@@ -54,7 +54,7 @@ ROOT_URLCONF = 'apptracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', 'trackerapp/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
