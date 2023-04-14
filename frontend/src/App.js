@@ -1,10 +1,16 @@
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Views/DashboardView.js';
+import './App.css'
 
-function App() {
+export default function App() {
   return (
-    <div>
-    </div>
+    <Router>
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>
+        </Routes>
+    </Router>
   );
 }
 
-export default App;
+
