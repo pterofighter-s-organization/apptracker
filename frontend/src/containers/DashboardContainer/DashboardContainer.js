@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import DashboardView from "../../Views/DashboardView";
+import DashboardPresentation from "../../presentations/DashboardPresentation";
 
 export default function DashboardContainer( props ) {
 
     //instead of calling the backend for data right now, we are going to give sample data
     const [apps, setApps] = useState([]);
 
-    //calling the cards
+    //calling the cards (move this down to applicationcardcontroller) (read whiteboard)
     useEffect(() => {
         const applicationCards = [
             {
@@ -40,7 +40,7 @@ export default function DashboardContainer( props ) {
     return(
         <>
             <h1>Dashboard</h1>
-            <DashboardView applications = {applicationCards}></DashboardView>
+            <DashboardPresentation applications = {apps}></DashboardPresentation>
         </>
     )
 }

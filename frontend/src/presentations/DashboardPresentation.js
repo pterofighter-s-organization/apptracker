@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DashboardView( {applications} ) {
     
-    
+    //this file gonna be replaced by smaller presentation files (all on whiteboard)
     return (
         <>
             
