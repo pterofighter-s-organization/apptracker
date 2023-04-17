@@ -14,7 +14,12 @@ export default function CategorizeCardContainer({ statuses }) {
 
 
     function convertIntoMap () {
-        
+        //final decision: look at last nights chat and decide that to be how we deal with frontend updating problem
+        //figure out the hierarchy for the application update
+        //doesnt always have to use useffect 
+        //make sure we delete the app from the status category first
+        //add it back when we recieve a response
+        //make a timeout to mimic 
     }
 
     const [apps, setApps] = useState(new Map([]));
