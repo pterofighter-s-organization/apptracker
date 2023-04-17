@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DashboardContainer from "./containers/DashboardContainer/DashboardContainer.js";
+import DashboardContainer from './components/Dashboard/DashboardContainer.js';
 import './App.css'
 
 export default function App() {
