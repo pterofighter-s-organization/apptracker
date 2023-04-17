@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function CategorizeCardContainer( { statuses } ){
+export default function CategorizeCardContainer({ statuses }) {
 
     //structure of the card from the basic info given
     // {
@@ -12,51 +12,68 @@ export default function CategorizeCardContainer( { statuses } ){
     //     dateApplied: "2-10-2023",
     // }
 
-    const [apps, setApps] = useState([]);
+
+    function convertIntoMap () {
+        
+    }
+
+    const [apps, setApps] = useState(new Map([]));
 
     //calling the applications from backend
 
     //later these going to be async
     useEffect(() => {
+        //use this array data and make a map
         const applications = [
             {
                 id: 1,
-                status: "ghosted",
-                position: "software engineer",
-                dateCreated: "2-3-2023",
-                company: "google",
-                salary: "60k - 100k",
-                dateApplied: "2-3-2023",
+                values: {
+                    status: "ghosted",
+                    position: "software engineer",
+                    dateCreated: "2-3-2023",
+                    company: "google",
+                    salary: "60k - 100k",
+                    dateApplied: "2-3-2023",
+                }
             },
             {
                 id: 2,
-                status: "interviewing",
-                position: "web engineer",
-                dateCreated: "2-5-2023",
-                company: "google",
-                salary: "90k - 120k",
-                dateApplied: "2-1-2023",
+                values: {
+                    status: "interviewing",
+                    position: "web engineer",
+                    dateCreated: "2-5-2023",
+                    company: "google",
+                    salary: "90k - 120k",
+                    dateApplied: "2-1-2023",
+                }
             },
             {
                 id: 3,
-                status: "applied",
-                position: "software engineer",
-                dateCreated: "2-8-2023",
-                company: "google",
-                salary: "80k - 110k",
-                dateApplied: "2-10-2023",
+                values: {
+                    status: "applied",
+                    position: "software engineer",
+                    dateCreated: "2-8-2023",
+                    company: "google",
+                    salary: "80k - 110k",
+                    dateApplied: "2-10-2023",
+                }
             }
         ]
-        setApps(applications)
+        
     }, [])
+
+
+    //** this going to be where the filter function is */
+    //** adding, changing the application */
 
     //we have to assume there is 1 - n number of categories
     //make a for loop to show them
-    
+
     //we installing redux so I don't have to pass nested props down to each child container
     //this will be the provider 
-    return(
+    return (
         <>
+
         </>
     )
 }
