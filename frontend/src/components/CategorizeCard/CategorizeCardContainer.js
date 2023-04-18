@@ -1,82 +1,59 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom";
+import { changeApps, getApps } from "../test.js"
 
-export default function CategorizeCardContainer({ statuses }) {
+export default function CategorizeCardContainer ( category ) {
 
-    function convertIntoMap(data) {
-        //final decision: look at last nights chat and decide that to be how we deal with frontend updating problem
-        //figure out the hierarchy for the application update
-        //doesnt always have to use useffect 
-        //make sure we delete the app from the status category first
-        //add it back when we recieve a response
-        //make a timeout to mimic 
-    }
+    //final decision: look at last nights chat and decide that to be how we deal with frontend updating problem
+    //figure out the hierarchy for the application update
+    //doesnt always have to use useffect 
+    //make sure we delete the app from the status category first
+    //add it back when we recieve a response
+    //make a timeout to mimic 
 
-    // const [apps, setApps] = useState([]);
+    const [apps, setApps] = useState([]);
 
     //used to group different apps into different status
-    // const groupedApplications = apps.reduce((groups, item) => {
-    //     const whatToGroup = "status"
-    //     let group = groups[item[whatToGroup]] || [];
-    //     group.push(item);
-    //     groups[item[whatToGroup]] = group;
-    //     return groups;
-    // }, {});
+    //updates whenever apps change
+    const groupedApplications = apps.reduce((groups, item) => {
+        let group = groups[item[category]] || [];
+        group.push(item);
+        groups[item[category]] = group;
+        return groups;
+    }, {});
     //the {} is the initial value of groups
     //time complexity is O(n)
 
-    //calling the applications from backend
-    //later these going to be async
-
     useEffect(() => {
-        // use this array data and make a map
-        // const applications = [
-        //     {
-        //         id: 1,
-        //         status: "ghosted",
-        //         position: "software engineer",
-        //         dateCreated: "2-3-2023",
-        //         company: "google",
-        //         salary: "60k - 100k",
-        //         dateApplied: "2-3-2023",
-        //     },
-        //     {
-        //         id: 2,
-        //         status: "interviewing",
-        //         position: "web engineer",
-        //         dateCreated: "2-5-2023",
-        //         company: "google",
-        //         salary: "90k - 120k",
-        //         dateApplied: "2-1-2023",
-        //     },
-        //     {
-        //         id: 3,
-        //         status: "applied",
-        //         position: "software engineer",
-        //         dateCreated: "2-8-2023",
-        //         company: "google",
-        //         salary: "80k - 110k",
-        //         dateApplied: "2-10-2023",
-        //     }
-        // ]
+        //calling the applications from backend
+        //later these going to be async
+        //mimic code for backend
+        const applications = getApps()
 
-        // setApps(applications)
-        console.log("test2")
-        
+        //this is correct, because we need to call backend again everytime we change pages
+        setApps(applications)
     }, [])
 
-    // console.log(groupedApplications)
-
     //** adding, changing the application */
+    function updateAppStatus(app, newStatus) {
 
-    //we have to assume there is 1 - n number of categories
-    //make a for loop to show them
+        const { id, status } = app
+        //set the app status to the new one
+        app["status"] = newStatus
 
-    //we installing redux so I don't have to pass nested props down to each child container
-    //this will be the provider 
-    return (
-        <>
-            
-        </>
-    )
+        //up here is the backend update (code later)
+        //mimic backend code (replace later)
+        //this is a backend response
+        changeApps(app, id)
+
+        //this is frontend update
+        setApps( (prevApps) => {
+            const index = prevApps.findIndex((item) => item.id === id)
+            prevApps[index] = app
+            return prevApps
+        })
+    }
+
+    console.log(groupedApplications)
+
+    return { groupedApplications, updateAppStatus }
 }

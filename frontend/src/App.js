@@ -16,8 +16,8 @@ export default function App() {
         {/* <Navbar /> */}
         <UrgentTaskPresentation />
         <Routes>
-          <Route exact path="/" element={<DashboardContainer />} />
-          <Route path="/p" element={<DashboardContainer />} />
+          <Route exact path="/" element={<DashboardContainer/>} />
+          <Route path="/p" element={<DashboardContainer/>} />
           <Route path="/u/:id" element={<UrgentTaskContainer />} />
         </Routes>
       </Router>
