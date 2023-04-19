@@ -2,7 +2,7 @@ from djongo import models
 
 # Create your models here.
 class Users(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    user_id = models.ObjectIdField()
     username = models.CharField(max_length=255)
     email = models.EmailField()
     password = models.CharField(max_length=255)
