@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from .serializers import UsersSerializer
 from .models import Users
 
+
+
 # Create your views here.
 def index(request):
     return HttpResponse("Hello, world")
