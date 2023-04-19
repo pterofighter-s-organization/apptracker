@@ -11,11 +11,10 @@ class Application(models.Model):
     user_id = models.ObjectIdField()
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=2048)
-    status = models.IntegerField()
+    status = models.CharField(max_length=255)
     date = models.DateField()
     salary = models.IntegerField()
     
-
 class notes(models.Model):
     note_id = models.ObjectIdField()
     application_id = models.ObjectIdField()
