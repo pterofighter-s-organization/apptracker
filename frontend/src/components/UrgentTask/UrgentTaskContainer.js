@@ -1,5 +1,5 @@
 
-export default function UrgentTaskContainer({}){
+export default function UrgentTaskContainer(){
 
     //make a container that only fetches data
     //so this container pass on the status to take to the list container

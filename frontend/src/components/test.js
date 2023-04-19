@@ -29,7 +29,16 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateApplied: "2-10-2023",
-    }
+    },
+    {
+        id: 4,
+        status: "interviewing",
+        position: "web engineer",
+        dateCreated: "2-5-2023",
+        company: "google",
+        salary: "90k - 120k",
+        dateApplied: "2-1-2023",
+    },
 ]
 
 //mimic backend

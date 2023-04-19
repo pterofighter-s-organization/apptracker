@@ -14,7 +14,7 @@ export default function CategorizeCardContainer ( category ) {
 
     //used to group different apps into different status
     //updates whenever apps change
-    const groupedApplications = apps.reduce((groups, item) => {
+    const categorizedApps = apps.reduce((groups, item) => {
         let group = groups[item[category]] || [];
         group.push(item);
         groups[item[category]] = group;
@@ -36,9 +36,9 @@ export default function CategorizeCardContainer ( category ) {
     //** adding, changing the application */
     function updateAppStatus(app, newStatus) {
 
-        const { id, status } = app
+        const { id } = app
         //set the app status to the new one
-        app["status"] = newStatus
+        app.status = newStatus
 
         //up here is the backend update (code later)
         //mimic backend code (replace later)
@@ -53,7 +53,7 @@ export default function CategorizeCardContainer ( category ) {
         })
     }
 
-    console.log(groupedApplications)
+    console.log(categorizedApps)
 
-    return { groupedApplications, updateAppStatus }
+    return { categorizedApps, updateAppStatus }
 }
