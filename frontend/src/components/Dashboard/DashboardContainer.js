@@ -27,7 +27,7 @@ export default function DashboardContainer() {
             <h1>Dashboard</h1>
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
-            <div className="d-flex justify-content-center flex-wrap gap-5 px-3">
+            <div className="d-flex justify-content-center flex-wrap gap-3 gap-lg-5 px-3 px-sm-3">
                 {interviewingApps.map((app) => (
                     <ApplicationCardContainer
                         key={app.id}

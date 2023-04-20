@@ -24,28 +24,29 @@ export default function ApplicationCardPresentation({ appObject, displayData }) 
 
     return (
         <>
-            <div className="border border-0 card bg-body-secondary p-0" style={{maxWidth: "475px"}}>
+            <div className="border border-0 card bg-body-secondary p-0" style={{ maxWidth: "350px" }}>
                 {/* <div className="card-header bg-success" /> */}
                 <div className="border border-0 card-header p-4 d-flex flex-wrap gap-3">
-                <StatusButtonPresentation color={"primary"} text={"interviewing"}/>
-                    <StatusButtonPresentation color={"secondary"} text={"ghosted"}/>
-                    <StatusButtonPresentation color={"success"} text={"Accepted"}/>
-                    <StatusButtonPresentation color={"danger"} text={"Rejected"}/>
-                    <StatusButtonPresentation color={"warning"} text={"Applied"}/>
+                    <StatusButtonPresentation color={"primary"} text={"interviewing"} />
+                    <StatusButtonPresentation color={"secondary"} text={"ghosted"} />
+                    <StatusButtonPresentation color={"success"} text={"Accepted"} />
+                    <StatusButtonPresentation color={"danger"} text={"Rejected"} />
+                    <StatusButtonPresentation color={"warning"} text={"Applied"} />
                 </div>
                 <div className="card-body p-4 d-flex flex-column gap-2">
-                    <div className="card-title h4">
+                    <div className="card-title h5">
                         {displayData.position} Application
                     </div>
-                    <div className="card-subtitle h5">
+                    <div className="card-subtitle h6">
                         - {displayData.company}
                     </div>
-                    <Link to={displayData.link} className="card-text btn btn-primary p-3 mt-4">
-                        <div className="">
-                            More Details
-                        </div>
-                    </Link>
                 </div>
+
+                <Link to={displayData.link} className="card-text btn btn-primary p-2 m-4 mt-0">
+                    <div className="">
+                        More Details
+                    </div>
+                </Link>
 
                 <div class="border border-0 card-footer text-body-secondary p-4">
                     Updated on 2/21/2022
