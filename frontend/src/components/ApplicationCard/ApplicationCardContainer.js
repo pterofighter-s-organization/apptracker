@@ -11,11 +11,11 @@ export default function ApplicationCardContainer ( {appObject} ) {
 
     //define which color correspond with what status
     const colorMapToCategory = {
-        "interviewing": "green",
-        "applied": "yellow",
-        "ghosted": "gray",
-        "rejected": "red",
-        "accepted": "black"
+        "interviewing": "warning",
+        "applied": "info",
+        "ghosted": "tertiary",
+        "rejected": "danger",
+        "accepted": "success"
     }
 
     const buttonsToShow = {

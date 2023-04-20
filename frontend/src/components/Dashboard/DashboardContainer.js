@@ -21,23 +21,29 @@ export default function DashboardContainer() {
     //     dateApplied: "2-3-2023",
     // }
 
+
     return (
         <>
             <h1>Dashboard</h1>
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
-            {interviewingApps.map((app) => (
-                <ApplicationCardContainer
-                    key={app.id}
-                    appObject={{ app, updateAppStatus }}
-                />
-            ))}
-            {appliedApps.map((app) => (
-                <ApplicationCardContainer
-                    key={app.id}
-                    appObject={{ app, updateAppStatus }}
-                />
-            ))}
+            <div className="d-flex justify-content-center flex-wrap gap-5 px-3">
+                {interviewingApps.map((app) => (
+                    <ApplicationCardContainer
+                        key={app.id}
+                        appObject={{ app, updateAppStatus }}
+                    />
+                ))}
+            </div>
+            {/* <div className="row row-cols-xxl-4 row-cols-md-2 row-cols-sm-1 d-flex justify-content-between gap-5">
+                    {appliedApps.map((app) => (
+                        <ApplicationCardContainer
+                            key={app.id}
+                            appObject={{ app, updateAppStatus }}
+                        />
+                    ))}
+                </div> */}
+
             {/* <ApplicationCardContainer appObject={{ card, updateAppStatus }} /> */}
             {/* <UrgentTaskContainer/> */}
             {/* <button onClick={(e) => {
