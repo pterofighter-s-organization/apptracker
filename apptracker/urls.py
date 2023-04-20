@@ -20,7 +20,8 @@ from rest_framework import routers
 from trackerapp import views
 
 router = routers.DefaultRouter()
-router.register(r'trackerapp', views.UsersView, 'trackerapp')
+router.register(r'users', views.UsersView, 'users')
+router.register(r'application', views.ApplicationView, 'application')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

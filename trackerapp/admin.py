@@ -8,11 +8,11 @@ class UsersAdmin(admin.ModelAdmin):
 class ApplicationAdmin(admin.ModelAdmin):
     pass
 
-class NotesAdmin(admin.ModelAdmin):
-    pass
+# class NotesAdmin(admin.ModelAdmin):
+#     pass
 
 
 
 admin.site.register(Users, UsersAdmin)
 admin.site.register(Application, ApplicationAdmin)
-admin.site.register(Notes, NotesAdmin)
+# admin.site.register(Notes, NotesAdmin)
