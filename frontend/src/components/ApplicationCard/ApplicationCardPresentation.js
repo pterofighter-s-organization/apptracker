@@ -27,11 +27,13 @@ export default function ApplicationCardPresentation({ appObject, displayData }) 
             <div className="border border-0 card bg-body-secondary p-0" style={{ maxWidth: "350px" }}>
                 {/* <div className="card-header bg-success" /> */}
                 <div className="border border-0 card-header p-4 d-flex flex-wrap gap-3">
-                    <StatusButtonPresentation color={"primary"} text={"interviewing"} />
-                    <StatusButtonPresentation color={"secondary"} text={"ghosted"} />
-                    <StatusButtonPresentation color={"success"} text={"Accepted"} />
-                    <StatusButtonPresentation color={"danger"} text={"Rejected"} />
-                    <StatusButtonPresentation color={"warning"} text={"Applied"} />
+                    <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <StatusButtonPresentation color={"primary"} text={"interviewing"} id="1" checked={true} name={displayData.id}/>
+                        <StatusButtonPresentation color={"secondary"} text={"ghosted"} id="2" name={displayData.id}/>
+                        <StatusButtonPresentation color={"success"} text={"Accepted"} id="3" name={displayData.id}/>
+                        <StatusButtonPresentation color={"danger"} text={"Rejected"} id="4" name={displayData.id}/>
+                        <StatusButtonPresentation color={"warning"} text={"Applied"} id="5" name={displayData.id}/>
+                    </div>
                 </div>
                 <div className="card-body p-4 d-flex flex-column gap-2">
                     <div className="card-title h5">
@@ -48,7 +50,7 @@ export default function ApplicationCardPresentation({ appObject, displayData }) 
                     </div>
                 </Link>
 
-                <div class="border border-0 card-footer text-body-secondary p-4">
+                <div className="border border-0 card-footer text-body-secondary p-4">
                     Updated on 2/21/2022
                 </div>
 
