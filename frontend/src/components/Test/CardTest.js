@@ -20,6 +20,10 @@ let applications = [
         company: "google",
         salary: "90k - 120k",
         dateEdited: "2-1-2023",
+        appointment: [
+            ("Closing interview","5-6-2023","15:45"),
+        ],
+        interviewPrep: false,
     },
     {
         id: 3,
@@ -32,7 +36,7 @@ let applications = [
     },
     {
         id: 4,
-        status: "interviewing",
+        status: "interested",
         position: "Web Engineer",
         dateCreated: "2-5-2023",
         company: "google",
@@ -47,10 +51,15 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
+        appointment: [
+            ("Technical interview","4-28-2023","15:00"),
+            ("zoom interview","4-28-2023","19:25"),
+        ],
+        interviewPrep: false,
     },
     {
         id: 7,
-        status: "interviewing",
+        status: "ghosted",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
@@ -59,7 +68,7 @@ let applications = [
     },
     {
         id: 8,
-        status: "interviewing",
+        status: "applied",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
@@ -74,6 +83,12 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
+        appointment: [
+            ("Intro interview","4-29-2023","14:00"),
+            ("Tech interview","4-31-2023","20:45"),
+            ("Closing interview","5-3-2023","13:45"),
+        ],
+        interviewPrep: true,
     },
 ]
 

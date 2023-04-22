@@ -11,7 +11,7 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
     //5. (the button to the app)
 
     return (
-        <div className="border border-0 card bg-body-secondary p-0" style={{ width: "300px" }}>
+        <div className="border border-0 card bg-light shadow p-0" style={{ width: "300px" }}>
             {/* <div className="card-header bg-success" /> */}
             <div className="border border-0 card-header p-4 d-flex flex-wrap gap-3">
                 <StatusButtonContainer
@@ -24,7 +24,7 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
                 <div className="card-title h5">
                     {displayData.position}
                 </div>
-                <div className="card-subtitle h6">
+                <div className="card-subtitle lead">
                     - {displayData.company}
                 </div>
             </div>

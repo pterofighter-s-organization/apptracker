@@ -4,7 +4,7 @@ export default function StatusButtonContainer({ appStatus, newStatus}) {
 
     //define which color correspond with what status
     const statusMapColor = {
-        "applied" : "info",
+        "applied" : "warning",
         "rejected" : "danger",
         "interviewing": "primary",
         "interested": "secondary",

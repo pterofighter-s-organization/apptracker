@@ -1,6 +1,7 @@
 import React from "react"
 import ApplicationCardContainer from "../ApplicationCard/ApplicationCardContainer.js"
 import CategorizeCardContainer from "../CategorizeCard/CategorizeCardContainer.js"
+import UrgentTaskContainer from "../UrgentTask/UrgentTaskContainer.js"
 
 export default function DashboardContainer() {
 
@@ -21,10 +22,10 @@ export default function DashboardContainer() {
     //     dateApplied: "2-3-2023",
     // }
 
-
     return (
         <>
             <h1>Dashboard</h1>
+            <UrgentTaskContainer apps={interviewingApps}/>
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
             <div className="">
@@ -33,6 +34,19 @@ export default function DashboardContainer() {
                 </div>
                 <div className="d-flex flex-wrap justify-content-center gap-5 p-5">
                     {interviewingApps.map((app) => (
+                        <ApplicationCardContainer
+                            key={app.id}
+                            appObject={{ app, updateAppStatus }}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className="">
+                <div className="d-flex">
+                    Applied
+                </div>
+                <div className="d-flex flex-wrap justify-content-center gap-5 p-5">
+                    {appliedApps.map((app) => (
                         <ApplicationCardContainer
                             key={app.id}
                             appObject={{ app, updateAppStatus }}

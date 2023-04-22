@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { changeApps, getApps } from "../test.js"
+import { changeApps, getApps } from "../Test/CardTest.js"
 
 export default function CategorizeCardContainer ( category ) {
 
@@ -40,6 +40,8 @@ export default function CategorizeCardContainer ( category ) {
         const { id } = app
         //set the app status to the new one
         app.status = newStatus
+        //set the date of when it was updated *
+        //add a history list of when the status was changed *
 
         //up here is the backend update (code later)
         //mimic backend code (replace later)
