@@ -1,17 +1,14 @@
 
-export default function StatusButtonPresentation({ text, color, id , checked, name}) {
+export default function StatusButtonPresentation({ status, newStatus, color }) {
     return (
         <>
-        {checked ? (
-            <input type="radio" class="btn-check" name={`btnradio${name}`} id={`btnradio${id}`} autocomplete="off" checked/>
-        ):(
-            <input type="radio" class="btn-check" name={`btnradio${name}`} id={`btnradio${id}`} autocomplete="off"/>
-        )}
-        <button type="button" className={`btn btn-outline-${color}`} for={`btnradio${name}${id}`}>
-            <div className="">
-                {text}
-            </div>
-        </button>
+            <li>
+                <button type="button" className={`dropdown-item text-${color}`} onClick={() => {
+                    newStatus(status)
+                }}>
+                    {status}
+                </button>
+            </li>
         </>
         )
 }

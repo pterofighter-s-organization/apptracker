@@ -10,7 +10,7 @@ let applications = [
         dateCreated: "2-3-2023",
         company: "google",
         salary: "60k - 100k",
-        dateApplied: "2-3-2023",
+        dateEdited: "2-3-2023",
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ let applications = [
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
-        dateApplied: "2-1-2023",
+        dateEdited: "2-1-2023",
     },
     {
         id: 3,
@@ -28,7 +28,7 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateApplied: "2-10-2023",
+        dateEdited: "2-10-2023",
     },
     {
         id: 4,
@@ -37,43 +37,43 @@ let applications = [
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
-        dateApplied: "2-1-2023",
+        dateEdited: "2-1-2023",
     },
     {
-        id: 5,
+        id: 6,
         status: "interviewing",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateApplied: "2-10-2023",
+        dateEdited: "2-10-2023",
     },
     {
-        id: 5,
+        id: 7,
         status: "interviewing",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateApplied: "2-10-2023",
+        dateEdited: "2-10-2023",
     },
     {
-        id: 5,
+        id: 8,
         status: "interviewing",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateApplied: "2-10-2023",
+        dateEdited: "2-10-2023",
     },
     {
-        id: 5,
+        id: 9,
         status: "interviewing",
         position: "Software Engineer",
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateApplied: "2-10-2023",
+        dateEdited: "2-10-2023",
     },
 ]
 
@@ -81,6 +81,7 @@ let applications = [
 export const changeApps = (app, id) => {
     const index = applications.findIndex((item) => item.id === id)
     applications[index] = app
+    return applications
 }
 
 export const getApps = () => {

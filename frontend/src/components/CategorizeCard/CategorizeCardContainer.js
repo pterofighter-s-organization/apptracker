@@ -11,6 +11,7 @@ export default function CategorizeCardContainer ( category ) {
     //make a timeout to mimic 
 
     const [apps, setApps] = useState([]);
+    const [change, setChange] = useState(0);
 
     //used to group different apps into different status
     //updates whenever apps change
@@ -43,14 +44,11 @@ export default function CategorizeCardContainer ( category ) {
         //up here is the backend update (code later)
         //mimic backend code (replace later)
         //this is a backend response
-        changeApps(app, id)
+        const res = changeApps(app, id)
 
         //this is frontend update
-        setApps( (prevApps) => {
-            const index = prevApps.findIndex((item) => item.id === id)
-            prevApps[index] = app
-            return prevApps
-        })
+        setApps(res)
+        setChange((change ? 0 : 1))
     }
 
     console.log(categorizedApps)
