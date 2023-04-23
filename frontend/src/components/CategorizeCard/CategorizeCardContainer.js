@@ -38,17 +38,32 @@ export default function CategorizeCardContainer ( category ) {
     function updateAppStatus(app, newStatus) {
 
         const { id } = app
-        //set the app status to the new one
+        const today = new Date(Date.now())
+        //set the app status to the new one (these should not be done here instead in backend as a json)
         app.status = newStatus
-        //set the date of when it was updated *
+        //gives 01:15 example format for it-IT
+        const timeInHours = today.toLocaleTimeString('it-IT').split(":")
+        app.dateEdited = today.toLocaleString('en-US', { timeZone: 'UTC' }).replaceAll(",", "").split(" ")[0] + " " + timeInHours[0] + ":" + timeInHours[1]
+
+        if(newStatus == "interviewing"){
+            const appointments = "appointments"
+            const interviewPrep = "interviewPrep"
+            if(!app.hasOwnProperty(appointments)){
+                app[appointments] = []
+            }
+            if(!app.hasOwnProperty(interviewPrep)){
+                app[interviewPrep] = false
+            }
+        }
         //add a history list of when the status was changed *
+        //for ex: an array of the (time edited, status updated to)
 
         //up here is the backend update (code later)
         //mimic backend code (replace later)
         //this is a backend response
         const res = changeApps(app, id)
 
-        //this is frontend update
+        //this is frontend update (modify according to response, should be getting only one app back which is the app changed)
         setApps(res)
         setChange((change ? 0 : 1))
     }

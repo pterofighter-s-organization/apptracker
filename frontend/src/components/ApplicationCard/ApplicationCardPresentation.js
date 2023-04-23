@@ -36,7 +36,7 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
             </Link>
 
             <div className="border border-0 card-footer text-body-secondary p-4">
-                Updated on {displayData.dateEdited}
+                Updated: {displayData.dateEdited}
             </div>
         </div>
     )

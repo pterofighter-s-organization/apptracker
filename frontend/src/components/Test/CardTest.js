@@ -20,7 +20,7 @@ let applications = [
         company: "google",
         salary: "90k - 120k",
         dateEdited: "2-1-2023",
-        appointment: [
+        appointments: [
             ("Closing interview","5-6-2023","15:45"),
         ],
         interviewPrep: false,
@@ -51,7 +51,7 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
-        appointment: [
+        appointments: [
             ("Technical interview","4-28-2023","15:00"),
             ("zoom interview","4-28-2023","19:25"),
         ],
@@ -83,7 +83,7 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
-        appointment: [
+        appointments: [
             ("Intro interview","4-29-2023","14:00"),
             ("Tech interview","4-31-2023","20:45"),
             ("Closing interview","5-3-2023","13:45"),

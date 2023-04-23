@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { FindDaysLeftOnTask } from "./TaskOrganization/TaskOrganization"
+import { FindDaysLeftOnTask, FindTaskOnApp } from "./TaskOrganization/TaskOrganization"
 import UrgentTaskPresentation from "./UrgentTaskPresentation"
 
 export default function UrgentTaskContainer( { apps } ){
@@ -14,14 +14,17 @@ export default function UrgentTaskContainer( { apps } ){
 
     //every app that comes into this container, expect they have appointment and interview prep property
 
-    //unwrap from 
-    const taskData = apps.fill().map((app) => {
-        return 
+   
+    let unwrappedData = []
+
+    //unwrap
+    apps.map((app) => {
+        FindTaskOnApp(app, unwrappedData)
     })
 
-    const dateData = apps.fill().map((app) => {
-        return FindDaysLeftOnTask(app)
-    })
+    // const dateData = apps.fill().map((app) => {
+    //     return FindDaysLeftOnTask(app)
+    // })
 
     const rankedData = []
 

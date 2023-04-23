@@ -1,7 +1,8 @@
 
-export function FindTaskOnApp ( app ) {
+export function FindTaskOnApp ( app, tasks ) {
+    console.log(app)
     const id = app.id
-    
+    const appointments = app.appointments
 }
 
 export function FindDaysLeftOnTask ( task ) {
@@ -22,9 +23,15 @@ export function FindDaysLeftOnTask ( task ) {
     const today = new Date(Date.now())
     console.log(today)
     console.log(testDate)
-    const daysLeftInMs = Math.abs(testDate - today) //milliseconds rn
-    const daysLeft = Math.ceil(daysLeftInMs/ (1000 * 60 * 60 * 24))
-    console.log(daysLeft)
+    const daysLeftInMs = (testDate - today) //milliseconds rn
+    if (daysLeftInMs < 0){
+        console.log("negative")
+    } else {
+
+    }
+    const daysLeft = Math.floor(daysLeftInMs/ (1000 * 60 * 60 * 24))
+    const hoursLeft = Math.floor((daysLeftInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    console.log(daysLeft, hoursLeft)
     // / (1000 * 60 * 60 * 24)
     
 
