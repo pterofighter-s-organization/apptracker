@@ -4,10 +4,10 @@ import StatusButtonContainer from "../StatusButton/StatusButtonContainer";
 export default function ApplicationCardPresentation({ displayData, newStatus }) {
 
     //present the following
-    //1. (Status, time diff)
+    //1. (status, time diff)
     //2. (color)
-    //3. (Position, <tab>, Company, <tab>, salary)
-    //4. (buttons to change status)
+    //3. (position, <tab>, company, <tab>, salary)
+    //4. (buttons to change status) - a function to change status
     //5. (the button to the app)
 
     return (

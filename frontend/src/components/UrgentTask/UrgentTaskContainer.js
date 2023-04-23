@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { FindDaysLeftOnTask } from "./TaskOrganization/TaskOrganization"
 import UrgentTaskPresentation from "./UrgentTaskPresentation"
 
 export default function UrgentTaskContainer( { apps } ){
@@ -11,15 +12,23 @@ export default function UrgentTaskContainer( { apps } ){
     //categorize container should also have a status change function to update (takes in id and status changed)
     //so i can decide on how the list looks
 
-    const [test, setTest] = useState(apps)
+    //every app that comes into this container, expect they have appointment and interview prep property
 
-    useEffect(() => {
-        console.log("testTask")
-    }, [test])
-    
+    //unwrap from 
+    const taskData = apps.fill().map((app) => {
+        return 
+    })
+
+    const dateData = apps.fill().map((app) => {
+        return FindDaysLeftOnTask(app)
+    })
+
+    const rankedData = []
+
+    //this deals with the loading state of it and the actual table
     return(
         <>
-            <UrgentTaskPresentation/>
+            <UrgentTaskPresentation displayData={rankedData}/>
         </>
     )
 }
