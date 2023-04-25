@@ -25,7 +25,7 @@ export function findTaskOnApp ( app, tasks ) {
                 position: position,
                 company: company,
                 priority : 0,
-                title: "Remember to track your next meeting time",
+                title: "Track your next meeting time",
                 date: date,
                 timeDue: date,
             }
@@ -52,7 +52,7 @@ export function findTaskOnApp ( app, tasks ) {
             position: position,
             company: company,
             priority: 1,
-            title: "Finish your interview preparation",
+            title: "Prepare for interview",
             date: date,
             timeDue: timeDue,
         }
@@ -104,9 +104,4 @@ export function findDaysLeftOnTask ( task ) {
     task.timeDiff = findTimeDifference( task.timeDue, Date.now() )   
 }
 
-export function RankTask ( tasks ) {
-
-    //sort with the number in [0]
-
-}
 
