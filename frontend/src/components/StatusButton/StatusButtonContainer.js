@@ -25,6 +25,7 @@ export default function StatusButtonContainer({ appStatus, newStatus}) {
                 className={`btn btn-${statusMapColor[appStatus]} dropdown-toggle dropdown-toggle-split`} 
                 data-bs-toggle="dropdown" aria-expanded="false"
             >
+                {/* not show on the page, but for reference */}
                 <span className="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">

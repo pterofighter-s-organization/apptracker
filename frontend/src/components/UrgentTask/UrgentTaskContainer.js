@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { FindDaysLeftOnTask, FindTaskOnApp } from "./TaskOrganization/TaskOrganization"
+import { findDaysLeftOnTask, findTaskOnApp, findTimeDifference } from "./TaskOrganization/TaskOrganization"
 import UrgentTaskPresentation from "./UrgentTaskPresentation"
 
 export default function UrgentTaskContainer( { apps } ){
@@ -14,24 +14,36 @@ export default function UrgentTaskContainer( { apps } ){
 
     //every app that comes into this container, expect they have appointment and interview prep property
 
-   
-    let unwrappedData = []
-
-    //unwrap
     apps.map((app) => {
-        FindTaskOnApp(app, unwrappedData)
+        app.appointments.sort((a, b) => new Date(a.date) - new Date(b.date))
     })
 
-    // const dateData = apps.fill().map((app) => {
-    //     return FindDaysLeftOnTask(app)
-    // })
+    let taskData = []
+    //unwrap to find specific task
+    apps.map((app) => {
+        findTaskOnApp(app, taskData)
+    })
 
-    const rankedData = []
+    taskData.map((task) => {
+        findDaysLeftOnTask(task)
+    })
+
+    taskData.sort((a,b) => {
+        const time1 = new Date(a.timeDue).getTime() - new Date(Date.now())
+        const time2 = new Date(b.timeDue).getTime() - new Date(Date.now())
+        return time1 - time2
+    })
 
     //this deals with the loading state of it and the actual table
     return(
         <>
-            <UrgentTaskPresentation displayData={rankedData}/>
+            {taskData ? 
+                <UrgentTaskPresentation displayData={taskData}/>
+                :
+                <>
+                    <h1>Loading...</h1>
+                </>
+            }
         </>
     )
 }

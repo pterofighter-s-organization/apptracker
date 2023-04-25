@@ -21,7 +21,10 @@ let applications = [
         salary: "90k - 120k",
         dateEdited: "2-1-2023",
         appointments: [
-            ("Closing interview","5-6-2023","15:45"),
+            {
+                title: "closing interview",
+                date: "5/6/2023 15:45",
+            },
         ],
         interviewPrep: false,
     },
@@ -52,8 +55,14 @@ let applications = [
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
         appointments: [
-            ("Technical interview","4-28-2023","15:00"),
-            ("zoom interview","4-28-2023","19:25"),
+            {
+                title: "first interview",
+                date: "8/29/2023 08:45",
+            },
+            {
+                title: "zoom interview",
+                date: "4/26/2023 18:45",
+            },
         ],
         interviewPrep: false,
     },
@@ -84,9 +93,10 @@ let applications = [
         salary: "80k - 110k",
         dateEdited: "2-10-2023",
         appointments: [
-            ("Intro interview","4-29-2023","14:00"),
-            ("Tech interview","4-31-2023","20:45"),
-            ("Closing interview","5-3-2023","13:45"),
+            {
+                title: "zoom interview",
+                date: "4/25/2023 10:45",
+            },
         ],
         interviewPrep: true,
     },
