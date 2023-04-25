@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
-import { findDaysLeftOnTask, findTaskOnApp, findTimeDifference } from "./TaskOrganization/TaskOrganization"
-import UrgentTaskPresentation from "./UrgentTaskPresentation"
+import { findTaskOnApp } from "./TaskOrganizeFunctions"
+import TaskTablePresentation from "./TaskTablePresentation.js"
 
 export default function UrgentTaskContainer( { apps } ){
 
@@ -24,10 +23,6 @@ export default function UrgentTaskContainer( { apps } ){
         findTaskOnApp(app, taskData)
     })
 
-    taskData.map((task) => {
-        findDaysLeftOnTask(task)
-    })
-
     taskData.sort((a,b) => {
         const time1 = new Date(a.timeDue).getTime() - new Date(Date.now())
         const time2 = new Date(b.timeDue).getTime() - new Date(Date.now())
@@ -38,7 +33,7 @@ export default function UrgentTaskContainer( { apps } ){
     return(
         <>
             {taskData ? 
-                <UrgentTaskPresentation displayData={taskData}/>
+                <TaskTablePresentation displayData={taskData}/>
                 :
                 <>
                     <h1>Loading...</h1>

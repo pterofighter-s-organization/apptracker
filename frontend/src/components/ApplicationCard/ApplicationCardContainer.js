@@ -13,19 +13,19 @@ export default function ApplicationCardContainer({ appObject }) {
 
     useEffect(() => {
         //that's when the status gets changed and a new card needs to be made
-        if (app["status"] != newStatus) {
+        if (app.status != newStatus) {
             updateAppStatus(app, newStatus);
         }
     }, [newStatus])
 
     const displayData = {
-        "id": app["id"],
-        "dateEdited": app["dateEdited"], //edit this later to (current date minus the date created or changed)
-        "status": app["status"],
-        "position": app["position"],
-        "company": app["company"],
-        "salary": app["salary"],
-        "link": "",
+        id: app.id,
+        dateEdited: app.dateEdited, //edit this later to (current date minus the date created or changed)
+        status: app.status,
+        position: app.position,
+        company: app.company,
+        salary: app.salary,
+        link: "",
     }
 
     return (

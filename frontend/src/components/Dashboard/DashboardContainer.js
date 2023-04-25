@@ -1,7 +1,7 @@
 import React from "react"
 import ApplicationCardContainer from "../ApplicationCard/ApplicationCardContainer.js"
 import CategorizeCardContainer from "../CategorizeCard/CategorizeCardContainer.js"
-import UrgentTaskContainer from "../UrgentTask/UrgentTaskContainer.js"
+import TaskTableContainer from "../TaskTable/TaskTableContainer.js"
 
 export default function DashboardContainer() {
 
@@ -25,7 +25,7 @@ export default function DashboardContainer() {
     return (
         <>
             <h1>Dashboard</h1>
-            <UrgentTaskContainer apps={interviewingApps}/>
+            <TaskTableContainer apps={interviewingApps}/>
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
             <div className="">
@@ -64,7 +64,7 @@ export default function DashboardContainer() {
                 </div> */}
 
             {/* <ApplicationCardContainer appObject={{ card, updateAppStatus }} /> */}
-            {/* <UrgentTaskContainer/> */}
+            {/* <TaskTableContainer/> */}
             {/* <button onClick={(e) => {
                 e.preventDefault()
                 updateAppStatus(card, "interviewing", "ghosted")

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { changeApps, getApps } from "../Test/CardTest.js"
+import { dateIntoString } from "../TimeDisplay/TimeDisplayFunctions.js";
 
 export default function CategorizeCardContainer ( category ) {
 
@@ -38,12 +39,11 @@ export default function CategorizeCardContainer ( category ) {
     function updateAppStatus(app, newStatus) {
 
         const { id } = app
-        const today = new Date(Date.now())
+        const today = dateIntoString(Date.now())
+        
         //set the app status to the new one (these should not be done here instead in backend as a json)
         app.status = newStatus
-        //gives 01:15 example format for it-IT
-        const timeInHours = today.toLocaleTimeString('it-IT').split(":")
-        app.dateEdited = today.toLocaleString('en-US', { timeZone: 'UTC' }).replaceAll(",", "").split(" ")[0] + " " + timeInHours[0] + ":" + timeInHours[1]
+        app.dateEdited = today
 
         if(newStatus == "interviewing"){
             const appointments = "appointments"

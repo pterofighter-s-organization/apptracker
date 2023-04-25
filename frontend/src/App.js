@@ -1,10 +1,8 @@
 import React, { useEffect } from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import DashboardContainer from './components/Dashboard/DashboardContainer.js'
-import UrgentTaskContainer from "./components/UrgentTask/UrgentTaskContainer.js"
+import TaskTablePresentation from "./components/TaskTable/TaskTablePresentation.js"
 import './App.css'
-import UrgentTaskPresentation from "./components/UrgentTask/UrgentTaskPresentation.js"
-import CategorizeCardContainer from "./components/CategorizeCard/CategorizeCardContainer.js"
 
 export default function App() {
 
@@ -14,11 +12,11 @@ export default function App() {
     <>
       <Router>
         {/* <Navbar /> */}
-        {/* <UrgentTaskPresentation /> */}
+        {/* <TaskTablePresentation /> */}
         <Routes>
           <Route exact path="/" element={<DashboardContainer/>} />
           <Route path="/p" element={<DashboardContainer/>} />
-          <Route path="/u/:id" element={<UrgentTaskContainer />} />
+          <Route path="/u/:id" element={<TaskTablePresentation />} />
         </Routes>
       </Router>
     </>

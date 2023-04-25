@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import TimeDisplayContainer from "../TimeDisplay/TimeDisplayContainer.js"
 import { TimerDisplayPresentation } from "../TimeDisplay/TimerDisplayPresentation.js";
+import { DateDisplayPresentation } from "../TimeDisplay/DateDisplayPresentation.js"
 
-export default function UrgentTaskPresentation({ displayData }) {
-    //temp navbar for testing purposes
+export default function TaskTablePresentation({ displayData }) {
+
     //col-1 = task number
-    //col-2 = task type
-    //col-3 = actual date
-    //col-4 = days left
-    //col-5 = link button
+    //col-2 = app info
+    //col-3 = title of the task
+    //col-4 = due date (not show on mobile)
+    //col-5 = time left
+    //col-6 = link button
 
     // {
     //     appId: id,
@@ -26,9 +27,9 @@ export default function UrgentTaskPresentation({ displayData }) {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" className="d-none d-sm-block">App Info</th>
+                        <th scope="col">App</th>
                         <th scope="col">Task to do</th>
-                        <th scope="col" >Due date</th>
+                        <th scope="col" className="d-none d-sm-block">Due date</th>
                         <th scope="col">Time</th>
                         <th scope="col">🔗</th>
                     </tr>
@@ -37,19 +38,27 @@ export default function UrgentTaskPresentation({ displayData }) {
                     <tbody>
                         {displayData.map((task) => (
                             <tr>
-                                <th scope="row" key={count} > {count++} </th>
-                                <td className="d-flex flex-wrap justify-content-center gap-1 gap-lg-3">
-                                    <div className="">
+                                <th 
+                                    scope="row" 
+                                    key={count} 
+                                > 
+                                    {count++} 
+                                </th>
+                                <td>
+                                    <div>
                                         {task.position}
                                     </div>
-                                    <div className="">
-                                        {"("+task.company+")"}
+                                    <div>
+                                        {"( "+task.company+" )"}
                                     </div>
                                 </td>
                                 <td>{task.title}</td>
                                 <td className="d-none d-sm-table-cell">{task.timeDue}</td>
                                 <td>
-                                    <TimerDisplayPresentation timeDiff={task.timeDiff} />
+                                    <TimerDisplayPresentation 
+                                        start={Date.now()} 
+                                        end={task.timeDue}
+                                    />
                                 </td>
                                 <td>
                                     <Link to={displayData.link} className="card-text btn btn-primary p-2 px-3">
@@ -62,14 +71,12 @@ export default function UrgentTaskPresentation({ displayData }) {
                         ))}
                     </tbody>
                     :
+                    // if theres no applications
                     <tbody>
                         <tr>
                             <th scope="row" key={count} > {count++} </th>
                             <td></td>
-                            <td></td>
                             <td>No interviewing applications at the momment</td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </tbody>
                 }

@@ -1,10 +1,13 @@
+import { findTimeDifference } from "./TimeDisplayFunctions"
 
-export function TimerDisplayPresentation ( {timeDiff} ) {
+export function TimerDisplayPresentation ( { start, end } ) {
+
+    const timeDiffObj = findTimeDifference(start, end)
     
     const timeDisplay = (() => {
-        const monthsLeft = timeDiff.totalMonthsLeft
-        const daysLeft = timeDiff.daysLeft
-        const hoursLeft = timeDiff.hoursLeft
+        const monthsLeft = timeDiffObj.totalMonthsLeft
+        const daysLeft = timeDiffObj.daysLeft
+        const hoursLeft = timeDiffObj.hoursLeft
 
         if (monthsLeft > 1){
             return monthsLeft + " " + "months left"
