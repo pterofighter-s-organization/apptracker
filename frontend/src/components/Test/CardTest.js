@@ -61,7 +61,7 @@ let applications = [
             },
             {
                 title: "zoom interview",
-                date: "4/26/2023 18:45",
+                date: "4/26/2023 00:26",
             },
             {
                 title: "test interview",

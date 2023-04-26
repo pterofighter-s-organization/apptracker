@@ -1,5 +1,7 @@
 import { findTimeDifference } from "../TimeDisplay/TimeDisplayFunctions"
 
+//functions here all help into organizing the details of the tasks being display
+
 export function findTaskOnApp ( app, tasks ) {
 
     //input: the app and the tasks list for updating

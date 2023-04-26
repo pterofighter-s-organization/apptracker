@@ -1,7 +1,7 @@
 import { findTaskOnApp } from "./TaskOrganizeFunctions"
 import TaskTablePresentation from "./TaskTablePresentation.js"
 
-export default function UrgentTaskContainer( { apps } ){
+export default function TaskTableContainer( { apps } ){
 
     //make a container that only fetches data
     //so this container pass on the status to take to the list container
@@ -13,16 +13,21 @@ export default function UrgentTaskContainer( { apps } ){
 
     //every app that comes into this container, expect they have appointment and interview prep property
 
+
+    //handling task table data
+
     apps.map((app) => {
         app.appointments.sort((a, b) => new Date(a.date) - new Date(b.date))
     })
 
     let taskData = []
-    //unwrap to find specific task
+
+    //find tasks in all the interviewing apps
     apps.map((app) => {
         findTaskOnApp(app, taskData)
     })
 
+    //sort it by the time due
     taskData.sort((a,b) => {
         const time1 = new Date(a.timeDue).getTime() - new Date(Date.now())
         const time2 = new Date(b.timeDue).getTime() - new Date(Date.now())

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { TimerDisplayPresentation } from "../TimeDisplay/TimerDisplayPresentation.js";
-import { DateDisplayPresentation } from "../TimeDisplay/DateDisplayPresentation.js"
+import TaskDetailsPresentation from "./TaskDetailsPresentation.js";
 
 export default function TaskTablePresentation({ displayData }) {
+
+    //layout of the task table
 
     //col-1 = task number
     //col-2 = app info
@@ -11,19 +11,11 @@ export default function TaskTablePresentation({ displayData }) {
     //col-5 = time left
     //col-6 = link button
 
-    // {
-    //     appId: id,
-    //     priority: 0,
-    //     title: appointment.title,
-    //     date: appointment.date,
-    //     timeDue: appointment.date,
-    // }
-
     let count = 1
 
     return (
-        <div className="table-responsive">
-            <table class="table text-center">
+        <>
+            <table class="table table-bordered text-center">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -44,29 +36,7 @@ export default function TaskTablePresentation({ displayData }) {
                                 > 
                                     {count++} 
                                 </th>
-                                <td>
-                                    <div>
-                                        {task.position}
-                                    </div>
-                                    <div>
-                                        {"( "+task.company+" )"}
-                                    </div>
-                                </td>
-                                <td>{task.title}</td>
-                                <td className="d-none d-sm-table-cell">{task.timeDue}</td>
-                                <td>
-                                    <TimerDisplayPresentation 
-                                        start={Date.now()} 
-                                        end={task.timeDue}
-                                    />
-                                </td>
-                                <td>
-                                    <Link to={displayData.link} className="card-text btn btn-primary p-2 px-3">
-                                        <div className="">
-                                            More Details
-                                        </div>
-                                    </Link>
-                                </td>
+                                <TaskDetailsPresentation task = {task}/>
                             </tr>
                         ))}
                     </tbody>
@@ -81,6 +51,6 @@ export default function TaskTablePresentation({ displayData }) {
                     </tbody>
                 }
             </table>
-        </div>
+        </>
     )
 }

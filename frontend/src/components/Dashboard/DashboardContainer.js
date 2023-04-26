@@ -29,10 +29,10 @@ export default function DashboardContainer() {
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
             <div className="">
-                <div className="d-flex">
+                <div className="">
                     Interviewing
                 </div>
-                <div className="d-flex flex-wrap justify-content-center gap-5 p-5">
+                <div className="d-flex flex-wrap gap-3 gap-lg-5">
                     {interviewingApps.map((app) => (
                         <ApplicationCardContainer
                             key={app.id}
@@ -45,7 +45,7 @@ export default function DashboardContainer() {
                 <div className="d-flex">
                     Applied
                 </div>
-                <div className="d-flex flex-wrap justify-content-center gap-5 p-5">
+                <div className="d-flex flex-wrap gap-3">
                     {appliedApps.map((app) => (
                         <ApplicationCardContainer
                             key={app.id}

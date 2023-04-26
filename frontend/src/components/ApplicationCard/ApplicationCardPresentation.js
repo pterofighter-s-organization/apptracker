@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import StatusButtonContainer from "../StatusButton/StatusButtonContainer";
+import DateDisplayPresentation from "../TimeDisplay/DateDisplayPresentation";
 
 export default function ApplicationCardPresentation({ displayData, newStatus }) {
 
@@ -36,7 +37,7 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
             </Link>
 
             <div className="border border-0 card-footer text-body-secondary p-4">
-                Updated: {displayData.dateEdited}
+                Updated: <DateDisplayPresentation date={displayData.dateEdited}/>
             </div>
         </div>
     )

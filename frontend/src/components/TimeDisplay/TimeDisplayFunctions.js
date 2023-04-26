@@ -29,7 +29,11 @@ export function findTimeDifference ( start, end ) {
     //time difference in different representations
     const yearsLeft = date2.getFullYear() - date1.getFullYear();
     const monthsLeft = date2.getMonth() - date1.getMonth();
-    const hoursLeft = Math.floor((daysLeftInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    //ms into hours = /3600000
+    const hours = ((daysLeftInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const hoursLeft = Math.floor(hours)
+    //ms into mins /60000
+    const minsLeft = Math.floor((hours * 60))
     const daysLeft = Math.floor(daysLeftInMs/ (1000 * 60 * 60 * 24))
 
     //this total months left turns the years left to months left and add it to the original months left 
@@ -39,6 +43,7 @@ export function findTimeDifference ( start, end ) {
     return { 
                 daysLeft, 
                 hoursLeft, 
+                minsLeft,
                 yearsLeft, 
                 monthsLeft, 
                 totalMonthsLeft 
