@@ -3,13 +3,15 @@ import { findTimeDifference } from "./time.js"
 //task.js
 //functions here all help into organizing the details of the tasks being display
 
-export function findTaskOnApp ( app, tasks ) {
+export function findTasksOnApp ( app ) {
 
     //input: the app and the tasks list for updating
     
     //0 - appointment
     //1 - Finish interview prep
     //find and organize task
+
+    const tasks = []
     
     //app informations for task displaying
     const id = app.id
@@ -65,6 +67,8 @@ export function findTaskOnApp ( app, tasks ) {
             timeDue: timeDue,
         }
     )
+
+    return tasks
 }
 
 export function findEarliestAppointment ( appointments ) {
@@ -72,7 +76,7 @@ export function findEarliestAppointment ( appointments ) {
     //input: appointments array
     //returns the index of the earliest up to date appointment possible
     //up to date meaning it has to be later than today
-    
+
     for(let i=0; i < appointments.length; i++) {
         const appointment = appointments[i]
         const timeDiff = findTimeDifference(Date.now(), appointment.date)

@@ -1,4 +1,4 @@
-import { findTaskOnApp } from "./TaskOrganizeFunctions"
+import { findTasksOnApp } from "./TaskOrganizeFunctions"
 import TaskTablePresentation from "./TaskTablePresentation.js"
 
 export default function TaskTableContainer( { apps } ){
@@ -24,7 +24,7 @@ export default function TaskTableContainer( { apps } ){
 
     //find tasks in all the interviewing apps
     apps.map((app) => {
-        findTaskOnApp(app, taskData)
+        taskData = taskData.concat(findTasksOnApp(app))
     })
 
     //sort it by the time due

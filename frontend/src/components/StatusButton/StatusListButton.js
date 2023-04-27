@@ -1,5 +1,5 @@
 
-export default function StatusButtonPresentation({ status, newStatus, color }) {
+export default function StatusListButton ({ status, newStatus, color }) {
    
     //how the item in dropdown looks
 
