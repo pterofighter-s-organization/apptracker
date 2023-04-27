@@ -8,8 +8,7 @@ export default function ApplicationCardContainer({ appObject }) {
     //this file should control the button presses and load loading state or the app info itself
     //1. loading the card
     //2. the actual look of the card
-    //3. deciding the color of the card
-    //4. deciding what's being displayed (do later)
+    //3. deciding what's being display
 
     useEffect(() => {
         //that's when the status gets changed and a new card needs to be made
