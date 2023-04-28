@@ -4,6 +4,8 @@ import DateAndTime from "../Date/DateAndTime.js";
 
 export default function ApplicationCardPresentation ({ displayData, newStatus }) {
 
+    //never call this file, a helper file for application card that defines the layout
+
     //present the following
     //1. (status, time diff)
     //2. (color)
@@ -22,7 +24,7 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
                     newStatus={newStatus}
                 />
             </div>
-            
+
             <div className="card-body p-4 d-flex flex-column gap-2">
                 <div className="card-title h5">
                     {displayData.position}

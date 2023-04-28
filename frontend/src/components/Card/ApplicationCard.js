@@ -13,10 +13,10 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
     //listens to when the status gets changed
     useEffect(() => {
         //that's when the status gets changed and a new card needs to be made
-        if (application.status != newStatus) {
+        if (application.status !== newStatus) {
             updateAppStatus(application, newStatus);
         }
-    }, [newStatus])
+    }, [newStatus, application])
 
     // reference to application details
     // const card = {

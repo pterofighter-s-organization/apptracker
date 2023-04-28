@@ -2,6 +2,7 @@ import TaskTableRow from './TaskTableRow.js'
 
 export default function TaskTablePresentation ({ displayData }) {
 
+    //never call this file, is just a helper file for tasktable.js
     //layout of the task table
 
     //col-1 = task number
