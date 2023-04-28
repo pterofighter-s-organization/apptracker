@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
-import ApplicationCardContainer from "../ApplicationCard/ApplicationCardContainer.js"
-import TaskTableContainer from "../TaskTable/TaskTableContainer.js"
+import ApplicationCard from "../components/Card/ApplicationCard.js"
+import TaskTable from "../components/TaskTable/TaskTable.js"
 import { dateToString } from "../utils/date.js"
 import { categorizeApplications, updateInterviewApp } from "../utils/application.js"
-import { updateApp, getApps } from "../data/mimicBackend.js"
+import { updateApp, getApps } from "../data/mimicBackendStatic.js"
 
 export default function Dashboard () {
 
@@ -13,9 +13,8 @@ export default function Dashboard () {
     const [change, setChange] = useState(0);
 
     useEffect(() => {
-        //calling the applications from backend
-        //later these going to be async
-        //mimic code for backend
+
+        //change later when backend is done
         let applications = []
         try{
             //set loading state here
@@ -26,12 +25,11 @@ export default function Dashboard () {
         }
         //or remove loading here
 
-        //this is correct, because we need to call backend again everytime we change pages
         setApps(applications)
-    })
+    }, [])
 
     //categorize applications before displaying
-    const categorizedApps = categorizeApplications(apps)
+    const categorizedApps = categorizeApplications(apps, "status")
 
     //** adding, changing the application */
     function updateAppStatus(app, newStatus) {
@@ -63,10 +61,14 @@ export default function Dashboard () {
         setChange((change ? 0 : 1))
     }
 
+    console.log(categorizedApps)
+
     return (
         <>
             <h1>Dashboard</h1>
-            <TaskTableContainer apps={interviewingApps} />
+            <TaskTable 
+                applications={categorizedApps.interviewing} 
+            />
             {/* have to use map because forEach wont render */}
             {/* make a list with grid and gap here to store cards */}
             <div className="">
@@ -74,10 +76,12 @@ export default function Dashboard () {
                     Interviewing
                 </div>
                 <div className="d-flex flex-wrap gap-3 gap-lg-5">
-                    {interviewingApps.map((app) => (
-                        <ApplicationCardContainer
-                            key={app.id}
-                            appObject={{ app, updateAppStatus }}
+                    {categorizedApps.interviewing.map((application) => (
+                        // console.log(application, "test")
+                        <ApplicationCard
+                            key={application.id}
+                            application={application}
+                            updateAppStatus={updateAppStatus}
                         />
                     ))}
                 </div>
@@ -87,10 +91,11 @@ export default function Dashboard () {
                     Applied
                 </div>
                 <div className="d-flex flex-wrap gap-3">
-                    {appliedApps.map((app) => (
-                        <ApplicationCardContainer
-                            key={app.id}
-                            appObject={{ app, updateAppStatus }}
+                    {categorizedApps.applied.map((application) => (
+                        <ApplicationCard
+                            key={application.id}
+                            application={application}
+                            updateAppStatus={updateAppStatus}
                         />
                     ))}
                 </div>

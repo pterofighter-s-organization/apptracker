@@ -1,7 +1,7 @@
 // time.js
 //     - make time displaying more user friendly
 
-export function findTimeDifference(start, end) {
+export function findTimeDifference (start, end) {
 
     //creates an object that shows different time representations of between two times
 
@@ -34,7 +34,7 @@ export function findTimeDifference(start, end) {
     }
 }
 
-export function findTimePeriod(time) {
+export function timePeriodFormat (time) {
 
     //formats time into a more user friendly text
     //input: (xx:xx)
@@ -54,7 +54,7 @@ export function findTimePeriod(time) {
     }
 }
 
-export function timeLeftFormat(timeDiffObj) {
+export function timeLeftFormat (timeDiffObj) {
 
     //formats the amount of time left into a more user friendly text
     //input: (time difference object from the findtimedifference function)

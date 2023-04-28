@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import StatusButtonContainer from "../StatusButton/StatusButtonContainer";
-import DateDisplayPresentation from "../TimeDisplay/DateDisplayPresentation";
+import StatusButton from "../StatusButton/StatusButton.js";
+import DateAndTime from "../Date/DateAndTime.js";
 
-export default function ApplicationCardPresentation({ displayData, newStatus }) {
+export default function ApplicationCardPresentation ({ displayData, newStatus }) {
 
     //present the following
     //1. (status, time diff)
@@ -11,16 +11,18 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
     //4. (buttons to change status) - a function to change status
     //5. (the button to the app)
 
+    //layout of the card
     return (
         <div className="border border-0 card bg-light shadow p-0" style={{ width: "300px" }}>
             {/* <div className="card-header bg-success" /> */}
             <div className="border border-0 card-header p-4 d-flex flex-wrap gap-3">
-                <StatusButtonContainer
+                <StatusButton
                     color={displayData.color}
                     appStatus={displayData.status}
                     newStatus={newStatus}
                 />
             </div>
+            
             <div className="card-body p-4 d-flex flex-column gap-2">
                 <div className="card-title h5">
                     {displayData.position}
@@ -31,13 +33,11 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
             </div>
 
             <Link to={displayData.link} className="card-text btn btn-primary p-2 m-4 mt-0">
-                <div className="">
-                    More Details
-                </div>
+                More Details
             </Link>
 
             <div className="border border-0 card-footer text-body-secondary p-4">
-                Updated: <DateDisplayPresentation date={displayData.dateEdited}/>
+                Updated: <DateAndTime date={displayData.dateEdited}/>
             </div>
         </div>
     )

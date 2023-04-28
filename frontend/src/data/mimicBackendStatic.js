@@ -1,6 +1,3 @@
-//the mimic backend will be refreshed if the page reloads
-
-// use this array data and make a map (temp data for testing)
 let applications = [
     {
         id: 1,
@@ -106,49 +103,23 @@ let applications = [
 ]
 
 //mimic backend
-export const changeApps = (app, id) => {
+export const updateApp = (app, id) => {
+
     const index = applications.findIndex((item) => item.id === id)
+
+    if (index === -1) {
+        return new Error("Application not found")
+    }
+
     applications[index] = app
     return applications
 }
 
 export const getApps = () => {
+    
+    if(!applications){
+        return new Error("No applications found")
+    }
+
     return applications
 }
-
-
-    // const buttonsToShow = {
-    //     "ghosted": ["applied", "rejected", "interviewing", "interested", "accepted"],
-    //     "interested": ["applied", "rejected", "interviewing", "accepted", "ghosted"],
-    //     "interviewing": ["rejected", "accepted", "ghosted"],
-    //     "applied": ["rejected", "interviewing","ghosted"],
-    //     "accepted": []
-    // }
-
-    // const colorMapToCategory = {
-    //     "interviewing": "warning",
-    //     "applied": "info",
-    //     "ghosted": "tertiary",
-    //     "rejected": "danger",
-    //     "accepted": "success"
-    // }
-
-    // {  reference of the app data
-    //     id: 1,
-    //     status: "ghosted",
-    //     position: "software engineer",
-    //     dateCreated: "2-3-2023",
-    //     company: "google",
-    //     salary: "60k - 100k",
-    //     dateApplied: "2-3-2023",
-    // },
-    //actual data on the card
-
-
-    //make a container that only fetches data
-    //so this container pass on the status to take to the list container
-    //this container only categorizes the apps //categorizecontainer
-    //so the list presentation decides how the list looks not the container
-    //maybe can try categorizecontainer only return states
-    //categorize container should also have a status change function to update (takes in id and status changed)
-    //so i can decide on how the list looks

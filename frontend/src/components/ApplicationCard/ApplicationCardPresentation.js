@@ -21,6 +21,7 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
                     newStatus={newStatus}
                 />
             </div>
+
             <div className="card-body p-4 d-flex flex-column gap-2">
                 <div className="card-title h5">
                     {displayData.position}
@@ -31,13 +32,11 @@ export default function ApplicationCardPresentation({ displayData, newStatus }) 
             </div>
 
             <Link to={displayData.link} className="card-text btn btn-primary p-2 m-4 mt-0">
-                <div className="">
-                    More Details
-                </div>
+                More Details
             </Link>
 
             <div className="border border-0 card-footer text-body-secondary p-4">
-                Updated: <DateDisplayPresentation date={displayData.dateEdited}/>
+                Updated: <DateDisplayPresentation date={displayData.dateEdited} />
             </div>
         </div>
     )

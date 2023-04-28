@@ -1,5 +1,5 @@
 
-export default function CategorizeApplications(applications, category) {
+export function categorizeApplications (applications, category) {
 
     //input: apps, and the category I am categorizing this in
     //return categorized apps {category: [n]}
@@ -28,14 +28,14 @@ export default function CategorizeApplications(applications, category) {
     return categorizedApps
 }
 
-export default function updateInterviewApp(application) {
+export function updateInterviewApp ( application ) {
 
     //making sure every app that updated to interviewing gets correct data
 
     const appointments = "appointments"
     const interviewPrep = "interviewPrep"
 
-    if (newStatus == "interviewing") {
+    if (application.status == "interviewing") {
         if (!application.hasOwnProperty(appointments)) {
             application[appointments] = []
         }

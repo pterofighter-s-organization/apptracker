@@ -1,6 +1,6 @@
-import TaskDetailsPresentation from "./TaskDetailsPresentation.js";
+import TaskTableRow from './TaskTableRow.js'
 
-export default function TaskTablePresentation({ displayData }) {
+export default function TaskTablePresentation ({ displayData }) {
 
     //layout of the task table
 
@@ -36,7 +36,7 @@ export default function TaskTablePresentation({ displayData }) {
                                 > 
                                     {count++} 
                                 </th>
-                                <TaskDetailsPresentation task = {task}/>
+                                <TaskTableRow task = {task}/>
                             </tr>
                         ))}
                     </tbody>

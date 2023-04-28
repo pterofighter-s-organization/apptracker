@@ -32,9 +32,7 @@ export default function StatusButton ({ appStatus, newStatus }) {
                 <span className="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">
-                {Object.entries(statusMapColor).map((statusObj) => {
-                    const status = statusObj[0]
-                    const color = statusObj[1]
+                {Object.entries(statusMapColor).map(([status, color]) => {
                     if (status != appStatus) {
                         return (
                             <StatusListButton

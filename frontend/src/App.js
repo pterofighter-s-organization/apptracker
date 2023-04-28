@@ -1,7 +1,6 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import DashboardContainer from './components/Dashboard/DashboardContainer.js'
-import TaskTablePresentation from "./components/TaskTable/TaskTablePresentation.js"
+import Dashboard from "./pages/Dashboard";
 import './App.css'
 
 export default function App() {
@@ -14,9 +13,7 @@ export default function App() {
         {/* <Navbar /> */}
         {/* <TaskTablePresentation /> */}
         <Routes>
-          <Route exact path="/" element={<DashboardContainer/>} />
-          <Route path="/p" element={<DashboardContainer/>} />
-          <Route path="/u/:id" element={<TaskTablePresentation />} />
+          <Route exact path="/" element={<Dashboard/>} />
         </Routes>
       </Router>
     </>

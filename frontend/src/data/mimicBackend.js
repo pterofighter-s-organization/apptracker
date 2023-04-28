@@ -2,7 +2,7 @@
 const fs = require('fs');
 const file = "applications.json"
 
-//mimic backend
+//mimic backend (can't be used because it needs nodejs and this should be done in an actual backend)
 export const updateApp = (app, id) => {
 
     //get apps from backend making sure they didnt change or updated because this is mimic instead of actual real time db
@@ -20,7 +20,7 @@ export const updateApp = (app, id) => {
     //write it back into the database
     fs.writeFile(file, JSON.stringify(applications), (err) => {
         if (err) {
-            return new Exception("can't update the file")
+            return new Error("can't update the file")
         } else {
             return applications
         }
@@ -30,7 +30,7 @@ export const updateApp = (app, id) => {
 export const getApps = () => {
     fs.readFile(file, (err, data) => {
         if (err) {
-            return new Exception("can't read file")
+            return new Error("can't read file")
         } else {
             const jsonData = JSON.parse(data)
             return jsonData.applications
