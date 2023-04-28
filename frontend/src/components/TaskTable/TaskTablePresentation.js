@@ -1,6 +1,6 @@
 import TaskTableRow from './TaskTableRow.js'
 
-export default function TaskTablePresentation ({ displayData }) {
+export default function TaskTablePresentation({ displayData }) {
 
     //never call this file, is just a helper file for tasktable.js
     //layout of the task table
@@ -16,30 +16,36 @@ export default function TaskTablePresentation ({ displayData }) {
 
     return (
         <>
-            <table class="table table-bordered text-center">
-                <thead>
+            <table class="table table-light table-bordered text-center">
+                <thead className="">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">App</th>
-                        <th scope="col">Task to do</th>
-                        <th scope="col" className="d-none d-sm-block">Due date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">🔗</th>
+                        <th scope="col" className="p-3">#</th>
+                        <th scope="col" className="p-3">App</th>
+                        <th scope="col" className="p-3">Task to do</th>
+                        <th scope="col" className="d-none d-sm-block p-3">Due date</th>
+                        <th scope="col" className="p-3">Time</th>
+                        <th scope="col" className="p-3">🔗</th>
                     </tr>
                 </thead>
                 {displayData.length > 0 ?
-                    <tbody>
+                    <tbody className="">
                         {displayData.map((task) => (
                             <tr>
-                                <th 
-                                    scope="row" 
-                                    key={count} 
-                                > 
-                                    {count++} 
+                                <th
+                                    scope="row"
+                                    key={count}
+                                >
+                                    {count++}
                                 </th>
-                                <TaskTableRow task = {task}/>
+                                <TaskTableRow task={task} />
                             </tr>
                         ))}
+                        {/* bottom row for some breathing space */}
+                        <tr>
+                            {Array.from({ length: 5 }).map(() => (
+                                <th></th>
+                            ))}
+                        </tr>
                     </tbody>
                     :
                     // if theres no applications

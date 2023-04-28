@@ -6,13 +6,13 @@ export default function TaskTable( { applications } ){
     //every app that comes into this, expect they have appointment and interview prep property
     //handling task table data
 
-    applications.map((application) => {
+    applications.forEach((application) => {
         application.appointments.sort((a, b) => new Date(a.date) - new Date(b.date))
     })
 
     //find tasks in all the interviewing applications
     let taskData = []
-    applications.map((application) => {
+    applications.forEach((application) => {
         taskData = taskData.concat(findTasksOnApp(application))
     })
 
@@ -27,7 +27,9 @@ export default function TaskTable( { applications } ){
     return(
         <>
             {taskData ? 
-                <TaskTablePresentation displayData={taskData}/>
+                <div className="m-5 bg-light shadow">
+                    <TaskTablePresentation displayData={taskData}/>
+                </div>
                 :
                 <>
                     <h1>Loading...</h1>

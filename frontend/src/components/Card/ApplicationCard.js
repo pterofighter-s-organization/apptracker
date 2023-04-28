@@ -39,6 +39,7 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
         link: "",
     }
 
+    //loading state for app list will be a bunch of card in loading state
     return (
         <>
             {application ?
@@ -50,6 +51,7 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
                 </>
                 :
                 <>
+                    {/* this loading state will happen when it is not in a list */}
                     <h1>Loading...</h1>
                 </>
             }
