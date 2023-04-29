@@ -12,7 +12,7 @@ export default function StatusButton ({ appStatus, newStatus }) {
         "interviewing": "primary",
         "interested": "secondary",
         "accepted": "success",
-        "ghosted": "tertiary",
+        "ghosted": "dark",
     }
 
     return (

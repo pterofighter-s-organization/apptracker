@@ -8,7 +8,7 @@ export default function App() {
   //reason why this is wrapped with fragment (ex: <> </>)
   //because it won't be affected by any css, any it can put <navbar> on top of <router>
   return (
-    <>
+    <div className="">
       <Router>
         {/* <Navbar /> */}
         {/* <TaskTablePresentation /> */}
@@ -16,7 +16,7 @@ export default function App() {
           <Route exact path="/" element={<Dashboard/>} />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 

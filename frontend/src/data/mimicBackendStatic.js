@@ -100,6 +100,22 @@ let applications = [
         ],
         interviewPrep: true,
     },
+    {
+        id: 10,
+        status: "interviewing",
+        position: "Software Engineer",
+        dateCreated: "2-8-2023",
+        company: "google",
+        salary: "80k - 110k",
+        dateEdited: "2-10-2023 16:25",
+        appointments: [
+            {
+                title: "zoom interview",
+                date: "4/25/2023 10:45",
+            },
+        ],
+        interviewPrep: false,
+    },
 ]
 
 //mimic backend

@@ -27,9 +27,7 @@ export default function TaskTable( { applications } ){
     return(
         <>
             {taskData ? 
-                <div className="m-5 bg-light shadow">
-                    <TaskTablePresentation displayData={taskData}/>
-                </div>
+                <TaskTablePresentation displayData={taskData}/>
                 :
                 <>
                     <h1>Loading...</h1>

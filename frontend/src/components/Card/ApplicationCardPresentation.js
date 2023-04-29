@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./ApplicationCard.css"
 import StatusButton from "../StatusButton/StatusButton.js";
 import DateAndTime from "../Date/DateAndTime.js";
 
@@ -15,9 +16,9 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
 
     //layout of the card
     return (
-        <div className="border border-0 card bg-light shadow p-0" style={{ width: "300px" }}>
+        <div className="card border border-0 rounded-0 bg-body-secondary bg-opacity-75">
             {/* <div className="card-header bg-success" /> */}
-            <div className="border border-0 card-header p-4 d-flex flex-wrap gap-3">
+            <div className="card-header p-4 d-flex flex-wrap gap-3 border border-0">
                 <StatusButton
                     color={displayData.color}
                     appStatus={displayData.status}

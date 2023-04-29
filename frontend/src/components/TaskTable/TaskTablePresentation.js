@@ -12,40 +12,46 @@ export default function TaskTablePresentation({ displayData }) {
     //col-5 = time left
     //col-6 = link button
 
+    const colors = {
+        0 : "danger-subtle",
+        1 : "secondary-subtle",
+    }
     let count = 1
+    // const borderWidth = "border-bottom"
+    const borderColor = ""
+    const headerPadding = "p-4" + " " + borderColor
+    const rowPadding = ""
+    const rowPaddingTest = "p-2 p-sm-3 border border-5 border-light"
+    // const footerPadding = "p-sm-2"
 
     return (
         <>
-            <table class="table table-light table-bordered text-center">
-                <thead className="">
+            <table class="table text-center ">
+                <thead className={`${headerPadding} bg-secondary bg-opacity-25 border-light border-5`} style={{ }}>
                     <tr>
-                        <th scope="col" className="p-3">#</th>
-                        <th scope="col" className="p-3">App</th>
-                        <th scope="col" className="p-3">Task to do</th>
-                        <th scope="col" className="d-none d-sm-block p-3">Due date</th>
-                        <th scope="col" className="p-3">Time</th>
-                        <th scope="col" className="p-3">🔗</th>
+                        <th scope="col" className={`${headerPadding}`}>#</th>
+                        <th scope="col" className={`${headerPadding}`}>App</th>
+                        <th scope="col" className={`${headerPadding}`}>Task</th>
+                        <th scope="col" className={`d-none d-sm-block ${""} ${headerPadding}`}>Due date</th>
+                        <th scope="col" className={`${headerPadding}`}>Time</th>
+                        <th scope="col" className={`${headerPadding}`}>🔗</th>
                     </tr>
                 </thead>
                 {displayData.length > 0 ?
                     <tbody className="">
                         {displayData.map((task) => (
-                            <tr>
+                            <tr className={`${borderColor} bg-${colors[task.priority]}`} style={{}}>
                                 <th
                                     scope="row"
                                     key={count}
+                                    style={{padding: rowPadding}}
+                                    className={`${rowPaddingTest}`}
                                 >
                                     {count++}
                                 </th>
-                                <TaskTableRow task={task} />
+                                <TaskTableRow task={task} padding={rowPadding} paddingTest={rowPaddingTest} />
                             </tr>
                         ))}
-                        {/* bottom row for some breathing space */}
-                        <tr>
-                            {Array.from({ length: 5 }).map(() => (
-                                <th></th>
-                            ))}
-                        </tr>
                     </tbody>
                     :
                     // if theres no applications
@@ -57,6 +63,14 @@ export default function TaskTablePresentation({ displayData }) {
                         </tr>
                     </tbody>
                 }
+                {/* bottom row for some breathing space */}
+                {/* <tfoot>
+                    <tr>
+                        {Array.from({ length: 6 }).map(() => (
+                            <th className={`${footerPadding}`}></th>
+                        ))}
+                    </tr>
+                </tfoot> */}
             </table>
         </>
     )

@@ -1,7 +1,12 @@
 import { timePeriodFormat } from "../../utils/time"
 import { dateToString } from "../../utils/date"
 
-export default function DateAndTime ( { date } ) {
+export default function DateAndTime ( {date} ) {
+    
+    //for firefox cause they cant read it properly
+    if(typeof date === "string"){
+        date = date.replace("-", "/")
+    }
     
     date = new Date(date)
     const dateAndTime = dateToString(date).split(" ")

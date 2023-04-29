@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ApplicationCardPresentation from "./ApplicationCardPresentation.js";
 
 export default function ApplicationCard ({ application, updateAppStatus }) {
@@ -7,16 +6,6 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
     //1. loading the card
     //2. button press action when status changed
     //3. deciding what's being display
-
-    const [newStatus, setNewStatus] = useState(application.status)
-
-    //listens to when the status gets changed
-    useEffect(() => {
-        //that's when the status gets changed and a new card needs to be made
-        if (application.status !== newStatus) {
-            updateAppStatus(application, newStatus);
-        }
-    }, [newStatus, application])
 
     // reference to application details
     // const card = {
@@ -28,6 +17,10 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
     //     salary: "60k - 100k",
     //     dateapplied: "2-3-2023",
     // }
+
+    function newStatus(status) {
+        updateAppStatus(application, status)
+    }
 
     const displayData = {
         id: application.id,
@@ -46,7 +39,7 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
                 <>
                     <ApplicationCardPresentation
                         displayData={displayData}
-                        newStatus={setNewStatus}
+                        newStatus={newStatus}
                     />
                 </>
                 :
