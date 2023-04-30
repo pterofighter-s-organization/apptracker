@@ -1,4 +1,4 @@
-import { findTimeDifference, timeLeftFormat } from "../../utils/time"
+import { findTimeDifference, timeLeftFormat } from "../../utils/archived/time"
 
 export default function Timer ( { start, end } ) {
 

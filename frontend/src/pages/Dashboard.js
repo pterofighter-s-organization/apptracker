@@ -8,6 +8,8 @@ import ApplicationList from "../components/List/ApplicationList.js"
 
 import "./Test.css"
 
+const moment = require('moment');
+
 //later will take the user id *
 export default function Dashboard() {
 
@@ -41,11 +43,11 @@ export default function Dashboard() {
     const updateAppStatus = ((app, newStatus) => {
 
         const { id } = app
-        const today = dateToString(new Date(Date.now()))
+        const today = dateToString("today")
 
         //set the app status to the new one (these should not be done here instead in backend as a json)
         app.status = newStatus
-        app.dateEdited = today
+        app.dateEdited = today.date + " " +today.time
         //making sure the application fits what an interview app needs
         updateInterviewApp(app)
 
@@ -98,14 +100,11 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="d-flex flex-column gap-2">
+            {/* <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
                     <h1 className="">
                         Upcoming Task
                     </h1>
-                    {/* <h1 className="text-nowrap">
-                        ( {categorizedApps.interviewing.length} )
-                    </h1> */}
                     <hr className="" style={{}} />
                 </div>
                 <div className="table-responsive">
@@ -113,7 +112,7 @@ export default function Dashboard() {
                         applications={categorizedApps.interviewing}
                     />
                 </div>
-            </div>
+            </div> */}
             <div class="container">
                 <div class="row">
                     <div class="col">
