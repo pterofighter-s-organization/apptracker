@@ -19,7 +19,7 @@ let applications = [
         appointments: [
             {
                 title: "closing interview",
-                date: "5/6/2023 15:45",
+                date: "5-6-2023 15:45",
             },
         ],
         interviewPrep: false,
@@ -53,15 +53,15 @@ let applications = [
         appointments: [
             {
                 title: "first interview",
-                date: "8/29/2023 08:45",
+                date: "8-29-2023 08:45",
             },
             {
                 title: "zoom interview",
-                date: "4/26/2023 00:26",
+                date: "4-26-2023 00:26",
             },
             {
                 title: "test interview",
-                date: "3/29/2023 08:45",
+                date: "3-29-2023 08:45",
             },
         ],
         interviewPrep: false,
@@ -95,7 +95,7 @@ let applications = [
         appointments: [
             {
                 title: "zoom interview",
-                date: "4/25/2023 10:45",
+                date: "4-25-2023 10:45",
             },
         ],
         interviewPrep: true,
@@ -111,7 +111,7 @@ let applications = [
         appointments: [
             {
                 title: "zoom interview",
-                date: "4/25/2023 10:45",
+                date: "4-25-2023 10:45",
             },
         ],
         interviewPrep: false,
