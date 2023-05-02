@@ -14,8 +14,16 @@
     backdrop-filter: blur(0.5px);
 }
 
+#collapse-apps-button{
+    position: absolute;
+    bottom: 25px;
+}
+#collapse-tasks-button{
+    position: absolute;
+    bottom: 25px;
+}
 
-@media (min-width: 680px) {
+/* @media (min-width: 680px) {
     #collapse-apps-button{
         position: absolute;
         bottom: 25px;
@@ -29,10 +37,10 @@
 @media (max-width: 680px) {
     #collapse-apps-button{
         position: absolute;
-        bottom: 0px;
+        bottom: 25px;
     }
     #collapse-tasks-button{
         position: absolute;
         bottom: 25px;
     }
-}
+} */

@@ -1,12 +1,12 @@
 
-//this is a file for helper functions (pure functions inside dashboard.js)
+//this is a file for helper functions (pure functions inside and used for dashboard.js)
 
 export function checkShowCollapseApps (apps) {
 
     const windowWidth = window.innerWidth
     const vwPadding = 1
 
-    //1vw * (the window width (in px) / 100)
+    //padding in px = (vw) * (the window width (in px) / 100)
     const paddingPx = vwPadding * (windowWidth / 100)
     const containerWidth = windowWidth - (2 * paddingPx)
     //gap is gutter width = container width * gutter percentage / 100

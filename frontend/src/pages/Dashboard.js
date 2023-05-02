@@ -119,7 +119,7 @@ export default function Dashboard() {
                         <>
                             <div
                                 className="blur-bg w-100"
-                                style={{ position: "absolute", bottom: 0, height: "10vh" }}
+                                style={{ position: "absolute", bottom: 0, height: "15vh" }}
                                 id="collapse-apps-bg"
                             />
 
@@ -165,7 +165,7 @@ export default function Dashboard() {
                         <>
                             <div
                                 className="blur-bg w-100"
-                                style={{ position: "absolute", bottom: 0, height: "10vh" }}
+                                style={{ position: "absolute", bottom: 0, height: "15vh" }}
                                 id="collapse-tasks-bg"
                             />
                             <div className="d-flex justify-content-center">

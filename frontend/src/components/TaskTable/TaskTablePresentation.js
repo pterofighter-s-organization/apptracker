@@ -29,7 +29,7 @@ export default function TaskTablePresentation({ displayData }) {
     let count = 1
     // const borderWidth = "border-bottom"
     const headerPadding = "p-4"
-    const rowPadding = ""
+    const rowPadding = "0.5vw"
     const rowClassNames = "p-2 p-sm-3 border border-5 border-light"
     // const footerPadding = "p-sm-2"
 
