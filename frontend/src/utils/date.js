@@ -1,47 +1,39 @@
 
 const moment = require('moment')
 
-export function correctDate ( dateString ) {
-    // if(typeof dateString === 'string'){
-    //     return dateString.replace("/","-")
-    // }
-    if(typeof dateString === 'string' && dateString !== "today"){
-        const dateObject = dateString.split(" ")
-        const date = dateObject[0].split("-")
-        const time = dateObject[1]
-        return new Date(date[0]+" "+date[1]+", "+date[2]+" "+time+":00")
-    }
+export function findCorrectMomentObj (dateString) {
+
     if(dateString === "today"){
-        return
+        return moment(Date.now())
     }
-    return dateString
+    return moment(dateString, "MM-DD-YYYY HH:mm:ss")
 }
 
-export function dateToString ( dateString ) {
+function dateHumanizedHelper (dateString) {
+    return dateString.replaceAll("-", "/")
+}
 
-    //takes in a random date format
-    //returns the date format and a more user friendly one
+export function dateFormat ( dateString ) {
 
-    // if datestring is "" then it is today
+    //forcing all dates to follow a specific format
+    //starts out with today
+    const momentDate = findCorrectMomentObj(dateString)
 
-    let momentDate = moment(correctDate(dateString))
-    console.log(momentDate)
-
-    const dateFormatted = momentDate.format("MM-DD-YYYY hh:mm a")
+    const dateFormatted = momentDate.format("MM-DD-YYYY HH:mm:ss")
 
     const dateObject = dateFormatted.split(" ")
     const date = dateObject[0]
     const time = dateObject[1]
-    console.log(date, time)
 
-    const dateHumanized = momentDate.format("hh:mm a")    
-    const dateHumanizedObj = dateHumanized.split(" ")
-    const timeHumanized = dateHumanizedObj[0] //12 hour period time
-    const timePeriod = dateHumanizedObj[1]
-
-    console.log(date)
+    const dateHumanized = dateHumanizedHelper(date)
+    const timeHumanizedObj = momentDate.format("hh:mm a").split(" ")
+    const timeHumanized = timeHumanizedObj[0] //12 hour period time
+    const timePeriod = timeHumanizedObj[1]
+    
     return {
         date,
+        dateHumanized,
+        dateFormatted,
         time,
         timeHumanized,
         timePeriod

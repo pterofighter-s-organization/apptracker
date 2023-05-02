@@ -1,10 +1,11 @@
+import { findCorrectMomentObj } from './date';
 
 const moment = require('moment')
 
 export function findTimeDifference (start, end) {
 
-    const startTime = moment(start)
-    const endTime = moment(end)
+    const startTime = findCorrectMomentObj(start)
+    const endTime = findCorrectMomentObj(end)
     const difference = moment.duration(endTime.diff(startTime))
 
     const yearsLeft = difference.years();
@@ -14,14 +15,19 @@ export function findTimeDifference (start, end) {
     const minutesLeft = difference.minutes();
     const secondsLeft = difference.seconds();
 
-    return (
+    return {
         yearsLeft,
         monthsLeft,
         daysLeft,
         hoursLeft,
         minutesLeft,
         secondsLeft
-    )
+    }
+}
+
+function timerHumanizedHelper (time, label) {
+    //takes an int and a string
+    return time.toString() + " " + label
 }
 
 export function timerDisplay (timeDiffObj) {
@@ -33,22 +39,39 @@ export function timerDisplay (timeDiffObj) {
     const minutesLeft = timeDiffObj.minutesLeft
 
     if (yearsLeft > 1) {
-        return yearsLeft + " " + "years left"
-    } if (monthsLeft > 1) {
-        return monthsLeft + " " + "months left"
+        return timerHumanizedHelper(yearsLeft, "years left")
+    } if (monthsLeft >= 1) {
+        if(monthsLeft === 1){
+            return timerHumanizedHelper(monthsLeft, "month left")
+        }
+        return timerHumanizedHelper(monthsLeft, "months left")
     } if (daysLeft > 1) {
-        return daysLeft + " " + "days left"
+        return timerHumanizedHelper(daysLeft, "days left")
     } if (hoursLeft >= 1) {
-        if (hoursLeft == 1) {
-            return hoursLeft + " " + "hour left"
+        if (hoursLeft === 1) {
+            return timerHumanizedHelper(hoursLeft, "hour left")
         }
-        return hoursLeft + " " + "hours left"
+        return timerHumanizedHelper(hoursLeft, "hours left")
     } if (minutesLeft >= 1) {
-        if (minutesLeft == 1) {
-            return minutesLeft + " " + "min left"
+        if (minutesLeft === 1) {
+            return timerHumanizedHelper(minutesLeft, "min left")
         }
-        return minutesLeft + " " + "mins left"
+        return timerHumanizedHelper(minutesLeft, "mins left")
     }
 
     return "Do Now"
+}
+
+export function sortTime (date1, date2) {
+
+    const dateA = findCorrectMomentObj(date1)
+    const dateB = findCorrectMomentObj(date2)
+    
+    if (dateA.isBefore(dateB)) {
+        return -1;
+      } else if (dateA.isAfter(dateB)) {
+        return 1;
+      } else {
+        return 0;
+      }
 }

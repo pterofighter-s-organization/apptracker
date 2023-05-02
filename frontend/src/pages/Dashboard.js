@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react"
 import ApplicationCardList from "../components/List/ApplicationCardList.js"
 import TaskTable from "../components/TaskTable/TaskTable.js"
-import { dateToString } from "../utils/date.js"
+import { dateFormat } from "../utils/date.js"
 import { categorizeApplications, updateInterviewApp } from "../utils/application.js"
 import { updateApp, getApps } from "../data/mimicBackendStatic.js"
 import ApplicationList from "../components/List/ApplicationList.js"
 
 import "./Test.css"
 
-const moment = require('moment');
-
 //later will take the user id *
 export default function Dashboard() {
 
     //showing the task that the user needs to finish and the applications they currently have
 
-    const statuses = ["interviewing", "applied", "interested", "ghosted", "rejected", "accepted"]
     const [apps, setApps] = useState([]);
     const [change, setChange] = useState(0);
 
@@ -43,11 +40,11 @@ export default function Dashboard() {
     const updateAppStatus = ((app, newStatus) => {
 
         const { id } = app
-        const today = dateToString("today")
+        const today = dateFormat("today")
 
         //set the app status to the new one (these should not be done here instead in backend as a json)
         app.status = newStatus
-        app.dateEdited = today.date + " " +today.time
+        app.dateEdited = today.dateFormatted
         //making sure the application fits what an interview app needs
         updateInterviewApp(app)
 
@@ -100,7 +97,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            {/* <div className="d-flex flex-column gap-2">
+            <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
                     <h1 className="">
                         Upcoming Task
@@ -112,7 +109,7 @@ export default function Dashboard() {
                         applications={categorizedApps.interviewing}
                     />
                 </div>
-            </div> */}
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col">

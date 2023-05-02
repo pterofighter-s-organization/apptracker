@@ -20,14 +20,14 @@ export function findTasksOnApp ( app ) {
     const appointments = app.appointments
 
     //need to find from when to when the task is valid
-    const now = Date.now()
+    const today = "today"
     const earliestAppointment = findEarliestAppointment(appointments)
     const timeDue = earliestAppointment.date
     const indexOftheAppointment = earliestAppointment.index
 
     //insert task
     // if -1 then theres no appointment
-    if(indexOftheAppointment == -1){
+    if(indexOftheAppointment === -1){
         tasks.push(
             {
                 appId: id,
@@ -35,8 +35,8 @@ export function findTasksOnApp ( app ) {
                 company: company,
                 priority : 0,
                 title: "Track your next meeting time",
-                date: now,
-                timeDue: now,
+                date: today,
+                timeDue: today,
             }
         )
     }else{
@@ -63,7 +63,7 @@ export function findTasksOnApp ( app ) {
             company: company,
             priority: 1,
             title: "Prepare for interview",
-            date: now,
+            date: today,
             timeDue: timeDue,
         }
     )
@@ -77,14 +77,15 @@ export function findEarliestAppointment ( appointments ) {
     //returns the index of the earliest up to date appointment possible
     //up to date meaning it has to be later than today
 
+    const today = "today"
     for(let i=0; i < appointments.length; i++) {
         const appointment = appointments[i]
-        const timeDiff = findTimeDifference(Date.now(), appointment.date)
+        const timeDiff = findTimeDifference(today, appointment.date)
         if(timeDiff.daysLeft >= 0){
             return { date: appointment.date, index: i }
         }
     }
 
     //index of that appointment
-    return { date: Date.now(), index: -1 }
+    return { date: today, index: -1 }
 }

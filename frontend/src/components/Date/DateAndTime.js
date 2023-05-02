@@ -1,4 +1,4 @@
-import { dateToString } from "../../utils/date"
+import { dateFormat } from "../../utils/date"
 
 export default function DateAndTime ( {date} ) {
     
@@ -7,14 +7,10 @@ export default function DateAndTime ( {date} ) {
     //     date = date.replace("-", "/")
     // }
     
-    const dateFormatted = dateToString(date)
-    const dateString = dateFormatted.date
+    const dateFormatted = dateFormat(date)
+    const dateString = dateFormatted.dateHumanized
     const time = dateFormatted.timeHumanized
     const timePeriod = dateFormatted.timePeriod
-
-    if (typeof dateString === "string"){
-        console.log("true")
-    }
 
     return(
         <>

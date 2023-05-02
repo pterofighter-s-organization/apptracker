@@ -42,7 +42,7 @@ export default function TaskTableRow ({ task, padding, paddingTest }) {
             </td>
             <td style={{padding: padding}} className={`${paddingTest}`}>
                 <Timer
-                    start={Date.now()}
+                    start={"today"}
                     end={task.timeDue}
                 />
             </td>
