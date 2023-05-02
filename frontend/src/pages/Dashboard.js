@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react"
-import TaskTable from "../components/TaskTable/TaskTable.js"
+
+//utils
 import { dateFormat } from "../utils/date.js"
+import { debounce } from "../utils/time.js"
 import { categorizeApplications, updateInterviewApp } from "../utils/application.js"
 import { updateApp, getApps } from "../data/mimicBackendStatic.js"
+
+//components
 import ApplicationList from "../components/List/ApplicationList.js"
+import TaskTable from "../components/TaskTable/TaskTable.js"
+
+//helpers
+import { checkShowCollapseApps, checkShowCollapseTasks, showRemainingContent } from "./DashboardHelpers.js"
 
 import "./Test.css"
 
@@ -14,6 +22,8 @@ export default function Dashboard() {
 
     const [apps, setApps] = useState([]);
     const [change, setChange] = useState(0);
+    const [categorizedApps, setCategorizedApps] = useState(categorizeApplications([], "status"))
+    //categorize applications before displaying
 
     useEffect(() => {
 
@@ -29,10 +39,8 @@ export default function Dashboard() {
         //or remove loading here
 
         setApps(applications)
+        setCategorizedApps(categorizeApplications(applications, "status"))
     }, [])
-
-    //categorize applications before displaying
-    const categorizedApps = categorizeApplications(apps, "status")
 
     //** adding, changing the application */
     //figure out usecallback
@@ -64,11 +72,19 @@ export default function Dashboard() {
         //right now it shouldn't trigger a re-render because apps is not subscribed yet *
         //can do it by adding it to the render part (return) *
         setApps(res)
+        setCategorizedApps(categorizeApplications(apps, "status"))
         //we will temp use this for now
         setChange((change ? 0 : 1))
     })
 
+    let showCollapseApps = checkShowCollapseApps(apps)
+    let showCollapseTasks = checkShowCollapseTasks(categorizedApps.interviewing)
     console.log(categorizedApps)
+
+    //delay 250 secs after the user finish resizing to start using the function
+    window.onresize = debounce(() => {
+        setChange((change ? 0 : 1))
+    }, 250)
 
     return (
         <div className="d-flex flex-column gap-5 mt-3 mt-lg-0" style={{ padding: "1vw 2.5vw" }}>
@@ -88,11 +104,43 @@ export default function Dashboard() {
                     </h1> */}
                     <hr className="" style={{}} />
                 </div>
-                <div className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4">
-                    <ApplicationList
-                        applications={categorizedApps}
-                        updateAppStatus={updateAppStatus}
-                    />
+                <div style={{ position: "relative" }}>
+                    <div
+                        className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
+                        id="collapse-apps"
+                        style={{ maxHeight: "40vh", overflow: "hidden" }}
+                    >
+                        <ApplicationList
+                            applications={categorizedApps}
+                            updateAppStatus={updateAppStatus}
+                        />
+                    </div>
+                    {showCollapseApps ?
+                        <>
+                            <div
+                                className="blur-bg w-100"
+                                style={{ position: "absolute", bottom: 0, height: "10vh" }}
+                                id="collapse-apps-bg"
+                            />
+
+                            <div className="d-flex justify-content-center test">
+                                <button
+                                    className="btn btn-primary p-3 px-5 mt-5" type="button" onClick={(e) => {
+                                        // e.preventDefault()
+                                        showRemainingContent("collapse-apps-button", "collapse-apps", "collapse-apps-bg")
+                                    }}
+                                    aria-expanded="false"
+                                    data-text="Applications"
+                                    id="collapse-apps-button"
+                                >
+                                    Show All Applications
+                                </button>
+                            </div>
+                        </>
+                        :
+                        <></>
+                    }
+
                 </div>
             </div>
 
@@ -103,78 +151,42 @@ export default function Dashboard() {
                     </h1>
                     <hr className="" style={{}} />
                 </div>
-                <div className="table-responsive">
-                    <TaskTable
-                        applications={categorizedApps.interviewing}
-                    />
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse show" id="toggleContent">
-                            <p>This content is only visible in the first 200 pixels.</p>
-                            <p>Click the button below to reveal the rest of the content.</p>
-                            <p>More content goes here...</p>
-                        </div>
-                        <button class="btn btn-primary mt-2" type="button" data-toggle="collapse" data-target="#toggleContent" aria-expanded="false" aria-controls="toggleContent">
-                            Show more
-                        </button>
+                <div style={{ position: "relative" }}>
+                    <div
+                        className="table-responsive"
+                        id="collapse-tasks"
+                        style={{ maxHeight: "40vh", overflow: "hidden" }}
+                    >
+                        <TaskTable
+                            applications={categorizedApps.interviewing}
+                        />
                     </div>
+                    {showCollapseTasks ?
+                        <>
+                            <div
+                                className="blur-bg w-100"
+                                style={{ position: "absolute", bottom: 0, height: "10vh" }}
+                                id="collapse-tasks-bg"
+                            />
+                            <div className="d-flex justify-content-center">
+                                <button
+                                    className="btn btn-primary p-3 px-5 mt-5" type="button" onClick={(e) => {
+                                        // e.preventDefault()
+                                        showRemainingContent("collapse-tasks-button", "collapse-tasks", "collapse-tasks-bg")
+                                    }}
+                                    aria-expanded="false"
+                                    data-text="Tasks"
+                                    id="collapse-tasks-button"
+                                >
+                                    Show All Tasks
+                                </button>
+                            </div>
+                        </>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
-
-            {/* have to use map because forEach wont render */}
-            {/* make a list with grid and gap here to store cards */}
-            {/* <div class="">
-                <div class="">
-                    <ApplicationCardList
-                        applications={categorizedApps.interviewing}
-                        updateAppStatus={updateAppStatus}
-                        nameOfList={"interviewing"}
-                    />
-                </div>
-                <div class="">
-                    <ApplicationCardList
-                        applications={categorizedApps.applied}
-                        updateAppStatus={updateAppStatus}
-                        nameOfList={"applied"}
-                    />
-                </div>
-            </div> */}
-
-            {/* <div className="">
-                <div className="d-flex">
-                    Applied
-                </div>
-                <div className="d-flex flex-wrap gap-3">
-                    {categorizedApps.applied.map((application) => (
-                        <ApplicationCard
-                            key={application.id}
-                            application={application}
-                            updateAppStatus={updateAppStatus}
-                        />
-                    ))}
-                </div>
-            </div> */}
-            {/* <div className="row row-cols-xxl-4 row-cols-md-2 row-cols-sm-1 d-flex justify-content-between gap-5">
-                    {appliedApps.map((app) => (
-                        <ApplicationCardContainer
-                            key={app.id}
-                            appObject={{ app, updateAppStatus }}
-                        />
-                    ))}
-                </div> */}
-
-            {/* <ApplicationCardContainer appObject={{ card, updateAppStatus }} /> */}
-            {/* <TaskTableContainer/> */}
-            {/* <button onClick={(e) => {
-                e.preventDefault()
-                updateAppStatus(card, "interviewing", "ghosted")
-            }
-            }>Test</button> */}
-            {/* this could be 1 - n containers (depending on categories) */}
-
         </div>
     )
 }

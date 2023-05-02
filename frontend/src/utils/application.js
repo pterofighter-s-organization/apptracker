@@ -13,7 +13,7 @@ export function categorizeApplications (applications, category) {
     //{} is the inital value for groups
 
     //temp (will change later and add a constant file)
-    if (category == "status") {
+    if (category === "status") {
         //now check if all the categories exist for that
         const statusCategory = ["applied", "interviewing", "ghosted", "interested", "rejected", "accepted"]
 
@@ -35,7 +35,7 @@ export function updateInterviewApp ( application ) {
     const appointments = "appointments"
     const interviewPrep = "interviewPrep"
 
-    if (application.status == "interviewing") {
+    if (application.status === "interviewing") {
         if (!application.hasOwnProperty(appointments)) {
             application[appointments] = []
         }

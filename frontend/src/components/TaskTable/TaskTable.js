@@ -1,5 +1,8 @@
+//utils
 import { findTasksOnApp } from "../../utils/task.js"
 import { sortDates } from "../../utils/date.js"
+
+//components
 import TaskTablePresentation from "./TaskTablePresentation.js"
 
 export default function TaskTable( { applications } ){
@@ -22,7 +25,9 @@ export default function TaskTable( { applications } ){
     return(
         <>
             {taskData ? 
-                <TaskTablePresentation displayData={taskData}/>
+                <TaskTablePresentation
+                    displayData={taskData}
+                />
                 :
                 <>
                     <h1>Loading...</h1>

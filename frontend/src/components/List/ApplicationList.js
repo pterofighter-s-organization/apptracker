@@ -1,7 +1,10 @@
+//components
 import ApplicationCard from "../Card/ApplicationCard"
+
+//utils
 import { sortDates } from "../../utils/date"
 
-export default function ApplicationList ({applications, updateAppStatus}) {
+export default function ApplicationList({ applications, updateAppStatus }) {
 
     // const priorities = {
     //     "interviewing" : 0,
@@ -12,49 +15,59 @@ export default function ApplicationList ({applications, updateAppStatus}) {
     //     "ghosted" : 5,
     // }
 
-    //update 
+    //sorts the apps to the most updated one for each status
     Object.entries(applications).forEach((apps) => {
         apps[1].sort((a, b) => {
-            return (-1*sortDates(a.dateEdited, b.dateEdited))
+            //-1 because this method returns the earliest to latest and we need to flip it
+            return (-1 * sortDates(a.dateEdited, b.dateEdited))
         })
     })
 
+
+    //the order of how the applications will be show based on status
+    //find a better way to show this * (later)
     return (
         <>
             {applications.interviewing.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
             {applications.applied.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
             {applications.accepted.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
             {applications.interested.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
             {applications.rejected.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
             {applications.ghosted.map((app) => (
-                <ApplicationCard 
+                <ApplicationCard
+                    key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}  
+                    updateAppStatus={updateAppStatus}
                 />
             ))}
         </>

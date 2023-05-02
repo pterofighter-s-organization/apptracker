@@ -1,6 +1,10 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+//pages
 import Dashboard from "./pages/Dashboard";
+
+//css
 import './App.css'
 
 export default function App() {
@@ -8,7 +12,7 @@ export default function App() {
   //reason why this is wrapped with fragment (ex: <> </>)
   //because it won't be affected by any css, any it can put <navbar> on top of <router>
   return (
-    <div className="">
+    <div className="pb-5">
       <Router>
         {/* <Navbar /> */}
         {/* <TaskTablePresentation /> */}

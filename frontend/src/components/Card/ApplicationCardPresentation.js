@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
+
+//css
 import "./ApplicationCard.css"
+
+//utils
+import { textFormat } from "../../utils/text.js";
+
+//components
 import StatusButton from "../StatusButton/StatusButton.js";
 import DateAndTime from "../Date/DateAndTime.js";
 
 export default function ApplicationCardPresentation ({ displayData, newStatus }) {
 
-    //never call this file, a helper file for application card that defines the layout
+    //never call this file other than appcard itself, a helper file for application card that defines the layout
 
     //present the following
     //1. (status, time diff)
@@ -20,6 +27,7 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
             {/* <div className="card-header bg-success" /> */}
             <div className="card-header p-4 d-flex flex-wrap gap-3 border border-0">
                 <StatusButton
+                    key={displayData.id}
                     color={displayData.color}
                     appStatus={displayData.status}
                     newStatus={newStatus}
@@ -28,10 +36,10 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
 
             <div className="card-body p-4 d-flex flex-column gap-2">
                 <div className="card-title h5">
-                    {displayData.position}
+                    {textFormat(displayData.position)}
                 </div>
                 <div className="card-subtitle lead">
-                    - {displayData.company}
+                    - {textFormat(displayData.company)}
                 </div>
             </div>
 

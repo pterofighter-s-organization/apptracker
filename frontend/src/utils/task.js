@@ -60,17 +60,20 @@ export function findTasksOnApp ( app ) {
         })
     }
 
-    tasks.push(
-        {
-            appId: id,
-            position: position,
-            company: company,
-            priority: 1,
-            title: "Prepare for interview",
-            date: today,
-            timeDue: timeDue,
-        }
-    )
+    //if didn't finish prep for interview
+    if (!app.interviewPrep) {
+        tasks.push(
+            {
+                appId: id,
+                position: position,
+                company: company,
+                priority: 1,
+                title: "Prepare for interview questions",
+                date: today,
+                timeDue: timeDue,
+            }
+        )
+    }
 
     return tasks
 }

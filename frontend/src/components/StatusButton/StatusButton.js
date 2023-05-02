@@ -1,4 +1,8 @@
+//components
 import StatusListButton from "./StatusListButton.js";
+
+//utils
+import { textFormat } from "../../utils/text.js";
 
 export default function StatusButton ({ appStatus, newStatus }) {
 
@@ -21,7 +25,7 @@ export default function StatusButton ({ appStatus, newStatus }) {
                 type="button"
                 className={`btn btn-${statusMapColor[appStatus]} pe-none`}
             >
-                {appStatus}
+                {textFormat(appStatus)}
             </button>
             <button
                 type="button"
@@ -33,16 +37,16 @@ export default function StatusButton ({ appStatus, newStatus }) {
             </button>
             <ul className="dropdown-menu">
                 {Object.entries(statusMapColor).map(([status, color]) => {
-                    if (status != appStatus) {
+                    if (status !== appStatus) {
                         return (
                             <StatusListButton
-                                key={status}
                                 status={status}
                                 newStatus={newStatus}
                                 color={color}
                             />
                         )
                     }
+                    return <></>
                 })}
             </ul>
         </div>

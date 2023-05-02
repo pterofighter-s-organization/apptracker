@@ -15,7 +15,7 @@ let applications = [
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
-        dateEdited: "2-1-2023 09:55:00",
+        dateEdited: "12-1-2023 09:55:00",
         appointments: [
             {
                 title: "closing interview",

@@ -1,4 +1,4 @@
-import ApplicationCard from "../Card/ApplicationCard.js"
+import ApplicationCard from "../../Card/ApplicationCard.js"
 
 export default function ApplicationCardList({ nameOfList, updateAppStatus, applications }) {
 

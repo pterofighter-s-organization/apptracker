@@ -1,6 +1,38 @@
-.collapse.show {
-    height: auto !important;
-    max-height: 20px;
+.content-preview {
+    max-height: 200px;
     overflow: hidden;
-    transition: max-height 0.5s ease;
+}
+
+.content-full:not(.show) {
+    display: none !important;
+}
+
+.blur-bg {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    /* this is how much it blurs, the thickness of the blur*/
+    backdrop-filter: blur(0.5px);
+}
+
+
+@media (min-width: 680px) {
+    #collapse-apps-button{
+        position: absolute;
+        bottom: 25px;
+    }
+    #collapse-tasks-button{
+        position: absolute;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 680px) {
+    #collapse-apps-button{
+        position: absolute;
+        bottom: 0px;
+    }
+    #collapse-tasks-button{
+        position: absolute;
+        bottom: 25px;
+    }
 }

@@ -1,3 +1,5 @@
+
+/* for phone and tablet screens */
 @media (min-width: 680px) {
     .card{
         width: min(315px);

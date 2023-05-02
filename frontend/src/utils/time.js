@@ -2,7 +2,10 @@ import { findCorrectMomentObj } from './date';
 
 const moment = require('moment')
 
-export function findTimeDifference (start, end) {
+export function findTimeDifference(start, end) {
+
+    //takes two time strings
+    //format: (MM-DD-YYYY) or ("today")
 
     const startTime = findCorrectMomentObj(start)
     const endTime = findCorrectMomentObj(end)
@@ -25,12 +28,12 @@ export function findTimeDifference (start, end) {
     }
 }
 
-function timerHumanizedHelper (time, label) {
+function timerHumanizedHelper(time, label) {
     //takes an int and a string
     return time.toString() + " " + label
 }
 
-export function timerDisplay (timeDiffObj) {
+export function timerDisplay(timeDiffObj) {
 
     const yearsLeft = timeDiffObj.yearsLeft
     const monthsLeft = timeDiffObj.monthsLeft
@@ -41,7 +44,7 @@ export function timerDisplay (timeDiffObj) {
     if (yearsLeft > 1) {
         return timerHumanizedHelper(yearsLeft, "years left")
     } if (monthsLeft >= 1) {
-        if(monthsLeft === 1){
+        if (monthsLeft === 1) {
             return timerHumanizedHelper(monthsLeft, "month left")
         }
         return timerHumanizedHelper(monthsLeft, "months left")
@@ -60,4 +63,21 @@ export function timerDisplay (timeDiffObj) {
     }
 
     return "Do Now"
+}
+
+//the delay function of when an action is finished
+//ex: after 250 secs of delay, we will do func {whatever you put} will be the args
+export function debounce(func, delay) {
+
+    //example on how to use this function
+    // window.onresize = debounce(() => {
+    //     showCollapseApps = checkShowCollapseApps()
+    //     setChange((change ? 0 : 1))
+    // }, 250)
+
+    let timeoutId
+    return function (...args) {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => func.apply(this, args), delay)
+    }
 }

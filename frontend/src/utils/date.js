@@ -15,11 +15,13 @@ function dateHumanizedHelper (dateString) {
 
 export function dateFormat ( dateString ) {
 
+    //made to work on firefox (needs a specific format) and other browsers
     //forcing all dates to follow a specific format
-    //starts out with today
+    //takes in "today" and other (MM-DD-YYYY) strings to format into the correct date for all browsers
+
     const momentDate = findCorrectMomentObj(dateString)
 
-    const dateFormatted = momentDate.format("MM-DD-YYYY HH:mm:ss")
+    const dateFormatted = momentDate.format("M-DD-YYYY HH:mm:ss")
 
     const dateObject = dateFormatted.split(" ")
     const date = dateObject[0]

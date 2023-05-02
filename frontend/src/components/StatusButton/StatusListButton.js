@@ -1,3 +1,5 @@
+//utils
+import { textFormat } from "../../utils/text"
 
 export default function StatusListButton ({ status, newStatus, color }) {
    
@@ -9,7 +11,7 @@ export default function StatusListButton ({ status, newStatus, color }) {
                 <button type="button" className={`dropdown-item text-${color}`} onClick={() => {
                     newStatus(status)
                 }}>
-                    {status}
+                    {textFormat(status)}
                 </button>
             </li>
         </>
