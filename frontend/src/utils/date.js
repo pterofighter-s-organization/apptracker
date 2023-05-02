@@ -26,7 +26,7 @@ export function dateFormat ( dateString ) {
     const time = dateObject[1]
 
     const dateHumanized = dateHumanizedHelper(date)
-    const timeHumanizedObj = momentDate.format("hh:mm a").split(" ")
+    const timeHumanizedObj = momentDate.format("h:mm a").split(" ")
     const timeHumanized = timeHumanizedObj[0] //12 hour period time
     const timePeriod = timeHumanizedObj[1]
     
@@ -38,4 +38,18 @@ export function dateFormat ( dateString ) {
         timeHumanized,
         timePeriod
     }
+}
+
+export function sortDates (date1, date2) {
+
+    const dateA = findCorrectMomentObj(date1)
+    const dateB = findCorrectMomentObj(date2)
+
+    if (dateA.isBefore(dateB)) {
+        return -1;
+      } else if (dateA.isAfter(dateB)) {
+        return 1;
+      } else {
+        return 0;
+      }
 }

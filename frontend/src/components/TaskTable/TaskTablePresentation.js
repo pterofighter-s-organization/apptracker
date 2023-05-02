@@ -16,6 +16,7 @@ export default function TaskTablePresentation({ displayData }) {
         0 : "danger-subtle",
         1 : "secondary-subtle",
     }
+    
     let count = 1
     // const borderWidth = "border-bottom"
     const borderColor = ""

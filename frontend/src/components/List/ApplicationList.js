@@ -1,4 +1,5 @@
 import ApplicationCard from "../Card/ApplicationCard"
+import { sortDates } from "../../utils/date"
 
 export default function ApplicationList ({applications, updateAppStatus}) {
 
@@ -10,6 +11,13 @@ export default function ApplicationList ({applications, updateAppStatus}) {
     //     "rejected" : 4,
     //     "ghosted" : 5,
     // }
+
+    //update 
+    Object.entries(applications).forEach((apps) => {
+        apps[1].sort((a, b) => {
+            return (-1*sortDates(a.dateEdited, b.dateEdited))
+        })
+    })
 
     return (
         <>

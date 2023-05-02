@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import ApplicationCardList from "../components/List/ApplicationCardList.js"
 import TaskTable from "../components/TaskTable/TaskTable.js"
 import { dateFormat } from "../utils/date.js"
 import { categorizeApplications, updateInterviewApp } from "../utils/application.js"

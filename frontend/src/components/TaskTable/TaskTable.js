@@ -1,15 +1,11 @@
 import { findTasksOnApp } from "../../utils/task.js"
-import { sortTime } from "../../utils/time.js"
+import { sortDates } from "../../utils/date.js"
 import TaskTablePresentation from "./TaskTablePresentation.js"
 
 export default function TaskTable( { applications } ){
 
     //every app that comes into this, expect they have appointment and interview prep property
     //handling task table data
-
-    applications.forEach((application) => {
-        application.appointments.sort((a, b) => sortTime(a.date, b.date))
-    })
 
     //find tasks in all the interviewing applications
     let taskData = []
@@ -19,7 +15,7 @@ export default function TaskTable( { applications } ){
 
     //sort it by the time due
     taskData.sort((a,b) => {
-        return sortTime(a.timeDue, b.timeDue)
+        return sortDates(a.timeDue, b.timeDue)
     })
 
     //this deals with the loading state of it and the actual table

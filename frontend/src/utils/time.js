@@ -61,17 +61,3 @@ export function timerDisplay (timeDiffObj) {
 
     return "Do Now"
 }
-
-export function sortTime (date1, date2) {
-
-    const dateA = findCorrectMomentObj(date1)
-    const dateB = findCorrectMomentObj(date2)
-    
-    if (dateA.isBefore(dateB)) {
-        return -1;
-      } else if (dateA.isAfter(dateB)) {
-        return 1;
-      } else {
-        return 0;
-      }
-}

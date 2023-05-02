@@ -6,7 +6,7 @@ let applications = [
         dateCreated: "2-3-2023",
         company: "google",
         salary: "60k - 100k",
-        dateEdited: "2-3-2023 14:53",
+        dateEdited: "2-3-2023 14:53:00",
     },
     {
         id: 2,
@@ -15,11 +15,11 @@ let applications = [
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
-        dateEdited: "2-1-2023 09:55",
+        dateEdited: "2-1-2023 09:55:00",
         appointments: [
             {
                 title: "closing interview",
-                date: "5-6-2023 15:45",
+                date: "5-6-2023 15:45:00",
             },
         ],
         interviewPrep: false,
@@ -31,7 +31,7 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 03:43",
+        dateEdited: "2-10-2023 03:43:00",
     },
     {
         id: 4,
@@ -40,7 +40,7 @@ let applications = [
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
-        dateEdited: "2-1-2023 12:35",
+        dateEdited: "2-1-2023 12:35:00",
     },
     {
         id: 6,
@@ -49,19 +49,19 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 10:50",
+        dateEdited: "2-10-2023 10:50:00",
         appointments: [
             {
                 title: "first interview",
-                date: "8-29-2023 08:45",
+                date: "8-29-2023 08:45:00",
             },
             {
                 title: "zoom interview",
-                date: "4-26-2023 00:26",
+                date: "4-26-2023 00:26:00",
             },
             {
                 title: "test interview",
-                date: "9-29-2023 08:45",
+                date: "9-29-2023 08:45:00",
             },
         ],
         interviewPrep: false,
@@ -73,7 +73,7 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 09:45",
+        dateEdited: "2-10-2023 09:45:00",
     },
     {
         id: 8,
@@ -82,7 +82,7 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 08:45",
+        dateEdited: "2-10-2023 08:45:00",
     },
     {
         id: 9,
@@ -91,11 +91,11 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 16:25",
+        dateEdited: "2-10-2023 16:25:00",
         appointments: [
             {
                 title: "zoom interview",
-                date: "7-25-2023 10:45",
+                date: "7-25-2023 10:45:00",
             },
         ],
         interviewPrep: true,
@@ -107,11 +107,11 @@ let applications = [
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
-        dateEdited: "2-10-2023 16:25",
+        dateEdited: "2-10-2023 16:25:00",
         appointments: [
             {
                 title: "zoom interview",
-                date: "6-25-2023 10:45",
+                date: "6-25-2023 10:45:00",
             },
         ],
         interviewPrep: false,

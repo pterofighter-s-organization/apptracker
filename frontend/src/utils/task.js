@@ -1,4 +1,5 @@
 import { findTimeDifference } from "./time.js"
+import { sortDates } from "./date.js"
 
 //task.js
 //functions here all help into organizing the details of the tasks being display
@@ -12,6 +13,9 @@ export function findTasksOnApp ( app ) {
     //find and organize task
 
     const tasks = []
+
+    //gotta ensure the appointments sorted before going on
+    app.appointments.sort((a, b) => sortDates(a.date, b.date))
     
     //app informations for task displaying
     const id = app.id
