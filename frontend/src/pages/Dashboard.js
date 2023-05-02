@@ -13,7 +13,7 @@ import TaskTable from "../components/TaskTable/TaskTable.js"
 //helpers
 import { checkShowCollapseApps, checkShowCollapseTasks, showRemainingContent } from "./DashboardHelpers.js"
 
-import "./Test.css"
+import "./Dashboard.css"
 
 //later will take the user id *
 export default function Dashboard() {
@@ -123,7 +123,7 @@ export default function Dashboard() {
                                 id="collapse-apps-bg"
                             />
 
-                            <div className="d-flex justify-content-center test">
+                            <div className="d-flex justify-content-center">
                                 <button
                                     className="btn btn-primary p-3 px-5 mt-5" type="button" onClick={(e) => {
                                         // e.preventDefault()
