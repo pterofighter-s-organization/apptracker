@@ -1,9 +1,9 @@
-For v1
+# For v1
     - made a dropdown button for changing status
     - made a collapse blur to make sure there's no infinite scrolling
     - made a resize window detection to automatically adjust the collapse
 
-For v2
+# For v2
     - history list of status updated
 
     Dashboard (v2)
