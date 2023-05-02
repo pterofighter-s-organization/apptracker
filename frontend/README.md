@@ -3,6 +3,8 @@
     - made a collapse blur to make sure there's no infinite scrolling
     - made a resize window detection to automatically adjust the collapse
 
+    Dashboard fully finished (5/2/2023 5:51am)
+
 # For v2 (After v1 finishes)
     - history list of status updated
 
