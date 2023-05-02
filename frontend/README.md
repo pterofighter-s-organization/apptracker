@@ -10,7 +10,6 @@
         - npm i react-router-dom
         - npm install moment
 
-
     start it
     - npm start
 
@@ -28,6 +27,8 @@
         - make a toolstip or that small bubble to show that a status is updated
 
     Starting navbar (5/2/2023 10:00am)
+    make description use collapse in bootstrap
+    update title of the app in dashboard
 
 # For v2 (After v1 finishes)
     - history list of status updated
