@@ -1,4 +1,6 @@
+
 //this is a file for helper functions (pure functions inside dashboard.js)
+
 export function checkShowCollapseApps (apps) {
 
     const windowWidth = window.innerWidth
@@ -19,6 +21,7 @@ export function checkShowCollapseApps (apps) {
 }
 
 export function checkShowCollapseTasks (apps) {
+    //if the amount of interviewing apps is > 3 that means there gonna be alot of task
     return (apps.length > 3)
 }
 
