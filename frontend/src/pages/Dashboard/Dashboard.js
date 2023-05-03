@@ -22,13 +22,14 @@ import "./Dashboard.css"
 export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
-    
+
     const { applications, updateApplication } = useAppManager()
     const [ windowWidth, setWindowWidth ] = useState(window.innerWidth)
-    //categorize applications before displaying
 
-    //use useMemo for returning the previous val if the dependency (reference) never changed
+    // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
     //avoid re-rendering
+
+    //categorize applications before displaying
     const categorizedApps = useMemo(() => (
         categorizeApplications(applications, "status")
     ), [applications])
@@ -44,6 +45,8 @@ export default function Dashboard () {
     const showCollapseTasks = useMemo(() => (
         checkShowCollapseTasks(tasks)
     ), [tasks])
+
+    //end of (1)
 
     //useCallback is for functions that are in child components and
     //prevent it from rendering the child components when it is not needed
