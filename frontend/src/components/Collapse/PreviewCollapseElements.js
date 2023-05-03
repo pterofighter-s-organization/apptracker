@@ -3,12 +3,12 @@ import "./PreviewCollapse.css"
 
 //a semi-component, need to pair with a container
 //because I want to leave flexibility for how the container looks
-export default function PreviewcollapseElements(props) {
+//instructions on how to build a preview collapse at the very bottom 
+export default function PreviewCollapseElements(props) {
 
     //this component must be pair with a container
     //elements like button and the blur background
     //the buttons, and the background to activate the collapse
-    //instructions on how to build a preview collapse at the very bottom 
 
     //here is what this semi component needs
     const {

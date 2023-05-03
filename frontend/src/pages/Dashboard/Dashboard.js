@@ -8,7 +8,7 @@ import { findAllTasks } from "../../utils/task.js"
 //components
 import CategorizedApplicationList from "../../components/List/CategorizedApplicationList.js"
 import TaskTable from "../../components/TaskTable/TaskTable.js"
-import PreviewcollapseElements from "../../components/Collapse/PreviewCollapseElements.js"
+import PreviewCollapseElements from "../../components/Collapse/PreviewCollapseElements.js"
 
 //hooks
 import useAppManager from "../../hooks/useAppManager.js"
@@ -98,7 +98,7 @@ export default function Dashboard() {
                         />
                     </div>
                     {showCollapseApps ?
-                        <PreviewcollapseElements
+                        <PreviewCollapseElements
                             text={"Applications"}
                             containerId={"collapse-apps"}
                             backgroundId={"collapse-apps-bg"}
@@ -131,7 +131,7 @@ export default function Dashboard() {
                         />
                     </div>
                     {showCollapseTasks ?
-                        <PreviewcollapseElements
+                        <PreviewCollapseElements
                             text={"Tasks"}
                             containerId={"collapse-tasks"}
                             backgroundId={"collapse-tasks-bg"}
