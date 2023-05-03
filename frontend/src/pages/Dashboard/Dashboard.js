@@ -44,7 +44,7 @@ export default function Dashboard () {
         checkShowCollapseTasks(tasks)
     ), [tasks])
 
-    //usecallback is for functions that are in child components and
+    //useCallback is for functions that are in child components and
     //prevent it from rendering the child components when it is not needed
     function updateAppStatus (app, newStatus) {
         updateApplication(app, newStatus)

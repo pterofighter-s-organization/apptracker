@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
+
+//backend mimic
 import { updateApp, getApps } from "../data/mimicBackendStatic";
+
+//utils
 import { dateFormat } from "../utils/date";
 import { updateInterviewApp } from "../utils/application.js"
+
+//custom hook for managing and getting apps
 
 export default function useAppManager () {
 
