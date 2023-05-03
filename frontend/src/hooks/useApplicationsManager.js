@@ -7,7 +7,7 @@ import { updateApp, getApps } from "../data/mimicBackendStatic";
 import { dateFormat } from "../utils/date";
 import { updateInterviewApp } from "../utils/application.js"
 
-export default function useAppManager () {
+export default function useApplicationsManager () {
     
     //custom hook for managing and getting apps
 
