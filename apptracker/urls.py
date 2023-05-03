@@ -18,13 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from trackerapp import views
+from django.conf.urls import url
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UsersView, 'users')
-router.register(r'application', views.ApplicationView, 'application')
+# router.register(r'users', views.UsersView, 'users')
+# router.register(r'application', views.ApplicationView, 'application')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('trackerapp/', include("trackerapp.urls") ),
-    path("api/", include(router.urls)),
+    url(r'^api/application$', views.application_list),
+    url(r'^api/application/(?P<pk>[0-9]+)$', views.application_detail)
+    # path("api/", include(router.urls)),
 ]

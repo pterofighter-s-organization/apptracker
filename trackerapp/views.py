@@ -29,7 +29,7 @@ def application_list(request):
         applications_serializer = ApplicationSerializer(applications, many=True)
         return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
-        application_data = JSONParser.parse(request)
+        application_data = JSONParser().parse(request)
         application_serializer = ApplicationSerializer(data=application_data)
         if application_serializer.is_valid():
             application_serializer.save()
@@ -41,6 +41,7 @@ def application_list(request):
 def application_detail(request, pk):
     #find application by pk 
     try:
+        print("pk is ", pk)
         application = Application.objects.get(pk=pk)
         #get an application
         if request.method == 'GET':
@@ -61,10 +62,10 @@ def application_detail(request, pk):
 
 
 
-class UsersView(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer
-    queryset = Users.objects.all()
+# class UsersView(viewsets.ModelViewSet):
+#     serializer_class = UsersSerializer
+#     queryset = Users.objects.all()
 
-class ApplicationView(viewsets.ModelViewSet):
-    serializer_class = ApplicationSerializer
-    queryset = Application.objects.all()
+# class ApplicationView(viewsets.ModelViewSet):
+#     serializer_class = ApplicationSerializer
+#     queryset = Application.objects.all()
