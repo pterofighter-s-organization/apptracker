@@ -1,6 +1,7 @@
 
 //this is a file for helper functions (PURE FUNCTIONS (no side effect, no global vars used) inside and used for dashboard.js)
 
+//later these can be its own seperate component * (later) gotta think about it
 export function checkShowCollapseApps (apps, windowWidth) {
 
     //calculate how many cards can the current window can fit to see if theres a need for collapse

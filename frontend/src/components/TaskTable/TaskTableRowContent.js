@@ -7,14 +7,15 @@ import Timer from "../Timer/Timer.js"
 //utils
 import { textFormat } from "../../utils/text.js";
 
-export default function TaskTableRow ({ task, padding, rowClassNames }) {
+export default function TaskTableRowContent ({ task, padding, rowClassNames, count }) {
 
+    //no padding specific, default to 0.5vw
     if (!padding) {
         padding = "0.5vw"
     }
 
     //Task details 
-    
+
     //col-1 = task number
     //col-2 = app info
     //col-3 = title of the task
@@ -29,10 +30,17 @@ export default function TaskTableRow ({ task, padding, rowClassNames }) {
     //     date: appointment.date,
     //     timeDue: appointment.date,
     // }
-    
+
     return (
         <>
-            <td style={{padding: padding}} className={`${rowClassNames}`}>
+            <th
+                scope="row"
+                style={{ padding: padding }}
+                className={`${rowClassNames}`}
+            >
+                {count}
+            </th>
+            <td style={{ padding: padding }} className={`${rowClassNames}`}>
                 <div>
                     {textFormat(task.position)}
                 </div>
@@ -41,20 +49,20 @@ export default function TaskTableRow ({ task, padding, rowClassNames }) {
                     {"( " + textFormat(task.company) + " )"}
                 </div>
             </td>
-            <td style={{padding: padding}} className={`${rowClassNames}`}>
+            <td style={{ padding: padding }} className={`${rowClassNames}`}>
                 {textFormat(task.title)}
             </td>
-            <td className={`d-none d-sm-table-cell ${rowClassNames}`} style={{padding: padding}}>
-                <DateAndTime date={task.timeDue}/>
+            <td className={`d-none d-sm-table-cell ${rowClassNames}`} style={{ padding: padding }}>
+                <DateAndTime date={task.timeDue} />
             </td>
-            <td style={{padding: padding}} className={`${rowClassNames}`}>
+            <td style={{ padding: padding }} className={`${rowClassNames}`}>
                 <Timer
                     start={"today"}
                     end={task.timeDue}
                 />
             </td>
-            <td style={{padding: padding}} className={`${rowClassNames}`}>
-                <Link to={""} className={`card-text btn btn-primary px-3 py-2`} style={{padding: `${padding}`}}>
+            <td style={{ padding: padding }} className={`${rowClassNames}`}>
+                <Link to={""} className={`card-text btn btn-primary px-3 py-2`} style={{ padding: `${padding}` }}>
                     <div className="">
                         More Details
                     </div>

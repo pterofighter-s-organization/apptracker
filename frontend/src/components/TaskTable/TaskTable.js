@@ -6,10 +6,7 @@ import TaskTablePresentation from "./TaskTablePresentation.js"
 
 export default function TaskTable ({tasks}) {
 
-    //every app that comes into this, expect they have appointment and interview prep property
-    //handling task table data
-
-    //find tasks in all the interviewing applications
+    //handling task table data and its modification, also handling its loading state
 
     //sort it by the time due
     tasks.sort((a,b) => {

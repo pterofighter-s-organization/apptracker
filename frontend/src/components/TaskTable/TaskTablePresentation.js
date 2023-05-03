@@ -1,10 +1,11 @@
 //components
-import TaskTableRow from './TaskTableRow.js'
+import TaskTableRowContent from './TaskTableRowContent.js'
 
-export default function TaskTablePresentation({ displayData }) {
+export default function TaskTablePresentation ({displayData}) {
 
     //never call this file, is just a helper file for tasktable.js
     //layout of the task table
+    //defines the ui of tasktable
 
     //col-1 = task number
     //col-2 = app info
@@ -27,7 +28,8 @@ export default function TaskTablePresentation({ displayData }) {
     }
 
     let count = 1
-    // const borderWidth = "border-bottom"
+    
+    //bootstrap css and some styles
     const headerPadding = "p-4"
     const rowPadding = "0.5vw"
     const rowClassNames = "p-2 p-sm-3 border border-5 border-light"
@@ -36,7 +38,10 @@ export default function TaskTablePresentation({ displayData }) {
     return (
         <>
             <table className="table text-center ">
-                <thead className={`${headerPadding} bg-secondary bg-opacity-25 border-light border-5`} style={{}}>
+                <thead 
+                    className={`${headerPadding} bg-secondary bg-opacity-25 border-light border-5`} 
+                    style={{}}
+                >
                     <tr>
                         <th scope="col" className={`${headerPadding}`}>#</th>
                         <th scope="col" className={`${headerPadding}`}>App</th>
@@ -50,20 +55,16 @@ export default function TaskTablePresentation({ displayData }) {
                     <tbody className="">
                         {displayData.map((task) => (
                             <tr
-                                className={`bg-${colorsMapPriority[task.priority].color} text-${colorsMapPriority[task.priority].textColor} bg-opacity-${colorsMapPriority[task.priority].opacity}`}
+                                className={`bg-${colorsMapPriority[task.priority].color} 
+                                            text-${colorsMapPriority[task.priority].textColor} 
+                                            bg-opacity-${colorsMapPriority[task.priority].opacity}`}
                                 key={count}
                             >
-                                <th
-                                    scope="row"
-                                    style={{ padding: rowPadding }}
-                                    className={`${rowClassNames}`}
-                                >
-                                    {count++}
-                                </th>
-                                <TaskTableRow
+                                <TaskTableRowContent
                                     task={task}
                                     padding={rowPadding}
                                     rowClassNames={rowClassNames}
+                                    count={count++}
                                 />
                             </tr>
                         ))}
