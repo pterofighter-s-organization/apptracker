@@ -52,7 +52,7 @@ export default function TaskTableRowContent ({ task, padding, rowClassNames, cou
             <td style={{ padding: padding }} className={`${rowClassNames}`}>
                 {textFormat(task.title)}
             </td>
-            <td className={`d-none d-sm-table-cell ${rowClassNames}`} style={{ padding: padding }}>
+            <td className={`d-none d-md-table-cell ${rowClassNames}`} style={{ padding: padding }}>
                 <DateAndTime date={task.timeDue} />
             </td>
             <td style={{ padding: padding }} className={`${rowClassNames}`}>

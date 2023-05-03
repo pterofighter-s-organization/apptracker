@@ -46,7 +46,7 @@ export default function TaskTablePresentation ({displayData}) {
                         <th scope="col" className={`${headerPadding}`}>#</th>
                         <th scope="col" className={`${headerPadding}`}>App</th>
                         <th scope="col" className={`${headerPadding}`}>Task</th>
-                        <th scope="col" className={`d-none d-sm-block ${headerPadding}`}>Due date</th>
+                        <th scope="col" className={`d-none d-md-block ${headerPadding}`}>Due date</th>
                         <th scope="col" className={`${headerPadding}`}>Time</th>
                         <th scope="col" className={`${headerPadding}`}>🔗</th>
                     </tr>
