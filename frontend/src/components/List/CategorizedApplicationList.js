@@ -4,7 +4,7 @@ import ApplicationCard from "../Card/ApplicationCard"
 //utils
 import { sortDates } from "../../utils/date"
 
-export default function ApplicationList({ applications, updateAppStatus }) {
+export default function CategorizedApplicationList({ applications, updateAppStatus }) {
 
     // const priorities = {
     //     "interviewing" : 0,

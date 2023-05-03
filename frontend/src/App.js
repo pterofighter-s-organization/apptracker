@@ -13,7 +13,7 @@ export default function App() {
   //because it won't be affected by any css, any it can put <navbar> on top of <router>
   return (
     // mimic footer with pb-5
-    <div className="pb-5">
+    <div className="App pb-5">
       <Router>
         {/* <Navbar /> */}
         {/* <TaskTablePresentation /> */}

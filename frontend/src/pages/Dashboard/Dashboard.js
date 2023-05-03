@@ -6,25 +6,23 @@ import { categorizeApplications } from "../../utils/application.js"
 import { findAllTasks } from "../../utils/task.js"
 
 //components
-import ApplicationList from "../../components/List/ApplicationList.js"
+import CategorizedApplicationList from "../../components/List/CategorizedApplicationList.js"
 import TaskTable from "../../components/TaskTable/TaskTable.js"
+import PreviewcollapseElements from "../../components/Collapse/PreviewCollapseElements.js"
 
 //hooks
 import useAppManager from "../../hooks/useAppManager.js"
 
 //helpers
-import { checkShowCollapseApps, checkShowCollapseTasks, showRemainingContent } from "./DashboardHelpers.js"
-
-//css
-import "./Dashboard.css"
+import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
 
 //later will take the user id *
-export default function Dashboard () {
+export default function Dashboard() {
 
     //showing the task that the user needs to finish and the applications they currently have
 
     const { applications, updateApplication } = useAppManager()
-    const [ windowWidth, setWindowWidth ] = useState(window.innerWidth)
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
     //avoid re-rendering
@@ -50,14 +48,14 @@ export default function Dashboard () {
 
     //useCallback is for functions that are in child components and
     //prevent it from rendering the child components when it is not needed
-    function updateAppStatus (app, newStatus) {
+    function updateAppStatus(app, newStatus) {
         updateApplication(app, newStatus)
     }
 
     //debugging
     // console.log(categorizedApps)
 
-    //delay 250 secs after the user finish resizing to start using the function
+    //delay 250 secs after the user starts resizing to start using the function
     window.onresize = debounce(() => {
         setWindowWidth(window.innerWidth)
     }, 250)
@@ -86,43 +84,31 @@ export default function Dashboard () {
                     </h1> */}
                     <hr className="" style={{}} />
                 </div>
+                {/* the collapse (only the buttons and the bg uses same elements)*/}
+                {/* giving more flexibility to the container that uses the collapse */}
                 <div style={{ position: "relative" }}>
                     <div
                         className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
                         id="collapse-apps"
                         style={{ maxHeight: "40vh", overflow: "hidden" }}
                     >
-                        <ApplicationList
+                        <CategorizedApplicationList
                             applications={categorizedApps}
                             updateAppStatus={updateAppStatus}
                         />
                     </div>
                     {showCollapseApps ?
-                        <>
-                            <div
-                                className="blur-bg w-100"
-                                style={{ position: "absolute", bottom: 0, height: "15vh" }}
-                                id="collapse-apps-bg"
-                            />
-
-                            <div className="d-flex justify-content-center">
-                                <button
-                                    className="btn btn-primary p-3 px-5 mt-5" type="button" onClick={(e) => {
-                                        // e.preventDefault()
-                                        showRemainingContent("collapse-apps-button", "collapse-apps", "collapse-apps-bg")
-                                    }}
-                                    aria-expanded="false"
-                                    data-text="Applications"
-                                    id="collapse-apps-button"
-                                >
-                                    Show All Applications
-                                </button>
-                            </div>
-                        </>
+                        <PreviewcollapseElements
+                            text={"Applications"}
+                            containerId={"collapse-apps"}
+                            backgroundId={"collapse-apps-bg"}
+                            buttonId={"collapse-apps-button"}
+                            maxHeight={"40vh"}
+                            overflow={"hidden"}
+                        />
                         :
                         <></>
                     }
-
                 </div>
             </div>
 
@@ -133,6 +119,7 @@ export default function Dashboard () {
                     </h1>
                     <hr className="" style={{}} />
                 </div>
+                {/* the collapse (only the buttons and the bg uses same elements) */}
                 <div style={{ position: "relative" }}>
                     <div
                         className="table-responsive"
@@ -144,26 +131,14 @@ export default function Dashboard () {
                         />
                     </div>
                     {showCollapseTasks ?
-                        <>
-                            <div
-                                className="blur-bg w-100"
-                                style={{ position: "absolute", bottom: 0, height: "15vh" }}
-                                id="collapse-tasks-bg"
-                            />
-                            <div className="d-flex justify-content-center">
-                                <button
-                                    className="btn btn-primary p-3 px-5 mt-5" type="button" onClick={(e) => {
-                                        // e.preventDefault()
-                                        showRemainingContent("collapse-tasks-button", "collapse-tasks", "collapse-tasks-bg")
-                                    }}
-                                    aria-expanded="false"
-                                    data-text="Tasks"
-                                    id="collapse-tasks-button"
-                                >
-                                    Show All Tasks
-                                </button>
-                            </div>
-                        </>
+                        <PreviewcollapseElements
+                            text={"Tasks"}
+                            containerId={"collapse-tasks"}
+                            backgroundId={"collapse-tasks-bg"}
+                            buttonId={"collapse-tasks-button"}
+                            maxHeight={"40vh"}
+                            overflow={"hidden"}
+                        />
                         :
                         <></>
                     }
