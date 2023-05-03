@@ -7,9 +7,9 @@ import { updateApp, getApps } from "../data/mimicBackendStatic";
 import { dateFormat } from "../utils/date";
 import { updateInterviewApp } from "../utils/application.js"
 
-//custom hook for managing and getting apps
-
 export default function useAppManager () {
+    
+    //custom hook for managing and getting apps
 
     const [applications, setApplications] = useState([])
 

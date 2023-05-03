@@ -22,6 +22,7 @@ import "./Dashboard.css"
 export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
+    
     const { applications, updateApplication } = useAppManager()
     const [ windowWidth, setWindowWidth ] = useState(window.innerWidth)
     //categorize applications before displaying
