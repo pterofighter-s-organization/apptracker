@@ -38,12 +38,14 @@ export default function Dashboard() {
     ), [categorizedApps.interviewing])
 
     const showCollapseApps = useMemo(() => (
+        //vh following how much you give to the container at the bottom 
         checkShowCollapseApps(applications, windowWidth, windowHeight, 40)
     ), [windowHeight, windowWidth, applications])
 
     const showCollapseTasks = useMemo(() => (
-        checkShowCollapseTasks(tasks)
-    ), [tasks])
+        //vh following how much you give to the container at the bottom 
+        checkShowCollapseTasks(tasks, windowHeight, 40) 
+    ), [windowHeight, tasks])
 
     //end of (1)
 
@@ -99,6 +101,7 @@ export default function Dashboard() {
                             updateAppStatus={updateAppStatus}
                         />
                     </div>
+                    {/* it's also flexible to decide when to show these elements, custom function, not req for the elements to work*/}
                     {showCollapseApps ?
                         <PreviewCollapseElements
                             text={"Applications"}

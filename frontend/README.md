@@ -21,10 +21,10 @@
     - task table collapse will automatically be gone if interviewing apps < 3
     - cards sort from the most update to outdated
     - tasks sort from the earliest to latest
+    - make measurements for calculating when to have preview collapses in dashboard (fully finish - shouldn't be edited)
 
     Dashboard fully finished (5/2/2023 5:51am)
         (Task to do in making it better)
-        - make a vars file to store all global vars used throughtout helper and main file
         - can add the quantities of apps and tasks 
         - make a toolstip or that small bubble to show that a status is updated
 

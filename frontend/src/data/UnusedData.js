@@ -152,3 +152,12 @@ export const getApps = () => {
     //maybe can try categorizecontainer only return states
     //categorize container should also have a status change function to update (takes in id and status changed)
     //so i can decide on how the list looks
+
+
+    // let gap = 16
+    // //g-xl-4 xl is >=1200px
+    // if (windowWidth >= 1200){
+    //     gap*=(1.5+marginError = 0.5)
+    // }
+
+    // const heightInPx = (vh / 100) * windowHeight
