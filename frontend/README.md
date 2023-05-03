@@ -33,8 +33,14 @@
     
 
     Starting navbar (5/2/2023 10:00am)
-    make description use collapse in bootstrap
-    update title of the app in dashboard
+        - make description use collapse in bootstrap
+        - update title of the app in dashboard
+
+    Individual App pages
+        Interview prep
+        - maybe dont need to do interview questions, just make them upload a pdf or a google link to their prep
+        - or a button saying they prep already
+
 
 # For v2 (After v1 finishes)
     - history list of status updated (for individual app pages)
