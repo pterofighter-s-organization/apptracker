@@ -23,12 +23,12 @@
     - tasks sort from the earliest to latest
 
     Dashboard fully finished (5/2/2023 5:51am)
+        (Task to do in making it better)
         - make a vars file to store all global vars used throughtout helper and main file
         - can add the quantities of apps and tasks 
         - make a toolstip or that small bubble to show that a status is updated
 
         Temp solutions (must implement)
-        - making it a scroll for users dont wanna expand whole thing
         - solution : make it show sections by sections / or make a button on the top right of the section to close
     
 
