@@ -25,6 +25,9 @@ export default function Dashboard () {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
+    const taskVh = 40
+    const appsVh = 40
+
     // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
     //avoid re-rendering
 
@@ -39,12 +42,12 @@ export default function Dashboard () {
 
     const showCollapseApps = useMemo(() => (
         //vh following how much you give to the container at the bottom 
-        checkShowCollapseApps(applications, windowWidth, windowHeight, 40)
+        checkShowCollapseApps(applications, windowWidth, windowHeight, appsVh)
     ), [windowHeight, windowWidth, applications])
 
     const showCollapseTasks = useMemo(() => (
         //vh following how much you give to the container at the bottom 
-        checkShowCollapseTasks(tasks, windowHeight, 40) 
+        checkShowCollapseTasks(tasks, windowHeight, taskVh) 
     ), [windowHeight, tasks])
 
     //end of (1)
@@ -94,7 +97,7 @@ export default function Dashboard () {
                     <div
                         className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
                         id="collapse-apps"
-                        style={{ maxHeight: "40vh", overflow: "hidden" }}
+                        style={{ maxHeight: appsVh.toString()+"vh", overflow: "hidden" }}
                     >
                         <CategorizedApplicationList
                             applications={categorizedApps}
@@ -108,7 +111,7 @@ export default function Dashboard () {
                             containerId={"collapse-apps"}
                             backgroundId={"collapse-apps-bg"}
                             buttonId={"collapse-apps-button"}
-                            maxHeight={"40vh"}
+                            maxHeight={appsVh.toString()+"vh"}
                             overflow={"hidden"}
                         />
                         :
@@ -129,7 +132,7 @@ export default function Dashboard () {
                     <div
                         className="table-responsive"
                         id="collapse-tasks"
-                        style={{ maxHeight: "40vh", overflow: "hidden" }}
+                        style={{ maxHeight: taskVh.toString()+"vh", overflow: "hidden" }}
                     >
                         <TaskTable
                             tasks={tasks}
@@ -141,7 +144,7 @@ export default function Dashboard () {
                             containerId={"collapse-tasks"}
                             backgroundId={"collapse-tasks-bg"}
                             buttonId={"collapse-tasks-button"}
-                            maxHeight={"40vh"}
+                            maxHeight={taskVh.toString()+"vh"}
                             overflow={"hidden"}
                         />
                         :
