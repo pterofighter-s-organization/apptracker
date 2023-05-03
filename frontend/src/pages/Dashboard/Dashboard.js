@@ -1,16 +1,16 @@
 import React, { useMemo, useState } from "react"
 
 //utils
-import { debounce } from "../utils/time.js"
-import { categorizeApplications } from "../utils/application.js"
-import { findAllTasks } from "../utils/task.js"
+import { debounce } from "../../utils/time.js"
+import { categorizeApplications } from "../../utils/application.js"
+import { findAllTasks } from "../../utils/task.js"
 
 //components
-import ApplicationList from "../components/List/ApplicationList.js"
-import TaskTable from "../components/TaskTable/TaskTable.js"
+import ApplicationList from "../../components/List/ApplicationList.js"
+import TaskTable from "../../components/TaskTable/TaskTable.js"
 
 //hooks
-import useAppManager from "../hooks/useAppManager.js"
+import useAppManager from "../../hooks/useAppManager.js"
 
 //helpers
 import { checkShowCollapseApps, checkShowCollapseTasks, showRemainingContent } from "./DashboardHelpers.js"
@@ -22,8 +22,8 @@ import "./Dashboard.css"
 export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
-    const { applications , updateApplication } = useAppManager()
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const { applications, updateApplication } = useAppManager()
+    const [ windowWidth, setWindowWidth ] = useState(window.innerWidth)
     //categorize applications before displaying
 
     //use useMemo for returning the previous val if the dependency (reference) never changed

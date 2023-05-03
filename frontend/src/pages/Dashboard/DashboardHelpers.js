@@ -1,7 +1,9 @@
 
-//this is a file for helper functions (pure functions inside and used for dashboard.js)
+//this is a file for helper functions (PURE FUNCTIONS (no side effect, no global vars used) inside and used for dashboard.js)
 
 export function checkShowCollapseApps (apps, windowWidth) {
+
+    //calculate how many cards can the current window can fit to see if theres a need for collapse
 
     const vwPadding = 1
 
@@ -9,7 +11,7 @@ export function checkShowCollapseApps (apps, windowWidth) {
     const paddingPx = vwPadding * (windowWidth / 100)
     const containerWidth = windowWidth - (2 * paddingPx)
     //gap is gutter width = container width * gutter percentage / 100
-    //the percentage is 1.5 usually but i downscale to 1.25 for margins
+    //the percentage is 1.5 usually but i downscale to 1.25 for margins (IMPORTANT DONT DELETE)
     const gap = (containerWidth * 1.25 / 100)
     const cardsToFit = Math.floor(windowWidth / (315 + gap))
 

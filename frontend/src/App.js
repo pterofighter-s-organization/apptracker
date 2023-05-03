@@ -2,7 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 //pages
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard/Dashboard.js";
 
 //css
 import './App.css'
