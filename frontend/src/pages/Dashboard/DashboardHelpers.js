@@ -60,7 +60,7 @@ export function checkShowCollapseTasks (tasks, windowHeight, vh) {
     const heightInPx = (vh / 100) * windowHeight
 
     // from px to vh = (px/windowHeight) * 100
-    const heightOfTask = 100 //90 tall for tasks
+    const heightOfTask = 100 //100 tall for tasks at all window sizes
 
     //gap of task is 16 in all sizes
     let gap = 16
