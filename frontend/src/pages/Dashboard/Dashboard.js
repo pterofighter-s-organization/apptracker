@@ -11,7 +11,7 @@ import TaskTable from "../../components/TaskTable/TaskTable.js"
 import PreviewCollapseElements from "../../components/Collapse/PreviewCollapseElements.js"
 
 //hooks
-import useAppManager from "../../hooks/useAppManager.js"
+import useApplicationsManager from "../../hooks/useApplicationsManager.js"
 
 //helpers
 import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
@@ -21,7 +21,7 @@ export default function Dashboard() {
 
     //showing the task that the user needs to finish and the applications they currently have
 
-    const { applications, updateApplication } = useAppManager()
+    const { applications, updateApplication } = useApplicationsManager()
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed

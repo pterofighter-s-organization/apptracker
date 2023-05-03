@@ -5,7 +5,7 @@ export default function DateAndTime ( {date} ) {
     
     //for firefox cause they cant read it properly
     // if(typeof date === "string"){
-    //     date = date.replace("-", "/")
+    //     date = date.replaceAll("-", "/")
     // }
     
     const dateFormatted = dateFormat(date)
