@@ -1,9 +1,8 @@
 
 //this is a file for helper functions (pure functions inside and used for dashboard.js)
 
-export function checkShowCollapseApps (apps) {
+export function checkShowCollapseApps (apps, windowWidth) {
 
-    const windowWidth = window.innerWidth
     const vwPadding = 1
 
     //padding in px = (vw) * (the window width (in px) / 100)
@@ -20,9 +19,9 @@ export function checkShowCollapseApps (apps) {
     return !(cardsToFit >= apps.length)
 }
 
-export function checkShowCollapseTasks (apps) {
-    //if the amount of interviewing apps is > 3 that means there gonna be alot of task
-    return (apps.length > 3)
+export function checkShowCollapseTasks (tasks) {
+    //if the amount of tasks is > 3 that means there gonna be alot of task
+    return (tasks.length > 3)
 }
 
 export function showRemainingContent(id, collapseId, backgroundId) {

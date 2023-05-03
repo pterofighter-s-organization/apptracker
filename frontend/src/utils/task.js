@@ -4,6 +4,16 @@ import { sortDates } from "./date.js"
 //task.js
 //functions here all help into organizing the details of the tasks being display
 
+export function findAllTasks ( applications ) {
+
+    let tasks = []
+    applications.forEach((application) => {
+        tasks = tasks.concat(findTasksOnApp(application))
+    })
+
+    return tasks
+}
+
 export function findTasksOnApp ( app ) {
 
     //input: the app and the tasks list for updating

@@ -1,91 +1,69 @@
-import React, { useEffect, useState } from "react"
+import React, { useMemo, useState } from "react"
 
 //utils
-import { dateFormat } from "../utils/date.js"
 import { debounce } from "../utils/time.js"
-import { categorizeApplications, updateInterviewApp } from "../utils/application.js"
-import { updateApp, getApps } from "../data/mimicBackendStatic.js"
+import { categorizeApplications } from "../utils/application.js"
+import { findAllTasks } from "../utils/task.js"
 
 //components
 import ApplicationList from "../components/List/ApplicationList.js"
 import TaskTable from "../components/TaskTable/TaskTable.js"
 
+//hooks
+import useAppManager from "../hooks/useAppManager.js"
+
 //helpers
 import { checkShowCollapseApps, checkShowCollapseTasks, showRemainingContent } from "./DashboardHelpers.js"
 
+//css
 import "./Dashboard.css"
 
 //later will take the user id *
-export default function Dashboard() {
+export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
-
-    const [apps, setApps] = useState([]);
-    const [change, setChange] = useState(0);
-    const [categorizedApps, setCategorizedApps] = useState(categorizeApplications([], "status"))
+    const { applications , updateApplication } = useAppManager()
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     //categorize applications before displaying
 
-    useEffect(() => {
+    //use useMemo for returning the previous val if the dependency (reference) never changed
+    //avoid re-rendering
+    const categorizedApps = useMemo(() => (
+        categorizeApplications(applications, "status")
+    ), [applications])
 
-        //change later when backend is done
-        let applications = []
-        try {
-            //set loading state here
-            applications = getApps()
-        } catch (err) {
-            //remove loading state here
-            console.log(err)
-        }
-        //or remove loading here
+    const tasks = useMemo(() => (
+        findAllTasks(categorizedApps.interviewing)
+    ), [categorizedApps.interviewing])
 
-        setApps(applications)
-        setCategorizedApps(categorizeApplications(applications, "status"))
-    }, [])
+    const showCollapseApps = useMemo(() => (
+        checkShowCollapseApps(applications, windowWidth)
+    ), [windowWidth, applications])
 
-    //** adding, changing the application */
-    //figure out usecallback
-    const updateAppStatus = ((app, newStatus) => {
+    const showCollapseTasks = useMemo(() => (
+        checkShowCollapseTasks(tasks)
+    ), [tasks])
 
-        const { id } = app
-        const today = dateFormat("today")
+    //usecallback is for functions that are in child components and
+    //prevent it from rendering the child components when it is not needed
+    function updateAppStatus (app, newStatus) {
+        updateApplication(app, newStatus)
+    }
 
-        //set the app status to the new one (these should not be done here instead in backend as a json)
-        app.status = newStatus
-        app.dateEdited = today.dateFormatted
-        //making sure the application fits what an interview app needs
-        updateInterviewApp(app)
-
-        //add a history list of when the status was changed *
-        //for ex: an array of the (time edited, status updated to)
-
-        //up here is the backend update (code later)
-        //mimic backend code (replace later)
-        //this is a backend response
-        let res = []
-        try {
-            res = updateApp(app, id)
-        } catch (err) {
-            console.log(err)
-        }
-
-        //this is frontend update (modify according to response, should be getting only one app back which is the app changed)
-        //right now it shouldn't trigger a re-render because apps is not subscribed yet *
-        //can do it by adding it to the render part (return) *
-        setApps(res)
-        setCategorizedApps(categorizeApplications(apps, "status"))
-        //we will temp use this for now
-        setChange((change ? 0 : 1))
-    })
-
-    let showCollapseApps = checkShowCollapseApps(apps)
-    let showCollapseTasks = checkShowCollapseTasks(categorizedApps.interviewing)
-    console.log(categorizedApps)
+    //debugging
+    // console.log(categorizedApps)
 
     //delay 250 secs after the user finish resizing to start using the function
     window.onresize = debounce(() => {
-        setChange((change ? 0 : 1))
+        setWindowWidth(window.innerWidth)
     }, 250)
 
+    //loading
+    // if(applications.length <= 0) {
+    //     return <>Loading...</>
+    // }
+
+    //finish
     return (
         <div className="d-flex flex-column gap-5 mt-3 mt-lg-0" style={{ padding: "1vw 2.5vw" }}>
             {/* <h1 className="">
@@ -158,7 +136,7 @@ export default function Dashboard() {
                         style={{ maxHeight: "40vh", overflow: "hidden" }}
                     >
                         <TaskTable
-                            applications={categorizedApps.interviewing}
+                            tasks={tasks}
                         />
                     </div>
                     {showCollapseTasks ?
