@@ -23,6 +23,7 @@ export default function Dashboard() {
 
     const { applications, updateApplication } = useApplicationsManager()
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
     // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
     //avoid re-rendering
@@ -37,8 +38,8 @@ export default function Dashboard() {
     ), [categorizedApps.interviewing])
 
     const showCollapseApps = useMemo(() => (
-        checkShowCollapseApps(applications, windowWidth)
-    ), [windowWidth, applications])
+        checkShowCollapseApps(applications, windowWidth, windowHeight, 40)
+    ), [windowHeight, windowWidth, applications])
 
     const showCollapseTasks = useMemo(() => (
         checkShowCollapseTasks(tasks)
@@ -58,6 +59,7 @@ export default function Dashboard() {
     //delay 250 secs after the user starts resizing to start using the function
     window.onresize = debounce(() => {
         setWindowWidth(window.innerWidth)
+        setWindowHeight(window.innerHeight)
     }, 250)
 
     //loading

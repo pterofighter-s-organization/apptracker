@@ -37,7 +37,7 @@
     update title of the app in dashboard
 
 # For v2 (After v1 finishes)
-    - history list of status updated
+    - history list of status updated (for individual app pages)
 
     Dashboard (v2)
     - make tabs in dashboard for (apps, tasks, etc) instead of the version 1 ui (top-down collapse)
