@@ -17,7 +17,7 @@ import useApplicationsManager from "../../hooks/useApplicationsManager.js"
 import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
 
 //later will take the user id *
-export default function Dashboard() {
+export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
 
