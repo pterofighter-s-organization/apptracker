@@ -3,11 +3,12 @@ import "./PreviewCollapse.css"
 
 //a semi-component, need to pair with a container
 //because I want to leave flexibility for how the container looks
-export default function PreviewcollapseElements (props) {
+export default function PreviewcollapseElements(props) {
 
     //this component must be pair with a container
     //elements like button and the blur background
     //the buttons, and the background to activate the collapse
+    //instructions on how to build a preview collapse at the very bottom 
 
     //here is what this semi component needs
     const {
@@ -27,13 +28,13 @@ export default function PreviewcollapseElements (props) {
         const background = document.getElementById(backgroundId)
         const button = document.getElementById(buttonId)
 
-        let isExpanded = button.getAttribute('aria-expanded')
+        let isCollapsed = button.getAttribute('aria-expanded')
         const text = button.getAttribute('data-text')
-        button.innerHTML = isExpanded === "true" ? "Show All " + text : "Show Less"
-        isExpanded = isExpanded === "true" ? "false" : "true"
-        button.setAttribute('aria-expanded', isExpanded)
+        button.innerHTML = isCollapsed === "true" ? "Show All " + text : "Show Less"
+        isCollapsed = isCollapsed === "true" ? "false" : "true"
+        button.setAttribute('aria-expanded', isCollapsed)
 
-        if (isExpanded === "true") {
+        if (isCollapsed === "true") {
             //collapsed state
             collapseContainer.style.overflow = ""
             collapseContainer.style.maxHeight = "none"
@@ -71,3 +72,29 @@ export default function PreviewcollapseElements (props) {
         </>
     )
 }
+
+//EXAMPLE of a preivew collapse with container to put the item
+/* <div style={{ position: "relative" }}>
+    <div
+        className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
+        id="collapse-apps"
+        style={{ maxHeight: "40vh", overflow: "hidden" }}
+    >
+        <CategorizedApplicationList
+            applications={categorizedApps}
+            updateAppStatus={updateAppStatus}
+        />
+    </div>
+    {showCollapseApps ?
+        <PreviewcollapseElements
+            text={"Applications"}
+            containerId={"collapse-apps"}
+            backgroundId={"collapse-apps-bg"}
+            buttonId={"collapse-apps-button"}
+            maxHeight={"40vh"}
+            overflow={"hidden"}
+        />
+        :
+        <></>
+    }
+</div> */
