@@ -1,43 +1,21 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 
-import "./Navbar.css"
-import NavbarElements from "./NavbarElements"
-import NavMenuButton from "./Button/NavMenuButton"
-import NavLogUserButton from "./Button/NavLogUserButton"
+//utils
+import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
+import NavSidebar from "./NavSideBar.js"
 
-export default function Navbar ({windowWidth}) {
+export default function Navbar() {
 
-    const expanded = {
-        width: 275,
-        show: true,
-        padding: 4,
-    }
+    const { windowWidth, windowHeight } = useWindowSizeManager()
 
-    const minimized = {
-        width: 100,
-        show: false,
-        padding: 3,
-    }
-
-    const [menuOption, setMenuOption] = useState(expanded)
-
-    const navBarWidth = useMemo(() => (
-        menuOption.width //px
-    ),[menuOption])
-    const showFullNav = useMemo(() => ( 
-        menuOption.show
-    ),[menuOption])
-    const navPadding = useMemo(() => (
-        menuOption.padding
-    ),[menuOption])
-
-    function handleChangeMenu (request) {
-        if(request === "expand"){
-            setMenuOption(expanded)
-        }else if(request === "minimize"){
-            setMenuOption(minimized)
-        }
-        console.log("test")
+    const ifYes = true
+    
+    const sizesMapToWidth = {
+        "s": 576,
+        "sm": 768,
+        "md": 992,
+        "lg": 1200,
+        "xl": 1400,
     }
 
     return (
@@ -55,27 +33,12 @@ export default function Navbar ({windowWidth}) {
         //     style={{ minWidth: "275px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
         //     <NavbarElements show={true}/>
         // </div>
-        <div
-            className=""
-            id="collapseWidthExample"
-            style={{ minWidth: navBarWidth.toString() + "px", minHeight: window.innerHeight, backgroundColor: "#2C4096" }}>
-            <div className={`sticky-top p-${navPadding.toString()}`}>
-                {/* <NavButton
-                icon={"box-arrow-left"}
-                text={"Log out"}
-                /> */}
-                {/* <div className="fixed-bottom p-4">
-                
-                </div> */}
-                <NavMenuButton 
-                    show={showFullNav} 
-                    handleChangeMenu={handleChangeMenu}
-                />
-                <div className="my-5 d-flex flex-column gap-3">
-                    <NavbarElements show={showFullNav} />
-                </div>
-                <NavLogUserButton show={showFullNav} />
-            </div>
-        </div>
+        <>
+            {ifYes ?
+                <NavSidebar windowHeight={windowHeight} />
+                :
+                <></>
+            }
+        </>
     )
 }

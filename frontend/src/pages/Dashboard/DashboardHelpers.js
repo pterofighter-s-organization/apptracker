@@ -42,7 +42,7 @@ export function checkShowCollapseApps(apps, windowWidth, windowHeight, vh) {
     }
 
     //debugging
-    checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
+    // checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
 
     return !(cardsToFitRow >= apps.length) && !checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
 }
@@ -62,7 +62,7 @@ function checkCardHeightHelper (windowHeight, vh, gap, cardsPerRow, appsLength) 
     const cardsToFitColumn = Math.floor((appContainerInPx) / (340 + gap)) //340 is the current average card height
 
     //debugging
-    console.log(cardsPerColumn, cardsPerRow)
+    // console.log(cardsPerColumn, cardsPerRow)
 
     return (cardsToFitColumn >= cardsPerColumn)
 }
@@ -81,6 +81,8 @@ export function checkShowCollapseTasks (tasks, windowHeight, vh) {
     let gap = 16 //gap of task is 16 in all sizes
 
     const rowsToFit = Math.floor((appContainerInPx) / (heightOfTask + gap))
+
+    // console.log("test")
 
     return !(rowsToFit > tasks.length)
 }

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 
-export default function NavButton({ icon, text, show }) {
-
+export default function NavButton({ icon, text, show, link }) {
 
     return (
         <Link
+            to={link}
             type="button"
             className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-3"
             style={{ border: "none" }}

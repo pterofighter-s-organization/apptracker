@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 
 //utils
-import { debounce } from "../../utils/time.js"
 import { categorizeApplications } from "../../utils/application.js"
 import { findAllTasks } from "../../utils/task.js"
 
@@ -12,27 +11,36 @@ import PreviewCollapseElements from "../../components/Collapse/PreviewCollapseEl
 
 //hooks
 import useApplicationsManager from "../../hooks/useApplicationsManager.js"
+import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 
 //helpers
 import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
 
 //later will take the user id *
-export default function Dashboard() {
+export default function Dashboard () {
 
     //showing the task that the user needs to finish and the applications they currently have
 
     const { applications, updateApplication } = useApplicationsManager()
+    const { windowWidth, windowHeight } = useWindowSizeManager()
 
-    const [windowWidth, setWindowWidth] = useState(0)
-    const [windowHeight, setWindowHeight] = useState(0)
+    const [containerWidth, setContainerWidth] = useState(0)
+    const [containerHeight, setContainerHeight] = useState(0)
+
     const dashboardRef = document.getElementById("dashboard")
+
+    //side effects of window sizes changing
+    useEffect(() => {
+        if (dashboardRef) {
+            setContainerWidth(dashboardRef.clientWidth)
+        }
+    }, [dashboardRef, windowWidth])
 
     useEffect(() => {
         if (dashboardRef) {
-            setWindowWidth(dashboardRef.clientWidth)
-            setWindowHeight(dashboardRef.clientHeight)
+            setContainerHeight(dashboardRef.clientHeight)
         }
-    }, [dashboardRef])
+    }, [dashboardRef, windowHeight])
 
     const taskVh = 40
     const appsVh = 40
@@ -51,13 +59,13 @@ export default function Dashboard() {
 
     const showCollapseApps = useMemo(() => (
         //vh following how much you give to the container at the bottom 
-        checkShowCollapseApps(applications, windowWidth, windowHeight, appsVh)
-    ), [windowHeight, windowWidth, applications])
+        checkShowCollapseApps(applications, containerWidth, containerHeight, appsVh)
+    ), [containerHeight, containerWidth, applications])
 
     const showCollapseTasks = useMemo(() => (
         //vh following how much you give to the container at the bottom 
-        checkShowCollapseTasks(tasks, windowHeight, taskVh)
-    ), [windowHeight, tasks])
+        checkShowCollapseTasks(tasks, containerHeight, taskVh)
+    ), [containerHeight, tasks])
 
     //end of (1)
 
@@ -69,13 +77,6 @@ export default function Dashboard() {
 
     //debugging
     // console.log(categorizedApps)
-
-    //delay 250 secs after the user starts resizing to start using the function
-    window.onresize = debounce(() => {
-        setWindowWidth(dashboardRef.clientWidth)
-        setWindowHeight(dashboardRef.clientHeight)
-    }, 250)
-
 
     //loading
     // if(applications.length <= 0) {
@@ -96,9 +97,9 @@ export default function Dashboard() {
             </div> */}
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
-                    <h1 className="">
+                    <div className="h2">
                         Your Job Applications
-                    </h1>
+                    </div>
                     {/* <h1 className="text-nowrap">
                         ( {categorizedApps.interviewing.length} )
                     </h1> */}
@@ -135,9 +136,9 @@ export default function Dashboard() {
 
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
-                    <h1 className="">
-                        Upcoming Task
-                    </h1>
+                    <div className="h2">
+                        Upcoming Tasks
+                    </div>
                     <hr className="" style={{}} />
                 </div>
                 {/* the collapse (only the buttons and the bg uses same elements) */}

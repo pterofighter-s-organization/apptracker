@@ -1,4 +1,3 @@
-import React from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 
@@ -24,6 +23,7 @@ export default function App() {
           {/* <TaskTablePresentation /> */}
           <Routes>
             <Route exact path="/" element={<Dashboard />} />
+            <Route exact path="/e" element={<Navbar />} />
           </Routes>
         </div>
       </Router>

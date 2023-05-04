@@ -117,47 +117,65 @@ export const getApps = () => {
 }
 
 
-    // const buttonsToShow = {
-    //     "ghosted": ["applied", "rejected", "interviewing", "interested", "accepted"],
-    //     "interested": ["applied", "rejected", "interviewing", "accepted", "ghosted"],
-    //     "interviewing": ["rejected", "accepted", "ghosted"],
-    //     "applied": ["rejected", "interviewing","ghosted"],
-    //     "accepted": []
-    // }
+// const buttonsToShow = {
+//     "ghosted": ["applied", "rejected", "interviewing", "interested", "accepted"],
+//     "interested": ["applied", "rejected", "interviewing", "accepted", "ghosted"],
+//     "interviewing": ["rejected", "accepted", "ghosted"],
+//     "applied": ["rejected", "interviewing","ghosted"],
+//     "accepted": []
+// }
 
-    // const colorMapToCategory = {
-    //     "interviewing": "warning",
-    //     "applied": "info",
-    //     "ghosted": "tertiary",
-    //     "rejected": "danger",
-    //     "accepted": "success"
-    // }
+// const colorMapToCategory = {
+//     "interviewing": "warning",
+//     "applied": "info",
+//     "ghosted": "tertiary",
+//     "rejected": "danger",
+//     "accepted": "success"
+// }
 
-    // {  reference of the app data
-    //     id: 1,
-    //     status: "ghosted",
-    //     position: "software engineer",
-    //     dateCreated: "2-3-2023",
-    //     company: "google",
-    //     salary: "60k - 100k",
-    //     dateApplied: "2-3-2023",
-    // },
-    //actual data on the card
-
-
-    //make a container that only fetches data
-    //so this container pass on the status to take to the list container
-    //this container only categorizes the apps //categorizecontainer
-    //so the list presentation decides how the list looks not the container
-    //maybe can try categorizecontainer only return states
-    //categorize container should also have a status change function to update (takes in id and status changed)
-    //so i can decide on how the list looks
+// {  reference of the app data
+//     id: 1,
+//     status: "ghosted",
+//     position: "software engineer",
+//     dateCreated: "2-3-2023",
+//     company: "google",
+//     salary: "60k - 100k",
+//     dateApplied: "2-3-2023",
+// },
+//actual data on the card
 
 
-    // let gap = 16
-    // //g-xl-4 xl is >=1200px
-    // if (windowWidth >= 1200){
-    //     gap*=(1.5+marginError = 0.5)
-    // }
+//make a container that only fetches data
+//so this container pass on the status to take to the list container
+//this container only categorizes the apps //categorizecontainer
+//so the list presentation decides how the list looks not the container
+//maybe can try categorizecontainer only return states
+//categorize container should also have a status change function to update (takes in id and status changed)
+//so i can decide on how the list looks
 
-    // const heightInPx = (vh / 100) * windowHeight
+
+// let gap = 16
+// //g-xl-4 xl is >=1200px
+// if (windowWidth >= 1200){
+//     gap*=(1.5+marginError = 0.5)
+// }
+
+// const heightInPx = (vh / 100) * windowHeight
+
+// const navBarWidth = useMemo(() => (
+//     menuOption.width //px
+// ),[menuOption])
+// const showFullNav = useMemo(() => (
+//     menuOption.show
+// ),[menuOption])
+// const navPadding = useMemo(() => (
+//     menuOption.padding
+// ),[menuOption])
+
+/* <NavButton
+icon={"box-arrow-left"}
+text={"Log out"}
+/> */
+/* <div className="fixed-bottom p-4">
+
+</div> */
