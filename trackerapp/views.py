@@ -14,8 +14,6 @@ def index(request):
     return HttpResponse("Hello, world")
 
 def test(request):
-    # user = Users(username = "test1", email = "testemail@gmail.com", password = "1234")
-    # user.save()
     return render(request, 'test.html')
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -41,7 +39,6 @@ def application_list(request):
 def application_detail(request, pk):
     #find application by pk 
     try:
-        print("pk is ", pk)
         application = Application.objects.get(pk=pk)
         #get an application
         if request.method == 'GET':
@@ -56,6 +53,43 @@ def application_detail(request, pk):
                 return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
             return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Application.DoesNotExist:
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET', 'POST', 'DELETE'])
+def user_list(request):
+    #get list of applications, POST a new application, DELETE all users
+    if request.method == 'GET':
+        users = Users.objects.all()
+        users_serializer = UsersSerializer(users, many=True)
+        return JsonResponse(users_serializer.data, safe=False)
+    elif request.method == 'POST':
+        users_data = JSONParser().parse(request)
+        users_serializer = ApplicationSerializer(data=users_data)
+        if users_serializer.is_valid():
+            users_serializer.save()
+            return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET', 'POST', 'DELETE'])
+def users_detail(request, pk):
+    #find application by pk 
+    try:
+        user = Users.objects.get(pk=pk)
+        #get an application
+        if request.method == 'GET':
+            users_serializer = UsersSerializer(user)
+            return JsonResponse(users_serializer.data)
+        #update an user 
+        elif request.method == 'POST':
+            users_data = JSONParser.parse(request)
+            users_serializer = UsersSerializer(data=users_data)
+            if users_serializer.is_valid():
+                users_serializer.save()
+                return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
+            return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except user.DoesNotExist:
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 

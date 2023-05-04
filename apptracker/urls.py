@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('trackerapp/', include("trackerapp.urls") ),
     url(r'^api/application$', views.application_list),
-    url(r'^api/application/(?P<pk>[0-9]+)$', views.application_detail)
+    url(r'^api/application/(?P<pk>[0-9]+)$', views.application_detail),
+    url(r'^api/users$', views.user_list),
+    url(r'^api/users/(?P<pk>[0-9]+)$', views.users_detail),
     # path("api/", include(router.urls)),
 ]
