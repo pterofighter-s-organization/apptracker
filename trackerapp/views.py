@@ -53,7 +53,7 @@ def application_detail(request, pk):
                 return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
             return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Application.DoesNotExist:
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse({'message': 'The application does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -65,7 +65,7 @@ def user_list(request):
         return JsonResponse(users_serializer.data, safe=False)
     elif request.method == 'POST':
         users_data = JSONParser().parse(request)
-        users_serializer = ApplicationSerializer(data=users_data)
+        users_serializer = UsersSerializer(data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
@@ -89,8 +89,8 @@ def users_detail(request, pk):
                 users_serializer.save()
                 return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
             return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    except user.DoesNotExist:
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    except Users.DoesNotExist:
+        return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 
 

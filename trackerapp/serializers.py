@@ -9,6 +9,8 @@ class UsersSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Application
-        fields = ('application_id','name', 'description', 'status'
+        fields = ('application_id','user_id','name', 'description', 'status'
                   , 'date', 'salary')
+        
+
 
