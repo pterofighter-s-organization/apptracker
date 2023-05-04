@@ -1,0 +1,7 @@
+.offcanvas {
+    width: 250px;
+}
+
+.nav-button:hover {
+    background-color: black;
+}

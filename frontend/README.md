@@ -9,6 +9,7 @@
         - npm install bootstrap@5.3.0-alpha3
         - npm i react-router-dom
         - npm install moment
+        - npm i bootstrap-icons
 
     start it
     - npm start

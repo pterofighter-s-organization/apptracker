@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 
 //utils
 import { debounce } from "../../utils/time.js"
@@ -17,13 +17,22 @@ import useApplicationsManager from "../../hooks/useApplicationsManager.js"
 import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
 
 //later will take the user id *
-export default function Dashboard () {
+export default function Dashboard() {
 
     //showing the task that the user needs to finish and the applications they currently have
 
     const { applications, updateApplication } = useApplicationsManager()
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+
+    const [windowWidth, setWindowWidth] = useState(0)
+    const [windowHeight, setWindowHeight] = useState(0)
+    const dashboardRef = document.getElementById("dashboard")
+
+    useEffect(() => {
+        if (dashboardRef) {
+            setWindowWidth(dashboardRef.clientWidth)
+            setWindowHeight(dashboardRef.clientHeight)
+        }
+    }, [dashboardRef])
 
     const taskVh = 40
     const appsVh = 40
@@ -47,7 +56,7 @@ export default function Dashboard () {
 
     const showCollapseTasks = useMemo(() => (
         //vh following how much you give to the container at the bottom 
-        checkShowCollapseTasks(tasks, windowHeight, taskVh) 
+        checkShowCollapseTasks(tasks, windowHeight, taskVh)
     ), [windowHeight, tasks])
 
     //end of (1)
@@ -63,9 +72,10 @@ export default function Dashboard () {
 
     //delay 250 secs after the user starts resizing to start using the function
     window.onresize = debounce(() => {
-        setWindowWidth(window.innerWidth)
-        setWindowHeight(window.innerHeight)
+        setWindowWidth(dashboardRef.clientWidth)
+        setWindowHeight(dashboardRef.clientHeight)
     }, 250)
+
 
     //loading
     // if(applications.length <= 0) {
@@ -74,7 +84,10 @@ export default function Dashboard () {
 
     //finish
     return (
-        <div className="d-flex flex-column gap-5 mt-3 mt-lg-0" style={{ padding: "1vw 2.5vw" }}>
+        <div
+            className="d-flex flex-column gap-5 mt-3 mt-lg-0" style={{ padding: "1.25vw 2.5vw" }}
+            id="dashboard"
+        >
             {/* <h1 className="">
                 Dashboard
             </h1>
@@ -97,7 +110,7 @@ export default function Dashboard () {
                     <div
                         className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
                         id="collapse-apps"
-                        style={{ maxHeight: appsVh.toString()+"vh", overflow: "hidden" }}
+                        style={{ maxHeight: appsVh.toString() + "vh", overflow: "hidden" }}
                     >
                         <CategorizedApplicationList
                             applications={categorizedApps}
@@ -111,7 +124,7 @@ export default function Dashboard () {
                             containerId={"collapse-apps"}
                             backgroundId={"collapse-apps-bg"}
                             buttonId={"collapse-apps-button"}
-                            maxHeight={appsVh.toString()+"vh"}
+                            maxHeight={appsVh.toString() + "vh"}
                             overflow={"hidden"}
                         />
                         :
@@ -132,7 +145,7 @@ export default function Dashboard () {
                     <div
                         className="table-responsive"
                         id="collapse-tasks"
-                        style={{ maxHeight: taskVh.toString()+"vh", overflow: "hidden" }}
+                        style={{ maxHeight: taskVh.toString() + "vh", overflow: "hidden" }}
                     >
                         <TaskTable
                             tasks={tasks}
@@ -144,7 +157,7 @@ export default function Dashboard () {
                             containerId={"collapse-tasks"}
                             backgroundId={"collapse-tasks-bg"}
                             buttonId={"collapse-tasks-button"}
-                            maxHeight={taskVh.toString()+"vh"}
+                            maxHeight={taskVh.toString() + "vh"}
                             overflow={"hidden"}
                         />
                         :

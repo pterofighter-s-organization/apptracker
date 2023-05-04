@@ -6,24 +6,32 @@
 import { findGapPx, viewSizeToPx } from "../../utils/measurements"
 
 //start of (1): the preview collapse check functions
-export function checkShowCollapseApps (apps, windowWidth, windowHeight, vh) {
+export function checkShowCollapseApps(apps, windowWidth, windowHeight, vh) {
 
     //calculate how many cards can the current window can fit to see if theres a need for collapse
 
-    const vwPadding = 1 //from the dashboard container
+    //1. find the width of the container that is containing the cards
+    //1-ex: containerWidth = windowWidth - padding (padding is in vw so convert into px)
+    //2. to calculate vw in px for padding, use this = (vw) * (the window width (in px) / 100)
+    //3. find the gap that's used to seperate between the cards
+    //3-ex: gap = spacer(16px or 1rem) * (multiplier) (multiplier depending on what the gap size is)
+    //4. with the gap and container width, find how many cards it can fit in a row
+    //4-ex: = containerWidth / (315 = width of the card) + gap
+    //5. do the same for height (read in helper func), check height is capable of putting that many cards row*(col of cards)
+    //so if the width of the window can fit all the cards then no need the button, and the height
 
-    //padding in px = (vw) * (the window width (in px) / 100)
+    const vwPadding = 2.5 //from the dashboard container
+
     const paddingPx = viewSizeToPx(vwPadding, windowWidth)
-    const appContainerWidth = windowWidth - (2 * paddingPx)
+    const appContainerWidth = windowWidth - (paddingPx)
 
-    // //read gutters doc on bootstrap bc it said gutter is 1.5rem = 16px for g-3 for g-4 is that * 1.5
     const arg = {
-        "s": {gap: 3, marginOfError: 0},
-        "sm": {gap: 3, marginOfError: 0},
-        "md": {gap: 3, marginOfError: 0},
-        "lg": {gap: 3, marginOfError: 0},
-        "xl": {gap: 4, marginOfError: 0.5},
-        "xxl": {gap: 4, marginOfError: 0.5},
+        "s": { gap: 3, marginOfError: 0 },
+        "sm": { gap: 3, marginOfError: 0 },
+        "md": { gap: 3, marginOfError: 0 },
+        "lg": { gap: 3, marginOfError: 0 },
+        "xl": { gap: 4, marginOfError: 0.5 },
+        "xxl": { gap: 4, marginOfError: 0.5 },
     }
     const gap = findGapPx(arg, windowWidth)
 
@@ -34,40 +42,46 @@ export function checkShowCollapseApps (apps, windowWidth, windowHeight, vh) {
     }
 
     //debugging
-    // checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
+    checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
 
-    //so if the with of the window can fit all the cards then no need the button
-    //check height is capable of putting that many cards row*(col of cards)
     return !(cardsToFitRow >= apps.length) && !checkCardHeightHelper(windowHeight, vh, gap, cardsToFitRow, apps.length)
 }
 
 function checkCardHeightHelper (windowHeight, vh, gap, cardsPerRow, appsLength) {
 
-    const heightInPx = viewSizeToPx(vh, windowHeight)
-    let cardsPerColumn = Math.ceil(appsLength/cardsPerRow) //making sure it's >= 1, always 1 card high
-    //15 margin of error (in case the estimation is incorrect)
-    const cardsToFitColumn = Math.floor((heightInPx) / (340 + gap)) //340 is the current average card height
+    //1. translate vh into px - the current container vh is
+    //2. find how many cards it has in the column by diving how much apps there are and how much a row can fit 
+    //2-ex: = apps.length / cardsPerRow = ceil(res) because there's always one card length of space for the container
+    //3. use the same gap and find how many cards can each column fit vertically
+    //3-ex: = containerHeight / (340 = height of the card) + gap 
+    //if the cards can fit exceeds amount of cards per column then it can fit
+
+    const appContainerInPx = viewSizeToPx(vh, windowHeight)
+    let cardsPerColumn = Math.ceil(appsLength / cardsPerRow) //making sure it's >= 1, always 1 card high
+
+    const cardsToFitColumn = Math.floor((appContainerInPx) / (340 + gap)) //340 is the current average card height
 
     //debugging
-    // console.log(cardsPerColumn, cardsPerRow)
+    console.log(cardsPerColumn, cardsPerRow)
 
-    //if the cards can fit exceeds amount of cards per column then it can fit
     return (cardsToFitColumn >= cardsPerColumn)
 }
 
 export function checkShowCollapseTasks (tasks, windowHeight, vh) {
 
-    const heightInPx = (vh / 100) * windowHeight
+    //1. find the container height in px
+    //2. use the height of task to find how many rows a column can fit vertically
+    //2-ex: = height = actual Height + gap in between them
+    //if amount of rows it can have > than the amount of task then dont show the button
 
-    // from px to vh = (px/windowHeight) * 100
+    const appContainerInPx = (vh / 100) * windowHeight
+
     const heightOfTask = 100 //100 tall for tasks at all window sizes
 
-    //gap of task is 16 in all sizes
-    let gap = 16
+    let gap = 16 //gap of task is 16 in all sizes
 
-    const rowsToFit = Math.floor((heightInPx) / (heightOfTask + gap))
+    const rowsToFit = Math.floor((appContainerInPx) / (heightOfTask + gap))
 
-    //if amount of rows it can have > than the amount of task then dont show the button
     return !(rowsToFit > tasks.length)
 }
 

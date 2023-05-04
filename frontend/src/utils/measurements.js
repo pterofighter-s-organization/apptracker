@@ -19,6 +19,11 @@ export function findGapPx (gapSizeObject, windowSize) {
     // } example of gapsizeobj
     //windowSize can be width or height
 
+    //the bootstrap standards on how gaps are created
+    //returning the px size of the gap 
+
+    const spacer = 16 //px
+
     const sizesMapToWidth = {
         "s": 576,
         "sm": 768,
@@ -27,7 +32,6 @@ export function findGapPx (gapSizeObject, windowSize) {
         "xl": 1400,
     }
 
-    const spacer = 16 //px
     const gapMultipliers = {
         0: 0,
         1: 0.25,
