@@ -23,16 +23,25 @@ export default function PreviewCollapseElements(props) {
     const {
         collapseId,
         text,
-        maxHeight,
         overflow,
+        dependency,
     } = props
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [showCollapse, setShowCollapse] = useState(true)
+    const [maxCollapseHeight, setMaxCollapseHeight] = useState(0)
     const collapseRef = document.getElementById(collapseId)
 
     const buttonId = collapseId + '-button'
     const backgroundId = collapseId + '-background'
+
+    useEffect(() => {
+
+        if(collapseRef){
+            setMaxCollapseHeight(parseInt(collapseRef.offsetHeight))
+        }
+
+    }, [collapseRef, windowHeight])
 
     //side effects of window sizes changing
     useEffect(() => {
@@ -41,7 +50,8 @@ export default function PreviewCollapseElements(props) {
             const containerRef = collapseRef.children[0]
             if (containerRef) {
                 //vh following how much you give to the container at the bottom 
-                const show = checkShowCollapse(containerRef.clientHeight, parseInt(collapseRef.offsetHeight))
+                const show = checkShowCollapse(containerRef.clientHeight, maxCollapseHeight)
+                console.log(parseInt(collapseRef.offsetHeight), maxCollapseHeight)
 
                 //debugging, the container in px, parentcontainer in px, and parentcontainer in px int
                 // console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight,parseInt(collapseRef.offsetHeight))
@@ -49,7 +59,26 @@ export default function PreviewCollapseElements(props) {
                 setShowCollapse(show)
             }
         }
-    }, [collapseRef, windowHeight, windowWidth])
+    }, [collapseRef, windowHeight, windowWidth, maxCollapseHeight, dependency])
+
+    useEffect(() => {
+        //little cleanup function
+        //to avoid unexpected behaviours when show changed and these never got reseted
+
+        const background = document.getElementById(backgroundId)
+        const button = document.getElementById(buttonId)
+
+        if (collapseRef && button && background) {
+
+            collapseRef.style.overflow = overflow
+            collapseRef.style.maxHeight = maxCollapseHeight + "px"
+            background.style.display = "" //shows it
+            button.style.position = "absolute"
+            button.style.marginTop = "0px"
+            button.style.bottom = "50px"
+        }
+
+    }, [showCollapse, collapseRef, backgroundId, buttonId, overflow, maxCollapseHeight])
 
     return (
         <>
@@ -63,7 +92,7 @@ export default function PreviewCollapseElements(props) {
                     <div className="d-flex justify-content-center">
                         <button
                             className="btn btn-primary p-3 px-5" type="button" onClick={() => {
-                                showRemainingContent(collapseId, maxHeight, overflow)
+                                showRemainingContent(collapseId, maxCollapseHeight, overflow)
                             }}
                             aria-expanded="false"
                             data-text={text}
@@ -99,7 +128,7 @@ export default function PreviewCollapseElements(props) {
     <PreviewCollapseElements
         text={"Tasks"}
         collapseId={"collapse-tasks"}
-        maxHeight={taskVh.toString() + "vh"}
         overflow={"hidden"}
+        dependency={tasks}
     />
 </div> */

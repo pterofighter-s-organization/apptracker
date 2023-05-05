@@ -94,8 +94,8 @@ export default function Dashboard() {
                     <PreviewCollapseElements
                         text={"Applications"}
                         collapseId={"collapse-apps"}
-                        maxHeight={appsVh.toString() + "vh"}
                         overflow={"hidden"}
+                        dependency={applications}
                     />
                 </div>
             </div>
@@ -125,8 +125,8 @@ export default function Dashboard() {
                     <PreviewCollapseElements
                         text={"Tasks"}
                         collapseId={"collapse-tasks"}
-                        maxHeight={taskVh.toString() + "vh"}
                         overflow={"hidden"}
+                        dependency={tasks}
                     />
                 </div>
             </div>

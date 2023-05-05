@@ -35,7 +35,7 @@ export function showRemainingContent(collapseId, maxHeight, overflow) {
     } else if (isCollapsed === "false") {
         //original state
         collapseContainer.style.overflow = overflow
-        collapseContainer.style.maxHeight = maxHeight
+        collapseContainer.style.maxHeight = maxHeight + "px"
         background.style.display = "" //shows it
         button.style.position = "absolute"
         button.style.marginTop = "0px"
