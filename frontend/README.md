@@ -23,6 +23,7 @@
     - cards sort from the most update to outdated
     - tasks sort from the earliest to latest
     - make measurements for calculating when to have preview collapses in dashboard (fully finish - shouldn't be edited)
+        - this is being replaced by something much more simplified and reliable, in learning.md
 
     Dashboard fully finished (5/2/2023 5:51am)
         (Task to do in making it better)
