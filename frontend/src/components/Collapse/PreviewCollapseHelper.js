@@ -16,6 +16,8 @@ export function showRemainingContent(collapseId, maxHeight, overflow) {
     button.innerHTML = isCollapsed === "true" ? "Show Less": "Show All " + text
     button.setAttribute('aria-expanded', isCollapsed)
 
+    console.log(isCollapsed)
+
     //styling to make button have more breathing space
     const marginForButton = spaceFromSize(5).res //same as m-5
 
@@ -26,7 +28,7 @@ export function showRemainingContent(collapseId, maxHeight, overflow) {
         //collapsed state
         collapseContainer.style.overflow = ""
         collapseContainer.style.transition = "0.05s ease-in-out";
-        collapseContainer.style.maxHeight = (container.clientHeight) + "px"
+        collapseContainer.style.maxHeight = ""
         background.style.display = "none"
         button.style.position = "relative"
         button.style.marginTop = (marginForButton) + "px"

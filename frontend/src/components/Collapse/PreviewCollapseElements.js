@@ -78,8 +78,8 @@ export default function PreviewCollapseElements(props) {
             button.style.position = "absolute"
             button.style.marginTop = "0px"
             button.style.bottom = "50px"
-            
-            // console.log(parseInt(collapseRef.offsetHeight), maxCollapseHeight, "debugging")
+
+            console.log(parseInt(collapseRef.offsetHeight), maxCollapseHeight, "debugging")
         }
 
     }, [showCollapse, collapseRef, backgroundId, buttonId, overflow, maxCollapseHeight])
