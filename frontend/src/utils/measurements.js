@@ -7,22 +7,7 @@ export function viewSizeToPx (viewSize, windowSize) {
     return (viewSize/100) * (windowSize) 
 }
 
-export function findGapPx (gapSizeObject, windowSize) {
-
-    // const arg = {
-    //     "s": {gap: 3, marginOfError: 0},
-    //     "sm": {gap: 3, marginOfError: 0},
-    //     "md": {gap: 3, marginOfError: 0},
-    //     "lg": {gap: 3, marginOfError: 0},
-    //     "xl": {gap: 4, marginOfError: 0.5},
-    //     "xxl": {gap: 4, marginOfError: 0.5},
-    // } example of gapsizeobj
-    //windowSize can be width or height
-
-    //the bootstrap standards on how gaps are created
-    //returning the px size of the gap 
-
-    const spacer = 16 //px
+export function breakpointMapWidth ( width ){
 
     const sizesMapToWidth = {
         "s": 576,
@@ -32,7 +17,25 @@ export function findGapPx (gapSizeObject, windowSize) {
         "xl": 1400,
     }
 
-    const gapMultipliers = {
+    Object.entries(sizesMapToWidth).forEach((sizeArr) => {
+        const sizeLabel = sizeArr[0]
+        const breakpointSizeWidth = sizeArr[1]
+        if (width < breakpointSizeWidth) {
+            return sizeLabel
+        }
+    })
+
+    return "xxl"
+}
+
+export function spaceFromSize ( size ) {
+
+    //the bootstrap standards on how sizes are created
+    //returning the px size of the size 
+
+    const spacer = 16 //px = 1rem
+
+    const spaceMultipliers = {
         0: 0,
         1: 0.25,
         2: 0.5,
@@ -41,26 +44,35 @@ export function findGapPx (gapSizeObject, windowSize) {
         5: 3,
     }
 
-    Object.entries(sizesMapToWidth).forEach((sizeArr) => {
-        const sizeLabel = sizeArr[0]
-        const breakpointSize = sizeArr[1]
-        const gapObjectByLabel = gapSizeObject[sizeLabel]
-        const gap = gapObjectByLabel.gap
-        const gapMultiplier = gapMultipliers[gap]
-        const marginOfError = gapObjectByLabel.marginOfError
-        const actualSize = (gapMultiplier + marginOfError) * spacer
+    const spaceMultiplier = spaceMultipliers[size]
+    const res = spacer * spaceMultiplier
 
-        if (windowSize < breakpointSize) {
-            return actualSize
-        }
-    })
+    return {
+        res,
+        spacer,
+        spaceMultiplier
+    }
+}
 
-    //only for xxl
-    const gapObjectByLabel = gapSizeObject["xxl"]
-    const gap = gapObjectByLabel.gap
-    const gapMultiplier = gapMultipliers[gap]
-    const marginOfError = gapObjectByLabel.marginOfError
-    const actualSize = (gapMultiplier + marginOfError) * spacer
+export function spaceOnAllBreakpoints (breakpointMapSize, width) {
 
-    return actualSize
+    // const arg = {
+    //     "s": {size: 3, marginOfError: 0},
+    //     "sm": {size: 3, marginOfError: 0},
+    //     "md": {size: 3, marginOfError: 0},
+    //     "lg": {size: 3, marginOfError: 0},
+    //     "xl": {size: 4, marginOfError: 0.5},
+    //     "xxl": {size: 4, marginOfError: 0.5},
+    // } example of sizesizeobj
+    //width
+
+
+    const breakpoint = breakpointMapWidth(width)
+    const sizeObject = breakpointMapSize[breakpoint]
+    const size = sizeObject.size
+    const marginOfError = sizeObject.marginOfError
+    const {spacer, spaceMultiplier} = spaceFromSize(size)
+    const spaceInPx = (spaceMultiplier + marginOfError) * spacer
+
+    return spaceInPx
 }

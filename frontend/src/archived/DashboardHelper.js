@@ -1,9 +1,7 @@
-
 //this is a file for helper functions (PURE FUNCTIONS (no side effect, no global vars used) inside dashboard.js)
 //only used for dashboard.js and designed for it
 
-//utils
-import { findGapPx, viewSizeToPx } from "../../utils/measurements"
+//old method of calculating if the app needs collapse because I didn't know I could just get the height directly
 
 //start of (1): the preview collapse check functions
 export function checkShowCollapseApps(apps, windowWidth, windowHeight, vh) {
@@ -86,5 +84,3 @@ export function checkShowCollapseTasks (tasks, windowHeight, vh) {
 
     return !(rowsToFit > tasks.length)
 }
-
-//end of (1)

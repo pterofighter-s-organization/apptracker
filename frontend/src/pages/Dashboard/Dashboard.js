@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useMemo } from "react"
 
 //utils
 import { categorizeApplications } from "../../utils/application.js"
@@ -11,36 +11,13 @@ import PreviewCollapseElements from "../../components/Collapse/PreviewCollapseEl
 
 //hooks
 import useApplicationsManager from "../../hooks/useApplicationsManager.js"
-import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
-
-//helpers
-import { checkShowCollapseApps, checkShowCollapseTasks } from "./DashboardHelpers.js"
 
 //later will take the user id *
-export default function Dashboard () {
+export default function Dashboard() {
 
     //showing the task that the user needs to finish and the applications they currently have
 
     const { applications, updateApplication } = useApplicationsManager()
-    const { windowWidth, windowHeight } = useWindowSizeManager()
-
-    const [containerWidth, setContainerWidth] = useState(0)
-    const [containerHeight, setContainerHeight] = useState(0)
-
-    const dashboardRef = document.getElementById("dashboard")
-
-    //side effects of window sizes changing
-    useEffect(() => {
-        if (dashboardRef) {
-            setContainerWidth(dashboardRef.clientWidth)
-        }
-    }, [dashboardRef, windowWidth])
-
-    useEffect(() => {
-        if (dashboardRef) {
-            setContainerHeight(dashboardRef.clientHeight)
-        }
-    }, [dashboardRef, windowHeight])
 
     const taskVh = 40
     const appsVh = 40
@@ -56,16 +33,6 @@ export default function Dashboard () {
     const tasks = useMemo(() => (
         findAllTasks(categorizedApps.interviewing)
     ), [categorizedApps.interviewing])
-
-    const showCollapseApps = useMemo(() => (
-        //vh following how much you give to the container at the bottom 
-        checkShowCollapseApps(applications, containerWidth, containerHeight, appsVh)
-    ), [containerHeight, containerWidth, applications])
-
-    const showCollapseTasks = useMemo(() => (
-        //vh following how much you give to the container at the bottom 
-        checkShowCollapseTasks(tasks, containerHeight, taskVh)
-    ), [containerHeight, tasks])
 
     //end of (1)
 
@@ -109,28 +76,27 @@ export default function Dashboard () {
                 {/* giving more flexibility to the container that uses the collapse */}
                 <div style={{ position: "relative" }}>
                     <div
-                        className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
                         id="collapse-apps"
                         style={{ maxHeight: appsVh.toString() + "vh", overflow: "hidden" }}
                     >
-                        <CategorizedApplicationList
-                            applications={categorizedApps}
-                            updateAppStatus={updateAppStatus}
-                        />
+                        <div
+                            className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
+                            id="dashboard-apps"
+                        >
+                            <CategorizedApplicationList
+                                applications={categorizedApps}
+                                updateAppStatus={updateAppStatus}
+                            />
+                        </div>
+
                     </div>
                     {/* it's also flexible to decide when to show these elements, custom function, not req for the elements to work*/}
-                    {showCollapseApps ?
-                        <PreviewCollapseElements
-                            text={"Applications"}
-                            containerId={"collapse-apps"}
-                            backgroundId={"collapse-apps-bg"}
-                            buttonId={"collapse-apps-button"}
-                            maxHeight={appsVh.toString() + "vh"}
-                            overflow={"hidden"}
-                        />
-                        :
-                        <></>
-                    }
+                    <PreviewCollapseElements
+                        text={"Applications"}
+                        collapseId={"collapse-apps"}
+                        maxHeight={appsVh.toString() + "vh"}
+                        overflow={"hidden"}
+                    />
                 </div>
             </div>
 
@@ -144,26 +110,24 @@ export default function Dashboard () {
                 {/* the collapse (only the buttons and the bg uses same elements) */}
                 <div style={{ position: "relative" }}>
                     <div
-                        className="table-responsive"
                         id="collapse-tasks"
                         style={{ maxHeight: taskVh.toString() + "vh", overflow: "hidden" }}
                     >
-                        <TaskTable
-                            tasks={tasks}
-                        />
+                        <div
+                            className="table-responsive"
+                            id="dashboard-tasks"
+                        >
+                            <TaskTable
+                                tasks={tasks}
+                            />
+                        </div>
                     </div>
-                    {showCollapseTasks ?
-                        <PreviewCollapseElements
-                            text={"Tasks"}
-                            containerId={"collapse-tasks"}
-                            backgroundId={"collapse-tasks-bg"}
-                            buttonId={"collapse-tasks-button"}
-                            maxHeight={taskVh.toString() + "vh"}
-                            overflow={"hidden"}
-                        />
-                        :
-                        <></>
-                    }
+                    <PreviewCollapseElements
+                        text={"Tasks"}
+                        collapseId={"collapse-tasks"}
+                        maxHeight={taskVh.toString() + "vh"}
+                        overflow={"hidden"}
+                    />
                 </div>
             </div>
         </div>
