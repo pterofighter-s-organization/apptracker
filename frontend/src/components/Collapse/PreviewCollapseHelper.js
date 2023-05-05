@@ -4,7 +4,7 @@ export function showRemainingContent(collapseId, maxHeight, overflow) {
 
     const buttonId = collapseId + '-button'
     const backgroundId = collapseId + '-background'
-    
+
     const collapseContainer = document.getElementById(collapseId)
     const background = document.getElementById(backgroundId)
     const button = document.getElementById(buttonId)
@@ -19,7 +19,8 @@ export function showRemainingContent(collapseId, maxHeight, overflow) {
     //styling to make button have more breathing space
     const marginForButton = spaceFromSize(5).res //same as m-5
 
-    console.log(container.clientHeight, container.clientHeight + marginForButton)
+    //debugging
+    //console.log(container.clientHeight, container.clientHeight + marginForButton)
 
     if (isCollapsed === "true") {
         //collapsed state
