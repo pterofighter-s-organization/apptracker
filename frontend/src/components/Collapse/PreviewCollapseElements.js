@@ -37,7 +37,7 @@ export default function PreviewCollapseElements(props) {
 
     useEffect(() => {
 
-        if(collapseRef){
+        if (collapseRef) {
             setMaxCollapseHeight(parseInt(collapseRef.offsetHeight))
         }
 
@@ -51,7 +51,6 @@ export default function PreviewCollapseElements(props) {
             if (containerRef) {
                 //vh following how much you give to the container at the bottom 
                 const show = checkShowCollapse(containerRef.clientHeight, maxCollapseHeight)
-                console.log(parseInt(collapseRef.offsetHeight), maxCollapseHeight)
 
                 //debugging, the container in px, parentcontainer in px, and parentcontainer in px int
                 // console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight,parseInt(collapseRef.offsetHeight))
@@ -70,12 +69,17 @@ export default function PreviewCollapseElements(props) {
 
         if (collapseRef && button && background) {
 
+            const text = button.getAttribute('data-text')
+            button.innerHTML = "Show All " + text
+            button.setAttribute('aria-expanded', false)
             collapseRef.style.overflow = overflow
             collapseRef.style.maxHeight = maxCollapseHeight + "px"
             background.style.display = "" //shows it
             button.style.position = "absolute"
             button.style.marginTop = "0px"
             button.style.bottom = "50px"
+            
+            // console.log(parseInt(collapseRef.offsetHeight), maxCollapseHeight, "debugging")
         }
 
     }, [showCollapse, collapseRef, backgroundId, buttonId, overflow, maxCollapseHeight])
