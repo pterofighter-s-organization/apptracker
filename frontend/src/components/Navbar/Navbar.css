@@ -1,7 +1,7 @@
-.offcanvas {
-    width: 250px;
+#nav-sidebar {
+    transition: min-width 0.3s ease-in-out, max-width 0.3s ease-in-out;
 }
 
-.nav-button:hover {
-    background-color: black;
+#nav-sidebar.closed {
+    white-space: nowrap;
 }

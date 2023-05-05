@@ -1,6 +1,5 @@
 import NavButton from "./Button/NavButton";
 
-
 export default function NavbarElements({ show }) {
 
     return (

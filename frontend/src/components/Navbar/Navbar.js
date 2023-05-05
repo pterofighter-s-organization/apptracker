@@ -1,22 +1,29 @@
-import React, { useState, useMemo, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
 //utils
 import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 import NavSidebar from "./NavSideBar.js"
 
-export default function Navbar() {
+export default function Navbar({breakpoint}) {
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
+    const [sideBarShow, setSidebarShow] = useState(true)
 
-    const ifYes = true
-    
-    const sizesMapToWidth = {
-        "s": 576,
-        "sm": 768,
-        "md": 992,
-        "lg": 1200,
-        "xl": 1400,
-    }
+    useEffect(() => {
+
+        const sizesMapToWidth = {
+            "s": 576,
+            "sm": 768,
+            "md": 992,
+            "lg": 1200,
+            "xl": 1400,
+        }
+
+        if(windowWidth < sizesMapToWidth[breakpoint]){
+            setSidebarShow(false)
+        }
+
+    },[windowWidth, breakpoint])
 
     return (
         // <div 
@@ -34,7 +41,7 @@ export default function Navbar() {
         //     <NavbarElements show={true}/>
         // </div>
         <>
-            {ifYes ?
+            {sideBarShow ?
                 <NavSidebar windowHeight={windowHeight} />
                 :
                 <></>

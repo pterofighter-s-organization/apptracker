@@ -5,6 +5,9 @@ import NavbarElements from "./NavbarElements.js"
 import NavMenuButton from "./Button/NavMenuButton"
 import NavLogUserButton from "./Button/NavLogUserButton"
 
+//css
+import "./Navbar.css"
+
 export default function NavSidebar({ windowHeight }) {
 
     const expanded = {
@@ -22,21 +25,31 @@ export default function NavSidebar({ windowHeight }) {
     const [menuOption, setMenuOption] = useState(minimized)
 
     //do not use usememo here because these arn't expensive to compute
+
     const navBarWidth = menuOption.width //px
     const showFullNav = menuOption.show
     const navPadding = menuOption.padding
 
     function handleChangeMenu(request) {
-        if (request === "expand") {
-            setMenuOption(expanded)
-        } else if (request === "minimize") {
+
+        const sidebar = document.getElementById("nav-sidebar")
+
+        if (request === "minimize") {
             setMenuOption(minimized)
+        } else if (request === "expand"){
+            setMenuOption(expanded)
+            sidebar.classList.add("closed")
         }
+
+        setTimeout(() => {
+            sidebar.className = sidebar.className.replace("closed", "")
+        }, 300)
     }
 
     return (
         <div
-            style={{ minWidth: navBarWidth.toString() + "px", minHeight: windowHeight, backgroundColor: "#2C4096" }}>
+            id="nav-sidebar"
+            style={{ minWidth: navBarWidth.toString() + "px", maxWidth: navBarWidth.toString() + "px", minHeight: windowHeight, backgroundColor: "#2C4096" }}>
             <div className={`sticky-top p-${navPadding.toString()}`}>
                 {/* <NavButton
                 icon={"box-arrow-left"}

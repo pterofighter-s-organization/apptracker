@@ -64,7 +64,3 @@ export function findGapPx (gapSizeObject, windowSize) {
 
     return actualSize
 }
-
-export function findWithinRange(size, breakpoint) {
-    
-}
