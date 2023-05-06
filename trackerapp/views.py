@@ -101,7 +101,7 @@ def notes_list(request):
         return JsonResponse(notes_serializer.data, safe=False)
     elif request.method == 'POST':
         notes_data = JSONParser().parse(request)
-        notes_serializer = ApplicationSerializer(data=notes_data)
+        notes_serializer = NotesSerializer(data=notes_data)
         if notes_serializer.is_valid():
             notes_serializer.save()
             return JsonResponse(notes_serializer.data, status=status.HTTP_201_CREATED)
@@ -120,7 +120,7 @@ def notes_detail(request, pk):
         #update an user 
         elif request.method == 'POST':
             notes_data = JSONParser.parse(request)
-            notes_serializer = UsersSerializer(data=notes_data)
+            notes_serializer = NotesSerializer(data=notes_data)
             if notes_serializer.is_valid():
                 notes_serializer.save()
                 return JsonResponse(notes_serializer.data, status=status.HTTP_201_CREATED)
