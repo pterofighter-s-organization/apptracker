@@ -4,8 +4,8 @@ from trackerapp.models import Users
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .serializers import UsersSerializer, ApplicationSerializer
-from .models import Users, Application
+from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer
+from .models import Users, Application, Notes
 
 
 
@@ -91,6 +91,42 @@ def users_detail(request, pk):
             return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def notes_list(request):
+    #get list of applications, POST a new application, DELETE all applications
+    if request.method == 'GET':
+        notes = Notes.objects.all()
+        notes_serializer = NotesSerializer(notes, many=True)
+        return JsonResponse(notes_serializer.data, safe=False)
+    elif request.method == 'POST':
+        notes_data = JSONParser().parse(request)
+        notes_serializer = ApplicationSerializer(data=notes_data)
+        if notes_serializer.is_valid():
+            notes_serializer.save()
+            return JsonResponse(notes_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(notes_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+def notes_detail(request, pk):
+    #find application by pk 
+    try:
+        note = Notes.objects.get(pk=pk)
+        #get an application
+        if request.method == 'GET':
+            notes_serializer = NotesSerializer(note)
+            return JsonResponse(notes_serializer.data)
+        #update an user 
+        elif request.method == 'POST':
+            notes_data = JSONParser.parse(request)
+            notes_serializer = UsersSerializer(data=notes_data)
+            if notes_serializer.is_valid():
+                notes_serializer.save()
+                return JsonResponse(notes_serializer.data, status=status.HTTP_201_CREATED)
+            return JsonResponse(notes_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Users.DoesNotExist:
+        return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 
 
