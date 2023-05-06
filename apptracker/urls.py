@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^api/application/(?P<pk>[0-9]+)$', views.application_detail),
     url(r'^api/users$', views.user_list),
     url(r'^api/users/(?P<pk>[0-9]+)$', views.users_detail),
+    url(r'^api/notes$', views.notes_list),
+    url(r'^api/notes/(?P<pk>[0-9]+)$', views.notes_detail),
     # path("api/", include(router.urls)),
 ]
