@@ -18,12 +18,12 @@ export default function App() {
     // mimic footer with pb-5
     <div className="App">
       <Router>
-        <div className="d-flex flex-row">
-          <Navbar />
+        <div className="d-flex flex-column flex-xl-row">
+          <Navbar breakpoint={"lg"}/>
           {/* <TaskTablePresentation /> */}
           <Routes>
             <Route exact path="/" element={<Dashboard />} />
-            <Route exact path="/e" element={<Navbar />} />
+            <Route exact path="/e" element={<Navbar/>} />
           </Routes>
         </div>
       </Router>

@@ -37,7 +37,7 @@ export default function TaskTablePresentation ({displayData}) {
 
     return (
         <>
-            <table className="table text-center ">
+            <table className="table text-center">
                 <thead 
                     className={`${headerPadding} bg-secondary bg-opacity-25 border-light border-5`} 
                     style={{}}

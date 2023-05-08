@@ -13,6 +13,7 @@ export default function NavMenuButton ({ show, handleChangeMenu }) {
                         e.preventDefault()
                         handleChangeMenu("minimize")
                     }}
+                    data-bs-toggle="tooltip" data-bs-placement="right" title={"Closes the menu"}
                 >
                     <i
                         className={`bi bi-x-lg`}
@@ -28,6 +29,7 @@ export default function NavMenuButton ({ show, handleChangeMenu }) {
                     className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
                     style={{ border: "none" }}
                     onClick={(e) => (handleChangeMenu("expand"))}
+                    data-bs-toggle="tooltip" data-bs-placement="right" title={"Expands the menu"}
                 >
                     <i
                         className={`bi bi-list mx-auto`}

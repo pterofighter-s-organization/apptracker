@@ -11,7 +11,7 @@ export default function PreviewCollapseElements({ showCollapseElements, showRema
         <>
             {showCollapseElements ?
                 <>
-                    <div className="d-flex justify-content-center mt-5">
+                    <div className="d-flex justify-content-center mt-4">
                         <button
                             className="btn btn-primary p-3 px-5" type="button" onClick={() => {
                                 showRemainingContents(false)
@@ -21,7 +21,7 @@ export default function PreviewCollapseElements({ showCollapseElements, showRema
                             id={buttonId}
                             style={{ position: "relative", bottom: "0px" }}
                         >
-                            Show Less {text}
+                            Show Less
                         </button>
                     </div>
                 </>

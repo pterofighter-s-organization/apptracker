@@ -53,7 +53,8 @@ export default function Dashboard() {
     //finish
     return (
         <div
-            className="d-flex flex-column gap-5 mt-3 mt-lg-0" style={{ padding: "1.25vw 2.5vw" }}
+            className="d-flex flex-column gap-5 mt-4 mt-xl-0" 
+            style={{ padding: "1.25vw 2.5vw" }}
             id="dashboard"
         >
             {/* <h1 className="">

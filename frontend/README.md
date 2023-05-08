@@ -10,6 +10,7 @@
         - npm i react-router-dom
         - npm install moment
         - npm i bootstrap-icons
+        - npm install jquery
 
     start it
     - npm start

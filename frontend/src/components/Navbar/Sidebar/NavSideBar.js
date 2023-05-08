@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 
 //components
-import NavbarElements from "./NavbarElements.js"
-import NavMenuButton from "./Button/NavMenuButton"
-import NavLogUserButton from "./Button/NavLogUserButton"
+import NavbarElements from "../NavbarElements.js"
+import NavMenuButton from "../Button/NavMenuButton.js"
+import NavLogUserButton from "../Button/NavLogUserButton.js"
 
 //css
-import "./Navbar.css"
+import "./NavSidebar.css"
 
 export default function NavSidebar({ windowHeight }) {
 
@@ -47,7 +47,7 @@ export default function NavSidebar({ windowHeight }) {
     }
 
     return (
-        <div
+        <nav
             id="nav-sidebar"
             style={{ minWidth: navBarWidth.toString() + "px", maxWidth: navBarWidth.toString() + "px", minHeight: windowHeight, backgroundColor: "#2C4096" }}>
             <div className={`sticky-top p-${navPadding.toString()}`}>
@@ -67,6 +67,6 @@ export default function NavSidebar({ windowHeight }) {
                 </div>
                 <NavLogUserButton show={showFullNav} />
             </div>
-        </div>
+        </nav>
     )
 }

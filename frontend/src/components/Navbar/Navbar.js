@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react"
 
 //utils
 import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
-import NavSidebar from "./NavSideBar.js"
 
-export default function Navbar({breakpoint}) {
+//components
+import NavSidebar from "./Sidebar/NavSideBar.js"
+import NavCollapseBar from "./NavCollapseBar.js"
+
+export default function Navbar({ breakpoint }) {
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [sideBarShow, setSidebarShow] = useState(true)
 
+    
     useEffect(() => {
 
         const sizesMapToWidth = {
@@ -19,11 +23,13 @@ export default function Navbar({breakpoint}) {
             "xl": 1400,
         }
 
-        if(windowWidth < sizesMapToWidth[breakpoint]){
+        if (windowWidth < sizesMapToWidth[breakpoint]) {
             setSidebarShow(false)
+        } else {
+            setSidebarShow(true)
         }
 
-    },[windowWidth, breakpoint])
+    }, [windowWidth, breakpoint])
 
     return (
         // <div 
@@ -44,7 +50,7 @@ export default function Navbar({breakpoint}) {
             {sideBarShow ?
                 <NavSidebar windowHeight={windowHeight} />
                 :
-                <></>
+                <NavCollapseBar/>
             }
         </>
     )

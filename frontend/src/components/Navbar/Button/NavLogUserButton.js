@@ -1,15 +1,15 @@
-
+import "./NavToolTip.css"
 
 export default function NavLogUserButton ({show}) {
-
 
     return (
         <>
             {show ?
                 <button
                     type="button"
-                    className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-3"
+                    className="btn btn-outline-primary nav-tooltip text-light d-flex flex-row align-items-center gap-3 w-100 p-3"
                     style={{ border: "none" }}
+                    data-bs-toggle="tooltip" data-bs-placement="right" title={"Logs the user out"}
                 >
                     <i
                         className={`bi bi-box-arrow-left`}
@@ -22,8 +22,8 @@ export default function NavLogUserButton ({show}) {
                 :
                 <button
                     type="button"
-                    className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
-                    style={{ border: "none" }}
+                    className="btn btn-outline-primary nav-tooltip text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
+                    style={{ border: "none" }} title={"Logs the user out"}
                 >
                     <i
                         className={`bi bi-box-arrow-left mx-auto`}
