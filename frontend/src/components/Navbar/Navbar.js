@@ -5,7 +5,7 @@ import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 
 //components
 import NavSidebar from "./Sidebar/NavSideBar.js"
-import NavCollapseBar from "./NavCollapseBar.js"
+import NavCollapseBar from "./CollapseBar/NavCollapseBar.js"
 
 export default function Navbar({ breakpoint }) {
 
