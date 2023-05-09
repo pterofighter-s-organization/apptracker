@@ -24,7 +24,6 @@ export default function NavCollapseBar() {
 
     return (
         <nav
-            className="nav-collapse"
             style={{ backgroundColor: "#2C4096", padding: "1.25vw 1.25vw" }}
         >
             {showFullNav ?

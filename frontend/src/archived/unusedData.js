@@ -179,3 +179,18 @@ text={"Log out"}
 /* <div className="fixed-bottom p-4">
 
 </div> */
+
+        // <div 
+        //     className="collapse collapse-horizontal show" 
+        //     id="collapseWidthExample" 
+        //     style={{ width: "400px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
+        //     <div className="sticky-top p-5" >
+        //         a
+        //     </div>
+        // </div>
+        // <div
+        //     className=""
+        //     id="collapseWidthExample"
+        //     style={{ minWidth: "275px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
+        //     <NavbarElements show={true}/>
+        // </div>

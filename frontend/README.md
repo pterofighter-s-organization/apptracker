@@ -35,9 +35,11 @@
         - solution : make it show sections by sections / or make a button on the top right of the section to close
     
 
-    Starting navbar (5/2/2023 10:00am)
+    Starting navbar fully finished (5/3/2023 1:00am)
+
+    Starting the app individual page (5/8/2023 5:00pm)
         - make description use collapse in bootstrap
-        - update title of the app in dashboard
+        - update title of the page in dashboard (finished)
 
     Individual App pages
         Interview prep

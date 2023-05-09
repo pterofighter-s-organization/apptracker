@@ -36,21 +36,17 @@ export default function PreviewCollapse(props) {
 
     //do usecallback to avoid function being re-render everytime and triggers the useeffect below
     const showRemainingContents = useCallback((request) => {
-
-        if (!collapseRef) {
-            return
+        if (collapseRef) {
+            if (request) {
+                collapseRef.style.overflow = ""
+                collapseRef.style.maxHeight = ""
+                setShowCollapseElements(true)
+            } else {
+                collapseRef.style.overflow = overflow
+                collapseRef.style.maxHeight = maxVhOfCollapse.toString() + "vh"
+                setShowCollapseElements(false)
+            }
         }
-
-        if (request) {
-            collapseRef.style.overflow = ""
-            collapseRef.style.maxHeight = ""
-            setShowCollapseElements(true)
-        } else {
-            collapseRef.style.overflow = overflow
-            collapseRef.style.maxHeight = maxVhOfCollapse.toString() + "vh"
-            setShowCollapseElements(false)
-        }
-
     }, [setShowCollapseElements, collapseRef, overflow, maxVhOfCollapse])
 
     //start of (1): side effects of window sizes changing

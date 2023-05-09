@@ -12,6 +12,7 @@ export default function Navbar({ breakpoint }) {
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [sideBarShow, setSidebarShow] = useState(true)
 
+    //the breakpoint is only what you want this to show before the breakpoint size
     
     useEffect(() => {
 
@@ -32,20 +33,6 @@ export default function Navbar({ breakpoint }) {
     }, [windowWidth, breakpoint])
 
     return (
-        // <div 
-        //     className="collapse collapse-horizontal show" 
-        //     id="collapseWidthExample" 
-        //     style={{ width: "400px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
-        //     <div className="sticky-top p-5" >
-        //         a
-        //     </div>
-        // </div>
-        // <div
-        //     className=""
-        //     id="collapseWidthExample"
-        //     style={{ minWidth: "275px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
-        //     <NavbarElements show={true}/>
-        // </div>
         <>
             {sideBarShow ?
                 <NavSidebar windowHeight={windowHeight} />
