@@ -3,6 +3,8 @@ import PreviewCollapse from "../../../components/Collapse/PreviewCollapse"
 
 export default function ApplicationDescription({ description, id }) {
 
+    //let dependency be id, description might not change at all sometimes, but id will
+
     return (
         <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5 bg-body-secondary w-100 p-4">
             <div className="d-flex flex-column gap-2 fs-3 ">
