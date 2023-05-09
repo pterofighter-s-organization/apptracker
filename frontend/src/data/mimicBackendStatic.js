@@ -128,7 +128,7 @@ export const updateApp = (app, id) => {
     }
 
     applications[index] = app
-    return applications
+    return applications[index]
 }
 
 export const getApps = () => {

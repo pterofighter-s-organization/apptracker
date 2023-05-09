@@ -13,7 +13,8 @@ export default function PreviewCollapseElements({ showCollapseElements, showRema
                 <>
                     <div className="d-flex justify-content-center mt-4">
                         <button
-                            className="btn btn-primary p-3 px-5" type="button" onClick={() => {
+                            className="btn btn-primary p-3 px-5" type="button" onClick={(e) => {
+                                e.preventDefault()
                                 showRemainingContents(false)
                             }}
                             aria-expanded="true"
@@ -34,7 +35,8 @@ export default function PreviewCollapseElements({ showCollapseElements, showRema
                     />
                     <div className="d-flex justify-content-center">
                         <button
-                            className="btn btn-primary p-3 px-5" type="button" onClick={() => {
+                            className="btn btn-primary p-3 px-5" type="button" onClick={(e) => {
+                                e.preventDefault()
                                 showRemainingContents(true)
                             }}
                             aria-expanded="true"

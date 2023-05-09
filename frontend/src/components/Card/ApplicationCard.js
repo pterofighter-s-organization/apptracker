@@ -1,6 +1,6 @@
 import ApplicationCardPresentation from "./ApplicationCardPresentation.js";
 
-export default function ApplicationCard ({ application, updateAppStatus }) {
+export default function ApplicationCard({ application, updateApplication }) {
 
     //this file should control the button presses and load loading state or the application info itself
     //1. loading the card
@@ -19,7 +19,12 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
     // }
 
     function newStatus(status) {
-        updateAppStatus(application, status)
+
+        const newAppInfo = {
+            "status": status
+        }
+
+        updateApplication(application, newAppInfo)
     }
 
     const displayData = {
@@ -29,7 +34,6 @@ export default function ApplicationCard ({ application, updateAppStatus }) {
         position: application.position,
         company: application.company,
         salary: application.salary,
-        link: "",
     }
 
     //loading state for app list will be a bunch of card in loading state

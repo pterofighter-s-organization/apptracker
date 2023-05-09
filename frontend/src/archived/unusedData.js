@@ -194,3 +194,15 @@ text={"Log out"}
         //     style={{ minWidth: "275px", minHeight: "100vh", backgroundColor: "#2C4096" }}>
         //     <NavbarElements show={true}/>
         // </div>
+
+        // const index = applications.findIndex((item) => item.id === id)
+        // const updatedApps = () => {
+        //     applications[index] = res
+        //     return applications
+        // }
+
+        // setMyArray(prevState =>
+        //     prevState.map(item => (item.id === id ? { ...item, name: newName } : item))
+        //   );
+
+        //setApplications(prevApps => ([...prevApps, res]))

@@ -1,3 +1,8 @@
+//backend mimic
+import { updateApp } from "../data/mimicBackendStatic";
+
+//utils
+import { dateFormat } from "../utils/date";
 
 export function categorizeApplications (applications, category) {
 
@@ -36,11 +41,59 @@ export function updateInterviewApp ( application ) {
     const interviewPrep = "interviewPrep"
 
     if (application.status === "interviewing") {
-        if (!application.hasOwnProperty(appointments)) {
+        if (!application[appointments]) {
             application[appointments] = []
         }
-        if (!application.hasOwnProperty(interviewPrep)) {
+        if (!application[interviewPrep]) {
             application[interviewPrep] = false
         }
     }
+}
+
+export function updateAppInfo (app, newAppInfo) {
+
+    const { id } = app
+    const today = dateFormat("today")
+
+    //set the app status to the new one (these should not be done here instead in backend as a json)
+
+    //gotta make a new reference so the components gets render again
+    const newApp = {
+        id: app.id,
+        status: app.status,
+        position: app.position,
+        dateCreated: app.dateCreated,
+        company: app.company,
+        salary: app.salary,
+        dateEdited: app.dateEdited,
+        appointments: app.appointments,
+        interviewPrep: app.interviewPrep,
+    }
+
+    //changes the only things needed to change specify on newappinfo
+    Object.entries(newAppInfo).forEach(([label, data]) => {
+        newApp[label] = data
+    })
+
+    newApp.dateEdited = today.dateFormatted
+
+    //making sure the application fits what an interview app needs
+    updateInterviewApp(newApp)
+
+    //add a history list of when the status was changed *
+    //for ex: an array of the (time edited, status updated to)
+
+    //up here is the backend update (code later)
+    //mimic backend code (replace later)
+    //this is a backend response
+    let res = null
+    try {
+        res = updateApp(newApp, id)
+    } catch (err) {
+        console.log(err)
+        alert(err)
+    }
+
+    console.log(res)
+    return res
 }

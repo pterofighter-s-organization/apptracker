@@ -51,7 +51,7 @@ export default function NavCollapseBar() {
                             handleChangeMenu={handleChangeMenu}
                         />
                     </div>
-                    <div className="d-flex flex-row ms-auto">
+                    <div className="d-flex flex-row ms-auto gap-0">
                         <NavButton
                             icon={"plus-circle"}
                             text={"New App"}

@@ -62,7 +62,7 @@ export default function TaskTableRowContent ({ task, padding, rowClassNames, cou
                 />
             </td>
             <td style={{ padding: padding }} className={`${rowClassNames}`}>
-                <Link to={""} className={`card-text btn btn-primary px-3 py-2`} style={{ padding: `${padding}` }}>
+                <Link to={"/application/"+task.appId+"#"+task.type} className={`card-text btn btn-primary px-3 py-2`} style={{ padding: `${padding}` }}>
                     <div className="">
                         More Details
                     </div>

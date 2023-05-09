@@ -4,7 +4,7 @@ import ApplicationCard from "../Card/ApplicationCard"
 //utils
 import { sortDates } from "../../utils/date"
 
-export default function CategorizedApplicationList({ applications, updateAppStatus }) {
+export default function CategorizedApplicationList({ applications, updateApplication }) {
 
     // const priorities = {
     //     "interviewing" : 0,
@@ -32,42 +32,42 @@ export default function CategorizedApplicationList({ applications, updateAppStat
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
             {applications.applied.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
             {applications.accepted.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
             {applications.interested.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
             {applications.rejected.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
             {applications.ghosted.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
-                    updateAppStatus={updateAppStatus}
+                    updateApplication={updateApplication}
                 />
             ))}
         </>

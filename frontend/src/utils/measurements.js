@@ -17,9 +17,7 @@ export function breakpointMapWidth ( width ){
         "xl": 1400,
     }
 
-    Object.entries(sizesMapToWidth).forEach((sizeArr) => {
-        const sizeLabel = sizeArr[0]
-        const breakpointSizeWidth = sizeArr[1]
+    Object.entries(sizesMapToWidth).forEach(([sizeLabel, breakpointSizeWidth]) => {
         if (width < breakpointSizeWidth) {
             return sizeLabel
         }

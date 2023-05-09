@@ -28,7 +28,6 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
             <div className="card-header p-4 d-flex flex-wrap gap-3 border border-0">
                 <StatusButton
                     key={displayData.id}
-                    color={displayData.color}
                     appStatus={displayData.status}
                     newStatus={newStatus}
                 />
@@ -43,7 +42,7 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
                 </div>
             </div>
 
-            <Link to={displayData.link} className="card-text btn btn-primary p-2 m-4 mt-0">
+            <Link to={"/application/"+displayData.id} className="card-text btn btn-primary p-2 m-4 mt-0">
                 More Details
             </Link>
 

@@ -31,11 +31,15 @@ export default function PreviewCollapse(props) {
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [showCollapseElements, setShowCollapseElements] = useState(false)
     const [showCollapse, setShowCollapse] = useState(true)
+    const [change, setChange] = useState(0)
 
     const collapseRef = document.getElementById(collapseId)
+    const containerRef = collapseRef ? collapseRef.children[0] : null
 
     //do usecallback to avoid function being re-render everytime and triggers the useeffect below
     const showRemainingContents = useCallback((request) => {
+
+        // console.log(collapseRef, request, collapseId)
         if (collapseRef) {
             if (request) {
                 collapseRef.style.overflow = ""
@@ -53,7 +57,6 @@ export default function PreviewCollapse(props) {
     useEffect(() => {
 
         if (collapseRef) {
-            const containerRef = collapseRef.children[0]
             if (containerRef) {
 
                 const vhToPx = viewSizeToPx(maxVhOfCollapse, windowHeight)
@@ -61,12 +64,13 @@ export default function PreviewCollapse(props) {
                 const show = vhToPx < containerRef.clientHeight
 
                 //debugging, the container in px, parentcontainer in px, and parentcontainer in px int
-                // console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight,parseInt(collapseRef.offsetHeight))
+                // console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight, parseInt(collapseRef.offsetHeight))
 
                 setShowCollapse(show)
             }
         }
-    }, [collapseRef, windowHeight, windowWidth, maxVhOfCollapse, dependency])
+
+    }, [collapseRef, windowHeight, windowWidth, maxVhOfCollapse, containerRef, dependency])
 
     useEffect(() => {
         if (collapseRef) {
@@ -78,9 +82,16 @@ export default function PreviewCollapse(props) {
 
     //end of (1)
 
+    //this is to make sure everything is loaded for the collapse to work perfectly
+    if (!containerRef || !collapseRef) {
+        //to avoid many re-renders
+        setTimeout(() => setChange(change ? 0 : 1), 500)
+    }
+
+    //make sure collapseRef works before showing or else the buttons wont respond because collapseref didnt even load
     return (
         <>
-            {showCollapse ?
+            {collapseRef && showCollapse && containerRef ?
                 <>
                     <PreviewCollapseElements
                         showCollapseElements={showCollapseElements}
@@ -90,7 +101,8 @@ export default function PreviewCollapse(props) {
                     />
                 </>
                 :
-                <></>
+                <>
+                </>
             }
         </>
     )
@@ -111,9 +123,9 @@ export default function PreviewCollapse(props) {
             />
         </div>
     </div>
-    <PreviewCollapseElements
+    <PreviewCollapse
         text={"Tasks"}
-        maxVhOfCollapse={taskVh.toString() + "vh"}
+        maxVhOfCollapse={(int)}
         collapseId={"collapse-tasks"}
         overflow={"hidden"}
         dependency={tasks}

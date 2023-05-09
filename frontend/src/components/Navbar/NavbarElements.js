@@ -8,8 +8,8 @@ export default function NavbarElements({ show }) {
                 icon={"house"}
                 text={"Dashboard"}
                 show={show}
-                link={"/e"}
-                tooltipText={"central place to see all apps and tasks"}
+                link={"/"}
+                tooltipText={"place to see all apps and tasks"}
             />
             <NavButton
                 icon={"pin-angle"}

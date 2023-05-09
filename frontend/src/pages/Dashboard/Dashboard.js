@@ -36,12 +36,6 @@ export default function Dashboard() {
 
     //end of (1)
 
-    //useCallback is for functions that are in child components and
-    //prevent it from rendering the child components when it is not needed
-    function updateAppStatus(app, newStatus) {
-        updateApplication(app, newStatus)
-    }
-
     //debugging
     // console.log(categorizedApps)
 
@@ -86,7 +80,7 @@ export default function Dashboard() {
                         >
                             <CategorizedApplicationList
                                 applications={categorizedApps}
-                                updateAppStatus={updateAppStatus}
+                                updateApplication={updateApplication}
                             />
                         </div>
 

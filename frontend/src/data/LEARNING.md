@@ -18,3 +18,7 @@ Transitions
 
 1. transition can do basic animations of making the website looks smoother
 2. have to put that transition property inside the one who actually changes the height
+
+Arr.filter returns an array
+
+new reference meaning a new address for that new object
