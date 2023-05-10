@@ -1,7 +1,7 @@
 import AppointmentInput from "../../../components/AppointmentInput/AppointmentInput";
 
 
-export default function ApplicationAppointment() {
+export default function ApplicationAppointment({submitAppointment}) {
 
     return (
         <>
@@ -12,7 +12,10 @@ export default function ApplicationAppointment() {
                         <hr className=""/>
                     </div>
                     <div className="">
-                        <AppointmentInput />
+                        <AppointmentInput 
+                            submitAppointment={submitAppointment}
+                            fontSize={"fs-5"}
+                        />
                     </div>
                 </div>
             </div>

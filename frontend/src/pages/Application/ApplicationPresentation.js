@@ -7,26 +7,25 @@ import ApplicationTask from './Layout/ApplicationTasks.js'
 import ApplicationAppointment from './Layout/ApplicationAppointment.js'
 
 
-export default function ApplicationPresentation({ application, updateNewStatus, tasks }) {
+export default function ApplicationPresentation({ application, updateNewStatus, tasks, submitAppointment }) {
 
     const basicInfo = {
         status: application.status,
         dateEdited: application.dateEdited,
         dateCreated: application.dateCreated,
-        dateApplied: "2-28-2023 3:00",
+        dateApplied: application.dateApplied,
     }
 
     const appInfo = {
         position: application.position,
         company: application.company,
-        description: application.description,
         salary: application.salary,
     }
 
     const linksInfo = {
         interviewPrep: application.interviewPrep,
-        resume: "/google-doc/resume",
-        coverLetter: "/google-doc/cover",
+        resume: application.resume,
+        coverLetter: application.coverLetter,
     }
 
     //test data
@@ -73,7 +72,6 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
 
             <ApplicationDescription
                 description={description}
-                id={application.id}
             />
 
             <div className="d-flex flex-column gap-3">
@@ -83,7 +81,9 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
                     </div>
                     <hr className='w-100' />
                 </div>
-                <ApplicationAppointment/>
+                <ApplicationAppointment
+                    submitAppointment={submitAppointment}
+                />
                 <ApplicationTask
                     tasks={tasks}
                     status={application.status}

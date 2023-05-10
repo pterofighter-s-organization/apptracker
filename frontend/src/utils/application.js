@@ -69,6 +69,10 @@ export function updateAppInfo (app, newAppInfo) {
         dateEdited: app.dateEdited,
         appointments: app.appointments,
         interviewPrep: app.interviewPrep,
+        description: app.description,
+        resume: app.resume,
+        coverLetter: app.coverLetter,
+        dateApplied: app.dateApplied,
     }
 
     //changes the only things needed to change specify on newappinfo

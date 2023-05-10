@@ -27,6 +27,9 @@ let applications = [
         company: "google",
         salary: "60k - 100k",
         dateEdited: "2-3-2023 14:53:00",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 2,
@@ -63,6 +66,9 @@ let applications = [
             },
         ],
         interviewPrep: "",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 3,
@@ -92,6 +98,9 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023 03:43:00",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 4,
@@ -121,6 +130,9 @@ let applications = [
         company: "google",
         salary: "90k - 120k",
         dateEdited: "2-1-2023 12:35:00",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 6,
@@ -165,6 +177,9 @@ let applications = [
             },
         ],
         interviewPrep: "",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 7,
@@ -194,6 +209,9 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023 09:45:00",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 8,
@@ -223,6 +241,9 @@ let applications = [
         company: "google",
         salary: "80k - 110k",
         dateEdited: "2-10-2023 08:45:00",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 9,
@@ -259,6 +280,9 @@ let applications = [
             },
         ],
         interviewPrep: "/google-doc/prep",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
     {
         id: 10,
@@ -295,6 +319,9 @@ let applications = [
             },
         ],
         interviewPrep: "",
+        resume: "/google-doc/resume",
+        coverLetter: "/google-doc/cover",
+        dateApplied: "",
     },
 ]
 

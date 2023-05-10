@@ -92,13 +92,13 @@ export default function Datebox(props) {
 
     useEffect(() => {
 
-        if (displayMonths.length > 0 && days.length > 0 && displayYears.length > 0) {
-            setDate(displayMonths + "-" + days + "-" + displayYears)
+        if (months.length > 0 && days.length > 0 && years.length > 0) {
+            setDate(months + "-" + days + "-" + years)
         } else {
             setDate("")
         }
 
-    }, [displayMonths, days, displayYears, setDate])
+    }, [months, days, years, setDate])
 
     function changeMonthInput(event) {
         const newMonth = event.target.value
@@ -115,7 +115,7 @@ export default function Datebox(props) {
         setYears(newYear)
     }
 
-    console.log(displayMonths, days, displayYears)
+    // console.log(displayMonths, days, displayYears)
 
     return (
         <>

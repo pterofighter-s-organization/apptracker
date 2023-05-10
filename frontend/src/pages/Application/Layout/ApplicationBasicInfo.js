@@ -41,9 +41,15 @@ export default function ApplicationBasicInfo({ displayData, updateNewStatus, sta
                     <div className="">
                         Applied :
                     </div>
-                    <div className="text-dark-emphasis">
-                        <DateAndTime date={displayData.dateApplied} />
-                    </div>
+                    {displayData.dateApplied && displayData.dateApplied.length > 0 ?
+                        <div className="text-dark-emphasis">
+                            <DateAndTime date={displayData.dateApplied} />
+                        </div>
+                        :
+                        <div className="text-dark-emphasis">
+                            Not specified
+                        </div>
+                    }
                 </div>
                 :
                 <></>

@@ -1,7 +1,7 @@
 //components
 import PreviewCollapse from "../../../components/Collapse/PreviewCollapse"
 
-export default function ApplicationDescription({ description, id }) {
+export default function ApplicationDescription({ description }) {
 
     //let dependency be id, description might not change at all sometimes, but id will
 

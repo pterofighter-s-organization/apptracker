@@ -1,3 +1,7 @@
+//utils
+import { dateFormat } from "../../utils/date.js";
+
+//components
 import ApplicationCardPresentation from "./ApplicationCardPresentation.js";
 
 export default function ApplicationCard({ application, updateApplication }) {
@@ -20,11 +24,19 @@ export default function ApplicationCard({ application, updateApplication }) {
 
     function newStatus(status) {
 
-        const newAppInfo = {
-            "status": status
+        if(status === "applied"){
+            const today = dateFormat("today")
+            const newAppInfo = {
+                "status": status,
+                "dateApplied": today.dateFormatted,
+            }
+            updateApplication(application, newAppInfo)
+        } else {
+            const newAppInfo = {
+                "status": status
+            }
+            updateApplication(application, newAppInfo)
         }
-
-        updateApplication(application, newAppInfo)
     }
 
     const displayData = {
