@@ -76,7 +76,7 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
             </div>
 
             {application.status === "interviewing" || application.status === "accepted" ?
-                <div className="d-flex flex-column gap-3">
+                <div className="d-flex flex-column gap-3" id="appointments">
                     <div className="d-flex flex-column gap-0">
                         <div className='h2 text-nowrap'>
                             Application Tasks :
