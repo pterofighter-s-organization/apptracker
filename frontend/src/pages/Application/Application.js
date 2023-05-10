@@ -30,7 +30,7 @@ export default function Application() {
 
     function updateNewStatus(status) {
 
-        if (status === "applied") {
+        if(status === "applied" && application.status === "interested"){
             const today = dateFormat("today")
             const newAppInfo = {
                 "status": status,
