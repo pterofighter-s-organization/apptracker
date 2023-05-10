@@ -30,26 +30,7 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
     }
 
     //test data
-    const description = `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
-
-    Responsibilities:
-    
-    Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
-    Research target markets and customer segments to inform campaign strategy
-    Create marketing materials such as social media posts, email newsletters, and digital ads
-    Monitor and report on campaign performance using analytics tools
-    Collaborate with the marketing team to brainstorm new ideas and strategies
-    Stay up-to-date with industry trends and best practices
-    Requirements:
-    
-    Bachelor's degree in marketing or a related field
-    Strong written and verbal communication skills
-    Excellent attention to detail
-    Strong analytical skills
-    Proficiency with Microsoft Office and Google Suite
-    Familiarity with marketing analytics tools such as Google Analytics
-    Ability to work in a fast-paced, deadline-driven environment
-    Positive attitude and willingness to learn`
+    const description = application.description
 
     // console.log(application.id)
     return (

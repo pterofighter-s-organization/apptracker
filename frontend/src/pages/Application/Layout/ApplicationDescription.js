@@ -24,7 +24,7 @@ export default function ApplicationDescription({ description, id }) {
                             <div className="fs-5">
                                 {/* pre allows mutliline text to be displayed correctly */}
                                 <pre className="pb-5" style={{maxWidth: "80vw"}}>
-                                    {description}
+                                    {description && description.length > 0 ? description : "No description provided"}
                                 </pre>
                             </div>
                         </div>

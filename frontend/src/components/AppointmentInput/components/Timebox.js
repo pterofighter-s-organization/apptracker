@@ -86,7 +86,7 @@ export default function Timebox(props) {
                     {hours.length > 0 ?
                         <option value="">hh</option>
                         :
-                        <option selected value="">mm</option>
+                        <option selected value="">hh</option>
                     }
                     {displayHours.map((num) => {
                         if (hours !== num) {

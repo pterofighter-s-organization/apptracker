@@ -3,6 +3,26 @@ let applications = [
         id: 1,
         status: "ghosted",
         position: "software engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-3-2023",
         company: "google",
         salary: "60k - 100k",
@@ -12,6 +32,26 @@ let applications = [
         id: 2,
         status: "interviewing",
         position: "Web Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
@@ -28,6 +68,26 @@ let applications = [
         id: 3,
         status: "applied",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -37,6 +97,26 @@ let applications = [
         id: 4,
         status: "interested",
         position: "Web Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-5-2023",
         company: "google",
         salary: "90k - 120k",
@@ -46,6 +126,26 @@ let applications = [
         id: 6,
         status: "interviewing",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -70,6 +170,26 @@ let applications = [
         id: 7,
         status: "ghosted",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -79,6 +199,26 @@ let applications = [
         id: 8,
         status: "applied",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -88,6 +228,26 @@ let applications = [
         id: 9,
         status: "interviewing",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -104,6 +264,26 @@ let applications = [
         id: 10,
         status: "interviewing",
         position: "Software Engineer",
+        description: `We are seeking a Junior Marketing Associate to join our fast-paced marketing team. The ideal candidate will have excellent communication skills, strong attention to detail, and a passion for marketing. In this role, you will assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising. You will work closely with the marketing team to research target markets, create marketing materials, and analyze campaign results. This is a great opportunity for someone who is looking to build their marketing skills and grow in their career.
+
+        Responsibilities:
+        
+        Assist in developing and executing marketing campaigns across various channels, including social media, email, and digital advertising
+        Research target markets and customer segments to inform campaign strategy
+        Create marketing materials such as social media posts, email newsletters, and digital ads
+        Monitor and report on campaign performance using analytics tools
+        Collaborate with the marketing team to brainstorm new ideas and strategies
+        Stay up-to-date with industry trends and best practices
+        Requirements:
+        
+        Bachelor's degree in marketing or a related field
+        Strong written and verbal communication skills
+        Excellent attention to detail
+        Strong analytical skills
+        Proficiency with Microsoft Office and Google Suite
+        Familiarity with marketing analytics tools such as Google Analytics
+        Ability to work in a fast-paced, deadline-driven environment
+        Positive attitude and willingness to learn`,
         dateCreated: "2-8-2023",
         company: "google",
         salary: "80k - 110k",
@@ -132,8 +312,8 @@ export const updateApp = (app, id) => {
 }
 
 export const getApps = () => {
-    
-    if(!applications){
+
+    if (!applications) {
         return new Error("No applications found")
     }
 
