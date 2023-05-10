@@ -1,15 +1,20 @@
+import { useMemo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-//utils
+//hooks
 import useApplicationManager from '../../hooks/useApplicationManager';
-import { dateFormat } from '../../utils/date';
 
-import ApplicationPresentation from './ApplicationPresentation';
-import { useMemo } from 'react';
+//utils
+import { dateFormat } from '../../utils/date';
 import { findTasksOnApp } from '../../utils/task';
+
+//components
+import ApplicationPresentation from './ApplicationPresentation';
 import useLocationManager from '../../hooks/useLocationManager';
 
 export default function Application() {
+
+    //clean out the code in this file and every other sub file that branches off this
 
     const { id } = useParams();
 
@@ -18,9 +23,13 @@ export default function Application() {
 
     const { application, updateApplication } = useApplicationManager(parseInt(id))
 
+    useEffect(() => {
+        document.title = 'Application ' + id + ' - Job Tracker App';
+    }, [id])
+
     function updateNewStatus(status) {
 
-        if(status === "applied"){
+        if (status === "applied") {
             const today = dateFormat("today")
             const newAppInfo = {
                 "status": status,
@@ -36,8 +45,8 @@ export default function Application() {
     }
 
     const tasks = useMemo(() => {
-        if(application){
-            if(application.status === "interviewing"){
+        if (application) {
+            if (application.status === "interviewing") {
                 return findTasksOnApp(application)
             }
             return []
@@ -45,7 +54,7 @@ export default function Application() {
         return null
     }, [application])
 
-    function submitAppointment(dateTime, title){
+    function submitAppointment(dateTime, title) {
 
         const appointment = {
             title: title,

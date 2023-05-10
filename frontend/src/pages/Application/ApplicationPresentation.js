@@ -59,20 +59,38 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
                     </div>
                     <hr className='w-100' />
                 </div>
-                <div className="d-flex flex-column flex-xl-row align-items-stretch gap-3 gap-md-4 gap-xl-5">
-                    <ApplicationAppInfo
-                        displayData={appInfo}
-                    />
-                    <ApplicationLinksInfo
-                        displayData={linksInfo}
-                        status={application.status}
+                <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5">
+                    <div className="d-flex flex-column flex-xl-row align-items-stretch gap-3 gap-md-4 gap-xl-5">
+                        <ApplicationAppInfo
+                            displayData={appInfo}
+                        />
+                        <ApplicationLinksInfo
+                            displayData={linksInfo}
+                            status={application.status}
+                        />
+                    </div>
+                    <ApplicationDescription
+                        description={description}
                     />
                 </div>
             </div>
 
-            <ApplicationDescription
-                description={description}
-            />
+            {application.status === "interviewing" || application.status === "applied" ?
+                <div className="d-flex flex-column gap-3">
+                    <div className="d-flex flex-column gap-0">
+                        <div className='h2 text-nowrap'>
+                            Application Tasks :
+                        </div>
+                        <hr className='w-100' />
+                    </div>
+                    <ApplicationTask
+                        tasks={tasks}
+                        status={application.status}
+                    />
+                </div>
+                :
+                <></>
+            }
 
             <div className="d-flex flex-column gap-3">
                 <div className="d-flex flex-column gap-0">
@@ -83,12 +101,11 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
                 </div>
                 <ApplicationAppointment
                     submitAppointment={submitAppointment}
-                />
-                <ApplicationTask
-                    tasks={tasks}
                     status={application.status}
                 />
             </div>
+            {/* //add notes */}
+
             {/* <hr className='w-100' /> */}
 
             {/* <div className="d-flex flex-column gap-1">

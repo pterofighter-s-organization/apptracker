@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 
 //utils
 import { categorizeApplications } from "../../utils/application.js"
@@ -18,6 +18,10 @@ export default function Dashboard() {
     //showing the task that the user needs to finish and the applications they currently have
 
     const { applications, updateApplication } = useApplicationsManager()
+
+    useEffect(() => {
+        document.title = 'Dashboard - Job Tracker App';
+    },[])
 
     const taskVh = 40
     const appsVh = 40
