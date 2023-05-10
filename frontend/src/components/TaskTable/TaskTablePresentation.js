@@ -75,7 +75,7 @@ export default function TaskTablePresentation ({displayData}) {
                         <tr>
                             <th scope="row" key={count} > {count++} </th>
                             <td></td>
-                            <td>No tasks at the momment, you can try applying more to have a higher chance of interviewing</td>
+                            <td>No tasks at the momment, you can try to track more apps</td>
                         </tr>
                     </tbody>
                 }
