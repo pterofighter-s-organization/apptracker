@@ -1,6 +1,9 @@
 //components
 import PreviewCollapse from "../../../components/Collapse/PreviewCollapse"
 
+//css
+import "./ApplicationDescription.css"
+
 export default function ApplicationDescription({ description }) {
 
     //let dependency be id, description might not change at all sometimes, but id will
@@ -23,7 +26,7 @@ export default function ApplicationDescription({ description }) {
                         >
                             <div className="fs-5">
                                 {/* pre allows mutliline text to be displayed correctly */}
-                                <pre className="pb-5" style={{maxWidth: "80vw"}}>
+                                <pre className="app-description pb-5">
                                     {description && description.length > 0 ? description : "No description provided"}
                                 </pre>
                             </div>
