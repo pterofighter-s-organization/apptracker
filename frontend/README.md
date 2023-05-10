@@ -40,6 +40,7 @@
     Starting the app individual page finished (5/8/2023 5:00pm) to (5/10/2023 4:00am)
         - clean up the code
         - update title of the page in dashboard (finished)
+        - add a modal for the creating appointment
 
     Starting form (5/10/2023 10:00am)
 
