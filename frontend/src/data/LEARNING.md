@@ -22,3 +22,6 @@ Transitions
 Arr.filter returns an array
 
 new reference meaning a new address for that new object
+
+<pre> is for displaying multiline string
+<textarea> is for inputting multiline string
