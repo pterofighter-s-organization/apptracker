@@ -25,6 +25,7 @@ export default function Application() {
 
     useEffect(() => {
         document.title = 'Application ' + id + ' - Job Tracker App';
+        return () => document.title = 'Job Tracker App';
     }, [id])
 
     function updateNewStatus(status) {

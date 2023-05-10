@@ -21,6 +21,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         document.title = 'Dashboard - Job Tracker App';
+        return () => document.title = 'Job Tracker App';
     },[])
 
     const taskVh = 40
