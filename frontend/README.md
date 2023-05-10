@@ -37,13 +37,15 @@
 
     Starting navbar fully finished (5/3/2023 1:00am)
 
-    Starting the app individual page (5/8/2023 5:00pm)
-        - make description use collapse in bootstrap
+    Starting the app individual page finished (5/8/2023 5:00pm) to (5/10/2023 4:00am)
+        - clean up the code
         - update title of the page in dashboard (finished)
+
+    Starting form (5/10/2023 10:00am)
 
     Individual App pages
         Interview prep
-        - maybe dont need to do interview questions, just make them upload a pdf or a google link to their prep
+        - maybe dont need to do interview questions, just make them upload a pdf or a google link to their prep (finished)
         - or a button saying they prep already
         - add tasks for accepted apps
 
