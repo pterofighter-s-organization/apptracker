@@ -73,14 +73,14 @@ export function findTasksOnApp ( app ) {
     }
 
     //if didn't finish prep for interview
-    if (!app.interviewPrep) {
+    if (app.interviewPrep.length <= 0) {
         tasks.push(
             {
                 appId: id,
                 position: position,
                 company: company,
                 priority: 1,
-                type: "task-prep",
+                type: "interview-prep",
                 title: "Prepare for interview questions",
                 date: today,
                 timeDue: timeDue,

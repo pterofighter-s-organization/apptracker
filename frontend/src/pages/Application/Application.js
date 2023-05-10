@@ -6,10 +6,15 @@ import useApplicationManager from '../../hooks/useApplicationManager';
 import ApplicationPresentation from './ApplicationPresentation';
 import { useMemo } from 'react';
 import { findTasksOnApp } from '../../utils/task';
+import useLocationManager from '../../hooks/useLocationManager';
 
 export default function Application() {
 
     const { id } = useParams();
+    
+    //helps me locate the user to a specific section id
+    useLocationManager()
+
     const { application, updateApplication } = useApplicationManager(parseInt(id))
 
     function updateNewStatus(status) {

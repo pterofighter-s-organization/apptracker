@@ -21,8 +21,11 @@ export default function ApplicationDescription({ description, id }) {
                             className="text-dark-emphasis"
                             id="application-description"
                         >
-                            <div className="">
-                                {description}
+                            <div className="fs-5">
+                                {/* pre allows mutliline text to be displayed correctly */}
+                                <pre  style={{maxWidth: "80vw"}}>
+                                    {description}
+                                </pre>
                             </div>
                         </div>
                     </div>
@@ -31,7 +34,7 @@ export default function ApplicationDescription({ description, id }) {
                         maxVhOfCollapse={20}
                         collapseId={"collapse-app-description"}
                         overflow={"hidden"}
-                        dependency={id}
+                        dependency={description}
                     />
                 </div>
             </div>

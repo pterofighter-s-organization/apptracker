@@ -45,11 +45,12 @@ export function updateInterviewApp ( application ) {
             application[appointments] = []
         }
         if (!application[interviewPrep]) {
-            application[interviewPrep] = false
+            application[interviewPrep] = ""
         }
     }
 }
 
+//talks to backend to update app
 export function updateAppInfo (app, newAppInfo) {
 
     const { id } = app

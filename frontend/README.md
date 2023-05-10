@@ -45,6 +45,7 @@
         Interview prep
         - maybe dont need to do interview questions, just make them upload a pdf or a google link to their prep
         - or a button saying they prep already
+        - add tasks for accepted apps
 
 
 # For v2 (After v1 finishes)

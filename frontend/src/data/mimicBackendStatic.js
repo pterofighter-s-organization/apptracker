@@ -22,7 +22,7 @@ let applications = [
                 date: "5-6-2023 15:45:00",
             },
         ],
-        interviewPrep: false,
+        interviewPrep: "",
     },
     {
         id: 3,
@@ -64,7 +64,7 @@ let applications = [
                 date: "9-29-2023 08:45:00",
             },
         ],
-        interviewPrep: false,
+        interviewPrep: "",
     },
     {
         id: 7,
@@ -98,7 +98,7 @@ let applications = [
                 date: "7-25-2023 10:45:00",
             },
         ],
-        interviewPrep: true,
+        interviewPrep: "/google-doc/prep",
     },
     {
         id: 10,
@@ -114,7 +114,7 @@ let applications = [
                 date: "6-25-2023 10:45:00",
             },
         ],
-        interviewPrep: false,
+        interviewPrep: "",
     },
 ]
 

@@ -34,7 +34,8 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
             </div>
 
             <div className="card-body p-4 d-flex flex-column gap-2">
-                <div className="card-title h5">
+                {/* avoid the title overflowing */}
+                <div className="card-title h5 text-truncate">
                     {textFormat(displayData.position)}
                 </div>
                 <div className="card-subtitle lead">
