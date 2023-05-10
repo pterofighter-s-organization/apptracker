@@ -6,8 +6,8 @@ export default function ApplicationDescription({ description, id }) {
     //let dependency be id, description might not change at all sometimes, but id will
 
     return (
-        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5 bg-body-secondary w-100 p-4">
-            <div className="d-flex flex-column gap-2 fs-3 ">
+        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5 bg-body-secondary w-100 p-4 fs-4">
+            <div className="d-flex flex-column gap-2 ">
                 <div className="">
                     Job description :
                 </div>
@@ -23,7 +23,7 @@ export default function ApplicationDescription({ description, id }) {
                         >
                             <div className="fs-5">
                                 {/* pre allows mutliline text to be displayed correctly */}
-                                <pre  style={{maxWidth: "80vw"}}>
+                                <pre className="pb-5" style={{maxWidth: "80vw"}}>
                                     {description}
                                 </pre>
                             </div>

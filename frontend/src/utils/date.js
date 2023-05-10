@@ -1,19 +1,19 @@
 
 const moment = require('moment')
 
-export function findCorrectMomentObj (dateString) {
+export function findCorrectMomentObj(dateString) {
 
-    if(dateString === "today"){
+    if (dateString === "today") {
         return moment(Date.now())
     }
     return moment(dateString, "MM-DD-YYYY HH:mm:ss")
 }
 
-function dateHumanizedHelper (dateString) {
+function dateHumanizedHelper(dateString) {
     return dateString.replaceAll("-", "/")
 }
 
-export function dateFormat ( dateString ) {
+export function dateFormat(dateString) {
 
     //made to work on firefox (needs a specific format) and other browsers
     //forcing all dates to follow a specific format
@@ -31,7 +31,7 @@ export function dateFormat ( dateString ) {
     const timeHumanizedObj = momentDate.format("h:mm a").split(" ")
     const timeHumanized = timeHumanizedObj[0] //12 hour period time
     const timePeriod = timeHumanizedObj[1]
-    
+
     return {
         date,
         dateHumanized,
@@ -42,16 +42,24 @@ export function dateFormat ( dateString ) {
     }
 }
 
-export function sortDates (date1, date2) {
+export function validateDate(dateString) {
+
+    const pattern = /^\d{2}-\d{2}-\d{4}$/;
+    // ^ = starting pt, \d is int, {n} is how many of them, - is just specifying it is a date
+
+    return pattern.test(dateString)
+}
+
+export function sortDates(date1, date2) {
 
     const dateA = findCorrectMomentObj(date1)
     const dateB = findCorrectMomentObj(date2)
 
     if (dateA.isBefore(dateB)) {
         return -1;
-      } else if (dateA.isAfter(dateB)) {
+    } else if (dateA.isAfter(dateB)) {
         return 1;
-      } else {
+    } else {
         return 0;
-      }
+    }
 }

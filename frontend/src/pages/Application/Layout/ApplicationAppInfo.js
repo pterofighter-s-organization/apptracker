@@ -3,8 +3,8 @@ import { textFormat } from "../../../utils/text"
 
 export default function ApplicationAppInfo({ displayData }) {
     return (
-        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5 bg-body-secondary p-4 w-100">
-            <div className="d-flex flex-row gap-3 fs-3">
+        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-4 bg-body-secondary p-4 w-100 fs-4">
+            <div className="d-flex flex-row gap-3">
                 <div className="">
                     Job title :
                 </div>
@@ -12,7 +12,7 @@ export default function ApplicationAppInfo({ displayData }) {
                     {textFormat(displayData.position)}
                 </div>
             </div>
-            <div className="d-flex flex-row gap-3 fs-3">
+            <div className="d-flex flex-row gap-3">
                 <div className="">
                     Company name :
                 </div>
@@ -20,7 +20,7 @@ export default function ApplicationAppInfo({ displayData }) {
                     {textFormat(displayData.company)}
                 </div>
             </div>
-            <div className="d-flex flex-row gap-3 fs-3">
+            <div className="d-flex flex-row gap-3">
                 <div className="">
                     Salary range :
                 </div>

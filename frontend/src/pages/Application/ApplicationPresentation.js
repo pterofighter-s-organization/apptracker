@@ -54,7 +54,7 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
     // console.log(application.id)
     return (
         <div
-            className="d-flex flex-column gap-4 gap-xl-5 w-100 my-3 my-xl-0"
+            className="d-flex flex-column gap-5 w-100 my-3 my-xl-0"
             style={{ padding: "1.25vw 2.5vw" }}
             id={"application" + application.id}
         >
@@ -95,18 +95,18 @@ export default function ApplicationPresentation({ application, updateNewStatus, 
                 id={application.id}
             />
 
-            <div className="d-flex flex-column gap-lg-3">
+            <div className="d-flex flex-column gap-3">
                 <div className="d-flex flex-column gap-0">
                     <div className='h2 text-nowrap'>
                         Additional Info :
                     </div>
                     <hr className='w-100' />
                 </div>
+                <ApplicationAppointment/>
                 <ApplicationTask
                     tasks={tasks}
                     status={application.status}
                 />
-                <ApplicationAppointment/>
             </div>
             {/* <hr className='w-100' /> */}
 

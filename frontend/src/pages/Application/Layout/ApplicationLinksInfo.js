@@ -11,9 +11,9 @@ export default function ApplicationLinksInfo({ displayData, status }) {
     const showTextForCoverLetter = displayData.coverLetter.length > 0
 
     return (
-        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-5 bg-body-secondary p-4 w-100">
+        <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-4 bg-body-secondary p-4 w-100 fs-4">
             {showInterviewInfo ?
-                <div className="d-flex flex-row gap-3 fs-3">
+                <div className="d-flex flex-row gap-3">
                     <div className="text-nowrap">
                         Interview Prep :
                     </div>
@@ -35,7 +35,7 @@ export default function ApplicationLinksInfo({ displayData, status }) {
             }
             {showResumeCoverLetters ?
                 <>
-                    <div className="d-flex flex-row gap-3 fs-3">
+                    <div className="d-flex flex-row gap-3">
                         <div className="text-nowrap">
                             Resume :
                         </div>
@@ -51,7 +51,7 @@ export default function ApplicationLinksInfo({ displayData, status }) {
                             </div>
                         }
                     </div>
-                    <div className="d-flex flex-row gap-3 fs-3">
+                    <div className="d-flex flex-row gap-3">
                         <div className="text-nowrap">
                             Cover letter :
                         </div>
@@ -70,7 +70,7 @@ export default function ApplicationLinksInfo({ displayData, status }) {
                 </>
                 :
                 <>
-                    <div className="d-flex flex-row gap-3 fs-3">
+                    <div className="d-flex flex-row gap-3">
                         <div className="text-nowrap">
                             Resume :
                         </div>
@@ -78,7 +78,7 @@ export default function ApplicationLinksInfo({ displayData, status }) {
                             Resume not needed
                         </div>
                     </div>
-                    <div className="d-flex flex-row gap-3 fs-3">
+                    <div className="d-flex flex-row gap-3">
                         <div className="text-nowrap">
                             Cover letter :
                         </div>

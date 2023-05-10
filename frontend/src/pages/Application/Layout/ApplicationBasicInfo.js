@@ -7,12 +7,12 @@ export default function ApplicationBasicInfo({ displayData, updateNewStatus, sta
     const showAppliedDate = status !== "interested"
 
     return (
-        <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 align-items-center bg-body-secondary p-4">
+        <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 align-items-center bg-body-secondary p-4 fs-4">
             <div className="d-flex flex-row gap-3 align-items-center">
-                <div className="fs-3">
+                <div className="">
                     Status :
                 </div>
-                <div className="mt-xl-1">
+                <div className="">
                     <StatusButton
                         appStatus={displayData.status}
                         newStatus={updateNewStatus}
@@ -20,7 +20,7 @@ export default function ApplicationBasicInfo({ displayData, updateNewStatus, sta
                     />
                 </div>
             </div>
-            <div className="d-flex flex-row gap-3 fs-3">
+            <div className="d-flex flex-row gap-3">
                 <div className="">
                     Updated :
                 </div>
@@ -28,7 +28,7 @@ export default function ApplicationBasicInfo({ displayData, updateNewStatus, sta
                     <DateAndTime date={displayData.dateEdited} />
                 </div>
             </div>
-            <div className="d-flex flex-row gap-3 fs-3">
+            <div className="d-flex flex-row gap-3">
                 <div className="">
                     Created :
                 </div>
@@ -37,7 +37,7 @@ export default function ApplicationBasicInfo({ displayData, updateNewStatus, sta
                 </div>
             </div>
             {showAppliedDate ?
-                <div className="d-flex flex-row gap-3 fs-3">
+                <div className="d-flex flex-row gap-3">
                     <div className="">
                         Applied :
                     </div>
