@@ -41,6 +41,7 @@
         - clean up the code
         - update title of the page in dashboard (finished)
         - add a modal for the creating appointment
+        - add notes 
 
     Starting form (5/10/2023 10:00am)
 
