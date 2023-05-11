@@ -64,7 +64,7 @@ export default function PreviewCollapse(props) {
                 const show = vhToPx < containerRef.clientHeight
 
                 //debugging, the container in px, parentcontainer in px, and parentcontainer in px int
-                console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight, parseInt(collapseRef.offsetHeight))
+                // console.log(vhToPx, containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight, parseInt(collapseRef.offsetHeight), collapseId)
 
                 setShowCollapse(show)
             }
