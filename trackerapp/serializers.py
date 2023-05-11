@@ -9,8 +9,8 @@ class UsersSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Application
-        fields = ('application_id','user_id','name', 'description', 'status'
-                  , 'date', 'salary')
+        fields = ('application_id','user_id','position','company','interview_preparation', 'resume_link', 'cover_letter_link',
+                  'description','status', 'date_applied', 'date_edited', 'date_created', 'salary')
 
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:

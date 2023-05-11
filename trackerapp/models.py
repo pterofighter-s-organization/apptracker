@@ -21,9 +21,15 @@ class Notes(models.Model):
 class Application(models.Model):
     application_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
-    name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    interview_preparation = models.CharField(max_length=255, blank=True, null=True)
+    resume_link = models.CharField(max_length=255, blank=True, null=True)
+    cover_letter_link = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=2048)
     status = models.CharField(max_length=255)
-    date = models.DateField()
-    salary = models.IntegerField()
+    date_applied = models.CharField(max_length=255, blank=True, null=True)
+    date_edited = models.CharField(max_length=255)
+    date_created = models.CharField(max_length=255)
+    salary = models.CharField(max_length=255)
     

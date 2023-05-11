@@ -46,7 +46,7 @@ def application_detail(request, pk):
             return JsonResponse(application_serializer.data)
         #update an application 
         elif request.method == 'POST':
-            application_data = JSONParser.parse(request)
+            application_data = JSONParser().parse(request)
             application_serializer = ApplicationSerializer(data=application_data)
             if application_serializer.is_valid():
                 application_serializer.save()
@@ -83,7 +83,7 @@ def users_detail(request, pk):
             return JsonResponse(users_serializer.data)
         #update an user 
         elif request.method == 'POST':
-            users_data = JSONParser.parse(request)
+            users_data = JSONParser().parse(request)
             users_serializer = UsersSerializer(data=users_data)
             if users_serializer.is_valid():
                 users_serializer.save()
@@ -119,7 +119,7 @@ def notes_detail(request, pk):
             return JsonResponse(notes_serializer.data)
         #update an user 
         elif request.method == 'POST':
-            notes_data = JSONParser.parse(request)
+            notes_data = JSONParser().parse(request)
             notes_serializer = NotesSerializer(data=notes_data)
             if notes_serializer.is_valid():
                 notes_serializer.save()
