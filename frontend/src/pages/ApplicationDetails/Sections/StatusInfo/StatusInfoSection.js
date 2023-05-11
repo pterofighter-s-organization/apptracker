@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 //utils
 import { dateFormat } from "../../../../utils/date"
 
-//parts
-import StatusChange from "./Parts/StatusChange"
-import UpdatedDate from "./Parts/UpdatedDate"
-import CreatedDate from "./Parts/CreatedDate"
-import AppliedDate from "./Parts/AppliedDate"
+//components
+import StatusChange from "./components/StatusChange"
+import UpdatedDate from "./components/UpdatedDate"
+import CreatedDate from "./components/CreatedDate"
+import AppliedDate from "./components/AppliedDate"
 
 export default function StatusInfoSection({ application, updateApplication }) {
 

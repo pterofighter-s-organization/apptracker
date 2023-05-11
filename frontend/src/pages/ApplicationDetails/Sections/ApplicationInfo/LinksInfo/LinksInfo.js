@@ -1,8 +1,7 @@
-import CoverLetterLink from "./Parts/CoverLetterLink"
-import InterviewPrepLink from "./Parts/InterviewPrepLink"
-import ResumeLink from "./Parts/ResumeLink"
-
-
+//components
+import CoverLetterLink from "./components/CoverLetterLink"
+import InterviewPrepLink from "./components/InterviewPrepLink"
+import ResumeLink from "./components/ResumeLink"
 
 export default function LinksInfo({ interviewPrep, resume, coverLetter, status }) {
 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
-//parts
-import TaskTableInfo from "./Parts/TaskTableInfo";
+//components
+import TaskTableInfo from "./components/TaskTableInfo";
 
 //utils
 import { findTasksOnApp } from '../../../../utils/task';

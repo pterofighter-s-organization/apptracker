@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
-//parts
-import ApplicationForm from "./Parts/AppointmentForm"
+//components
+import ApplicationForm from "./components/AppointmentForm"
 
 export default function AdditonalInfoSection({ application, updateApplication }) {
 

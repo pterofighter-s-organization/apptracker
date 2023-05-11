@@ -22,6 +22,8 @@ export default function StatusButton({ status, setStatus, textClass }) {
     }
 
 
+    //another solution is to make the list items here instead, then update it again with usememo*
+    
     //using ref to remove the show in dropdownmenu which was stuck because the component didn't unmount
     //later can find a better solution *
     const dropdownMenuRef = useRef(null)
