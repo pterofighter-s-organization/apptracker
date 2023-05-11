@@ -8,9 +8,9 @@ import { dateFormat } from "../../utils/date.js";
 import "./ApplicationCard.css"
 
 //components
-import AppCardHeader from "./Sections/CardHeader/AppCardHeader.js";
-import AppCardBody from "./Sections/CardBody/AppCardBody.js";
-import AppCardFooter from "./Sections/CardFooter/AppCardFooter.js"
+import AppCardHeader from "./components/CardHeader/AppCardHeader.js";
+import AppCardBody from "./components/CardBody/AppCardBody.js";
+import AppCardFooter from "./components/CardFooter/AppCardFooter.js"
 
 
 export default function ApplicationCard({ application, updateApplication }) {
@@ -24,6 +24,7 @@ export default function ApplicationCard({ application, updateApplication }) {
 
     //updates when status changed
     useEffect(() => {
+        //status = new status, app.status is the old status
         if (status !== application.status) {
             if (status === "applied" && application.status === "interested") {
                 const today = dateFormat("today")

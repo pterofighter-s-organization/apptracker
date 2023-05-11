@@ -5,7 +5,7 @@ import { categorizeApplications } from "../../utils/application.js"
 import { findAllTasks } from "../../utils/task.js"
 
 //components
-import CategorizedApplicationList from "../../components/List/CategorizedApplicationList.js"
+import CategorizedApplicationList from "../../components/Lists/CategorizedApplicationList.js"
 import TaskTable from "../../components/TaskTable/TaskTable.js"
 import PreviewCollapse from "../../components/PreviewCollapse/PreviewCollapse.js"
 

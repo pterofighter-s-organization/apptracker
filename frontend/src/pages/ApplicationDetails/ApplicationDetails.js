@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import useApplicationManager from '../../hooks/useApplicationManager';
 import useLocationManager from '../../hooks/useLocationManager';
 
-//parts
+//sections
 import StatusInfoSection from './Sections/StatusInfo/StatusInfoSection.js';
 import ApplicationInfoSection from './Sections/ApplicationInfo/ApplicationInfoSection.js'
 import TaskInfoSection from './Sections/TaskInfo/TaskInfoSection';

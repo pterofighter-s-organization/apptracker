@@ -64,16 +64,20 @@ export default function Datebox(props) {
         handleChange
     } = props
 
-    const displayMonths = provideMonths()
-    const displayYears = provideYears()
+    const displayMonths = useMemo(() => (
+        provideMonths()
+    ),[])
+    const displayYears = useMemo(() => (
+        provideYears()
+    ),[])
 
     const [months, setMonths] = useState("")
     const [days, setDays] = useState("")
     const [years, setYears] = useState("")
 
     const displayDays = useMemo(() => {
-        return provideDaysFromMonth(displayMonths, displayYears)
-    }, [displayMonths, displayYears])
+        return provideDaysFromMonth(months, years)
+    }, [months, years])
 
     useEffect(() => {
 
@@ -88,26 +92,25 @@ export default function Datebox(props) {
         // eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        handleChange(months + "-" + days + "-" + years)
-    }, [months, days, years, handleChange])
-
     function changeMonthInput(event) {
         event.preventDefault()
         const newMonth = event.target.value
         setMonths(newMonth)
+        handleChange(months + "-" + days + "-" + years)
     }
 
     function changeDayInput(event) {
         event.preventDefault()
         const newDay = event.target.value
         setDays(newDay)
+        handleChange(months + "-" + days + "-" + years)
     }
 
     function changeYearInput(event) {
         event.preventDefault()
         const newYear = event.target.value
         setYears(newYear)
+        handleChange(months + "-" + days + "-" + years)
     }
 
     // console.log(displayMonths, days, displayYears)

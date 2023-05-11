@@ -57,20 +57,18 @@ export default function Timebox(props) {
         // eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        handleChange(hours + ":" + mins + ":00")
-    }, [mins, hours, handleChange])
-
     function changeHoursInput(event) {
         event.preventDefault()
         const newHours = event.target.value
         setHours(newHours)
+        handleChange(hours + ":" + mins + ":00")
     }
 
     function changeMinsInput(event) {
         event.preventDefault()
         const newMins = event.target.value
         setMins(newMins)
+        handleChange(hours + ":" + mins + ":00")
     }
 
     return (

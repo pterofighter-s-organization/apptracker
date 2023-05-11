@@ -2,7 +2,7 @@
 import ApplicationCard from "../ApplicationCard/ApplicationCard.js"
 
 //utils
-import { sortDates } from "../../utils/date"
+import { sortDates } from "../../utils/date.js"
 
 export default function CategorizedApplicationList({ applications, updateApplication }) {
 

@@ -88,7 +88,7 @@ export function updateAppInfo (app, newAppInfo) {
     //add a history list of when the status was changed *
     //for ex: an array of the (time edited, status updated to)
 
-    //up here is the backend update (code later)
+    //up here is the backend update (code later) PUT THIS TALKING WITH BACKEND CODE TO API.JS (IMPORTANT)
     //mimic backend code (replace later)
     //this is a backend response
     let res = null
