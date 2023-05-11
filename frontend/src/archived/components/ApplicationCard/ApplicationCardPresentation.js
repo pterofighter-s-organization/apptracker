@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import "./ApplicationCard.css"
 
 //utils
-import { textFormat } from "../../utils/text.js";
+import { textFormat } from "../../../utils/text.js";
 
 //components
-import StatusButton from "../StatusButton/StatusButton.js";
-import DateAndTime from "../Date/DateAndTime.js";
+import StatusButton from "../../../components/StatusButton/StatusButton.js";
+import DateAndTime from "../../../components/Date/DateAndTime.js";
 
-export default function ApplicationCardPresentation ({ displayData, newStatus }) {
+export default function ApplicationCardPresentation ({ displayData, status, setStatus }) {
 
     //never call this file other than appcard itself, a helper file for application card that defines the layout
 
@@ -28,8 +28,8 @@ export default function ApplicationCardPresentation ({ displayData, newStatus })
             <div className="card-header p-4 d-flex flex-wrap gap-3 border border-0">
                 <StatusButton
                     key={displayData.id}
-                    appStatus={displayData.status}
-                    newStatus={newStatus}
+                    status={status}
+                    setStatus={setStatus}
                 />
             </div>
 

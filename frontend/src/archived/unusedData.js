@@ -206,3 +206,8 @@ text={"Log out"}
         //   );
 
         //setApplications(prevApps => ([...prevApps, res]))
+
+        //making sure the status button gets dismounted and everything gets re-rendered (IMPORTANT)
+        //because if the button doesn't dismount, it will be stuck because the eventlistener didn't get dismount
+        // setApplication(null)
+        // setTimeout(() => setApplication(res), 0.01)

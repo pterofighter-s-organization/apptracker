@@ -1,5 +1,5 @@
 //components
-import PreviewCollapse from "../../../components/Collapse/PreviewCollapse.js"
+import PreviewCollapse from "../../../components/PreviewCollapse/PreviewCollapse.js"
 import TaskTable from "../../../components/TaskTable/TaskTable.js"
 
 export default function ApplicationTask({ tasks, status }) {

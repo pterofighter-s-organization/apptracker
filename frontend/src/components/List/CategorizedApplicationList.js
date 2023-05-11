@@ -1,5 +1,5 @@
 //components
-import ApplicationCard from "../Card/ApplicationCard"
+import ApplicationCard from "../ApplicationCard/ApplicationCard.js"
 
 //utils
 import { sortDates } from "../../utils/date"

@@ -11,7 +11,7 @@ import { getApps } from "../data/mimicBackendStatic";
 export default function useApplicationManager(id) {
 
     const [application, setApplication] = useState(null)
-    // const [change, setChange] = useState(0)
+    // const [change, setChange] = useState(0) no need anymore because useref solved my problem
 
     useEffect(() => {
 
@@ -32,11 +32,7 @@ export default function useApplicationManager(id) {
     function updateApplication(app, newAppInfo) {
 
         const res = updateAppInfo(app, newAppInfo)
-
-        //making sure the status button gets dismounted and everything gets re-rendered (IMPORTANT)
-        //because if the button doesn't dismount, it will be stuck because the eventlistener didn't get dismount
-        setApplication(null)
-        setTimeout(() => setApplication(res), 0.01)
+        setApplication(res)
         // setChange(change ? 0 : 1)
     }
 

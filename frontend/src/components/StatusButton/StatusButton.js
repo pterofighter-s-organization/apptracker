@@ -1,10 +1,12 @@
+import { useEffect, useRef } from "react";
+
 //components
 import StatusListButton from "./StatusListButton.js";
 
 //utils
 import { textFormat } from "../../utils/text.js";
 
-export default function StatusButton({ appStatus, newStatus, textClass }) {
+export default function StatusButton({ status, setStatus, textClass }) {
 
     //defines the structure of a status button dropdown
 
@@ -19,32 +21,43 @@ export default function StatusButton({ appStatus, newStatus, textClass }) {
         "ghosted": "dark",
     }
 
+
+    //using ref to remove the show in dropdownmenu which was stuck because the component didn't unmount
+    //later can find a better solution *
+    const dropdownMenuRef = useRef(null)
+
+    useEffect(() => {
+        if(dropdownMenuRef){
+            dropdownMenuRef.current.classList.remove("show")
+        }
+    },[status, dropdownMenuRef])
+
     return (
         <div className="btn-group">
             <button
                 type="button"
-                className={`btn btn-${statusMapColor[appStatus]} pe-none`}
+                className={`btn btn-${statusMapColor[status]} pe-none`}
             >
                 <div className={textClass}>
-                    {textFormat(appStatus)}
+                    {textFormat(status)}
                 </div>
             </button>
             <button
                 type="button"
-                className={`btn btn-${statusMapColor[appStatus]} dropdown-toggle dropdown-toggle-split`}
+                className={`btn btn-${statusMapColor[status]} dropdown-toggle dropdown-toggle-split`}
                 data-bs-toggle="dropdown" aria-expanded="false"
                 data-bs-auto-close="true"
             >
                 {/* not show on the page, but for reference */}
                 <span className="visually-hidden">Toggle Dropdown</span>
             </button>
-            <ul className={`dropdown-menu`}>
-                {Object.entries(statusMapColor).map(([status, color]) => {
-                    if (status !== appStatus) {
+            <ul className={`dropdown-menu`} ref={dropdownMenuRef}>
+                {Object.entries(statusMapColor).map(([statusLabel, color]) => {
+                    if (statusLabel !== status) {
                         return (
                             <StatusListButton
-                                status={status}
-                                newStatus={newStatus}
+                                status={statusLabel}
+                                setStatus={setStatus}
                                 color={color}
                                 textClass={textClass}
                             />

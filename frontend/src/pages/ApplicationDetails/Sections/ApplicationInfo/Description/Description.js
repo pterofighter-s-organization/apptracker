@@ -1,10 +1,10 @@
 //components
-import PreviewCollapse from "../../../components/Collapse/PreviewCollapse"
+import PreviewCollapse from "../../../../../components/PreviewCollapse/PreviewCollapse"
 
 //css
-import "./ApplicationDescription.css"
+import "./Description.css"
 
-export default function ApplicationDescription({ description }) {
+export default function Description({ description }) {
 
     //let dependency be id, description might not change at all sometimes, but id will
 

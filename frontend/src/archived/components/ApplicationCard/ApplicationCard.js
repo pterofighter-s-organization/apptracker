@@ -1,8 +1,10 @@
 //utils
-import { dateFormat } from "../../utils/date.js";
+import { useEffect, useState } from "react";
+
+import { dateFormat } from "../../../utils/date.js";
 
 //components
-import ApplicationCardPresentation from "./ApplicationCardPresentation.js";
+import ApplicationCardPresentation from "../../Card/ApplicationCardPresentation.js";
 
 export default function ApplicationCard({ application, updateApplication }) {
 
@@ -22,27 +24,30 @@ export default function ApplicationCard({ application, updateApplication }) {
     //     dateapplied: "2-3-2023",
     // }
 
-    function newStatus(status) {
+    const [status, setStatus] = useState(application.status)
 
-        if(status === "applied" && application.status === "interested"){
-            const today = dateFormat("today")
-            const newAppInfo = {
-                "status": status,
-                "dateApplied": today.dateFormatted,
+    //updates when status changed
+    useEffect(() => {
+        if (status !== application.status) {
+            if (status === "applied" && application.status === "interested") {
+                const today = dateFormat("today")
+                const newAppInfo = {
+                    "status": status,
+                    "dateApplied": today.dateFormatted,
+                }
+                updateApplication(application, newAppInfo)
+            } else {
+                const newAppInfo = {
+                    "status": status
+                }
+                updateApplication(application, newAppInfo)
             }
-            updateApplication(application, newAppInfo)
-        } else {
-            const newAppInfo = {
-                "status": status
-            }
-            updateApplication(application, newAppInfo)
         }
-    }
+    }, [status, application, updateApplication])
 
     const displayData = {
         id: application.id,
         dateEdited: application.dateEdited, //edit this later to (current date minus the date created or changed)
-        status: application.status,
         position: application.position,
         company: application.company,
         salary: application.salary,
@@ -55,7 +60,8 @@ export default function ApplicationCard({ application, updateApplication }) {
                 <>
                     <ApplicationCardPresentation
                         displayData={displayData}
-                        newStatus={newStatus}
+                        status={status}
+                        setStatus={setStatus}
                     />
                 </>
                 :

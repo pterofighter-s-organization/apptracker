@@ -7,7 +7,7 @@ import { findAllTasks } from "../../utils/task.js"
 //components
 import CategorizedApplicationList from "../../components/List/CategorizedApplicationList.js"
 import TaskTable from "../../components/TaskTable/TaskTable.js"
-import PreviewCollapse from "../../components/Collapse/PreviewCollapse.js"
+import PreviewCollapse from "../../components/PreviewCollapse/PreviewCollapse.js"
 
 //hooks
 import useApplicationsManager from "../../hooks/useApplicationsManager.js"

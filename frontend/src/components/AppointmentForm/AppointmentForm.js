@@ -5,7 +5,7 @@ import Textbox from "./components/Textbox"
 import Datebox from "./components/Datebox"
 import Timebox from "./components/Timebox"
 
-export default function AppointmentInput({ submitAppointment, fontSize }) {
+export default function AppointmentForm({ setAppointment, fontSize }) {
 
     //form
     //textbox -> mm-dd-yyyy -> hh:mm
@@ -42,7 +42,13 @@ export default function AppointmentInput({ submitAppointment, fontSize }) {
         }
 
         if (time.length > 0 && date.length > 0 && text.length > 0) {
-            submitAppointment((date + " " + time), text)
+
+            const appointment = {
+                title: text,
+                date: (date + " " + time),
+            }
+
+            setAppointment(appointment)
             //make a modal later * and clean up the code please
         }
     }
