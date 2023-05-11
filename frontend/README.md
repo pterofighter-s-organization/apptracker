@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# To use the frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    Go to frontend folder
+    - cd /apptracker/frontend 
+    
+    install the tools
+    - npm install
+        **If doesn't work, just install these**
+        - npm install bootstrap@5.3.0-alpha3
+        - npm i react-router-dom
+        - npm install moment
+        - npm i bootstrap-icons
+        - npm install jquery
 
-## Available Scripts
+    start it
+    - npm start
 
-In the project directory, you can run:
+# For v1 (In progress)
+    - made a dropdown button for changing status
+    - made a collapse blur to make sure there's no infinite scrolling
+    - made a resize window detection to automatically adjust the collapse
+    - made a formula to calculate if theres a need of collapse - based on how many cards it can display on that width
+    - task table collapse will automatically be gone if interviewing apps < 3
+    - cards sort from the most update to outdated
+    - tasks sort from the earliest to latest
+    - make measurements for calculating when to have preview collapses in dashboard (fully finish - shouldn't be edited)
+        - this is being replaced by something much more simplified and reliable, in learning.md
 
-### `npm start`
+    Dashboard fully finished (5/2/2023 5:51am)
+        (Task to do in making it better)
+        - can add the quantities of apps and tasks 
+        - make a toolstip or that small bubble to show that a status is updated
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+        Temp solutions (must implement)
+        - solution : make it show sections by sections / or make a button on the top right of the section to close
+    
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    Starting navbar fully finished (5/3/2023 1:00am)
 
-### `npm test`
+    Starting the app individual page finished (5/8/2023 5:00pm) to (5/10/2023 4:00am)
+        - clean up the code
+        - update title of the page in dashboard (finished)
+        - add a modal for the creating appointment
+        - add notes 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    Starting form (5/10/2023 10:00am)
 
-### `npm run build`
+    Individual App pages
+        Interview prep
+        - maybe dont need to do interview questions, just make them upload a pdf or a google link to their prep (finished)
+        - or a button saying they prep already
+        - add tasks for accepted apps
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# For v2 (After v1 finishes)
+    - history list of status updated (for individual app pages)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    Dashboard (v2)
+    - make tabs in dashboard for (apps, tasks, etc) instead of the version 1 ui (top-down collapse)
+    - the tasks could be on the bottom of the tabs or be one of the tabs
+    - make the create app button inside the app list after we start using tabs
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
