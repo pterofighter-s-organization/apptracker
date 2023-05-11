@@ -1,21 +1,35 @@
-from djongo import models
+# from djongo import models
+from django.db import models
 
 # Create your models here.
 class Users(models.Model):
+    user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
+    email = models.EmailField()
     password = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name
+    
+class Notes(models.Model):
+    note_id = models.AutoField(primary_key=True)
+    application_id = models.IntegerField()
+    title = models.CharField(max_length=255)
+    note = models.CharField(max_length=2048)
+
+    
 
 class Application(models.Model):
-    application_id = models.ObjectIdField()
-    user_id = models.ObjectIdField()
-    name = models.CharField(max_length=255)
+    application_id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField()
+    position = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    interview_preparation = models.CharField(max_length=255, blank=True, null=True)
+    resume_link = models.CharField(max_length=255, blank=True, null=True)
+    cover_letter_link = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=2048)
     status = models.CharField(max_length=255)
-    date = models.DateField()
-    salary = models.IntegerField()
+    date_applied = models.CharField(max_length=255, blank=True, null=True)
+    date_edited = models.CharField(max_length=255)
+    date_created = models.CharField(max_length=255)
+    salary = models.CharField(max_length=255)
     
-class notes(models.Model):
-    note_id = models.ObjectIdField()
-    application_id = models.ObjectIdField()
-    note = models.CharField(max_length=2048)
