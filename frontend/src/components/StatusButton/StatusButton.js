@@ -21,17 +21,17 @@ export default function StatusButton({ status, setStatus, textClass }) {
         "ghosted": "dark",
     }
 
-    //another solution is to make the list items here instead, then update it again with usememo*
+    //another solution is to make the list items here instead, then update it again with usememo* (NOT WORK)
 
     //using ref to remove the show in dropdownmenu which was stuck because the component didn't unmount
-    //later can find a better solution *
+    //this is the only solution after testing 
     const dropdownMenuRef = useRef(null)
 
     useEffect(() => {
-        if(dropdownMenuRef){
+        if (dropdownMenuRef) {
             dropdownMenuRef.current.classList.remove("show")
         }
-    },[status, dropdownMenuRef])
+    }, [status, dropdownMenuRef])
 
     return (
         <div className="btn-group">
@@ -70,3 +70,17 @@ export default function StatusButton({ status, setStatus, textClass }) {
         </div>
     )
 }
+
+//for testing purposes of the other solution
+/* <ul className="dropdown-menu">
+                {newStatuses.map((newStatus) => {
+                    return (
+                        <StatusListButton
+                            status={newStatus}
+                            setStatus={setStatus}
+                            color={statusMapColor[newStatus]}
+                            textClass={textClass}
+                        />
+                    )
+                })}
+            </ul> */
