@@ -9,6 +9,7 @@ import { findTasksOnApp } from '../../../../utils/task';
 
 export default function TaskInfoSection({ application, updateApplication }) {
 
+    //change this to tasks
     const [appointment, setAppointment] = useState(null)
 
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function TaskInfoSection({ application, updateApplication }) {
             />
             <TaskForm
                 setTask={setAppointment}
-                fontSize={"fs-6"}
+                fontSize={"fs-5"}
             />
         </div>
     )

@@ -42,6 +42,7 @@
         - update title of the page in dashboard (finished)
         - add a modal for the creating appointment
         - add notes 
+        - add shortcuts to different parts of the page
 
     Starting form (5/10/2023 10:00am)
 
