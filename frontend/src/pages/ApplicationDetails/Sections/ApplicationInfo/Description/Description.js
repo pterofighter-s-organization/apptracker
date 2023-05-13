@@ -6,7 +6,7 @@ import "./Description.css"
 
 export default function Description({ description }) {
 
-    //let dependency be id, description might not change at all sometimes, but id will
+    //let dependency be id, description might not change at all sometimes, but id will (not for now)
 
     return (
         <div className="d-flex flex-column bg-body-secondary w-100 p-4 fs-4">
@@ -15,6 +15,7 @@ export default function Description({ description }) {
                     Job description :
                 </div>
                 <hr />
+                {/* preview collapse component */}
                 <div style={{ position: "relative" }}>
                     <div
                         id="collapse-app-description"

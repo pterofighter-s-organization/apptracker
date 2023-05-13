@@ -3,7 +3,7 @@ import CoverLetterLink from "./components/CoverLetterLink"
 import InterviewPrepLink from "./components/InterviewPrepLink"
 import ResumeLink from "./components/ResumeLink"
 
-export default function LinksInfo({ interviewPrep, resume, coverLetter, status }) {
+export default function LinksInfo({ interviewPreparation, resume, coverLetter, status }) {
 
     const showInterviewInfo = status !== "applied" && status !== "interested"
     const showResumeCoverLetters = status !== "interested"
@@ -12,7 +12,7 @@ export default function LinksInfo({ interviewPrep, resume, coverLetter, status }
         <div className="d-flex flex-column gap-3 gap-md-4 gap-xl-4 bg-body-secondary p-4 w-100 fs-4">
             {showInterviewInfo ?
                 <InterviewPrepLink
-                    interviewPrep={interviewPrep}
+                    interviewPreparation={interviewPreparation}
                 />
                 :
                 <></>

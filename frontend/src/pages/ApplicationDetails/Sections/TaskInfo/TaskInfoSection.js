@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 
 //components
 import TaskTableInfo from "./components/TaskTableInfo";
-import TaskForm from "../../../../components/TaskForm/TaskForm"
+import TaskForm from "../../../../components/TaskForm/TaskForm.js";
 
 //utils
 import { findTasksOnApp } from '../../../../utils/task';
@@ -10,34 +10,31 @@ import { findTasksOnApp } from '../../../../utils/task';
 export default function TaskInfoSection({ application, updateApplication }) {
 
     //change this to tasks
-    const [appointment, setAppointment] = useState(null)
+    const [task, setTask] = useState(null)
 
     useEffect(() => {
-        if (appointment) {
-            const newAppointments = [...application.appointments, appointment]
+        if (task) {
+            const newTask = [...application.tasks, task]
             const newAppInfo = {
-                "appointments": newAppointments
+                "tasks": newTask
             }
             updateApplication(application, newAppInfo)
 
             //this is to ensure there's no unexpected behaviour such as spam request to backend
             //a little cleanup
-            setAppointment(null)
+            setTask(null)
         }
-    }, [appointment, application, updateApplication])
+    }, [task, application, updateApplication])
 
     const tasks = useMemo(() => {
         if (application) {
-            if (application.status === "interviewing") {
-                return findTasksOnApp(application)
-            }
-            return []
+            return findTasksOnApp(application)
         }
         return null
     }, [application])
 
     return (
-        <div className="d-flex flex-column gap-3" id="appointments">
+        <div className="d-flex flex-column gap-3" id="tasks">
             <div className="d-flex flex-column gap-0">
                 <div className='h2 text-nowrap'>
                     Application Tasks :
@@ -48,7 +45,7 @@ export default function TaskInfoSection({ application, updateApplication }) {
                 tasks={tasks}
             />
             <TaskForm
-                setTask={setAppointment}
+                setTask={setTask}
                 fontSize={"fs-5"}
             />
         </div>

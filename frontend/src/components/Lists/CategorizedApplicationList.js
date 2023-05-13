@@ -1,8 +1,11 @@
+import { useMemo } from "react"
+
 //components
 import ApplicationCard from "../ApplicationCard/ApplicationCard.js"
 
 //utils
 import { sortDates } from "../../utils/date.js"
+import { categorizeApplications } from "../../utils/application.js"
 
 export default function CategorizedApplicationList({ applications, updateApplication }) {
 
@@ -15,8 +18,13 @@ export default function CategorizedApplicationList({ applications, updateApplica
     //     "ghosted" : 5,
     // }
 
+    //categorize applications before displaying
+    const categorizedApps = useMemo(() => (
+        categorizeApplications(applications, "status")
+    ), [applications])
+
     //sorts the apps to the most updated one for each status
-    Object.entries(applications).forEach((apps) => {
+    Object.entries(categorizedApps).forEach((apps) => {
         apps[1].sort((a, b) => {
             //-1 because this method returns the earliest to latest and we need to flip it
             return (-1 * sortDates(a.dateEdited, b.dateEdited))
@@ -28,42 +36,42 @@ export default function CategorizedApplicationList({ applications, updateApplica
     //find a better way to show this * (later)
     return (
         <>
-            {applications.interviewing.map((app) => (
+            {categorizedApps.interviewing.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
                     updateApplication={updateApplication}
                 />
             ))}
-            {applications.applied.map((app) => (
+            {categorizedApps.applied.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
                     updateApplication={updateApplication}
                 />
             ))}
-            {applications.accepted.map((app) => (
+            {categorizedApps.accepted.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
                     updateApplication={updateApplication}
                 />
             ))}
-            {applications.interested.map((app) => (
+            {categorizedApps.interested.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
                     updateApplication={updateApplication}
                 />
             ))}
-            {applications.rejected.map((app) => (
+            {categorizedApps.rejected.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}
                     updateApplication={updateApplication}
                 />
             ))}
-            {applications.ghosted.map((app) => (
+            {categorizedApps.ghosted.map((app) => (
                 <ApplicationCard
                     key={app.id}
                     application={app}

@@ -68,6 +68,10 @@ export default function ApplicationCard({ application, updateApplication }) {
 
 }
 
+//card header - status
+//body - app info, title and company
+//footer - date updated
+
 // reference to application details
     // const card = {
     //     id: 1,

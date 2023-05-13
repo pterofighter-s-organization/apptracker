@@ -1,8 +1,8 @@
 
 
-export default function InterviewPrepLink({ interviewPrep }) {
+export default function InterviewPrepLink({ interviewPreparation }) {
 
-    const showLinkForPrep = interviewPrep && interviewPrep.length > 0
+    const showLinkForPrep = interviewPreparation && interviewPreparation.length > 0
 
     return (
         <div className="d-flex flex-row gap-3">
@@ -13,8 +13,8 @@ export default function InterviewPrepLink({ interviewPrep }) {
 
             {showLinkForPrep ?
                 <div className="text-dark-emphasis text-truncate">
-                    <a href={interviewPrep}>
-                        {interviewPrep}
+                    <a href={interviewPreparation}>
+                        {interviewPreparation}
                     </a>
                 </div>
                 :

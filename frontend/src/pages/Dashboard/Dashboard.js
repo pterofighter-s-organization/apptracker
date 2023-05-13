@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react"
 
 //utils
-import { categorizeApplications } from "../../utils/application.js"
 import { findAllTasks } from "../../utils/task.js"
 
 //components
@@ -22,7 +21,7 @@ export default function Dashboard() {
     useEffect(() => {
         document.title = 'Dashboard - Job Tracker App';
         return () => document.title = 'Job Tracker App';
-    },[])
+    }, [])
 
     const taskVh = 40
     const appsVh = 40
@@ -30,19 +29,14 @@ export default function Dashboard() {
     // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
     //avoid re-rendering
 
-    //categorize applications before displaying
-    const categorizedApps = useMemo(() => (
-        categorizeApplications(applications, "status")
-    ), [applications])
-
-    const tasks = useMemo(() => (
-        findAllTasks(categorizedApps.interviewing)
-    ), [categorizedApps.interviewing])
+    const tasks = useMemo(() => {
+        return findAllTasks(applications)
+    }, [applications])
 
     //end of (1)
 
     //debugging
-    // console.log(categorizedApps)
+    // console.log(applications)
 
     //loading
     // if(applications.length <= 0) {
@@ -52,7 +46,7 @@ export default function Dashboard() {
     //finish
     return (
         <div
-            className="d-flex flex-column gap-5 mt-4 mt-xl-0" 
+            className="d-flex flex-column gap-5 mt-4 mt-xl-0 w-100"
             style={{ padding: "1.25vw 2.5vw" }}
             id="dashboard"
         >
@@ -62,6 +56,8 @@ export default function Dashboard() {
             <div className="w-100 bg-secondary">
                 &emsp;
             </div> */}
+
+            {/* job application cards in list */}
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
                     <div className="h2">
@@ -84,7 +80,7 @@ export default function Dashboard() {
                             id="dashboard-apps"
                         >
                             <CategorizedApplicationList
-                                applications={categorizedApps}
+                                applications={applications}
                                 updateApplication={updateApplication}
                             />
                         </div>
@@ -101,6 +97,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
+            {/* task table */}
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
                     <div className="h2">
@@ -132,6 +129,7 @@ export default function Dashboard() {
                     />
                 </div>
             </div>
+
         </div>
     )
 }

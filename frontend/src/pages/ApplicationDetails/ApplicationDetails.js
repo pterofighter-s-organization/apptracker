@@ -11,6 +11,9 @@ import ApplicationInfoSection from './Sections/ApplicationInfo/ApplicationInfoSe
 import TaskInfoSection from './Sections/TaskInfo/TaskInfoSection';
 import AdditonalInfoSection from './Sections/AdditonalInfo/AdditonalInfoSection';
 
+//utils
+import { checkIfNeedTask } from '../../utils/application';
+
 export default function ApplicationDetails() {
 
     const { id } = useParams(); //get the id from the url
@@ -37,9 +40,10 @@ export default function ApplicationDetails() {
                     <ApplicationInfoSection
                         application={application}
                     />
-                    {application.status === "interviewing" || application.status === "accepted" ?
+                    {checkIfNeedTask(application.status) ?
                         <TaskInfoSection
                             application={application}
+                            updateApplication={updateApplication}
                         />
                         :
                         <></>

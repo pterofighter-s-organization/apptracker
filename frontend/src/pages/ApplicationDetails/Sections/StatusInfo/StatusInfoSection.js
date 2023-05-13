@@ -36,7 +36,7 @@ export default function StatusInfoSection({ application, updateApplication }) {
     //when status changes, we change whether the date should be shown
     useEffect(() => {
         setShowAppliedDate(application.status !== "interested")
-    }, [application])
+    }, [application.status])
 
     return (
         <div className="d-flex flex-column gap-lg-3">

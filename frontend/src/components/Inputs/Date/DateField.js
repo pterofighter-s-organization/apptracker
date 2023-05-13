@@ -1,34 +1,31 @@
+
 //inputs
-import Timebox from "./Timebox"
+import Datebox from "./Datebox"
 
-export default function TimeField(props) {
+export default function DateField(props) {
 
-    const { 
-        time,
+    const {
+        formData,
         setFormData,
-        errorMsgs,
+        errorMsg,
         fontSize,
         header,
         footer,
     } = props
-
-    function handleChange(newValue) {
-        setFormData(prevFormData => ({ ...prevFormData, "time": newValue }))
-    }
 
     return (
         <div className="d-flex flex-column gap-3">
             <div className={`${fontSize}`}>
                 {header}
             </div>
-            <Timebox
-                time={time}
-                handleChange={handleChange}
+            <Datebox
+                formData={formData}
+                setFormData={setFormData}
                 fontSize={fontSize}
             />
-            {errorMsgs && errorMsgs.length > 0 ?
+            {errorMsg.date && errorMsg.date.length > 0 ?
                 <div className={`blockquote-footer text-danger mt-1 ${fontSize}`}>
-                    {errorMsgs}
+                    {errorMsg.date}
                 </div>
                 :
                 <div className={`blockquote-footer mt-1 ${fontSize}`}>

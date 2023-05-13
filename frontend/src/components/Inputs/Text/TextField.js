@@ -5,31 +5,28 @@ export default function TextField(props) {
 
     //later add texthint, textitle, and width to make this an independent component*
     const {
-        text,
+        formData,
         setFormData,
         errorMsg,
         fontSize,
         header,
         footer,
+        fieldWidth,
     } = props
 
-    function handleChange(newValue) {
-        setFormData(prevFormData => ({ ...prevFormData, "text": newValue }))
-    }
-
     return (
-        <div className="d-flex flex-column gap-3" style={{ width: "800px", maxWidth: "100vw" }}>
+        <div className="d-flex flex-column gap-3" style={{ width: fieldWidth+"px", maxWidth: "100vw" }}>
             <div className={`${fontSize}`}>
                 {header}
             </div>
             <Textbox
-                text={text}
-                handleChange={handleChange}
+                formData={formData}
+                setFormData={setFormData}
                 fontSize={fontSize}
             />
-            {errorMsg && errorMsg.length > 0 ?
+            {errorMsg.text && errorMsg.text.length > 0 ?
                 <div className={`blockquote-footer text-danger mt-1 ${fontSize}`}>
-                    {errorMsg}
+                    {errorMsg.text}
                 </div>
                 :
                 <div className={`blockquote-footer mt-1 ${fontSize}`}>

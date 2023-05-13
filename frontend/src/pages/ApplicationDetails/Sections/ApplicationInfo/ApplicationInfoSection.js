@@ -6,7 +6,10 @@ import Description from "./Description/Description"
 export default function ApplicationInfoSection({ application }) {
 
     return (
-        <div className="d-flex flex-column gap-lg-3" id="interview-prep">
+        <div 
+            className="d-flex flex-column gap-lg-3" 
+            id="interview-preparation"
+        >
             <div className="d-flex flex-column gap-0">
                 <div className='h2 text-nowrap'>
                     Application Info :
@@ -21,7 +24,7 @@ export default function ApplicationInfoSection({ application }) {
                         company={application.company}
                     />
                     <LinksInfo
-                        interviewPrep={application.interviewPrep}
+                        interviewPreparation={application.interviewPreparation}
                         resume={application.resume}
                         coverLetter={application.coverLetter}
                         status={application.status}

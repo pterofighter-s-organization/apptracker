@@ -211,3 +211,20 @@ text={"Log out"}
         //because if the button doesn't dismount, it will be stuck because the eventlistener didn't get dismount
         // setApplication(null)
         // setTimeout(() => setApplication(res), 0.01)
+
+        // export function updateInterviewApp ( application ) {
+
+        //     //making sure every app that updated to interviewing gets correct data
+        
+        //     const tasks = "tasks"
+        //     const interviewPreparation = "interviewPreparation"
+        
+        //     if (application.status === "interviewing") {
+        //         if (!application[tasks]) {
+        //             application[tasks] = []
+        //         }
+        //         if (!application[interviewPreparation]) {
+        //             application[interviewPreparation] = ""
+        //         }
+        //     }
+        // }

@@ -5,10 +5,10 @@ import textValidator from '../Validators/textValidator';
 import dateValidator from '../Validators/dateValidator';
 import timeValidator from '../Validators/timeValidator';
 
-//fields
-import TextField from './Fields/Text/TextField';
-import DateField from './Fields/Date/DateField';
-import TimeField from './Fields/Time/TimeField';
+//input components
+import TextField from '../../../Inputs/Text/TextField';
+import DateField from '../../../Inputs/Date/DateField';
+import TimeField from '../../../Inputs/Time/TimeField';
 
 export default function TaskFormFields({ setTask, fontSize }) {
 
@@ -17,8 +17,11 @@ export default function TaskFormFields({ setTask, fontSize }) {
 
     const [formData, setFormData] = useState({
         "text": "",
-        "date": "",
-        "time": "",
+        "month": "",
+        "day": "",
+        "year": "",
+        "hour": "",
+        "min": "",
     })
 
     const [errorMsgs, setErrorMsgs] = useState({
@@ -29,8 +32,11 @@ export default function TaskFormFields({ setTask, fontSize }) {
 
     function handleSubmittedForm() {
 
-        const timeCheck = timeValidator(formData.time, setErrorMsgs)
-        const dateCheck = dateValidator(formData.date, setErrorMsgs)
+        const time = formData.hour + ":" + formData.min + ":00"
+        const date = formData.month + "-" + formData.day + "-" + formData.year
+
+        const timeCheck = timeValidator(time, setErrorMsgs)
+        const dateCheck = dateValidator(date, setErrorMsgs)
         const textCheck = textValidator(formData.text, setErrorMsgs)
 
         if (timeCheck && dateCheck && textCheck) {
@@ -38,7 +44,7 @@ export default function TaskFormFields({ setTask, fontSize }) {
             //make a new task
             const newTask = {
                 title: formData.text,
-                date: (formData.date + " " + formData.time),
+                date: (date + " " + time),
             }
 
             setTask(newTask)
@@ -55,25 +61,26 @@ export default function TaskFormFields({ setTask, fontSize }) {
         >
             <div className="d-flex flex-wrap gap-3 gap-sm-4">
                 <TextField
-                    text={formData.text}
+                    formData={formData}
                     setFormData={setFormData}
-                    errorMsg={errorMsgs.text}
+                    errorMsg={errorMsgs}
                     fontSize={fontSize}
+                    fieldWidth={800} //px
                     header={"Task title *"}
                     footer={"Enter the name for your task"}
                 />
                 <DateField
-                    date={formData.date}
+                    formData={formData}
                     setFormData={setFormData}
-                    errorMsg={errorMsgs.date}
+                    errorMsg={errorMsgs}
                     fontSize={fontSize}
                     header={"Date of task *"}
                     footer={"Select in (MM DD YYYY)"}
                 />
                 <TimeField
-                    time={formData.time}
+                    formData={formData}
                     setFormData={setFormData}
-                    errorMsgs={errorMsgs.time}
+                    errorMsgs={errorMsgs}
                     fontSize={fontSize}
                     header={"Time *"}
                     footer={"24 hr format (hh:mm)"}

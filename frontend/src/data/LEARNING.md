@@ -25,3 +25,5 @@ new reference meaning a new address for that new object
 
 <pre> is for displaying multiline string
 <textarea> is for inputting multiline string
+
+on usememo, it works if you only call the specific value of the object
