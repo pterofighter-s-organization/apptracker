@@ -1,6 +1,6 @@
 //utils
 import { findTimeDifference } from "./time.js"
-import { sortDates, validateDate } from "./date.js"
+import { sortDates, validateDateTime } from "./date.js"
 import { checkIfNeedTask } from "./application.js"
 import { textFormat } from "./text.js"
 
@@ -75,7 +75,7 @@ export function findTasksOnApp(application) {
     //finding some of the major task the user needs to finish
     //upload resume, upload the time you applied to this application
     if (application.status !== "interested") {
-        if (!validateDate(application.dateApplied)) {
+        if (!validateDateTime(application.dateApplied)) {
             tasks.push(
                 {
                     id: id,

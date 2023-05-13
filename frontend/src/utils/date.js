@@ -1,3 +1,4 @@
+import { validateTime } from './time'
 
 const moment = require('moment')
 
@@ -51,6 +52,17 @@ export function validateDate(dateString) {
     // ^ = starting pt, \d is int, {n} is how many of them, - is just specifying it is a date
 
     return patternOne.test(dateString) || patternTwo.test(dateString) || patternThree.test(dateString) || patternFour.test(dateString)
+}
+
+export function validateDateTime(dateTimeString) {
+
+    const dateTimeObj = dateTimeString.split(" ")
+    const date = dateTimeObj[0]
+    const time = dateTimeObj[1]
+
+    console.log(dateTimeObj)
+
+    return validateDate(date) && validateTime(time)
 }
 
 export function sortDates(date1, date2) {

@@ -39,18 +39,18 @@ export default function StatusInfoSection({ application, updateApplication }) {
     }, [application.status])
 
     return (
-        <div className="d-flex flex-column gap-lg-3">
+        <div className="d-flex flex-column gap-lg-3 fs-5">
 
             {/* the title of this section */}
             <div className="d-flex flex-column gap-0">
-                <div className='h2 text-nowrap'>
+                <div className='h3 text-nowrap'>
                     Status Info :
                 </div>
                 <hr className='w-100' />
             </div>
 
             {/* the parts in this section */}
-            <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 align-items-center bg-body-secondary p-4 fs-4">
+            <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 align-items-center bg-body-secondary p-4">
                 <StatusChange
                     status={status}
                     setStatus={setStatus}

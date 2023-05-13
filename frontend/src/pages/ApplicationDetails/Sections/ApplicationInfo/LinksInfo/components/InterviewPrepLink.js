@@ -19,7 +19,7 @@ export default function InterviewPrepLink({ interviewPreparation }) {
                 </div>
                 :
                 <div className="text-dark-emphasis">
-                    Provide a doc link
+                    No prep doc link
                 </div>
             }
         </div>

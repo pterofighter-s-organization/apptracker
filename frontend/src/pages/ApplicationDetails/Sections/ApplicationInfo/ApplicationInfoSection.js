@@ -7,11 +7,11 @@ export default function ApplicationInfoSection({ application }) {
 
     return (
         <div 
-            className="d-flex flex-column gap-lg-3" 
+            className="d-flex flex-column gap-lg-3 fs-5" 
             id="interview-preparation"
         >
             <div className="d-flex flex-column gap-0">
-                <div className='h2 text-nowrap'>
+                <div className='h3 text-nowrap'>
                     Application Info :
                 </div>
                 <hr className='w-100' />

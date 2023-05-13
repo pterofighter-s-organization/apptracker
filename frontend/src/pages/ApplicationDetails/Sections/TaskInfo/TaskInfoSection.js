@@ -36,7 +36,7 @@ export default function TaskInfoSection({ application, updateApplication }) {
     return (
         <div className="d-flex flex-column gap-3" id="tasks">
             <div className="d-flex flex-column gap-0">
-                <div className='h2 text-nowrap'>
+                <div className='h3 text-nowrap'>
                     Application Tasks :
                 </div>
                 <hr className='w-100' />

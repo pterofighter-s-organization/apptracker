@@ -17,8 +17,8 @@ export default function CoverLetterLink({ coverLetter }) {
                     </a>
                 </div>
                 :
-                <div className="text-dark-emphasis text-truncate">
-                    Provide a cover letter link
+                <div className="text-dark-emphasis">
+                    No cover letter link
                 </div>
             }
         </div>

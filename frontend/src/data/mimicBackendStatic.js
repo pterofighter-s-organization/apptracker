@@ -336,7 +336,7 @@ let applications = [
         coverLetter: "",
         description: ``,
         status: "interviewing",
-        dateApplied: "2-10-2023 9:30",
+        dateApplied: "2-10-2023 09:30",
         dateEdited: "4-29-2023 10:30",
         dateCreated: "4-29-2023 10:30",
         salary: "70k-120k",
@@ -376,7 +376,7 @@ let applications = [
         Ability to work in a fast-paced, deadline-driven environment
         Positive attitude and willingness to learn`,
         status: "applied",
-        dateApplied: "2-10-2023 9:30",
+        dateApplied: "2-10-2023 09:30",
         dateEdited: "3-9-2023 10:30",
         dateCreated: "3-1-2023 15:30",
         salary: "80k-100k",

@@ -16,8 +16,8 @@ export default function ResumeLink({ resume }) {
                     </a>
                 </div>
                 :
-                <div className="text-dark-emphasis text-truncate">
-                    Provide resume doc link
+                <div className="text-dark-emphasis">
+                    No resume link
                 </div>
             }
         </div>

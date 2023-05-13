@@ -87,8 +87,9 @@ export function debounce(func, delay) {
 
 export function validateTime(timeString) {
 
-    const pattern = /^\d{2}:\d{2}:\d{2}$/;
+    const patternOne = /^\d{2}:\d{2}:\d{2}$/;
+    const patternTwo = /^\d{2}:\d{2}$/;
     // ^ = starting pt, \d is int, {n} is how many of them, : is just specifying it is a time, $ indicates the end
 
-    return pattern.test(timeString)
+    return patternOne.test(timeString) || patternTwo.test(timeString)
 }

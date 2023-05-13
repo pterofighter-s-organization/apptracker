@@ -60,7 +60,7 @@ export default function Dashboard() {
             {/* job application cards in list */}
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
-                    <div className="h2">
+                    <div className="h3">
                         Your Job Applications
                     </div>
                     {/* <h1 className="text-nowrap">
@@ -100,7 +100,7 @@ export default function Dashboard() {
             {/* task table */}
             <div className="d-flex flex-column gap-2">
                 <div className="d-flex flex-column gap-1">
-                    <div className="h2">
+                    <div className="h3">
                         Upcoming Tasks
                     </div>
                     <hr className="" style={{}} />
