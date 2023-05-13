@@ -4,6 +4,7 @@ import { useState } from 'react';
 import textValidator from '../Validators/textValidator';
 import dateValidator from '../Validators/dateValidator';
 import timeValidator from '../Validators/timeValidator';
+import dateTimeValidator from '../Validators/dateTimeValidator';
 
 //input components
 import TextField from '../../../Inputs/Text/TextField';
@@ -41,13 +42,20 @@ export default function TaskFormFields({ setTask, fontSize }) {
 
         if (timeCheck && dateCheck && textCheck) {
 
-            //make a new task
-            const newTask = {
-                title: formData.text,
-                date: (date + " " + time),
-            }
+            const dateTime = date + " " + time
+            const dateTimeCheck = dateTimeValidator(dateTime, setErrorMsgs)
 
-            setTask(newTask)
+            if (dateTimeCheck) {
+                //make a new task
+
+                console.log("test2")
+                const newTask = {
+                    title: formData.text,
+                    date: dateTime,
+                }
+
+                setTask(newTask)
+            }
         }
     }
 

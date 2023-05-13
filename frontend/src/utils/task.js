@@ -50,7 +50,7 @@ export function findTasksOnApp(application) {
                 company: company,
                 priority: 0,
                 type: "tasks",
-                title: "Track your next upcoming interview or task",
+                title: "Track your next upcoming interview or related task",
                 date: today,
                 timeDue: today,
             }
@@ -95,7 +95,7 @@ export function findTasksOnApp(application) {
                     position: position,
                     company: company,
                     priority: 1,
-                    type: "dateApplied",
+                    type: "resume",
                     title: "Insert the link for your resume",
                     date: today,
                     timeDue: today,

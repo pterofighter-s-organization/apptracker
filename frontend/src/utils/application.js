@@ -82,6 +82,8 @@ export function updateAppInfo (application, newAppInfo) {
 
     newApplication.dateEdited = today.dateFormatted
 
+    console.log(newApplication)
+
     //add a history list of when the status was changed *
     //for ex: an array of the (time edited, status updated to)
 

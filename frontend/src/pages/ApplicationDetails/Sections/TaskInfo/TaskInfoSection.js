@@ -46,7 +46,7 @@ export default function TaskInfoSection({ application, updateApplication }) {
             />
             <TaskForm
                 setTask={setTask}
-                fontSize={"fs-5"}
+                fontSize={"fs-6"}
             />
         </div>
     )

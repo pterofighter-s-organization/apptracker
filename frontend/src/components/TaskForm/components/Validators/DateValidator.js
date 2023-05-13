@@ -14,6 +14,7 @@ export default function dateValidator(date, setErrorMsgs) {
     } else {
         setErrorMsgs(prevErrorMsgs => ({...prevErrorMsgs, "date": ""}))
     }
+    
 
     //if it fits the requirement
     return check

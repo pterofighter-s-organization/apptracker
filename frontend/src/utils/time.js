@@ -18,6 +18,7 @@ export function findTimeDifference(start, end) {
     const minutesLeft = difference.minutes();
     const secondsLeft = difference.seconds();
 
+    //all representations of the difference 1 day = 24 hours left etc.
     return {
         yearsLeft,
         monthsLeft,
@@ -68,6 +69,8 @@ export function timerDisplay(timeDiffObj) {
 //the delay function of when an action is finished
 //ex: after 250 secs of delay, we will do func {whatever you put} will be the args
 export function debounce(func, delay) {
+
+    //this is an object to fit the event target
 
     //example on how to use this function
     // window.onresize = debounce(() => {

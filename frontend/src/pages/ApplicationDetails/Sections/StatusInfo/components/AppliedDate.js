@@ -6,7 +6,7 @@ export default function AppliedDate({ dateApplied }) {
     const showDateApplied = dateApplied && dateApplied.length > 0
 
     return (
-        <div className="d-flex flex-row gap-3">
+        <div className="d-flex flex-row gap-3" id="dateApplied">
             <div className="">
                 Applied :
             </div>

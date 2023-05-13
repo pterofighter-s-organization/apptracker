@@ -47,9 +47,10 @@ export function validateDate(dateString) {
     const patternOne = /^\d{2}-\d{2}-\d{4}$/
     const patternTwo = /^\d{1}-\d{2}-\d{4}$/
     const patternThree = /^\d{2}-\d{1}-\d{4}$/
+    const patternFour = /^\d{1}-\d{1}-\d{4}$/
     // ^ = starting pt, \d is int, {n} is how many of them, - is just specifying it is a date
 
-    return patternOne.test(dateString) || patternTwo.test(dateString) || patternThree.test(dateString)
+    return patternOne.test(dateString) || patternTwo.test(dateString) || patternThree.test(dateString) || patternFour.test(dateString)
 }
 
 export function sortDates(date1, date2) {

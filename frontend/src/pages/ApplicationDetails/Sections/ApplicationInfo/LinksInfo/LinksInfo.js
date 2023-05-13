@@ -28,7 +28,7 @@ export default function LinksInfo({ interviewPreparation, resume, coverLetter, s
                 </>
                 :
                 <>
-                    <div className="d-flex flex-row gap-3">
+                    <div className="d-flex flex-row gap-3" id="resume">
                         <div className="text-nowrap">
                             Resume :
                         </div>

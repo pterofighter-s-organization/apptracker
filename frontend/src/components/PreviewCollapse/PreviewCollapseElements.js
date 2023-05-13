@@ -11,7 +11,7 @@ export default function PreviewCollapseElements({ showCollapseElements, showRema
         <>
             {showCollapseElements ?
                 <>
-                    <div className="d-flex justify-content-center mt-4">
+                    <div className="d-flex justify-content-center my-4">
                         <button
                             className="btn btn-primary p-3 px-5" type="button" onClick={(e) => {
                                 e.preventDefault()
