@@ -11,6 +11,7 @@ export default function TaskInfoSection({ application, updateApplication }) {
 
     //change this to tasks
     const [task, setTask] = useState(null)
+    const [showSuccessModal, setShowSuccessModal] = useState(false)
 
     useEffect(() => {
         if (task) {
@@ -18,7 +19,8 @@ export default function TaskInfoSection({ application, updateApplication }) {
             const newAppInfo = {
                 "tasks": newTask
             }
-            updateApplication(application, newAppInfo)
+
+            setShowSuccessModal(updateApplication(application, newAppInfo))
 
             //this is to ensure there's no unexpected behaviour such as spam request to backend
             //a little cleanup
@@ -32,6 +34,12 @@ export default function TaskInfoSection({ application, updateApplication }) {
         }
         return null
     }, [application])
+
+    function closeModal() {
+        setTimeout(() => {
+            setShowSuccessModal(false)
+        }, 200)
+    }
 
     return (
         <div className="d-flex flex-column gap-3" id="tasks">
@@ -47,6 +55,8 @@ export default function TaskInfoSection({ application, updateApplication }) {
             <TaskForm
                 setTask={setTask}
                 fontSize={"fs-6"}
+                closeModal={closeModal}
+                showSuccessModal={showSuccessModal}
             />
         </div>
     )

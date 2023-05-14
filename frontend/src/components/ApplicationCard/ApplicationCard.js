@@ -32,7 +32,9 @@ export default function ApplicationCard({ application, updateApplication }) {
                     "status": status,
                     "dateApplied": today.dateFormatted,
                 }
+
                 updateApplication(application, newAppInfo)
+                
             } else {
                 const newAppInfo = {
                     "status": status

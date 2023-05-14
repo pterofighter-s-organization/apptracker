@@ -1,7 +1,14 @@
 //sub-components
 import TaskFormFields from "./components/FormFields/TaskFormFields";
 
-export default function TaskForm({ setTask, fontSize }) {
+export default function TaskForm(props) {
+
+    const {
+        setTask,
+        fontSize,
+        showSuccessModal,
+        closeModal,
+    } = props
 
     //the outside layer and dealing with errors when it happens
 
@@ -20,6 +27,8 @@ export default function TaskForm({ setTask, fontSize }) {
                 <TaskFormFields
                     setTask={setTask}
                     fontSize={fontSize}
+                    showSuccessModal={showSuccessModal}
+                    closeModal={closeModal}
                 />
             </div>
         </div>

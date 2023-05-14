@@ -1,5 +1,5 @@
 //inputs
-import Timebox from "./Timebox"
+import Timebox from "./components/Timebox"
 
 export default function TimeField(props) {
 

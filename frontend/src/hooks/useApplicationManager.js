@@ -31,8 +31,13 @@ export default function useApplicationManager(id) {
 
     function updateApplication(app, newAppInfo) {
 
-        const res = updateAppInfo(app, newAppInfo)
-        setApplication(res)
+        try{
+            setApplication(updateAppInfo(app, newAppInfo))
+            return true
+        }catch(err){
+            console.log(err)
+            return false
+        }
         // setChange(change ? 0 : 1)
     }
 

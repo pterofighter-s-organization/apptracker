@@ -14,7 +14,14 @@ import TimeField from '../../../Inputs/Time/TimeField';
 //modal components
 import SubmissionModal from '../../../Modals/SubmissionModal';
 
-export default function TaskFormFields({ setTask, fontSize }) {
+export default function TaskFormFields(props) {
+
+    const { 
+        setTask, 
+        fontSize, 
+        showSuccessModal, 
+        closeModal 
+    } = props
 
     //form
     //textbox -> mm-dd-yyyy -> hh:mm
@@ -35,7 +42,6 @@ export default function TaskFormFields({ setTask, fontSize }) {
         "time": ""
     })
 
-    const [showSuccessModal, setShowSuccessModal] = useState(false)
     const modalId = "taskFormModal"
 
     function handleSubmittedForm() {
@@ -61,15 +67,8 @@ export default function TaskFormFields({ setTask, fontSize }) {
                 }
 
                 setTask(newTask)
-                setShowSuccessModal(true)
             }
         }
-    }
-
-    function closeModal() {
-        setTimeout(() => {
-            setShowSuccessModal(false)
-        }, 200)
     }
 
     return (
@@ -132,7 +131,7 @@ export default function TaskFormFields({ setTask, fontSize }) {
                 :
                 <SubmissionModal
                     header={"Warning!"}
-                    message={"Task failed to add. Check error fields and fix them"}
+                    message={"Task failed to add! Check error fields and fix them"}
                     closeMessage={"Close"}
                     closeModal={closeModal}
                     id={modalId}

@@ -1,4 +1,4 @@
-import { dateFormat, findCorrectMomentObj } from '../../../utils/date';
+import { dateFormat, findCorrectMomentObj } from '../../../../utils/date';
 
 const dateOfTodayObj = dateFormat("today").date.split("-")
 

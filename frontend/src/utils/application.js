@@ -90,13 +90,5 @@ export function updateAppInfo (application, newAppInfo) {
     //up here is the backend update (code later) PUT THIS TALKING WITH BACKEND CODE TO API.JS (IMPORTANT)
     //mimic backend code (replace later)
     //this is a backend response
-    let res = null
-    try {
-        res = updateApp(newApplication, id)
-    } catch (err) {
-        console.log(err)
-        alert(err)
-    }
-
-    return res
+    return updateApp(newApplication, id)
 }

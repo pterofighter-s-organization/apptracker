@@ -1,5 +1,5 @@
 
-export default function TaskHeader() {
+export default function TaskTableHeader() {
 
     const headerPadding = "p-4"
 
