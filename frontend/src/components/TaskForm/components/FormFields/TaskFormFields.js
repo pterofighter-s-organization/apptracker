@@ -10,7 +10,9 @@ import dateTimeValidator from '../Validators/dateTimeValidator';
 import TextField from '../../../Inputs/Text/TextField';
 import DateField from '../../../Inputs/Date/DateField';
 import TimeField from '../../../Inputs/Time/TimeField';
-import SubmittedModal from '../../../Modals/SubmittedModal';
+
+//modal components
+import SubmissionModal from '../../../Modals/SubmissionModal';
 
 export default function TaskFormFields({ setTask, fontSize }) {
 
@@ -33,7 +35,8 @@ export default function TaskFormFields({ setTask, fontSize }) {
         "time": ""
     })
 
-    const [modalStatus, setModalStatus] = useState(false)
+    const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const modalId = "taskFormModal"
 
     function handleSubmittedForm() {
 
@@ -58,9 +61,15 @@ export default function TaskFormFields({ setTask, fontSize }) {
                 }
 
                 setTask(newTask)
-                setModalStatus(true)
+                setShowSuccessModal(true)
             }
         }
+    }
+
+    function closeModal() {
+        setTimeout(() => {
+            setShowSuccessModal(false)
+        }, 200)
     }
 
     return (
@@ -103,15 +112,34 @@ export default function TaskFormFields({ setTask, fontSize }) {
                         footer={"24 hr format (hh:mm)"}
                     />
                 </div>
-                <button  
-                    className={`btn btn-primary p-3 ${fontSize}`} 
+                <button
+                    className={`btn btn-primary p-3 ${fontSize}`}
                     type="submit"
-                    data-bs-toggle="modal" data-bs-target="#taskFormModal"
+                    data-bs-toggle="modal" data-bs-target={"#" + modalId}
                 >
                     Submit
                 </button>
             </form>
-            <SubmittedModal
+
+            {showSuccessModal ?
+                <SubmissionModal
+                    header={"Successful!"}
+                    message={"New task has been added!"}
+                    closeMessage={"Close"}
+                    closeModal={closeModal}
+                    id={modalId}
+                />
+                :
+                <SubmissionModal
+                    header={"Warning!"}
+                    message={"Task failed to add. Check error fields and fix them"}
+                    closeMessage={"Close"}
+                    closeModal={closeModal}
+                    id={modalId}
+                />
+            }
+
+            {/* <SubmittedModal
                 link={""}
                 linkButtonLabel={""}
                 showSecondButton={false}
@@ -120,7 +148,7 @@ export default function TaskFormFields({ setTask, fontSize }) {
                 id={"taskFormModal"}
                 errorMsg={"Task failed to add, check error fields."}
                 successMsg={"New task has been added!"}
-            />
+            /> */}
         </>
     )
 }

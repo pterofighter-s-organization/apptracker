@@ -26,7 +26,9 @@ export default function SubmittedModal(props) {
                     {status ?
                         <>
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel">Successful!</h1>
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                    Successful!
+                                </h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={(e) => resetStatus(e)}></button>
                             </div>
                             <div className="modal-body">
@@ -36,7 +38,9 @@ export default function SubmittedModal(props) {
                         :
                         <>
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel">Unsuccessful</h1>
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                    Warning!
+                                </h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={(e) => resetStatus(e)}></button>
                             </div>
                             <div className="modal-body">
