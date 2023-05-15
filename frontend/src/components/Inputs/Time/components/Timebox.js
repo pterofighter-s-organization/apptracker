@@ -1,5 +1,5 @@
 //helpers
-import { inputHourValues, inputMinValues } from "./TimeInputHelper"
+import { inputHourValues, inputMinValues } from "./TimeInputInitializer"
 
 export default function Timebox(props) {
 

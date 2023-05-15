@@ -24,6 +24,8 @@ export default function useApplicationManager(id) {
             //remove loading state here
             console.log(err)
         }
+
+        console.log("test")
         //or remove loading here
         setApplication(res)
 

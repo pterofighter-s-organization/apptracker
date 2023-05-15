@@ -1,13 +1,16 @@
 
 
-export default function Textbox(props) {
+
+
+export default function DescriptionBox(props) {
 
     const {
         formData,
         setFormData,
         fontSize,
-        label
     } = props
+
+    const label = "description"
 
     function changeTextInput(event) {
         // console.log(event.target.value);
@@ -17,13 +20,13 @@ export default function Textbox(props) {
     }
 
     return (
-        <>
-            <input 
-                type="text" 
-                value={formData[label]} 
-                className={`form-control p-3 bg-body ${fontSize}`} 
-                onChange={(e) => changeTextInput(e)} 
-            />
-        </>
+        <textarea
+            value={formData[label]}
+            className={`form-text-area p-3 bg-body ${fontSize}`}
+            onChange={(e) => {
+                changeTextInput(e)
+            }}
+        >
+        </textarea>
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 //components
-import StatusListButton from "./StatusListButton.js";
+import StatusListButton from "./components/StatusListButton.js";
 
 //utils
 import { textFormat } from "../../utils/text.js";

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 //helpers
-import { inputDayValues, inputMonthValues, inputYearValues } from './DateInputHelper';
+import { inputDayValues, inputMonthValues, inputYearValues } from './DateInputInitializer';
 
 export default function Datebox(props) {
 
