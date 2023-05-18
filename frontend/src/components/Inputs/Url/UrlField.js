@@ -1,9 +1,8 @@
-//inputs
-import Textbox from "./components/Textbox"
+//components
+import Urlbox from "./components/Urlbox";
 
-export default function TextField(props) {
+export default function UrlField(props) {
 
-    //later add texthint, textitle, and width to make this an independent component*
     /* there is label, width changes on textfield for multiuse */
     const {
         formData,
@@ -23,7 +22,7 @@ export default function TextField(props) {
             <div className={`${fontSize}`}>
                 {header}
             </div>
-            <Textbox
+            <Urlbox
                 formData={formData}
                 setFormData={setFormData}
                 fontSize={fontSize}

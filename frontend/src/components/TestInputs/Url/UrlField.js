@@ -1,43 +1,38 @@
-//inputs
-import Textbox from "./components/Textbox"
+//components
+import Urlbox from "./components/UrlBox";
 
-export default function TextField(props) {
+export default function UrlField(props) {
 
-    //later add texthint, textitle, and width to make this an independent component*
-    /* there is label, width changes on textfield for multiuse */
     const {
         formData,
         setFormData,
-        errorMsg,
+        label,
         fontSize,
         header,
         footer,
-        width,
-        minWidth,
-        label,
-    } = props
+        errorMsgs
+    } = props;
 
-    //making sure the text box at least 680px wide
     return (
-        <div className="d-flex flex-column gap-3" style={{ minWidth: minWidth, width: width, maxWidth: "100vw" }}>
+        <>
             <div className={`${fontSize}`}>
                 {header}
             </div>
-            <Textbox
+            <Urlbox
                 formData={formData}
                 setFormData={setFormData}
                 fontSize={fontSize}
                 label={label}
             />
-            {errorMsg[label] && errorMsg[label].length > 0 ?
+            {errorMsgs.hasOwnProperty(label) && errorMsgs[label] && errorMsgs[label].length > 0 ?
                 <div className={`blockquote-footer text-danger mt-1 ${fontSize}`}>
-                    {errorMsg.text}
+                    {errorMsgs[label]}
                 </div>
                 :
                 <div className={`blockquote-footer mt-1 ${fontSize}`}>
                     {footer}
                 </div>
             }
-        </div>
+        </>
     )
 }

@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import useApplicationManager from '../../hooks/useApplicationManager';
 import { useEffect, useState } from 'react';
 import { dateTimeInitializer } from './helpers/Initializers';
+import ApplicationInfoFields from './components/FormFields/ApplicationInfo/ApplicationInfoFields';
+import StatusInfoFields from './components/FormFields/StatusInfo/StatusInfoFields';
 
 export default function ApplicationEditForm() {
 
@@ -83,6 +85,7 @@ export default function ApplicationEditForm() {
             })
         }
     }, [application])
+    
 
     return (
         <>
@@ -92,8 +95,24 @@ export default function ApplicationEditForm() {
                     style={{ padding: "1.25vw 2.5vw" }}
                     id={"application" + application.id}
                 >
-
-
+                    <StatusInfoFields
+                        dateAppliedData={dateTimeApplied}
+                        setDateAppliedData={setDateTimeApplied}
+                        dateCreatedData={dateTimeCreated}
+                        setDateCreatedData={setDateTimeCreated}
+                        fontSize={"fs-6"}
+                        errorMsgs={errorMsgs}
+                        application={application}
+                        updateApplication={updateApplication}
+                    />
+                    <ApplicationInfoFields
+                        linkData={linksInfo}
+                        setLinkData={setLinksInfo}
+                        appData={applicationInfo}
+                        setAppData={setApplicationInfo}
+                        fontSize={"fs-6"}
+                        errorMsgs={errorMsgs}
+                    />
                 </div>
                 :
                 <>

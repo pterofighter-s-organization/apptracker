@@ -50,14 +50,13 @@ export default function SubmissionLinkModal(props) {
                             {closeMessage}
                         </button>
                         <Link
-                            to={link}
-                            className="btn btn-primary px-3 py-2"
                             onClick={
                                 (e) => {
-                                    e.preventDefault()
                                     closeModal()
                                 }
                             }
+                            to={link}
+                            className="btn btn-primary px-3 py-2"
                         >
                             <div className="">
                                 {buttonLinkLabel}

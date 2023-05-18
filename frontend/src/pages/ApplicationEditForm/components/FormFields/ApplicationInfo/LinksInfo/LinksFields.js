@@ -1,7 +1,7 @@
 //input components
-import TextField from '../../../../../../components/Inputs/Text/TextField';
+import UrlField from '../../../../../../components/Inputs/Url/UrlField';
 
-export default function NamesField(props) {
+export default function LinksField(props) {
 
     const {
         formData,
@@ -11,44 +11,44 @@ export default function NamesField(props) {
     } = props
 
     return (
-        <div className="d-flex flex-column bg-body-secondary w-100 p-4">
+        <div className="d-flex flex-column gap-1 bg-body-secondary w-100 p-4">
             <div className="">
-                Job Information :
+                Link to documents used :
             </div>
             <hr/>
             <div className="d-flex flex-wrap gap-4">
-                <TextField
+                <UrlField
                     formData={formData}
                     setFormData={setFormData}
                     errorMsg={errorMsgs}
                     fontSize={fontSize}
                     minWidth={"100%"} 
                     width={"100%"} 
-                    label={"position"}
-                    header={"Position applied *"}
-                    footer={"Ex. Software Engineer"}
+                    label={"resume"}
+                    header={"Resume link *"}
+                    footer={"Insert the url to the doc"}
                 />
-                <TextField
+                <UrlField
                     formData={formData}
                     setFormData={setFormData}
                     errorMsg={errorMsgs}
                     fontSize={fontSize}
                     minWidth={"100%"} 
                     width={"100%"} 
-                    label={"company"}
-                    header={"Company applied *"}
-                    footer={"Ex. Google, Amazon etc."}
+                    label={"coverLetter"}
+                    header={"Cover letter link *"}
+                    footer={"Insert the url to the doc"}
                 />
-                <TextField
+                <UrlField
                     formData={formData}
                     setFormData={setFormData}
                     errorMsg={errorMsgs}
                     fontSize={fontSize}
-                    minWidth={"25%"} 
-                    width={"250px"} 
-                    label={"salary"}
-                    header={"Salary Range *"}
-                    footer={"Ex. 90k-120k"}
+                    minWidth={"100%"} 
+                    width={"100%"} 
+                    label={"interviewPreparation"}
+                    header={"Interview Preparation link *"}
+                    footer={"Insert the url to the doc"}
                 />
             </div>
         </div>

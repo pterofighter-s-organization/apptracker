@@ -21,8 +21,8 @@ export default function TaskInfo(props) {
                 setFormData={setFormData}
                 errorMsg={errorMsgs}
                 fontSize={fontSize}
-                minWidthInVw={40} //min vw
-                widthInPx={680} // px
+                minWidth={"40vw"}
+                width={"680px"}
                 label={"text"}
                 header={"Task title *"}
                 footer={"Enter the name for your task"}

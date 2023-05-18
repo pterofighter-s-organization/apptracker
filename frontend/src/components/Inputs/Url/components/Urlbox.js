@@ -1,6 +1,5 @@
 
-
-export default function Textbox(props) {
+export default function Urlbox(props) {
 
     const {
         formData,
@@ -19,9 +18,9 @@ export default function Textbox(props) {
     return (
         <>
             <input 
-                type="text" 
+                type="url" 
                 value={formData[label]} 
-                placeholder={"text"}
+                placeholder={"http://www.sampledoc123.com"}
                 className={`form-control p-3 bg-body ${fontSize}`} 
                 onChange={(e) => changeTextInput(e)} 
             />
