@@ -35,7 +35,7 @@ def application_list(request):
         return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def application_detail(request, pk):
     #find application by pk 
     try:
@@ -45,12 +45,12 @@ def application_detail(request, pk):
             application_serializer = ApplicationSerializer(application)
             return JsonResponse(application_serializer.data)
         #update an application 
-        elif request.method == 'POST':
+        elif request.method == 'PUT':
             application_data = JSONParser().parse(request)
-            application_serializer = ApplicationSerializer(data=application_data)
+            application_serializer = ApplicationSerializer(application, data=application_data)
             if application_serializer.is_valid():
                 application_serializer.save()
-                return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
+                return JsonResponse(application_serializer.data)
             return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Application.DoesNotExist:
         return JsonResponse({'message': 'The application does not exist'}, status=status.HTTP_404_NOT_FOUND)
