@@ -1,5 +1,5 @@
 //utils
-import { validateDateTime } from "../../../utils/date"
+import { validateDateTime } from "../../../utils/dateTime/dateTime"
 
 export function dateTimeInitializer(dateTime, label) {
 
@@ -9,7 +9,7 @@ export function dateTimeInitializer(dateTime, label) {
         ["year" + label]: "",
         ["hour" + label]: "",
         ["min" + label]: "",
-        ["sec" + label]: "",
+        ["sec" + label]: "00",
     }
 
     if (dateTime && validateDateTime(dateTime)) {

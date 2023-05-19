@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 //hooks
 import useApplicationManager from "../../hooks/useApplicationManager"
-import { dateTimeInitializer } from "./helpers/initializers"
+
+//helpers
+import dateTimeInitializer from "../../utils/initializers/dateTime/dateTimeInitializer"
 
 //sections
 import StatusAndDatesEdit from "./sections/StatusAndDates/StatusAndDatesEdit.js"
 import ApplicationInfosEdit from "./sections/ApplicationInfos/ApplicationInfosEdit"
 
 //validators
-import textValidator from "./validators/text/textValidator"
-import dateTimeValidator from "./validators/dateTime/dateTimeValidator"
-
-//utils
-import { dateFormat } from "../../utils/date"
+import textValidator from "../../utils/validators/text/textValidator"
+import dateTimeValidator from "../../utils/validators/dateTime/dateTimeValidator"
+import urlValidator from "../../utils/validators/url/urlValidator"
 
 //components
 import RerouteModals from "../../components/Modals/RerouteModals/RerouteModals"
@@ -22,35 +22,21 @@ import RerouteModals from "../../components/Modals/RerouteModals/RerouteModals"
 export default function ApplicationDetailsEdit() {
 
     const { id } = useParams()
+
     const [formData, setFormData] = useState(null)
     const [errorMsgs, setErrorMsgs] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+
     const { application, updateApplication } = useApplicationManager(parseInt(id))
 
-    //updates when status changed
     useEffect(() => {
-        //status = new status, app.status is the old status
-        if (formData && formData["status"] !== application.status) {
-
-            const status = formData["status"]
-            if (status === "applied" && application.status === "interested") {
-                const today = dateFormat("today")
-                const newAppInfo = {
-                    "status": status,
-                    "dateApplied": today.dateFormatted,
-                }
-
-                updateApplication(application, newAppInfo)
-
-            } else {
-                const newAppInfo = {
-                    "status": status
-                }
-                updateApplication(application, newAppInfo)
-            }
+        if (application) {
+            document.title = "Editing (" + application.position + ", " + application.company + ") - Job Tracker App"
         }
-    }, [formData, application, updateApplication])
+        return () => document.title = "Job Tracker App"
+    }, [id, application])
 
+    //set application data into form
     useEffect(() => {
 
         if (application) {
@@ -71,12 +57,16 @@ export default function ApplicationDetailsEdit() {
             const newFormData = { ...basicData, ...dateAppliedData }
 
             setFormData(newFormData)
+
             setErrorMsgs({
                 "dateApplied": "",
                 "timeApplied": "",
                 "position": "",
                 "company": "",
                 "salary": "",
+                "coverLetter": "",
+                "resume": "",
+                "interviewPreparation": "",
             })
         }
 
@@ -90,10 +80,19 @@ export default function ApplicationDetailsEdit() {
         const positionCheck = textValidator(formData, setErrorMsgs, "position")
         const companyCheck = textValidator(formData, setErrorMsgs, "company")
         const salaryCheck = textValidator(formData, setErrorMsgs, "salary")
+        const resumeCheck = urlValidator(formData, setErrorMsgs, "resume")
+        const coverLetterCheck = urlValidator(formData, setErrorMsgs, "coverLetter")
+        const interviewPreparationCheck = urlValidator(formData, setErrorMsgs, "interviewPreparation")
 
         // console.log("test1", dateAppliedCheck, dateCreatedCheck, positionCheck, companyCheck, salaryCheck)
 
-        if (dateAppliedCheck.check && positionCheck && companyCheck && salaryCheck) {
+        const allChecks = (
+            dateAppliedCheck.check && positionCheck.check && 
+            companyCheck.check && salaryCheck.check && resumeCheck.check 
+            && interviewPreparationCheck.check && coverLetterCheck.check
+        )
+
+        if (allChecks) {
 
             const newAppInfo = {
                 "position": formData["position"],
@@ -103,7 +102,8 @@ export default function ApplicationDetailsEdit() {
                 "resume": formData["resume"],
                 "coverLetter": formData["coverLetter"],
                 "interviewPreparation": formData["interviewPreparation"],
-                "dateApplied": dateAppliedCheck.dateTime,
+                "dateApplied": dateAppliedCheck.value,
+                "status": formData["status"],
             }
 
             // console.log(newAppInfo)
@@ -112,13 +112,12 @@ export default function ApplicationDetailsEdit() {
         }
     }
 
+    //modals
     function closeModal() {
         setTimeout(() => {
             setShowSuccessModal(false)
-        },200)
+        }, 200)
     }
-
-    //make a reroute instead of link for modal
 
     if (!formData) {
         return <></>
@@ -133,6 +132,7 @@ export default function ApplicationDetailsEdit() {
                     handleSubmittedForm(e)
                 }}
             >
+                {/* sections */}
                 <StatusAndDatesEdit
                     formData={formData}
                     setFormData={setFormData}
@@ -145,21 +145,33 @@ export default function ApplicationDetailsEdit() {
                     fontSize={"fs-6"}
                     errorMsgs={errorMsgs}
                 />
-                <button
-                    className={`btn btn-primary p-3 py-4 ${"fs-5"}`}
-                    type="submit"
-                    data-bs-toggle="modal" data-bs-target={"#reroute-message"}
-                >
-                    Edit form
-                </button>
+
+                {/* buttons */}
+                <div className="d-flex flex-column gap-3">
+                    <button
+                        className={`btn btn-primary p-3 py-4 ${"fs-6"}`}
+                        type="submit"
+                        data-bs-toggle="modal" data-bs-target={"#edit-form"}
+                    >
+                        Save Changes
+                    </button>
+                    <Link
+                        to={"/application/" + application.id}
+                        className="btn btn-outline-secondary p-3 py-4 fs-6"
+                    >
+                        Back to app
+                    </Link>
+                </div>
             </form>
+
             <RerouteModals
-                successMsg={"Successfully edited application! You may stay to keep editing or locate back to the application."}
+                id={"edit-form"}
+                successMsg={"Saved! You may stay to keep editing or locate back to the application."}
                 errorMsg={"Unsucessful! Please check the invalid fields and correct them."}
                 closeModal={closeModal}
                 buttonLabel={"Back to app"}
                 showSuccessModal={showSuccessModal}
-                address={"/application/"+application.id}
+                address={"/application/" + application.id}
             />
         </>
     )

@@ -1,12 +1,11 @@
 
-
-export default function Textbox(props) {
+export default function TextBox(props) {
 
     const {
         formData,
         setFormData,
+        label,
         fontSize,
-        label
     } = props
 
     function changeTextInput(event) {
@@ -17,14 +16,12 @@ export default function Textbox(props) {
     }
 
     return (
-        <>
-            <input 
-                type="text" 
-                value={formData[label]} 
-                placeholder={"text"}
-                className={`form-control p-3 bg-body ${fontSize}`} 
-                onChange={(e) => changeTextInput(e)} 
-            />
-        </>
+        <input
+            type="text"
+            value={formData[label]}
+            placeholder={"text"}
+            className={`form-control p-3 bg-body ${fontSize}`}
+            onChange={(e) => changeTextInput(e)}
+        />
     )
 }

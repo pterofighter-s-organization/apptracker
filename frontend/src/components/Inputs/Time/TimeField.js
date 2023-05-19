@@ -1,36 +1,51 @@
-//inputs
-import Timebox from "./components/Timebox"
+
+//components
+import HourBox from "./components/Hour/HourBox"
+import MinBox from "./components/Min/MinBox"
+
 
 export default function TimeField(props) {
 
-    const { 
+    const {
         formData,
         setFormData,
-        errorMsgs,
+        label,
         fontSize,
         header,
         footer,
+        errorMsgs
     } = props
 
+    const actualLabel = "time" + label
+
     return (
-        <div className="d-flex flex-column gap-3">
+        <>
             <div className={`${fontSize}`}>
                 {header}
             </div>
-            <Timebox
-                formData={formData}
-                setFormData={setFormData}
-                fontSize={fontSize}
-            />
-            {errorMsgs.time && errorMsgs.time.length > 0 ?
+            <div className="d-flex flex-wrap gap-3 align-items-center">
+                <HourBox
+                    formData={formData}
+                    setFormData={setFormData}
+                    fontSize={fontSize}
+                    label={label}
+                />
+                <MinBox
+                    formData={formData}
+                    setFormData={setFormData}
+                    fontSize={fontSize}
+                    label={label}
+                />
+            </div>
+            {errorMsgs.hasOwnProperty(actualLabel) && errorMsgs[actualLabel] && errorMsgs[actualLabel].length > 0 ?
                 <div className={`blockquote-footer text-danger mt-1 ${fontSize}`}>
-                    {errorMsgs.time}
+                    {errorMsgs[actualLabel]}
                 </div>
                 :
                 <div className={`blockquote-footer mt-1 ${fontSize}`}>
                     {footer}
                 </div>
             }
-        </div>
+        </>
     )
 }

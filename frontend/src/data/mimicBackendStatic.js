@@ -444,6 +444,9 @@ let applications = [
         notes: []
     },
 ]
+
+let count = 5
+
 //mimic backend
 export const updateApp = (app, id) => {
 
@@ -455,6 +458,18 @@ export const updateApp = (app, id) => {
 
     applications[index] = app
     return applications[index]
+}
+
+export const createApp = (app) => {
+
+    app["id"] = count++
+    applications.push(app)
+
+    console.log(app)
+    return {
+        "status": true,
+        "application": app
+    }
 }
 
 export const getApps = () => {

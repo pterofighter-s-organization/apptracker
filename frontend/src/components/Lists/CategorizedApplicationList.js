@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import ApplicationCard from "../ApplicationCard/ApplicationCard.js"
 
 //utils
-import { sortDates } from "../../utils/date.js"
+import { sortDates } from "../../utils/dateTime/date/date.js"
 import { categorizeApplications } from "../../utils/application.js"
 
 export default function CategorizedApplicationList({ applications, updateApplication }) {

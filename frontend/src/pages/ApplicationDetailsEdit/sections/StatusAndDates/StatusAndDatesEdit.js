@@ -1,7 +1,7 @@
 //components
-import DateField from "../../../../components/TestInputs/Date/DateField"
-import TimeField from "../../../../components/TestInputs/Time/TimeField"
-import StatusField from "../../../../components/TestInputs/Status/StatusField"
+import DateField from "../../../../components/Inputs/Date/DateField"
+import TimeField from "../../../../components/Inputs/Time/TimeField"
+import StatusField from "../../../../components/Inputs/Status/StatusField"
 
 
 export default function StatusAndDatesEdit(props) {
@@ -17,11 +17,17 @@ export default function StatusAndDatesEdit(props) {
         <div className="d-flex flex-column gap-lg-3">
 
             {/* the title of this section */}
-            <div className="d-flex flex-column gap-0">
-                <div className='h3 text-nowrap'>
-                    Status Info :
+            <div className="d-flex flex-column gap-0 mb-3">
+                <div className='h4 text-nowrap'>
+                    Edit Status and Dates:
                 </div>
                 <hr className='w-100' />
+                <div className="">
+                    * ( required fields )
+                </div>
+                <div className="">
+                    Important: ( status won't be automatically updated unless you saved changes )
+                </div>
             </div>
 
             {/* the parts in this section */}
@@ -35,8 +41,6 @@ export default function StatusAndDatesEdit(props) {
                             setFormData={setFormData}
                             label={""}
                             fontSize={fontSize}
-                            header={"Application Status *"}
-                            footer={"Ex: (Interviewing, Applied, etc...)"}
                         />
                     </div>
                 </div>

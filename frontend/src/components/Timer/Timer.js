@@ -1,5 +1,5 @@
 //utils
-import { findTimeDifference, timerDisplay } from '../../utils/time.js'
+import { findTimeDifference, timerDisplay } from '../../utils/dateTime/time/time.js'
 
 export default function Timer ({start, end}) {
 

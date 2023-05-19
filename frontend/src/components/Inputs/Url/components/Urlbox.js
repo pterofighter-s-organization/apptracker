@@ -1,4 +1,5 @@
 
+
 export default function Urlbox(props) {
 
     const {
@@ -16,14 +17,12 @@ export default function Urlbox(props) {
     }
 
     return (
-        <>
-            <input 
-                type="url" 
-                value={formData[label]} 
-                placeholder={"http://www.sampledoc123.com"}
-                className={`form-control p-3 bg-body ${fontSize}`} 
-                onChange={(e) => changeTextInput(e)} 
-            />
-        </>
+        <input
+            type="text"
+            value={formData[label]}
+            placeholder={"http://www.sampledoc123/edit"}
+            className={`form-control p-3 bg-body ${fontSize}`}
+            onChange={(e) => changeTextInput(e)}
+        />
     )
 }

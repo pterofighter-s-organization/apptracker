@@ -6,8 +6,9 @@ import Navbar from "./components/Navbar/Navbar.js";
 
 //pages
 import Dashboard from "./pages/Dashboard/Dashboard.js";
-import Application from './pages/Application/Application.js';
+import ApplicationDetails from './pages/ApplicationDetails/ApplicationDetails.js';
 import ApplicationDetailsEdit from './pages/ApplicationDetailsEdit/ApplicationDetailsEdit.js';
+import ApplicationForm from './pages/ApplicationForm/ApplicationForm.js';
 
 //css
 import './App.css'
@@ -25,8 +26,9 @@ export default function App() {
           {/* <TaskTablePresentation /> */}
           <Routes>
             <Route exact path="/" element={<Dashboard />} />
-            <Route exact path="/application/:id" element={<Application/>} />
+            <Route exact path="/application/:id" element={<ApplicationDetails/>} />
             <Route exact path="/application/edit/:id" element={<ApplicationDetailsEdit/>} />
+            <Route exact path="/application/new" element={<ApplicationForm/>} />
           </Routes>
         </div>
       </Router>

@@ -1,8 +1,9 @@
 //utils
-import { findTimeDifference } from "./time.js"
-import { sortDates, validateDateTime } from "./date.js"
+import { findTimeDifference } from "./dateTime/time/time.js"
+import { sortDates } from "./dateTime/date/date.js"
 import { checkIfNeedTask } from "./application.js"
 import { textFormat } from "./text.js"
+import { validateDateTime } from "./dateTime/dateTime.js"
 
 //task.js
 //functions here all help into organizing the details of the tasks being display
@@ -82,7 +83,7 @@ export function findTasksOnApp(application) {
                     position: position,
                     company: company,
                     priority: 1,
-                    type: "dateApplied",
+                    type: "edit",
                     title: "Please give the time you applied to the application",
                     date: today,
                     timeDue: today,
@@ -95,7 +96,7 @@ export function findTasksOnApp(application) {
                     position: position,
                     company: company,
                     priority: 1,
-                    type: "resume",
+                    type: "edit",
                     title: "Insert the link for your resume",
                     date: today,
                     timeDue: today,

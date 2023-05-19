@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 //utils
-import { debounce } from "../utils/time"
+import { debounce } from "../utils/dateTime/time/time"
 
 export default function useWindowSizeManager() {
 

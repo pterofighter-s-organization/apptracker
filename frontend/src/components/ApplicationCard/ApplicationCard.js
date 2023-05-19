@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 //utils
-import { dateFormat } from "../../utils/date.js";
+import { dateFormat } from "../../utils/dateTime/date/date.js";
 
 //css
 import "./ApplicationCard.css"
@@ -20,11 +20,15 @@ export default function ApplicationCard({ application, updateApplication }) {
     //2. button press action when status changed
     //3. deciding what's being display
 
-    const [status, setStatus] = useState(application.status)
+    const [formData, setFormData] = useState({
+        "status": application.status
+    })
 
     //updates when status changed
     useEffect(() => {
         //status = new status, app.status is the old status
+        const status = formData["status"]
+
         if (status !== application.status) {
             if (status === "applied" && application.status === "interested") {
                 const today = dateFormat("today")
@@ -42,15 +46,15 @@ export default function ApplicationCard({ application, updateApplication }) {
                 updateApplication(application, newAppInfo)
             }
         }
-    }, [status, application, updateApplication])
+    }, [formData, application, updateApplication])
 
     return (
         <div className="card border border-0 rounded-0 bg-body-secondary bg-opacity-75">
             {/* <div className="card-header bg-success" /> */}
 
             <AppCardHeader
-                status={status}
-                setStatus={setStatus}
+                formData={formData}
+                setFormData={setFormData}
             />
             <AppCardBody
                 position={application.position}

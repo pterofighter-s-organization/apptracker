@@ -4,7 +4,7 @@ import { findPrioritizedTask } from "../../utils/task";
 import TaskTableBody from "./components/Body/TaskTableBody";
 import TaskTableHeader from "./components/Header/TaskTableHeader";
 
-export default function TaskTable({ tasks }) {
+export default function TaskTable({ tasks, fontSize }) {
 
     //find the priority of the task and sort them
     tasks.sort((a, b) => {
@@ -32,7 +32,7 @@ export default function TaskTable({ tasks }) {
     return (
         <>
             {tasks ?
-                <table className="table text-center">
+                <table className={`table text-center ${fontSize}`} >
                     <TaskTableHeader />
                     <TaskTableBody
                         tasks={tasks}

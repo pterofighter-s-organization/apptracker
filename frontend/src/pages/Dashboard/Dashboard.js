@@ -1,7 +1,4 @@
-import React, { useEffect, useMemo } from "react"
-
-//utils
-import { findAllTasks } from "../../utils/task.js"
+import React, { useEffect } from "react"
 
 //hooks
 import useApplicationsManager from "../../hooks/useApplicationsManager.js"
@@ -22,22 +19,13 @@ export default function Dashboard() {
         return () => document.title = 'Job Tracker App';
     }, [])
 
-    // start of (1): use useMemo for returning the previous val if the dependency (reference) never changed
-    //avoid re-rendering
-
-    const tasks = useMemo(() => {
-        return findAllTasks(applications)
-    }, [applications])
-
-    //end of (1)
-
     //debugging
     // console.log(applications)
 
     //loading
-    // if(applications.length <= 0) {
-    //     return <>Loading...</>
-    // }
+    if(!applications) {
+        return <>Loading...</>
+    }
 
     //finish
     return (
@@ -61,7 +49,8 @@ export default function Dashboard() {
 
             {/* task table */}
             <TasksSection
-                tasks={tasks}
+                applications={applications}
+                updateApplication={updateApplication}
             />
 
         </div>

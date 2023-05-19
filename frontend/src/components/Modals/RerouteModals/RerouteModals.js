@@ -7,6 +7,7 @@ import RerouteSuccessModal from "./components/RerouteSuccessModal"
 export default function RerouteModal(props) {
 
     const {
+        id,
         showSuccessModal,
         successMsg,
         errorMsg,
@@ -16,7 +17,7 @@ export default function RerouteModal(props) {
     } = props
 
     return (
-        <div className="modal fade" id="reroute-message" tabindex="-1">
+        <div className="modal fade" id={id} tabindex="-1">
             <div className="modal-dialog">
                 <div className="modal-content">
                     {showSuccessModal ?

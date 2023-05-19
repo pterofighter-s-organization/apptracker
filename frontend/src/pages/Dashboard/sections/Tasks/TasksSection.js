@@ -1,10 +1,21 @@
+import { useMemo } from "react"
+
+//utils
+import { findAllTasks } from "../../../../utils/task.js"
+
 //components
 import TaskTable from "../../../../components/TaskTable/TaskTable.js"
 import PreviewCollapse from "../../../../components/PreviewCollapse/PreviewCollapse.js"
 
-export default function TasksSection({ tasks }) {
+export default function TasksSection({ applications, updateApplication }) {
 
     const taskVh = 40
+
+    //use useMemo for returning the previous val if the dependency (reference) never changed
+    //avoid re-rendering
+    const tasks = useMemo(() => {
+        return findAllTasks(applications)
+    }, [applications])
     
     return (
         <div className="d-flex flex-column gap-2">

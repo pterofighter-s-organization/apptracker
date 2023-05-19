@@ -1,8 +1,8 @@
 //backend mimic
-import { updateApp } from "../data/mimicBackendStatic";
+import { createApp, updateApp } from "../data/mimicBackendStatic";
 
 //utils
-import { dateFormat } from "../utils/date";
+import { dateFormat } from "./dateTime/date/date";
 
 export function categorizeApplications (applications, category) {
 
@@ -35,6 +35,22 @@ export function categorizeApplications (applications, category) {
 
 export function checkIfNeedTask (status) {
     return status === "applied" || status === "interviewing" || status === "accepted"
+}
+
+export function createApplication(newAppInfo){
+
+    const today = dateFormat("today")
+    const newApplication = {}
+
+    Object.entries(newAppInfo).forEach(([label, data]) => {
+        newApplication[label] = data
+    })
+
+    newApplication["tasks"] = []
+    newApplication["dateEdited"] = today.dateFormatted
+    newApplication["dateCreated"] = today.dateFormatted
+
+    return createApp(newApplication)
 }
 
 //talks to backend to update app
@@ -71,7 +87,7 @@ export function updateAppInfo (application, newAppInfo) {
     const newApplication = {} // a new reference
 
     //transfering old data to new reference
-    Object.entries(application).forEach(([label, data]) => {
+    Object.entries(application).forEach(([label, _]) => {
         newApplication[label] = application[label]
     })
 
