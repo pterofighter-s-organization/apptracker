@@ -18,9 +18,15 @@ export default function StatusAndDatesEdit(props) {
 
             {/* the title of this section */}
             <div className="d-flex flex-column gap-0 mb-3">
-                <div className='h4 text-nowrap'>
-                    Edit Status and Dates:
-                </div>
+                {formData["status"] !== "interested" ?
+                    <div className='h4 text-nowrap'>
+                        Edit Status and Dates:
+                    </div>
+                    :
+                    <div className='h4 text-nowrap'>
+                        Edit Status:
+                    </div>
+                }
                 <hr className='w-100' />
                 <div className="">
                     * ( required fields )

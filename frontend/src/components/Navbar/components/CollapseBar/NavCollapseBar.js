@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 //components
-import NavLogUserButton from "../Button/NavLogUserButton";
-import NavMenuButton from "../Button/NavMenuButton";
-import NavButton from "../Button/NavButton";
-import NavbarElements from "../NavbarElements";
+import NavLogUserButton from "../Buttons/NavLogUserButton";
+import NavMenuButton from "../Buttons/NavMenuButton";
+import NavButton from "../Buttons/NavButton";
+import NavbarElements from "../../NavbarElements";
 
 //css
 import "./NavCollapse.css"

@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar/Navbar.js";
 //pages
 import Dashboard from "./pages/Dashboard/Dashboard.js";
 import ApplicationDetails from './pages/ApplicationDetails/ApplicationDetails.js';
-import ApplicationDetailsEdit from './pages/ApplicationDetailsEdit/ApplicationDetailsEdit.js';
+import ApplicationEditForm from './pages/ApplicationEditForm/ApplicationEditForm.js';
 import ApplicationForm from './pages/ApplicationForm/ApplicationForm.js';
 
 //css
@@ -27,7 +27,7 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<Dashboard />} />
             <Route exact path="/application/:id" element={<ApplicationDetails/>} />
-            <Route exact path="/application/edit/:id" element={<ApplicationDetailsEdit/>} />
+            <Route exact path="/application/edit/:id" element={<ApplicationEditForm/>} />
             <Route exact path="/application/new" element={<ApplicationForm/>} />
           </Routes>
         </div>

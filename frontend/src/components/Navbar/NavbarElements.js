@@ -1,4 +1,4 @@
-import NavButton from "./Button/NavButton";
+import NavButton from "./components/Buttons/NavButton";
 
 export default function NavbarElements({ show }) {
 

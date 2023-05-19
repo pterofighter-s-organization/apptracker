@@ -4,7 +4,9 @@ import { Link, useParams } from "react-router-dom"
 //hooks
 import useApplicationManager from "../../hooks/useApplicationManager"
 
-//helpers
+//initializers
+import basicDataInitializer from "../../utils/initializers/basicData/basicDataInitializer"
+import errorDataInitializer from "../../utils/initializers/errorData/errorDataInitializer"
 import dateTimeInitializer from "../../utils/initializers/dateTime/dateTimeInitializer"
 
 //sections
@@ -19,7 +21,7 @@ import urlValidator from "../../utils/validators/url/urlValidator"
 //components
 import RerouteModals from "../../components/Modals/RerouteModals/RerouteModals"
 
-export default function ApplicationDetailsEdit() {
+export default function ApplicationEditForm() {
 
     const { id } = useParams()
 
@@ -38,45 +40,21 @@ export default function ApplicationDetailsEdit() {
 
     //set application data into form
     useEffect(() => {
-
         if (application) {
             //makes (MM-DD-YYYY) (hh:mm) ex: hour + label: data
             const dateAppliedData = dateTimeInitializer(application.dateApplied, "Applied")
-
-            const basicData = {
-                "status": application.status,
-                "position": application.position,
-                "company": application.company,
-                "salary": application.salary,
-                "interviewPreparation": application.interviewPreparation,
-                "resume": application.resume,
-                "coverLetter": application.coverLetter,
-                "description": application.description,
-            }
-
-            const newFormData = { ...basicData, ...dateAppliedData }
+            const newFormData = { ...basicDataInitializer(application), ...dateAppliedData }
 
             setFormData(newFormData)
-
-            setErrorMsgs({
-                "dateApplied": "",
-                "timeApplied": "",
-                "position": "",
-                "company": "",
-                "salary": "",
-                "coverLetter": "",
-                "resume": "",
-                "interviewPreparation": "",
-            })
+            setErrorMsgs(errorDataInitializer())
         }
-
     }, [application])
 
     function handleSubmittedForm(event) {
 
         event.preventDefault()
 
-        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "Applied")
+        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "Applied", true, true) //allow empty? allow dates before today?
         const positionCheck = textValidator(formData, setErrorMsgs, "position")
         const companyCheck = textValidator(formData, setErrorMsgs, "company")
         const salaryCheck = textValidator(formData, setErrorMsgs, "salary")
@@ -93,7 +71,6 @@ export default function ApplicationDetailsEdit() {
         )
 
         if (allChecks) {
-
             const newAppInfo = {
                 "position": formData["position"],
                 "company": formData["company"],
@@ -105,9 +82,7 @@ export default function ApplicationDetailsEdit() {
                 "dateApplied": dateAppliedCheck.value,
                 "status": formData["status"],
             }
-
             // console.log(newAppInfo)
-
             setShowSuccessModal(updateApplication(application, newAppInfo))
         }
     }

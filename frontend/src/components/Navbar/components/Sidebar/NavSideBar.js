@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 
 //components
-import NavbarElements from "../NavbarElements.js"
-import NavMenuButton from "../Button/NavMenuButton.js"
-import NavLogUserButton from "../Button/NavLogUserButton.js"
+import NavbarElements from "../../NavbarElements.js"
+import NavMenuButton from "../Buttons/NavMenuButton.js"
+import NavLogUserButton from "../Buttons/NavLogUserButton.js"
 
 //css
 import "./NavSidebar.css"

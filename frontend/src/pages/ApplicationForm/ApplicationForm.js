@@ -47,7 +47,7 @@ export default function ApplicationForm() {
 
         event.preventDefault()
 
-        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "Applied")
+        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "Applied", true, true) //allow empty? allow dates before today?
         const positionCheck = textValidator(formData, setErrorMsgs, "position")
         const companyCheck = textValidator(formData, setErrorMsgs, "company")
         const salaryCheck = textValidator(formData, setErrorMsgs, "salary")
@@ -102,9 +102,9 @@ export default function ApplicationForm() {
                     handleSubmittedForm(e)
                 }}
             >
-                {/* <div className="border border-dark p-4">
-                    <div className="h4">
-                        Tracking a new application
+                {/* <div className="border border-dark p-4 text-center">
+                    <div className="h4 mt-1">
+                        Tracking a New Application
                     </div>
                 </div> */}
 
@@ -129,7 +129,7 @@ export default function ApplicationForm() {
                         type="submit"
                         data-bs-toggle="modal" data-bs-target={"#create-form"}
                     >
-                        Submit
+                        Submit a new Application
                     </button>
                 </div>
             </form>

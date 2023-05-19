@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-//helpers
-import { dateTimeInitializer } from "./helpers/initializers";
+//initializers
+import dateTimeInitializer from "../../utils/initializers/dateTime/dateTimeInitializer";
 
 //sections
 import TaskDateTimeInputs from "./sections/DateTime/TaskDateTimeInputs";
@@ -11,8 +11,8 @@ import TaskTitleInput from "./sections/Title/TaskTitleInput";
 import SubmissionModals from "../Modals/SubmissionModals/SubmissionModals";
 
 //validators
-import dateTimeValidator from "./validators/dateTime/dateTimeValidator";
-import textValidator from "./validators/text/textValidator";
+import dateTimeValidator from "../../utils/validators/dateTime/dateTimeValidator";
+import textValidator from "../../utils/validators/text/textValidator";
 
 export default function TaskForm({ application, updateApplication, fontSize }) {
 
@@ -21,13 +21,13 @@ export default function TaskForm({ application, updateApplication, fontSize }) {
     const [showSuccessModal, setShowSuccessModal] = useState(false)
 
     useEffect(() => {
-        const dateDueData = dateTimeInitializer("","Due")
+        const dateDueData = dateTimeInitializer(null, "Due")
         const basicData = {
             "title": ""
         }
         const newFormData = { ...basicData, ...dateDueData }
-        setFormData(newFormData)
 
+        setFormData(newFormData)
         setErrorMsgs({
             "timeDue": "",
             "dateDue": "",
@@ -39,12 +39,10 @@ export default function TaskForm({ application, updateApplication, fontSize }) {
 
         event.preventDefault()
 
-        const dateDueCheck = dateTimeValidator(formData, setErrorMsgs, "Due")
+        const dateDueCheck = dateTimeValidator(formData, setErrorMsgs, "Due", false, false) //dont allow empty. dont allow dates before today
         const titleCheck = textValidator(formData, setErrorMsgs, "title")
 
-        console.log(formData)
-
-        if (dateDueCheck.check && titleCheck) {
+        if (dateDueCheck.check && titleCheck.check) {
 
             const newTask = {
                 title: formData["title"],
@@ -60,6 +58,8 @@ export default function TaskForm({ application, updateApplication, fontSize }) {
         }
     }
 
+
+    //modals
     const modalId = "task-form"
 
     function closeModal() {
@@ -82,7 +82,7 @@ export default function TaskForm({ application, updateApplication, fontSize }) {
                     </div>
                     <hr className="" />
                     <div className="fs-6 mb-3">
-                        * is Required
+                        * ( required fields )
                     </div>
                 </div>
 
