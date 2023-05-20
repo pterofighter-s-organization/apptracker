@@ -4,8 +4,8 @@ from trackerapp.models import Users
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer
-from .models import Users, Application, Notes
+from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer, TaskSerializer
+from .models import Users, Application, Notes, Task
 
 
 
@@ -129,7 +129,20 @@ def notes_detail(request, pk):
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 
-
+@api_view(['GET', 'POST', 'DELETE'])
+def task_list(request):
+    #get list of applications, POST a new application, DELETE all applications
+    if request.method == 'GET':
+        tasks = Task.objects.all()
+        task_serializer = TaskSerializer(tasks, many=True)
+        return JsonResponse(task_serializer.data, safe=False)
+    elif request.method == 'POST':
+        task_data = JSONParser().parse(request)
+        task_serializer = TaskSerializer(data=task_data)
+        if task_serializer.is_valid():
+            task_serializer.save()
+            return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # class UsersView(viewsets.ModelViewSet):
