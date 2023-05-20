@@ -144,6 +144,25 @@ def task_list(request):
             return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET', 'PUT', 'DELETE'])
+def task_detail(request, pk):
+    #find application by pk 
+    try:
+        task = Task.objects.get(pk=pk)
+        #get an application
+        if request.method == 'GET':
+            task_serializer = TaskSerializer(task)
+            return JsonResponse(task_serializer.data)
+        #update an user 
+        elif request.method == 'PUT':
+            task_data = JSONParser().parse(request)
+            task_serializer = TaskSerializer(task,data=task_data)
+            if task_serializer.is_valid():
+                task_serializer.save()
+                return JsonResponse(task_serializer.data)
+            return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Users.DoesNotExist:
+        return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 # class UsersView(viewsets.ModelViewSet):
 #     serializer_class = UsersSerializer
