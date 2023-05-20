@@ -1,6 +1,6 @@
 
 
-export default function basicDataInitializer (application) {
+export default function basicDataInitializer (inputObj) {
 
     //raw data
     const basicData = {
@@ -14,9 +14,9 @@ export default function basicDataInitializer (application) {
         "description": "",
     }
 
-    if(application){
+    if(inputObj){
         Object.entries(basicData).forEach(([label, _]) => {
-            basicData[label] = application[label]
+            basicData[label] = inputObj[label]
         })
     }
 

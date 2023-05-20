@@ -1,3 +1,4 @@
+import NoteCardList from "../../../../components/Lists/NoteCardList"
 
 
 
@@ -5,7 +6,7 @@
 export default function AddditionalInfos(props){
 
     const {
-        // application,
+        application,
         // updateApplication,
         fontSize
     } = props
@@ -17,6 +18,12 @@ export default function AddditionalInfos(props){
                     Additional Info :
                 </div>
                 <hr className='w-100' />
+            </div>
+
+            <div className="d-flex flex-wrap gap-5 w-100">
+                <NoteCardList
+                    appId={application.id}
+                />
             </div>
         </div>
     )

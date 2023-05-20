@@ -445,9 +445,87 @@ let applications = [
     },
 ]
 
-let count = 5
+const notes = [
+    {
+        "id": 1,
+        "appId": 1,
+        "text": "test out something"
+    },
+    {
+        "id": 2,
+        "appId": 1,
+        "text": "test out something"
+    },
+    {
+        "id": 3,
+        "appId": 2,
+        "text": "test out something"
+    },
+    {
+        "id": 4,
+        "appId": 3,
+        "text": "test out something"
+    },
+    {
+        "id": 5,
+        "appId": 3,
+        "text": "test out something"
+    },
+    {
+        "id": 6,
+        "appId": 1,
+        "text": "test out something"
+    },
+]
+
+let appCount = 4
+let noteCount = 5
 
 //mimic backend
+
+//notes
+export const getAppNotes = (appId) => {
+    const notesInApp = notes.filter((note) => (note.appId === appId))
+    
+    if(notesInApp.length === 0){
+        return new Error("No notes found")
+    }
+    
+    return {
+        "status": true,
+        "notes": notesInApp
+    }
+}
+
+export const createAppNote = (appId) => {
+
+    const note = {
+        "text": "",
+        "appId": appId
+    }
+
+    note["id"] = ++noteCount
+    notes.push(note)
+
+    return{
+        "status": true,
+        "note": note
+    }
+}
+
+export const updateAppNote = (note, id) => {
+
+    const index = notes.findIndex((note) => note.id === id)
+
+    if(index === -1){
+        return new Error("notes not found")
+    }
+
+    notes[index] = note
+    return notes[index]
+}
+
+//apps
 export const updateApp = (app, id) => {
 
     const index = applications.findIndex((item) => item.id === id)
@@ -462,10 +540,10 @@ export const updateApp = (app, id) => {
 
 export const createApp = (app) => {
 
-    app["id"] = count++
+    app["id"] = ++appCount
     applications.push(app)
 
-    console.log(app)
+    // console.log(app)
     return {
         "status": true,
         "application": app

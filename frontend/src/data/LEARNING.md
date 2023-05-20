@@ -27,3 +27,6 @@ new reference meaning a new address for that new object
 <textarea> is for inputting multiline string
 
 on usememo, it works if you only call the specific value of the object
+
+
+debounce = sets a time id, making sure whatever is in this function cannot be spammed, and setimeout is a queue which can be spam
