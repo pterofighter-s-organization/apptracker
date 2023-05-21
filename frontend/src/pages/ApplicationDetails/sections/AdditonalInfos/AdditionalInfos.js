@@ -20,7 +20,7 @@ export default function AddditionalInfos(props){
                 <hr className='w-100' />
             </div>
 
-            <div className="d-flex flex-wrap gap-5 w-100">
+            <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 w-100">
                 <NoteCardList
                     appId={application.id}
                 />

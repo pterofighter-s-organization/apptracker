@@ -445,7 +445,7 @@ let applications = [
     },
 ]
 
-const notes = [
+let notes = [
     {
         "id": 1,
         "appId": 1,
@@ -479,7 +479,7 @@ const notes = [
 ]
 
 let appCount = 4
-let noteCount = 5
+let noteCount = 6
 
 //mimic backend
 
@@ -487,6 +487,7 @@ let noteCount = 5
 export const getAppNotes = (appId) => {
     const notesInApp = notes.filter((note) => (note.appId === appId))
     
+    console.log(notesInApp, "get", notes)
     if(notesInApp.length === 0){
         return new Error("No notes found")
     }
@@ -499,13 +500,18 @@ export const getAppNotes = (appId) => {
 
 export const createAppNote = (appId) => {
 
+    noteCount = noteCount+1
     const note = {
+        "id": noteCount,
+        "appId": appId,
         "text": "",
-        "appId": appId
     }
 
-    note["id"] = ++noteCount
+    // note["id"] = ++noteCount
+    console.log("before", notes.length, notes)
     notes.push(note)
+    console.log(notes.length, "after", notes)
+    console.log("dllm")
 
     return{
         "status": true,
@@ -515,13 +521,15 @@ export const createAppNote = (appId) => {
 
 export const updateAppNote = (note, id) => {
 
-    const index = notes.findIndex((note) => note.id === id)
+    const index = notes.findIndex((test) => test.id === id)
 
+    console.log(index, "before index", notes.length)
     if(index === -1){
         return new Error("notes not found")
     }
 
     notes[index] = note
+    console.log(index, "after index", notes.length)
     return notes[index]
 }
 

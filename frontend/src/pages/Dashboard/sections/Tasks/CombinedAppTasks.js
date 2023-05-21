@@ -7,7 +7,7 @@ import { findAllTasks } from "../../../../utils/task.js"
 import TaskTable from "../../../../components/TaskTable/TaskTable.js"
 import PreviewCollapse from "../../../../components/PreviewCollapse/PreviewCollapse.js"
 
-export default function TasksSection({ applications, updateApplication }) {
+export default function CombinedAppTasks({ applications, updateApplication }) {
 
     const taskVh = 40
 

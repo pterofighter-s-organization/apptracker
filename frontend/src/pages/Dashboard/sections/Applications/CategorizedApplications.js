@@ -1,10 +1,34 @@
-//components
-import CategorizedApplicationList from "../../../../components/Lists/CategorizedApplicationList.js"
-import PreviewCollapse from "../../../../components/PreviewCollapse/PreviewCollapse.js"
+import { useMemo } from "react"
 
-export default function ApplicationsSection({ applications, updateApplication }) {
+//utils
+import { categorizeApplications } from "../../../../utils/application.js"
+import { sortDates } from "../../../../utils/dateTime/date/date.js"
+
+//components
+import PreviewCollapse from "../../../../components/PreviewCollapse/PreviewCollapse.js"
+import ApplicationCard from "../../../../components/ApplicationCard/ApplicationCard.js"
+
+export default function CategorizedApplications({ applications, updateApplication }) {
 
     const appsVh = 40
+
+    applications.sort((a, b) => {
+        return (-1 * sortDates(a.dateEdited, b.dateEdited))
+    })
+
+    const categorizedApps = useMemo(() => {
+        const res = categorizeApplications(applications, "status")
+        return [...res.interviewing, ...res.applied, ...res.interested, ...res.rejected, ...res.ghosted]
+    }, [applications])
+
+    //sorts the apps to the most updated one for each status
+    // Object.entries(categorizedApps).forEach((apps) => {
+    //     apps[1].sort((a, b) => {
+    //         //-1 because this method returns the earliest to latest and we need to flip it
+    //         return (-1 * sortDates(a.dateEdited, b.dateEdited))
+    //     })
+    // })
+
 
     return (
         <div className="d-flex flex-column gap-2">
@@ -28,10 +52,14 @@ export default function ApplicationsSection({ applications, updateApplication })
                         className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4"
                         id="dashboard-apps"
                     >
-                        <CategorizedApplicationList
-                            applications={applications}
-                            updateApplication={updateApplication}
-                        />
+                        {categorizedApps.map((app) => {
+                            return (
+                                <ApplicationCard
+                                    application={app}
+                                    updateApplication={updateApplication}
+                                />
+                            )
+                        })}
                     </div>
 
                 </div>

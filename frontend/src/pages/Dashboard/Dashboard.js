@@ -4,8 +4,8 @@ import React, { useEffect } from "react"
 import useApplicationsManager from "../../hooks/useApplicationsManager.js"
 
 //sections
-import ApplicationsSection from "./sections/Applications/ApplicationsSection.js"
-import TasksSection from "./sections/Tasks/TasksSection.js"
+import CategorizedApplications from "./sections/Applications/CategorizedApplications.js"
+import CombinedAppTasks from "./sections/Tasks/CombinedAppTasks.js"
 
 //later will take the user id *
 export default function Dashboard() {
@@ -42,13 +42,13 @@ export default function Dashboard() {
             </div> */}
 
             {/* job application cards in list */}
-            <ApplicationsSection
+            <CategorizedApplications
                 applications={applications}
                 updateApplication={updateApplication}
             />
 
             {/* task table */}
-            <TasksSection
+            <CombinedAppTasks
                 applications={applications}
                 updateApplication={updateApplication}
             />

@@ -13,16 +13,20 @@ export default function useNotesManager(appId) {
         let notesFromApp = []
         try {
             notesFromApp = getAppNotes(appId)
+            setNotes(notesFromApp.notes)
         } catch (error) {
             console.log(error)
+            setNotes([])
         }
 
-        setNotes(notesFromApp.notes)
+        console.log("testr")
+
     }, [appId])
 
     function updateNote(newNote, id) {
 
-        newNote["appId"] = appId
+        // newNote["appId"] = appId
+        console.log("test")
         const res = updateAppNote(newNote, id)
         setNotes(prev => prev.map(item => (item.id === res.id ? res : item)))
     }

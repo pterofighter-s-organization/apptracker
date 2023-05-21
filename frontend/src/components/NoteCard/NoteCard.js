@@ -12,6 +12,7 @@ export default function NoteCard(props) {
         updateNote,
         id,
         fontSize,
+        appId,
     } = props
 
     const [formData, setFormData] = useState(null)
@@ -24,26 +25,42 @@ export default function NoteCard(props) {
         }
     }, [noteText])
 
-    useEffect(() => {
-        if (formData && formData["noteText"] !== prevNoteText) {
-            debounce(() => {
-                updateNote({
-                    "text": formData["noteText"],
-                    "id": id
-                }, id)
-                setPrevNoteText(formData["noteText"])
-            }, 250)
-        }
-    }, [formData, noteText, id, updateNote, prevNoteText])
 
-    console.log(formData, noteText, id)
+    useEffect(() => {
+
+        if (formData && formData["noteText"] !== prevNoteText) {
+            // console.log(formData, formData.noteText !== prevNoteText, prevNoteText, formData["noteText"])
+            // const test = debounce(() => {
+            //     console.log("test")
+            //     updateNote({
+            //         "text": formData["noteText"],
+            //         "id": id,
+            //         "appId": appId
+            //     }, id)
+            //     setPrevNoteText(formData["noteText"])
+            // }, 250)
+
+            console.log("test", formData["text"])
+            updateNote({
+                "id": id,
+                "appId": appId,
+                "text": formData["noteText"],
+            }, id)
+            setPrevNoteText(formData["noteText"])
+
+
+            // window.addEventListener("test", test)
+        }
+    }, [formData, noteText, id, updateNote, prevNoteText, appId])
+
+    // console.log(formData, noteText, id)
     if (!formData) {
         return <></>
     }
 
     return (
-        <div className="card">
-            <div className="card-body" >
+        <div className="card" style={{ height: "300px" }}>
+            <div className="card-body" style={{ height: "300px" }}>
                 <MultiLineTextBox
                     formData={formData}
                     setFormData={setFormData}
