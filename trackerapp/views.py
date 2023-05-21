@@ -128,6 +128,13 @@ def notes_detail(request, pk):
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
+@api_view(['GET'])
+def notes_list_application(request, app_id):
+    notes = Notes.objects.filter(application_id=app_id)
+
+    if request.method  == 'GET':
+        notes_serializer = NotesSerializer(notes, many=True)
+        return JsonResponse(notes_serializer.data, safe=False)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def task_list(request):
