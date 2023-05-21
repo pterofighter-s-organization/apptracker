@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^api/users/(?P<pk>[0-9]+)$', views.users_detail),
     url(r'^api/notes$', views.notes_list),
     url(r'^api/notes/(?P<pk>[0-9]+)$', views.notes_detail),
-    url(r'^api/notes_app/(?P<pk>[0-9]+)$', views.notes_list_application),
+    url(r'^api/notes_app/(?P<app_id>[0-9]+)$', views.notes_list_application),
     url(r'^api/task$', views.task_list),
     url(r'^api/task/(?P<pk>[0-9]+)$', views.task_detail),
     # path("api/", include(router.urls)),
