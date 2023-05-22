@@ -1,7 +1,7 @@
 
 //components
 import { useEffect, useState } from "react"
-import MultiLineTextBox from "../Inputs/MultiLineText/components/MultiLineTextBox.js"
+import MultiLineTextBox from "../../components/Inputs/MultiLineText/components/MultiLineTextBox.js"
 import { debounce } from "../../utils/dateTime/time/time.js"
 
 

@@ -27,7 +27,7 @@ export default function MultiLineTextField(props) {
         //     </div>
         // </>
         <>
-            <div className="bg-body" style={{ height: "100%" }}>
+            <div className="bg-body rounded-3" style={{ height: "100%" }}>
                 <MultiLineTextBox
                     formData={formData}
                     setFormData={setFormData}
