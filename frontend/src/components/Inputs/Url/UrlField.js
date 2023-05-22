@@ -1,5 +1,5 @@
 //components
-import Urlbox from "./components/UrlBox";
+import Urlbox from "./components/Urlbox"
 
 export default function UrlField(props) {
 

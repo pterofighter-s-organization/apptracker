@@ -1,6 +1,6 @@
 
 //components
-import TextBox from "./components/TextBox"
+import TextBox from "./components/Textbox"
 
 export default function TextField(props) {
 
