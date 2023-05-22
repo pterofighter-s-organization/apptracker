@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 
 
 export default function MultiLineTextBox(props) {
@@ -17,15 +17,7 @@ export default function MultiLineTextBox(props) {
         setFormData(prevFormData => ({ ...prevFormData, [label]: newText }))
     }
 
-    const multiLineTextBox = useRef(null)
-
-    useEffect(() => {
-        if (multiLineTextBox) {
-            const { scrollHeight } = multiLineTextBox.current;
-            multiLineTextBox.current.style.height = "auto"
-            multiLineTextBox.current.style.height = `${scrollHeight}px`;
-        }
-    }, [multiLineTextBox])
+    // const multiLineTextBox = useRef(null)
 
     const placeholderText = `Multi-line text`
 
@@ -33,8 +25,8 @@ export default function MultiLineTextBox(props) {
         <>
             <textarea
                 value={formData[label]}
-                ref={multiLineTextBox}
-                className={`form-control p-3 bg-body ${fontSize}`}
+                // ref={multiLineTextBox}
+                className={`form-control p-3 bg-transparent border-0 ${fontSize}`}
                 style={{ overflow: "auto", height: "100%", resize: "none" }}
                 onChange={(e) => {
                     changeTextInput(e)

@@ -1,0 +1,12 @@
+/* for phone and tablet screens */
+@media (min-width: 680px) {
+    #addButton{
+        width: min(315px);
+    }
+}
+
+@media (max-width: 680px) {
+    #addButton{
+        width: 100%;
+    }
+}

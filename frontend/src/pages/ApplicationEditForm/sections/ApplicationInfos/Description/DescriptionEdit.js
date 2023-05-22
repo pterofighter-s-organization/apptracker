@@ -19,7 +19,7 @@ export default function DescriptionEdit(props) {
                 <hr className='w-100' />
             </div>
 
-            <div className="d-flex flex-column gap-3" style={{minHeight: "35vh", maxHeight: "50vh"}}>
+            <div className="d-flex flex-column gap-3" style={{minHeight: "50vh"}}>
                 <MultiLineTextField
                     formData={formData}
                     setFormData={setFormData}

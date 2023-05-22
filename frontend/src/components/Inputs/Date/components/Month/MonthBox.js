@@ -13,6 +13,7 @@ export default function MonthBox(props) {
 
     const displayMonths = useMemo(() => {
         return inputMonthValues()
+        // eslint-disable-next-line
     }, [formData[actualLabel]])
     
     function inputMonthValues() {

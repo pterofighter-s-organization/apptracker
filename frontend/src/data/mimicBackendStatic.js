@@ -485,13 +485,16 @@ let noteCount = 6
 
 //notes
 export const getAppNotes = (appId) => {
+
     const notesInApp = notes.filter((note) => (note.appId === appId))
     
-    console.log(notesInApp, "get", notes)
+    console.log(notesInApp.length, "get", notes)
     if(notesInApp.length === 0){
-        return new Error("No notes found")
+        console.log("tester")
+        throw new Error("No notes found")
     }
     
+    console.log("success")
     return {
         "status": true,
         "notes": notesInApp
@@ -519,13 +522,13 @@ export const createAppNote = (appId) => {
     }
 }
 
-export const updateAppNote = (note, id) => {
+export const updateAppNote = (note) => {
 
-    const index = notes.findIndex((test) => test.id === id)
+    const index = notes.findIndex((test) => test.id === note.id)
 
     console.log(index, "before index", notes.length)
     if(index === -1){
-        return new Error("notes not found")
+        throw new Error("notes not found")
     }
 
     notes[index] = note
@@ -539,7 +542,7 @@ export const updateApp = (app, id) => {
     const index = applications.findIndex((item) => item.id === id)
 
     if (index === -1) {
-        return new Error("Application not found")
+        throw new Error("Application not found")
     }
 
     applications[index] = app
@@ -561,7 +564,7 @@ export const createApp = (app) => {
 export const getApps = () => {
 
     if (!applications) {
-        return new Error("No applications found")
+        throw new Error("No applications found")
     }
 
     return applications

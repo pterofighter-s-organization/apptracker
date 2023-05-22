@@ -11,7 +11,7 @@ import { checkIfNeedTask } from "../../utils/application";
 //sections
 import StatusAndDates from "./sections/StatusAndDates/StatusAndDates";
 import ApplicationInfos from "./sections/ApplicationInfos/ApplicationInfos";
-import AdditionalInfos from "./sections/AdditonalInfos/AdditionalInfos";
+import Notes from "./sections/Notes/Notes";
 import TaskInfos from "./sections/TaskInfos/TaskInfos";
 
 export default function ApplicationDetails() {
@@ -68,7 +68,7 @@ export default function ApplicationDetails() {
                 :
                 <></>
             }
-            <AdditionalInfos
+            <Notes
                 application={application}
                 updateApplication={updateApplication}
                 fontSize={"fs-6"}
