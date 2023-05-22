@@ -15,7 +15,6 @@ export default function useApplicationsManager () {
     useEffect(() => {
 
         //change later when backend is done
-        console.log("backend")
         let res = []
         try {
             //set loading state here
@@ -38,7 +37,7 @@ export default function useApplicationsManager () {
         //to make dependency work, gotta generate a new refence
 
         setApplications(prevApps => prevApps.map(item => (item.id === res.id ? res : item)))
-        console.log(applications)
+        // console.log(applications)
     }
 
     return {

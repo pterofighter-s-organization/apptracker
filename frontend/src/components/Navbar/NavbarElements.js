@@ -1,4 +1,4 @@
-import NavButton from "./Button/NavButton";
+import NavButton from "./components/Buttons/NavButton";
 
 export default function NavbarElements({ show }) {
 
@@ -22,7 +22,7 @@ export default function NavbarElements({ show }) {
                 icon={"plus-circle"}
                 text={"New App"}
                 show={show}
-                link={"/"}
+                link={"/application/new"}
                 tooltipText={"you can click here to track a new app"}
             />
             <NavButton

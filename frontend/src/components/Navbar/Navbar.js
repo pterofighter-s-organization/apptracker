@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react"
 import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 
 //components
-import NavSidebar from "./Sidebar/NavSideBar.js"
-import NavCollapseBar from "./CollapseBar/NavCollapseBar.js"
+import NavSidebar from "./components/Sidebar/NavSideBar.js"
+import NavCollapseBar from "./components/CollapseBar/NavCollapseBar.js"
 
 export default function Navbar({ breakpoint }) {
 

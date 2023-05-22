@@ -1,8 +1,8 @@
 //backend mimic
-import { updateApp } from "../data/mimicBackendStatic";
+import { createApp, updateApp } from "../data/mimicBackendStatic";
 
 //utils
-import { dateFormat } from "../utils/date";
+import { dateFormat } from "./dateTime/date/date";
 
 export function categorizeApplications (applications, category) {
 
@@ -33,72 +33,78 @@ export function categorizeApplications (applications, category) {
     return categorizedApps
 }
 
-export function updateInterviewApp ( application ) {
+export function checkIfNeedTask (status) {
+    return status === "applied" || status === "interviewing" || status === "accepted"
+}
 
-    //making sure every app that updated to interviewing gets correct data
+export function createApplication(newAppInfo){
 
-    const appointments = "appointments"
-    const interviewPrep = "interviewPrep"
+    const today = dateFormat("today")
+    const newApplication = {}
 
-    if (application.status === "interviewing") {
-        if (!application[appointments]) {
-            application[appointments] = []
-        }
-        if (!application[interviewPrep]) {
-            application[interviewPrep] = ""
-        }
-    }
+    Object.entries(newAppInfo).forEach(([label, data]) => {
+        newApplication[label] = data
+    })
+
+    newApplication["tasks"] = []
+    newApplication["dateEdited"] = today.dateFormatted
+    newApplication["dateCreated"] = today.dateFormatted
+
+    return createApp(newApplication)
 }
 
 //talks to backend to update app
-export function updateAppInfo (app, newAppInfo) {
+export function updateAppInfo (application, newAppInfo) {
 
-    const { id } = app
+    const { id } = application
     const today = dateFormat("today")
 
     //set the app status to the new one (these should not be done here instead in backend as a json)
 
     //gotta make a new reference so the components gets render again
-    const newApp = {
-        id: app.id,
-        status: app.status,
-        position: app.position,
-        dateCreated: app.dateCreated,
-        company: app.company,
-        salary: app.salary,
-        dateEdited: app.dateEdited,
-        appointments: app.appointments,
-        interviewPrep: app.interviewPrep,
-        description: app.description,
-        resume: app.resume,
-        coverLetter: app.coverLetter,
-        dateApplied: app.dateApplied,
-    }
+    // const newApp = {
+    //     id: app.id,
+    //     position: app.position,
+    //     company: app.company,
+    //     interviewPreparation: app.interviewPreparation,
+    //     resumeLink: "",
+    //     coverLetterLink: "",
+    //     description: ``,
+    //     status: "interviewing",
+    //     dateApplied: "2-10-2023 9:30",
+    //     dateEdited: "4-29-2023 10:30",
+    //     dateCreated: "4-29-2023 10:30",
+    //     salary: "70k-120k",
+    //     tasks: [
+    //         {
+    //             title: "zoom interview",
+    //             date: "6-25-2023 10:45:00",
+    //         },
+    //     ],
+    //     notes: []
+    // }
+
+    const newApplication = {} // a new reference
+
+    //transfering old data to new reference
+    Object.entries(application).forEach(([label, _]) => {
+        newApplication[label] = application[label]
+    })
 
     //changes the only things needed to change specify on newappinfo
     Object.entries(newAppInfo).forEach(([label, data]) => {
-        newApp[label] = data
+        newApplication[label] = data
     })
 
-    newApp.dateEdited = today.dateFormatted
+    newApplication.dateEdited = today.dateFormatted
 
-    //making sure the application fits what an interview app needs
-    updateInterviewApp(newApp)
+    console.log(newApplication)
 
     //add a history list of when the status was changed *
     //for ex: an array of the (time edited, status updated to)
 
-    //up here is the backend update (code later)
+    //up here is the backend update (code later) PUT THIS TALKING WITH BACKEND CODE TO API.JS (IMPORTANT)
     //mimic backend code (replace later)
     //this is a backend response
-    let res = null
-    try {
-        res = updateApp(newApp, id)
-    } catch (err) {
-        console.log(err)
-        alert(err)
-    }
-
-    console.log(res)
-    return res
+    return updateApp(newApplication, id)
 }

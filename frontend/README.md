@@ -42,8 +42,13 @@
         - update title of the page in dashboard (finished)
         - add a modal for the creating appointment
         - add notes 
+        - add shortcuts to different parts of the page and a edit button with it
+        - change all task to equal priority and color too
+
+        - reason why salary range is a string because i want the same easy feeling of typing into a spreadsheet but not the crammed ui of it
 
     Starting form (5/10/2023 10:00am)
+        - redo all data to match json version in backend
 
     Individual App pages
         Interview prep

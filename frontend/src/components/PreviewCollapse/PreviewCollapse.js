@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 
 //components
-import PreviewCollapseElements from './PreviewCollapseElements.js';
+import PreviewCollapseButton from './components/PreviewCollapseButton.js';
 
 //utils
 import { viewSizeToPx } from '../../utils/measurements.js';
@@ -29,7 +29,7 @@ export default function PreviewCollapse(props) {
     } = props
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
-    const [showCollapseElements, setShowCollapseElements] = useState(false)
+    const [showCollapseButton, setShowCollapseButton] = useState(false)
     const [showCollapse, setShowCollapse] = useState(true)
     const [change, setChange] = useState(0)
 
@@ -44,14 +44,14 @@ export default function PreviewCollapse(props) {
             if (request) {
                 collapseRef.style.overflow = ""
                 collapseRef.style.maxHeight = ""
-                setShowCollapseElements(true)
+                setShowCollapseButton(true)
             } else {
                 collapseRef.style.overflow = overflow
                 collapseRef.style.maxHeight = maxVhOfCollapse.toString() + "vh"
-                setShowCollapseElements(false)
+                setShowCollapseButton(false)
             }
         }
-    }, [setShowCollapseElements, collapseRef, overflow, maxVhOfCollapse])
+    }, [setShowCollapseButton, collapseRef, overflow, maxVhOfCollapse])
 
     //start of (1): side effects of window sizes changing
     useEffect(() => {
@@ -64,7 +64,7 @@ export default function PreviewCollapse(props) {
                 const show = vhToPx < containerRef.clientHeight
 
                 //debugging, the container in px, parentcontainer in px, and parentcontainer in px int
-                // console.log(containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight, parseInt(collapseRef.offsetHeight))
+                // console.log(vhToPx, containerRef.clientHeight, getComputedStyle(collapseRef).maxHeight, parseInt(collapseRef.offsetHeight), collapseId)
 
                 setShowCollapse(show)
             }
@@ -93,8 +93,8 @@ export default function PreviewCollapse(props) {
         <>
             {collapseRef && showCollapse && containerRef ?
                 <>
-                    <PreviewCollapseElements
-                        showCollapseElements={showCollapseElements}
+                    <PreviewCollapseButton
+                        showCollapseButton={showCollapseButton}
                         showRemainingContents={showRemainingContents}
                         collapseId={collapseId}
                         text={text}

@@ -1,15 +1,18 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 
 //hooks
-import useApplicationManager from '../../hooks/useApplicationManager';
-import useLocationManager from '../../hooks/useLocationManager';
+import useApplicationManager from "../../hooks/useApplicationManager";
+import useLocationManager from "../../hooks/useLocationManager";
 
-//parts
-import StatusInfoSection from './Sections/StatusInfo/StatusInfoSection.js';
-import ApplicationInfoSection from './Sections/ApplicationInfo/ApplicationInfoSection.js'
-import TaskInfoSection from './Sections/TaskInfo/TaskInfoSection';
-import AdditonalInfoSection from './Sections/AdditonalInfo/AdditonalInfoSection';
+//utils
+import { checkIfNeedTask } from "../../utils/application";
+
+//sections
+import StatusAndDates from "./sections/StatusAndDates/StatusAndDates";
+import ApplicationInfos from "./sections/ApplicationInfos/ApplicationInfos";
+import Notes from "./sections/Notes/Notes";
+import TaskInfos from "./sections/TaskInfos/TaskInfos";
 
 export default function ApplicationDetails() {
 
@@ -18,40 +21,58 @@ export default function ApplicationDetails() {
     const { application, updateApplication } = useApplicationManager(parseInt(id));
 
     useEffect(() => {
-        document.title = "Application " + id + " - Job Tracker App"
+        if (application) {
+            document.title = "" + application.position + ", " + application.company + " -  Job Tracker App"
+        }
         return () => document.title = "Job Tracker App"
-    }, [id])
+    }, [id, application])
+
+    if (!application) {
+        return <></>
+    }
 
     return (
-        <>
-            {application ?
-                <div
-                    className="d-flex flex-column gap-5 w-100 my-3 my-xl-0"
-                    style={{ padding: "1.25vw 2.5vw" }}
-                    id={"application" + application.id}
-                >
-                    <StatusInfoSection
-                        application={application}
-                        updateApplication={updateApplication}
-                    />
-                    <ApplicationInfoSection
-                        application={application}
-                    />
-                    {application.status === "interviewing" || application.status === "accepted" ?
-                        <TaskInfoSection
-                            application={application}
-                        />
-                        :
-                        <></>
-                    }
-                    <AdditonalInfoSection
-                        application={application}
-                        updateApplication={updateApplication}
-                    />
+        <div
+            className="d-flex flex-column gap-5 w-100 my-3 my-xl-0"
+            style={{ padding: "1.25vw 2.5vw" }}
+            id={"application" + application.id}
+        >
+            <Link
+                to={"/application/edit/" + application.id}
+                className="btn btn-primary p-3 py-4 fs-6"
+                id="edit"
+            >
+                <div className="d-flex flex-row gap-3 justify-content-center">
+                    <i class="bi bi-pencil"></i>
+                    <div>
+                        Edit Application
+                    </div>
                 </div>
+            </Link>
+
+            <StatusAndDates
+                application={application}
+                updateApplication={updateApplication}
+                fontSize={"fs-5"}
+            />
+            <ApplicationInfos
+                application={application}
+                fontSize={"fs-5"}
+            />
+            {checkIfNeedTask(application.status) ?
+                <TaskInfos
+                    application={application}
+                    updateApplication={updateApplication}
+                    fontSize={"fs-6"}
+                />
                 :
                 <></>
             }
-        </>
+            <Notes
+                application={application}
+                updateApplication={updateApplication}
+                fontSize={"fs-6"}
+            />
+        </div>
     )
 }

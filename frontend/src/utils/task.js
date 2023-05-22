@@ -1,111 +1,149 @@
-import { findTimeDifference } from "./time.js"
-import { sortDates } from "./date.js"
+//utils
+import { findTimeDifference } from "./dateTime/time/time.js"
+import { sortDates } from "./dateTime/date/date.js"
+import { checkIfNeedTask } from "./application.js"
+import { textFormat } from "./text.js"
+import { validateDateTime } from "./dateTime/dateTime.js"
 
 //task.js
 //functions here all help into organizing the details of the tasks being display
 
-export function findAllTasks ( applications ) {
+export function findAllTasks(applications) {
 
     let tasks = []
-    applications.forEach((application) => {
-        tasks = tasks.concat(findTasksOnApp(application))
-    })
+
+    if (applications) {
+        applications.forEach((application) => {
+            if (checkIfNeedTask(application.status)) {
+                tasks = tasks.concat(findTasksOnApp(application))
+            }
+        })
+    }
 
     return tasks
 }
 
-export function findTasksOnApp ( app ) {
+export function findTasksOnApp(application) {
 
-    //input: the app and the tasks list for updating
-    
-    //0 - appointment
-    //1 - Finish interview prep
-    //find and organize task
+    //checks out the task for every app
+    //and adds task that people forgot to do
 
     const tasks = []
 
-    //gotta ensure the appointments sorted before going on
-    app.appointments.sort((a, b) => sortDates(a.date, b.date))
-    
-    //app informations for task displaying
-    const id = app.id
-    const position = app.position
-    const company = app.company
-    const appointments = app.appointments
+    //sort the task by date first
+    application.tasks.sort((a, b) => sortDates(a.date, b.date))
 
-    //need to find from when to when the task is valid
+    const {
+        id,
+        position,
+        company
+    } = application
+
     const today = "today"
-    const earliestAppointment = findEarliestAppointment(appointments)
-    const timeDue = earliestAppointment.date
-    const indexOftheAppointment = earliestAppointment.index
+    const earliestTask = findEarliestTask(application.tasks)
+    const indexForEarliestTask = earliestTask.index
 
-    //insert task
-    // if -1 then theres no appointment
-    if(indexOftheAppointment === -1){
+    if (indexForEarliestTask === -1) {
         tasks.push(
             {
-                appId: id,
+                id: id,
                 position: position,
                 company: company,
-                priority : 0,
-                type: "appointments",
-                title: "Track your next meeting time",
+                priority: 0,
+                type: "tasks",
+                title: "Track your next upcoming interview or related task",
                 date: today,
                 timeDue: today,
             }
         )
-    }else{
-        //Start from today's appointment date and beyond
-        appointments.slice(indexOftheAppointment).forEach(appointment =>{
+    } else {
+        application.tasks.slice(indexForEarliestTask).forEach((task) => {
             tasks.push(
                 {
-                    appId: id,
+                    id: id,
                     position: position,
                     company: company,
                     priority: 0,
-                    type: "appointments",
-                    title: appointment.title,
-                    date: appointment.date,
-                    timeDue: appointment.date,
+                    type: "tasks",
+                    title: textFormat(task.title),
+                    date: task.date,
+                    timeDue: task.date,
                 }
             )
         })
     }
 
-    //if didn't finish prep for interview
-    if (app.interviewPrep.length <= 0) {
-        tasks.push(
-            {
-                appId: id,
-                position: position,
-                company: company,
-                priority: 1,
-                type: "interview-prep",
-                title: "Prepare for interview questions",
-                date: today,
-                timeDue: timeDue,
-            }
-        )
+    //finding some of the major task the user needs to finish
+    //upload resume, upload the time you applied to this application
+    if (application.status !== "interested") {
+        if (!validateDateTime(application.dateApplied)) {
+            tasks.push(
+                {
+                    id: id,
+                    position: position,
+                    company: company,
+                    priority: 1,
+                    type: "edit",
+                    title: "Please give the time you applied to the application",
+                    date: today,
+                    timeDue: today,
+                }
+            )
+        } if (application.resume.length <= 0) {
+            tasks.push(
+                {
+                    id: id,
+                    position: position,
+                    company: company,
+                    priority: 1,
+                    type: "edit",
+                    title: "Insert the link for your resume",
+                    date: today,
+                    timeDue: today,
+                }
+            )
+        }
     }
 
     return tasks
 }
 
-export function findEarliestAppointment ( appointments ) {
 
-    //input: appointments array
+export function findEarliestTask(tasks) {
+
+    //input: tasks array
     //returns the index of the earliest up to date appointment possible
     //up to date meaning it has to be later than today
 
     const today = "today"
-    for(let i=0; i < appointments.length; i++) {
-        const appointment = appointments[i]
-        const timeDiff = findTimeDifference(today, appointment.date)
-        if(timeDiff.daysLeft >= 0){
-            return { date: appointment.date, index: i }
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i]
+        const timeDiffObject = findTimeDifference(today, task.date)
+        if (timeDiffObject.daysLeft >= 0) {
+            return { date: task.date, index: i }
         }
     }
 
     //index of that appointment
     return { date: today, index: -1 }
+}
+
+export function findPrioritizedTask(task1, task2) {
+
+    const taskDateWhen = sortDates(task1.date, task2.date)
+
+    //same day
+    if (taskDateWhen === 0) {
+        //num smaller is higher priority
+        if (task1.priority < task2.priority) {
+            return -1 //goes first
+        } else if (task1.priority > task2.priority) {
+            return 1
+        } else {
+            return 0 //same priority
+        }
+    } else {
+        //different day, then we sort by date instead
+        return taskDateWhen
+    }
 }
