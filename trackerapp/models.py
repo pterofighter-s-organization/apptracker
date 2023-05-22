@@ -32,4 +32,10 @@ class Application(models.Model):
     date_edited = models.CharField(max_length=255)
     date_created = models.CharField(max_length=255)
     salary = models.CharField(max_length=255)
+
+class Task(models.Model):
+    task_id = models.AutoField(primary_key=True)
+    application_id = models.IntegerField
+    title = models.CharField(max_length=255)
+    date_due = models.CharField(max_length=255)
     
