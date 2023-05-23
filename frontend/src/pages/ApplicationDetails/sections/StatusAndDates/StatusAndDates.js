@@ -26,7 +26,7 @@ export default function StatusAndDates(props) {
                 const today = dateFormat("today")
                 const newAppInfo = {
                     "status": formData["status"],
-                    "dateApplied": today.dateFormatted,
+                    "date_applied": today.dateFormatted,
                 }
                 updateApplication(application, newAppInfo)
             } else {
@@ -73,7 +73,7 @@ export default function StatusAndDates(props) {
                         Updated :
                     </div>
                     <div className="text-dark-emphasis">
-                        <DateAndTime date={application.dateEdited} />
+                        <DateAndTime date={application.date_edited} />
                     </div>
                 </div>
 
@@ -83,9 +83,9 @@ export default function StatusAndDates(props) {
                         <div className="">
                             Applied :
                         </div>
-                        {application.dateApplied.length > 0 ?
+                        {application.date_applied.length > 0 ?
                             <div className="text-dark-emphasis">
-                                <DateAndTime date={application.dateApplied} />
+                                <DateAndTime date={application.date_applied} />
                             </div>
                             :
                             <div className="text-dark-emphasis">
@@ -103,7 +103,7 @@ export default function StatusAndDates(props) {
                         Created :
                     </div>
                     <div className="text-dark-emphasis">
-                        <DateAndTime date={application.dateCreated} />
+                        <DateAndTime date={application.date_created} />
                     </div>
                 </div>
 

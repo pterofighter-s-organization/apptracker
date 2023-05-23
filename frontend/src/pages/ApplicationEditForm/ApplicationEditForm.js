@@ -42,7 +42,7 @@ export default function ApplicationEditForm() {
     useEffect(() => {
         if (application) {
             //makes (MM-DD-YYYY) (hh:mm) ex: hour + label: data
-            const dateAppliedData = dateTimeInitializer(application.dateApplied, "Applied")
+            const dateAppliedData = dateTimeInitializer(application.dateApplied, "_applied")
             const newFormData = { ...basicDataInitializer(application), ...dateAppliedData }
 
             setFormData(newFormData)
@@ -54,13 +54,13 @@ export default function ApplicationEditForm() {
 
         event.preventDefault()
 
-        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "Applied", true, true) //allow empty? allow dates before today?
+        const dateAppliedCheck = dateTimeValidator(formData, setErrorMsgs, "_applied", true, true) //allow empty? allow dates before today?
         const positionCheck = textValidator(formData, setErrorMsgs, "position")
         const companyCheck = textValidator(formData, setErrorMsgs, "company")
         const salaryCheck = textValidator(formData, setErrorMsgs, "salary")
         const resumeCheck = urlValidator(formData, setErrorMsgs, "resume")
-        const coverLetterCheck = urlValidator(formData, setErrorMsgs, "coverLetter")
-        const interviewPreparationCheck = urlValidator(formData, setErrorMsgs, "interviewPreparation")
+        const coverLetterCheck = urlValidator(formData, setErrorMsgs, "cover_letter_link")
+        const interviewPreparationCheck = urlValidator(formData, setErrorMsgs, "interview_preparation_link")
 
         // console.log("test1", dateAppliedCheck, dateCreatedCheck, positionCheck, companyCheck, salaryCheck)
 
@@ -76,10 +76,10 @@ export default function ApplicationEditForm() {
                 "company": formData["company"],
                 "salary": formData["salary"],
                 "description": formData["description"],
-                "resume": formData["resume"],
-                "coverLetter": formData["coverLetter"],
-                "interviewPreparation": formData["interviewPreparation"],
-                "dateApplied": dateAppliedCheck.value,
+                "resume_link": formData["resume_link"],
+                "cover_letter_link": formData["cover_letter_link"],
+                "interview_preparation_link": formData["interview_preparation_link"],
+                "date_applied": dateAppliedCheck.value,
                 "status": formData["status"],
             }
             // console.log(newAppInfo)
@@ -146,7 +146,7 @@ export default function ApplicationEditForm() {
                 closeModal={closeModal}
                 buttonLabel={"Back to app"}
                 showSuccessModal={showSuccessModal}
-                address={"/application/" + application.id}
+                address={"/application/" + application.application_id}
             />
         </>
     )

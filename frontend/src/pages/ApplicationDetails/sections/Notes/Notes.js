@@ -22,7 +22,7 @@ export default function AddditionalInfos(props){
 
             <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 w-100">
                 <NoteCardList
-                    applicationId={application.id}
+                    applicationId={application.application_id}
                 />
             </div>
         </div>

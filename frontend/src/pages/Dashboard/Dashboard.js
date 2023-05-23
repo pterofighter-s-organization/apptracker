@@ -48,10 +48,10 @@ export default function Dashboard() {
             />
 
             {/* task table */}
-            <CombinedAppTasks
+            {/* <CombinedAppTasks
                 applications={applications}
                 updateApplication={updateApplication}
-            />
+            /> */}
 
         </div>
     )

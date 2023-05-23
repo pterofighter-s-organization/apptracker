@@ -34,7 +34,7 @@ export default function ApplicationCard({ application, updateApplication }) {
                 const today = dateFormat("today")
                 const newAppInfo = {
                     "status": status,
-                    "dateApplied": today.dateFormatted,
+                    "date_applied": today.dateFormatted,
                 }
 
                 updateApplication(application, newAppInfo)
@@ -61,13 +61,13 @@ export default function ApplicationCard({ application, updateApplication }) {
                 company={application.company}
             />
             <Link 
-                to={"/application/"+application.id} 
+                to={"/application/"+application.application_id} 
                 className="card-text btn btn-primary p-2 m-4 mt-0"
             >
                 More Details
             </Link>
             <AppCardFooter
-                dateEdited={application.dateEdited}
+                dateEdited={application.date_edited}
             />
         </div>
     )

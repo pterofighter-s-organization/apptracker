@@ -35,10 +35,10 @@ export default function ApplicationDetails() {
         <div
             className="d-flex flex-column gap-5 w-100 my-3 my-xl-0"
             style={{ padding: "1.25vw 2.5vw" }}
-            id={"application" + application.id}
+            id={"application" + application.application_id}
         >
             <Link
-                to={"/application/edit/" + application.id}
+                to={"/application/edit/" + application.application_id}
                 className="btn btn-primary p-3 py-4 fs-6"
                 id="edit"
             >
@@ -59,7 +59,7 @@ export default function ApplicationDetails() {
                 application={application}
                 fontSize={"fs-5"}
             />
-            {checkIfNeedTask(application.status) ?
+            {/* {checkIfNeedTask(application.status) ?
                 <TaskInfos
                     application={application}
                     updateApplication={updateApplication}
@@ -72,7 +72,7 @@ export default function ApplicationDetails() {
                 application={application}
                 updateApplication={updateApplication}
                 fontSize={"fs-6"}
-            />
+            /> */}
         </div>
     )
 }

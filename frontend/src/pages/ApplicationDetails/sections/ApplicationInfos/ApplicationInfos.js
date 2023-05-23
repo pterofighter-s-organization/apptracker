@@ -40,10 +40,10 @@ export default function ApplicationInfos(props) {
 
                     {/* links */}
                     <LinksInfo
-                        interviewPreparation={application.interviewPreparation}
+                        interviewPreparation={application.interview_preparation_link}
                         status={application.status}
                         resume={application.resume}
-                        coverLetter={application.coverLetter}
+                        coverLetter={application.cover_letter_link}
                     />
 
                 </div>

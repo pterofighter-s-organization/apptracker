@@ -8,9 +8,9 @@ export default function basicDataInitializer (inputObj) {
         "position": "",
         "company": "",
         "salary": "",
-        "interviewPreparation": "",
-        "resume": "",
-        "coverLetter": "",
+        "interview_preparation_link": "",
+        "resume_link": "",
+        "cover_letter_link": "",
         "description": "",
     }
 
