@@ -18,7 +18,7 @@ export default function CategorizedApplications({ applications, updateApplicatio
 
     const categorizedApps = useMemo(() => {
         const res = categorizeApplications(applications, "status")
-        return [...res.interviewing, ...res.applied, ...res.interested, ...res.rejected, ...res.ghosted]
+        return [...res.interviewing, ...res.applied, ...res.accepted,...res.interested,...res.rejected, ...res.ghosted]
     }, [applications])
 
     //sorts the apps to the most updated one for each status

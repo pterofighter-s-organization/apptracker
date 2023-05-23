@@ -23,13 +23,15 @@ export default function ApplicationCard({ application, updateApplication }) {
     const [formData, setFormData] = useState({
         "status": application.status
     })
-
+    
+    console.log(application.status, "after")
     //updates when status changed
     useEffect(() => {
         //status = new status, app.status is the old status
         const status = formData["status"]
 
         if (status !== application.status) {
+            console.log(status, application.status, application.application_id)
             if (status === "applied" && application.status === "interested") {
                 const today = dateFormat("today")
                 const newAppInfo = {
