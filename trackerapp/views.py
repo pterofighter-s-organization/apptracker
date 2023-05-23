@@ -28,7 +28,6 @@ def application_list(request):
         return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
         application_data = JSONParser().parse(request)
-        print(request, application_data,"troll")
         application_serializer = ApplicationSerializer(data=application_data)
         if application_serializer.is_valid():
             application_serializer.save()
