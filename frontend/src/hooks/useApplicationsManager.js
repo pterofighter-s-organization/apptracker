@@ -47,7 +47,7 @@ export default function useApplicationsManager() {
 
     //** adding, changing the application */
     //figure out usecallback
-    async function updateApplication(app, newAppInfo) {
+    function updateApplication(app, newAppInfo) {
 
         // const res = updateAppInfo(app, newAppInfo)
 
@@ -115,17 +115,30 @@ export default function useApplicationsManager() {
         //         console.error('Error updating item:', error);        
         //     });
 
-        try{
-            const test = applications
-            setApplications(null)
-            const response = await axios.put("http://127.0.0.1:8000/api/application/"+res.application_id, res)
-            console.log("Item updated successfully", response.data);
-            setApplications(applications.map(item => (item.application_id === response.data.application_id ? response.data : item)))
-        }catch(error){
-            console.log("Error updating item:", error);
-        } //this help solve the infinite loop
 
-        
+        async function postData() {
+            try {
+                const test = applications
+                // setApplications(null)
+                const response = await axios.put("http://127.0.0.1:8000/api/application/" + res.application_id, res)
+                const data = await response.data
+                console.log("Item updated successfully", data);
+                const current = [...applications]
+                const index = current.findIndex((app) => app.application_id === data.application_id)
+
+                if (index !== -1) {
+                    current[index] = data
+                }
+                setApplications(current)
+                console.log(applications, "1")
+            } catch (error) {
+                console.log("Error updating item:", error);
+            } //this help solve the infinite loop            
+        }
+
+        postData()
+
+
         // axios.put("http://127.0.0.1:8000/api/application/3", {
         //     "user_id": 1,
         //     "position": "Java Develope1",
