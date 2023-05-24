@@ -36,5 +36,6 @@ urlpatterns = [
     re_path(r'^api/notes_app/(?P<app_id>[0-9]+)$', views.notes_list_application),
     re_path(r'^api/task$', views.task_list),
     re_path(r'^api/task/(?P<pk>[0-9]+)$', views.task_detail),
+    re_path(r'^api/task_app/(?P<app_id>[0-9]+)$', views.task_list_application),
     # path("api/", include(router.urls)),
 ]

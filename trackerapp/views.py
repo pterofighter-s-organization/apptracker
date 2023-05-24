@@ -170,6 +170,14 @@ def task_detail(request, pk):
             return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+def task_list_application(request, app_id):
+    tasks = Task.objects.filter(application_id=app_id)
+
+    if request.method  == 'GET':
+        tasks_serializer = TaskSerializer(tasks, many=True)
+        return JsonResponse(tasks_serializer.data, safe=False)
 
 # class UsersView(viewsets.ModelViewSet):
 #     serializer_class = UsersSerializer
