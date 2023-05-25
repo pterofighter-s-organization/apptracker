@@ -1,15 +1,8 @@
 
 
-export default function Urlbox(props) {
+export default function Urlbox({ formData, setFormData, label }) {
 
-    const {
-        formData,
-        setFormData,
-        fontSize,
-        label
-    } = props
-
-    function changeTextInput(event) {
+    function changeInput(event) {
         // console.log(event.target.value);
         event.preventDefault()
         const newText = event.target.value
@@ -21,8 +14,8 @@ export default function Urlbox(props) {
             type="text"
             value={formData[label]}
             placeholder={"http://www.sampledoc123/edit"}
-            className={`form-control p-3 bg-body ${fontSize}`}
-            onChange={(e) => changeTextInput(e)}
+            className={`form-control p-3 bg-body`}
+            onChange={(e) => changeInput(e)}
         />
     )
 }

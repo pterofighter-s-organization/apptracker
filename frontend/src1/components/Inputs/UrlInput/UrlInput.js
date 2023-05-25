@@ -1,5 +1,5 @@
 
-export default function TextBox({ formData, setFormData, label }) {
+export default function UrlInput({ formData, setFormData, label }) {
 
     function changeInput(event) {
         // console.log(event.target.value);
@@ -12,7 +12,7 @@ export default function TextBox({ formData, setFormData, label }) {
         <input
             type="text"
             value={formData[label]}
-            placeholder={"text"}
+            placeholder={"http://www.sampledoc123/edit"}
             className={`form-control p-3 bg-body`}
             onChange={(e) => changeInput(e)}
         />

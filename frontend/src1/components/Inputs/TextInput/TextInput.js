@@ -1,5 +1,5 @@
 
-export default function TextBox({ formData, setFormData, label }) {
+export default function TextInput({ formData, setFormData, label }) {
 
     function changeInput(event) {
         // console.log(event.target.value);
