@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 //hooks
-import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
+import useWindowSizeManager from '../../hooks/useWindowSizeManager';
 
 //components
 import { PreviewCollapseButton } from "./components"
@@ -10,9 +10,6 @@ import { PreviewCollapseButton } from "./components"
 //utils
 import { viewSizeToPx } from "../../utils/measurements.js"
 
-//a semi-component, need to pair with a container
-//because I want to leave flexibility for how the container weights in height and width
-//example on how to build a preview collapse at the very bottom 
 export default function PreviewCollapse(props) {
 
     //here is what this semi component needs

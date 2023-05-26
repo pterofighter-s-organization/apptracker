@@ -1,0 +1,7 @@
+#side-navbar {
+    transition: min-width 0.3s ease-in-out, max-width 0.3s ease-in-out;
+}
+
+#side-navbar.closed {
+    white-space: nowrap;
+}

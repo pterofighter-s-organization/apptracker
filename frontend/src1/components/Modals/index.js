@@ -1,2 +1,2 @@
-export { SubmissionModal } from './SubmissionModal';
+export { SubmitModal } from './SubmitModal';
 export { RerouteModal } from './RerouteModal';

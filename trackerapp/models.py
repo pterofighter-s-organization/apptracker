@@ -35,7 +35,7 @@ class Application(models.Model):
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
-    application_id = models.IntegerField
+    application_id = models.IntegerField()
     title = models.CharField(max_length=255)
     date_due = models.CharField(max_length=255)
     

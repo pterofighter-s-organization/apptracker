@@ -1,2 +1,2 @@
-export { RerouteSuccessModal } from './RerouteSuccessModal';
-export { RerouteErrorModal } from './RerouteErrorModal'
+export { RerouteSuccessModalContent } from './RerouteSuccessModalContent';
+export { RerouteErrorModalContent } from './RerouteErrorModalContent'

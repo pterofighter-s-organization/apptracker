@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react"
 
-//utils
-import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
+import { useState, useEffect } from "react"
 
 //components
-import NavSidebar from "./components/Sidebar/NavSideBar.js"
-import NavCollapseBar from "./components/CollapseBar/NavCollapseBarTest.js"
+import { CollapseNavbar, SideNavbar } from "../../components/Navbars"
 
-export default function Navbar({ breakpoint }) {
+//utils
+import useWindowSizeManager from "../../hooks/useWindowSizeManager"
+
+export default function PageLayout({ children }) {
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [sideBarShow, setSidebarShow] = useState(true)
 
     //the breakpoint is only what you want this to show before the breakpoint size
-    
-    useEffect(() => {
 
+    useEffect(() => {
         const sizesMapToWidth = {
             "s": 576,
             "sm": 768,
@@ -24,21 +23,21 @@ export default function Navbar({ breakpoint }) {
             "xl": 1400,
         }
 
-        if (windowWidth < sizesMapToWidth[breakpoint]) {
+        if (windowWidth < sizesMapToWidth["lg"]) {
             setSidebarShow(false)
         } else {
             setSidebarShow(true)
         }
-
-    }, [windowWidth, breakpoint])
+    }, [windowWidth])
 
     return (
-        <>
+        <div className="d-flex flex-column flex-xl-row">
             {sideBarShow ?
-                <NavSidebar windowHeight={windowHeight} />
+                <SideNavbar windowHeight={windowHeight} />
                 :
-                <NavCollapseBar/>
+                <CollapseNavbar />
             }
-        </>
+            {children}
+        </div>
     )
 }

@@ -1,4 +1,9 @@
 
+# This component is
+- a semi-component, need to pair with a container
+- because I want to leave flexibility for how the container weights in height and width
+- example on how to build a preview collapse at the very bottom 
+
 # This component must
 - this component must be pair with a collapse container
 
