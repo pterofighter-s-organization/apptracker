@@ -2,15 +2,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 //hooks
-import useWindowSizeManager from '../../hooks/useWindowSizeManager';
+import useWindowSizeManager from "../../hooks/useWindowSizeManager.js"
 
 //components
-import { PreviewCollapseButton } from "./components"
+import PreviewCollapseButton from './components/PreviewCollapseButton.js';
 
 //utils
-import { viewSizeToPx } from "../../utils/measurements.js"
+import { viewSizeToPx } from '../../utils/measurements.js';
 
+//a semi-component, need to pair with a container
+//because I want to leave flexibility for how the container weights in height and width
+//example on how to build a preview collapse at the very bottom 
 export default function PreviewCollapse(props) {
+
+    //this component must be pair with a collapse container
+    //elements like button and the blur background
+    //the buttons, and the background to activate the collapse
 
     //here is what this semi component needs
     const {
@@ -100,3 +107,27 @@ export default function PreviewCollapse(props) {
         </>
     )
 }
+
+//EXAMPLE of a preivew collapse with container to put the item
+/* <div style={{ position: "relative" }}>
+    <div
+        id="collapse-tasks"
+        style={{ maxHeight: taskVh.toString() + "vh", overflow: "hidden" }}
+    >
+        <div
+            className="table-responsive"
+            id="dashboard-tasks"
+        >
+            <TaskTable
+                tasks={tasks}
+            />
+        </div>
+    </div>
+    <PreviewCollapse
+        text={"Tasks"}
+        maxVhOfCollapse={(int)}
+        collapseId={"collapse-tasks"}
+        overflow={"hidden"}
+        dependency={tasks}
+    />
+</div> */

@@ -1,0 +1,11 @@
+@media (min-width: 680px) {
+    #note-card{
+        width: min(315px);
+    }
+}
+
+@media (max-width: 680px) {
+    #note-card{
+        width: 100%;
+    }
+}

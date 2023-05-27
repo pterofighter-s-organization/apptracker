@@ -1,50 +1,71 @@
 import { useEffect, useState } from "react";
 
-//utils
-import { updateAppInfo } from "../utils/application";
-
-//backend mimic
-import { getApps } from "../data/mimicBackendStatic";
-
-
+//services
+import api from "../services/api";
 
 export default function useApplicationManager(id) {
 
     const [application, setApplication] = useState(null)
-    // const [change, setChange] = useState(0) no need anymore because useref solved my problem
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-
-        let res = null
-        try {
-            //set loading state here
-            res = getApps().filter(app => (app.id === id))[0]
-
-        } catch (err) {
-            //remove loading state here
-            console.log(err)
-        }
-
-        // console.log("test")
-        //or remove loading here
-        setApplication(res)
-
+        fetchApplication(id)
     }, [id])
 
-    function updateApplication(app, newAppInfo) {
+    async function fetchApplication(application_id) {
 
-        try{
-            setApplication(updateAppInfo(app, newAppInfo))
+        try {
+            setIsLoading(true)
+            const response = await api.applicationAPI.getApplication(application_id)
+            setApplication(response.data)
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false)
+        }
+    }
+
+    async function updateApplication(app) {
+
+        const { application_id } = app
+
+        const current = application
+        //test, change later*
+        setApplication(null)
+
+        try {
+            setIsLoading(true)
+            const response = await api.applicationAPI.updateApplication(application_id, app)
+            setApplication(response.data)
+            setIsLoading(false)
             return true
-        }catch(err){
-            console.log(err)
+        } catch (error) {
+            console.log(error)
+            //test, change later*
+            setApplication(current)
+            setIsLoading(false)
             return false
         }
-        // setChange(change ? 0 : 1)
+    }
+
+    async function createApplication(app){
+
+        try{
+            setIsLoading(true)
+            const response = await app.applicationAPI.createApplication(app)
+            setIsLoading(false)
+            return response.data !== null
+        }catch(error){
+            console.log(error)
+            setIsLoading(false)
+            return false
+        }
     }
 
     return {
         application,
-        updateApplication
+        updateApplication,
+        createApplication,
+        isLoading
     }
 }
