@@ -1,12 +1,13 @@
-/* for phone and tablet screens */
 @media (min-width: 680px) {
-    #addNoteButton{
+    #note-add-button{
         width: min(315px);
+        height: 300px;
     }
 }
 
 @media (max-width: 680px) {
-    #addNoteButton{
+    #note-add-button{
         width: 100%;
+        height: auto;
     }
 }

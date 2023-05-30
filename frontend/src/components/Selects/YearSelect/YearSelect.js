@@ -10,7 +10,8 @@ export default function YearSelect({ formData, setFormData, label }) {
     function selectYearValues() {
         const res = []
         const todayDateTime = findTodayDate()
-        const currentYearInInt = parseInt(todayDateTime.split(" ")[0][2])
+        // console.log(todayDateTime.split(" ")[0].split("-")[2])
+        const currentYearInInt = parseInt(todayDateTime.split(" ")[0].split("-")[2])
 
         for (let num = currentYearInInt - 5; num <= currentYearInInt + 10; num += 1) {
             res.push(num.toString())

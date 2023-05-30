@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 //pages
-import { Dashboard } from './pages';
+import { Dashboard } from './pages/Dashboard';
+import { ApplicationDetails } from './pages/ApplicationDetails'
+import { EditApplication } from './pages/EditApplication';
 // import ApplicationDetails from './pages/ApplicationDetails/ApplicationDetails.js';
 // import ApplicationEditForm from './pages/ApplicationEditForm/ApplicationEditForm.js';
 // import ApplicationForm from './pages/ApplicationForm/ApplicationForm.js';
 
 //layouts
-import { PageLayout } from './layouts';
+import { PageLayout } from './layouts/PageLayout';
 
 //css
 import './App.css'
@@ -25,6 +27,8 @@ export default function App() {
             {/* <TaskTablePresentation /> */}
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
+              <Route exact path="/application/:id" element={<ApplicationDetails />} />
+              <Route exact path="/application/edit/:id" element={<EditApplication />} />
               {/* <Route exact path="/application/:id" element={<ApplicationDetails />} />
               <Route exact path="/application/edit/:id" element={<ApplicationEditForm />} />
               <Route exact path="/application/new" element={<ApplicationForm />} /> */}

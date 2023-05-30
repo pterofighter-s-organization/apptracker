@@ -1,21 +1,21 @@
+//components
+import { TaskRow } from "./components"
+
 //utils
-
-
+import * as taskUtils from "../../utils/taskUtils"
 
 export default function TaskTable({ tasks }) {
 
     //find the priority of the task and sort them
     tasks.sort((a, b) => {
-        return findPrioritizedTask(a, b)
+        return taskUtils.findPrioritizedTask(a, b)
     })
 
-    if (!tasks) {
-        return <>Loading...</>
-    }
+    const relevantTasks = taskUtils.findRelevantTasks(tasks)
 
     //styles
     const headerPadding = "p-4"
-    let taskCount = 0
+    let count = 1
 
     return (
         <table className={`table text-center`} >
@@ -32,8 +32,27 @@ export default function TaskTable({ tasks }) {
             </thead>
 
             <tbody>
-                {
-                    
+                {relevantTasks.map((task) => {
+                    return (
+                        <TaskRow
+                            task={task}
+                            count={count++}
+                        />
+                    )
+                })}
+                {relevantTasks.length <= 0 ?
+                    <tr>
+                        <th
+                            scope="row"
+                            key={count++}
+                        >
+                            {count++}
+                        </th>
+                        <td></td>
+                        <td>No tasks found!</td>
+                    </tr>
+                    :
+                    <></>
                 }
             </tbody>
 

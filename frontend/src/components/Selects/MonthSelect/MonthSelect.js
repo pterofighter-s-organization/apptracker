@@ -24,7 +24,6 @@ export default function MonthSelect({ formData, setFormData, label }) {
         setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newMonth }))
     }
 
-
     return (
         <select
             className={`form-select p-3 bg-body`}

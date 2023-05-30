@@ -1,7 +1,7 @@
 //css
 import "./PreviewCollapseButton.css"
 
-export default function PreviewCollapseButton({ showCollapseButton, showRemainingContents, text, collapseId }) {
+export default function PreviewCollapseButton({ collapseId, showCollapseButton, showRemainingContents, text }) {
 
     const buttonId = collapseId + '-button'
     const backgroundId = collapseId + '-background'
@@ -10,7 +10,7 @@ export default function PreviewCollapseButton({ showCollapseButton, showRemainin
         <>
             {showCollapseButton ?
                 <>
-                    <div className="d-flex justify-content-center my-4">
+                    <div className="d-flex justify-content-center mt-4">
                         <button
                             className="btn btn-primary p-3 px-5" type="button" onClick={(e) => {
                                 e.preventDefault()

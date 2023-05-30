@@ -39,7 +39,7 @@ export default function StatusButton({ formData, setFormData, label }) {
                 type="button"
                 className={`btn btn-${statusMapColor[status]} pe-none`}
             >
-                <div className={fontSize}>
+                <div>
                     {formatters.textFormatter(status)}
                 </div>
             </button>
@@ -67,7 +67,7 @@ export default function StatusButton({ formData, setFormData, label }) {
                                         updateStatus(statusLabel)
                                     }}
                                 >
-                                    <div className={fontSize}>
+                                    <div>
                                         {formatters.textFormatter(statusLabel)}
                                     </div>
                                 </button>

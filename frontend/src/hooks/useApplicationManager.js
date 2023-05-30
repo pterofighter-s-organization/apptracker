@@ -29,21 +29,15 @@ export default function useApplicationManager(id) {
 
         const { application_id } = app
 
-        const current = application
-        //test, change later*
-        setApplication(null)
-
         try {
-            setIsLoading(true)
+            // setIsLoading(true)
             const response = await api.applicationAPI.updateApplication(application_id, app)
             setApplication(response.data)
-            setIsLoading(false)
+            // setIsLoading(false)
             return true
         } catch (error) {
             console.log(error)
-            //test, change later*
-            setApplication(current)
-            setIsLoading(false)
+            // setIsLoading(false)
             return false
         }
     }
@@ -51,13 +45,13 @@ export default function useApplicationManager(id) {
     async function createApplication(app){
 
         try{
-            setIsLoading(true)
+            // setIsLoading(true)
             const response = await app.applicationAPI.createApplication(app)
-            setIsLoading(false)
+            // setIsLoading(false)
             return response.data !== null
         }catch(error){
             console.log(error)
-            setIsLoading(false)
+            // setIsLoading(false)
             return false
         }
     }

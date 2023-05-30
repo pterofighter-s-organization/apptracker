@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 //components
 import { StatusButton } from "../../Buttons"
-import { DateAndTime } from "../../DateTime"
+import { DateTime } from "../../DateTime"
 
 //utils
-import * as applicationUtils from "../utils/applicationUtils"
-import * as formatters from "../../utils/formatters"
+import * as formatters from "../../../utils/formatters"
+import * as appUtils from "../../../utils/applicationUtils"
 
 //css
 import "./ApplicationCard.css"
@@ -24,13 +25,13 @@ export default function ApplicationCard({ application, updateApplication }) {
 
         if (status !== application.status) {
             if (status === "applied" && application.status === "interested") {
-                const updateInfo = applicationUtils.updateInfoForAppliedApp()
-                updateApplication(applicationUtils.updateApplicationInfo(updateInfo, application))
+                const updateInfo = appUtils.updateInfoForAppliedApp(application.date_applied)
+                updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
             } else {
                 const updateInfo = {
                     "status": status
                 }
-                updateApplication(applicationUtils.updateApplicationInfo(updateInfo, application))
+                updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
             }
         }
     }, [formData, application, updateApplication])
@@ -56,8 +57,15 @@ export default function ApplicationCard({ application, updateApplication }) {
                 </div>
             </div>
 
+            <Link 
+                to={"/application/"+application.application_id} 
+                className="card-text btn btn-primary m-4 mt-0 p-2"
+            >
+                More Details
+            </Link>
+
             <div className="border border-0 card-footer text-body-secondary p-4">
-                Updated: <DateAndTime dateTime={application.dateEdited} />
+                Updated: <DateTime dateTime={application.date_edited} />
             </div>
 
         </div>

@@ -19,6 +19,7 @@ export function errorInfoInitializer() {
 export function dateInfoInitializer(dateTime, label) {
 
     label = labelFormatter("", label)
+    console.log(label)
 
     //label is what this data field gonna be called
     const dateInfoObj = {

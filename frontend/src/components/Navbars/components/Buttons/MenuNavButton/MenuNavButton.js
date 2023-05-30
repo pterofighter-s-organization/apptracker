@@ -1,4 +1,7 @@
 
+//css
+import "../NavButton.css"
+
 export default function MenuNavButton ({ showLabel, handleChangeMenu }) {
 
     return (
@@ -12,6 +15,7 @@ export default function MenuNavButton ({ showLabel, handleChangeMenu }) {
                         e.preventDefault()
                         handleChangeMenu("minimize")
                     }}
+                    id="nav-tooltip"
                     data-bs-toggle="tooltip" data-bs-placement="right" title={"Closes the menu"}
                 >
                     <i
@@ -28,6 +32,7 @@ export default function MenuNavButton ({ showLabel, handleChangeMenu }) {
                     className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
                     style={{ border: "none" }}
                     onClick={(e) => (handleChangeMenu("expand"))}
+                    id="nav-tooltip"
                     data-bs-toggle="tooltip" data-bs-placement="right" title={"Expands the menu"}
                 >
                     <i

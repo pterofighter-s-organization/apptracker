@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //components
-import { MenuNavButton, LogUserNavButton, EssentialNavButtons } from "../components/Buttons";
+import { MenuNavButton, LogUserNavButton, EssentialNavButtons } from "../components";
 
 //css
 import "./SideNavbar.css"

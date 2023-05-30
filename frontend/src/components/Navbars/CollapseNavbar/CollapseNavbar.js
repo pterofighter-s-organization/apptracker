@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-//components
-import { LogUserNavButton, MenuNavButton, EssentialNavButtons, NavButton } from "../components/Buttons"
+//sub-components
+import { LogUserNavButton, MenuNavButton, EssentialNavButtons, NavButton } from "../components"
 
 //css
 import "./CollapseNavbar.css"
@@ -19,10 +19,10 @@ export default function CollapseNavbar() {
     }
 
     return (
-        <nav style={{ backgroundColor: "#2C4096", padding: "1.25vw 1.25vw" }}>
+        <nav className="d-flex flex-row w-100 p-1 p-sm-2" style={{ backgroundColor: "#2C4096" }}>
             {showFullNav ?
 
-                <div className="py-3" id="collapse-navbar">
+                <div className="py-3 w-100" id="collapse-navbar-slidedown">
                     <MenuNavButton
                         showLabel={true}
                         handleChangeMenu={handleChangeMenu}
@@ -33,7 +33,7 @@ export default function CollapseNavbar() {
                     <LogUserNavButton showLabel={true} />
                 </div>
                 :
-                <div className="d-flex flex-row gap-3" id="collapse-navbar">
+                <div className="d-flex flex-row gap-3 w-100" id="collapse-navbar-slideup">
                     {/* divs surrounding ensure the menu button doesnt get stretched */}
                     <div className="">
                         <MenuNavButton

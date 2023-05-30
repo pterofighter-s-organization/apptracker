@@ -38,6 +38,7 @@ export function findTimeDifference(start, end) {
     const hoursLeft = difference.hours();
     const minutesLeft = difference.minutes();
     const secondsLeft = difference.seconds();
+    const millisecondsLeft = difference.milliseconds();
 
     //all representations of the difference 1 day = 24 hours left etc.
     return {
@@ -46,6 +47,8 @@ export function findTimeDifference(start, end) {
         daysLeft,
         hoursLeft,
         minutesLeft,
-        secondsLeft
+        secondsLeft,
+        millisecondsLeft,
+        difference
     }
 }

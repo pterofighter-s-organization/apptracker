@@ -1,47 +1,42 @@
 //utils
-import { findTodayDate } from "./dateTimeUtils"
-import { validateDateTime } from "./validators"
-import { sortDates } from "./dateTimeUtils"
+import { findTodayDate, sortDates } from "./dateTimeUtils"
+import { validateDateTime } from "./validations"
 
 export function checkIfNeedTask(applicationStatus) {
     return applicationStatus === "applied" || applicationStatus === "interviewing" || applicationStatus === "accepted"
 }
 
-// export function findAllExtraTasks(applications) {
+export function findRelevantTasks(tasks) {
 
-//     let tasks = []
+    const res = []
+    const today = findTodayDate()
 
-//     if (applications) {
-//         applications.forEach((application) => {
-//             if (checkIfNeedTask(application.status)) {
-//                 allExtraTasks = allExtraTasks.concat(findExtraTasks(application))
-//             }
-//         })
-//     }
+    tasks.forEach((task, index) => {
+        // console.log(sortDates(today, task.date_due), sortDates(today, task.date_due)===-1, tasks.slice(index))
+        const difference = sortDates(today, task.date_due)
+        if (difference <= 0) {
+            res.push(task)
+        }
+    })
 
-//     return tasks
-// }
-
-export function processAllTasks(tasks) {
-
-    application.tasks.sort((a, b) => sortDates(a.date, b.date))
-    
+    return res
 }
 
-export function processTaskInfo(task) {
+export function findAllExtraTasks(applications) {
 
-    const {
-        task_id,
-        application_id,
-        title,
-        company,
-        position,
-        type,
-        date_due
-    } = task
+    let allExtraTasks = []
 
+    if (applications) {
+        applications.forEach((application) => {
+            if (checkIfNeedTask(application.status)) {
+                allExtraTasks = allExtraTasks.concat(findExtraTasks(application))
+            }
+        })
+    }
 
+    return allExtraTasks
 }
+
 
 export function findExtraTasks(application) {
 
@@ -65,27 +60,27 @@ export function findExtraTasks(application) {
         if (!validateDateTime(date_applied)) {
             extraTasks.push(
                 {
-                    id: taskId,
+                    task_id: taskId,
+                    application_id: application_id,
                     position: position,
                     company: company,
                     priority: 1,
-                    type: "edit",
+                    section: "edit",
                     title: "Please give the time you applied to the application",
-                    date: today,
-                    timeDue: today,
+                    date_due: today,
                 }
             )
         } if (resume_link.length <= 0) {
             extraTasks.push(
                 {
-                    id: taskId,
+                    task_id: taskId,
+                    application_id: application_id,
                     position: position,
                     company: company,
                     priority: 1,
-                    type: "edit",
+                    section: "edit",
                     title: "Insert the link for your resume",
-                    date: today,
-                    timeDue: today,
+                    date_due: today,
                 }
             )
         }
@@ -96,7 +91,7 @@ export function findExtraTasks(application) {
 
 export function findPrioritizedTask(task1, task2) {
 
-    const taskDateWhen = sortDates(task1.date, task2.date)
+    const taskDateWhen = sortDates(task1.date_due, task2.date_due)
 
     //same day
     if (taskDateWhen === 0) {

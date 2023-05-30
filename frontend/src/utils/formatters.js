@@ -1,6 +1,6 @@
 
 
-export function textFormatter(text){
+export function textFormatter(text) {
 
     //only uppercase the first letter of a word
     return text.replace(/\b\w/g, letter => letter.toUpperCase());
@@ -16,31 +16,31 @@ export function timeFormatter(time) {
 
     //hh:mm:ss
     const timeObj = time.split(":")
-    const hours = parseInt(timeObj[0])
+    let hours = parseInt(timeObj[0])
     const mins = timeObj[1]
 
     //convert to humanized time (ex: 1:20pm)
-    if(hours === 0){
-        hours+=12
-        return {hours: hours, mins: mins, period: "am"}
+    if (hours === 0) {
+        hours += 12
+        return { hours: hours, mins: mins, period: "am" }
     }
-    if(hours === 12){
-        return {hours: hours, mins: mins, period: "pm"}
+    if (hours === 12) {
+        return { hours: hours, mins: mins, period: "pm" }
     }
-    if(hours > 12){
-        return {hours: hours-12, mins: mins, period: "pm"}
+    if (hours > 12) {
+        return { hours: hours - 12, mins: mins, period: "pm" }
     }
 
-    return {hours: hours, mins: mins, period: "am"}
+    return { hours: hours, mins: mins, period: "am" }
 }
 
-export function labelFormatter(prefix, label){
+export function labelFormatter(prefix, label) {
 
     //if not null
-    if(prefix && label){
+    if ((prefix && label) || (prefix.length === 0 && label)) {
         return prefix + "_" + label
     }
-    if(prefix){
+    if (prefix && !label) {
         return prefix
     }
     return label

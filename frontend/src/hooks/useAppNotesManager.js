@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 //services
 import api from "../services/api"
 
+// import axios from "axios"
+
 export default function useAppNotesManager(id) {
 
     const [notes, setNotes] = useState([])
@@ -21,46 +23,57 @@ export default function useAppNotesManager(id) {
             setIsLoading(false)
         } catch (error) {
             console.log(error)
+            setNotes(null)
             setIsLoading(false)
         }
     }
 
-    async function updateNote(note) {
+    function updateNote(note) {
+        //making sure the put request doesn't get spammed
+        setTimeout(() => {
+            updateNoteHelper(note)
+        }, 500)
+    }
+
+    async function updateNoteHelper(note) {
 
         const { note_id } = note
         const current = notes
 
-        setNotes(null)
+        // console.log(note)
 
+        //cant use settimeout here because await has to be wrapped inside async
         try {
-            setIsLoading(true)
+            //do not set loading state for this because it will keep refreshing the page
+            // setIsLoading(true)
             const response = await api.noteAPI.updateNote(note_id, note)
             setNotes(current.map((item) => (item.note_id === response.data.note_id ? response.data : item)))
-            setIsLoading(false)
+            // setIsLoading(false)
             return true
         } catch (error) {
             console.log(error)
-            setNotes(current)
-            setIsLoading(false)
+            // setIsLoading(false)
             return false
         }
     }
 
     async function createNote(note) {
 
-        const current = notes
-        setNotes(null)
-
+        // axios.post("http://localhost:8000/api/notes", note).then(response => {
+        //     console.log(response.data)
+        // }).catch(error => {
+        //     console.log(error)
+        // })
         try {
-            setIsLoading(true)
+            // setIsLoading(true)
             const response = await api.noteAPI.createNote(note)
-            setNotes([...notes, ...response.data])
-            setIsLoading(false)
+            // console.log([...notes, response.data], response.data)
+            setNotes([...notes, response.data])
+            // setIsLoading(false)
             return true
         } catch (error) {
             console.log(error)
-            setNotes(current)
-            setIsLoading(false)
+            // setIsLoading(false)
             return false
         }
     }

@@ -1,7 +1,7 @@
 //utils
-import { findTimeDifference } from "./utils/dateTimeUtils";
+import * as dateTimeUtils from "../../utils/dateTimeUtils";
 
-export default function Timer({ time }) {
+export default function Timer({ start, end }) {
 
     //it will display a countdown timer
     function resultFormatter(num, label) {
@@ -42,7 +42,7 @@ export default function Timer({ time }) {
 
     return (
         <>
-            {findCountdown(findTimeDifference(time))}
+            {findCountdown(dateTimeUtils.findTimeDifference(start, end))}
         </>
     )
 }

@@ -28,18 +28,18 @@ export default function useAppTasksManager(id) {
     async function createAppTask(task) {
 
         const current = tasks
-        setTasks(null)
 
         try {
-            setIsLoading(true)
+            // setIsLoading(true)
+            // setTasks(null)
             const response = await api.taskAPI.createTask(task)
-            setTasks([...current, ...response.data])
-            setIsLoading(false)
+            setTasks([...current, response.data])
+            // setIsLoading(false)
             return true
         } catch (error) {
             console.log(error)
-            setTasks(current)
-            setIsLoading(false)
+            // setTasks(current)
+            // setIsLoading(false)
             return false
         }
     }

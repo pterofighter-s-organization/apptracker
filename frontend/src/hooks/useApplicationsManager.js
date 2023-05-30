@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 //services
 import api from "../services/api";
@@ -27,21 +27,17 @@ export default function useApplicationsManager() {
     async function updateApplication(app) {
 
         const { application_id } = app
-        const current = applications
-        //test, change later*
-        setApplications(null)
 
+        //only get needs loading
         try {
-            setIsLoading(true)
+            // setIsLoading(true)
             const response = await api.applicationAPI.updateApplication(application_id, app)
-            setApplications(current.map((item) => (item.application_id === response.data.application_id ? response.data : item)))
-            setIsLoading(false)
+            setApplications(prev => prev.map((item) => (item.application_id === response.data.application_id ? response.data : item)))
+            // setIsLoading(false)
             return true
         } catch (error) {
             console.log(error)
-            //test, change later*
-            setApplications(current)
-            setIsLoading(false)
+            // setIsLoading(false)
             return false
         }
     }

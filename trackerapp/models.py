@@ -13,8 +13,7 @@ class Users(models.Model):
 class Notes(models.Model):
     note_id = models.AutoField(primary_key=True)
     application_id = models.IntegerField()
-    title = models.CharField(max_length=255)
-    note = models.CharField(max_length=2048)
+    note = models.CharField(max_length=2048, blank=True, null=True)
 
     
 
@@ -38,4 +37,8 @@ class Task(models.Model):
     application_id = models.IntegerField()
     title = models.CharField(max_length=255)
     date_due = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    section = models.CharField(max_length=255, blank=True, null=True)
+    priority = models.IntegerField()
     

@@ -31,13 +31,18 @@ export default function PageLayout({ children }) {
     }, [windowWidth])
 
     return (
-        <div className="d-flex flex-column flex-xl-row">
+        <div className="d-flex flex-column flex-xl-row w-100">
             {sideBarShow ?
                 <SideNavbar windowHeight={windowHeight} />
                 :
                 <CollapseNavbar />
             }
-            {children}
+            <div
+                className="mt-4 mt-md-3 mt-xxl-1 w-100"
+                style={{ padding: "1.25vw 2.5vw" }}
+            >
+                {children}
+            </div>
         </div>
     )
 }

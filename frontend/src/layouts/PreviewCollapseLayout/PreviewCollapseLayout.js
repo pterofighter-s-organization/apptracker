@@ -5,21 +5,23 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useWindowSizeManager from '../../hooks/useWindowSizeManager';
 
 //components
-import { PreviewCollapseButton } from "./components"
+import { PreviewCollapseButton } from './components'
 
 //utils
-import { viewSizeToPx } from "../../utils/measurements.js"
+import * as measurements from '../../utils/measurements'
 
-export default function PreviewCollapse(props) {
+export default function PreviewCollapseLayout(props) {
 
     //here is what this semi component needs
     const {
-        collapseId,
-        maxVhOfCollapse,
+        children,
+        id,
+        previewVh,
         text,
-        overflow,
         dependency,
     } = props
+
+    const collapseId = "preview-collapse-" + id
 
     const { windowWidth, windowHeight } = useWindowSizeManager()
     const [showCollapseButton, setShowCollapseButton] = useState(false)
@@ -28,6 +30,7 @@ export default function PreviewCollapse(props) {
 
     const collapseRef = document.getElementById(collapseId)
     const containerRef = collapseRef ? collapseRef.children[0] : null
+    const overflow = "hidden"
 
     //do usecallback to avoid function being re-render everytime and triggers the useeffect below
     const showRemainingContents = useCallback((request) => {
@@ -40,11 +43,11 @@ export default function PreviewCollapse(props) {
                 setShowCollapseButton(true)
             } else {
                 collapseRef.style.overflow = overflow
-                collapseRef.style.maxHeight = maxVhOfCollapse.toString() + "vh"
+                collapseRef.style.maxHeight = previewVh.toString() + "vh"
                 setShowCollapseButton(false)
             }
         }
-    }, [setShowCollapseButton, collapseRef, overflow, maxVhOfCollapse])
+    }, [setShowCollapseButton, collapseRef, overflow, previewVh])
 
     //start of (1): side effects of window sizes changing
     useEffect(() => {
@@ -52,7 +55,7 @@ export default function PreviewCollapse(props) {
         if (collapseRef) {
             if (containerRef) {
 
-                const vhToPx = viewSizeToPx(maxVhOfCollapse, windowHeight)
+                const vhToPx = measurements.viewSizeToPx(previewVh, windowHeight)
                 //vh following how much you give to the container at the bottom 
                 const show = vhToPx < containerRef.clientHeight
 
@@ -63,7 +66,7 @@ export default function PreviewCollapse(props) {
             }
         }
 
-    }, [collapseRef, windowHeight, windowWidth, maxVhOfCollapse, containerRef, dependency])
+    }, [collapseRef, windowHeight, windowWidth, previewVh, containerRef, dependency])
 
     useEffect(() => {
         if (collapseRef) {
@@ -83,13 +86,20 @@ export default function PreviewCollapse(props) {
 
     //make sure collapseRef works before showing or else the buttons wont respond because collapseref didnt even load
     return (
-        <>
+        <div style={{ position: "relative" }}>
+            <div
+                id={collapseId}
+                style={{ maxHeight: previewVh.toString() + "vh", overflow: overflow }}
+            >
+                {children}
+            </div>
+            {/* it's also flexible to decide when to show these elements, custom function, not req for the elements to work*/}
             {collapseRef && showCollapse && containerRef ?
                 <>
                     <PreviewCollapseButton
+                        collapseId={collapseId}
                         showCollapseButton={showCollapseButton}
                         showRemainingContents={showRemainingContents}
-                        collapseId={collapseId}
                         text={text}
                     />
                 </>
@@ -97,6 +107,6 @@ export default function PreviewCollapse(props) {
                 <>
                 </>
             }
-        </>
+        </div>
     )
 }

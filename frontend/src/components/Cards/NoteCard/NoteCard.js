@@ -9,19 +9,19 @@ import "./NoteCard.css"
 export default function NoteCard({ note, updateNote }) {
 
     const [formData, setFormData] = useState({
-        "text": note.text
+        "note": note.note
     })
-    const [prevText, setPrevText] = useState(note.text)
+    const [prevText, setPrevText] = useState(note.note)
 
     useEffect(() => {
-        if (formData && formData["text"] !== prevText) {
+        if (formData && formData["note"] !== prevText) {
             updateNote({
                 "note_id": note.note_id,
                 "application_id": note.application_id,
                 "title": "",
-                "text": formData["text"],
+                "note": formData["note"],
             })
-            setPrevText(formData["text"])
+            setPrevText(formData["note"])
         }
     }, [formData, updateNote, prevText, note])
 
@@ -35,7 +35,7 @@ export default function NoteCard({ note, updateNote }) {
                 <TextAreaInput
                     formData={formData}
                     setFormData={setFormData}
-                    label={"text"}
+                    label={"note"}
                 />
             </div>
         </div>

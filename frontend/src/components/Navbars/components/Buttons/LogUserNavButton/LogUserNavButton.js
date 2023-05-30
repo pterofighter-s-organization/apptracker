@@ -8,8 +8,9 @@ export default function LogUserNavButton({ showLabel }) {
             {showLabel ?
                 <button
                     type="button"
-                    className="btn btn-outline-primary nav-tooltip text-light d-flex flex-row align-items-center gap-3 w-100 p-3"
+                    className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-3"
                     style={{ border: "none" }}
+                    id="nav-tooltip"
                     data-bs-toggle="tooltip" data-bs-placement="right" title={"Logs the user out"}
                 >
                     <i
@@ -23,7 +24,8 @@ export default function LogUserNavButton({ showLabel }) {
                 :
                 <button
                     type="button"
-                    className="btn btn-outline-primary nav-tooltip text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
+                    className="btn btn-outline-primary text-light d-flex flex-row align-items-center gap-3 w-100 p-2"
+                    id="nav-tooltip"
                     style={{ border: "none" }} title={"Logs the user out"}
                 >
                     <i

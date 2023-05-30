@@ -51,7 +51,7 @@ export default function DaySelect({ formData, setFormData, label }) {
 
     return (
         <select
-            className={`form-select p-3 bg-body ${fontSize}`}
+            className={`form-select p-3 bg-body`}
             style={{ width: "90px" }}
             onChange={(e) => changeSelect(e)}
         >
