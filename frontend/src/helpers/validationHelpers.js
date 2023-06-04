@@ -79,12 +79,12 @@ export function isValidDateTime(dateTimeString) {
 export function isEmptyDateTime(dateTimeString) {
 
     //can only have 00 and no other numbers but can fit other characters
-    const exactlyTwoZerosRegex = /^([^0]*0[^0]*){2}[^0-9]*$/;
+    const exactlyTwoZerosRegex = /^[^0-9]*0{2}[^0-9]*$/
     const dateFormatRegex = /^.*-.*-.*:.*:.*$/
 
     // - - : :00 because seconds already pre-defined
 
-    console.log(dateTimeString, dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString))
+    // console.log(dateTimeString, dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString), exactlyTwoZerosRegex.test("00"))
 
     return dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString)
 }
