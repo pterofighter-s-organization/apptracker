@@ -16,12 +16,12 @@ export function validateDateTime(formData, setErrorMsgs, label, allowPastDates) 
     }
     if (!isValidDateTime(dateTime)) {
         setErrorMsgs[actualLabel] = "Please finish selecting the date elements."
-        formData[actualLabel] = null
+        formData[actualLabel] = dateTime
         return
         // return { check: false, value: "" }
     } if (!allowPastDates && compareDates(dateTime, findTodayDate()) < 0) {
         setErrorMsgs[actualLabel] = "The current selected date is before today"
-        formData[actualLabel] = null
+        formData[actualLabel] = dateTime
         return
         // console.log(actualLabel, "before")
         // setErrorMsgs((prevErrorMsgs) => ({ ...prevErrorMsgs, [actualLabel]: "The current selected date is before today" }))

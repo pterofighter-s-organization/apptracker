@@ -50,17 +50,20 @@ export default function useApplicationManager(id) {
         const { application_id } = app
         //assign to a new reference
         const newErrorMsgs = Object.assign(errorMessages, {})
+        console.log(app)
 
         //dont need to do loading here because useeffect for status update wont be triggered
         try {
             validationHelpers.validateDateTime(app, newErrorMsgs, "applied", true)
             const response = await api.applicationAPI.updateApplication(application_id, app)
             setApplication(response.data)
+            //temp. for recording date errors before it can be solve in backend
+            formHelpers.findErrors(newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return true
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error.response.data, newErrorMsgs)
+            formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return false
         }
@@ -74,6 +77,7 @@ export default function useApplicationManager(id) {
             validationHelpers.validateDateTime(app, newErrorMsgs, "applied", true)
             const response = await api.applicationAPI.createApplication(app)
             setApplication(response.data)
+            formHelpers.findErrors(newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return true
         } catch (error) {
