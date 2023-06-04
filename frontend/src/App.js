@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 //pages
-import { Dashboard } from './pages/Dashboard';
+import { Dashboard } from './pages/Boards/Dashboard';
+import { ArchivedBoard } from './pages/Boards/ArchivedBoard';
+import { PinnedApplications } from './pages/PinnedApplications';
 import { ApplicationDetails } from './pages/ApplicationDetails'
-import { EditApplication } from './pages/EditApplication';
-// import ApplicationDetails from './pages/ApplicationDetails/ApplicationDetails.js';
-// import ApplicationEditForm from './pages/ApplicationEditForm/ApplicationEditForm.js';
-// import ApplicationForm from './pages/ApplicationForm/ApplicationForm.js';
+import { EditApplicationForm } from './pages/ApplicationForms/EditApplicationForm';
+import { NewApplicationForm } from './pages/ApplicationForms/NewApplicationForm';
 
 //layouts
 import { PageLayout } from './layouts/PageLayout';
@@ -24,14 +24,13 @@ export default function App() {
       <Router>
         <div className="d-flex flex-column flex-xl-row">
           <PageLayout>
-            {/* <TaskTablePresentation /> */}
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
+              <Route exact path="/archived-board" element={<ArchivedBoard />} />
+              <Route exact path="/pinned-applications" element={<PinnedApplications />} />
               <Route exact path="/application/:id" element={<ApplicationDetails />} />
-              <Route exact path="/application/edit/:id" element={<EditApplication />} />
-              {/* <Route exact path="/application/:id" element={<ApplicationDetails />} />
-              <Route exact path="/application/edit/:id" element={<ApplicationEditForm />} />
-              <Route exact path="/application/new" element={<ApplicationForm />} /> */}
+              <Route exact path="/application/edit/:id" element={<EditApplicationForm />} />
+              <Route exact path="/application/new/:givenStatus" element={<NewApplicationForm />} />
             </Routes>
           </PageLayout>
         </div>

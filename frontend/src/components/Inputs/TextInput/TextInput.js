@@ -1,17 +1,17 @@
 
-export default function TextInput({ formData, setFormData, label }) {
+export default function TextInput({ value, updateValue }) {
 
     function changeInput(event) {
         // console.log(event.target.value);
         event.preventDefault()
-        const newText = event.target.value
-        setFormData(prevFormData => ({ ...prevFormData, [label]: newText }))
+        const newValue = event.target.value
+        updateValue(newValue)
     }
 
     return (
         <input
             type="text"
-            value={formData[label]}
+            value={value}
             placeholder={"text"}
             className={`form-control p-3 bg-body`}
             onChange={(e) => changeInput(e)}

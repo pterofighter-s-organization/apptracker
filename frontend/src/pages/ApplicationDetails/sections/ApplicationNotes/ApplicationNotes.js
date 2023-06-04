@@ -41,9 +41,15 @@ export default function ApplicationNotes({ application }) {
                 }}
                 id="note-add-button"
             >
-                <div className="fs-5">
-                    Add Note
-                </div>
+                {notes.length > 0 ?
+                    <div className="fs-5">
+                        Add Note
+                    </div>
+                    :
+                    <div className="fs-5">
+                        Click me to start note taking for this application
+                    </div>
+                }
             </button>
         </div>
     )

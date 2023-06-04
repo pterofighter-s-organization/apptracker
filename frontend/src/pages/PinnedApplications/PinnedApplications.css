@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+    #application-interested-add{
+        height: 300px;
+        width: min(315px);
+    }
+}
+
+@media (max-width: 768px) {
+    #application-interested-add{
+        height: auto;
+        width: 100%;
+    }
+}

@@ -38,7 +38,7 @@ export default function PageLayout({ children }) {
                 <CollapseNavbar />
             }
             <div
-                className="mt-4 mt-md-3 mt-xxl-1 w-100"
+                className="my-4 my-md-3 my-xl-2 w-100"
                 style={{ padding: "1.25vw 2.5vw" }}
             >
                 {children}

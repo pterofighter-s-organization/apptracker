@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 //components
 import { TextAreaInput } from "../../Inputs"
@@ -8,34 +8,24 @@ import "./NoteCard.css"
 
 export default function NoteCard({ note, updateNote }) {
 
-    const [formData, setFormData] = useState({
-        "note": note.note
-    })
-    const [prevText, setPrevText] = useState(note.note)
+    const [text, setText] = useState(note.note)
 
-    useEffect(() => {
-        if (formData && formData["note"] !== prevText) {
-            updateNote({
-                "note_id": note.note_id,
-                "application_id": note.application_id,
-                "title": "",
-                "note": formData["note"],
-            })
-            setPrevText(formData["note"])
-        }
-    }, [formData, updateNote, prevText, note])
+    function updateNoteText(newText) {
+        updateNote({
+            "note_id": note.note_id,
+            "application_id": note.application_id,
+            "title": "",
+            "note": newText,
+        })
+        setText(newText)
+    }
 
     return (
-        <div
-            className="card bg-warning bg-opacity-50"
-            style={{ height: "300px" }}
-            id="note-card"
-        >
-            <div className="card-body" style={{ height: "100%" }}>
+        <div className="card bg-warning bg-opacity-50" id="note-card">
+            <div className="d-flex card-body" style={{ height: "300px" }}>
                 <TextAreaInput
-                    formData={formData}
-                    setFormData={setFormData}
-                    label={"note"}
+                    value={text}
+                    updateValue={updateNoteText}
                 />
             </div>
         </div>

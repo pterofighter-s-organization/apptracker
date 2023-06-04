@@ -228,3 +228,25 @@ text={"Log out"}
         //         }
         //     }
         // }
+
+            //updates when status changed
+    // useEffect(() => {
+    //     //status = new status, app.status is the old status
+    //     const status = formData["status"]
+
+    //     if (status !== application.status) {
+    //         if (status === "applied" && application.status === "interested") {
+    //             const updateInfo = appUtils.updateInfoForAppliedApp(application.date_applied)
+    //             updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
+    //         } else {
+    //             const updateInfo = {
+    //                 "status": status
+    //             }
+    //             updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
+    //         }
+    //     }
+
+    // }, [formData, application, updateApplication])
+
+    // the problem here is it changed the state of the previous app cards also the old status gets render first then the new one. fixed with not using useeffect to change status
+    // console.log("test-looping-problem", status, application.status, application.application_id)

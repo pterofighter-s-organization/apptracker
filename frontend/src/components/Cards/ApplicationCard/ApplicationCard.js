@@ -1,50 +1,67 @@
-import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { StatusButton } from "../../Buttons"
+import { StatusButton } from "../../Buttons/StatusButton"
 import { DateTime } from "../../DateTime"
+
+//helpers
+import * as applicationHelpers from "../../../helpers/applicationHelpers"
 
 //utils
 import * as formatters from "../../../utils/formatters"
-import * as appUtils from "../../../utils/applicationUtils"
 
 //css
 import "./ApplicationCard.css"
 
 export default function ApplicationCard({ application, updateApplication }) {
 
-    const [formData, setFormData] = useState({
-        "status": application.status
-    })
-
-    //updates when status changed
-    useEffect(() => {
-        //status = new status, app.status is the old status
-        const status = formData["status"]
-
-        if (status !== application.status) {
-            if (status === "applied" && application.status === "interested") {
-                const updateInfo = appUtils.updateInfoForAppliedApp(application.date_applied)
-                updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
-            } else {
-                const updateInfo = {
-                    "status": status
-                }
-                updateApplication(appUtils.updateApplicationInfo(updateInfo, application))
+    // the problem here is it changed the state of the previous app cards also the old status gets render first then the new one. fixed with not using useeffect to change status
+    // console.log("test-looping-problem", status, application.status, application.application_id)
+    function updateStatus(newStatus) {
+        // console.log("test", newStatus)
+        if (newStatus === "applied" && application.status === "interested") {
+            const updateInfo = applicationHelpers.updateInfoForAppliedApp(application.date_applied)
+            updateApplication(applicationHelpers.updateApplicationInfo(updateInfo, application))
+        } else {
+            const updateInfo = {
+                "status": newStatus
             }
+            updateApplication(applicationHelpers.updateApplicationInfo(updateInfo, application))
         }
-    }, [formData, application, updateApplication])
+    }
+
+    function updateArchiveStatus() {
+        const updateInfo = {
+            "archived": !application.archived
+        }
+        updateApplication(applicationHelpers.updateApplicationInfo(updateInfo, application))
+    }
 
     return (
         <div className="card border border-0 rounded-0 bg-body-secondary bg-opacity-75 fs-6" id="application-card">
 
             <div className="card-header d-flex flex-wrap gap-3 border border-0 p-4">
-                <StatusButton
-                    formData={formData}
-                    setFormData={setFormData}
-                    label={""}
-                />
+                <div className="flex-grow-1">
+                    <StatusButton
+                        value={application.status}
+                        updateValue={updateStatus}
+                    />
+                </div>
+                <button
+                    type="button"
+                    className="btn p-0 fs-4"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        updateArchiveStatus()
+                    }}
+                    data-bs-toggle="tooltip" data-bs-placement="right" title={(!application.archived) ? "Archived this application to archived board" : "Restore this application to dashboard"}
+                >
+                    {!application.archived ?
+                        <i class="bi bi-x-lg"></i>
+                        :
+                        <i class="bi bi-arrow-clockwise"></i>
+                    }
+                </button>
             </div>
 
             <div className="card-body d-flex flex-column gap-2 p-4">
@@ -57,8 +74,8 @@ export default function ApplicationCard({ application, updateApplication }) {
                 </div>
             </div>
 
-            <Link 
-                to={"/application/"+application.application_id} 
+            <Link
+                to={"/application/" + application.application_id}
                 className="card-text btn btn-primary m-4 mt-0 p-2"
             >
                 More Details

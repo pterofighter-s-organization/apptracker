@@ -29,10 +29,7 @@ export default function useAppNotesManager(id) {
     }
 
     function updateNote(note) {
-        //making sure the put request doesn't get spammed
-        setTimeout(() => {
-            updateNoteHelper(note)
-        }, 500)
+        updateNoteHelper(note)
     }
 
     async function updateNoteHelper(note) {

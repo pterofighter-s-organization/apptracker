@@ -7,7 +7,7 @@ export function findTodayDate(){
     return moment(Date.now()).format("MM-DD-YYYY HH:mm:ss")
 }
 
-export function sortDates(date1, date2) {
+export function compareDates(date1, date2) {
 
     const dateA = moment(date1, "MM-DD-YYYY HH:mm:ss")
     const dateB = moment(date2, "MM-DD-YYYY HH:mm:ss")

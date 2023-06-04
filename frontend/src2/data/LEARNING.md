@@ -26,7 +26,6 @@ new reference meaning a new address for that new object
 <pre> is for displaying multiline string
 <textarea> is for inputting multiline string
 
-on usememo, it works if you only call the specific value of the object
-
-
 debounce = sets a time id, making sure whatever is in this function cannot be spammed, and setimeout is a queue which can be spam
+
+using flex grow 1 so it can use all the availble space provided by the stretched height. It's good for fields that aren't same height but want to equal the two heights

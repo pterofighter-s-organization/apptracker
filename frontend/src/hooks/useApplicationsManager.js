@@ -20,6 +20,7 @@ export default function useApplicationsManager() {
             setIsLoading(false)
         } catch (error) {
             console.log(error)
+            setApplications(null)
             setIsLoading(false)
         }
     }
@@ -28,7 +29,7 @@ export default function useApplicationsManager() {
 
         const { application_id } = app
 
-        //only get needs loading
+        //(No need, is fixed) - (archived): loading here because useeffect for status update is triggered because the application status doesnt update fast enough
         try {
             // setIsLoading(true)
             const response = await api.applicationAPI.updateApplication(application_id, app)

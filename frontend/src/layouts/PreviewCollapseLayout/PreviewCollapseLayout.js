@@ -86,7 +86,7 @@ export default function PreviewCollapseLayout(props) {
 
     //make sure collapseRef works before showing or else the buttons wont respond because collapseref didnt even load
     return (
-        <div style={{ position: "relative" }}>
+        <div className="" style={{ position: "relative" }}>
             <div
                 id={collapseId}
                 style={{ maxHeight: previewVh.toString() + "vh", overflow: overflow }}

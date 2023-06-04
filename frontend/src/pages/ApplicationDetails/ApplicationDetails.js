@@ -24,8 +24,6 @@ export default function ApplicationDetails() {
         return () => document.title = "Job Tracker App"
     }, [id, application])
 
-    console.log(id, application)
-
     if (isLoading) {
         return <>Loading...</>
     }
@@ -67,9 +65,10 @@ export default function ApplicationDetails() {
             <SectionLayout title={"Application Tasks :"}>
                 <ApplicationTasks
                     application={application}
+                    isArchived={null}
                 />
             </SectionLayout>
-            
+
             <SectionLayout title={"Application Notes :"}>
                 <ApplicationNotes
                     application={application}

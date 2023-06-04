@@ -10,7 +10,8 @@ export default function NavButton(props) {
         label,
         tooltipText,
         route,
-        showLabel
+        showLabel,
+        minimizeMenu,
     } = props
 
     return (
@@ -21,6 +22,13 @@ export default function NavButton(props) {
             style={{ border: "none" }}
             id="nav-tooltip"
             data-bs-toggle="tooltip" data-bs-placement="right" title={tooltipText}
+            onClick={(e) => {
+                //dont put preventdefault or else to={route} wont work
+                // e.preventDefault()
+                if(minimizeMenu){
+                    minimizeMenu()
+                }
+            }}
         >
             {showLabel ?
                 <>

@@ -1,25 +1,9 @@
 import { labelFormatter } from "./formatters"
 
-export function errorInfoInitializer() {
-
-    const errorInfo = {
-        "date_applied": "",
-        "time_applied": "",
-        "position": "",
-        "company": "",
-        "salary": "",
-        "cover_letter_link": "",
-        "resume": "",
-        "interview_preparation": "",
-    }
-
-    return errorInfo
-}
-
 export function dateInfoInitializer(dateTime, label) {
 
     label = labelFormatter("", label)
-    console.log(label)
+    // console.log(label)
 
     //label is what this data field gonna be called
     const dateInfoObj = {
@@ -47,29 +31,4 @@ export function dateInfoInitializer(dateTime, label) {
     }
 
     return dateInfoObj
-}
-
-export function basicInfoInitializer(givenData) {
-
-    //raw data
-    const basicInfo = {
-        "status": "interested", //default to interested
-        "position": "",
-        "company": "",
-        "salary": "",
-        "interview_preparation_link": "",
-        "resume_link": "",
-        "cover_letter_link": "",
-        "description": "",
-    }
-
-    //if givendata is null, no need to prefill the data
-    if (givenData) {
-        Object.entries(basicInfo).forEach(([label, _]) => {
-            basicInfo[label] = givenData[label]
-        })
-    }
-
-    return basicInfo
-
 }

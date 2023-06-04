@@ -3,30 +3,25 @@ import { useMemo } from "react"
 
 //utils
 import { findTodayDate } from "../../../utils/dateTimeUtils"
-import { labelFormatter } from "../../../utils/formatters"
 
 const moment = require('moment')
 
-export default function DaySelect({ formData, setFormData, label }) {
-
-    const actualLabel = labelFormatter("day", label)
-    const monthLabel = labelFormatter("month", label)
-    const yearLabel = labelFormatter("year", label)
+export default function DaySelect({ value, month, year, updateValue }) {
 
     const selectValues = useMemo(() => {
-        return selectDayValues(formData[monthLabel], formData[yearLabel])
+        return selectDayValues(month, year)
         // eslint-disable-next-line
-    }, [formData[monthLabel], formData[yearLabel]])
+    }, [month, year])
 
-    function selectDayValues(month, year) {
+    function selectDayValues(currentMonth, currentYear) {
         //use 01 as day
         const res = []
         const todayDateTime = findTodayDate() //(mm-dd-yyyy hh:mm:ss)
         const todayDate = todayDateTime[0]
         const todayTime = todayDateTime[1]
 
-        if (month.length > 0) {
-            const date = (year.length > 0) ? (month + "-01-" + year + " " + todayTime) : (month + "-01-" + todayDate[2] + " " + todayTime)
+        if (currentMonth.length > 0) {
+            const date = (currentYear.length > 0) ? (currentMonth + "-01-" + currentYear + " " + todayTime) : (currentMonth + "-01-" + todayDate[2] + " " + todayTime)
             const dateObj = moment(date, "MM-DD-YYYY, HH:mm:ss")
 
             for (let num = 1; num <= dateObj.daysInMonth(); num += 1) {
@@ -45,8 +40,8 @@ export default function DaySelect({ formData, setFormData, label }) {
 
     function changeSelect(event) {
         event.preventDefault()
-        const newDay = event.target.value
-        setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newDay }))
+        const newValue = event.target.value
+        updateValue(newValue)
     }
 
     return (
@@ -55,13 +50,13 @@ export default function DaySelect({ formData, setFormData, label }) {
             style={{ width: "90px" }}
             onChange={(e) => changeSelect(e)}
         >
-            {formData[actualLabel].length > 0 ?
+            {value.length > 0 ?
                 <option value="">DD</option>
                 :
                 <option selected value="">DD</option>
             }
             {selectValues.map((num) => {
-                if (formData[actualLabel] !== num) {
+                if (value !== num) {
                     return <option key={num} value={num}>{num}</option>
                 } else {
                     return <option key={num} selected value={num}>{num}</option>

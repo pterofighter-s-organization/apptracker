@@ -1,7 +1,8 @@
 //buttons
 import { NavButton } from "../NavButton"
+import { PinnedAppButton } from "../PinnedAppButton"
 
-export default function EssentialNavButtons({ showLabel }) {
+export default function EssentialNavButtons({ showLabel, minimizeMenu }) {
 
     return (
         <>
@@ -9,30 +10,29 @@ export default function EssentialNavButtons({ showLabel }) {
                 icon={"house"}
                 label={"Dashboard"}
                 showLabel={showLabel}
+                minimizeMenu={minimizeMenu}
                 route={"/"}
                 tooltipText={"place to see all apps and tasks"}
             />
-            <NavButton
-                icon={"pin-angle"}
-                label={"Interested Apps"}
+            <PinnedAppButton
                 showLabel={showLabel}
-                route={"/"}
-                tooltipText={"showLabels all apps labeled as interested"}
+                minimizeMenu={minimizeMenu}
             />
             <NavButton
-                icon={"plus-circle"}
-                label={"New App"}
+                icon={"archive"}
+                label={"Archived"}
                 showLabel={showLabel}
-                route={"/application/new"}
-                tooltipText={"you can click here to track a new app"}
+                minimizeMenu={minimizeMenu}
+                route={"/archived-board"}
+                tooltipText={"show all apps labeled as archived"}
             />
-            <NavButton
+            {/* <NavButton
                 icon={"person-circle"}
                 label={"My Account"}
                 showLabel={showLabel}
                 route={"/"}
                 tooltipText={"Can see resume and everything about your account"}
-            />
+            /> */}
         </>
     )
 }

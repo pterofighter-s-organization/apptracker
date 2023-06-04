@@ -10,7 +10,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Application
         fields = ('application_id','user_id','position','company','interview_preparation', 'resume_link', 'cover_letter_link',
-                  'description','status', 'date_applied', 'date_edited', 'date_created', 'salary')
+                  'description','status', 'date_applied', 'date_edited', 'date_created', 'salary', 'archived')
 
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:

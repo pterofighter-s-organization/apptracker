@@ -2,27 +2,11 @@ import { useEffect, useRef } from "react";
 
 //utils
 import * as formatters from "../../../utils/formatters";
+import { STATUSES_MAP_COLOR } from "../../../utils/constants";
 
-export default function StatusButton({ formData, setFormData, label }) {
-
-    const statusMapColor = {
-        "applied": "warning",
-        "rejected": "danger",
-        "interviewing": "primary",
-        "interested": "secondary",
-        "accepted": "success",
-        "ghosted": "dark",
-    }
-
-    const actualLabel = formatters.labelFormatter("status", label)
-    const status = formData[actualLabel]
-
-    function updateStatus(newStatus) {
-        setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newStatus }))
-    }
+export default function StatusButton({ value, updateValue }) {
 
     //another solution is to make the list of other status items here instead, then update it again with usememo* (NOT WORK)
-
     //using ref to remove the show in dropdownmenu which was stuck because the component didn't unmount
     //this is the only solution after testing 
     const dropdownMenuRef = useRef(null)
@@ -31,21 +15,21 @@ export default function StatusButton({ formData, setFormData, label }) {
         if (dropdownMenuRef) {
             dropdownMenuRef.current.classList.remove("show")
         }
-    }, [status, dropdownMenuRef])
+    }, [value, dropdownMenuRef])
 
     return (
         <div className="btn-group">
             <button
                 type="button"
-                className={`btn btn-${statusMapColor[status]} pe-none`}
+                className={`btn btn-${STATUSES_MAP_COLOR[value]} pe-none`}
             >
                 <div>
-                    {formatters.textFormatter(status)}
+                    {formatters.textFormatter(value)}
                 </div>
             </button>
             <button
                 type="button"
-                className={`btn btn-${statusMapColor[status]} dropdown-toggle dropdown-toggle-split`}
+                className={`btn btn-${STATUSES_MAP_COLOR[value]} dropdown-toggle dropdown-toggle-split`}
                 data-bs-toggle="dropdown" aria-expanded="false"
                 data-bs-auto-close="true"
             >
@@ -55,16 +39,16 @@ export default function StatusButton({ formData, setFormData, label }) {
 
             {/* dropdown of other statuses */}
             <ul className={`dropdown-menu`} ref={dropdownMenuRef}>
-                {Object.entries(statusMapColor).map(([statusLabel, color]) => {
-                    if (statusLabel !== status) {
+                {Object.entries(STATUSES_MAP_COLOR).map(([statusLabel, color]) => {
+                    if (statusLabel !== value) {
                         return (
                             <li>
                                 <button
                                     type="button"
-                                    className={`dropdown-item text-${color}`}
+                                    className={`dropdown-item text-${(color === "light") ? "dark" : color}`}
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        updateStatus(statusLabel)
+                                        updateValue(statusLabel)
                                     }}
                                 >
                                     <div>

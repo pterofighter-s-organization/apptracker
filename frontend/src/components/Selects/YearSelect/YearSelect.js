@@ -1,10 +1,8 @@
 //utils
 import { findTodayDate } from "../../../utils/dateTimeUtils"
-import { labelFormatter } from "../../../utils/formatters"
 
-export default function YearSelect({ formData, setFormData, label }) {
+export default function YearSelect({ value, updateValue }) {
 
-    const actualLabel = labelFormatter("year", label)
     const selectValues = selectYearValues()
 
     function selectYearValues() {
@@ -22,8 +20,8 @@ export default function YearSelect({ formData, setFormData, label }) {
 
     function changeSelect(event) {
         event.preventDefault()
-        const newYear = event.target.value
-        setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newYear }))
+        const newValue = event.target.value
+        updateValue(newValue)
     }
 
     return (
@@ -32,13 +30,13 @@ export default function YearSelect({ formData, setFormData, label }) {
             style={{ width: "115px" }}
             onChange={(e) => changeSelect(e)}
         >
-            {formData[actualLabel].length > 0 ?
+            {value.length > 0 ?
                 <option value="">YYYY</option>
                 :
                 <option selected value="">YYYY</option>
             }
             {selectValues.map((num) => {
-                if (formData[actualLabel] !== num) {
+                if (value !== num) {
                     return <option key={num} value={num}>{num}</option>
                 } else {
                     return <option key={num} selected value={num}>{num}</option>

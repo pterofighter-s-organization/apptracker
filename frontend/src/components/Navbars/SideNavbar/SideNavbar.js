@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //components
-import { MenuNavButton, LogUserNavButton, EssentialNavButtons } from "../components";
+import { MenuNavButton, EssentialNavButtons, NewAppButton } from "../components/Buttons";
 
 //css
 import "./SideNavbar.css"
@@ -33,7 +33,7 @@ export default function NavSidebar({ windowHeight }) {
 
         if (request === "minimize") {
             setMenuOption(minimized)
-        } else if (request === "expand"){
+        } else if (request === "expand") {
             setMenuOption(expanded)
             sidebar.classList.add("closed")
         }
@@ -43,10 +43,20 @@ export default function NavSidebar({ windowHeight }) {
         }, 300)
     }
 
+    function minimizeMenu(){
+        //uncomment to allow minimize menu to work. a timeout to make a smooth transition
+        
+        //minimize the menu as you change to another page
+        // setTimeout(() => {
+        //     setMenuOption(minimized)
+        // }, 100)
+    }
+
     return (
         <nav
             id="side-navbar"
-            style={{ minWidth: navbarWidth.toString() + "px", maxWidth: navbarWidth.toString() + "px", minHeight: windowHeight, backgroundColor: "#2C4096" }}>
+            style={{ minWidth: navbarWidth.toString() + "px", maxWidth: navbarWidth.toString() + "px", minHeight: windowHeight, backgroundColor: "#2C4096" }}
+        >
             <div className={`sticky-top p-${navPadding.toString()}`}>
                 {/* <NavButton
                 icon={"box-arrow-left"}
@@ -60,9 +70,15 @@ export default function NavSidebar({ windowHeight }) {
                     handleChangeMenu={handleChangeMenu}
                 />
                 <div className="my-5 d-flex flex-column gap-3">
-                    <EssentialNavButtons showLabel={showFullNav} />
+                    <EssentialNavButtons 
+                        showLabel={showFullNav} 
+                        minimizeMenu={minimizeMenu}
+                    />
                 </div>
-                <LogUserNavButton showLabel={showFullNav} />
+                <NewAppButton
+                    showLabel={showFullNav}
+                    minimizeMenu={minimizeMenu}
+                />
             </div>
         </nav>
     )

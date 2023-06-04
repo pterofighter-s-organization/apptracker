@@ -2,6 +2,7 @@ import { useMemo } from "react"
 
 //components
 import { TaskTable } from "../../../../components/TaskTable"
+import { TaskForm } from "../../../../components/TaskForm"
 
 //layouts
 import { PreviewCollapseLayout } from "../../../../layouts/PreviewCollapseLayout"
@@ -9,25 +10,24 @@ import { PreviewCollapseLayout } from "../../../../layouts/PreviewCollapseLayout
 //hooks
 import useAppTasksManager from "../../../../hooks/useAppTasksManager"
 
-//utils
-import * as taskUtils from "../../../../utils/taskUtils"
-import { TaskForm } from "../../../../components/TaskForm"
+//helpers
+import * as taskHelpers from "../../../../helpers/taskHelpers"
 
-export default function ApplicationTasks({ application }) {
+export default function ApplicationTasks({ application, isArchived }) {
 
-    const { tasks, createAppTask, isLoading } = useAppTasksManager(application.application_id)
+    const { tasks, createNewTask, errorMsgs, isLoading } = useAppTasksManager(application.application_id)
 
     const combinedTasks = useMemo(() => {
-        const extraTasks = taskUtils.findExtraTasks(application)
+        const extraTasks = (!isArchived) ? taskHelpers.findExtraTasks(application) : []
         return [...extraTasks, ...tasks]
-    }, [application, tasks])
+    }, [application, tasks, isArchived])
 
     if (isLoading) {
         return <>Loading...</>
     }
 
     return (
-        <div className="d-flex flex-column gap-3">
+        <div className="d-flex flex-column gap-5 gap-sm-3">
 
             <PreviewCollapseLayout
                 id={"application-tasks"}
@@ -36,13 +36,17 @@ export default function ApplicationTasks({ application }) {
                 dependency={combinedTasks}
             >
                 <div className="table-responsive fs-6" id="app-tasktable">
-                    <TaskTable tasks={combinedTasks} />
+                    <TaskTable
+                        tasks={combinedTasks}
+                        isArchived={isArchived}
+                    />
                 </div>
             </PreviewCollapseLayout>
 
             <TaskForm
-                createTask={createAppTask}
+                createNewTask={createNewTask}
                 application={application}
+                errorMsgs={errorMsgs}
             />
 
         </div>

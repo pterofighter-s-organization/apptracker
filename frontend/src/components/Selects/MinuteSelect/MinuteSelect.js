@@ -1,9 +1,6 @@
-//utils
-import { labelFormatter } from "../../../utils/formatters"
 
-export default function MinuteSelect({ formData, setFormData, label }) {
+export default function MinuteSelect({ value, updateValue }) {
 
-    const actualLabel = labelFormatter("min", label)
     const selectValues = selectMinValues()
 
     function selectMinValues() {
@@ -23,9 +20,9 @@ export default function MinuteSelect({ formData, setFormData, label }) {
 
     function changeSelect(event) {
         event.preventDefault()
-        const newMin = event.target.value
-        // console.log("actual", actualLabel, formData[actualLabel], newMin)
-        setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newMin }))
+        const newValue = event.target.value
+        // console.log("actual", actualLabel, value, newMin)
+        updateValue(newValue)
     }
 
     return (
@@ -34,13 +31,13 @@ export default function MinuteSelect({ formData, setFormData, label }) {
             style={{ width: "90px" }}
             onChange={(e) => changeSelect(e)}
         >
-            {formData[actualLabel].length > 0 ?
+            {value.length > 0 ?
                 <option value="">mm</option>
                 :
                 <option selected value="">mm</option>
             }
             {selectValues.map((num) => {
-                if (formData[actualLabel] !== num) {
+                if (value !== num) {
                     return <option key={num} value={num}>{num}</option>
                 } else {
                     return <option key={num} selected value={num}>{num}</option>

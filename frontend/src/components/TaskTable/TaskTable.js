@@ -1,17 +1,17 @@
 //components
 import { TaskRow } from "./components"
 
-//utils
-import * as taskUtils from "../../utils/taskUtils"
+//helpers
+import * as taskHelpers from "../../helpers/taskHelpers"
 
-export default function TaskTable({ tasks }) {
+export default function TaskTable({ tasks, isArchived }) {
 
     //find the priority of the task and sort them
     tasks.sort((a, b) => {
-        return taskUtils.findPrioritizedTask(a, b)
+        return taskHelpers.findPrioritizedTask(a, b)
     })
 
-    const relevantTasks = taskUtils.findRelevantTasks(tasks)
+    const relevantTasks = taskHelpers.findRelevantTasks(tasks, isArchived)
 
     //styles
     const headerPadding = "p-4"
@@ -49,7 +49,7 @@ export default function TaskTable({ tasks }) {
                             {count++}
                         </th>
                         <td></td>
-                        <td>No tasks found!</td>
+                        <td>{(!isArchived) ? "No tasks found! Track a new one inside an application" : "No archived tasks"}</td>
                     </tr>
                     :
                     <></>

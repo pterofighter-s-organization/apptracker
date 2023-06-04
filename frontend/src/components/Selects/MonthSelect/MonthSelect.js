@@ -1,14 +1,7 @@
-import { useMemo } from "react"
-import { labelFormatter } from "../../../utils/formatters"
 
-export default function MonthSelect({ formData, setFormData, label }) {
+export default function MonthSelect({ value, updateValue }) {
 
-    const actualLabel = labelFormatter("month", label)
-
-    const selectValues = useMemo(() => {
-        return selectMonthValues()
-        // eslint-disable-next-line
-    }, [formData[actualLabel]])
+    const selectValues = selectMonthValues()
 
     function selectMonthValues() {
         const res = []
@@ -20,8 +13,8 @@ export default function MonthSelect({ formData, setFormData, label }) {
 
     function changeSelect(event) {
         event.preventDefault()
-        const newMonth = event.target.value
-        setFormData(prevFormData => ({ ...prevFormData, [actualLabel]: newMonth }))
+        const newValue = event.target.value
+        updateValue(newValue)
     }
 
     return (
@@ -30,13 +23,13 @@ export default function MonthSelect({ formData, setFormData, label }) {
             style={{ width: "90px" }}
             onChange={(e) => changeSelect(e)}
         >
-            {formData[actualLabel].length > 0 ?
+            {value.length > 0 ?
                 <option value="">MM</option>
                 :
                 <option selected value="">MM</option>
             }
             {selectValues.map((num) => {
-                if (formData[actualLabel] !== num) {
+                if (value !== num) {
                     return <option key={num} value={num}>{num}</option>
                 } else {
                     return <option key={num} selected value={num}>{num}</option>

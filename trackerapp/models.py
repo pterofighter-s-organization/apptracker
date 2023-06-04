@@ -16,7 +16,6 @@ class Notes(models.Model):
     note = models.CharField(max_length=2048, blank=True, null=True)
 
     
-
 class Application(models.Model):
     application_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
@@ -25,12 +24,13 @@ class Application(models.Model):
     interview_preparation = models.CharField(max_length=255, blank=True, null=True)
     resume_link = models.CharField(max_length=255, blank=True, null=True)
     cover_letter_link = models.CharField(max_length=255, blank=True, null=True)
-    description = models.CharField(max_length=2048)
+    description = models.CharField(max_length=2048, blank=True, null=True)
     status = models.CharField(max_length=255)
-    date_applied = models.CharField(max_length=255, blank=True, null=True)
+    date_applied = models.CharField(max_length=255, blank=True)
     date_edited = models.CharField(max_length=255)
     date_created = models.CharField(max_length=255)
     salary = models.CharField(max_length=255)
+    archived = models.BooleanField(default=False)
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)

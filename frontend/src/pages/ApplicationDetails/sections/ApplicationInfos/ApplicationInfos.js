@@ -60,7 +60,7 @@ export default function ApplicationInfos({ application }) {
             </div>
 
             {/* description */}
-            <SubSectionLayout title={"Description :"}>
+            <SubSectionLayout title={"Description :"} titleFontSize={"fs-5"}>
                 <PreviewCollapseLayout
                     id={"description"}
                     text={"Description"}

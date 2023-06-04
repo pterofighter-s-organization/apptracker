@@ -1,11 +1,13 @@
+//utils
+// import { debounce } from "../../../utils/debounce"
 
-export default function TextAreaInput({ formData, setFormData, label }) {
+export default function TextAreaInput({ value, updateValue }) {
 
     function changeInput(event) {
         // console.log(event.target.value);
         event.preventDefault()
-        const newText = event.target.value
-        setFormData(prevFormData => ({ ...prevFormData, [label]: newText }))
+        const newValue = event.target.value
+        updateValue(newValue)
     }
 
     // const multiLineTextBox = useRef(null)
@@ -15,16 +17,18 @@ export default function TextAreaInput({ formData, setFormData, label }) {
     return (
         <>
             <textarea
-                value={formData[label]}
+                value={value}
                 // ref={multiLineTextBox}
-                className={`form-control p-3 bg-transparent border-0`}
+                //a flex-grow-1 to make sure it follow its parents height. Parent must be a d-flex
+                className={`form-control p-3 bg-transparent border-0 flex-grow-1`}
                 style={{ overflow: "auto", height: "100%", resize: "none" }}
                 onChange={(e) => {
+                    // debounce(changeInput(e), 0)
                     changeInput(e)
                 }}
                 placeholder={placeholderText}
             >
-                {formData[label]}
+                {value}
             </textarea>
         </>
     )
