@@ -11,6 +11,7 @@ import useNotesManager from "../../../../hooks/useNotesManager";
 export default function NoteList({ isArchived }) {
 
     const { notes, updateNote, isLoading } = useNotesManager()
+    // const categorizedNotes = (notes) ? notes.sort((note1, note2) => note2.note_id - note1.note_id).filter(note => note.archived === isArchived) : null
     const categorizedNotes = (notes) ? notes.filter(note => note.archived === isArchived) : null
 
     if (isLoading) {
