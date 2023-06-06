@@ -1,7 +1,7 @@
 
-**How to install and start the job-tracker application**
+# How to install and start the job-tracker application**
 
-# Get frontend to work
+**Get frontend to work**
 
     Go to frontend folder
     - cd /apptracker/frontend 
@@ -23,7 +23,7 @@
     if a page pops up with no errors, then frontend runs correctly.
     make sure you have start the backend to use the app.
 
-# To use the backend
+**To use the backend**
 
     **Pre-req -> have Python and Mongodb installed**
 
