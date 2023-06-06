@@ -15,15 +15,15 @@
 
 # EXAMPLE of how to use a preivew collapse
 
-<PreviewCollapseLayout
-    id={"application-tasks"}
-    text={"Tasks"}
-    previewVh={40}
-    dependency={combinedTasks}
->
-    //whats in between (start)
-        <div className="table-responsive" id="dashboard-tasks">
-            <TaskTable tasks={combinedTasks} />
-        </div>
-    //(end)
-</PreviewCollapseLayout>
+    <PreviewCollapseLayout
+        id={"application-tasks"}
+        text={"Tasks"}
+        previewVh={40}
+        dependency={combinedTasks}
+    >
+        //whats in between (start)
+            <div className="table-responsive" id="dashboard-tasks">
+                <TaskTable tasks={combinedTasks} />
+            </div>
+        //(end)
+    </PreviewCollapseLayout>
