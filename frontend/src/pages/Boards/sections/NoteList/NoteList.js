@@ -31,7 +31,7 @@ export default function NoteList({ isArchived }) {
                     previewVh={60}
                     dependency={categorizedNotes}
                 >
-                    <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 ">
+                    <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5">
                         {categorizedNotes.map((note) => {
                             return (
                                 <NoteCard
@@ -45,7 +45,7 @@ export default function NoteList({ isArchived }) {
                 :
                 <div className="fs-5">
                     {!isArchived ?
-                        "No notes at this moment."
+                        "No notes at this moment. Make one inside an application"
                         :
                         "No archived notes found."
                     }
