@@ -1,1 +1,1 @@
-export { default as SubmitSuccessModalContent } from './SubmitSuccessModalContent'
+export { default as SubmitSuccessModalContent } from './SubmitSuccessModalContent';

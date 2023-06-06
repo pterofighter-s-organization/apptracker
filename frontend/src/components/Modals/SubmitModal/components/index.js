@@ -1,2 +1,2 @@
 export { SubmitErrorModalContent } from './SubmitErrorModalContent';
-export { SubmitSuccessModalContent } from './SubmitSuccessModalContent';
+export { SubmitSuccessModalContent } from './SubmitSuccessModalContent'

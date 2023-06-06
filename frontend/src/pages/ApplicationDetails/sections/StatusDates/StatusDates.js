@@ -43,13 +43,13 @@ export default function StatusDates({ application, updateApplication }) {
 
             {application.status !== "interested" ?
                 <DataLayout title={"Applied"}>
-                    {!application.date_applied || application.date_applied.length <= 0 || validationHelpers.isEmptyDateTime(application.date_applied) ?
+                    {!application.date_applied || application.date_applied.length <= 0?
                         <div className="text-dark-emphasis">
                             Not specified
                         </div>
                         :
                         <>
-                            {validationHelpers.isValidDateTime(application.date_applied) ?
+                            {validationHelpers.isValidIsoDateTime(application.date_applied) ?
                                 <DateTime
                                     dateTime={application.date_applied}
                                 />

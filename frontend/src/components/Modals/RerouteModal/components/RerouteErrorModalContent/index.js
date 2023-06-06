@@ -1,1 +1,1 @@
-export { default as RerouteErrorModalContent } from './RerouteErrorModalContent'
+export { default as RerouteErrorModalContent } from './RerouteErrorModalContent';

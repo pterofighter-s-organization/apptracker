@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 //components
-import { ApplicationCard } from '../../components/Cards';
+import { ApplicationCard } from '../../components/Cards/ApplicationCard';
 
 //layouts
 import { SectionLayout } from '../../layouts/SectionLayout';
@@ -15,9 +15,6 @@ import * as applicationHelpers from '../../helpers/applicationHelpers';
 
 //utils
 import * as dateTimeUtils from '../../utils/dateTimeUtils';
-
-//css
-import "./PinnedApplications.css"
 
 export default function PinnedApplications() {
 
@@ -36,7 +33,7 @@ export default function PinnedApplications() {
     }, [applications, isArchived])
 
     if (!categorizedApps) {
-        return <>Applications cannot be fetched!</>
+        return <>Applications cannot be fetched! Mostly backend not connected.</>
     }
 
     return (
@@ -56,11 +53,10 @@ export default function PinnedApplications() {
                         :
                         <Link
                             to="/application/new/interested"
-                            className="btn btn-primary d-flex align-items-center justify-content-center fs-5 p-4"
-                            id="application-interested-add"
+                            className={`btn btn-primary d-flex align-items-center justify-content-center fs-5 p-4 ${"add-form-button"}`}
                         >
-                            <div className="fs-5">
-                                Click me to start tracking interested applications
+                            <div className="form-button-label">
+                                Start tracking interested applications
                             </div>
                         </Link>
                     :

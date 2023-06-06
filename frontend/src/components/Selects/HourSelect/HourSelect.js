@@ -6,7 +6,7 @@ export default function HourSelect({ value, updateValue }) {
     function selectHourValues() {
         const res = []
 
-        for (let num = 1; num <= 24; num += 1) {
+        for (let num = 0; num <= 23; num += 1) {
             const stringInt = num.toString()
             if (stringInt.length > 1) {
                 res.push(stringInt)

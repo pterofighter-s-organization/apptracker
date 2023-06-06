@@ -5,24 +5,22 @@ import { NoteCard } from "../../../../components/Cards/NoteCard"
 //hooks
 import useAppNotesManager from "../../../../hooks/useAppNotesManager"
 
-//css
-import "./ApplicationNotes.css"
+export default function ApplicationNotes({ application, isArchived }) {
 
-export default function ApplicationNotes({ application }) {
+    const { notes, createNote, updateNote, isLoading } = useAppNotesManager(application.application_id)
+    const categorizedNotes = (notes) ? notes.filter(note => note.archived === isArchived) : null
 
-    const { notes, createNote, updateNote, isLoading: notesLoading } = useAppNotesManager(application.application_id)
-
-    if (notesLoading) {
+    if (isLoading) {
         return <>Loading...</>
     }
 
-    if (!notes) {
+    if (!categorizedNotes) {
         return <>Get application notes error!</>
     }
 
     return (
-        <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 w-100 pb-3">
-            {notes.map((note) => {
+        <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 w-100 align-items-stretch pb-3">
+            {categorizedNotes.map((note) => {
                 return (
                     <NoteCard
                         note={note}
@@ -31,25 +29,23 @@ export default function ApplicationNotes({ application }) {
                 )
             })}
             <button
-                className="btn btn-primary d-flex flex-column justify-content-center align-items-center p-4"
+                className={`btn btn-primary d-flex flex-column justify-content-center align-items-center p-4 ${"add-form-button"}`}
                 onClick={(e) => {
                     e.preventDefault()
+                    //archived automatically is false
                     createNote({
                         "application_id": application.application_id,
                         "note": ""
                     })
                 }}
-                id="note-add-button"
             >
-                {notes.length > 0 ?
-                    <div className="fs-5">
-                        Add Note
-                    </div>
-                    :
-                    <div className="fs-5">
-                        Click me to start note taking for this application
-                    </div>
-                }
+                <div className="form-button-label">
+                    {categorizedNotes.length > 0 ?
+                        "Add Note"
+                        :
+                        "Start note taking for this application"
+                    }
+                </div>
             </button>
         </div>
     )

@@ -15,13 +15,13 @@ import useApplicationManager from "../../../hooks/useApplicationManager"
 
 //utils
 import * as initializers from "../../../utils/initializers"
+import * as dateTimeUtils from "../../../utils/dateTimeUtils"
 import { APP_STATUSES } from "../../../utils/constants"
-import { findTodayDate } from "../../../utils/dateTimeUtils"
 
 export default function NewApplicationForm() {
 
     const { givenStatus } = useParams()
-    console.log(givenStatus, "status")
+    // console.log(givenStatus, "status")
 
     const [formData, setFormData] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -36,7 +36,7 @@ export default function NewApplicationForm() {
     useEffect(() => {
         const dateAppliedData = initializers.dateInfoInitializer(null, "applied")
         const basicData = {
-            "status": (APP_STATUSES.includes(givenStatus)) ? givenStatus: "interested",
+            "status": (APP_STATUSES.includes(givenStatus)) ? givenStatus : "interested",
             "position": "",
             "company": "",
             "salary": "",
@@ -52,9 +52,6 @@ export default function NewApplicationForm() {
 
     function handleSubmittedForm() {
 
-        const date_applied = (formData["month_applied"] + "-" + formData["day_applied"] + "-" +
-            formData["year_applied"] + " " + formData["hour_applied"] + ":" + formData["min_applied"] + ":" + formData["sec_applied"])
-
         createApplication({
             "user_id": 1,
             "status": formData["status"],
@@ -65,9 +62,9 @@ export default function NewApplicationForm() {
             "interview_preparation": formData["interview_preparation"],
             "resume_link": formData["resume_link"],
             "cover_letter_link": formData["cover_letter_link"],
-            "date_applied": date_applied,
-            "date_created": findTodayDate(),
-            "date_edited": findTodayDate()
+            "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),
+            "date_created": dateTimeUtils.findTodayUTCDate(),
+            "date_edited": dateTimeUtils.findTodayUTCDate(),
         }).then((status) => {
             setShowSuccessModal(status)
         })
@@ -142,22 +139,26 @@ export default function NewApplicationForm() {
             {/* buttons */}
             <div className="d-flex flex-column gap-3">
                 <button
-                    className={`btn btn-primary p-3 py-4 ${"fs-6"}`}
+                    className={`btn btn-primary p-3 py-4`}
                     type="submit"
                     data-bs-toggle="modal" data-bs-target={"#new-form"}
                 >
-                    Submit
+                    <div className="form-button-label">
+                        Submit
+                    </div>
                 </button>
             </div>
 
             <RerouteModal
-                id={"new-form"}
-                successMsg={"Submitted! You may stay to track more apps or locate to the application."}
-                errorMsg={"Please check the invalid fields and correct them."}
-                closeModal={closeModal}
+                modalId={"new-form"}
+                messages={{
+                    success: "Submitted! You may stay to track more apps or locate to the application.",
+                    error: "Please check the invalid fields and correct them.",
+                }}
                 buttonLabel={"Go to app"}
-                showSuccessModal={showSuccessModal}
                 route={"/application/" + ((application) ? application.application_id : "")}
+                closeModal={closeModal}
+                showSuccessModal={showSuccessModal}
             />
         </form>
     )

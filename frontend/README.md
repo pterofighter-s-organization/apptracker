@@ -11,6 +11,7 @@
         - npm install moment
         - npm i bootstrap-icons
         - npm install jquery
+        - npm install moment-timezone --save
 
     start it
     - npm start

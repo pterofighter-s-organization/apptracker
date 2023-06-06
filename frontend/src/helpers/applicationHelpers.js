@@ -1,12 +1,12 @@
 
 //utils
 import { APP_STATUSES } from "../utils/constants"
-import { findTodayDate } from "../utils/dateTimeUtils"
+import * as dateTimeUtils from "../utils/dateTimeUtils"
 
 export function updateApplicationInfo(updateInfo, application) {
 
     const newApplication = {} // a new reference
-    const today = findTodayDate()
+    const today = dateTimeUtils.findTodayUTCDate()
 
     //transfering old data to new reference
     Object.entries(application).forEach(([label, _]) => {
@@ -25,7 +25,7 @@ export function updateApplicationInfo(updateInfo, application) {
 
 export function updateInfoForAppliedApp(dateApplied) {
 
-    const today = findTodayDate()
+    const today = dateTimeUtils.findTodayUTCDate()
 
     //if date applied already declared, then dont change. If isn't declared, then make it today
     const updateInfo = {

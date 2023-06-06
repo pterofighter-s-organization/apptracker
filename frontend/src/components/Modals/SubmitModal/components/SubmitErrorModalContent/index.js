@@ -1,1 +1,1 @@
-export { default as SubmitErrorModalContent } from './SubmitErrorModalContent'
+export { default as SubmitErrorModalContent } from './SubmitErrorModalContent';

@@ -1,1 +1,1 @@
-export { default as RerouteModal } from './RerouteModal';
+export { default as RerouteModal } from './RerouteModal'

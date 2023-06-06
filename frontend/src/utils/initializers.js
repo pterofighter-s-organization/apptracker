@@ -1,5 +1,7 @@
 import { labelFormatter } from "./formatters"
 
+const moment = require("moment")
+
 export function dateInfoInitializer(dateTime, label) {
 
     label = labelFormatter("", label)
@@ -17,9 +19,9 @@ export function dateInfoInitializer(dateTime, label) {
 
     //if null, then no need to prefill the dateTime data - everything in here should be valid
     if (dateTime) {
-        const dateTimeSplitted = dateTime.split(" ")
-        const dateSplitted = dateTimeSplitted[0].split("-")
-        const timeSplitted = dateTimeSplitted[1].split(":")
+        const dateTimeObj = moment(dateTime, moment.ISO_8601).format('MM-DD-YYYY HH:mm:ss')
+        const dateSplitted = dateTimeObj[0].split("-")
+        const timeSplitted = dateTimeObj[1].split(":")
 
         dateInfoObj["month" + label] = dateSplitted[0]
         dateInfoObj["day" + label] = dateSplitted[1]

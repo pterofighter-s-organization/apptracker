@@ -6,9 +6,6 @@ import { SubSectionLayout } from "../../../../layouts/SubSectionLayout";
 import { PreviewCollapseLayout } from "../../../../layouts/PreviewCollapseLayout";
 import { DataLayout } from "../../layouts";
 
-//utils
-import * as formatters from "../../../../utils/formatters";
-
 //css
 import "./Description.css"
 
@@ -22,13 +19,13 @@ export default function ApplicationInfos({ application }) {
                 {/* basic info */}
                 <div className="d-flex flex-column gap-3 gap-md-4 bg-body-secondary p-4 w-100">
                     <DataLayout title={"Position"}>
-                        <div className="text-dark-emphasis">
-                            {formatters.textFormatter(application.position)}
+                        <div className="text-dark-emphasis text-capitalize">
+                            {application.position}
                         </div>
                     </DataLayout>
                     <DataLayout title={"Company"}>
-                        <div className="text-dark-emphasis">
-                            {formatters.textFormatter(application.company)}
+                        <div className="text-dark-emphasis text-capitalize">
+                            {application.company}
                         </div>
                     </DataLayout>
                     <DataLayout title={"Salary"}>

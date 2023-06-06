@@ -1,40 +1,19 @@
 
-//utils
-import { compareDates, findTodayDate } from "../utils/dateTimeUtils"
-import { labelFormatter } from "../utils/formatters"
+//format validations
 
-//form field validations
-export function validateDateTime(formData, setErrorMsgs, label, allowPastDates) {
+export function isEmptyDateTime(dateTimeString) {
 
-    const actualLabel = labelFormatter("date", label)
-    const dateTime  = formData[actualLabel]
-    
-    if(isEmptyDateTime(dateTime)) {
-        setErrorMsgs[actualLabel] = ""
-        formData[actualLabel] = ""
-        return
-    }
-    if (!isValidDateTime(dateTime)) {
-        setErrorMsgs[actualLabel] = "Please finish selecting the date elements."
-        formData[actualLabel] = dateTime
-        return
-        // return { check: false, value: "" }
-    } if (!allowPastDates && compareDates(dateTime, findTodayDate()) < 0) {
-        setErrorMsgs[actualLabel] = "The current selected date is before today"
-        formData[actualLabel] = dateTime
-        return
-        // console.log(actualLabel, "before")
-        // setErrorMsgs((prevErrorMsgs) => ({ ...prevErrorMsgs, [actualLabel]: "The current selected date is before today" }))
-        // return { check: false, value: null }
-    }
+    //can only have 00 and no other numbers but can fit other characters
+    const exactlyTwoZerosRegex = /^[^0-9]*0{2}[^0-9]*$/
+    const dateFormatRegex = /^.*-.*-.*:.*:.*$/
 
-    setErrorMsgs[actualLabel] = ""
-    formData[actualLabel] = dateTime
-    return
-    // return { check: true, value: dateTime }
+    // - - : :00 because seconds already pre-defined
+
+    // console.log(dateTimeString, dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString), exactlyTwoZerosRegex.test("00"))
+
+    return dateTimeString.length === 0 || (dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString))
 }
 
-//format validations
 export function isValidDate(dateString) {
 
     if(!dateString){
@@ -76,18 +55,67 @@ export function isValidDateTime(dateTimeString) {
     return isValidTime(time) && isValidDate(date)
 }
 
-export function isEmptyDateTime(dateTimeString) {
-
-    //can only have 00 and no other numbers but can fit other characters
-    const exactlyTwoZerosRegex = /^[^0-9]*0{2}[^0-9]*$/
-    const dateFormatRegex = /^.*-.*-.*:.*:.*$/
-
-    // - - : :00 because seconds already pre-defined
-
-    // console.log(dateTimeString, dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString), exactlyTwoZerosRegex.test("00"))
-
-    return dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString)
+export function isValidIsoDateTime(isoString) {
+    const moment = require('moment')
+    return moment(isoString, moment.ISO_8601).isValid()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//form field validations
+// export function validateDateTime(formData, setErrorMsgs, label, allowPastDates) {
+
+//     const actualLabel = labelFormatter("date", label)
+//     const dateTime  = formData[actualLabel]
+    
+//     if(isEmptyDateTime(dateTime)) {
+//         setErrorMsgs[actualLabel] = ""
+//         formData[actualLabel] = ""
+//         return
+//     }
+//     if (!isValidDateTime(dateTime)) {
+//         setErrorMsgs[actualLabel] = "Please finish selecting the date elements."
+//         formData[actualLabel] = dateTime
+//         return
+//         // return { check: false, value: "" }
+//     } if (!allowPastDates && compareDates(dateTime, findTodayDate()) < 0) {
+//         setErrorMsgs[actualLabel] = "The current selected date is before today"
+//         formData[actualLabel] = dateTime
+//         return
+//         // console.log(actualLabel, "before")
+//         // setErrorMsgs((prevErrorMsgs) => ({ ...prevErrorMsgs, [actualLabel]: "The current selected date is before today" }))
+//         // return { check: false, value: null }
+//     }
+
+//     setErrorMsgs[actualLabel] = ""
+//     formData[actualLabel] = dateTime
+//     return
+//     // return { check: true, value: dateTime }
+// }
+
+
+// export function isEmptyDateTime(dateTimeString) {
+
+//     //can only have 00 and no other numbers but can fit other characters
+//     const exactlyTwoZerosRegex = /^[^0-9]*0{2}[^0-9]*$/
+//     const dateFormatRegex = /^.*-.*-.*:.*:.*$/
+
+//     // - - : :00 because seconds already pre-defined
+
+//     // console.log(dateTimeString, dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString), exactlyTwoZerosRegex.test("00"))
+
+//     return dateFormatRegex.test(dateTimeString) && exactlyTwoZerosRegex.test(dateTimeString)
+// }
 
 //Not gonna use the functions below after backend finishes, only for testing before coding the backend.
 

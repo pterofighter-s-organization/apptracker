@@ -29,7 +29,7 @@ export default function ApplicationDetails() {
     }
 
     if (!application) {
-        return <>Application Not Found!</>
+        return <>Application Not Found! Mostly backend not connected.</>
     }
 
     return (
@@ -38,10 +38,10 @@ export default function ApplicationDetails() {
 
             <Link
                 to={"/application/edit/" + application.application_id}
-                className="btn btn-primary p-3 py-4 fs-6"
+                className={`btn btn-primary p-3 py-4 ${"form-button"}`}
                 id="edit"
             >
-                <div className="d-flex flex-row gap-3 justify-content-center">
+                <div className={`d-flex flex-row gap-3 justify-content-center ${"form-button-label"}`}>
                     <i class="bi bi-pencil"></i>
                     <div>
                         Edit Application
@@ -65,13 +65,14 @@ export default function ApplicationDetails() {
             <SectionLayout title={"Application Tasks :"}>
                 <ApplicationTasks
                     application={application}
-                    isArchived={null}
+                    isArchived={false}
                 />
             </SectionLayout>
 
             <SectionLayout title={"Application Notes :"}>
                 <ApplicationNotes
                     application={application}
+                    isArchived={false}
                 />
             </SectionLayout>
 

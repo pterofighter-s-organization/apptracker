@@ -11,8 +11,6 @@ export default function TaskTable({ tasks, isArchived }) {
         return taskHelpers.findPrioritizedTask(a, b)
     })
 
-    const relevantTasks = taskHelpers.findRelevantTasks(tasks, isArchived)
-
     //styles
     const headerPadding = "p-4"
     let count = 1
@@ -32,7 +30,7 @@ export default function TaskTable({ tasks, isArchived }) {
             </thead>
 
             <tbody>
-                {relevantTasks.map((task) => {
+                {tasks.map((task) => {
                     return (
                         <TaskRow
                             task={task}
@@ -40,7 +38,7 @@ export default function TaskTable({ tasks, isArchived }) {
                         />
                     )
                 })}
-                {relevantTasks.length <= 0 ?
+                {tasks.length <= 0 ?
                     <tr>
                         <th
                             scope="row"

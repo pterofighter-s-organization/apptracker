@@ -7,9 +7,6 @@ import { DateTime } from "../../DateTime"
 //helpers
 import * as applicationHelpers from "../../../helpers/applicationHelpers"
 
-//utils
-import * as formatters from "../../../utils/formatters"
-
 //css
 import "./ApplicationCard.css"
 
@@ -66,11 +63,11 @@ export default function ApplicationCard({ application, updateApplication }) {
 
             <div className="card-body d-flex flex-column gap-2 p-4">
                 {/* avoid the title overflowing with text-truncate */}
-                <div className="card-title text-truncate h5">
-                    {formatters.textFormatter(application.position)}
+                <div className="card-title text-truncate text-capitalize h5">
+                    {application.position}
                 </div>
-                <div className="card-subtitle lead">
-                    - {formatters.textFormatter(application.company)}
+                <div className="card-subtitle text-capitalize lead">
+                    - {application.company}
                 </div>
             </div>
 

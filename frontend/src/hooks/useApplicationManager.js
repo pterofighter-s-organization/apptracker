@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 
 //helpers
-import * as validationHelpers from "../helpers/validationHelpers";
 import * as formHelpers from "../helpers/formHelpers";
 
 export default function useApplicationManager(id) {
@@ -54,11 +53,8 @@ export default function useApplicationManager(id) {
 
         //dont need to do loading here because useeffect for status update wont be triggered
         try {
-            validationHelpers.validateDateTime(app, newErrorMsgs, "applied", true)
             const response = await api.applicationAPI.updateApplication(application_id, app)
             setApplication(response.data)
-            //temp. for recording date errors before it can be solve in backend
-            formHelpers.findErrors(newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return true
         } catch (error) {
@@ -72,17 +68,15 @@ export default function useApplicationManager(id) {
     async function createApplication(app) {
 
         const newErrorMsgs = Object.assign(errorMessages, {})
-
+        console.log(app)
         try {
-            validationHelpers.validateDateTime(app, newErrorMsgs, "applied", true)
             const response = await api.applicationAPI.createApplication(app)
             setApplication(response.data)
-            formHelpers.findErrors(newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return true
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error.response.data, newErrorMsgs)
+            formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return false
         }

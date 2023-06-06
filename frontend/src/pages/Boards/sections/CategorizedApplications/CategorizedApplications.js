@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { ApplicationCard } from "../../../../components/Cards"
+import { ApplicationCard } from "../../../../components/Cards/ApplicationCard"
 
 //layouts
 import { PreviewCollapseLayout } from "../../../../layouts/PreviewCollapseLayout"
@@ -12,9 +12,6 @@ import * as dateTimeUtils from "../../../../utils/dateTimeUtils"
 
 //helpers
 import * as applicationHelpers from "../../../../helpers/applicationHelpers"
-
-//css
-import "./CategorizedApplications.css"
 
 export default function CategorizedApplications({ applications, updateApplication, isLoading, isArchived }) {
 
@@ -34,7 +31,7 @@ export default function CategorizedApplications({ applications, updateApplicatio
     }
 
     if (!categorizedApps) {
-        return <>Applications cannot be fetched</>
+        return <>Applications cannot be fetched! Mostly backend not connected.</>
     }
 
     return (
@@ -57,15 +54,13 @@ export default function CategorizedApplications({ applications, updateApplicatio
                 </PreviewCollapseLayout>
                 :
                 <>
-
                     {!isArchived ?
                         <Link
                             to="/application/new/interested"
-                            className="btn btn-primary d-flex align-items-center justify-content-center fs-5 p-4"
-                            id="application-add"
+                            className={`btn btn-primary d-flex align-items-center justify-content-center p-4 ${"add-form-button"}`}
                         >
-                            <div className="fs-5">
-                                Click me to start tracking applications
+                            <div className="form-button-label">
+                                Start tracking applications
                             </div>
                         </Link>
                         :

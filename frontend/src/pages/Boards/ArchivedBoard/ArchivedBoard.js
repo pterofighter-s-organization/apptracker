@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 
-//sections
-import { CategorizedApplications, RelevantTasks } from "../sections"
+//shared-sections
+import { CategorizedApplications, RelevantTasks, NoteList } from "../sections"
 
 //layouts
 import { SectionLayout } from "../../../layouts/SectionLayout"
@@ -33,6 +33,12 @@ export default function ArchivedBoard() {
             <SectionLayout title={"Archived Tasks"}>
                 <RelevantTasks
                     applications={applications}
+                    isArchived={true}
+                />
+            </SectionLayout>
+
+            <SectionLayout title={"Archived notes"}>
+                <NoteList
                     isArchived={true}
                 />
             </SectionLayout>

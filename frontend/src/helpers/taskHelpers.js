@@ -1,30 +1,34 @@
 
 //utils
-import { findTodayDate, compareDates } from "../utils/dateTimeUtils"
+import * as dateTimeUtils from '../utils/dateTimeUtils'
 
 //helpers
-import { isValidDateTime } from "./validationHelpers"
+import { isValidIsoDateTime } from "./validationHelpers"
 
 export function isTaskNeeded(applicationStatus) {
     return applicationStatus === "applied" || applicationStatus === "interviewing" || applicationStatus === "accepted"
 }
 
-export function findRelevantTasks(tasks, isArchived) {
+export function categorizeTasks(tasks){
 
+    const archivedTasks = []
     const relevantTasks = []
-    const today = findTodayDate()
+    const today = dateTimeUtils.findTodayUTCDate()
 
-    tasks.forEach((task, _) => {
-        // console.log(compareDates(today, task.date_due), compareDates(today, task.date_due)===-1, tasks.slice(index))
-        const res = compareDates(today, task.date_due)
-        if (isArchived === null || isArchived) {
-            relevantTasks.push(task)
-        } else if (!isArchived && res <= 0) {
+    tasks.forEach((task) => {
+        const res = dateTimeUtils.compareDates(today, task.date_due)
+        //1 meaning the the date due is before today
+        if(res === 1){
+            archivedTasks.push(task)
+        }else{
             relevantTasks.push(task)
         }
     })
 
-    return relevantTasks
+    return {
+        archivedTasks,
+        relevantTasks,
+    }
 }
 
 export function findAllExtraTasks(applications) {
@@ -56,13 +60,13 @@ export function findExtraTasks(application) {
         resume_link
     } = application
 
-    const today = findTodayDate()
+    const today = dateTimeUtils.findTodayUTCDate()
     const taskId = application_id + position + company
 
     //finding some of the major task the user needs to finish
     //upload resume, upload the time you applied to this application
     if (status !== "interested") {
-        if (!isValidDateTime(date_applied)) {
+        if (!isValidIsoDateTime(date_applied)) {
             extraTasks.push(
                 {
                     task_id: taskId,
@@ -96,7 +100,7 @@ export function findExtraTasks(application) {
 
 export function findPrioritizedTask(task1, task2) {
 
-    const res = compareDates(task1.date_due, task2.date_due)
+    const res = dateTimeUtils.compareDates(task1.date_due, task2.date_due)
 
     //same day
     if (res === 0) {

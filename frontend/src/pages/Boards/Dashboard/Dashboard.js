@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 
 //sections
-import { CategorizedApplications, RelevantTasks } from "../sections"
+import { CategorizedApplications, RelevantTasks, NoteList } from "../sections"
 
 //layouts
 import { SectionLayout } from "../../../layouts/SectionLayout"
@@ -32,7 +32,13 @@ export default function Dashboard() {
             <SectionLayout title={"Your Relevant Tasks"}>
                 <RelevantTasks
                     applications={applications}
-                    isArchived={false}         
+                    isArchived={false}
+                />
+            </SectionLayout>
+
+            <SectionLayout title={"Your notes"}>
+                <NoteList
+                    isArchived={false}
                 />
             </SectionLayout>
             {/* <button

@@ -10,11 +10,12 @@ import { SubmitModal } from '../Modals/SubmitModal'
 //layouts
 import { SubSectionLayout } from '../../layouts/SubSectionLayout'
 
-//utils
-import * as initializers from '../../utils/initializers'
-
 //helpers
 import * as formHelpers from '../../helpers/formHelpers'
+
+//utils
+import * as initializers from '../../utils/initializers'
+import * as dateTimeUtils from '../../utils/dateTimeUtils'
 
 export default function TaskForm({ createNewTask, application, errorMsgs }) {
 
@@ -38,14 +39,13 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
         // const titleCheck = fieldChecks.checkTextField(formData, setErrorMsgs, "title")
 
         // createTask({})
-        const date_due = formData["month_due"] + "-" + formData["day_due"] + "-" + formData["year_due"] + " " + formData["hour_due"] + ":" + formData["min_due"] + ":" + formData["sec_due"]
         createNewTask({
             "application_id": application.application_id,
             "title": formData["title"],
-            "date_due": date_due,
+            "date_due": dateTimeUtils.convertInputToISO(formData, "due"),
             "company": application.company,
             "position": application.position,
-            "section": "task",
+            "section": "application-tasks",
             "priority": 0,
         }).then(status => {
             setShowSuccessModal(status)
@@ -121,13 +121,14 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
                 </button>
 
                 <SubmitModal
-                    id={modalId}
-                    showSuccessModal={showSuccessModal}
-                    successMsg={"New task submitted!"}
-                    errorMsg={"Please check the invalid fields and correct them."}
+                    modalId={modalId}
+                    messages={{
+                        success: "New task submitted!",
+                        error: "Please check the invalid fields and correct them."
+                    }}
                     closeModal={closeModal}
+                    showSuccessModal={showSuccessModal}
                 />
-
             </form>
 
         </SubSectionLayout>

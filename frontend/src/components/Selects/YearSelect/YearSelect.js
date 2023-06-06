@@ -1,5 +1,5 @@
 //utils
-import { findTodayDate } from "../../../utils/dateTimeUtils"
+import * as dateTimeUtils from '../../../utils/dateTimeUtils'
 
 export default function YearSelect({ value, updateValue }) {
 
@@ -7,9 +7,10 @@ export default function YearSelect({ value, updateValue }) {
 
     function selectYearValues() {
         const res = []
-        const todayDateTime = findTodayDate()
+        const todayDateTime = dateTimeUtils.findTodayUTCDate()
+        const pstDateTime = dateTimeUtils.convertUTCtoPST(todayDateTime)
         // console.log(todayDateTime.split(" ")[0].split("-")[2])
-        const currentYearInInt = parseInt(todayDateTime.split(" ")[0].split("-")[2])
+        const currentYearInInt = parseInt(pstDateTime.split("T")[0].split("-")[0])
 
         for (let num = currentYearInInt - 5; num <= currentYearInInt + 10; num += 1) {
             res.push(num.toString())

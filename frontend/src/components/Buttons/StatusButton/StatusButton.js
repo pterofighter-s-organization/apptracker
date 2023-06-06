@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 
 //utils
-import * as formatters from "../../../utils/formatters";
 import { STATUSES_MAP_COLOR } from "../../../utils/constants";
 
 export default function StatusButton({ value, updateValue }) {
@@ -15,6 +14,7 @@ export default function StatusButton({ value, updateValue }) {
         if (dropdownMenuRef) {
             dropdownMenuRef.current.classList.remove("show")
         }
+        //value is here because when the value changes, it must remove the show of the previous dropdown
     }, [value, dropdownMenuRef])
 
     return (
@@ -23,8 +23,8 @@ export default function StatusButton({ value, updateValue }) {
                 type="button"
                 className={`btn btn-${STATUSES_MAP_COLOR[value]} pe-none`}
             >
-                <div>
-                    {formatters.textFormatter(value)}
+                <div className="text-capitalize">
+                    {value}
                 </div>
             </button>
             <button
@@ -51,8 +51,8 @@ export default function StatusButton({ value, updateValue }) {
                                         updateValue(statusLabel)
                                     }}
                                 >
-                                    <div>
-                                        {formatters.textFormatter(statusLabel)}
+                                    <div className="text-capitalize">
+                                        {statusLabel}
                                     </div>
                                 </button>
                             </li>

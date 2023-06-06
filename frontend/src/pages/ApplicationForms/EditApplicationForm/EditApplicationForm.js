@@ -15,7 +15,7 @@ import { SectionLayout } from "../../../layouts/SectionLayout"
 
 //utils
 import * as initializers from "../../../utils/initializers"
-import { findTodayDate } from "../../../utils/dateTimeUtils"
+import * as dateTimeUtils from "../../../utils/dateTimeUtils"
 
 export default function EditApplicationForm() {
 
@@ -56,9 +56,6 @@ export default function EditApplicationForm() {
 
     function handleSubmittedForm() {
 
-        const date_applied = (formData["month_applied"] + "-" + formData["day_applied"] + "-" +
-            formData["year_applied"] + " " + formData["hour_applied"] + ":" + formData["min_applied"] + ":" + formData["sec_applied"])
-
         updateApplication({
             "user_id": application.user_id,
             "application_id": application.application_id,
@@ -70,9 +67,9 @@ export default function EditApplicationForm() {
             "interview_preparation": formData["interview_preparation"],
             "resume_link": formData["resume_link"],
             "cover_letter_link": formData["cover_letter_link"],
-            "date_applied": date_applied,
+            "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),
             "date_created": application.date_created,
-            "date_edited": findTodayDate()
+            "date_edited": dateTimeUtils.findTodayUTCDate()
         }).then((status) => {
             setShowSuccessModal(status)
         })
@@ -101,7 +98,7 @@ export default function EditApplicationForm() {
                 handleSubmittedForm()
             }}
         >
-            <SectionLayout title={"Edit "+(formData["status"] !== "interested" ? "Status And Dates :" : "Status :")}>
+            <SectionLayout title={"Edit " + (formData["status"] !== "interested" ? "Status And Dates :" : "Status :")}>
                 <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 mb-3">
                     <div className="">
                         * ( required fields )
@@ -138,28 +135,34 @@ export default function EditApplicationForm() {
             {/* buttons */}
             <div className="d-flex flex-column gap-3">
                 <button
-                    className={`btn btn-primary p-3 py-4 ${"fs-6"}`}
+                    className={`btn btn-primary p-3 py-4`}
                     type="submit"
                     data-bs-toggle="modal" data-bs-target={"#edit-form"}
                 >
-                    Save Changes
+                    <div className="form-button-label">
+                        Save changes
+                    </div>
                 </button>
                 <Link
                     to={"/application/" + application.application_id}
-                    className="btn btn-outline-secondary p-3 py-4 fs-6"
+                    className="btn btn-outline-secondary p-3 py-4"
                 >
-                    Back to app
+                    <div className="form-button-label">
+                        Back to app
+                    </div>
                 </Link>
             </div>
 
             <RerouteModal
-                id={"edit-form"}
-                successMsg={"Saved! You may stay to keep editing or locate back to the application."}
-                errorMsg={"Please check the invalid fields and correct them."}
-                closeModal={closeModal}
+                modalId={"edit-form"}
+                messages={{
+                    success: "Saved! You may stay to keep editing or locate back to the application.",
+                    error: "Please check the invalid fields and correct them.",
+                }}
                 buttonLabel={"Back to app"}
-                showSuccessModal={showSuccessModal}
                 route={"/application/" + application.application_id}
+                closeModal={closeModal}
+                showSuccessModal={showSuccessModal}
             />
         </form>
     )

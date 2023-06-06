@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function RerouteSuccessModalContent(props) {
+export default function RerouteSuccessModal(props){
 
     const {
         message,

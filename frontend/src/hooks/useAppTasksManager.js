@@ -5,7 +5,6 @@ import api from "../services/api";
 
 //helpers
 import * as formHelpers from "../helpers/formHelpers";
-import * as validationHelpers from "../helpers/validationHelpers";
 
 export default function useAppTasksManager(id) {
 
@@ -47,15 +46,15 @@ export default function useAppTasksManager(id) {
         //assign to a new reference
         const newErrorMsgs = Object.assign(errorMessages, {})
 
+        // console.log(task)
         try {
-            validationHelpers.validateDateTime(task, newErrorMsgs, "due", false) //obj, errormessages, label, allowpastdates
             const response = await api.taskAPI.createTask(task)
             setTasks([...current, response.data])
             setErrorMsgs(newErrorMsgs)
             return true
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error.response.data, newErrorMsgs)
+            formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
             return false
         }

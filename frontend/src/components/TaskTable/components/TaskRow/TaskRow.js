@@ -5,7 +5,6 @@ import { DateTime } from '../../../DateTime'
 import { Timer } from '../../../Timer'
 
 //utils
-import * as formatters from '../../../../utils/formatters';
 import * as dateTimeUtils from '../../../../utils/dateTimeUtils';
 
 
@@ -48,15 +47,15 @@ export default function TaskRow({ count, task }) {
                 </th>
                 {/* position and company name */}
                 <td
-                    className={`${rowClassNames}`}
+                    className={`${rowClassNames} text-capitalize`}
                     style={{ padding: `${rowPadding}` }}
                 >
                     <div>
-                        {formatters.textFormatter(task.position)}
+                        {task.position}
                     </div>
                     {/* text-nowrap ensures that ( ) doesnt get displaced when the text couldnt fit them anymore */}
                     <div className="text-nowrap">
-                        {"( " + formatters.textFormatter(task.company) + " )"}
+                        {"( " + task.company + " )"}
                     </div>
                 </td>
 
@@ -82,7 +81,7 @@ export default function TaskRow({ count, task }) {
                     style={{ padding: `${rowPadding}` }}
                 >
                     <Timer
-                        start={dateTimeUtils.findTodayDate()}
+                        start={dateTimeUtils.findTodayUTCDate()}
                         end={task.date_due}
                     />
                 </td>

@@ -1,11 +1,4 @@
 
-
-export function textFormatter(text) {
-
-    //only uppercase the first letter of a word
-    return text.replace(/\b\w/g, letter => letter.toUpperCase());
-}
-
 export function dateFormatter(date) {
 
     //making sure every - is converted into / for not taking up space

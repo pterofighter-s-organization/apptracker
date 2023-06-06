@@ -19,7 +19,8 @@ export default function ApplicationTasks({ application, isArchived }) {
 
     const combinedTasks = useMemo(() => {
         const extraTasks = (!isArchived) ? taskHelpers.findExtraTasks(application) : []
-        return [...extraTasks, ...tasks]
+        const { archivedTasks, relevantTasks } = taskHelpers.categorizeTasks(tasks)
+        return [...extraTasks, ...((!isArchived) ? relevantTasks : archivedTasks)]
     }, [application, tasks, isArchived])
 
     if (isLoading) {

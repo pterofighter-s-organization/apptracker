@@ -2,7 +2,7 @@
 import { useMemo } from "react"
 
 //utils
-import { findTodayDate } from "../../../utils/dateTimeUtils"
+import * as dateTimeUtils from "../../../utils/dateTimeUtils"
 
 const moment = require('moment')
 
@@ -16,9 +16,10 @@ export default function DaySelect({ value, month, year, updateValue }) {
     function selectDayValues(currentMonth, currentYear) {
         //use 01 as day
         const res = []
-        const todayDateTime = findTodayDate() //(mm-dd-yyyy hh:mm:ss)
-        const todayDate = todayDateTime[0]
-        const todayTime = todayDateTime[1]
+        const todayPSTISO = dateTimeUtils.convertUTCtoPST(dateTimeUtils.findTodayUTCDate())
+        const todayPSTDateTime = dateTimeUtils.convertISOtoDate(todayPSTISO) //(mm-dd-yyyy hh:mm:ss)
+        const todayDate = todayPSTDateTime[0]
+        const todayTime = todayPSTDateTime[1]
 
         if (currentMonth.length > 0) {
             const date = (currentYear.length > 0) ? (currentMonth + "-01-" + currentYear + " " + todayTime) : (currentMonth + "-01-" + todayDate[2] + " " + todayTime)
