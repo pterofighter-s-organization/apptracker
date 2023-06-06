@@ -19,7 +19,7 @@ export function dateInfoInitializer(dateTime, label) {
 
     //if null, then no need to prefill the dateTime data - everything in here should be valid
     if (dateTime) {
-        const dateTimeObj = moment(dateTime, moment.ISO_8601).format('MM-DD-YYYY HH:mm:ss')
+        const dateTimeObj = moment(dateTime, moment.ISO_8601).format('M-D-YYYY H:mm:ss').split(" ")
         const dateSplitted = dateTimeObj[0].split("-")
         const timeSplitted = dateTimeObj[1].split(":")
 

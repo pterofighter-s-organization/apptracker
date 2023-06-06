@@ -26,7 +26,7 @@ export function isValidDate(dateString) {
     const patternFour = /^\d{1}-\d{1}-\d{4}$/
     // ^ = starting pt, \d is int, {n} is how many of them, - is just specifying it is a date
 
-    return patternOne.test(dateString) || patternTwo.test(dateString) || patternThree.test(dateString) || patternFour.test(dateString)
+    return (patternOne.test(dateString) || patternTwo.test(dateString) || patternThree.test(dateString) || patternFour.test(dateString))
 }
 
 export function isValidTime(timeString) {
@@ -37,9 +37,12 @@ export function isValidTime(timeString) {
 
     const patternOne = /^\d{2}:\d{2}:\d{2}$/;
     const patternTwo = /^\d{2}:\d{2}$/;
+    const patternThree = /^\d{1}:\d{1}:\d{2}$/;
+    const patternFour = /^\d{2}:\d{1}:\d{2}$/;
+    const patternFive = /^\d{1}:\d{2}:\d{2}$/;
     // ^ = starting pt, \d is int, {n} is how many of them, : is just specifying it is a time, $ indicates the end
 
-    return patternOne.test(timeString) || patternTwo.test(timeString)
+    return (patternOne.test(timeString) || patternTwo.test(timeString) || patternThree.test(timeString) || patternFour.test(timeString) || patternFive.test(timeString))
 }
 
 export function isValidDateTime(dateTimeString) {

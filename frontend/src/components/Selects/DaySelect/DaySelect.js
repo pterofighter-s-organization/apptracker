@@ -17,13 +17,14 @@ export default function DaySelect({ value, month, year, updateValue }) {
         //use 01 as day
         const res = []
         const todayPSTISO = dateTimeUtils.convertUTCtoPST(dateTimeUtils.findTodayUTCDate())
-        const todayPSTDateTime = dateTimeUtils.convertISOtoDate(todayPSTISO) //(mm-dd-yyyy hh:mm:ss)
+        const todayPSTDateTime = dateTimeUtils.convertISOtoDate(todayPSTISO).split(" ") //(mm-dd-yyyy hh:mm:ss)
         const todayDate = todayPSTDateTime[0]
         const todayTime = todayPSTDateTime[1]
+        console.log(todayPSTDateTime, todayDate, currentMonth, currentYear)
 
         if (currentMonth.length > 0) {
-            const date = (currentYear.length > 0) ? (currentMonth + "-01-" + currentYear + " " + todayTime) : (currentMonth + "-01-" + todayDate[2] + " " + todayTime)
-            const dateObj = moment(date, "MM-DD-YYYY, HH:mm:ss")
+            const date = (currentYear.length > 0) ? (currentMonth + "-1-" + currentYear + " " + todayTime) : (currentMonth + "-1-" + todayDate[2] + " " + todayTime)
+            const dateObj = moment(date, "M-D-YYYY, H:m:ss")
 
             for (let num = 1; num <= dateObj.daysInMonth(); num += 1) {
                 res.push(num.toString())

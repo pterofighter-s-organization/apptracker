@@ -6,7 +6,9 @@ export default function MinuteSelect({ value, updateValue }) {
     function selectMinValues() {
         const res = []
 
+        //controlled, must have two digits.
         for (let num = 0; num <= 59; num += 1) {
+            // res.push(num.toString())
             const stringInt = num.toString()
             if (stringInt.length > 1) {
                 res.push(stringInt)
