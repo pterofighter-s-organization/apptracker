@@ -5,8 +5,8 @@ import * as dateTimeUtils from '../utils/dateTimeUtils'
 //helpers
 import { isValidIsoDateTime } from "./validationHelpers"
 
-export function isTaskNeeded(applicationStatus) {
-    return applicationStatus === "applied" || applicationStatus === "interviewing" || applicationStatus === "accepted"
+export function isTaskNeeded(status, isArchived) {
+    return (status === "applied" || status === "interviewing" || status === "accepted") && !isArchived
 }
 
 export function categorizeTasks(tasks){
@@ -37,9 +37,7 @@ export function findAllExtraTasks(applications) {
 
     if (applications) {
         applications.forEach((application) => {
-            if (isTaskNeeded(application.status)) {
-                allExtraTasks = allExtraTasks.concat(findExtraTasks(application))
-            }
+            allExtraTasks = allExtraTasks.concat(findExtraTasks(application))
         })
     }
 
@@ -57,7 +55,8 @@ export function findExtraTasks(application) {
         company,
         status,
         date_applied,
-        resume_link
+        resume_link,
+        archived
     } = application
 
     const today = dateTimeUtils.findTodayUTCDate()
@@ -65,7 +64,7 @@ export function findExtraTasks(application) {
 
     //finding some of the major task the user needs to finish
     //upload resume, upload the time you applied to this application
-    if (status !== "interested") {
+    if (isTaskNeeded(status, archived)) {
         if (!isValidIsoDateTime(date_applied)) {
             extraTasks.push(
                 {
