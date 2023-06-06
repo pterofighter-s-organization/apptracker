@@ -40,7 +40,7 @@ export default function NewApplicationForm() {
             "position": "",
             "company": "",
             "salary": "",
-            "interview_preparation": "",
+            "application_link": "",
             "resume_link": "",
             "cover_letter_link": "",
             "description": ""
@@ -59,7 +59,7 @@ export default function NewApplicationForm() {
             "company": formData["company"],
             "salary": formData["salary"],
             "description": formData["description"],
-            "interview_preparation": formData["interview_preparation"],
+            "application_link": formData["application_link"],
             "resume_link": formData["resume_link"],
             "cover_letter_link": formData["cover_letter_link"],
             "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),

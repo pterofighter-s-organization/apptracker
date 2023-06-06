@@ -1,4 +1,4 @@
-/* share between css files inside its tree */
+/* share between css files inside its tree - this is the root file */
 :root {
     --fs-button-xl: calc(1rem * 1.15);
     --fs-button-xs: calc(1rem);

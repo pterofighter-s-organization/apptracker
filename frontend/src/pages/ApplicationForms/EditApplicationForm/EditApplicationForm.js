@@ -43,7 +43,7 @@ export default function EditApplicationForm() {
                 "position": application.position,
                 "company": application.company,
                 "salary": application.salary,
-                "interview_preparation": application.interview_preparation,
+                "application_link": application.application_link,
                 "resume_link": application.resume_link,
                 "cover_letter_link": application.cover_letter_link,
                 "description": application.description
@@ -64,7 +64,7 @@ export default function EditApplicationForm() {
             "company": formData["company"],
             "salary": formData["salary"],
             "description": formData["description"],
-            "interview_preparation": formData["interview_preparation"],
+            "application_link": formData["application_link"],
             "resume_link": formData["resume_link"],
             "cover_letter_link": formData["cover_letter_link"],
             "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),

@@ -16,6 +16,20 @@
     start it
     - npm start
 
+# To use the backend
+
+    Database migration
+    - drop the database from mongodb
+    - go to migration folder in trackerapp folder
+    - delete 0.0001 py
+    * commands below starting from the main folder
+    - cd apptracker
+    - python -m manage makemigrations trackerapp
+    - python -m manage migrate trackerapp
+    * refresh mongodb to see if the db is re-created
+    * restart backend using this command
+    - python -m manage runserver 
+
 # For v1 (In progress)
     - made a dropdown button for changing status
     - made a collapse blur to make sure there's no infinite scrolling

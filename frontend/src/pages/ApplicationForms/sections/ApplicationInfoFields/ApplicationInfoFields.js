@@ -60,15 +60,15 @@ export default function ApplicationInfoFields({ formData, setFormData, errorMsgs
 
                 <SubSectionLayout title={"Link infos :"} titleFontSize={"fs-5"}>
                     <div className="d-flex flex-column gap-3">
-                        <FormFieldHeader header={"Preparation doc link"} isRequired={false} />
+                        <FormFieldHeader header={"Application link"} isRequired={false} />
                         <UrlInput
-                            value={formData["interview_preparation"]}
-                            updateValue={formHelpers.setInputData(setFormData, "interview_preparation")}
+                            value={formData["application_link"]}
+                            updateValue={formHelpers.setInputData(setFormData, "application_link")}
                         />
                         <FormFieldFooter
-                            footer={"Link to a doc Ex. (Share google doc link)"}
-                            errorMessage={errorMsgs["interview_preparation"]}
-                            isError={errorMsgs["interview_preparation"].length > 0}
+                            footer={"Link to where you found this application"}
+                            errorMessage={errorMsgs["application_link"]}
+                            isError={errorMsgs["application_link"].length > 0}
                         />
                     </div>
 

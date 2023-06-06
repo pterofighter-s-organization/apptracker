@@ -9,7 +9,7 @@ class UsersSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Application
-        fields = ('application_id','user_id','position','company','interview_preparation', 'resume_link', 'cover_letter_link',
+        fields = ('application_id','user_id','position','company','application_link', 'resume_link', 'cover_letter_link',
                   'description','status', 'date_applied', 'date_edited', 'date_created', 'salary', 'archived')
         extra_kwargs = {
             'date_applied': {

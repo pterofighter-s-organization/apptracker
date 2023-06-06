@@ -38,7 +38,7 @@ class Application(models.Model):
     user_id = models.IntegerField()
     position = models.CharField(max_length=255)
     company = models.CharField(max_length=255)
-    interview_preparation = models.CharField(max_length=255, blank=True, null=True)
+    application_link = models.CharField(max_length=255, blank=True, null=True)
     resume_link = models.CharField(max_length=255, blank=True, null=True)
     cover_letter_link = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=2048, blank=True, null=True)

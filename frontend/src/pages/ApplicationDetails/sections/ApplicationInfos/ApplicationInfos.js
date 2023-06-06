@@ -36,23 +36,15 @@ export default function ApplicationInfos({ application }) {
                 </div>
                 {/* links info */}
                 <div className="d-flex flex-column gap-3 gap-md-4 bg-body-secondary p-4 w-100">
-                    {application.status !== "interested" ?
-                        <>
-                            <DataLayout title={"Preparation link"}>
-                                <LinkDisplay link={application.interview_preparation} />
-                            </DataLayout>
-                            <DataLayout title={"Resume link"}>
-                                <LinkDisplay link={application.resume_link} />
-                            </DataLayout>
-                            <DataLayout title={"Cover letter link"}>
-                                <LinkDisplay link={application.cover_letter_link} />
-                            </DataLayout>
-                        </>
-                        :
-                        <div className="text-dark-emphasis">
-                            No links needed for interested applications
-                        </div>
-                    }
+                    <DataLayout title={"Application link"}>
+                        <LinkDisplay link={application.application_link} />
+                    </DataLayout>
+                    <DataLayout title={"Resume link"}>
+                        <LinkDisplay link={application.resume_link} />
+                    </DataLayout>
+                    <DataLayout title={"Cover letter link"}>
+                        <LinkDisplay link={application.cover_letter_link} />
+                    </DataLayout>
                 </div>
             </div>
 

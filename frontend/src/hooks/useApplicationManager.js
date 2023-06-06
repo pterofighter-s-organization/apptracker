@@ -19,7 +19,7 @@ export default function useApplicationManager(id) {
         "status": "",
         "resume_link": "",
         "cover_letter_link": "",
-        "interview_preparation": "",
+        "application_link": "",
         "description": "",
     }
 
