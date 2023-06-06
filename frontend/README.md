@@ -13,7 +13,6 @@
         - npm i react-router-dom
         - npm install moment
         - npm i bootstrap-icons
-        - npm install jquery
         - npm install moment-timezone --save
 
     **To start the frontend**
