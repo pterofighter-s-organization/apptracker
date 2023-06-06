@@ -16,14 +16,20 @@ export default function Timer({ start, end }) {
         const hoursLeft = timeDiffObj.hoursLeft
         const minutesLeft = timeDiffObj.minutesLeft
 
-        if (yearsLeft > 1) {
+        if (yearsLeft >= 1) {
+            if(monthsLeft === 1){
+                return resultFormatter(yearsLeft, "year left")
+            }
             return resultFormatter(yearsLeft, "years left")
         } if (monthsLeft >= 1) {
             if (monthsLeft === 1) {
                 return resultFormatter(monthsLeft, "month left")
             }
             return resultFormatter(monthsLeft, "months left")
-        } if (daysLeft > 1) {
+        } if (daysLeft >= 1) {
+            if (daysLeft === 1) {
+                return resultFormatter(daysLeft, "day left")
+            }
             return resultFormatter(daysLeft, "days left")
         } if (hoursLeft >= 1) {
             if (hoursLeft === 1) {

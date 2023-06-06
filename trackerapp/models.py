@@ -14,7 +14,7 @@ def validate_datetime_before_now(value):
     # value= value.astimezone(local_timezone)
     # current_datetime = timezone.now().astimezone(local_timezone)
     current_datetime = timezone.now()
-    print(current_datetime, value)
+    # print(current_datetime, value)
     if current_datetime > value:
         raise ValidationError("The datetime must be before the current date and time.")
 
