@@ -1,5 +1,5 @@
 
-# How to install and start the job-tracker application**
+# How to install and start the job-tracker application
 
 **Get frontend to work**
 
