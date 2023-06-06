@@ -37,7 +37,7 @@ export default function ArchivedBoard() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Archived notes"}>
+            <SectionLayout title={"Archived Notes"}>
                 <NoteList
                     isArchived={true}
                 />
