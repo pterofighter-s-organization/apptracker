@@ -28,7 +28,7 @@ export default function ApplicationTasks({ application, isArchived }) {
     }
 
     return (
-        <div className="d-flex flex-column gap-5 gap-sm-3">
+        <div className="d-flex flex-column gap-3">
 
             <PreviewCollapseLayout
                 id={"application-tasks"}
