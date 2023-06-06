@@ -1,7 +1,7 @@
 
 **How to install and start the job-tracker application**
 
-# get frontend to work
+# Get frontend to work
 
     Go to frontend folder
     - cd /apptracker/frontend 
