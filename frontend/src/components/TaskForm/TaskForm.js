@@ -1,61 +1,55 @@
-import { useEffect, useState } from "react";
-
-//initializers
-import dateTimeInitializer from "../../utils/initializers/dateTime/dateTimeInitializer";
-
-//sections
-import TaskDateTimeInputs from "./sections/DateTime/TaskDateTimeInputs";
-import TaskTitleInput from "./sections/Title/TaskTitleInput";
+import { useEffect, useState } from 'react'
 
 //components
-import SubmissionModals from "../Modals/SubmissionModals/SubmissionModals";
+import { FormFieldHeader } from '../FormFieldHeader'
+import { FormFieldFooter } from '../FormFieldFooter'
+import { TextInput } from '../Inputs/TextInput'
+import { DateTimeSelect } from '../Selects/DateTimeSelect'
+import { SubmitModal } from '../Modals/SubmitModal'
 
-//validators
-import dateTimeValidator from "../../utils/validators/dateTime/dateTimeValidator";
-import textValidator from "../../utils/validators/text/textValidator";
+//layouts
+import { SubSectionLayout } from '../../layouts/SubSectionLayout'
 
-export default function TaskForm({ application, updateApplication, fontSize }) {
+//helpers
+import * as formHelpers from '../../helpers/formHelpers'
+
+//utils
+import * as initializers from '../../utils/initializers'
+import * as dateTimeUtils from '../../utils/dateTimeUtils'
+
+export default function TaskForm({ createNewTask, application, errorMsgs }) {
 
     const [formData, setFormData] = useState(null)
-    const [errorMsgs, setErrorMsgs] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
 
     useEffect(() => {
-        const dateDueData = dateTimeInitializer(null, "Due")
+        const dateDueData = initializers.dateInfoInitializer(null, "due")
         const basicData = {
             "title": ""
         }
         const newFormData = { ...basicData, ...dateDueData }
 
         setFormData(newFormData)
-        setErrorMsgs({
-            "timeDue": "",
-            "dateDue": "",
-            "title": ""
-        })
+        // console.log(newFormData)
     }, [])
 
-    function handleSubmittedForm(event) {
+    function handleSubmittedForm() {
 
-        event.preventDefault()
+        // const dateDueCheck = fieldChecks.checkDateTimeField(formData, setErrorMsgs, "due", false, false) //dont allow empty. dont allow dates before today
+        // const titleCheck = fieldChecks.checkTextField(formData, setErrorMsgs, "title")
 
-        const dateDueCheck = dateTimeValidator(formData, setErrorMsgs, "Due", false, false) //dont allow empty. dont allow dates before today
-        const titleCheck = textValidator(formData, setErrorMsgs, "title")
-
-        if (dateDueCheck.check && titleCheck.check) {
-
-            const newTask = {
-                title: formData["title"],
-                date: dateDueCheck.value,
-            }
-
-            const newTasks = [...application.tasks, newTask]
-            const newAppInfo = {
-                "tasks": newTasks
-            }
-
-            setShowSuccessModal(updateApplication(application, newAppInfo))
-        }
+        // createTask({})
+        createNewTask({
+            "application_id": application.application_id,
+            "title": formData["title"],
+            "date_due": dateTimeUtils.convertInputToISO(formData, "due"),
+            "company": application.company,
+            "position": application.position,
+            "section": "application-tasks",
+            "priority": 0,
+        }).then(status => {
+            setShowSuccessModal(status)
+        })
     }
 
 
@@ -69,65 +63,74 @@ export default function TaskForm({ application, updateApplication, fontSize }) {
     }
 
     if (!formData) {
-        return <></>
+        return <>Loading form...</>
     }
 
     return (
-        <>
-            <div className="d-flex flex-column bg-body-secondary p-4">
+        <SubSectionLayout title={"Creating a new task :"} titleFontSize={"fs-5"}>
 
-                <div className="d-flex flex-column gap-0">
-                    <div className="h4 text-nowrap">
-                        Tracking a new task :
-                    </div>
-                    <hr className="" />
-                    <div className="fs-6 mb-3">
-                        * ( required fields )
-                    </div>
-                </div>
-
-                <form
-                    className="d-flex flex-column gap-3 gap-xl-4"
-                    onSubmit={(e) => {
-                        handleSubmittedForm(e)
-                    }}
-                >
-                    {/* sections */}
-                    <div className="d-flex flex-wrap gap-3 gap-sm-4">
-                        <TaskTitleInput
-                            formData={formData}
-                            setFormData={setFormData}
-                            fontSize={fontSize}
-                            errorMsgs={errorMsgs}
-                        />
-                        <TaskDateTimeInputs
-                            formData={formData}
-                            setFormData={setFormData}
-                            fontSize={fontSize}
-                            errorMsgs={errorMsgs}
-                        />
-                    </div>
-
-                    {/* button */}
-                    <button
-                        className={`btn btn-primary p-3 ${fontSize}`}
-                        type="submit"
-                        data-bs-toggle="modal" data-bs-target={"#" + modalId}
-                    >
-                        Submit
-                    </button>
-
-                </form>
-
+            <div className="mb-3 fs-6">
+                * ( required fields )
             </div>
 
-            <SubmissionModals
-                id={modalId}
-                showSuccessModal={showSuccessModal}
-                successMsg={"Task added!"}
-                errorMsg={"Fail to add task! Please check the invalid fields."}
-                closeModal={closeModal}
-            />
-        </>
+            <form
+                className="d-flex flex-column gap-3 gap-xl-4 fs-6"
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSubmittedForm(e)
+                }}
+            >
+
+                <div className="d-flex flex-wrap gap-3 gap-sm-4">
+
+                    <div className="d-flex flex-column gap-3" style={{ minWidth: "40vw", width: "680px", maxWidth: "100vw" }}>
+                        <FormFieldHeader header={"Task title"} isRequired={true} />
+                        <TextInput
+                            value={formData["title"]}
+                            updateValue={formHelpers.setInputData(setFormData, "title")}
+                        />
+                        <FormFieldFooter
+                            footer={"Enter the name for your task"}
+                            errorMessage={errorMsgs["title"]}
+                            isError={errorMsgs["title"].length > 0}
+                        />
+                    </div>
+
+                    <div className="d-flex flex-column gap-3">
+                        <FormFieldHeader header={"Due date"} isRequired={true} />
+                        <DateTimeSelect
+                            formData={formData}
+                            setFormData={setFormData}
+                            label={"due"}
+                        />
+                        <FormFieldFooter
+                            footer={"Select date in (MM-DD-YYYY) and (hh:mm) in 24 hour format."}
+                            errorMessage={errorMsgs["date_due"]}
+                            isError={errorMsgs["date_due"].length > 0}
+                        />
+                    </div>
+
+                </div>
+
+                <button
+                    className={`btn btn-primary p-3`}
+                    type="submit"
+                    data-bs-toggle="modal" data-bs-target={"#" + modalId}
+                >
+                    Submit
+                </button>
+
+                <SubmitModal
+                    modalId={modalId}
+                    messages={{
+                        success: "New task submitted!",
+                        error: "Please check the invalid fields and correct them."
+                    }}
+                    closeModal={closeModal}
+                    showSuccessModal={showSuccessModal}
+                />
+            </form>
+
+        </SubSectionLayout>
     )
 }

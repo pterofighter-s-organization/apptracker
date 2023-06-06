@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 export default function useLocationManager() {
 
     const location = useLocation();
-    console.log(location)
+    // console.log(location)
     const sectionId = location.hash.replace("#", "")
 
     useEffect(() => {

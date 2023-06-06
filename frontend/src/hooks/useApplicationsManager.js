@@ -1,47 +1,51 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-//backend mimic
-import { getApps } from "../data/mimicBackendStatic";
+//services
+import api from "../services/api";
 
-//utils
-import { updateAppInfo } from "../utils/application.js"
-
-export default function useApplicationsManager () {
-    
-    //custom hook for managing and getting apps
+export default function useApplicationsManager() {
 
     const [applications, setApplications] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-
-        //change later when backend is done
-        let res = []
-        try {
-            //set loading state here
-            res = getApps()
-        } catch (err) {
-            //remove loading state here
-            console.log(err)
-        }
-        //or remove loading here
-        setApplications(res)
+        fetchApplications()
     }, [])
 
-    //** adding, changing the application */
-    //figure out usecallback
-    function updateApplication(app, newAppInfo){
+    async function fetchApplications() {
+        try {
+            setIsLoading(true)
+            const response = await api.applicationAPI.getApplications()
+            setApplications(response.data)
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error)
+            setApplications(null)
+            setIsLoading(false)
+        }
+    }
 
-        const res = updateAppInfo(app, newAppInfo)
-        //using prev apps access those vals and res is now a new arr with spread operator (dont delete)
-        //that has old and new vals, which generatesa new ref to the array
-        //to make dependency work, gotta generate a new refence
+    async function updateApplication(app) {
 
-        setApplications(prevApps => prevApps.map(item => (item.id === res.id ? res : item)))
-        // console.log(applications)
+        const { application_id } = app
+
+        //(No need, is fixed) - (archived): loading here because useeffect for status update is triggered because the application status doesnt update fast enough
+        try {
+            // setIsLoading(true)
+            const response = await api.applicationAPI.updateApplication(application_id, app)
+            setApplications(prev => prev.map((item) => (item.application_id === response.data.application_id ? response.data : item)))
+            // setIsLoading(false)
+            return true
+        } catch (error) {
+            console.log(error)
+            // setIsLoading(false)
+            return false
+        }
     }
 
     return {
         applications,
-        updateApplication
+        updateApplication,
+        isLoading
     }
 }

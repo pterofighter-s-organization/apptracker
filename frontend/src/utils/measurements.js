@@ -1,13 +1,13 @@
 
 
-export function viewSizeToPx (viewSize, windowSize) {
+export function viewSizeToPx(viewSize, windowSize) {
 
     //viewsize and windowsize must be in same dimension (ex: width, width)
 
-    return (viewSize/100) * (windowSize) 
+    return (viewSize / 100) * (windowSize)
 }
 
-export function breakpointMapWidth ( width ){
+export function breakpointMapWidth(width) {
 
     const sizesMapToWidth = {
         "s": 576,
@@ -26,7 +26,7 @@ export function breakpointMapWidth ( width ){
     return "xxl"
 }
 
-export function spaceFromSize ( size ) {
+export function spaceFromSize(size) {
 
     //the bootstrap standards on how sizes are created
     //returning the px size of the size 
@@ -52,7 +52,7 @@ export function spaceFromSize ( size ) {
     }
 }
 
-export function spaceOnAllBreakpoints (breakpointMapSize, width) {
+export function spaceOnAllBreakpoints(breakpointMapSize, width) {
 
     // const arg = {
     //     "s": {size: 3, marginOfError: 0},
@@ -69,7 +69,7 @@ export function spaceOnAllBreakpoints (breakpointMapSize, width) {
     const sizeObject = breakpointMapSize[breakpoint]
     const size = sizeObject.size
     const marginOfError = sizeObject.marginOfError
-    const {spacer, spaceMultiplier} = spaceFromSize(size)
+    const { spacer, spaceMultiplier } = spaceFromSize(size)
     const spaceInPx = (spaceMultiplier + marginOfError) * spacer
 
     return spaceInPx

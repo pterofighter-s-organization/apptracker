@@ -1,24 +1,21 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
+//sub-sections
+import { StatusDates, ApplicationInfos, ApplicationNotes, ApplicationTasks } from "./sections";
+
+//layouts
+import { SectionLayout } from "../../layouts/SectionLayout";
+
 //hooks
-import useApplicationManager from "../../hooks/useApplicationManager";
 import useLocationManager from "../../hooks/useLocationManager";
-
-//utils
-import { checkIfNeedTask } from "../../utils/application";
-
-//sections
-import StatusAndDates from "./sections/StatusAndDates/StatusAndDates";
-import ApplicationInfos from "./sections/ApplicationInfos/ApplicationInfos";
-import Notes from "./sections/Notes/Notes";
-import TaskInfos from "./sections/TaskInfos/TaskInfos";
+import useApplicationManager from "../../hooks/useApplicationManager";
 
 export default function ApplicationDetails() {
 
     const { id } = useParams(); //get the id from the url
     useLocationManager() //locates the user to a specific section #section
-    const { application, updateApplication } = useApplicationManager(parseInt(id));
+    const { application, updateApplication, isLoading } = useApplicationManager(parseInt(id));
 
     useEffect(() => {
         if (application) {
@@ -27,22 +24,24 @@ export default function ApplicationDetails() {
         return () => document.title = "Job Tracker App"
     }, [id, application])
 
+    if (isLoading) {
+        return <>Loading...</>
+    }
+
     if (!application) {
-        return <></>
+        return <>Application Not Found! Mostly backend not connected.</>
     }
 
     return (
-        <div
-            className="d-flex flex-column gap-5 w-100 my-3 my-xl-0"
-            style={{ padding: "1.25vw 2.5vw" }}
-            id={"application" + application.id}
-        >
+        //define the final font size here
+        <div className="d-flex flex-column gap-5 fs-5">
+
             <Link
-                to={"/application/edit/" + application.id}
-                className="btn btn-primary p-3 py-4 fs-6"
+                to={"/application/edit/" + application.application_id}
+                className={`btn btn-primary p-3 py-4 ${"form-button"}`}
                 id="edit"
             >
-                <div className="d-flex flex-row gap-3 justify-content-center">
+                <div className={`d-flex flex-row gap-3 justify-content-center ${"form-button-label"}`}>
                     <i class="bi bi-pencil"></i>
                     <div>
                         Edit Application
@@ -50,29 +49,33 @@ export default function ApplicationDetails() {
                 </div>
             </Link>
 
-            <StatusAndDates
-                application={application}
-                updateApplication={updateApplication}
-                fontSize={"fs-5"}
-            />
-            <ApplicationInfos
-                application={application}
-                fontSize={"fs-5"}
-            />
-            {checkIfNeedTask(application.status) ?
-                <TaskInfos
+            <SectionLayout title={"Status And Dates :"}>
+                <StatusDates
                     application={application}
                     updateApplication={updateApplication}
-                    fontSize={"fs-6"}
                 />
-                :
-                <></>
-            }
-            <Notes
-                application={application}
-                updateApplication={updateApplication}
-                fontSize={"fs-6"}
-            />
+            </SectionLayout>
+
+            <SectionLayout title={"Application Infos :"}>
+                <ApplicationInfos
+                    application={application}
+                />
+            </SectionLayout>
+
+            <SectionLayout title={"Application Tasks :"}>
+                <ApplicationTasks
+                    application={application}
+                    isArchived={false}
+                />
+            </SectionLayout>
+
+            <SectionLayout title={"Application Notes :"}>
+                <ApplicationNotes
+                    application={application}
+                    isArchived={false}
+                />
+            </SectionLayout>
+
         </div>
     )
 }

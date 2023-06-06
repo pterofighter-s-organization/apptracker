@@ -1,0 +1,31 @@
+#collapse-navbar-slidedown {
+    /* transition: 0.25s ease-in-out; */
+    animation-duration: 0.5s;
+    animation-name: slidedown;
+}
+
+@keyframes slidedown {
+    from {
+        margin-bottom: -25%;
+    }
+
+    to {
+        margin-bottom: 0%;
+    }
+}
+
+#collapse-navbar-slideup {
+    /* transition: 0.25s ease-in-out; */
+    animation-duration: 0.25s;
+    animation-name: slideup;
+}
+
+@keyframes slideup {
+    from {
+        margin-bottom: 50%;
+    }
+
+    to {
+        margin-bottom: 0%;
+    }
+}

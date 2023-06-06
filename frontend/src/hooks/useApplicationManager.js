@@ -1,50 +1,92 @@
 import { useEffect, useState } from "react";
 
-//utils
-import { updateAppInfo } from "../utils/application";
+//services
+import api from "../services/api";
 
-//backend mimic
-import { getApps } from "../data/mimicBackendStatic";
-
-
+//helpers
+import * as formHelpers from "../helpers/formHelpers";
 
 export default function useApplicationManager(id) {
 
     const [application, setApplication] = useState(null)
-    // const [change, setChange] = useState(0) no need anymore because useref solved my problem
+    const [isLoading, setIsLoading] = useState(false)
+
+    const errorMessages = {
+        "position": "",
+        "company": "",
+        "salary": "",
+        "date_applied": "",
+        "status": "",
+        "resume_link": "",
+        "cover_letter_link": "",
+        "application_link": "",
+        "description": "",
+    }
+
+    const [errorMsgs, setErrorMsgs] = useState(errorMessages)
 
     useEffect(() => {
-
-        let res = null
-        try {
-            //set loading state here
-            res = getApps().filter(app => (app.id === id))[0]
-
-        } catch (err) {
-            //remove loading state here
-            console.log(err)
+        if(id){
+            fetchApplication(id)
         }
-
-        // console.log("test")
-        //or remove loading here
-        setApplication(res)
-
     }, [id])
 
-    function updateApplication(app, newAppInfo) {
+    async function fetchApplication(application_id) {
 
-        try{
-            setApplication(updateAppInfo(app, newAppInfo))
+        try {
+            setIsLoading(true)
+            const response = await api.applicationAPI.getApplication(application_id)
+            setApplication(response.data)
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false)
+        }
+    }
+
+    async function updateApplication(app) {
+
+        const { application_id } = app
+        //assign to a new reference
+        const newErrorMsgs = Object.assign(errorMessages, {})
+        console.log(app)
+
+        //dont need to do loading here because useeffect for status update wont be triggered
+        try {
+            const response = await api.applicationAPI.updateApplication(application_id, app)
+            setApplication(response.data)
+            setErrorMsgs(newErrorMsgs)
             return true
-        }catch(err){
-            console.log(err)
+        } catch (error) {
+            console.log(error)
+            formHelpers.findErrorMessages(error, newErrorMsgs)
+            setErrorMsgs(newErrorMsgs)
             return false
         }
-        // setChange(change ? 0 : 1)
+    }
+
+    async function createApplication(app) {
+
+        const newErrorMsgs = Object.assign(errorMessages, {})
+        console.log(app)
+        try {
+            const response = await api.applicationAPI.createApplication(app)
+            setApplication(response.data)
+            setErrorMsgs(newErrorMsgs)
+            return true
+        } catch (error) {
+            console.log(error)
+            formHelpers.findErrorMessages(error, newErrorMsgs)
+            setErrorMsgs(newErrorMsgs)
+            return false
+        }
     }
 
     return {
         application,
-        updateApplication
+        updateApplication,
+        createApplication,
+        errorMsgs,
+        isLoading
     }
 }

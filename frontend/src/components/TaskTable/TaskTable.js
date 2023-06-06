@@ -1,56 +1,59 @@
-import { findPrioritizedTask } from "../../utils/task";
-
 //components
-import TaskTableBody from "./components/Body/TaskTableBody";
-import TaskTableHeader from "./components/Header/TaskTableHeader";
+import { TaskRow } from "./components"
 
-export default function TaskTable({ tasks, fontSize }) {
+//helpers
+import * as taskHelpers from "../../helpers/taskHelpers"
+
+export default function TaskTable({ tasks, isArchived }) {
 
     //find the priority of the task and sort them
     tasks.sort((a, b) => {
-        return findPrioritizedTask(a, b)
+        return taskHelpers.findPrioritizedTask(a, b)
     })
 
-    //Task details 
-
-    //col-1 = task number
-    //col-2 = app info
-    //col-3 = title of the task
-    //col-4 = due date (not show on mobile)
-    //col-5 = time left
-    //col-6 = link button
-
-    // {
-    //     appId: id,
-    //     priority: 0,
-    //     title: appointment.title,
-    //     date: appointment.date,
-    //     type: appointment.type
-    //     timeDue: appointment.date,
-    // }
+    //styles
+    const headerPadding = "p-4"
+    let count = 1
 
     return (
-        <>
-            {tasks ?
-                <table className={`table text-center ${fontSize}`} >
-                    <TaskTableHeader />
-                    <TaskTableBody
-                        tasks={tasks}
-                    />
-                    {/* bottom row for some breathing space */}
-                    {/* <tfoot>
+        <table className={`table text-center`} >
+
+            <thead className={`bg-secondary bg-opacity-25 border-light border-5 ${headerPadding}`}>
+                <tr>
+                    <th scope="col" className={`${headerPadding}`}>#</th>
+                    <th scope="col" className={`${headerPadding}`}>App</th>
+                    <th scope="col" className={`${headerPadding}`}>Task</th>
+                    <th scope="col" className={`d-none d-md-block ${headerPadding}`}>Due date</th>
+                    <th scope="col" className={`${headerPadding}`}>Time</th>
+                    <th scope="col" className={`${headerPadding}`}>🔗</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {tasks.map((task) => {
+                    return (
+                        <TaskRow
+                            task={task}
+                            count={count++}
+                        />
+                    )
+                })}
+                {tasks.length <= 0 ?
                     <tr>
-                        {Array.from({ length: 6 }).map(() => (
-                            <th className={`${footerPadding}`}></th>
-                        ))}
+                        <th
+                            scope="row"
+                            key={count++}
+                        >
+                            {count++}
+                        </th>
+                        <td></td>
+                        <td>{(!isArchived) ? "No tasks found! Track a new one inside an application" : "No archived tasks"}</td>
                     </tr>
-                </tfoot> */}
-                </table>
-                :
-                <h1>
-                    Loading...
-                </h1>
-            }
-        </>
+                    :
+                    <></>
+                }
+            </tbody>
+
+        </table>
     )
 }

@@ -1,48 +1,59 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-//backend
-import { getAppNotes, updateAppNote, createAppNote } from "../data/mimicBackendStatic";
+//services
+import api from "../services/api";
 
-
-export default function useNotesManager(appId) {
+export default function useNotesManager() {
 
     const [notes, setNotes] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        fetchAllNotes()
+    }, [])
 
-        let notesFromApp = []
+    async function fetchAllNotes() {
         try {
-            notesFromApp = getAppNotes(appId)
-            setNotes(notesFromApp.notes)
+            setIsLoading(true)
+            const response = await api.noteAPI.getNotes()
+            setNotes(response.data)
+            setIsLoading(false)
         } catch (error) {
-            console.log("dae")
             console.log(error)
-            setNotes([])
+            setNotes(null)
+            setIsLoading(false)
         }
-
-        console.log("testr")
-
-    }, [appId])
-
-    function updateNote(newNote) {
-
-        // newNote["appId"] = appId
-        // console.log("test")
-        const res = updateAppNote(newNote)
-        setNotes(prev => prev.map(item => (item.id === res.id ? res : item)))
     }
 
-    function createNote(appId) {
+    function updateNote(note) {
+        updateNoteHelper(note)
+    }
 
-        const res = createAppNote(appId)
-        setNotes(prev => ([...prev, res.note]))
+    async function updateNoteHelper(note) {
 
-        return res.status
+        const { note_id } = note
+        const current = notes
+
+        // console.log(note)
+
+        //cant use settimeout here because await has to be wrapped inside async
+        try {
+            //do not set loading state for this because it will keep refreshing the page
+            // setIsLoading(true)
+            const response = await api.noteAPI.updateNote(note_id, note)
+            setNotes(current.map((item) => (item.note_id === response.data.note_id ? response.data : item)))
+            // setIsLoading(false)
+            return true
+        } catch (error) {
+            console.log(error)
+            // setIsLoading(false)
+            return false
+        }
     }
 
     return {
         notes,
         updateNote,
-        createNote
+        isLoading
     }
 }
