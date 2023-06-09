@@ -49,27 +49,27 @@ export default function ApplicationDetails() {
                 </div>
             </Link>
 
-            <SectionLayout title={"Status And Dates :"}>
+            <SectionLayout title={"Status And Dates"}>
                 <StatusDates
                     application={application}
                     updateApplication={updateApplication}
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Application Infos :"}>
+            <SectionLayout title={"Application Infos"}>
                 <ApplicationInfos
                     application={application}
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Application Tasks :"}>
+            <SectionLayout title={"Application Tasks"}>
                 <ApplicationTasks
                     application={application}
                     isArchived={false}
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Application Notes :"}>
+            <SectionLayout title={"Application Notes"}>
                 <ApplicationNotes
                     application={application}
                     isArchived={false}

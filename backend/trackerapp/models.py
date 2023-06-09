@@ -7,7 +7,7 @@ from django.utils import timezone
 
 # from datetime import datetime
 # from django.core import validators
-    
+
 def validate_datetime_before_now(value):
     #to use this would have to install pytz first. meant to test different timezones
     # local_timezone = datetime.now(pytz.timezone('UTC')).astimezone().tzinfo

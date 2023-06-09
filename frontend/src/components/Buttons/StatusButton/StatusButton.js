@@ -21,6 +21,7 @@ export default function StatusButton({ value, updateValue }) {
         <div className="btn-group">
             <button
                 type="button"
+                //pointer event none -> pe-none
                 className={`btn btn-${STATUSES_MAP_COLOR[value]} pe-none`}
             >
                 <div className="text-capitalize">

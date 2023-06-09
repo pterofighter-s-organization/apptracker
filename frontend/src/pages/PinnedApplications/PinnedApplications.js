@@ -33,7 +33,11 @@ export default function PinnedApplications() {
     }, [applications, isArchived])
 
     if (!categorizedApps) {
-        return <>Applications cannot be fetched! Mostly backend not connected.</>
+        return (
+            <SectionLayout title={"Interested Applications"}>
+                Applications cannot be fetched! Mostly backend not connected.
+            </SectionLayout>
+        )
     }
 
     return (
