@@ -33,7 +33,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 <pre>Install the following inside the environment</pre>
 <code> pip install djongo
-pip install --force-reinstall -v "Pymongo==3.12.3"</code>
+ pip install --force-reinstall -v "Pymongo==3.12.3"</code>
 
 <pre>Do the command below to check the following tool versions</pre>
 <code> pip list </code>
@@ -70,8 +70,6 @@ pymongo = 3.12.3
 </pre>
 
 <pre>If these two aren't in the exact version, use these commands, else skip these</pre>
-<code>
-pip install --force-reinstall -v "Pymongo==3.12.3"
-pip install --force-reinstall -v "Sqlparse==0.2.4"
-</code>
+<code> pip install --force-reinstall -v "Pymongo==3.12.3"
+ pip install --force-reinstall -v "Sqlparse==0.2.4" </code>
 
