@@ -8,33 +8,37 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 <h2>Prerequisites</h2>
 <p>Have these installed before approaching the next steps</p>
-<pre>Have mongoDBCompass installed on your computer
-Have python 3.9.7 or up, check inside terminal using the command below</pre>
+<pre>
+- Have mongoDBCompass installed on your computer
+- Have python 3.9.7 or up, check inside terminal using the command below
+</pre>
 <code> python --version </code>
 
 <h2>Cloning From Repo</h2>
 <p>Open "Code" button and select clone using HTTPS or SSH, copy the url.</p>
-<pre>Open your terminal to a desired directory and type</pre>
+<pre>- Open your terminal to a desired directory and type</pre>
 <code> git clone "copied url" </code>
 <br><br>
 <p>After you finish entering your github credentials, the folder should be created inside the directory</p>
-<pre>Do this command to enter the repo folder</pre>
+<pre>- Do this command to enter the repo folder</pre>
 <code> cd apptracker </code>
 <br><br>
 <p>Stay inside apptracker directory, this is where we install the appropriate tools</p>
 
 <h2>Tool Installations</h2>
-<pre>Install the virtual environment for backend</pre>
+<pre>- Install the virtual environment for backend</pre>
 <code> pip install pipenv </code>
 <br><br>
-<pre>Activate the virtual environment</pre>
+<pre>- Activate the virtual environment</pre>
 <code> python -m pipenv shell </code>
 <br><br>
-<pre>Install the following inside the environment</pre>
-<code> pip install djongo
- pip install --force-reinstall -v "Pymongo==3.12.3"</code>
+<pre>- Install the following inside the environment</pre>
+<code>
+pip install djongo
+pip install --force-reinstall -v "Pymongo==3.12.3"
+</code>
 <br><br>
-<pre>Do the command below to check the following tool versions</pre>
+<pre>- Do the command below to check the following tool versions</pre>
 <code> pip list </code>
 <br><br>
 <pre>
@@ -61,14 +65,16 @@ virtualenv          20.23.0
 virtualenv-clone    0.5.7
 wheel               0.40.0
 </pre>
-<br><br>
+
 <p>Everything doesn't have to be exact versions except,</p>
 <pre>
-sqlparse = 0.2.4
-pymongo = 3.12.3
+- sqlparse = 0.2.4
+- pymongo = 3.12.3
 </pre>
-<br><br>
-<pre>If these two aren't in the exact version, use these commands, else skip these</pre>
-<code> pip install --force-reinstall -v "Pymongo==3.12.3"
- pip install --force-reinstall -v "Sqlparse==0.2.4" </code>
+<br>
+<pre>- If these two aren't in the exact version, use these commands, else skip these</pre>
+<code>
+pip install --force-reinstall -v "Pymongo==3.12.3"
+pip install --force-reinstall -v "Sqlparse==0.2.4"
+</code>
 <br><br>
