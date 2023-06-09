@@ -135,6 +135,7 @@ npm install moment-timezone --save</code>
 <h2>Authors</h2>
 <blockquote>
 Kelvin Chan (chan34kelvin)
+and
 Damon Chen (peterofighter)
 </blockquote>
 
