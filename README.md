@@ -3,25 +3,23 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future interviews. 
 
-## Technologies Used
+# Technologies Used
 
 - Backend: Django, Djongo, MongoDB, Django REST Framework
 - Frontend: React.js, HTML, CSS (Bootstrap), Axios
 
-## Contributors
+# Contributors
 - Kelvin Chan (Github: chan34kelvin)
 - Damon Chen (Github: peterofighter)
 
-## Installation
+# Installation
 - The following instructions will help you setup this application to run in the local machine
 
-<h2>Prerequisites</h2>
-<p>Have these installed before approaching the next steps</p>
-<pre>
+## Prerequisites
+Have these installed before approaching the next steps
 - Have mongoDBCompass installed on your computer
 - Have python 3.9.7 or up, check inside terminal using the command below
-</pre>
-<code>python --version</code>
+```python --version```
 
 <h2>Cloning From Repo</h2>
 <p>Open "Code" button and select clone url in HTTPS or SSH, copy the url.</p>
