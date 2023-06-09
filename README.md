@@ -8,15 +8,13 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 <h2>Prerequisites</h2>
 <p>Have these installed before approaching the next steps</p>
-<pre>Have python 3.9.7 or up, check inside terminal using the command below</pre>
+<pre>Have mongoDBCompass installed on your computer
+Have python 3.9.7 or up, check inside terminal using the command below</pre>
 <code> python --version </code>
-
-<pre>Have mongoDBCompass installed on your computer</pre>
 
 <h2>Cloning From Repo</h2>
 <p>Open "Code" button and select clone using HTTPS or SSH, copy the url.</p>
-<pre>Open your terminal to a desired directory and type</pre>
-<code> git clone "copied url" </code>
+<pre>Open your terminal to a desired directory and type</pre><code> git clone "copied url" </code>
 
 <p>After you finish entering your github credentials, the folder should be created inside the directory</p>
 <pre>Do this command to enter the repo folder</pre>
