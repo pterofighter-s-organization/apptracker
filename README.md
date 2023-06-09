@@ -3,6 +3,13 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future appointments. 
 
+<h2>Programmers</h2>
+<blockquote>
+Kelvin Chan (chan34kelvin)
+and
+Damon Chen (peterofighter)
+</blockquote>
+
 <h1>To Use This Application</h1>
 <p>The following instructions will help you setup this application to run in the local machine</P>
 
@@ -78,15 +85,15 @@ pip install --force-reinstall -v "Sqlparse==0.2.4"
 <h2>Database Setup And Migrations</h2>
 <pre>- Go to backend directory using this command</pre>
 <code>cd backend</code>
-<h3>Step 1</h3>
+<h3>Step 1 :</h3>
 <pre>- Use these commands to finish setting up/ migrating</pre>
 <code>python -m manage makemigrations trackerapp
 python -m manage migrate trackerapp</code>
 
-<h3>Step 2</h3>
+<h3>Step 2 :</h3>
 <pre>- Open mongoDBCompass app, connect and check/refresh to see if apptracker database is created</pre>
 
-<h3>Step 3</h3>
+<h3>Step 3 :</h3>
 <pre>Start the backend</pre>
 
 <h3>Step : Only For Replacing Old Db With New</h3>
@@ -108,7 +115,7 @@ python -m manage runserver</code>
 <p>Backend should be running if there isn't any errors showing up, now start the frontend</p>
 
 <h2>Starting Frontend</h2>
-<h3>Step 1: Skip to step 2 if you already done this</h3>
+<h3>Step 1 : Skip to step 2 if you already done this</h3>
 <p>If you're new, please do the following commands</p>
 <pre>- Go to frontend folder, if you're in backend folder, do cd .. to backtrack into parent directory</pre>
 <pre>- From main folder apptracker, do this command</pre>
@@ -124,18 +131,11 @@ npm i react-router-dom
 npm install moment
 npm i bootstrap-icons
 npm install moment-timezone --save</code>
-<h3>Step 2</h3>
+<h3>Step 2:</h3>
 <pre>- Make sure you're in frontend directory and start it using this command</pre>
 <code>npm start</code>
 <br><br>
 <pre>- If a page pops up without errors, frontend is loaded successfully.</pre>
 
 <p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.</p>
-
-<h2>Creators</h2>
-<blockquote>
-Kelvin Chan (chan34kelvin)
-and
-Damon Chen (peterofighter)
-</blockquote>
 
