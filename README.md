@@ -15,7 +15,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 <code>python --version</code>
 
 <h2>Cloning From Repo</h2>
-<p>Open "Code" button and select clone using HTTPS or SSH, copy the url.</p>
+<p>Open "Code" button and select clone url in HTTPS or SSH, copy the url.</p>
 <pre>- Open your terminal to a desired directory and type</pre>
 <code>git clone "copied url"</code>
 <br><br>
@@ -70,9 +70,29 @@ wheel               0.40.0
 - sqlparse = 0.2.4
 - pymongo = 3.12.3
 </pre>
-<pre>- If these two aren't in the exact version, use these commands, else skip these</pre>
-<code>
-pip install --force-reinstall -v "Pymongo==3.12.3"
+<p>If these two aren't in the exact version, use these commands, else skip these.</p>
+<code>pip install --force-reinstall -v "Pymongo==3.12.3"
 pip install --force-reinstall -v "Sqlparse==0.2.4"
 </code>
-<br><br>
+
+<h2>Database setup and migrations</h2>
+<pre>- Go to backend directory using this command</pre>
+<code>cd backend</code>
+<h3>Step 1</h3>
+<pre>- Use these commands to finish setting up/ migrating</pre>
+<code>python -m manage makemigrations trackerapp
+python -m manage migrate trackerapp</code>
+
+<h3>Step 2</h3>
+<pre>- Open mongoDBCompass app, connect and check/refresh to see if apptracker database is created</pre>
+
+<h3>Step 3</h3>
+<pre>Start the backend</pre>
+<code>python -m manage runserver</code>
+
+<h3>Not For New Setup, Only For Replacing Db From Old With New</h3>
+<p>This is to clean up an existing database. Skip this if you're newly setting up the database.</p>
+<pre>- Go to mongoDBCompass app, connect to the database and find apptracker database then drop it</pre>
+<pre>- Go to migration folder inside trackerapp folder and delete 0.0001 py</pre>
+<pre>- Start from step 1 above</pre>
+
