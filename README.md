@@ -130,4 +130,11 @@ npm install moment-timezone --save</code>
 <br><br>
 <pre>- If a page pops up without errors, frontend is loaded successfully.</pre>
 
-<p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend</p>
+<p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.</p>
+
+<h2>Authors</h2>
+<blockquote>
+Kelvin Chan (chan34kelvin)
+Damon Chen (peterofighter)
+</blockquote>
+
