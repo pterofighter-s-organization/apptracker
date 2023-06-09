@@ -3,7 +3,7 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future appointments. 
 
-<h2>Contributors</h2>
+<h2>Programmers</h2>
 <blockquote>
 Kelvin Chan (chan34kelvin)
 and
