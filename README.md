@@ -131,7 +131,7 @@ npm i react-router-dom
 npm install moment
 npm i bootstrap-icons
 npm install moment-timezone --save</code>
-<h3>Step 2:</h3>
+<h3>Step 2 :</h3>
 <pre>- Make sure you're in frontend directory and start it using this command</pre>
 <code>npm start</code>
 <br><br>
