@@ -75,7 +75,7 @@ wheel               0.40.0
 pip install --force-reinstall -v "Sqlparse==0.2.4"
 </code>
 
-<h2>Database setup and migrations</h2>
+<h2>Database Setup And Migrations</h2>
 <pre>- Go to backend directory using this command</pre>
 <code>cd backend</code>
 <h3>Step 1</h3>
@@ -88,11 +88,19 @@ python -m manage migrate trackerapp</code>
 
 <h3>Step 3</h3>
 <pre>Start the backend</pre>
-<code>python -m manage runserver</code>
 
-<h3>Not For New Setup, Only For Replacing Db From Old With New</h3>
+<h3>Step : Only For Replacing Old Db With New</h3>
 <p>This is to clean up an existing database. Skip this if you're newly setting up the database.</p>
 <pre>- Go to mongoDBCompass app, connect to the database and find apptracker database then drop it</pre>
 <pre>- Go to migration folder inside trackerapp folder and delete 0.0001 py</pre>
 <pre>- Start from step 1 above</pre>
 
+<h2>Starting Backend</h2>
+<pre>- If virtual environment not activiated, do this in the main github folder.</pre>
+<pre>- Skip this if your environment already activated</pre>
+<code>python -m pipenv shell</code>
+<br>
+<pre>- Check pip list, make sure it matches the pip list reqs. above</pre>
+<pre>- Run this command inside the backend folder</pre>
+<code>cd backend</code>
+<code>python -m manage runserver</code>
