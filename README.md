@@ -25,6 +25,7 @@ Open "Code" button and select clone url in HTTPS or SSH, copy the url.
 - Open your terminal to a desired directory and type ```git clone "copied url"```
 After you finish entering your github credentials, the folder should be created inside the directory.
 - ```cd apptracker``` to enter the repo folder.
+
 Stay inside apptracker directory, this is where we install the appropriate tools.
 
 ## Tools Setup
@@ -79,7 +80,6 @@ pip install --force-reinstall -v "Sqlparse==0.2.4"
 python -m manage makemigrations trackerapp
 python -m manage migrate trackerapp
 ```
-
 ### Step 2:
 - Open mongoDBCompass app.
 - Connect into localhost 27017.
@@ -108,6 +108,7 @@ This is to clean up an existing database. Skip this if you're newly setting up t
 
 ### Step 3:
 - ```python -m manage runserver``` to start it inside the backend directory.
+
 Backend should be running if there isn't any errors showing up, now start the frontend
 
 ## Starting Frontend
@@ -132,5 +133,5 @@ npm install moment-timezone --save
 - Start the frontend using ```npm start```
 If a page pops up without errors, frontend is loaded successfully.
 
-After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.
+After you did a ```npm install``` once, you can start from step 2 and skip step 1 to start the frontend.
 
