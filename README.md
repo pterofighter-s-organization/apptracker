@@ -18,7 +18,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 ## Prerequisites
 Have these installed before approaching the next steps.
 - Have mongoDBCompass installed on your computer.
-- Have python 3.9.7 or up, ```python --version``` use this command to check inside the terminal.
+- Have python 3.9.7 or up, use ```python --version``` command to check inside the terminal.
 
 ## Cloning From Repo
 Open "Code" button and select clone url in HTTPS or SSH, copy the url.
@@ -30,17 +30,13 @@ Stay inside apptracker directory, this is where we install the appropriate tools
 ## Tools Setup
 - ```pip install pipenv``` to install the virtual environment for backend.
 - ```python -m pipenv shell``` to activate the virtual environment.
-- Install the following inside the environment  
+- Use the following installation commands inside the environment.  
 ```
 pipenv sync
 pip install djongo
 pip install --force-reinstall -v "Pymongo==3.12.3"
 ```
-<br><br>
-<pre>- Do the command below to check the following tool versions</pre>
-<code>pip list</code>
-<br><br>
-<pre>
+- Do command ```pip list``` to check the following tool versions
 Package             Version
 ------------------- --------
 asgiref             3.7.0
@@ -63,72 +59,77 @@ tzdata              2023.3
 virtualenv          20.23.0
 virtualenv-clone    0.5.7
 wheel               0.40.0
-</pre>
 
-<p>Everything doesn't have to be exact versions except,</p>
-<pre>
+Everything doesn't have to be exact versions except,
 - sqlparse = 0.2.4
 - pymongo = 3.12.3
-</pre>
-<p>If these two aren't in the exact version, use these commands, else skip these.</p>
-<code>pip install --force-reinstall -v "Pymongo==3.12.3"
+If these two aren't in the exact version, use these commands, else skip these.
+```
+pip install --force-reinstall -v "Pymongo==3.12.3"
 pip install --force-reinstall -v "Sqlparse==0.2.4"
-</code>
+```
 
-<h2>Database Setup And Migrations</h2>
-<pre>- Go to backend directory using this command</pre>
-<code>cd backend</code>
-<h3>Step 1 :</h3>
-<pre>- Use these commands to finish setting up/ migrating</pre>
-<code>python -m manage makemigrations trackerapp
-python -m manage migrate trackerapp</code>
+## Database Setup And Migrations
+- Use ```cd backend``` to enter the backend directory.
 
-<h3>Step 2 :</h3>
-<pre>- Open mongoDBCompass app, connect and check/refresh to see if apptracker database is created</pre>
+### Step 1:
+- Use these commands to finish setting up/migrating.
+```
+python -m manage makemigrations trackerapp
+python -m manage migrate trackerapp
+```
 
-<h3>Step 3 :</h3>
-<pre>Start the backend</pre>
+### Step 2:
+- Open mongoDBCompass app.
+- Connect into localhost 27017.
+- Refresh the database and check if apptracker is created.
 
-<h3>Step 4 : Only For Replacing Old Db With New</h3>
-<p>This is to clean up an existing database. Skip this if you're newly setting up the database.</p>
-<pre>- Go to mongoDBCompass app, connect to the database and find apptracker database then drop it</pre>
-<pre>- Go to migration folder inside trackerapp folder and delete 0.0001 py</pre>
-<pre>- Start from step 1 above</pre>
+### Step 3:
+- Start the backend.
+- Skip step 4 if you're newly setting up.
 
-<h2>Starting Backend</h2>
-<pre>- If virtual environment not activiated, do this in the main github folder.</pre>
-<pre>- Skip this if your environment already activated</pre>
-<code>python -m pipenv shell</code>
-<br><br>
-<pre>- Check pip list, make sure it matches the pip list reqs. above</pre>
-<pre>- Run this command inside the backend folder</pre>
-<code>cd backend
-python -m manage runserver</code>
-<br><br>
-<p>Backend should be running if there isn't any errors showing up, now start the frontend</p>
+### Step 4: Only For Replacing Old Db With New
+This is to clean up an existing database. Skip this if you're newly setting up the database.
+- Go to mongoDBCompass app and connect to localhost 27017.
+- Find apptracker database then drop it by clciking the trashbin icon.
+- Go to migration folder inside backend/trackerapp folder and delete 0.0001 py
+- Repeat steps from 1 to 3.
 
-<h2>Starting Frontend</h2>
-<h3>Step 1 : Skip to step 2 if you already done this</h3>
-<p>If you're new, please do the following commands</p>
-<pre>- Go to frontend folder, if you're in backend folder, do cd .. to backtrack into parent directory</pre>
-<pre>- From main folder apptracker, do this command</pre>
-<code>cd frontend</code>
-<br><br>
-<pre>Install the tools for frontend with one command</pre>
-<code>npm install</code>
-<br><br>
-<pre>- In case the tools didn't successfully install, here is the list of tools used in frontend</pre>
-<pre>- Skip this if npm install was successful</pre>
-<code>npm install bootstrap@5.3.0-alpha3
+## Starting Backend
+- Skip step 1 if your environment is already activated. If unsure, just do step 1.
+
+### Step 1:
+- If virtual environment not activiated, do ```python -m pipenv shell``` in the main github folder.
+
+### Step 2:
+- Use ```pip list``` and check to make sure it matches the pip list reqs. above.
+- ```cd backend``` to enter the backend directory.
+
+### Step 3:
+- ```python -m manage runserver``` to start it inside the backend directory.
+Backend should be running if there isn't any errors showing up, now start the frontend
+
+## Starting Frontend
+- Skip to step 2 if you already ```npm install```. Don't skip if you're newly setting up.
+
+### Step 1:
+- Go to frontend folder, if you're in backend folder, do ```cd ..``` to backtrack into parent directory.
+- From github main folder, do ```cd frontend``` to enter frontend directory.
+- Install the tools for frontend with ```npm install```
+- Proceed to next step if successful.
+- In case the tools didn't successfully install, here is the list of tools used in frontend. Don't use this if ```npm install``` run successfully.
+```
+npm install bootstrap@5.3.0-alpha3
 npm i react-router-dom
 npm install moment
 npm i bootstrap-icons
-npm install moment-timezone --save</code>
-<h3>Step 2 :</h3>
-<pre>- Make sure you're in frontend directory and start it using this command</pre>
-<code>npm start</code>
-<br><br>
-<pre>- If a page pops up without errors, frontend is loaded successfully.</pre>
+npm install moment-timezone --save
+```
 
-<p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.</p>
+### Step 2 :
+- Make sure you're in frontend directory.
+- Start the frontend using ```npm start```
+If a page pops up without errors, frontend is loaded successfully.
+
+After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.
 
