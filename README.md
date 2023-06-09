@@ -1,17 +1,19 @@
 
 # Job-Application-Tracker-App
 
-Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future appointments. 
+Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future interviews. 
 
-<h2>Programmers</h2>
-<blockquote>
-Kelvin Chan (chan34kelvin)
-and
-Damon Chen (peterofighter)
-</blockquote>
+## Technologies Used
 
-<h1>To Use This Application</h1>
-<p>The following instructions will help you setup this application to run in the local machine</P>
+- Backend: Django, Djongo, MongoDB, Django REST Framework
+- Frontend: React.js, HTML, CSS (Bootstrap), Axios
+
+## Contributors
+- Kelvin Chan (Github: chan34kelvin)
+- Damon Chen (Github: peterofighter)
+
+## Installation
+- The following instructions will help you setup this application to run in the local machine
 
 <h2>Prerequisites</h2>
 <p>Have these installed before approaching the next steps</p>
@@ -96,7 +98,7 @@ python -m manage migrate trackerapp</code>
 <h3>Step 3 :</h3>
 <pre>Start the backend</pre>
 
-<h3>Step : Only For Replacing Old Db With New</h3>
+<h3>Step 4 : Only For Replacing Old Db With New</h3>
 <p>This is to clean up an existing database. Skip this if you're newly setting up the database.</p>
 <pre>- Go to mongoDBCompass app, connect to the database and find apptracker database then drop it</pre>
 <pre>- Go to migration folder inside trackerapp folder and delete 0.0001 py</pre>
