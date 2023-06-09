@@ -132,7 +132,7 @@ npm install moment-timezone --save</code>
 
 <p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend.</p>
 
-<h2>Authors</h2>
+<h2>Creators</h2>
 <blockquote>
 Kelvin Chan (chan34kelvin)
 and
