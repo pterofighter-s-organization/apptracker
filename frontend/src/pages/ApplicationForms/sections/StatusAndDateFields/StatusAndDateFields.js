@@ -1,6 +1,6 @@
 
 //components
-import { StatusButton } from "../../../../components/Buttons/StatusButton"
+import { StatusButton } from "../../../../components/StatusButton"
 import { FormFieldFooter } from "../../../../components/FormFieldFooter"
 import { FormFieldHeader } from "../../../../components/FormFieldHeader"
 import { DateTimeSelect } from "../../../../components/Selects/DateTimeSelect"

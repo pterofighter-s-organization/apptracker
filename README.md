@@ -99,8 +99,35 @@ python -m manage migrate trackerapp</code>
 <pre>- If virtual environment not activiated, do this in the main github folder.</pre>
 <pre>- Skip this if your environment already activated</pre>
 <code>python -m pipenv shell</code>
-<br>
+<br><br>
 <pre>- Check pip list, make sure it matches the pip list reqs. above</pre>
 <pre>- Run this command inside the backend folder</pre>
-<code>cd backend</code>
-<code>python -m manage runserver</code>
+<code>cd backend
+python -m manage runserver</code>
+<br><br>
+<p>Backend should be running if there isn't any errors showing up, now start the frontend</p>
+
+<h2>Starting Frontend</h2>
+<h3>Step 1: Skip to step 2 if you already done this</h3>
+<p>If you're new, please do the following commands</p>
+<pre>- Go to frontend folder, if you're in backend folder, do cd .. to backtrack into parent directory</pre>
+<pre>- From main folder apptracker, do this command</pre>
+<code>cd frontend</code>
+<br><br>
+<pre>Install the tools for frontend with one command</pre>
+<code>npm install</code>
+<br><br>
+<pre>- In case the tools didn't successfully install, here is the list of tools used in frontend</pre>
+<pre>- Skip this if npm install was successful</pre>
+<code>npm install bootstrap@5.3.0-alpha3
+npm i react-router-dom
+npm install moment
+npm i bootstrap-icons
+npm install moment-timezone --save</code>
+<h3>Step 2</h3>
+<pre>- Make sure you're in frontend directory and start it using this command</pre>
+<code>npm start</code>
+<br><br>
+<pre>- If a page pops up without errors, frontend is loaded successfully.</pre>
+
+<p>After you did a npm install once, you can start from step 2 and skip step 1 to start the frontend</p>

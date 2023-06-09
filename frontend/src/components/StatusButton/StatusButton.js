@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 //utils
-import { STATUSES_MAP_COLOR } from "../../../utils/constants";
+import { STATUSES_MAP_COLOR } from "../../utils/constants";
 
 export default function StatusButton({ value, updateValue }) {
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //components
-import { StatusButton } from "../../Buttons/StatusButton"
+import { StatusButton } from "../../StatusButton"
 import { DateTime } from "../../DateTime"
 
 //helpers
