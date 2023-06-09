@@ -37,6 +37,7 @@ pip install djongo
 pip install --force-reinstall -v "Pymongo==3.12.3"
 ```
 - Do command ```pip list``` to check the following tool versions
+```
 Package             Version
 ------------------- --------
 asgiref             3.7.0
@@ -59,7 +60,7 @@ tzdata              2023.3
 virtualenv          20.23.0
 virtualenv-clone    0.5.7
 wheel               0.40.0
-
+```
 Everything doesn't have to be exact versions except,
 - sqlparse = 0.2.4
 - pymongo = 3.12.3
