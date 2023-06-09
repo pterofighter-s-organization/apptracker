@@ -71,6 +71,8 @@ wheel               0.40.0
 - pymongo = 3.12.3
 </pre>
 <pre>- If these two aren't in the exact version, use these commands, else skip these</pre>
-<code>pip install --force-reinstall -v "Pymongo==3.12.3"
-pip install --force-reinstall -v "Sqlparse==0.2.4"</code>
+<code>
+pip install --force-reinstall -v "Pymongo==3.12.3"
+pip install --force-reinstall -v "Sqlparse==0.2.4"
+</code>
 <br><br>
