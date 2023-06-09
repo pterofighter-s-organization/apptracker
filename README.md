@@ -8,30 +8,36 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 <h2>Prerequisites</h2>
 <p>Have these installed before approaching the next steps</p>
-<pre>Have python 3.9.7 or up, check inside terminal using this command</pre>
+<pre>Have python 3.9.7 or up, check inside terminal using the command below</pre>
 <code> python --version </code>
+
 <pre>Have mongoDBCompass installed on your computer</pre>
+
 <h2>Cloning From Repo</h2>
 <p>Open "Code" button and select clone using HTTPS or SSH, copy the url.</p>
 <pre>Open your terminal to a desired directory and type</pre>
 <code> git clone "copied url" </code>
+
 <p>After you finish entering your github credentials, the folder should be created inside the directory</p>
 <pre>Do this command to enter the repo folder</pre>
 <code> cd apptracker </code>
 
 <p>Stay inside apptracker directory, this is where we install the appropriate tools</p>
+
 <h2>Tool Installations</h2>
 <pre>Install the virtual environment for backend</pre>
 <code> pip install pipenv </code>
+
 <pre>Activate the virtual environment</pre>
 <code> python -m pipenv shell </code>
+
 <pre>Install the following inside the environment</pre>
-<code> 
-pip install djongo
-pip install --force-reinstall -v "Pymongo==3.12.3"
-pip list
-</code>
-<pre>Inside pip list, check the following tool versions</pre>
+<code> pip install djongo
+pip install --force-reinstall -v "Pymongo==3.12.3"</code>
+
+<pre>Do the command below to check the following tool versions</pre>
+<code> pip list </code>
+
 <pre>
 Package             Version
 ------------------- --------
@@ -56,12 +62,14 @@ virtualenv          20.23.0
 virtualenv-clone    0.5.7
 wheel               0.40.0
 </pre>
+
 <p>Everything doesn't have to be exact versions except,</p>
 <pre>
 sqlparse = 0.2.4
 pymongo = 3.12.3
 </pre>
-<p>If these two aren't in the exact version, use these commands, else skip these</p>
+
+<pre>If these two aren't in the exact version, use these commands, else skip these</pre>
 <code>
 pip install --force-reinstall -v "Pymongo==3.12.3"
 pip install --force-reinstall -v "Sqlparse==0.2.4"
