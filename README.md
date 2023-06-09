@@ -13,36 +13,29 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 - Damon Chen (Github: peterofighter)
 
 # Installation
-- The following instructions will help you setup this application to run in the local machine
+- The following instructions will help you setup this application to run in the local machine.
 
 ## Prerequisites
-Have these installed before approaching the next steps
-- Have mongoDBCompass installed on your computer
-- Have python 3.9.7 or up, check inside terminal using the command below
-```python --version```
+Have these installed before approaching the next steps.
+- Have mongoDBCompass installed on your computer.
+- Have python 3.9.7 or up, ```python --version``` use this command to check inside the terminal.
 
-<h2>Cloning From Repo</h2>
-<p>Open "Code" button and select clone url in HTTPS or SSH, copy the url.</p>
-<pre>- Open your terminal to a desired directory and type</pre>
-<code>git clone "copied url"</code>
-<br><br>
-<p>After you finish entering your github credentials, the folder should be created inside the directory</p>
-<pre>- Do this command to enter the repo folder</pre>
-<code>cd apptracker</code>
-<br><br>
-<p>Stay inside apptracker directory, this is where we install the appropriate tools</p>
+## Cloning From Repo
+Open "Code" button and select clone url in HTTPS or SSH, copy the url.
+- Open your terminal to a desired directory and type ```git clone "copied url"```
+After you finish entering your github credentials, the folder should be created inside the directory.
+- ```cd apptracker``` to enter the repo folder.
+Stay inside apptracker directory, this is where we install the appropriate tools.
 
-<h2>Tool Installations</h2>
-<pre>- Install the virtual environment for backend</pre>
-<code>pip install pipenv</code>
-<br><br>
-<pre>- Activate the virtual environment</pre>
-<code>python -m pipenv shell</code>
-<br><br>
-<pre>- Install the following inside the environment</pre>
-<code>pipenv sync
+## Tools Setup
+- ```pip install pipenv``` to install the virtual environment for backend.
+- ```python -m pipenv shell``` to activate the virtual environment.
+- Install the following inside the environment  
+```
+pipenv sync
 pip install djongo
-pip install --force-reinstall -v "Pymongo==3.12.3"</code>
+pip install --force-reinstall -v "Pymongo==3.12.3"
+```
 <br><br>
 <pre>- Do the command below to check the following tool versions</pre>
 <code>pip list</code>
