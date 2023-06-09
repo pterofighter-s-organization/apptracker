@@ -3,13 +3,14 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future appointments. 
 
-<h1>To Use The Appliation</h1>
+<h1>To Use Appliation</h1>
 <p>The following instructions will help you setup this application to run in the local machine</P>
 
 <h2>Prerequisites</h2>
 <p>Have these installed before approaching the next steps</p>
-<pre>Have python 3.9.7 or up and have mongoDBCompass installed on your computer</pre>
-
+<pre>Have python 3.9.7 or up, check inside terminal using this command</pre>
+<code> python --version </code>
+<pre>Have mongoDBCompass installed on your computer</pre>
 <h2>Cloning From Repo</h2>
 <p>Open "Code" button and select clone using HTTPS or SSH, copy the url.</p>
 <pre>Open your terminal to a desired directory and type</pre>
