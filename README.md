@@ -153,7 +153,7 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 ![Screenshot](./images/edit-app/edit-app-2.png)
 
 ## Archived Board
-- Restore button to restore this application from archived.
+- A restore button to restore this application or notes from archived.
 
 ![Screenshot](./images/archived-apps/archived-apps-1.png)
 
