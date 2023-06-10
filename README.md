@@ -128,7 +128,7 @@ npm install moment
 npm i bootstrap-icons
 npm install moment-timezone --save
 ```
-### Step 2 :
+### Step 2:
 - Make sure you're in frontend directory.
 - Start the frontend using ```npm start```
 If a page pops up without errors, frontend is loaded successfully.
@@ -153,9 +153,8 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 ![Screenshot](./images/edit-app/edit-app-2.png)
 
 ## Archived Board
+- Restore button to restore this application from archived.
 ![Screenshot](./images/archived-apps/archived-apps-1.png)
-![Screenshot](./images/archived-apps/archived-apps-2.png)
 
 ## Interested Applications
 ![Screenshot](./images/interested-apps/interested-apps-1.png)
-![Screenshot](./images/interested-apps/interested-apps-2.png)
