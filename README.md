@@ -13,7 +13,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 - Damon Chen (Github: peterofighter)
 
 # Installation
-- The following instructions will help you setup this application to run in the local machine.
+The following instructions will help you setup this application to run in the local machine.
 
 ## Prerequisites
 Have these installed before approaching the next steps.
