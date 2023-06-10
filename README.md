@@ -146,7 +146,7 @@ Backend should be running if there isn't any errors showing up, now start the fr
 ```
 npm install bootstrap@5.3.0-alpha3
 npm i react-router-dom
-npm install moment
+npm install moment 
 npm i bootstrap-icons
 npm install moment-timezone --save
 ```
