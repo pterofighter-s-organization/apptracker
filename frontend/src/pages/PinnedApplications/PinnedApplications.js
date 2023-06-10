@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 //components
@@ -21,6 +21,11 @@ export default function PinnedApplications() {
     const { applications, updateApplication, isLoading: appsLoading } = useApplicationsManager()
     const isArchived = false
 
+    useEffect(() => {
+        document.title = " Interested Apps -  Job Tracker App"
+        return () => document.title = "Job Tracker App"
+    }, [])
+
     const categorizedApps = useMemo(() => {
         if (applications) {
             applications.sort((a, b) => {
@@ -33,7 +38,11 @@ export default function PinnedApplications() {
     }, [applications, isArchived])
 
     if (!categorizedApps) {
-        return <>Applications cannot be fetched! Mostly backend not connected.</>
+        return (
+            <SectionLayout title={"Interested Applications"}>
+                Applications cannot be fetched! Mostly backend not connected.
+            </SectionLayout>
+        )
     }
 
     return (

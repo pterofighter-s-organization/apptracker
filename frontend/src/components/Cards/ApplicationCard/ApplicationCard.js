@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //components
-import { StatusButton } from "../../Buttons/StatusButton"
+import { StatusButton } from "../../StatusButton"
 import { DateTime } from "../../DateTime"
 
 //helpers
@@ -51,7 +51,9 @@ export default function ApplicationCard({ application, updateApplication }) {
                         e.preventDefault()
                         updateArchiveStatus()
                     }}
-                    data-bs-toggle="tooltip" data-bs-placement="right" title={(!application.archived) ? "Archived this application to archived board" : "Restore this application to dashboard"}
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="right" 
+                    title={(!application.archived) ? "Archived this application to archived board" : "Restore this application to dashboard"}
                 >
                     {!application.archived ?
                         <i class="bi bi-x-lg"></i>
@@ -63,10 +65,20 @@ export default function ApplicationCard({ application, updateApplication }) {
 
             <div className="card-body d-flex flex-column gap-2 p-4">
                 {/* avoid the title overflowing with text-truncate */}
-                <div className="card-title text-truncate text-capitalize h5">
+                <div 
+                    className="card-title text-truncate text-capitalize h5"
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="right" 
+                    title={application.position}
+                >
                     {application.position}
                 </div>
-                <div className="card-subtitle text-capitalize lead">
+                <div 
+                    className="card-subtitle text-capitalize lead"
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="right" 
+                    title={application.company}
+                >
                     - {application.company}
                 </div>
             </div>

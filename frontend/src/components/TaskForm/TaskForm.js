@@ -45,7 +45,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
             "date_due": dateTimeUtils.convertInputToISO(formData, "due"),
             "company": application.company,
             "position": application.position,
-            "section": "application-tasks",
+            "section": "",
             "priority": 0,
         }).then(status => {
             setShowSuccessModal(status)

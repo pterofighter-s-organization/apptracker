@@ -1,5 +1,9 @@
-import { ModalLayout } from "../layout"
+
+//components
 import { RerouteErrorModalContent, RerouteSuccessModalContent } from "./components"
+
+//layout
+import { ModalLayout } from "../layout"
 
 export default function RerouteModal(props){
 

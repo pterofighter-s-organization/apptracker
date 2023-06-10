@@ -1,5 +1,9 @@
-import { ModalLayout } from "../layout";
+
+//components
 import { SubmitSuccessModalContent, SubmitErrorModalContent } from "./components";
+
+//layout
+import { ModalLayout } from "../layout";
 
 export default function SubmitModal(props) {
 

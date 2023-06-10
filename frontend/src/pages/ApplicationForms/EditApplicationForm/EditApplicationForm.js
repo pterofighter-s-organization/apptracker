@@ -87,7 +87,7 @@ export default function EditApplicationForm() {
     }
 
     if (!formData) {
-        return <>Application Data Not Found!</>
+        return <>Application Data Not Found! Mostly backend not connected.</>
     }
 
     return (
@@ -98,7 +98,7 @@ export default function EditApplicationForm() {
                 handleSubmittedForm()
             }}
         >
-            <SectionLayout title={"Edit " + (formData["status"] !== "interested" ? "Status And Dates :" : "Status :")}>
+            <SectionLayout title={"Edit " + (formData["status"] !== "interested" ? "Status And Dates" : "Status")}>
                 <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 mb-3">
                     <div className="">
                         * ( required fields )
@@ -119,7 +119,7 @@ export default function EditApplicationForm() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Edit Application Info :"}>
+            <SectionLayout title={"Edit Application Info"}>
                 <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 mb-3">
                     <div className="">
                         * ( required fields )
