@@ -125,7 +125,23 @@ Backend should be running if there isn't any errors showing up, now start the fr
 - Go to frontend folder, if you're in backend folder, do ```cd ..``` to backtrack into parent directory.
 - From github main folder, do ```cd frontend``` to enter frontend directory.
 - Install the tools for frontend with ```npm install```
-- Proceed to next step if successful.
+- do ```npm ls``` and check if your list matches with this.
+```
+├── @testing-library/jest-dom@5.16.5
+├── @testing-library/react@13.4.0
+├── @testing-library/user-event@13.5.0
+├── axios@1.4.0
+├── bootstrap-icons@1.10.5
+├── bootstrap@5.3.0-alpha3
+├── moment-timezone@0.5.43
+├── moment@2.29.4
+├── react-dom@18.2.0
+├── react-router-dom@6.10.0
+├── react-scripts@5.0.1
+├── react@18.2.0
+└── web-vitals@2.1.4
+```
+- If it matches, proceed to Step 2, else do the commands below.
 - In case the tools didn't successfully install, here is the list of tools used in frontend. Don't use this if ```npm install``` run successfully.
 ```
 npm install bootstrap@5.3.0-alpha3
