@@ -139,3 +139,23 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 
 ## Dashboard
 ![Screenshot](./images/dashboard/dashboard-2.png)
+
+## Application
+![Screenshot](./images/app/app-1.png)
+![Screenshot](./images/app/app-2.png)
+
+## New Application
+![Screenshot](./images/new-app/new-app-1.png)
+![Screenshot](./images/new-app/new-app-2.png)
+
+## Edit Application
+![Screenshot](./images/edit-app/edit-app-1.png)
+![Screenshot](./images/edit-app/edit-app-2.png)
+
+## Archived Board
+![Screenshot](./images/archived-apps/archived-apps-1.png)
+![Screenshot](./images/archived-apps/archived-apps-2.png)
+
+## Interested Applications
+![Screenshot](./images/interested-apps/interested-apps-1.png)
+![Screenshot](./images/interested-apps/interested-apps-2.png)
