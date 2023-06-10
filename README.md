@@ -65,6 +65,7 @@ wheel               0.40.0
 Everything doesn't have to be exact versions except,
 - sqlparse = 0.2.4
 - pymongo = 3.12.3
+
 If these two aren't in the exact version, use these commands, else skip these.
 ```
 pip install --force-reinstall -v "Pymongo==3.12.3"
@@ -127,7 +128,6 @@ npm install moment
 npm i bootstrap-icons
 npm install moment-timezone --save
 ```
-
 ### Step 2 :
 - Make sure you're in frontend directory.
 - Start the frontend using ```npm start```
@@ -135,3 +135,7 @@ If a page pops up without errors, frontend is loaded successfully.
 
 After you did a ```npm install``` once, you can start from step 2 and skip step 1 to start the frontend.
 
+# Project Snapshots
+
+## Dashboard
+![Screenshot](./images/dashboard-2.png)
