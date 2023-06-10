@@ -10,7 +10,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 # Contributors
 - Kelvin Chan (Github: chan34kelvin)
-- Damon Chen (Github: peterofighter)
+- Damon Chen (Github: pterofighter)
 
 # Installation
 The following instructions will help you setup this application to run in the local machine.
@@ -159,3 +159,9 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 
 ## Interested Applications
 ![Screenshot](./images/interested-apps/interested-apps-1.png)
+
+## Designs
+
+This application was designed using figma. From initial sketches to prototypes.
+
+https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
