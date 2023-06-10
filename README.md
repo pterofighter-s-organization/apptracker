@@ -154,6 +154,7 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 
 ## Archived Board
 - Restore button to restore this application from archived.
+
 ![Screenshot](./images/archived-apps/archived-apps-1.png)
 
 ## Interested Applications
