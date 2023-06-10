@@ -1,5 +1,5 @@
 //components
-import { StatusButton } from '../../../../components/StatusButton'
+import StatusButton from '../../../../components/StatusButton/StatusButton'
 import { DateTime } from '../../../../components/DateTime'
 
 //layouts
