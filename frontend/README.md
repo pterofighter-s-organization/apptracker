@@ -1,4 +1,4 @@
-# to start frontend
+# To Start Frontend
 
 Make sure you directory is /frontend and do ```npm start```
 

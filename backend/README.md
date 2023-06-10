@@ -1,4 +1,4 @@
-# to start the backend
+# To Start The Backend
 run 'python -m pipenv shell' to start the virtual env
 then 'python -m manage runserver' to run the server
 
