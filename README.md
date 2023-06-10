@@ -10,7 +10,7 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 # Contributors
 - Kelvin Chan (Github: chan34kelvin)
-- Damon Chen (Github: peterofighter)
+- Damon Chen (Github: pterofighter)
 
 # Installation
 The following instructions will help you setup this application to run in the local machine.
