@@ -138,4 +138,4 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 # Project Snapshots
 
 ## Dashboard
-![Screenshot](./images/dashboard-2.png)
+![Screenshot](./images/dashboard/dashboard-2.png)
