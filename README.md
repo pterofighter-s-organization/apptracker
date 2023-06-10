@@ -8,6 +8,12 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 - Backend: Django, Djongo, MongoDB, Django REST Framework
 - Frontend: React.js, HTML, CSS (Bootstrap), Axios
 
+# Designs
+
+This application was designed using figma. From initial sketches to prototypes.
+
+https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
+
 # Contributors
 - Kelvin Chan (Github: chan34kelvin)
 - Damon Chen (Github: pterofighter)
@@ -134,12 +140,6 @@ npm install moment-timezone --save
 If a page pops up without errors, frontend is loaded successfully.
 
 After you did a ```npm install``` once, you can start from step 2 and skip step 1 to start the frontend.
-
-# Designs
-
-This application was designed using figma. From initial sketches to prototypes.
-
-https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
 
 # Project Snapshots
 
