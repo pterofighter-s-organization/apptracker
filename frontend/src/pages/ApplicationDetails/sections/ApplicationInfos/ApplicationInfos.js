@@ -29,7 +29,7 @@ export default function ApplicationInfos({ application }) {
                         </div>
                     </DataLayout>
                     <DataLayout title={"Salary"}>
-                        <div className="text-dark-emphasis">
+                        <div className="text-dark-emphasis text-uppercase">
                             {application.salary}
                         </div>
                     </DataLayout>
@@ -37,13 +37,22 @@ export default function ApplicationInfos({ application }) {
                 {/* links info */}
                 <div className="d-flex flex-column gap-3 gap-md-4 bg-body-secondary p-4 w-100">
                     <DataLayout title={"Application link"}>
-                        <LinkDisplay link={application.application_link} />
+                        <LinkDisplay
+                            link={application.application_link}
+                            label={"application link"}
+                        />
                     </DataLayout>
                     <DataLayout title={"Resume link"}>
-                        <LinkDisplay link={application.resume_link} />
+                        <LinkDisplay
+                            link={application.resume_link}
+                            label={"resume link"}
+                        />
                     </DataLayout>
                     <DataLayout title={"Cover letter link"}>
-                        <LinkDisplay link={application.cover_letter_link} />
+                        <LinkDisplay
+                            link={application.cover_letter_link}
+                            label={"cover letter link"}
+                        />
                     </DataLayout>
                 </div>
             </div>

@@ -93,7 +93,7 @@ export default function NewApplicationForm() {
                 handleSubmittedForm()
             }}
         >
-            <SectionLayout title={"Select " + (formData["status"] !== "interested" ? "Status And Dates :" : "Status :")}>
+            <SectionLayout title={"Select " + (formData["status"] !== "interested" ? "Status And Dates" : "Status")}>
                 <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 mb-3">
                     <div className="">
                         * ( required fields )
@@ -118,7 +118,7 @@ export default function NewApplicationForm() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Enter Application Info :"}>
+            <SectionLayout title={"Enter Application Info"}>
                 <div className="d-flex flex-wrap gap-3 gap-md-4 gap-xl-5 mb-3">
                     <div className="">
                         * ( required fields )

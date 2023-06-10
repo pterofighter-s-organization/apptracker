@@ -34,7 +34,7 @@ export default function RelevantTasks({ applications, isArchived }) {
                 previewVh={40}
                 dependency={combinedTasks}
             >
-                <div className="table-responsive" id="dashboard-tasktable">
+                <div className="table-responsive fs-6" id="dashboard-tasktable">
                     <TaskTable
                         tasks={combinedTasks}
                         isArchived={isArchived}

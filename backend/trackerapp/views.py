@@ -7,8 +7,6 @@ from rest_framework.decorators import api_view
 from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer, TaskSerializer
 from .models import Users, Application, Notes, Task
 
-
-
 # Create your views here.
 def index(request):
     return HttpResponse("Hello, world")
