@@ -135,6 +135,12 @@ If a page pops up without errors, frontend is loaded successfully.
 
 After you did a ```npm install``` once, you can start from step 2 and skip step 1 to start the frontend.
 
+# Designs
+
+This application was designed using figma. From initial sketches to prototypes.
+
+https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
+
 # Project Snapshots
 
 ## Dashboard
@@ -159,9 +165,3 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 
 ## Interested Applications
 ![Screenshot](./images/interested-apps/interested-apps-1.png)
-
-## Designs
-
-This application was designed using figma. From initial sketches to prototypes.
-
-https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
