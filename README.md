@@ -3,6 +3,8 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future interviews. 
 
+**The time used in this app is based off PST**
+
 # Technologies Used
 
 - Backend: Django, Djongo, MongoDB, Django REST Framework
@@ -23,14 +25,24 @@ The following instructions will help you setup this application to run in the lo
 
 ## Prerequisites
 Have these installed before approaching the next steps.
+- Have mongoDB community server installed on your computer.
+
+For windows, install here: https://www.mongodb.com/try/download/community-kubernetes-operator
+
+For mac, follow this doc: https://docs.google.com/document/d/1QfQ5nFLKqnzoVeREdH5JEA9NjsbkRwo8V_EMeXvc7fY/edit?usp=sharing
+
 - Have mongoDBCompass installed on your computer.
 - Have python 3.9.7 or up, use ```python --version``` command to check inside the terminal.
+- Have Visual Studio Code installed.
 
 ## Cloning From Repo
 Open "Code" button and select clone url in HTTPS or SSH, copy the url.
 - Open your terminal to a desired directory and type ```git clone "copied url"```
 After you finish entering your github credentials, the folder should be created inside the directory.
-- ```cd apptracker``` to enter the repo folder.
+- Open Visual Studio Code and open the apptracker project.
+- Open terminal, make a split terminal with git bash and make sure both terminals are in apptracker directory.
+
+Do ```cd apptracker``` if you're not inside that directory for the terminals.
 
 Stay inside apptracker directory, this is where we install the appropriate tools.
 
@@ -72,7 +84,7 @@ Everything doesn't have to be exact versions except,
 - sqlparse = 0.2.4
 - pymongo = 3.12.3
 
-If these two aren't in the exact version, use these commands, else skip these.
+If these two aren't in the exact version, use these commands, **else skip these.**
 ```
 pip install --force-reinstall -v "Pymongo==3.12.3"
 pip install --force-reinstall -v "Sqlparse==0.2.4"
@@ -92,11 +104,13 @@ python -m manage migrate trackerapp
 - Connect into localhost 27017.
 - Refresh the database and check if apptracker is created.
 
+![Screenshot](./images/installations/migrated-database.png)
+
 ### Step 3:
 - Start the backend.
-- Skip step 4 if you're newly setting up.
+- **Skip step 4 if you're newly setting up.**
 
-### Step 4: Only For Replacing Old Db With New
+### Step 4: Only For Replacing Old Db With New Db
 This is to clean up an existing database. Skip this if you're newly setting up the database.
 - Go to mongoDBCompass app and connect to localhost 27017.
 - Find apptracker database then drop it by clciking the trashbin icon.
@@ -116,7 +130,7 @@ This is to clean up an existing database. Skip this if you're newly setting up t
 ### Step 3:
 - ```python -m manage runserver``` to start it inside the backend directory.
 
-Backend should be running if there isn't any errors showing up, now start the frontend
+Backend should be running if there isn't any errors showing up, **now start the frontend in the other split terminal.**
 
 ## Starting Frontend
 - Skip to step 2 if you already ```npm install```. Don't skip if you're newly setting up.
