@@ -89,7 +89,7 @@ export default function TaskRow({ count, task }) {
                 {/* the link to the details of this task */}
                 <td className={`${rowClassNames}`}>
                     <Link
-                        to={"/application/" + task.application_id + "#" + task.section}
+                        to={(task.priority === 1) ? "/application/edit/" + task.application_id : "/application/" + task.application_id + "#" + task.section}
                         className={`card-text btn btn-primary px-3 py-2`}
                         style={{ padding: `${rowPadding}` }}
                     >

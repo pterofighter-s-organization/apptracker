@@ -198,3 +198,9 @@ After you did a ```npm install``` once, you can start from step 2 and skip step 
 
 ## Interested Applications
 ![Screenshot](./images/interested-apps/interested-apps-1.png)
+
+# Resources
+
+Image: Css Basic Miscellany Flat icon  
+Author: Freepik  
+Source: Freepik (URL: https://www.freepik.com/icon/css_302423#fromView=search&term=list&page=1&position=81)  

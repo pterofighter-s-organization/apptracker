@@ -11,6 +11,9 @@ import { SectionLayout } from "../../layouts/SectionLayout";
 import useLocationManager from "../../hooks/useLocationManager";
 import useApplicationManager from "../../hooks/useApplicationManager";
 
+//helpers
+import * as applicationHelpers from "../../helpers/applicationHelpers"
+
 export default function ApplicationDetails() {
 
     const { id } = useParams(); //get the id from the url
@@ -24,6 +27,13 @@ export default function ApplicationDetails() {
         return () => document.title = "Job Tracker App"
     }, [id, application])
 
+    function updateArchiveStatus() {
+        const updateInfo = {
+            "archived": !application.archived
+        }
+        updateApplication(applicationHelpers.updateApplicationInfo(updateInfo, application))
+    }
+
     if (isLoading) {
         return <>Loading...</>
     }
@@ -36,18 +46,46 @@ export default function ApplicationDetails() {
         //define the final font size here
         <div className="d-flex flex-column gap-5 fs-5">
 
-            <Link
-                to={"/application/edit/" + application.application_id}
-                className={`btn btn-primary p-3 py-4 ${"form-button"}`}
-                id="edit"
-            >
-                <div className={`d-flex flex-row gap-3 justify-content-center ${"form-button-label"}`}>
-                    <i class="bi bi-pencil"></i>
-                    <div>
-                        Edit Application
+            <div className="d-flex flex-column gap-3">
+                <button 
+                    className={`btn ${(!application.archived ? "btn-danger" : "btn-secondary")} p-3 py-4 ${"form-button"}`}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        updateArchiveStatus()                       
+                    }}    
+                >
+                    <div className={`d-flex flex-row gap-3 justify-content-center ${"form-button-label"}`}>
+                        {!application.archived ?
+                            <>
+                                <i class="bi bi-x-lg"></i>
+                                <div>
+                                    Archive Application
+                                </div>
+                            </>
+                            :
+                            <>
+                                <i class="bi bi-arrow-clockwise"></i>
+                                <div>
+                                    Restore Application
+                                </div>
+                            </>
+                        }
                     </div>
-                </div>
-            </Link>
+                </button>
+
+                <Link
+                    to={"/application/edit/" + application.application_id}
+                    className={`btn btn-primary p-3 py-4 ${"form-button"}`}
+                    id="edit"
+                >
+                    <div className={`d-flex flex-row gap-3 justify-content-center ${"form-button-label"}`}>
+                        <i class="bi bi-pencil"></i>
+                        <div>
+                            Edit Application
+                        </div>
+                    </div>
+                </Link>
+            </div>
 
             <SectionLayout title={"Status And Dates"}>
                 <StatusDates
