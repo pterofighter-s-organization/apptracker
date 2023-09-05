@@ -29,14 +29,14 @@ export default function Dashboard() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Your Relevant Tasks"}>
+            <SectionLayout title={"Your Reminders"}>
                 <RelevantTasks
                     applications={applications}
                     isArchived={false}
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Your notes"}>
+            <SectionLayout title={"Your Notes"}>
                 <NoteList
                     isArchived={false}
                 />

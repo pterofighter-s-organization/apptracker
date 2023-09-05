@@ -30,7 +30,7 @@ export default function ArchivedBoard() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Archived Tasks"}>
+            <SectionLayout title={"Archived Reminders"}>
                 <RelevantTasks
                     applications={applications}
                     isArchived={true}

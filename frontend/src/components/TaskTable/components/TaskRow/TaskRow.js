@@ -23,8 +23,9 @@ export default function TaskRow({ count, task }) {
         },
     }
 
-    const rowPadding = "0.5vw"
-    const rowClassNames = "p-2 p-sm-3 border border-5 border-light"
+    const paddingTestVal = "0.5vw"
+    const rowSharedCSS = "p-2 p-sm-3 border border-light"
+    const rowSharedBorder = "border-5"
 
     return (
         <>
@@ -37,18 +38,18 @@ export default function TaskRow({ count, task }) {
                 key={task.task_id}
             >
 
-                {/* taskcount */}
+                {/* taskcount. border-start-0 subtracting the starting border from left so it doesnt indent */}
                 <th
                     scope="row"
-                    className={`${rowClassNames}`}
-                    style={{ padding: `${rowPadding}` }}
+                    className={`${rowSharedCSS} border-5 border-start-0`}
+                    style={{ padding: `${paddingTestVal}` }}
                 >
                     {count}
                 </th>
                 {/* position and company name */}
                 <td
-                    className={`${rowClassNames} text-capitalize`}
-                    style={{ padding: `${rowPadding}` }}
+                    className={`${rowSharedCSS} ${rowSharedBorder} text-capitalize`}
+                    style={{ padding: `${paddingTestVal}` }}
                 >
                     <div>
                         {task.position}
@@ -61,24 +62,24 @@ export default function TaskRow({ count, task }) {
 
                 {/* task title */}
                 <td
-                    className={`${rowClassNames}`}
-                    style={{ padding: `${rowPadding}` }}
+                    className={`${rowSharedCSS} ${rowSharedBorder}`}
+                    style={{ padding: `${paddingTestVal}` }}
                 >
                     {task.title}
                 </td>
 
                 {/* when the task is due (in MM-DD-YYYY and hh:mm am/pm) */}
                 <td
-                    className={`d-none d-md-table-cell ${rowClassNames}`}
-                    style={{ padding: `${rowPadding}` }}
+                    className={`d-none d-md-table-cell ${rowSharedCSS} ${rowSharedBorder}`}
+                    style={{ padding: `${paddingTestVal}` }}
                 >
                     <DateTime dateTime={task.date_due} />
                 </td>
 
                 {/* time due in countdown */}
                 <td
-                    className={`${rowClassNames}`}
-                    style={{ padding: `${rowPadding}` }}
+                    className={`${rowSharedCSS} ${rowSharedBorder}`}
+                    style={{ padding: `${paddingTestVal}` }}
                 >
                     <Timer
                         start={dateTimeUtils.findTodayUTCDate()}
@@ -86,12 +87,12 @@ export default function TaskRow({ count, task }) {
                     />
                 </td>
 
-                {/* the link to the details of this task */}
-                <td className={`${rowClassNames}`}>
+                {/* the link to the details of this task. border-end-0 is subtracting the border padding at the end of the table to prevent indent*/}
+                <td className={`${rowSharedCSS} ${rowSharedBorder} border-end-0`}>
                     <Link
-                        to={"/application/" + task.application_id + "#" + task.section}
+                        to={(task.priority === 1) ? "/application/edit/" + task.application_id : "/application/" + task.application_id + "#" + task.section}
                         className={`card-text btn btn-primary px-3 py-2`}
-                        style={{ padding: `${rowPadding}` }}
+                        style={{ padding: `${paddingTestVal}` }}
                     >
                         <div className="">
                             More Details

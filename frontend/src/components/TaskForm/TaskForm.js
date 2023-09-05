@@ -67,7 +67,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
     }
 
     return (
-        <SubSectionLayout title={"Creating a new task :"} titleFontSize={"fs-5"}>
+        <SubSectionLayout title={"Set a New Reminder :"} titleFontSize={"fs-5"}>
 
             <div className="mb-3 fs-6">
                 * ( required fields )
@@ -90,7 +90,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
                             updateValue={formHelpers.setInputData(setFormData, "title")}
                         />
                         <FormFieldFooter
-                            footer={"Enter the name for your task"}
+                            footer={"Enter the task to be reminded."}
                             errorMessage={errorMsgs["title"]}
                             isError={errorMsgs["title"].length > 0}
                         />

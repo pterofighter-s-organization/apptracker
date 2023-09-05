@@ -12,7 +12,7 @@ export default function TextInput({ value, updateValue }) {
         <input
             type="text"
             value={value}
-            placeholder={"text"}
+            placeholder={"Enter text"}
             className={`form-control p-3 bg-body`}
             onChange={(e) => changeInput(e)}
         />
