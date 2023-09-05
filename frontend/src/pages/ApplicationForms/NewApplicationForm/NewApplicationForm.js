@@ -125,7 +125,7 @@ export default function NewApplicationForm() {
                     </div>
                     <div className="d-flex flex-wrap gap-3">
                         <div className="">
-                            Hint: ( link to docs recommended for better tracking )
+                            Tip: ( link to docs recommended for better tracking )
                         </div>
                     </div>
                 </div>
