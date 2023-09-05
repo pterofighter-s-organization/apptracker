@@ -16,9 +16,10 @@ export default function TaskTable({ tasks, isArchived }) {
     let count = 1
 
     return (
-        <table className={`table text-center`} >
+        <table className={`table text-center`}>
 
-            <thead className={`bg-secondary bg-opacity-25 border-light border-5 ${headerPadding}`}>
+            {/* border 0 so it doesnt ident the whole table by accident - fixed on sep 6 */}
+            <thead className={`bg-secondary bg-opacity-25 border-light border-0 ${headerPadding}`}>
                 <tr>
                     <th scope="col" className={`${headerPadding}`}>#</th>
                     <th scope="col" className={`${headerPadding}`}>App</th>
