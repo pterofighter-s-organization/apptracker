@@ -100,7 +100,7 @@ export default function ApplicationDetails() {
                 />
             </SectionLayout>
 
-            <SectionLayout title={"Application Tasks"}>
+            <SectionLayout title={"Application Reminders"}>
                 <ApplicationTasks
                     application={application}
                     isArchived={false}
