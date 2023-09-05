@@ -49,6 +49,9 @@ export default function TaskTable({ tasks, isArchived }) {
                         </th>
                         <td></td>
                         <td>{(!isArchived) ? "No tasks found! Track a new one inside an application" : "No archived tasks"}</td>
+                        <td/>
+                        <td/>
+                        <td/>
                     </tr>
                     :
                     <></>
