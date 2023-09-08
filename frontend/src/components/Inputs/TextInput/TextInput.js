@@ -1,5 +1,9 @@
 
-export default function TextInput({ value, updateValue }) {
+
+//reason why i don't put setforminput here because that function only use to modify key value data
+//not all input passed in uses that currently
+
+export default function TextInput({ value, updateValue, label }) {
 
     function changeInput(event) {
         // console.log(event.target.value);
@@ -12,7 +16,7 @@ export default function TextInput({ value, updateValue }) {
         <input
             type="text"
             value={value}
-            placeholder={"Enter text"}
+            placeholder={`Enter ${(label) ? label : "text"}`}
             className={`form-control p-3 bg-body`}
             onChange={(e) => changeInput(e)}
         />

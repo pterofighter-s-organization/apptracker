@@ -88,6 +88,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
                         <TextInput
                             value={formData["title"]}
                             updateValue={formHelpers.setInputData(setFormData, "title")}
+                            label={"title"}
                         />
                         <FormFieldFooter
                             footer={"Enter the task to be reminded."}
