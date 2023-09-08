@@ -25,6 +25,7 @@ export default function NewApplicationForm() {
 
     const [formData, setFormData] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [errorModalMessage, setErrorModalMessage] = useState("")
 
     const { application, createApplication, errorMsgs, isLoading } = useApplicationManager(null)
 
@@ -65,8 +66,9 @@ export default function NewApplicationForm() {
             "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),
             "date_created": dateTimeUtils.findTodayUTCDate(),
             "date_edited": dateTimeUtils.findTodayUTCDate(),
-        }).then((status) => {
-            setShowSuccessModal(status)
+        }).then((response) => {
+            setShowSuccessModal(response.status)
+            setErrorModalMessage(response.errorModalMessage)
         })
     }
 
@@ -153,7 +155,7 @@ export default function NewApplicationForm() {
                 modalId={"new-form"}
                 messages={{
                     success: "Submitted! You may stay to track more apps or locate to the application.",
-                    error: "Please check the invalid fields and correct them.",
+                    error: errorModalMessage,
                 }}
                 buttonLabel={"Go to app"}
                 route={"/application/" + ((application) ? application.application_id : "")}

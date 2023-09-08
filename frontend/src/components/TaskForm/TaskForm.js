@@ -21,6 +21,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
 
     const [formData, setFormData] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [errorModalMessage, setErrorModalMessage] = useState("")
 
     useEffect(() => {
         const dateDueData = initializers.dateInfoInitializer(null, "due")
@@ -47,8 +48,9 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
             "position": application.position,
             "section": "",
             "priority": 0,
-        }).then(status => {
-            setShowSuccessModal(status)
+        }).then((response) => {
+            setShowSuccessModal(response.status)
+            setErrorModalMessage(response.errorModalMessage)
         })
     }
 
@@ -125,7 +127,7 @@ export default function TaskForm({ createNewTask, application, errorMsgs }) {
                     modalId={modalId}
                     messages={{
                         success: "New task submitted!",
-                        error: "Please check the invalid fields and correct them."
+                        error: errorModalMessage
                     }}
                     closeModal={closeModal}
                     showSuccessModal={showSuccessModal}

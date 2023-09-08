@@ -49,36 +49,43 @@ export default function useApplicationManager(id) {
         const { application_id } = app
         //assign to a new reference
         const newErrorMsgs = Object.assign(errorMessages, {})
-        console.log(app)
+        // console.log(app)
 
         //dont need to do loading here because useeffect for status update wont be triggered
         try {
             const response = await api.applicationAPI.updateApplication(application_id, app)
             setApplication(response.data)
             setErrorMsgs(newErrorMsgs)
-            return true
+            return {
+                status: true,
+                errorMessage: null
+            }
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error, newErrorMsgs)
+            const ifHumanErrors = formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
-            return false
+            return formHelpers.findErrorModalMessage(error, ifHumanErrors)
         }
     }
 
     async function createApplication(app) {
 
+        //assign a new reference, {} is the new ref, so the usestate updates
         const newErrorMsgs = Object.assign(errorMessages, {})
-        console.log(app)
+        // console.log(app)
         try {
             const response = await api.applicationAPI.createApplication(app)
             setApplication(response.data)
             setErrorMsgs(newErrorMsgs)
-            return true
+            return {
+                status: true,
+                errorMessage: null
+            }
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error, newErrorMsgs)
+            const ifHumanErrors = formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
-            return false
+            return formHelpers.findErrorModalMessage(error, ifHumanErrors)
         }
     }
 

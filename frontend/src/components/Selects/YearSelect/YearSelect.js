@@ -8,9 +8,9 @@ export default function YearSelect({ value, updateValue }) {
     function selectYearValues() {
         const res = []
         const todayDateTime = dateTimeUtils.findTodayUTCDate()
-        const pstDateTime = dateTimeUtils.convertUTCtoPST(todayDateTime)
+        const localDateTime = dateTimeUtils.convertUTCtoLocal(todayDateTime)
         // console.log(todayDateTime.split(" ")[0].split("-")[2])
-        const currentYearInInt = parseInt(pstDateTime.split("T")[0].split("-")[0])
+        const currentYearInInt = parseInt(localDateTime.split("T")[0].split("-")[0])
 
         for (let num = currentYearInInt - 5; num <= currentYearInInt + 10; num += 1) {
             res.push(num.toString())

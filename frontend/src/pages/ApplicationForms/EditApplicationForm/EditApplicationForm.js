@@ -23,6 +23,7 @@ export default function EditApplicationForm() {
 
     const [formData, setFormData] = useState(null)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [errorModalMessage, setErrorModalMessage] = useState("")
 
     const { application, updateApplication, errorMsgs, isLoading } = useApplicationManager(parseInt(id))
 
@@ -70,8 +71,9 @@ export default function EditApplicationForm() {
             "date_applied": dateTimeUtils.convertInputToISO(formData, "applied"),
             "date_created": application.date_created,
             "date_edited": dateTimeUtils.findTodayUTCDate()
-        }).then((status) => {
-            setShowSuccessModal(status)
+        }).then((response) => {
+            setShowSuccessModal(response.status)
+            setErrorModalMessage(response.errorModalMessage)
         })
     }
 
@@ -157,7 +159,7 @@ export default function EditApplicationForm() {
                 modalId={"edit-form"}
                 messages={{
                     success: "Saved! You may stay to keep editing or locate back to the application.",
-                    error: "Please check the invalid fields and correct them.",
+                    error: errorModalMessage,
                 }}
                 buttonLabel={"Back to app"}
                 route={"/application/" + application.application_id}

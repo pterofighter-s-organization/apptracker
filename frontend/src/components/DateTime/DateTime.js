@@ -4,8 +4,8 @@ import * as dateTimeUtils from "../../utils/dateTimeUtils";
 
 export default function DateTime({ dateTime }) {
 
-    const pstDateTime = dateTimeUtils.convertUTCtoPST(dateTime)
-    const dateTimeObj = dateTimeUtils.convertISOtoDate(pstDateTime).split(" ")
+    const localDateTime = dateTimeUtils.convertUTCtoLocal(dateTime)
+    const dateTimeObj = dateTimeUtils.convertISOtoDate(localDateTime).split(" ")
     const date = dateTimeObj[0]
     const time = dateTimeObj[1]
 
