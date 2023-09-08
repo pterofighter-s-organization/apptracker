@@ -54,7 +54,7 @@ export default function TaskTable({ tasks, updateTask, isArchived }) {
                             scope="row"
                             key={count++}
                         >
-                            {count++}
+                            #
                         </th>
                         <td></td>
                         <td>{(!isArchived) ? "No tasks found! Track a new one inside an application" : "No archived tasks"}</td>

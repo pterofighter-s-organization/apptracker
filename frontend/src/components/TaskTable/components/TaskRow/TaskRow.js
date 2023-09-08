@@ -8,7 +8,7 @@ import { Timer } from '../../../Timer'
 import * as dateTimeUtils from '../../../../utils/dateTimeUtils';
 
 
-export default function TaskRow({ count, task, updateTask }) {
+export default function TaskRow({ task, updateTask }) {
 
     const colorsMapPriority = {
         0: {
