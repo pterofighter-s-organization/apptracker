@@ -116,7 +116,7 @@ python -m manage migrate trackerapp
 ### Step 4: Only For Replacing Old Db With New Db
 This is to clean up an existing database. Skip this if you're newly setting up the database.
 - Go to mongoDBCompass app and connect to localhost 27017.
-- Find apptracker database then drop it by clciking the trashbin icon.
+- Find apptracker database then drop it by clicking the trashbin icon.
 - Go to migration folder inside backend/trackerapp folder and delete 0.0001 py
 - Repeat steps from 1 to 3.
 

@@ -25,8 +25,21 @@ export default function useTasksManager() {
         }
     }
 
+    async function updateTask(task) {
+
+        try {
+            const response = await api.taskAPI.updateTask(task.task_id, task)
+            setTasks(prev => prev.map((item) => (item.task_id === response.data.task_id) ? response.data : item))
+            return
+        } catch (error) {
+            console.log(error)
+            return
+        }
+    }
+
     return {
         tasks,
+        updateTask,
         isLoading
     }
 }

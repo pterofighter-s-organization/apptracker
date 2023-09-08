@@ -27,7 +27,7 @@ class NotesSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Task 
-        fields = ('task_id', 'application_id', 'title', 'date_due', 'company', 'position', 'priority', 'section')
+        fields = ('task_id', 'application_id', 'title', 'date_due', 'company', 'position', 'priority', 'section', 'archived')
         extra_kwargs = {
             'date_due': {
                 'error_messages': {
