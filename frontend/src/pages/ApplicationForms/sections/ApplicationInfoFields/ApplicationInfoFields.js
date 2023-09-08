@@ -23,9 +23,10 @@ export default function ApplicationInfoFields({ formData, setFormData, errorMsgs
                         <TextInput
                             value={formData["position"]}
                             updateValue={formHelpers.setInputData(setFormData, "position")}
+                            label={"position"}
                         />
                         <FormFieldFooter
-                            footer={"Ex. (Software engineer, web engineer, etc..)"}
+                            footer={"Ex. (Software engineer, Web engineer, etc..)"}
                             errorMessage={errorMsgs["position"]}
                             isError={errorMsgs["position"].length > 0}
                         />
@@ -36,6 +37,7 @@ export default function ApplicationInfoFields({ formData, setFormData, errorMsgs
                         <TextInput
                             value={formData["company"]}
                             updateValue={formHelpers.setInputData(setFormData, "company")}
+                            label={"company"}
                         />
                         <FormFieldFooter
                             footer={"Ex. (Google, Amazon, Microsoft, etc..)"}
@@ -49,6 +51,7 @@ export default function ApplicationInfoFields({ formData, setFormData, errorMsgs
                         <TextInput
                             value={formData["salary"]}
                             updateValue={formHelpers.setInputData(setFormData, "salary")}
+                            label={"salary"}
                         />
                         <FormFieldFooter
                             footer={"Ex. (90k-100k)"}

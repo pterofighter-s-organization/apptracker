@@ -51,12 +51,15 @@ export default function useAppTasksManager(id) {
             const response = await api.taskAPI.createTask(task)
             setTasks([...current, response.data])
             setErrorMsgs(newErrorMsgs)
-            return true
+            return {
+                status: true,
+                errorModalMessage: null
+            }
         } catch (error) {
             console.log(error)
-            formHelpers.findErrorMessages(error, newErrorMsgs)
+            const ifHumanErrors = formHelpers.findErrorMessages(error, newErrorMsgs)
             setErrorMsgs(newErrorMsgs)
-            return false
+            return formHelpers.findErrorModalMessage(error, ifHumanErrors)
         }
     }
 
