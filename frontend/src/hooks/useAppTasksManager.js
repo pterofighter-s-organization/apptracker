@@ -40,6 +40,18 @@ export default function useAppTasksManager(id) {
         }
     }
 
+    async function updateAppTask(task) {
+
+        try {
+            const response = await api.taskAPI.updateTask(task.task_id, task)
+            setTasks(prev => prev.map((item) => (item.task_id === response.data.task_id) ? response.data : item))
+            return
+        } catch (error) {
+            console.log(error)
+            return
+        }
+    }
+
     async function createNewTask(task) {
 
         const current = tasks
@@ -65,6 +77,7 @@ export default function useAppTasksManager(id) {
 
     return {
         tasks,
+        updateAppTask,
         createNewTask,
         errorMsgs,
         isLoading

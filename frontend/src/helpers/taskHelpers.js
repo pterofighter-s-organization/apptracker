@@ -17,8 +17,12 @@ export function categorizeTasks(tasks){
 
     tasks.forEach((task) => {
         const res = dateTimeUtils.compareDates(today, task.date_due)
+
         //1 meaning the the date due is before today
         if(res === 1){
+            task.type = "expired"
+            archivedTasks.push(task)
+        }else if(task.archived){
             archivedTasks.push(task)
         }else{
             relevantTasks.push(task)

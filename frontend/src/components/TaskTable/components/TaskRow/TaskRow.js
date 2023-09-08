@@ -8,7 +8,7 @@ import { Timer } from '../../../Timer'
 import * as dateTimeUtils from '../../../../utils/dateTimeUtils';
 
 
-export default function TaskRow({ count, task }) {
+export default function TaskRow({ count, task, updateTask }) {
 
     const colorsMapPriority = {
         0: {
@@ -21,6 +21,11 @@ export default function TaskRow({ count, task }) {
             textColor: "dark",
             opacity: "100",
         },
+    }
+
+    function updateArchiveStatus() {
+        task.archived = !task.archived
+        updateTask(task)
     }
 
     const paddingTestVal = "0.5vw"
@@ -44,7 +49,45 @@ export default function TaskRow({ count, task }) {
                     className={`${rowSharedCSS} border-5 border-start-0`}
                     style={{ padding: `${paddingTestVal}` }}
                 >
-                    {count}
+                    {task.type && task.type === "expired" ?
+                        <i
+                            type="button"
+                            className="bi bi-stopwatch fs-5"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            title={"Task expired"}
+                        ></i>
+                        :
+                        <>
+                            {task.priority === 0 ?
+                                <button
+                                    type="button"
+                                    className="btn p-0 fs-5"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        updateArchiveStatus()
+                                    }}
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="right"
+                                    title={(!task.archived) ? "Archived this reminder to archived board" : "Restore this reminder for this app"}
+                                >
+                                    {!task.archived ?
+                                        <i className="bi bi-x-lg"></i>
+                                        :
+                                        <i className="bi bi-arrow-clockwise"></i>
+                                    }
+                                </button>
+                                :
+                                <i
+                                    type="button"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="right"
+                                    title="Task urgent"
+                                    class="bi bi-alarm fs-5"
+                                ></i>
+                            }
+                        </>
+                    }
                 </th>
                 {/* position and company name */}
                 <td

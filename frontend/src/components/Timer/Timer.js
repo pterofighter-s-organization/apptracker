@@ -15,6 +15,9 @@ export default function Timer({ start, end }) {
         const daysLeft = timeDiffObj.daysLeft
         const hoursLeft = timeDiffObj.hoursLeft
         const minutesLeft = timeDiffObj.minutesLeft
+        const secondsLeft = timeDiffObj.secondsLeft
+
+        console.log(secondsLeft)
 
         if (yearsLeft >= 1) {
             if(monthsLeft === 1){
@@ -41,9 +44,11 @@ export default function Timer({ start, end }) {
                 return resultFormatter(minutesLeft, "min left")
             }
             return resultFormatter(minutesLeft, "mins left")
+        } if (secondsLeft >= 0) {
+            return "Do Now"
         }
 
-        return "Do Now"
+        return "Expired"
     }
 
     return (

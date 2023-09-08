@@ -15,7 +15,7 @@ import * as taskHelpers from "../../../../helpers/taskHelpers"
 
 export default function ApplicationTasks({ application, isArchived }) {
 
-    const { tasks, createNewTask, errorMsgs, isLoading } = useAppTasksManager(application.application_id)
+    const { tasks, createNewTask, updateAppTask, errorMsgs, isLoading } = useAppTasksManager(application.application_id)
 
     const combinedTasks = useMemo(() => {
         const extraTasks = (!isArchived) ? taskHelpers.findExtraTasks(application) : []
@@ -39,6 +39,7 @@ export default function ApplicationTasks({ application, isArchived }) {
                 <div className="table-responsive fs-6" id="app-tasktable">
                     <TaskTable
                         tasks={combinedTasks}
+                        updateTask={updateAppTask}
                         isArchived={isArchived}
                     />
                 </div>

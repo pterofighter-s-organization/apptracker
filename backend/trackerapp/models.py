@@ -58,3 +58,4 @@ class Task(models.Model):
     position = models.CharField(max_length=255)
     section = models.CharField(max_length=255, blank=True, null=True)
     priority = models.IntegerField()
+    archived = models.BooleanField(default=False)
