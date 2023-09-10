@@ -6,6 +6,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer, TaskSerializer
 from .models import Users, Application, Notes, Task
+import bcrypt
 
 # Create your views here.
 def index(request):
@@ -63,12 +64,15 @@ def user_list(request):
         return JsonResponse(users_serializer.data, safe=False)
     elif request.method == 'POST':
         users_data = JSONParser().parse(request)
+        print("before", users_data)
+        users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        print("after", users_data)
         users_serializer = UsersSerializer(data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def users_detail(request, pk):
@@ -176,6 +180,8 @@ def task_list_application(request, app_id):
     if request.method  == 'GET':
         tasks_serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(tasks_serializer.data, safe=False)
+
+
 
 # class UsersView(viewsets.ModelViewSet):
 #     serializer_class = UsersSerializer
