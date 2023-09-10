@@ -29,7 +29,7 @@ export default function ApplicationNotes({ application, isArchived }) {
                 )
             })}
             <button
-                className={`btn btn-primary d-flex flex-column justify-content-center align-items-center p-4 ${"add-form-button"}`}
+                className={`btn btn-primary d-flex flex-column justify-content-center align-items-center p-4 ${"item-add-display-button"}`}
                 onClick={(e) => {
                     e.preventDefault()
                     //archived automatically is false
@@ -39,7 +39,7 @@ export default function ApplicationNotes({ application, isArchived }) {
                     })
                 }}
             >
-                <div className="form-button-label">
+                <div className="display-button-label">
                     {categorizedNotes.length > 0 ?
                         "Add Note"
                         :

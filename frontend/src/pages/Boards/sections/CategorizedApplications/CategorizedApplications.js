@@ -57,9 +57,9 @@ export default function CategorizedApplications({ applications, updateApplicatio
                     {!isArchived ?
                         <Link
                             to="/application/new/interested"
-                            className={`btn btn-primary d-flex align-items-center justify-content-center p-4 ${"add-form-button"}`}
+                            className={`btn btn-primary d-flex align-items-center justify-content-center p-4 ${"item-add-display-button"}`}
                         >
-                            <div className="form-button-label">
+                            <div className="display-button-label">
                                 Start tracking applications
                             </div>
                         </Link>
