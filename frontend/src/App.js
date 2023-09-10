@@ -7,6 +7,8 @@ import { PinnedApplications } from './pages/PinnedApplications';
 import { ApplicationDetails } from './pages/ApplicationDetails'
 import { EditApplicationForm } from './pages/ApplicationForms/EditApplicationForm';
 import { NewApplicationForm } from './pages/ApplicationForms/NewApplicationForm';
+import { LoginForm } from './pages/AccountForms/LoginForm';
+import { SignUpForm } from './pages/AccountForms/SignUpForm';
 
 //layouts
 import { PageLayout } from './layouts/PageLayout';
@@ -29,6 +31,8 @@ export default function App() {
               <Route exact path="/application/:id" element={<ApplicationDetails />} />
               <Route exact path="/application/edit/:id" element={<EditApplicationForm />} />
               <Route exact path="/application/new/:givenStatus" element={<NewApplicationForm />} />
+              <Route exact path="/login" element={<LoginForm/>} />
+              <Route exact path="/signup" element={<SignUpForm/>} />
             </Routes>
           </PageLayout>
         </div>

@@ -62,9 +62,9 @@ export default function PinnedApplications() {
                         :
                         <Link
                             to="/application/new/interested"
-                            className={`btn btn-primary d-flex align-items-center justify-content-center fs-5 p-4 ${"add-form-button"}`}
+                            className={`btn btn-primary d-flex align-items-center justify-content-center fs-5 p-4 ${"item-add-display-button"}`}
                         >
-                            <div className="form-button-label">
+                            <div className="display-button-label">
                                 Start tracking interested applications
                             </div>
                         </Link>

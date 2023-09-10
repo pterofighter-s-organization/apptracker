@@ -14,7 +14,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'date_applied': {
                 'error_messages': {
-                    'null': 'Please select every date elements before submitting.',
+                    'null': 'Please select all date elements before submitting.',
                 }
             }
         }
@@ -31,7 +31,7 @@ class TaskSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'date_due': {
                 'error_messages': {
-                    'null': 'Please select every date elements before submitting.',
+                    'null': 'Please select all date elements before submitting.',
                 }
             }
         }

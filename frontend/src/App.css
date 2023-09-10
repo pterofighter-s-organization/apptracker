@@ -1,5 +1,6 @@
 /* share between css files inside its tree - this is the root file */
 :root {
+    /* commented out because its too big for smaller screen sizes, no need atm. */
     --fs-button-xl: calc(1rem * 1.15);
     --fs-button-xs: calc(1rem);
 }
@@ -10,10 +11,10 @@
 }
 
 @media (min-width: 680px) {
-    .form-button-label{
+    .display-button-label{
         font-size: var(--fs-button-xl);
     }
-    .add-form-button{
+    .item-add-display-button{
         height: 300px;
         width: min(315px);
     }
@@ -21,10 +22,10 @@
 
 /* 680px 768px */
 @media (max-width: 680px) {
-    .form-button-label{
+    .display-button-label{
         font-size: var(--fs-button-xs);
     }
-    .add-form-button{
+    .item-add-display-button{
         height: auto;
         width: 100%;
     }
