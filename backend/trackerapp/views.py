@@ -6,6 +6,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer, TaskSerializer
 from .models import Users, Application, Notes, Task
+import bcrypt
 
 # Create your views here.
 def index(request):
@@ -50,6 +51,10 @@ def application_detail(request, pk):
                 application_serializer.save()
                 return JsonResponse(application_serializer.data)
             return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'DELETE':
+            item_to_delete = Application.objects.get(pk=pk)
+            item_to_delete.delete()
+            return JsonResponse({'message': 'Application was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Application.DoesNotExist:
         return JsonResponse({'message': 'The application does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -63,12 +68,15 @@ def user_list(request):
         return JsonResponse(users_serializer.data, safe=False)
     elif request.method == 'POST':
         users_data = JSONParser().parse(request)
+        print("before", users_data)
+        users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        print("after", users_data)
         users_serializer = UsersSerializer(data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def users_detail(request, pk):
@@ -87,6 +95,10 @@ def users_detail(request, pk):
                 users_serializer.save()
                 return JsonResponse(users_serializer.data)
             return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'DELETE':
+            item_to_delete = Users.objects.get(pk=pk)
+            item_to_delete.delete()
+            return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -123,6 +135,10 @@ def notes_detail(request, pk):
                 notes_serializer.save()
                 return JsonResponse(notes_serializer.data)
             return JsonResponse(notes_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'DELETE':
+            item_to_delete = Notes.objects.get(pk=pk)
+            item_to_delete.delete()
+            return JsonResponse({'message': 'Note was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -166,6 +182,10 @@ def task_detail(request, pk):
                 task_serializer.save()
                 return JsonResponse(task_serializer.data)
             return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'DELETE':
+            item_to_delete = Task.objects.get(pk=pk)
+            item_to_delete.delete()
+            return JsonResponse({'message': 'Task was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -176,6 +196,8 @@ def task_list_application(request, app_id):
     if request.method  == 'GET':
         tasks_serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(tasks_serializer.data, safe=False)
+
+
 
 # class UsersView(viewsets.ModelViewSet):
 #     serializer_class = UsersSerializer
