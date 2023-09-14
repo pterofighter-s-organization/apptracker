@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { FormFieldHeader } from "../../../components/FormFieldHeader"
 import { FormFieldFooter } from "../../../components/FormFieldFooter"
 import { TextInput } from "../../../components/Inputs/TextInput"
+import { ConfidentialInput } from "../../../components/Inputs/ConfidentialInput"
 
 //helpers
 import * as formHelpers from "../../../helpers/formHelpers"
@@ -65,7 +66,7 @@ export default function LoginForm({ }) {
 
                         <div className="d-flex flex-column gap-3">
                             <FormFieldHeader header={"Password"} isRequired={true} />
-                            <TextInput
+                            <ConfidentialInput
                                 value={formData["password"]}
                                 updateValue={formHelpers.setInputData(setFormData, "password")}
                                 label={"password"}
@@ -83,7 +84,7 @@ export default function LoginForm({ }) {
                             Login
                         </button>
                         <Link to="/signup" type="button" className="btn btn-outline-secondary p-3 text-center">
-                            Get Started
+                            Get Started with a New Account
                         </Link>
                     </div>
                 </div>
