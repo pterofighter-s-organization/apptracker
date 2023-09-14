@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { FormFieldHeader } from "../../../components/FormFieldHeader"
 import { FormFieldFooter } from "../../../components/FormFieldFooter"
 import { TextInput } from "../../../components/Inputs/TextInput"
+import { ConfidentialInput } from "../../../components/Inputs/ConfidentialInput"
 
 //helpers
 import * as formHelpers from "../../../helpers/formHelpers"
@@ -15,15 +16,15 @@ export default function SignUpForm({ }) {
 
     const errorMsgs = {
         "username": "",
-        "password": "",
-        "retypedPassword": ""
+        "newPassword": "",
+        "confirmedPassword": ""
     }
 
     useEffect(() => {
         const basicFormData = {
             "username": "",
-            "password": "",
-            "retypedPassword": ""
+            "newPassword": "",
+            "confirmedPassword": ""
         }
 
         setFormData(basicFormData)
@@ -65,29 +66,29 @@ export default function SignUpForm({ }) {
                             />
                         </div>
                         <div className="d-flex flex-column gap-3">
-                            <FormFieldHeader header={"Set up a password"} isRequired={true} />
-                            <TextInput
-                                value={formData["password"]}
-                                updateValue={formHelpers.setInputData(setFormData, "password")}
-                                label={"password"}
+                            <FormFieldHeader header={"Set a new password"} isRequired={true} />
+                            <ConfidentialInput
+                                value={formData["newPassword"]}
+                                updateValue={formHelpers.setInputData(setFormData, "newPassword")}
+                                label={"new password"}
                             />
                             <FormFieldFooter
                                 footer={"Enter your account password."}
-                                errorMessage={errorMsgs["password"]}
-                                isError={errorMsgs["password"].length > 0}
+                                errorMessage={errorMsgs["newPassword"]}
+                                isError={errorMsgs["newPassword"].length > 0}
                             />
                         </div>
                         <div className="d-flex flex-column gap-3">
                             <FormFieldHeader header={"Confirm password"} isRequired={true} />
-                            <TextInput
-                                value={formData["retypedPassword"]}
-                                updateValue={formHelpers.setInputData(setFormData, "retypedPassword")}
-                                label={"the same password"}
+                            <ConfidentialInput
+                                value={formData["confirmedPassword"]}
+                                updateValue={formHelpers.setInputData(setFormData, "confirmedPassword")}
+                                label={"to confirm password"}
                             />
                             <FormFieldFooter
-                                footer={"Retype your password to ensure."}
-                                errorMessage={errorMsgs["retypedPassword"]}
-                                isError={errorMsgs["retypedPassword"].length > 0}
+                                footer={"Retype your password to confirm."}
+                                errorMessage={errorMsgs["confirmedPassword"]}
+                                isError={errorMsgs["confirmedPassword"].length > 0}
                             />
                         </div>
 
