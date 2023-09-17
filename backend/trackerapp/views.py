@@ -68,9 +68,7 @@ def user_list(request):
         return JsonResponse(users_serializer.data, safe=False)
     elif request.method == 'POST':
         users_data = JSONParser().parse(request)
-        print("before", users_data)
         users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        print("after", users_data)
         users_serializer = UsersSerializer(data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
@@ -99,6 +97,18 @@ def users_detail(request, pk):
             item_to_delete = Users.objects.get(pk=pk)
             item_to_delete.delete()
             return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    except Users.DoesNotExist:
+        return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+def user_authenticate(request):
+    try:
+        user_data = JSONParser().parse(request)
+        user = Users.objects.get(username=user_data['username'])
+        password_matches = bcrypt.checkpw(user_data['password'].encode('utf-8'), user.password.encode('utf-8'))
+        if password_matches:
+            return JsonResponse({'message': 'password matches'}, status=status.HTTP_200_OK)
+        return JsonResponse({'message': 'password does not match'}, status=status.HTTP_401_UNAUTHORIZED)
     except Users.DoesNotExist:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
