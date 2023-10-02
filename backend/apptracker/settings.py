@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
+AUTH_USER_MODEL = "trackerapp.Users"
+
 # CORS_ORIGIN_WHITELIST = [
 #      'https://localhost:3000'
 # ]
