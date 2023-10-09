@@ -86,7 +86,26 @@ def user_list(request):
         return JsonResponse({"username":user.username,"password": user.password},status=status.HTTP_201_CREATED)
 
 
-
+#TODO: maybe change this in the future to take a session token 
+#to do stuff after adding the authenticate function
+#check if password actually changes
+@api_view(['GET', 'PUT', 'DELETE'])
+def users_detail(request, pk):
+    try:
+        user = User.objects.get(id = pk)
+        if request.method == 'GET':
+            return JsonResponse({"username":user.username,"email": user.email,"password": user.password},status=status.HTTP_201_CREATED)
+        if request.method == 'PUT':
+            users_data = JSONParser().parse(request)
+            if 'email' in users_data:
+                user.email = users_data['email']
+            if 'password' in users_data:
+                user.set_password = users_data['password']
+            user_json = {"username": user.username, "email": user.email, "password": user.password}
+            user.save()
+            return JsonResponse(user_json)
+    except:
+        return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def users_detail(request, pk):
