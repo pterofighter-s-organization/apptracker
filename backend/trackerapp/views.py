@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 # from trackerapp.models import Users
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
@@ -106,6 +107,18 @@ def users_detail(request, pk):
             return JsonResponse(user_json)
     except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST', 'DELETE'])
+def users_login(request):
+    if request.method == 'POST':
+        users_data = JSONParser().parse(request)
+        user = authenticate(username = users_data['username'], password = users_data['password'])
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return JsonResponse({'message': 'Successfully logined'}, status=status.HTTP_200_OK)
+        return JsonResponse({'message': 'Wrong username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+    return JsonResponse({'message': 'No clue what happened'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def users_detail(request, pk):
