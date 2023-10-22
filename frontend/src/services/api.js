@@ -29,10 +29,18 @@ const noteAPI = {
     updateNote: (note_id, note) => apiClient.put('/notes/'+ note_id, note)
 }
 
+const userAPI = {
+    getUsers: () => apiClient.get('/users'),
+    getUser: () => apiClient.get('/user'),
+    createUser: (user) => apiClient.post('/user'),
+    updateUser: (user_id, user) => apiClient.put('/user'),
+}
+
 const APIs = {
     applicationAPI,
     taskAPI,
-    noteAPI
+    noteAPI,
+    userAPI
 }
 
 export default APIs

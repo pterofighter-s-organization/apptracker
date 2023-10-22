@@ -58,7 +58,7 @@ export default function useApplicationManager(id) {
             setErrorMsgs(newErrorMsgs)
             return {
                 status: true,
-                errorMessage: null
+                errorModalMessage: null
             }
         } catch (error) {
             console.log(error)
@@ -75,6 +75,7 @@ export default function useApplicationManager(id) {
         // console.log(app)
         try {
             const response = await api.applicationAPI.createApplication(app)
+            console.log(response)
             setApplication(response.data)
             setErrorMsgs(newErrorMsgs)
             return {

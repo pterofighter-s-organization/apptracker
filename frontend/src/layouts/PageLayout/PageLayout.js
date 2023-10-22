@@ -30,6 +30,8 @@ export default function PageLayout({ children }) {
         }
     }, [windowWidth])
 
+    console.log("test")
+
     return (
         <div className="d-flex flex-column flex-xl-row w-100" style={{ backgroundColor: "#FAF9F6" }}>
             {sideBarShow ?

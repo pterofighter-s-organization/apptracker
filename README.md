@@ -55,32 +55,27 @@ Stay inside apptracker directory, this is where we install the appropriate tools
 - Use the following installation commands inside the environment.  
 ```
 pipenv sync
+pip install certifi
 pip install djongo
 pip install --force-reinstall -v "Pymongo==3.12.3"
 ```
 - Do command ```pip list``` to check the following tool versions
 ```
 Package             Version
-------------------- --------
+------------------- ---------
 asgiref             3.7.0
-certifi             2023.5.7
-distlib             0.3.6
-Django              4.1.9
+bcrypt              4.0.1
+certifi             2023.7.22
+Django              4.1.11
 django-cors-headers 4.0.0
 djangorestframework 3.14.0
 djongo              1.3.6
 dnspython           2.3.0
-filelock            3.12.0
 pip                 23.1.2
-pipenv              2023.6.2
-platformdirs        3.5.1
 pymongo             3.12.3
 pytz                2023.3
-setuptools          67.7.2
+setuptools          67.8.0
 sqlparse            0.2.4
-tzdata              2023.3
-virtualenv          20.23.0
-virtualenv-clone    0.5.7
 wheel               0.40.0
 ```
 Everything doesn't have to be exact versions except,

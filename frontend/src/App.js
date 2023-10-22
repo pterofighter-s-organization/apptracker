@@ -13,10 +13,15 @@ import { SignUpForm } from './pages/AccountForms/SignUpForm';
 //layouts
 import { PageLayout } from './layouts/PageLayout';
 
+//hooks
+import useUserManager from './hooks/useUserManager';
+
 //css
 import './App.css'
 
 export default function App() {
+
+  //add users here
 
   return (
     // mimic footer with pb-5
@@ -31,8 +36,8 @@ export default function App() {
               <Route exact path="/application/:id" element={<ApplicationDetails />} />
               <Route exact path="/application/edit/:id" element={<EditApplicationForm />} />
               <Route exact path="/application/new/:givenStatus" element={<NewApplicationForm />} />
-              <Route exact path="/login" element={<LoginForm/>} />
-              <Route exact path="/signup" element={<SignUpForm/>} />
+              <Route exact path="/login" element={<LoginForm />} />
+              <Route exact path="/signup" element={<SignUpForm />} />
             </Routes>
           </PageLayout>
         </div>

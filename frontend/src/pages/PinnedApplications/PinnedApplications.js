@@ -51,8 +51,9 @@ export default function PinnedApplications() {
                 {!appsLoading ?
                     categorizedApps.length > 0 ?
                         <div className="d-flex flex-wrap justify-content-evenly justify-content-xl-start gap-3 gap-xl-4" id="interested-apps">
-                            {categorizedApps.map((app) => (
+                            {categorizedApps.map((app, index) => (
                                 <ApplicationCard
+                                    key={index}
                                     application={app}
                                     updateApplication={updateApplication}
                                     isArchived={isArchived}

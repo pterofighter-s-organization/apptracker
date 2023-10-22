@@ -17,8 +17,6 @@ export default function Timer({ start, end }) {
         const minutesLeft = timeDiffObj.minutesLeft
         const secondsLeft = timeDiffObj.secondsLeft
 
-        console.log(secondsLeft)
-
         if (yearsLeft >= 1) {
             if(monthsLeft === 1){
                 return resultFormatter(yearsLeft, "year left")
