@@ -8,12 +8,7 @@ import * as formHelpers from "../helpers/formHelpers"
 
 export default function useUserManager() {
 
-    const [user, setUser] = useState({
-        "email": "test234@email.com",
-        "username": "",
-        "password": ""
-
-    })
+    const [user, setUser] = useState(null)
 
     const [errorMsgs, setErrorMsgs] = useState({
         email: "",
@@ -25,12 +20,12 @@ export default function useUserManager() {
 
     // const [isLoading, setIsLoading] = useState(false)
 
-    const getUser = (user) => {
+    const loginUser = (user) => {
 
         const newErrorMsgs = Object.assign(errorMsgs, {})
 
         try {
-            const response = api.userAPI.getUser(user)
+            const response = api.userAPI.loginUser(user)
             setUser(response.data)
             setErrorMsgs(newErrorMsgs)
             return {
@@ -67,7 +62,7 @@ export default function useUserManager() {
 
     return{
         user,
-        getUser,
+        loginUser,
         createUser,
         errorMsgs,
     }

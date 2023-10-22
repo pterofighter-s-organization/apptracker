@@ -9,17 +9,19 @@ import { ConfidentialInput } from "../../../components/Inputs/ConfidentialInput"
 
 //helpers
 import * as formHelpers from "../../../helpers/formHelpers"
+import useUserManager from "../../../hooks/useUserManager"
 
 export default function LoginForm({ }) {
-
+    const {errorMsgs,loginUser} = useUserManager()
     const [formData, setFormData] = useState(null)
 
-    const errorMsgs = {
-        "username": "",
-        "password": ""
+    function submitLogin(event){
+        event.preventDefault()
+        loginUser(formData)
     }
 
     useEffect(() => {
+        
         const basicFormData = {
             "username": "",
             "password": "",
@@ -80,7 +82,7 @@ export default function LoginForm({ }) {
 
                     </div>
                     <div className="d-flex flex-column gap-3">
-                        <button type="button" className="btn btn-primary p-3 text-center">
+                        <button type="button" onClick={(e)=>submitLogin(e)} className="btn btn-primary p-3 text-center">
                             Login
                         </button>
                         <Link to="/signup" type="button" className="btn btn-outline-secondary p-3 text-center">

@@ -30,8 +30,7 @@ const noteAPI = {
 }
 
 const userAPI = {
-    getUsers: () => apiClient.get('/users'),
-    getUser: () => apiClient.get('/user'),
+    loginUser: (user) => apiClient.post('/login', user),
     createUser: (user) => apiClient.post('/user'),
     updateUser: (user_id, user) => apiClient.put('/user'),
 }
