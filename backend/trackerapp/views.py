@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from trackerapp.models import Users
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+# from trackerapp.models import Users
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .serializers import UsersSerializer, ApplicationSerializer, NotesSerializer, TaskSerializer
-from .models import Users, Application, Notes, Task
+from .serializers import ApplicationSerializer, NotesSerializer, TaskSerializer#, UserSerializer
+from .models import Application, Notes, Task#, Users
 import bcrypt
 
 # Create your views here.
@@ -58,49 +60,101 @@ def application_detail(request, pk):
     except Application.DoesNotExist:
         return JsonResponse({'message': 'The application does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
+# Olde User method
+# @api_view(['GET', 'POST', 'DELETE'])
+# def user_list(request):
+#     #get list of applications, POST a new application, DELETE all users
+#     if request.method == 'GET':
+#         users = Users.objects.all()
+#         users_serializer = UsersSerializer(users, many=True)
+#         return JsonResponse(users_serializer.data, safe=False)
+#     elif request.method == 'POST':
+#         users_data = JSONParser().parse(request)
+#         users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+#         users_serializer = UsersSerializer(data=users_data)
+#         if users_serializer.is_valid():
+#             users_serializer.save()
+#             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
+#         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
-    #get list of applications, POST a new application, DELETE all users
-    if request.method == 'GET':
-        users = Users.objects.all()
-        users_serializer = UsersSerializer(users, many=True)
-        return JsonResponse(users_serializer.data, safe=False)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         users_data = JSONParser().parse(request)
-        print("before", users_data)
-        users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        print("after", users_data)
-        users_serializer = UsersSerializer(data=users_data)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        username = users_data['username']
+        password = users_data['password']
+        user = User.objects.create_user(username=username, password=password)
+        return JsonResponse({"username":user.username,"password": user.password},status=status.HTTP_201_CREATED)
 
 
+#TODO: maybe change this in the future to take a session token 
+#to do stuff after adding the authenticate function
+#check if password actually changes
 @api_view(['GET', 'PUT', 'DELETE'])
 def users_detail(request, pk):
-    #find application by pk 
     try:
-        user = Users.objects.get(pk=pk)
-        #get an application
+        user = User.objects.get(id = pk)
         if request.method == 'GET':
-            users_serializer = UsersSerializer(user)
-            return JsonResponse(users_serializer.data)
-        #update an user 
-        elif request.method == 'PUT':
+            return JsonResponse({"username":user.username,"email": user.email,"password": user.password},status=status.HTTP_201_CREATED)
+        if request.method == 'PUT':
             users_data = JSONParser().parse(request)
-            users_serializer = UsersSerializer(user,data=users_data)
-            if users_serializer.is_valid():
-                users_serializer.save()
-                return JsonResponse(users_serializer.data)
-            return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        elif request.method == 'DELETE':
-            item_to_delete = Users.objects.get(pk=pk)
-            item_to_delete.delete()
-            return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    except Users.DoesNotExist:
+            if 'email' in users_data:
+                user.email = users_data['email']
+            if 'password' in users_data:
+                user.set_password = users_data['password']
+            user_json = {"username": user.username, "email": user.email, "password": user.password}
+            user.save()
+            return JsonResponse(user_json)
+    except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST', 'DELETE'])
+def users_login(request):
+    if request.method == 'POST':
+        users_data = JSONParser().parse(request)
+        user = authenticate(username = users_data['username'], password = users_data['password'])
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return JsonResponse({'message': 'Successfully logined'}, status=status.HTTP_200_OK)
+        return JsonResponse({'message': 'Wrong username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+    return JsonResponse({'message': 'No clue what happened'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# @api_view(['GET', 'PUT', 'DELETE'])
+# def users_detail(request, pk):
+#     #find application by pk 
+#     try:
+#         user = Users.objects.get(pk=pk)
+#         #get an application
+#         if request.method == 'GET':
+#             users_serializer = UsersSerializer(user)
+#             return JsonResponse(users_serializer.data)
+#         #update an user 
+#         elif request.method == 'PUT':
+#             users_data = JSONParser().parse(request)
+#             users_serializer = UsersSerializer(user,data=users_data)
+#             if users_serializer.is_valid():
+#                 users_serializer.save()
+#                 return JsonResponse(users_serializer.data)
+#             return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         elif request.method == 'DELETE':
+#             item_to_delete = Users.objects.get(pk=pk)
+#             item_to_delete.delete()
+#             return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+#     except Users.DoesNotExist:
+#         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+# @api_view(['POST'])
+# def user_authenticate(request):
+#     try:
+#         user_data = JSONParser().parse(request)
+#         user = Users.objects.get(username=user_data['username'])
+#         password_matches = bcrypt.checkpw(user_data['password'].encode('utf-8'), user.password.encode('utf-8'))
+#         if password_matches:
+#             return JsonResponse({'message': 'password matches'}, status=status.HTTP_200_OK)
+#         return JsonResponse({'message': 'password does not match'}, status=status.HTTP_401_UNAUTHORIZED)
+#     except Users.DoesNotExist:
+#         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def notes_list(request):
@@ -139,7 +193,7 @@ def notes_detail(request, pk):
             item_to_delete = Notes.objects.get(pk=pk)
             item_to_delete.delete()
             return JsonResponse({'message': 'Note was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    except Users.DoesNotExist:
+    except Notes.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 @api_view(['GET'])
@@ -186,7 +240,7 @@ def task_detail(request, pk):
             item_to_delete = Task.objects.get(pk=pk)
             item_to_delete.delete()
             return JsonResponse({'message': 'Task was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    except Users.DoesNotExist:
+    except Task.DoesNotExist:
         return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 @api_view(['GET'])
