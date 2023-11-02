@@ -1,0 +1,90 @@
+.sidenav{
+    background-color: #F2EFEF;
+    height: 100vh;
+    padding-top: 2rem;
+    transition: width 0.3s ease-in-out;
+    /**/
+    position: sticky; /* sticky top -> making sure the navbar stays same place when scrolled down */
+    top: 0;
+    /**/
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers the x direction*/
+    gap: 0.75rem; /* gap-5 */
+}
+
+.minimized-sidenav{
+    width: 5rem;
+}
+
+.expanded-sidenav{
+    width: 15rem;
+}
+
+.sidenav-button{
+    text-decoration: none;
+    background-color: #D9D9D9;
+    padding: 0.5em 0.75em;
+    border-radius: 2em;
+    color: black;
+}
+
+.expanded-sidenav .sidenav-button{
+    width: 80%;
+    padding: 0.75em 1.75em;
+    /**/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sidenav-button:hover{
+    opacity: 0.75;
+}
+
+.sidenav-button-icon{
+    font-size: 1.25em;
+}
+
+.sidenav-button-text{
+    font-weight: bolder;
+    color: black;
+    text-transform: capitalize;
+    font-size: 1em;
+    /**/
+    text-wrap: nowrap; /* making sure there's no weird transition caused by it */
+    overflow: hidden;
+}
+
+.minimized-sidenav .sidenav-button .sidenav-button-text{
+    display: none;
+}
+
+.minimized-sidenav .sidenav-logo .sidenav-button-text {
+    display: none;
+}
+
+.sidenav-logo{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* gap-4 */
+    align-items: center;
+}
+
+.sidenav-logo-img{
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.minimized-sidenav .sidenav-button .minimize-sidenav-icon{
+    display: none;
+}
+
+.expanded-sidenav .sidenav-button .expand-sidenav-icon{
+    display: none;
+}
+
+.minimized-sidenav .sidenav-button .expand-sidenav-icon{
+    display: initial;
+}

@@ -1,1 +1,0 @@
-export { default as SubSectionLayout } from './SubSectionLayout';

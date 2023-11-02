@@ -8,13 +8,15 @@
 .App {
     min-height: 100%;
     width: 100%;
+    font-family: "Work Sans", sans-serif;
 }
 
 @media (min-width: 680px) {
-    .display-button-label{
+    .display-button-label {
         font-size: var(--fs-button-xl);
     }
-    .item-add-display-button{
+
+    .item-add-display-button {
         height: 300px;
         width: min(315px);
     }
@@ -22,10 +24,11 @@
 
 /* 680px 768px */
 @media (max-width: 680px) {
-    .display-button-label{
+    .display-button-label {
         font-size: var(--fs-button-xs);
     }
-    .item-add-display-button{
+
+    .item-add-display-button {
         height: auto;
         width: 100%;
     }
