@@ -1,7 +1,7 @@
 .sidenav{
     background-color: #F2EFEF;
-    height: 100vh;
-    padding-top: 2rem;
+    min-height: 100vh;
+    padding: 2rem 0;
     transition: width 0.3s ease-in-out;
     /**/
     position: sticky; /* sticky top -> making sure the navbar stays same place when scrolled down */
