@@ -44,8 +44,8 @@ export default function SideNav() {
                 style={{ borderStyle: "none" }}
                 onClick={() => handleMinimize()}
             >
-                <i className="sidenav-button-icon expand-sidenav-icon bi bi-list"></i>
-                <i className="sidenav-button-icon minimize-sidenav-icon bi bi-x-circle-fill" />
+                <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
+                <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
                 <div className="sidenav-button-text">
                     close menu
                 </div>

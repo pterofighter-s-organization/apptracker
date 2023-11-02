@@ -77,14 +77,14 @@
     height: 2.25rem;
 }
 
-.minimized-sidenav .sidenav-button .minimize-sidenav-icon{
+.minimized-sidenav .sidenav-button .sidenav-minimize-icon{
     display: none;
 }
 
-.expanded-sidenav .sidenav-button .expand-sidenav-icon{
+.expanded-sidenav .sidenav-button .sidenav-expand-icon{
     display: none;
 }
 
-.minimized-sidenav .sidenav-button .expand-sidenav-icon{
+.minimized-sidenav .sidenav-button .sidenav-expand-icon{
     display: initial;
 }
