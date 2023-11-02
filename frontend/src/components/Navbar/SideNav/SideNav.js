@@ -10,10 +10,10 @@ export default function SideNav() {
 
     // const [isMinimized, setIsMinimized] = useState(true) //minimized nav is preset in nav
 
-    const handleMinimize = () => {
+    const handleResize = () => {
         const sideNavbarElement = document.getElementById("sidenav")
-        const ifMinimized = sideNavbarElement.classList.contains("minimized-sidenav")
-        if (ifMinimized) {
+        const isMinimized = sideNavbarElement.classList.contains("minimized-sidenav")
+        if (isMinimized) {
             sideNavbarElement.classList.replace("minimized-sidenav", "expanded-sidenav")
         } else {
             sideNavbarElement.classList.replace("expanded-sidenav", "minimized-sidenav")
@@ -40,9 +40,10 @@ export default function SideNav() {
                 </div>
             </Link>
             <button
+                type="button"
                 className="sidenav-button"
                 style={{ borderStyle: "none" }}
-                onClick={() => handleMinimize()}
+                onClick={() => handleResize()}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
@@ -74,12 +75,12 @@ export default function SideNav() {
                     </Link>
                 ))
             }
-            <div style={{margin: "0.5rem"}}/>
+            <div style={{ margin: "0.5rem" }} />
             <Link
                 to={loginRoute.route}
                 className="sidenav-button"
             >
-                <i className={`sidenav-button-icon ${loginRoute.icon}`}/>
+                <i className={`sidenav-button-icon ${loginRoute.icon}`} />
                 <div className="sidenav-button-text">
                     {loginRoute.text}
                 </div>
