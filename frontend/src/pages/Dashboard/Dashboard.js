@@ -1,12 +1,15 @@
 
-//components
-import { Navbar } from "../../components/Navbar"
+//layout
+import { HeaderLayout } from "../../layouts/HeaderLayout"
+import { PageLayout } from "../../layouts/PageLayout"
 
-export default function Dashboard(){
+export default function Dashboard() {
 
-    return(
-        <div className="">
-            <Navbar/>
-        </div>
+    return (
+        <PageLayout>
+            <HeaderLayout title={"my dashboard"}>
+                Welcome, <i>User 1</i>
+            </HeaderLayout>
+        </PageLayout>
     )
 }

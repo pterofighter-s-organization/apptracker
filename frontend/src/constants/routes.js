@@ -1,11 +1,11 @@
 
-export const newApplicationRoute = {
+export const NEW_APP_ROUTE = {
     text: "new job",
     route: "/new-app",
     icon: "bi bi-plus-circle-fill"
 }
 
-export const featureRoutes = [
+export const FEATURES_ROUTES = [
     {
         text: "all jobs",
         route: "/all-jobs",
@@ -28,7 +28,7 @@ export const featureRoutes = [
     }
 ]
 
-export const loginRoute = {
+export const LOGIN_ROUTE = {
     text: "sign in",
     route: "/login",
     icon: "bi bi-door-open-fill"

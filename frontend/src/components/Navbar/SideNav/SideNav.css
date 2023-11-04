@@ -1,7 +1,6 @@
 .sidenav{
     background-color: #F2EFEF;
-    min-height: 100vh;
-    padding: 2rem 0;
+    height: 100vh;
     transition: width 0.3s ease-in-out;
     /**/
     position: sticky; /* sticky top -> making sure the navbar stays same place when scrolled down */
@@ -15,10 +14,12 @@
 
 .minimized-sidenav{
     width: 5rem;
+    padding: 2rem 2rem;
 }
 
 .expanded-sidenav{
     width: 15rem;
+    padding: 2rem 1.5rem;
 }
 
 .sidenav-button{
@@ -30,7 +31,7 @@
 }
 
 .expanded-sidenav .sidenav-button{
-    width: 80%;
+    align-self: stretch;
     padding: 0.75em 1.75em;
     /**/
     display: flex;

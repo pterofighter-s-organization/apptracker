@@ -1,0 +1,17 @@
+
+.application-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+@media (min-width: 1200px) {
+    .application-list {
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .application-list {
+        gap: 1rem;
+    }
+}

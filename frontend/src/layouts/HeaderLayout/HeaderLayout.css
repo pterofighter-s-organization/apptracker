@@ -1,0 +1,28 @@
+@media (min-width: 1200px) {
+    .header-layout {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1200px) {
+    .header-layout {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        /* justify-content: flex-start; */
+    }
+
+    .header-layout-title {
+        margin-right: 0.75rem;
+    }
+}
+
+.header-layout {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.header-layout-title {
+    font-weight: 900;
+    text-transform: capitalize;
+}

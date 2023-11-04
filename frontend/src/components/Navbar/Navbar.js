@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 import { SideNav } from "./SideNav"
 import { DropdownNav } from "./DropdownNav"
 
+//constants
+import { SCREEN_BREAKPOINTS } from "../../constants/measurements"
+
 export default function Navbar() {
 
     const [isMobile, setIsMobile] = useState(false)
@@ -12,7 +15,7 @@ export default function Navbar() {
 
         const handleResize = () => {
             //breakpoint for dropdown nav
-            setIsMobile(window.innerWidth < 768) //px
+            setIsMobile(window.innerWidth < SCREEN_BREAKPOINTS["lg"]) //px
         }
 
         handleResize() //call the function to check the current size

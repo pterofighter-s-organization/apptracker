@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //routes
-import { newApplicationRoute, featureRoutes, loginRoute } from "../routes/routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
 
 //css
 import "./DropdownNav.css"
@@ -36,10 +36,10 @@ export default function DropdownNav() {
                 </Link>
                 <div className="dropdownnav-bar-end">
                     <Link
-                        to={newApplicationRoute.route}
+                        to={NEW_APP_ROUTE.route}
                         className="dropdownnav-bar-button"
                     >
-                        <i className={`${newApplicationRoute.icon}`} />
+                        <i className={`${NEW_APP_ROUTE.icon}`} />
                     </Link>
                     <button
                         type="button"
@@ -55,7 +55,7 @@ export default function DropdownNav() {
             <div className="dropdownnav-content">
                 <div className="dropdownnav-content-features">
                     {
-                        featureRoutes.map((route) => (
+                        FEATURES_ROUTES.map((route) => (
                             <Link
                                 to={route.route}
                                 className="dropdownnav-content-button"
@@ -71,12 +71,12 @@ export default function DropdownNav() {
                 </div>
                 <hr style={{ margin: "0.25rem" }} />
                 <Link
-                    to={loginRoute.route}
+                    to={LOGIN_ROUTE.route}
                     className="dropdownnav-content-button"
                 >
-                    <i className={`dropdownnav-content-button-icon ${loginRoute.icon}`} />
+                    <i className={`dropdownnav-content-button-icon ${LOGIN_ROUTE.icon}`} />
                     <div className="dropdownnav-content-button-text">
-                        {loginRoute.text}
+                        {LOGIN_ROUTE.text}
                     </div>
                 </Link>
             </div>

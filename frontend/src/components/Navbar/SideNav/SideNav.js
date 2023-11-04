@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-//routes
-import { newApplicationRoute, featureRoutes, loginRoute } from "../routes/routes"
+//constants
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
 
 //css
 import "./SideNav.css"
@@ -52,17 +52,17 @@ export default function SideNav() {
                 </div>
             </button>
             <Link
-                to={newApplicationRoute.route}
+                to={NEW_APP_ROUTE.route}
                 className="sidenav-button"
             >
-                <i className={`sidenav-button-icon ${newApplicationRoute.icon}`}></i>
+                <i className={`sidenav-button-icon ${NEW_APP_ROUTE.icon}`}></i>
                 <div className="sidenav-button-text">
-                    {newApplicationRoute.text}
+                    {NEW_APP_ROUTE.text}
                 </div>
             </Link>
             <div style={{ margin: "0.5rem" }} />
             {
-                featureRoutes.map((route) => (
+                FEATURES_ROUTES.map((route) => (
                     <Link
                         to={route.route}
                         className="sidenav-button"
@@ -77,12 +77,12 @@ export default function SideNav() {
             }
             <div style={{ margin: "0.5rem" }} />
             <Link
-                to={loginRoute.route}
+                to={LOGIN_ROUTE.route}
                 className="sidenav-button"
             >
-                <i className={`sidenav-button-icon ${loginRoute.icon}`} />
+                <i className={`sidenav-button-icon ${LOGIN_ROUTE.icon}`} />
                 <div className="sidenav-button-text">
-                    {loginRoute.text}
+                    {LOGIN_ROUTE.text}
                 </div>
             </Link>
         </nav>
