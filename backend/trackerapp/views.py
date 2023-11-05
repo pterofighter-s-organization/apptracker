@@ -28,11 +28,16 @@ def application_list(request):
         applications_serializer = ApplicationSerializer(applications, many=True)
         return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
-        application_data = JSONParser().parse(request)
-        application_serializer = ApplicationSerializer(data=application_data)
-        if application_serializer.is_valid():
-            application_serializer.save()
-            return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
+        print("TESTING OVER HERE")
+        if request.user.is_authenticated:
+            print("request", request.content_params)
+            application_data = JSONParser().parse(request)
+            # application_data['user_id'] = request.user.id
+            print("application data is", application_data)
+            application_serializer = ApplicationSerializer(data=application_data)
+            if application_serializer.is_valid():
+                application_serializer.save()
+                return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -77,6 +82,8 @@ def application_detail(request, pk):
 #             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
 #         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#TODO: make it error when creating user with same username
+#Creates a user
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
     if request.method == 'POST':
