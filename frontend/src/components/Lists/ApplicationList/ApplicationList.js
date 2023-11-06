@@ -11,11 +11,10 @@ export default function ApplicationList({ }) {
     return (
         <div className="application-list">
             {
-                Array.from({ length: 32 }, () => 0).map((id) => (
-                    <ApplicationCard key={id} test={true} />
+                Array.from({ length: 10 }, (_, index) => index + 1).map((id) => (
+                    <ApplicationCard key={id} id={id} />
                 ))
             }
-            <ApplicationCard test={false} />
         </div>
     )
 }

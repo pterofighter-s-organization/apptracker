@@ -9,6 +9,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: baseline;
+        padding: 0.5rem 0;
         /* justify-content: flex-start; */
     }
 
@@ -23,6 +24,6 @@
 }
 
 .header-layout-title {
-    font-weight: 900;
+    /* font-weight: 900; */
     text-transform: capitalize;
 }

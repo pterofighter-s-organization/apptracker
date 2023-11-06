@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+
+//helpers
+import { ifCloseMenu } from "../../../helpers/componentHelpers"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -8,20 +12,27 @@ import "./SideNav.css"
 
 export default function SideNav() {
 
-    // const [isMinimized, setIsMinimized] = useState(true) //minimized nav is preset in nav
+    const [showMenu, setShowMenu] = useState(false)
 
-    const handleResize = () => {
-        const sideNavbarElement = document.getElementById("sidenav")
-        const isMinimized = sideNavbarElement.classList.contains("minimized-sidenav")
-        if (isMinimized) {
-            sideNavbarElement.classList.replace("minimized-sidenav", "expanded-sidenav")
-        } else {
-            sideNavbarElement.classList.replace("expanded-sidenav", "minimized-sidenav")
+    useEffect(() => {
+        const handleClick = (event) => {
+            if (ifCloseMenu(event, "sidenav")) {
+                setShowMenu(false)
+            }
         }
-    }
+
+        document.addEventListener("click", handleClick)
+
+        return () => {
+            document.removeEventListener("click", handleClick)
+        }
+    }, [])
 
     return (
-        <nav className="sidenav minimized-sidenav" id="sidenav">
+        <nav
+            className={`sidenav ${showMenu ? "expanded-sidenav" : "minimized-sidenav"}`}
+            id="sidenav"
+        >
             <Link
                 to="/"
                 className="sidenav-logo"
@@ -42,8 +53,8 @@ export default function SideNav() {
             <button
                 type="button"
                 className="sidenav-button"
-                style={{ borderStyle: "none" }}
-                onClick={() => handleResize()}
+                // style={{ borderStyle: "none" }} declared in app.css
+                onClick={() => setShowMenu(!showMenu)}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />

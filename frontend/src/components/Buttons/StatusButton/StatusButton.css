@@ -1,0 +1,53 @@
+.status-button {
+    font-size: 0.75em;
+    /**/
+    /* display: flex; */
+    position: relative;
+    display: inline-flexbox;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.status-button-face {
+    padding: 0.75em 1.25em;
+    border-radius: 2rem;
+    text-transform: capitalize;
+    /**/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-button-face:hover {
+    opacity: 0.9;
+}
+
+.minimized-status-button .status-button-option-menu {
+    display: none;
+}
+
+.status-button-option-menu {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    /**/
+    margin-top: 0.5rem;
+    animation: open-dropdown 150ms ease;
+    transform-origin: top center;
+    /* this is how much it blurs, the thickness of the blur*/
+    backdrop-filter: blur(1.5px);
+}
+
+.status-button-option {
+    background-color: #f2efef;
+    padding: 0.5em 1em;
+    border-radius: 2em;
+    text-transform: capitalize;
+}
+
+.status-button-option:hover {
+    border: 0.01em black solid;
+}

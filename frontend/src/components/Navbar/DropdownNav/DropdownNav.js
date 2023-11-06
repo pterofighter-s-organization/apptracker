@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+
+//helpers
+import { ifCloseMenu } from "../../../helpers/componentHelpers"
 
 //routes
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -8,21 +12,28 @@ import "./DropdownNav.css"
 
 export default function DropdownNav() {
 
+    const [showMenu, setShowMenu] = useState(false)
 
-    const handleResize = () => {
-
-        const dropdownNavbarElement = document.getElementById("dropdownnav")
-        const isMinimized = dropdownNavbarElement.classList.contains("minimized-dropdownnav")
-
-        if (isMinimized) {
-            dropdownNavbarElement.classList.replace("minimized-dropdownnav", "expanded-dropdownnav")
-        } else {
-            dropdownNavbarElement.classList.replace("expanded-dropdownnav", "minimized-dropdownnav")
+    useEffect(() => {
+        //can close menu outside of the menu (closing when clicked on any other part of the window)
+        const handleClick = (event) => {
+            if (ifCloseMenu(event, "dropdownnav")) {
+                setShowMenu(false)
+            }
         }
-    }
+
+        document.addEventListener("click", handleClick);
+
+        return () => {
+            document.removeEventListener("click", handleClick)
+        }
+    }, [])
 
     return (
-        <nav className="dropdownnav minimized-dropdownnav" id="dropdownnav">
+        <nav
+            className={`dropdownnav ${showMenu ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
+            id="dropdownnav"
+        >
             <div className="dropdownnav-bar">
                 <Link
                     to={"/"}
@@ -44,8 +55,8 @@ export default function DropdownNav() {
                     <button
                         type="button"
                         className="dropdownnav-bar-button"
-                        style={{ borderStyle: "none" }}
-                        onClick={() => handleResize()}
+                        // style={{ borderStyle: "none" }} already declared in app.css
+                        onClick={() => setShowMenu(!showMenu)}
                     >
                         <i className="dropdownnav-button-expand-icon bi bi-list"></i>
                         <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />

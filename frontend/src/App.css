@@ -3,6 +3,11 @@
     /* commented out because its too big for smaller screen sizes, no need atm. */
     --fs-button-xl: calc(1rem * 1.15);
     --fs-button-xs: calc(1rem);
+    --desktop-breakpoint: 1200px;
+}
+
+button {
+    border-style: none;
 }
 
 h6 {
@@ -36,5 +41,14 @@ h6 {
     .item-add-display-button {
         height: auto;
         width: 100%;
+    }
+}
+
+@keyframes open-dropdown{
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
     }
 }

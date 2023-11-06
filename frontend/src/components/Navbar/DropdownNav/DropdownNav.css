@@ -90,15 +90,6 @@
     gap: 0.5rem;
 }
 
-@keyframes open-dropdown{
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 .dropdownnav-content-button{
     display: flex;
     flex-direction: row;
