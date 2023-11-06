@@ -14,7 +14,7 @@
 }
 
 .application-card:hover{
-    border: 1px black solid;
+    outline: 1px black solid; /*border that doesnt decrease the width of the card*/
 }
 
 @media (min-width: 1200px) {}
@@ -35,7 +35,7 @@
 }
 
 .application-card-top-button:hover {
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 .application-card-details {

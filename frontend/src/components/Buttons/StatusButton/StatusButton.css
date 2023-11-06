@@ -49,5 +49,5 @@
 }
 
 .status-button-option:hover {
-    border: 0.01em black solid;
+    outline: 0.05em black solid;
 }
