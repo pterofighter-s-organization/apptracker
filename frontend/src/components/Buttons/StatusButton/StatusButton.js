@@ -38,18 +38,17 @@ export default function StatusButton({ id }) {
         return brightness > 128 ? "#000000" : "#FFFFFF";
     }
 
+    //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     return (
         <div
             className={`status-button ${showMenu ? "" : "minimized-status-button"}`}
             id={statusButtonId}
+            onClick={(e) => {e.preventDefault()}}
         >
             <button
                 className="status-button-face"
                 style={{ backgroundColor: APP_STATUS_COLORS[status], color: getContrastColor(APP_STATUS_COLORS[status]) }}
-                onClick={(e) => {
-                    e.preventDefault()
-                    setShowMenu(!showMenu)
-                }}
+                onClick={() => {setShowMenu(!showMenu)}}
             >
                 <div>{status}</div>
                 <i
@@ -65,10 +64,7 @@ export default function StatusButton({ id }) {
                                 key={option}
                                 className="status-button-option"
                                 style={{ color: color }}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setStatus(option)
-                                }}
+                                onClick={() => {setStatus(option)}}
                             >
                                 {option}
                             </button>

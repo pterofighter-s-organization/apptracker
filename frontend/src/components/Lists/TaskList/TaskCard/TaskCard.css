@@ -44,10 +44,6 @@
     overflow: hidden;
 }
 
-.task-card-title {
-    font-weight: bold;
-}
-
 @media (min-width: 1200px) {
     .task-card-job{
         max-width: 15rem;
