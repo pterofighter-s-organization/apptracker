@@ -11,11 +11,11 @@
     z-index: 0;
 }
 
-.task-card:hover{
+.task-card:hover {
     outline: 1px solid black;
 }
 
-.task-card-section{
+.task-card-section {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -33,17 +33,19 @@
     overflow: hidden;
 }
 
-@media (min-width: 1200px) {
-    .task-card-job{
+@media (min-width: 992px) {
+    .task-card-job {
         max-width: 15rem;
     }
 }
 
-@media (max-width: 1200px) {
-    .task-card-job{
+@media (max-width: 992px) {
+    .task-card-job {
         width: 100%;
     }
+}
 
+@media (max-width: 1200px) {
     .task-card-title {
         margin-left: 0.75rem;
     }
