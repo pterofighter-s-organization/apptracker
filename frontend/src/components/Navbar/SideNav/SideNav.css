@@ -44,7 +44,8 @@
 }
 
 .sidenav-button:hover {
-    opacity: 0.75;
+    filter: brightness(0.8);
+    -webkit-filter: brightness(0.85);
 }
 
 .sidenav-button-icon {

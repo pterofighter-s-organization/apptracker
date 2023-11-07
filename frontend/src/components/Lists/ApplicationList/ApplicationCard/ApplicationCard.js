@@ -22,7 +22,7 @@ export default function ApplicationCard({ application, id }) {
                 </div>
                 <button
                     type="button"
-                    className="application-card-top-button"
+                    className="onclick-bw-button"
                     onClick={(e) =>{
                         e.preventDefault() /*use preventdefault to not activate the link */
                     }}

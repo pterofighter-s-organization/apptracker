@@ -17,7 +17,7 @@ export default function TaskCard({ title }) {
                 <div className="task-card-buttons">
                     <button
                         type="button"
-                        className="task-card-button"
+                        className="onclick-bw-button"
                         onClick={(e) =>{
                             e.preventDefault() /*use preventdefault to not activate the link */
                         }}

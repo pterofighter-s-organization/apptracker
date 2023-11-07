@@ -7,7 +7,7 @@
 }
 
 button {
-    border-style: none;
+    border: none;
 }
 
 h6 {
@@ -19,6 +19,20 @@ h6 {
     width: 100%;
     font-family: "Work Sans", sans-serif;
     background-color: #D9D9D9;
+}
+
+.onclick-bw-button {
+    background-color: #D9D9D9;
+    color: black;
+    transition: background-color 150ms ease-in-out;
+    padding: 0.5em 0.75em;
+    border-radius: 2em;
+}
+
+.onclick-bw-button:hover {
+    opacity: 0.75;
+    background-color: black;
+    color: #D9D9D9;
 }
 
 @media (min-width: 680px) {
@@ -44,10 +58,11 @@ h6 {
     }
 }
 
-@keyframes open-dropdown{
+@keyframes open-dropdown {
     0% {
         transform: scale(0);
     }
+
     100% {
         transform: scale(1);
     }

@@ -42,13 +42,13 @@ export default function StatusButton({ id }) {
     return (
         <div
             className={`status-button ${showMenu ? "" : "minimized-status-button"}`}
-            id={statusButtonId}
             onClick={(e) => {e.preventDefault()}}
         >
             <button
                 className="status-button-face"
                 style={{ backgroundColor: APP_STATUS_COLORS[status], color: getContrastColor(APP_STATUS_COLORS[status]) }}
                 onClick={() => {setShowMenu(!showMenu)}}
+                id={statusButtonId}
             >
                 <div>{status}</div>
                 <i

@@ -105,7 +105,8 @@
 }
 
 .dropdownnav-content-button:hover{
-    opacity: 0.75;
+    filter: brightness(0.8);
+    -webkit-filter: brightness(0.85);
 }
 
 .dropdownnav-content-button-icon{
