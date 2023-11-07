@@ -1,0 +1,92 @@
+.task-card {
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+    /**/
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 0;
+}
+
+.task-card:hover{
+    outline: 1px solid black;
+}
+
+.task-card-section{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.task-card-button {
+    border-radius: 2rem;
+    padding: 0.5em 0.75em;
+    background-color: #d9d9d9;
+    z-index: 1;
+}
+
+.task-card-button:hover{
+    opacity: 0.75;
+}
+
+.task-card-job {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    background-color: #d9d9d9;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1em;
+    /**/
+    overflow: hidden;
+}
+
+.task-card-title {
+    font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+    .task-card-job{
+        max-width: 15rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .task-card-job{
+        width: 100%;
+    }
+
+    .task-card-title {
+        margin-left: 0.75rem;
+    }
+}
+
+.task-card-title::first-letter {
+    text-transform: uppercase;
+}
+
+.task-card-job-text {
+    text-transform: capitalize;
+    max-width: 60%;
+    /*max width - the first text which is job will have more space*/
+    text-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-card-clock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-left: 0.75rem;
+}
+
+.task-card-datetime {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}

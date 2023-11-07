@@ -3,13 +3,19 @@ import { Link } from "react-router-dom"
 //components
 import { StatusButton } from "../../../Buttons/StatusButton"
 
+//constants
+import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
+
 //css
 import "./ApplicationCard.css"
 
 export default function ApplicationCard({ application, id }) {
 
     return (
-        <Link className="application-card">
+        <Link
+            to="/all-tasks"
+            className="application-card"
+        >
             <div className="application-card-top">
                 <div style={{ flexGrow: 1 }}>
                     <StatusButton key={id} id={id} />
@@ -17,19 +23,21 @@ export default function ApplicationCard({ application, id }) {
                 <button
                     type="button"
                     className="application-card-top-button"
-                    onClick={{}}
+                    onClick={(e) =>{
+                        e.preventDefault() /*use preventdefault to not activate the link */
+                    }}
                 >
-                    <i className="bi bi-archive-fill"></i>
+                    <i className={`${ARCHIVED_BIN_ICON}`}></i>
                 </button>
             </div>
             <div className="application-card-details">
                 <h6 className="application-card-details-text">
                     Google
                 </h6>
-                <h3 className="application-card-details-text" style={{marginLeft: "-0.05em"}}>
+                <h3 className="application-card-details-text" style={{ marginLeft: "-0.05em" }}>
                     UX/UI DesignerUX/UI Designer
                 </h3>
-                <h5 style={{textTransform: "initial"}}>
+                <h5 style={{ textTransform: "initial" }}>
                     $100 /hr
                 </h5>
             </div>

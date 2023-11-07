@@ -14,7 +14,7 @@ export default function StatusButton({ id }) {
     const [status, setStatus] = useState("interviewing")
     const [showMenu, setShowMenu] = useState(false)
 
-    const statusButtonId = "status-button" + id
+    const statusButtonId = "status-button" + id //making sure every status button differs
 
     useEffect(() => {
         const handleClick = (event) => {
@@ -46,7 +46,10 @@ export default function StatusButton({ id }) {
             <button
                 className="status-button-face"
                 style={{ backgroundColor: APP_STATUS_COLORS[status], color: getContrastColor(APP_STATUS_COLORS[status]) }}
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={(e) => {
+                    e.preventDefault()
+                    setShowMenu(!showMenu)
+                }}
             >
                 <div>{status}</div>
                 <i
@@ -62,7 +65,10 @@ export default function StatusButton({ id }) {
                                 key={option}
                                 className="status-button-option"
                                 style={{ color: color }}
-                                onClick={() => setStatus(option)}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setStatus(option)
+                                }}
                             >
                                 {option}
                             </button>

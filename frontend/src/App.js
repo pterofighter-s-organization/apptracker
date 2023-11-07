@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 //pages
 import { Dashboard } from './pages/Dashboard';
-import { JobList } from './pages/JobList';
+import { JobBoard } from './pages/JobBoard';
+import { TaskBoard } from './pages/TaskBoard';
 
 //css
 import './App.css'
@@ -15,7 +16,8 @@ export default function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Dashboard/>} />
-          <Route path="/all-jobs" element={<JobList/>} />
+          <Route path="/all-jobs" element={<JobBoard/>} />
+          <Route path="/all-tasks" element={<TaskBoard/>} />
         </Routes>
       </Router>
     </div>

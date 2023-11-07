@@ -41,6 +41,18 @@
     backdrop-filter: blur(1.5px);
 }
 
+@media (min-width: 17.5rem){
+    .status-button-option-menu{
+        width: 16.5rem; /*follow app card width but -1 rem*/
+    }
+}
+
+@media (max-width: 17.5rem){
+    .status-button-option-menu{
+        width: inherit;
+    }
+}
+
 .status-button-option {
     background-color: #f2efef;
     padding: 0.5em 1em;

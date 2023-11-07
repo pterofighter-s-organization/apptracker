@@ -7,9 +7,9 @@ import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 
 //css
-import "./JobList.css"
+import "./JobBoard.css"
 
-export default function JobList() {
+export default function JobBoard() {
 
     return (
         <PageLayout>

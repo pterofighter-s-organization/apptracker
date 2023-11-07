@@ -1,3 +1,4 @@
+import { ARCHIVED_BIN_ICON } from "./components"
 
 export const NEW_APP_ROUTE = {
     text: "new job",
@@ -24,7 +25,7 @@ export const FEATURES_ROUTES = [
     {
         text: "archived bin",
         route: "/archived-bin",
-        icon: "bi bi-trash3-fill"
+        icon: ARCHIVED_BIN_ICON
     }
 ]
 
