@@ -1,0 +1,7 @@
+{
+    "moduleResolution": "node",
+    "compilerOptions": {
+      "baseUrl": "src"
+    },
+    "include": ["src"]
+  }

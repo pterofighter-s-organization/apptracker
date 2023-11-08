@@ -32,32 +32,34 @@ export default function ApplicationCard({ isArchived, id }) {
                 <div style={{ flexGrow: 1 }}>
                     <StatusButton key={id} id={id} />
                 </div>
-                {isArchived ?
-                    <>
+                <div className="application-card-top-buttons">
+                    {isArchived ?
+                        <>
+                            <button
+                                type="button"
+                                className="onclick-bw-button"
+                                onClick={(e) => handleRestore(e)}
+                            >
+                                <i className="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                            <button
+                                type="button"
+                                className="onclick-bw-button"
+                                onClick={(e) => handleDelete(e)}
+                            >
+                                <i className="bi bi-trash3-fill"></i>
+                            </button>
+                        </>
+                        :
                         <button
                             type="button"
                             className="onclick-bw-button"
-                            onClick={(e) => handleRestore(e)}
+                            onClick={(e) => handleArchive(e)}
                         >
-                            <i className="bi bi-arrow-counterclockwise"></i>
+                            <i className={`${ARCHIVED_BIN_ICON}`}></i>
                         </button>
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleDelete(e)}
-                        >
-                            <i className="bi bi-trash3-fill"></i>
-                        </button>
-                    </>
-                    :
-                    <button
-                        type="button"
-                        className="onclick-bw-button"
-                        onClick={(e) => handleArchive(e)}
-                    >
-                        <i className={`${ARCHIVED_BIN_ICON}`}></i>
-                    </button>
-                }
+                    }
+                </div>
             </div>
             <div className="application-card-details">
                 <h6 className="application-card-details-text">

@@ -12,6 +12,8 @@ export default function ActiveNoteCard({ id }) {
     const [isEdit, setIsEdit] = useState(false)
     const [value, setValue] = useState(``)
 
+    const activeNoteCardId = "note-card-" + id
+
     const handleSave = (e) => {
         e.preventDefault()
         setIsEdit(false)
@@ -23,7 +25,10 @@ export default function ActiveNoteCard({ id }) {
     }
 
     return (
-        <div className="note-card">
+        <div
+            className="note-card"
+            id={activeNoteCardId}
+        >
             <div className="note-card-header">
                 <Link
                     to={"/all-jobs"}
@@ -63,6 +68,7 @@ export default function ActiveNoteCard({ id }) {
             {
                 isEdit ?
                     <textarea
+                        id={"textarea-" + activeNoteCardId}
                         className="note-card-textarea"
                         value={value}
                         placeholder="Remember to save above after edit."
