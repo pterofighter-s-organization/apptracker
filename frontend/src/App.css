@@ -24,7 +24,7 @@ h6 {
 .onclick-bw-button {
     background-color: #D9D9D9;
     color: black;
-    transition: background-color 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
     padding: 0.5em 0.75em;
     border-radius: 2em;
 }

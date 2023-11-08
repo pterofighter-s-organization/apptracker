@@ -7,7 +7,7 @@
 @media (min-width: 576px) {
     .task-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     }
 }
 

@@ -23,7 +23,7 @@ export default function ApplicationCard({ application, id }) {
                 <button
                     type="button"
                     className="onclick-bw-button"
-                    onClick={(e) =>{
+                    onClick={(e) => {
                         e.preventDefault() /*use preventdefault to not activate the link */
                     }}
                 >
@@ -42,9 +42,7 @@ export default function ApplicationCard({ application, id }) {
                 </h5>
             </div>
             <div className="application-card-date">
-                <div style={{ fontSize: "0.85em" }}>
-                    Updated: 2/12/2022 10:38am
-                </div>
+                Updated: 2/12/2022 10:38am
             </div>
         </Link>
     )

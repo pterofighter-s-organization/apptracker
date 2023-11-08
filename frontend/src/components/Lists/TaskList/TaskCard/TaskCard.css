@@ -33,13 +33,13 @@
     overflow: hidden;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 576px) {
     .task-card-job {
         max-width: 15rem;
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 576px) {
     .task-card-job {
         width: 100%;
     }
@@ -49,6 +49,10 @@
     .task-card-title {
         margin-left: 0.75rem;
     }
+}
+
+.task-card-title {
+    text-wrap: wrap;
 }
 
 .task-card-title::first-letter {
@@ -75,5 +79,9 @@
 .task-card-datetime {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.task-card-buttons{
     gap: 0.5rem;
 }
