@@ -2,12 +2,12 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
 
 //css
-import "./NoteCard.css"
+import "../NoteCard.css"
 
-export default function NoteCard({ id }) {
+export default function ActiveNoteCard({ id }) {
 
     const [isEdit, setIsEdit] = useState(false)
     const [value, setValue] = useState(``)
@@ -16,6 +16,10 @@ export default function NoteCard({ id }) {
         e.preventDefault()
         setIsEdit(false)
         //add a method to save it to backend
+    }
+
+    const handleArchive = (e) => {
+        e.preventDefault()
     }
 
     return (
@@ -51,7 +55,7 @@ export default function NoteCard({ id }) {
                 <button
                     type="button"
                     className="onclick-bw-button"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e) => handleArchive(e)}
                 >
                     <i className={`${ARCHIVED_BIN_ICON}`} />
                 </button>
@@ -83,7 +87,7 @@ export default function NoteCard({ id }) {
                                         setIsEdit(true)
                                     }}
                                 >
-                                    click to edit
+                                    click to continue editing
                                 </button>
                             </>
                             :
@@ -95,7 +99,7 @@ export default function NoteCard({ id }) {
                                     setIsEdit(true)
                                 }}
                             >
-                                click to edit
+                                click to start editing
                             </button>
                         }
                     </div>

@@ -19,6 +19,11 @@ export default function ApplicationList({ }) {
                     />
                 ))
             }
+            <ApplicationCard
+                key={11}
+                id={11}
+                isArchived={true}
+            />
         </div>
     )
 }

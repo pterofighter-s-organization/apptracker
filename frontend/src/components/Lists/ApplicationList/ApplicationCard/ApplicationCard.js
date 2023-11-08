@@ -9,7 +9,19 @@ import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
 //css
 import "./ApplicationCard.css"
 
-export default function ApplicationCard({ application, id }) {
+export default function ApplicationCard({ isArchived, id }) {
+
+    const handleArchive = (e) => {
+        e.preventDefault()
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+    }
+
+    const handleRestore = (e) => {
+        e.preventDefault()
+    }
 
     return (
         <Link
@@ -20,15 +32,32 @@ export default function ApplicationCard({ application, id }) {
                 <div style={{ flexGrow: 1 }}>
                     <StatusButton key={id} id={id} />
                 </div>
-                <button
-                    type="button"
-                    className="onclick-bw-button"
-                    onClick={(e) => {
-                        e.preventDefault() /*use preventdefault to not activate the link */
-                    }}
-                >
-                    <i className={`${ARCHIVED_BIN_ICON}`}></i>
-                </button>
+                {isArchived ?
+                    <>
+                        <button
+                            type="button"
+                            className="onclick-bw-button"
+                            onClick={(e) => handleRestore(e)}
+                        >
+                            <i className="bi bi-arrow-counterclockwise"></i>
+                        </button>
+                        <button
+                            type="button"
+                            className="onclick-bw-button"
+                            onClick={(e) => handleDelete(e)}
+                        >
+                            <i className="bi bi-trash3-fill"></i>
+                        </button>
+                    </>
+                    :
+                    <button
+                        type="button"
+                        className="onclick-bw-button"
+                        onClick={(e) => handleArchive(e)}
+                    >
+                        <i className={`${ARCHIVED_BIN_ICON}`}></i>
+                    </button>
+                }
             </div>
             <div className="application-card-details">
                 <h6 className="application-card-details-text">

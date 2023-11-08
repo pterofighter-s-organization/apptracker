@@ -23,6 +23,7 @@ export default function TaskList({ }) {
                     <TaskCard
                         key={id}
                         id={id}
+                        isArchived={true}
                         title={"test me i am a task"}
                     />
                 ))

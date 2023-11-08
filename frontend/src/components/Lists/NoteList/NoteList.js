@@ -1,6 +1,7 @@
 
 //components
-import { NoteCard } from "./NoteCard"
+import { ArchivedNoteCard } from "./NoteCard/ArchivedNoteCard"
+import { ActiveNoteCard } from "./NoteCard/ActiveNoteCard"
 
 //css
 import "./NoteList.css"
@@ -11,9 +12,10 @@ export default function NoteList() {
         <div className="note-list">
             {
                 Array.from({ length: 10 }, (_, index) => index + 1).map((id) => (
-                    <NoteCard key={id} id={id} />
+                    <ActiveNoteCard key={id} id={id} />
                 ))
             }
+            <ArchivedNoteCard key={11} id={11}/>
         </div>
     )
 }

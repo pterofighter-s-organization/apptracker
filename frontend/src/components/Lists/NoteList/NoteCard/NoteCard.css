@@ -13,6 +13,10 @@
     text-decoration: none;
 }
 
+.note-card:hover {
+    outline: 1px solid black;
+}
+
 .note-card-header {
     display: flex;
     flex-direction: row;
@@ -28,7 +32,6 @@
     font-size: 1.25em;
     flex-grow: 1;
     /**/
-    text-decoration: none;
     color: black;
     transition: color 150ms ease-in-out;
 }
@@ -68,8 +71,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    /* justify for centering y axis, align-items for x axis, and text-align for text itself */
     justify-content: center;
     align-items: center;
+    text-align: center;
     text-transform: capitalize;
     border-radius: 1em;
     background-color: #f2efef;

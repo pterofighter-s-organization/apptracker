@@ -6,7 +6,22 @@ import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
 //css
 import "./TaskCard.css"
 
-export default function TaskCard({ title }) {
+export default function TaskCard({ title, isArchived }) {
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+        //handle delete logic
+    }
+
+    const handleRestore = (e) => {
+        e.preventDefault()
+        //handle restore
+    }
+
+    const handleArchive = (e) => {
+        e.preventDefault() /*use preventdefault to not activate the link */
+        //handle archive
+    }
 
     return (
         <Link
@@ -14,17 +29,33 @@ export default function TaskCard({ title }) {
             className="task-card"
         >
             <div className="task-card-section">
-                <div className="task-card-buttons">
-                    <button
-                        type="button"
-                        className="onclick-bw-button"
-                        onClick={(e) => {
-                            e.preventDefault() /*use preventdefault to not activate the link */
-                        }}
-                    >
-                        <i className={`${ARCHIVED_BIN_ICON}`} />
-                    </button>
-                </div>
+                {
+                    isArchived ?
+                        <>
+                            <button
+                                type="button"
+                                className="onclick-bw-button"
+                                onClick={(e) => handleDelete(e)}
+                            >
+                                <i className="bi bi-trash3-fill"></i>
+                            </button>
+                            <button
+                                type="button"
+                                className="onclick-bw-button"
+                                onClick={(e) => handleRestore(e)}
+                            >
+                                <i className="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </>
+                        :
+                        <button
+                            type="button"
+                            className="onclick-bw-button"
+                            onClick={(e) => handleArchive(e)}
+                        >
+                            <i className={`${ARCHIVED_BIN_ICON}`} />
+                        </button>
+                }
                 <div className="task-card-title">
                     {title}
                 </div>
