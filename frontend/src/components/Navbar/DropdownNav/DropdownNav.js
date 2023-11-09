@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-//helpers
-import { ifCloseMenu } from "../../../helpers/componentHelpers"
+//hooks
+import useShowMenu from "hooks/useShowMenu"
 
 //routes
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -12,27 +11,13 @@ import "./DropdownNav.css"
 
 export default function DropdownNav() {
 
-    const [showMenu, setShowMenu] = useState(false)
-
-    useEffect(() => {
-        //can close menu outside of the menu (closing when clicked on any other part of the window)
-        const handleClick = (event) => {
-            if (ifCloseMenu(event, "dropdownnav")) {
-                setShowMenu(false)
-            }
-        }
-
-        document.addEventListener("click", handleClick);
-
-        return () => {
-            document.removeEventListener("click", handleClick)
-        }
-    }, [])
+    const dropdownNavId = "dropdownnav"
+    const { showMenu, handleOpenMenu, handleCloseMenu } = useShowMenu(dropdownNavId)
 
     return (
         <nav
             className={`dropdownnav ${showMenu ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
-            id="dropdownnav"
+            id={dropdownNavId}
         >
             <div className="dropdownnav-bar">
                 <Link
@@ -56,7 +41,9 @@ export default function DropdownNav() {
                         type="button"
                         className="dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
-                        onClick={() => setShowMenu(!showMenu)}
+                        onClick={(e) => (
+                            showMenu ? handleCloseMenu(e) : handleOpenMenu(e)
+                        )}
                     >
                         <i className="dropdownnav-button-expand-icon bi bi-list"></i>
                         <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />

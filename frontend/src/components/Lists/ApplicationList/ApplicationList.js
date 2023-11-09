@@ -5,25 +5,38 @@ import { ApplicationCard } from "./ApplicationCard"
 //css
 import "./ApplicationList.css"
 
-export default function ApplicationList({ }) {
+import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
 
-    //add a method to check how many cards to show at once
+function ApplicationList({ id, cards, cardCount, handleClick, isPreview }) {
+
+    console.log(cardCount)
 
     return (
-        <div className="application-list">
+        <div 
+            className="application-list" 
+            id={id}
+        >
             {
-                Array.from({ length: 10 }, (_, index) => index + 1).map((id) => (
-                    <ApplicationCard
-                        key={id}
-                        id={id}
-                    />
-                ))
+                cards.map((item, index) => {
+                    const count = index + 1
+                    if (count <= cardCount) {
+                        return (
+                            <ApplicationCard
+                                key={index}
+                                id={index}
+                            />
+                        )
+                    }
+                    return <></>
+                })
             }
-            <ApplicationCard
+            {/* <ApplicationCard
                 key={11}
                 id={11}
                 isArchived={true}
-            />
+            /> */}
         </div>
     )
 }
+
+export default withVisibleCardCount(ApplicationList)

@@ -74,3 +74,14 @@ export function spaceOnAllBreakpoints(breakpointMapSize, width) {
 
     return spaceInPx
 }
+
+export const remToPx = (rem) => {
+    //1rem = 16px
+    return (rem*16)
+}
+
+export const calculateVisibleCard = (height, cardHeight, gap) => {
+    //all in rem
+    const visibleCardsInHeight = Math.floor((height) / (cardHeight + gap))
+    return visibleCardsInHeight
+}

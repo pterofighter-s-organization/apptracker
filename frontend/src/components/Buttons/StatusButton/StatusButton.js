@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-//helpers
-import { ifCloseMenu } from "../../../helpers/componentHelpers"
+//hooks
+import useShowMenu from "hooks/useShowMenu"
 
 //constants
 import { APP_STATUS_COLORS } from "../../../constants/application"
@@ -11,24 +11,10 @@ import "./StatusButton.css"
 
 export default function StatusButton({ id }) {
 
-    const [status, setStatus] = useState("interviewing")
-    const [showMenu, setShowMenu] = useState(false)
-
     const statusButtonId = "status-button" + id //making sure every status button differs
 
-    useEffect(() => {
-        const handleClick = (event) => {
-            if (ifCloseMenu(event, statusButtonId)) {
-                setShowMenu(false)
-            }
-        }
-
-        document.addEventListener("click", handleClick)
-
-        return () => {
-            document.removeEventListener("click", handleClick)
-        }
-    }, [])
+    const [status, setStatus] = useState("interviewing")
+    const { showMenu, handleCloseMenu, handleOpenMenu } = useShowMenu(statusButtonId)
 
     function getContrastColor(hexColor) {
         const r = parseInt(hexColor.substr(1, 2), 16);
@@ -42,12 +28,14 @@ export default function StatusButton({ id }) {
     return (
         <div
             className={`status-button ${showMenu ? "" : "minimized-status-button"}`}
-            onClick={(e) => {e.preventDefault()}}
+            onClick={(e) => { e.preventDefault() }}
         >
             <button
                 className="status-button-face"
                 style={{ backgroundColor: APP_STATUS_COLORS[status], color: getContrastColor(APP_STATUS_COLORS[status]) }}
-                onClick={() => {setShowMenu(!showMenu)}}
+                onClick={(e) => (
+                    showMenu ? handleCloseMenu(e) : handleOpenMenu(e)
+                )}
                 id={statusButtonId}
             >
                 <div>{status}</div>
@@ -64,12 +52,13 @@ export default function StatusButton({ id }) {
                                 key={option}
                                 className="status-button-option"
                                 style={{ color: color }}
-                                onClick={() => {setStatus(option)}}
+                                onClick={() => { setStatus(option) }}
                             >
                                 {option}
                             </button>
                         )
                     }
+                    return <></>
                 })}
             </div>
         </div>

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-//helpers
-import { ifCloseMenu } from "../../../helpers/componentHelpers"
+//hooks
+import useShowMenu from "hooks/useShowMenu"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -12,26 +11,13 @@ import "./SideNav.css"
 
 export default function SideNav() {
 
-    const [showMenu, setShowMenu] = useState(false)
-
-    useEffect(() => {
-        const handleClick = (event) => {
-            if (ifCloseMenu(event, "sidenav")) {
-                setShowMenu(false)
-            }
-        }
-
-        document.addEventListener("click", handleClick)
-
-        return () => {
-            document.removeEventListener("click", handleClick)
-        }
-    }, [])
+    const sideNavId = "sidenav"
+    const { showMenu, handleOpenMenu, handleCloseMenu } = useShowMenu(sideNavId)
 
     return (
         <nav
             className={`sidenav ${showMenu ? "expanded-sidenav" : "minimized-sidenav"}`}
-            id="sidenav"
+            id={sideNavId}
         >
             <Link
                 to="/"
@@ -54,7 +40,9 @@ export default function SideNav() {
                 type="button"
                 className="sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={(e) => (
+                    showMenu ? handleCloseMenu(e) : handleOpenMenu(e)
+                )}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
