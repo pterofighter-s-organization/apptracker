@@ -48,18 +48,24 @@ export default function withVisibleCardCount(Component) {
 
         useEffect(() => {
             //detect if is scrolling down
-            const oldScrollY = window.scrollY
+            let oldScrollY = window.scrollY || document.documentElement.scrollTop;
             const handleScrollLoading = debounce(() => {
                 // no need to detect when to end because if it ended, there will be no more scrolling.
-                if (oldScrollY < window.scrollY) {
+                if (oldScrollY < (window.scrollY || document.documentElement.scrollTop)) {
                     setCardCount((prev) => prev + initialCount)
                 }
-            }, 400)
+            }, 250)
 
-            window.addEventListener('scroll', handleScrollLoading);
+            if (!isPreview) { //only when it isn't a preview
+                window.addEventListener('scroll', handleScrollLoading);
+            }
 
-            return () => { window.removeEventListener('scroll', handleScrollLoading) }
-        }, [initialCount])
+            return () => {
+                if (!isPreview) {
+                    window.removeEventListener('scroll', handleScrollLoading)
+                }
+            }
+        }, [initialCount, isPreview])
 
         return <Component
             id={id}
