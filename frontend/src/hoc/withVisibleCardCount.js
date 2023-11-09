@@ -37,7 +37,7 @@ export default function withVisibleCardCount(Component) {
                 if (isPreview) {
                     return (colCount * Math.floor(rowCount / 2)) //making sure it only takes half the screen height
                 } else {
-                    return ((rowCount * colCount))
+                    return ((rowCount * colCount) + 1) //purposely + 1 for scrolling.
                 }
             }
 
@@ -54,7 +54,7 @@ export default function withVisibleCardCount(Component) {
                 if (oldScrollY < (window.scrollY || document.documentElement.scrollTop)) {
                     setCardCount((prev) => prev + initialCount)
                 }
-            }, 250)
+            }, 400)
 
             if (!isPreview) { //only when it isn't a preview
                 window.addEventListener('scroll', handleScrollLoading);

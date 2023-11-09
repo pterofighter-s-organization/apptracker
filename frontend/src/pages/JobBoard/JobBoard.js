@@ -11,7 +11,7 @@ import "./JobBoard.css"
 
 export default function JobBoard() {
 
-    const cards = Array.from({ length: 30 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 25 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
