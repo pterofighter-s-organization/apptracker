@@ -22,7 +22,7 @@ export default function JobBoard() {
                 id={"app-list"}
                 cardX={17.5}
                 cardY={15}
-                isPreview={true}
+                isPreview={false}
                 cards={cards}
             />
         </PageLayout>

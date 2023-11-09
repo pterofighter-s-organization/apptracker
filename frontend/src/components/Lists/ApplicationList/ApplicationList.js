@@ -2,10 +2,11 @@
 //components
 import { ApplicationCard } from "./ApplicationCard"
 
+//hoc
+import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
+
 //css
 import "./ApplicationList.css"
-
-import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
 
 function ApplicationList({ id, cards, cardCount, handleClick, isPreview }) {
 
