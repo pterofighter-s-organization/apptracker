@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 
 //components
 import { ApplicationCard } from "./ApplicationCard"
+import { ShowButton } from "../../Buttons/ShowButton"
+import { RedirectButton } from "../../Buttons/RedirectButton"
 
 //hoc
 import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
@@ -10,7 +12,7 @@ import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
 import "./ApplicationList.css"
 import "../List.css"
 
-function ApplicationList({ id, cards, cardCount, isPreview }) {
+function ApplicationList({ id, cards, cardCount, isPreview, isArchived }) {
 
     return (
         <div className="list-container">
@@ -18,38 +20,29 @@ function ApplicationList({ id, cards, cardCount, isPreview }) {
                 className="list application-list"
                 id={id}
             >
-                {
-                    cards.map((item, index) => {
-                        const count = index + 1
-                        if (count <= cardCount) {
-                            return (
-                                <ApplicationCard
-                                    key={index}
-                                    id={index}
-                                />
-                            )
-                        }
-                        return <></>
-                    })
+                {isArchived ?
+                    cards.slice(0, cardCount).map((item, index) => (
+                        <ApplicationCard
+                            key={"application-card-" + index}
+                            id={"application-card-" + index}
+                            isArchived={true}
+                        />
+                    ))
+
+                    :
+                    cards.slice(0, cardCount).map((item, index) => (
+                        <ApplicationCard
+                            key={"application-card-" + index}
+                            id={"application-card-" + index}
+                        />
+                    ))
                 }
-                {/* <ApplicationCard
-                key={11}
-                id={11}
-                isArchived={true}
-            /> */}
             </div>
             {
                 isPreview ?
-                    <Link
-                        to="/"
-                        className="redirect-button"
-                    >
-                        Go to site
-                    </Link>
+                    <RedirectButton link={"/all-jobs"} />
                     :
-                    <div className="show-button">
-                        {(cardCount >= cards.length) ? "that's all the content" : "scroll to load more"}
-                    </div>
+                    <ShowButton isLoading={(cardCount >= cards.length)} />
             }
         </div>
     )

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-//hooks
-import useShowMenu from "hooks/useShowMenu"
+//hocs
+import withDropdownControl from "../../../hoc/withDropdownControl"
 
 //routes
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -9,15 +9,12 @@ import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/
 //css
 import "./DropdownNav.css"
 
-export default function DropdownNav() {
-
-    const dropdownNavId = "dropdownnav"
-    const { showMenu, handleOpenMenu, handleCloseMenu } = useShowMenu(dropdownNavId)
+function DropdownNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
 
     return (
         <nav
-            className={`dropdownnav ${showMenu ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
-            id={dropdownNavId}
+            className={`dropdownnav ${showDropdown ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
+            id={id}
         >
             <div className="dropdownnav-bar">
                 <Link
@@ -42,7 +39,7 @@ export default function DropdownNav() {
                         className="dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
                         onClick={(e) => (
-                            showMenu ? handleCloseMenu(e) : handleOpenMenu(e)
+                            showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
                         )}
                     >
                         <i className="dropdownnav-button-expand-icon bi bi-list"></i>
@@ -81,3 +78,5 @@ export default function DropdownNav() {
         </nav>
     )
 }
+
+export default withDropdownControl(DropdownNav)

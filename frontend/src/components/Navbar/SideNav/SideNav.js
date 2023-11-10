@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-//hooks
-import useShowMenu from "hooks/useShowMenu"
+//hocs
+import withDropdownControl from "../../../hoc/withDropdownControl"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
@@ -9,15 +9,12 @@ import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/
 //css
 import "./SideNav.css"
 
-export default function SideNav() {
-
-    const sideNavId = "sidenav"
-    const { showMenu, handleOpenMenu, handleCloseMenu } = useShowMenu(sideNavId)
+function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
 
     return (
         <nav
-            className={`sidenav ${showMenu ? "expanded-sidenav" : "minimized-sidenav"}`}
-            id={sideNavId}
+            className={`sidenav ${showDropdown ? "expanded-sidenav" : "minimized-sidenav"}`}
+            id={id}
         >
             <Link
                 to="/"
@@ -41,7 +38,7 @@ export default function SideNav() {
                 className="sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
                 onClick={(e) => (
-                    showMenu ? handleCloseMenu(e) : handleOpenMenu(e)
+                    showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
                 )}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
@@ -87,3 +84,5 @@ export default function SideNav() {
         </nav>
     )
 }
+
+export default withDropdownControl(SideNav)

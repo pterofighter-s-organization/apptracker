@@ -1,4 +1,4 @@
-.status-button {
+.status-dropdown {
     font-size: 0.75em;
     /**/
     /* display: flex; */
@@ -9,7 +9,7 @@
     align-items: baseline;
 }
 
-.status-button-face {
+.status-dropdown-face {
     padding: 0.75em 1.25em;
     border-radius: 2rem;
     text-transform: capitalize;
@@ -20,21 +20,21 @@
     gap: 0.5rem;
 }
 
-.status-button-face:hover {
+.status-dropdown-face:hover {
     opacity: 0.9;
 }
 
-.minimized-status-button .status-button-option-menu {
+.minimized-status-dropdown .status-dropdown-option-menu {
     display: none;
 }
 
-.status-button-option-menu {
+.status-dropdown-option-menu {
     position: absolute;
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
     /**/
-    margin-top: 0.5rem;
+    padding: 0.5rem 0;
     animation: open-dropdown 150ms ease;
     transform-origin: top center;
     /* this is how much it blurs, the thickness of the blur*/
@@ -42,24 +42,24 @@
 }
 
 @media (min-width: 17.5rem){
-    .status-button-option-menu{
+    .status-dropdown-option-menu{
         width: 16.5rem; /*follow app card width but -1 rem*/
     }
 }
 
 @media (max-width: 17.5rem){
-    .status-button-option-menu{
+    .status-dropdown-option-menu{
         width: inherit;
     }
 }
 
-.status-button-option {
+.status-dropdown-option {
     background-color: #f2efef;
     padding: 0.5em 1em;
     border-radius: 2em;
     text-transform: capitalize;
 }
 
-.status-button-option:hover {
+.status-dropdown-option:hover {
     outline: 0.05em black solid;
 }

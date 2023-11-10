@@ -30,7 +30,7 @@ export default function Navbar() {
 
     return (
         <>
-            {isMobile ? <DropdownNav /> : <SideNav />}
+            {isMobile ? <DropdownNav id={"dropdownnav"}/> : <SideNav id={"sidenav"}/>}
         </>
     )
 }

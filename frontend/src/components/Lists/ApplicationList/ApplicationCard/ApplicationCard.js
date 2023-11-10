@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //components
-import { StatusButton } from "../../../Buttons/StatusButton"
+import { StatusDropdown } from "../../../Dropdowns/StatusDropdown"
 
 //constants
 import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
@@ -30,7 +30,10 @@ export default function ApplicationCard({ isArchived, id }) {
         >
             <div className="application-card-top">
                 <div style={{ flexGrow: 1 }}>
-                    <StatusButton key={id} id={id} />
+                    <StatusDropdown
+                        key={id}
+                        id={"status-button-" + id}
+                    />
                 </div>
                 <div className="application-card-top-buttons">
                     {isArchived ?

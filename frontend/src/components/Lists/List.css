@@ -23,21 +23,3 @@
         gap: 1rem;
     }
 }
-
-.show-button {
-    background-color: #827C7C;
-    text-align: center;
-    border-radius: 2em;
-    color: white;
-    padding: 1em;
-    text-transform: capitalize;
-}
-
-.redirect-button {
-    background-color: #5a5151;
-    text-align: center;
-    border-radius: 2em;
-    color: white;
-    padding: 1em;
-    text-transform: capitalize;
-}

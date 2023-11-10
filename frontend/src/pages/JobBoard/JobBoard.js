@@ -20,8 +20,6 @@ export default function JobBoard() {
             </HeaderLayout>
             <ApplicationList
                 id={"app-list"}
-                cardX={17.5}
-                cardY={15}
                 isPreview={false}
                 cards={cards}
             />

@@ -1,33 +1,30 @@
 import { useEffect, useState } from "react"
 
-//hooks
-import useWindowSize from "../hooks/useWindowSize"
-
 //utils
-import { remToPx } from "../utils/measurements"
 import { debounce } from "../utils/debounce"
 
 export default function withVisibleCardCount(Component) {
-    function VisibleCardCount({ id, cardX, cardY, isPreview, ...props }) {
+    function VisibleCardCount({ id, isPreview, ...props }) {
         const [initialCount, setInitialCount] = useState(1)
         const [cardCount, setCardCount] = useState(1) //default at 1, multiply by number of cols
-        const { windowWidth, windowHeight } = useWindowSize()
         //based on the given window x and y, decide how many cards it should shown at once.
         //measure x, decide how many it can show in row.
         //Using breakpoint, we will decide how many cards it should show
 
         useEffect(() => {
-            const gapInPx = remToPx((windowWidth > 1200) ? 1.25 : 1) //in rem
+            // const gapInPx = remToPx((windowWidth > 1200) ? 1.25 : 1)
+            const gapInPx = 0 //no need to get the gap as element child already included
             const listElement = document.getElementById(id)
+            const listElementCard = listElement.children[0]
 
             const measureColCount = () => {
-                const cardXInPx = (remToPx(cardX) + gapInPx)
+                const cardXInPx = (listElementCard.offsetWidth + gapInPx)
                 return Math.floor((listElement.offsetWidth) / cardXInPx)
             }
 
             const measureRowCount = () => {
-                const cardYInPx = (remToPx(cardY) + gapInPx)
-                return Math.floor((windowHeight) / cardYInPx)
+                const cardYInPx = (listElementCard.offsetHeight + gapInPx)
+                return Math.floor((window.innerHeight) / cardYInPx)
             }
 
             const calculateCardCount = () => {
@@ -37,14 +34,23 @@ export default function withVisibleCardCount(Component) {
                 if (isPreview) {
                     return (colCount * Math.floor(rowCount / 2)) //making sure it only takes half the screen height
                 } else {
-                    return ((rowCount * colCount) + 1) //purposely + 1 for scrolling.
+                    return ((rowCount * colCount) + 0) //purposely + 1 for scrolling.
                 }
             }
 
-            const calculatedCount = calculateCardCount()
-            setCardCount(calculatedCount)
-            setInitialCount(calculatedCount)
-        }, [isPreview, id, windowWidth, windowHeight, cardX, cardY])
+            const handleCardCount = () => {
+                const calculatedCount = calculateCardCount()
+                setCardCount(calculatedCount)
+                setInitialCount(calculatedCount)
+            }
+
+            handleCardCount()
+            window.addEventListener("resize", handleCardCount)
+
+            return () => {
+                window.removeEventListener("resize", handleCardCount)
+            }
+        }, [isPreview, id])
 
         useEffect(() => {
             //detect if is scrolling down
@@ -57,14 +63,13 @@ export default function withVisibleCardCount(Component) {
             }, 400)
 
             if (!isPreview) { //only when it isn't a preview
-                window.addEventListener('scroll', handleScrollLoading);
+                document.addEventListener('scroll', handleScrollLoading);
             }
 
             return () => {
-                if (!isPreview) {
-                    window.removeEventListener('scroll', handleScrollLoading)
-                }
+                document.removeEventListener('scroll', handleScrollLoading)
             }
+            //to avoid resizing and the eventlistener got removed by accident
         }, [initialCount, isPreview])
 
         return <Component
