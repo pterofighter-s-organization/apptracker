@@ -1,6 +1,7 @@
 
 //components
 import { NoteCard } from "../../components/Cards/NoteCard";
+import { CardList } from "../../components/CardList";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -11,7 +12,6 @@ import withStatusControl from "../../hoc/withStatusControl";
 
 //css
 import "./NoteBoard.css"
-import { CardList } from "../../components/CardList";
 
 function NoteBoard({ status, handleStatus }) {
 
@@ -31,6 +31,7 @@ function NoteBoard({ status, handleStatus }) {
                 cards={cards}
                 CardComponent={NoteCard}
                 isPreview={false}
+                isRedirect={false}
                 status={status}
             />
         </PageLayout>

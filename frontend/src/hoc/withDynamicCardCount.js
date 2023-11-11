@@ -12,15 +12,16 @@ export default function withDynamicCardCount(Component, increaseCount) {
             const calculateCardCount = () => {
                 const colCount = Math.floor(listElement.offsetWidth / cardElement.offsetWidth)
                 const rowCount = Math.floor(window.innerHeight / cardElement.offsetHeight)
+                const rowPositiveCount = rowCount > 0 ? rowCount : 1
+                const colPositiveCount = colCount > 0 ? colCount : 1
 
-                return isPreview ? (colCount * Math.floor(rowCount / 2)) : (rowCount * colCount)
+                return isPreview ? (colPositiveCount * Math.ceil(rowPositiveCount / 4)) : (rowPositiveCount * colPositiveCount)
             }
 
             const handleCalculation = () => {
                 const calculatedCardCount = calculateCardCount()
                 setCardCount(calculatedCardCount)
                 setInitialCount(calculatedCardCount)
-                console.log("test")
             }
 
             handleCalculation()

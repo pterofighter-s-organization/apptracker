@@ -13,13 +13,13 @@ import withStatusControl from "../../hoc/withStatusControl";
 //css
 import "./TaskBoard.css"
 
-function TaskBoard({status, handleStatus}) {
+function TaskBoard({ status, handleStatus }) {
 
     const cards = Array.from({ length: 25 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
-            <HeaderLayout 
+            <HeaderLayout
                 title={"all job tasks"}
                 status={status}
                 handleStatus={handleStatus}
@@ -32,6 +32,7 @@ function TaskBoard({status, handleStatus}) {
                 CardComponent={TaskCard}
                 status={status}
                 isPreview={false}
+                isRedirect={false}
             />
         </PageLayout>
     )

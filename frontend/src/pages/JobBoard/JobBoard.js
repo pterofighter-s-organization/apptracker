@@ -15,7 +15,7 @@ import "./JobBoard.css"
 
 function JobBoard({ status, handleStatus }) {
 
-    const cards = Array.from({ length: 0 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 25 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
@@ -31,6 +31,7 @@ function JobBoard({ status, handleStatus }) {
                 cards={cards}
                 CardComponent={JobCard}
                 isPreview={false}
+                isRedirect={false}
                 status={status}
             />
         </PageLayout>

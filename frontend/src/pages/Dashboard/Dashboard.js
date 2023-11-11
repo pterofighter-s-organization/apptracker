@@ -18,7 +18,8 @@ import "./Dashboard.css"
 function Dashboard({ status, handleStatus }) {
 
     const isPreview = true
-    const cards = Array.from({ length: 15 }, (_, index) => index + 1)
+    const isRedirect = true
+    const cards = Array.from({ length: 30 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
@@ -35,6 +36,7 @@ function Dashboard({ status, handleStatus }) {
                 cards={cards}
                 status={status}
                 isPreview={isPreview}
+                isRedirect={isRedirect}
             />
             <CardList
                 type={"tasks"}
@@ -42,6 +44,7 @@ function Dashboard({ status, handleStatus }) {
                 cards={cards}
                 status={status}
                 isPreview={isPreview}
+                isRedirect={isRedirect}
             />
             <CardList
                 type={"notes"}
@@ -49,6 +52,7 @@ function Dashboard({ status, handleStatus }) {
                 cards={cards}
                 status={status}
                 isPreview={isPreview}
+                isRedirect={isRedirect}
             />
         </PageLayout>
     )

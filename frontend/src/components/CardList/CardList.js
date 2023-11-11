@@ -12,12 +12,12 @@ import withDynamicCardCount from "../../hoc/withDynamicCardCount"
 //css
 import "./CardList.css"
 
-function CardList({ cards, initialCount, cardCount, CardComponent, status, isPreview, type, ...props }) {
+function CardList({ cards, initialCount, cardCount, CardComponent, status, isRedirect, type, ...props }) {
 
     const CARD_WIDTHS = {
-        "jobs": 17.5,
-        "tasks": 30,
-        "notes": 17.5
+        "jobs": "17.5rem",
+        "tasks": "30rem",
+        "notes": "17.5rem"
     }
 
     return (
@@ -25,7 +25,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isPre
             <div
                 id={"card-list-" + type}
                 className="card-list"
-                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARD_WIDTHS[type]}rem, 1fr))` }}
+                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARD_WIDTHS[type]}, 1fr))` }}
             >
                 {
                     cards.slice(0, cardCount).map((card, index) => (
@@ -38,7 +38,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isPre
             </div>
             {
                 cards.length > 0 ?
-                    isPreview ?
+                    isRedirect ?
                         <RedirectButton link={"/all-" + type + "/" + status}>
                             show all {type}
                         </RedirectButton>
@@ -56,9 +56,15 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isPre
                             <div>
                                 no {status} {type} at the moment!
                             </div>
-                            <RedirectButton link={"/new-job"}>
-                                track new {type}
-                            </RedirectButton>
+                            {type === "jobs" ?
+                                <RedirectButton link={"/new-job"}>
+                                    track new {type}
+                                </RedirectButton>
+                                :
+                                <>
+                                    create one inside jobs page.
+                                </>
+                            }
                         </>
                     </ErrorLayout>
             }
