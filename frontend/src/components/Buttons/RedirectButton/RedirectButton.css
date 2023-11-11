@@ -2,7 +2,6 @@
     background-color: #5a5151;
     color: white;
     padding: 1.25em 2em;
-    text-transform: capitalize;
     text-decoration: none;
     font-size: 0.9em;
     border-radius: 2em;
@@ -11,4 +10,8 @@
 
 .redirect-button:hover {
     filter: brightness(1.25);
+}
+
+.redirect-button::first-letter{
+    text-transform: uppercase;
 }

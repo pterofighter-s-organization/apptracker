@@ -1,6 +1,6 @@
 
 //hocs
-import withDropdownControl from "../../../hoc/withDropdownControl"
+import withDropdownControl from "../../../hocs/withDropdownControl"
 
 //css
 import "./StatusDropdown.css"

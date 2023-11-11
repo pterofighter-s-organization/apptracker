@@ -7,7 +7,7 @@ export default function withDynamicCardCount(Component, increaseCount) {
 
         useEffect(() => {
             const listElement = document.getElementById("card-list-" + type)
-            const cardElement = (listElement.children[0]) ? listElement.children[0] : listElement
+            const cardElement = (listElement && listElement.children[0]) ? listElement.children[0] : listElement
 
             const calculateCardCount = () => {
                 const colCount = Math.floor(listElement.offsetWidth / cardElement.offsetWidth)
@@ -40,10 +40,10 @@ export default function withDynamicCardCount(Component, increaseCount) {
         const handleResetCount = (e) => {
             e.preventDefault()
             setCardCount(initialCount)
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // window.scrollTo({
+            //     top: document.documentElement.scrollHeight - (initialCount * cardElement.offsetHeight),
+            //     behavior: 'smooth'
+            // });
         }
 
         return <Component

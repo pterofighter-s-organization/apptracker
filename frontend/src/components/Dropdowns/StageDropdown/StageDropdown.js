@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 //hocs
-import withDropdownControl from "../../../hoc/withDropdownControl"
+import withDropdownControl from "../../../hocs/withDropdownControl"
 
 //constants
 import { APP_STAGE_COLORS } from "../../../constants/application"

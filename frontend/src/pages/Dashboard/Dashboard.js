@@ -10,7 +10,7 @@ import { HeaderLayout } from "../../layouts/HeaderLayout"
 import { PageLayout } from "../../layouts/PageLayout"
 
 //hocs
-import withStatusControl from "../../hoc/withStatusControl"
+import withStatusControl from "../../hocs/withStatusControl"
 
 //css
 import "./Dashboard.css"
@@ -19,7 +19,9 @@ function Dashboard({ status, handleStatus }) {
 
     const isPreview = true
     const isRedirect = true
-    const cards = Array.from({ length: 30 }, (_, index) => index + 1)
+    const jobCards = Array.from({ length: 25 }, (_, index) => index + 1)
+    const taskCards = Array.from({ length: 30 }, (_, index) => index + 1)
+    const noteCards = Array.from({ length: 30 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
@@ -33,7 +35,7 @@ function Dashboard({ status, handleStatus }) {
             <CardList
                 type={"jobs"}
                 CardComponent={JobCard}
-                cards={cards}
+                cards={jobCards}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}
@@ -41,7 +43,7 @@ function Dashboard({ status, handleStatus }) {
             <CardList
                 type={"tasks"}
                 CardComponent={TaskCard}
-                cards={cards}
+                cards={taskCards}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}
@@ -49,7 +51,7 @@ function Dashboard({ status, handleStatus }) {
             <CardList
                 type={"notes"}
                 CardComponent={NoteCard}
-                cards={cards}
+                cards={noteCards}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}

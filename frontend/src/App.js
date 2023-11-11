@@ -5,6 +5,7 @@ import { Dashboard } from './pages/Dashboard';
 import { JobBoard } from './pages/JobBoard';
 import { TaskBoard } from './pages/TaskBoard';
 import { NoteBoard } from './pages/NoteBoard';
+import { JobPage } from './pages/JobPage';
 
 //css
 import './App.css'
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/all-jobs/:givenStatus" element={<JobBoard />} />
           <Route path="/all-tasks/:givenStatus" element={<TaskBoard />} />
           <Route path="/all-notes/:givenStatus" element={<NoteBoard />} />
+          <Route path="/job/:id" element={<JobPage />} />
         </Routes>
       </Router>
     </div>

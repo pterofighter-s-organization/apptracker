@@ -20,7 +20,7 @@ export default function withDropdownControl(Component) {
             return () => {
                 document.removeEventListener("click", handleClick)
             }
-        }, [])
+        }, [id])
 
         const handleCloseDropdown = (e) => {
             e.preventDefault()

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import withDropdownControl from "../../../hoc/withDropdownControl"
+import withDropdownControl from "../../../hocs/withDropdownControl"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../../../constants/routes"

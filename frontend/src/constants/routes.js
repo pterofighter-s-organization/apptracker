@@ -1,4 +1,3 @@
-import { ARCHIVED_BIN_ICON } from "./components"
 
 export const HOME_ROUTE = {
     text: "dashboard",

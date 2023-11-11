@@ -7,7 +7,7 @@ import { RedirectButton } from "../Buttons/RedirectButton"
 import { ErrorLayout } from "../../layouts/ErrorLayout"
 
 //hocs
-import withDynamicCardCount from "../../hoc/withDynamicCardCount"
+import withDynamicCardCount from "../../hocs/withDynamicCardCount"
 
 //css
 import "./CardList.css"
@@ -40,7 +40,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                 cards.length > 0 ?
                     isRedirect ?
                         <RedirectButton link={"/all-" + type + "/" + status}>
-                            show all {type}
+                            Click here for {type}
                         </RedirectButton>
                         :
                         <ShowButton

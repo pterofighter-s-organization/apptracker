@@ -3,8 +3,11 @@
     border-radius: 2em;
     color: white;
     padding: 1.25em 2em;
-    text-transform: capitalize;
     font-size: 0.9em;
+}
+
+.show-button::first-letter{
+    text-transform: uppercase;
 }
 
 .show-button-load {
