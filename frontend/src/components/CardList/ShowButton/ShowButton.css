@@ -6,10 +6,6 @@
     text-transform: capitalize;
 }
 
-.show-button:hover {
-    filter: brightness(1.25);
-}
-
 .show-button-load {
     background-color: #5a5151;
 }

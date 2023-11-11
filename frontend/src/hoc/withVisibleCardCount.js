@@ -14,8 +14,8 @@ export default function withVisibleCardCount(Component) {
         useEffect(() => {
             // const gapInPx = remToPx((windowWidth > 1200) ? 1.25 : 1)
             const gapInPx = 0 //no need to get the gap as element child already included
-            const listElement = document.getElementById(id)
-            const listElementCard = listElement.children[0]
+            const listElement = document.getElementById(id) 
+            const listElementCard = listElement.children[0] ? listElement.children[0] : listElement
 
             const measureColCount = () => {
                 const cardXInPx = (listElementCard.offsetWidth + gapInPx)
@@ -52,32 +52,49 @@ export default function withVisibleCardCount(Component) {
             }
         }, [isPreview, id])
 
-        useEffect(() => {
-            //detect if is scrolling down
-            let oldScrollY = window.scrollY || document.documentElement.scrollTop;
-            const handleScrollLoading = debounce(() => {
-                // no need to detect when to end because if it ended, there will be no more scrolling.
-                if (oldScrollY < (window.scrollY || document.documentElement.scrollTop)) {
-                    setCardCount((prev) => prev + initialCount)
-                }
-            }, 400)
+        const handleClick = (e) => {
+            e.preventDefault()
+            setCardCount((prev) => prev + (initialCount >= 20 ? initialCount : 20))
+        }
 
-            if (!isPreview) { //only when it isn't a preview
-                document.addEventListener('scroll', handleScrollLoading);
-            }
-
-            return () => {
-                document.removeEventListener('scroll', handleScrollLoading)
-            }
-            //to avoid resizing and the eventlistener got removed by accident
-        }, [initialCount, isPreview])
+        const handleReset = (e) => {
+            e.preventDefault()
+            setCardCount(initialCount)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         return <Component
             id={id}
             cardCount={cardCount}
             isPreview={isPreview}
+            handleClick={handleClick}
+            handleReset={handleReset}
             {...props}
         />
     }
     return VisibleCardCount
 }
+
+
+// useEffect(() => {
+//     //detect if is scrolling down
+//     let oldScrollY = window.scrollY || document.documentElement.scrollTop;
+//     const handleScrollLoading = debounce(() => {
+//         // no need to detect when to end because if it ended, there will be no more scrolling.
+//         if (oldScrollY < (window.scrollY || document.documentElement.scrollTop)) {
+//             setCardCount((prev) => prev + initialCount)
+//         }
+//     }, 400)
+
+//     if (!isPreview) { //only when it isn't a preview
+//         document.addEventListener('scroll', handleScrollLoading);
+//     }
+
+//     return () => {
+//         document.removeEventListener('scroll', handleScrollLoading)
+//     }
+//     //to avoid resizing and the eventlistener got removed by accident
+// }, [initialCount, isPreview])

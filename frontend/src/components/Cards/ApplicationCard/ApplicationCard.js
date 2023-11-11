@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom"
 
 //components
-import { StatusDropdown } from "../../../Dropdowns/StatusDropdown"
+import { StageDropdown } from "../../Dropdowns/StageDropdown"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../constants/components"
 
 //css
 import "./ApplicationCard.css"
 
 export default function ApplicationCard({ isArchived, id }) {
 
+    
     const handleArchive = (e) => {
         e.preventDefault()
     }
@@ -30,9 +31,9 @@ export default function ApplicationCard({ isArchived, id }) {
         >
             <div className="application-card-top">
                 <div style={{ flexGrow: 1 }}>
-                    <StatusDropdown
+                    <StageDropdown
                         key={id}
-                        id={"status-button-" + id}
+                        id={"stage-dropdown-" + id}
                     />
                 </div>
                 <div className="application-card-top-buttons">

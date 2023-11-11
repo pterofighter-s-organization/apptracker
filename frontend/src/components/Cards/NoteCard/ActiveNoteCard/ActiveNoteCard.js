@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
 
 //css
 import "../NoteCard.css"
@@ -12,7 +12,7 @@ export default function ActiveNoteCard({ id }) {
     const [isEdit, setIsEdit] = useState(false)
     const [value, setValue] = useState(``)
 
-    const activeNoteCardId = "note-card-" + id
+    const activeNoteCardId = "active-" + id
 
     const handleSave = (e) => {
         e.preventDefault()
@@ -27,6 +27,7 @@ export default function ActiveNoteCard({ id }) {
     return (
         <div
             className="note-card"
+            key={activeNoteCardId}
             id={activeNoteCardId}
         >
             <div className="note-card-header">
@@ -68,7 +69,7 @@ export default function ActiveNoteCard({ id }) {
             {
                 isEdit ?
                     <textarea
-                        id={"textarea-" + activeNoteCardId}
+                        id={"textarea-" + id}
                         className="note-card-textarea"
                         value={value}
                         placeholder="Remember to save above after edit."

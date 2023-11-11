@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import withDropdownControl from "../../../hoc/withDropdownControl"
 
 //routes
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../../../constants/routes"
 
 //css
 import "./DropdownNav.css"
@@ -18,7 +18,7 @@ function DropdownNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown
         >
             <div className="dropdownnav-bar">
                 <Link
-                    to={"/"}
+                    to={HOME_ROUTE.route}
                     className="dropdownnav-logo"
                 >
                     <img

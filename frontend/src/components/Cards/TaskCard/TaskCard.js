@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../constants/components"
 
 //css
 import "./TaskCard.css"
 
-export default function TaskCard({ title, isArchived }) {
+export default function TaskCard({ id, isArchived }) {
+
+    const title = "title hello, i am"
+    const taskCardId = "task-card-" + id
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -26,6 +29,8 @@ export default function TaskCard({ title, isArchived }) {
     return (
         <Link
             to={"/all-jobs"}
+            id={taskCardId}
+            key={taskCardId}
             className="task-card"
         >
             <div className="task-card-section">

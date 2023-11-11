@@ -5,6 +5,7 @@ import "../NoteCard.css"
 
 export default function ArchivedNoteCard({ id }) {
 
+    const archivedNoteCardId = "archived-" + id
     const value = "t"
 
     const handleRestore = (e) => {
@@ -17,7 +18,11 @@ export default function ArchivedNoteCard({ id }) {
     }
 
     return (
-        <div className="note-card">
+        <div
+            className="note-card"
+            key={archivedNoteCardId}
+            id={archivedNoteCardId}
+        >
             <div className="note-card-header">
                 <Link
                     to={"/all-jobs"}

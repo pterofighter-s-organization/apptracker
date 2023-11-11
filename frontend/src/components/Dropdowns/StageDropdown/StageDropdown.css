@@ -1,0 +1,61 @@
+.stage-dropdown {
+    font-size: 0.75em;
+    /**/
+    position: relative;
+    align-items: baseline;
+}
+
+.stage-dropdown-face {
+    padding: 0.75em 1.25em;
+    border-radius: 2rem;
+    text-transform: capitalize;
+    /**/
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stage-dropdown-face:hover {
+    opacity: 0.9;
+}
+
+.minimized-stage-dropdown .stage-dropdown-options {
+    display: none;
+}
+
+.stage-dropdown-options {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    /**/
+    padding: 0.5rem 0;
+    animation: open-dropdown 150ms ease;
+    transform-origin: top center;
+    /* this is how much it blurs, the thickness of the blur*/
+    backdrop-filter: blur(1.5px);
+}
+
+@media (min-width: 17.5rem){
+    .stage-dropdown-options{
+        width: 16.5rem; /*follow app card width but -1 rem*/
+    }
+}
+
+@media (max-width: 17.5rem){
+    .stage-dropdown-options{
+        width: inherit;
+    }
+}
+
+.stage-dropdown-option {
+    background-color: #f2efef;
+    padding: 0.5em 1em;
+    border-radius: 2em;
+    text-transform: capitalize;
+}
+
+.stage-dropdown-option:hover {
+    outline: 0.05em black solid;
+}

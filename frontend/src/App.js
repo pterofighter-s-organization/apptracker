@@ -16,10 +16,13 @@ export default function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<Dashboard/>} />
-          <Route path="/all-jobs" element={<JobBoard/>} />
-          <Route path="/all-tasks" element={<TaskBoard/>} />
-          <Route path="/all-notes" element={<NoteBoard/>} />
+          <Route exact path="/" element={<Dashboard />} />
+          <Route path="/all-jobs" element={<JobBoard />} />
+          <Route path="/all-tasks" element={<TaskBoard />} />
+          <Route path="/all-notes" element={<NoteBoard />} />
+          <Route path="/all-jobs/:givenStatus" element={<JobBoard />} />
+          <Route path="/all-tasks/:givenStatus" element={<TaskBoard />} />
+          <Route path="/all-notes/:givenStatus" element={<NoteBoard />} />
         </Routes>
       </Router>
     </div>

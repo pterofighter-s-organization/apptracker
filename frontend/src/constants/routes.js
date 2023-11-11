@@ -1,5 +1,11 @@
 import { ARCHIVED_BIN_ICON } from "./components"
 
+export const HOME_ROUTE = {
+    text: "dashboard",
+    route: "/",
+    icon: ""
+}
+
 export const NEW_APP_ROUTE = {
     text: "new job",
     route: "/new-app",
@@ -22,11 +28,11 @@ export const FEATURES_ROUTES = [
         route: "/all-notes",
         icon: "bi bi-stickies-fill"
     },
-    {
-        text: "archived bin",
-        route: "/archived-bin",
-        icon: ARCHIVED_BIN_ICON
-    }
+    // {
+    //     text: "archived bin",
+    //     route: "/archived-bin",
+    //     icon: ARCHIVED_BIN_ICON
+    // }
 ]
 
 export const LOGIN_ROUTE = {

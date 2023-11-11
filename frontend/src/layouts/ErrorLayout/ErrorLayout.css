@@ -1,0 +1,14 @@
+
+.error-layout{
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 2em;
+    border-radius: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-transform: capitalize;
+}
+

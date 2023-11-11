@@ -1,33 +1,59 @@
 
 //components
-import { TaskCard } from "./TaskCard"
+import { TaskCard } from "../../Cards/TaskCard"
+import { RedirectButton } from "../../Buttons/RedirectButton"
+import { ShowButton } from "../../Buttons/ShowButton"
+
+//hocs
+import withVisibleCardCount from "../../../hoc/withVisibleCardCount"
 
 //css
 import "./TaskList.css"
+import "../List.css"
 
-export default function TaskList() {
+function TaskList({ id, cards, cardCount, isPreview, status, ...props }) {
 
     return (
-        <div className="task-list">
+        <div className="list-container">
+            <div
+                className="list task-list"
+                id={id}
+            >
+                {status === "active" ?
+                    cards.slice(0, cardCount).map((item, index) => (
+                        <TaskCard
+                            key={"task-card-" + index}
+                            id={"task-card-" + index}
+                            isArchived={false}
+                        />
+                    ))
+
+                    :
+                    cards.slice(0, cardCount).map((item, index) => (
+                        <TaskCard
+                            key={"task-card-" + index}
+                            id={"task-card-" + index}
+                            isArchived={true}
+                        />
+                    ))
+                }
+            </div>
             {
-                Array.from({ length: 5 }, (_, index) => index + 1).map((id) => (
-                    <TaskCard
-                        key={id}
-                        id={id}
-                        title={"test me i am a task test me i am a task test me i am a task"}
+                isPreview ?
+                    <RedirectButton
+                        link={"/all-tasks"}
+                        text={"tasks"}
+                        status={status}
                     />
-                ))
-            }
-            {
-                Array.from({ length: 5 }, (_, index) => index + 1).map((id) => (
-                    <TaskCard
-                        key={id}
-                        id={id}
-                        isArchived={true}
-                        title={"test me i am a task"}
+                    :
+                    <ShowButton
+                        isLoading={(cardCount < cards.length)}
+                        text={"tasks"}
+                        {...props}
                     />
-                ))
             }
         </div>
     )
 }
+
+export default withVisibleCardCount(TaskList)

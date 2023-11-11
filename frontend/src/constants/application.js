@@ -1,5 +1,5 @@
 
-export const APP_STATUS_COLORS = {
+export const APP_STAGE_COLORS = {
     "applied": "#FFA500",
     "rejected": "#FF0000",
     "interviewing": "#4A47F2",

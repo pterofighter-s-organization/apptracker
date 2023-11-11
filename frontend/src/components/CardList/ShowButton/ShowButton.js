@@ -2,23 +2,23 @@
 //css
 import "./ShowButton.css"
 
-export default function ShowButton({ isLoading, handleClick, handleReset, text }) {
+export default function ShowButton({ isShow, handleResetCount, handleAddCount, label }) {
 
     return (
         <div className="show-button-container">
-            {isLoading ?
+            {isShow ?
                 <button
                     type="button"
                     className="show-button show-button-load"
-                    onClick={(e) => handleClick(e)}
+                    onClick={(e) => handleAddCount(e)}
                 >
-                    show more {text}
+                    show more {label}
                 </button>
                 :
                 <button
                     type="button"
                     className="show-button show-button-reset"
-                    onClick={(e) => handleReset(e)}
+                    onClick={(e) => handleResetCount(e)}
                 >
                     show less
                 </button>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import withDropdownControl from "../../../hoc/withDropdownControl"
 
 //constants
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE } from "../../../constants/routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../../../constants/routes"
 
 //css
 import "./SideNav.css"
@@ -17,7 +17,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
             id={id}
         >
             <Link
-                to="/"
+                to={HOME_ROUTE.route}
                 className="sidenav-logo"
                 style={{ textDecoration: "none", marginBottom: "1rem" }}
             >
