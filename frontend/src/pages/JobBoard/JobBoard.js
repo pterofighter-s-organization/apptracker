@@ -1,6 +1,7 @@
 
 //components
-import { ApplicationList } from "../../components/Lists/ApplicationList";
+import { JobCard } from "../../components/Cards/JobCard";
+import { CardList } from "../../components/CardList";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -14,7 +15,7 @@ import "./JobBoard.css"
 
 function JobBoard({ status, handleStatus }) {
 
-    const cards = Array.from({ length: 25 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 0 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
@@ -25,11 +26,12 @@ function JobBoard({ status, handleStatus }) {
             >
                 Every job from <i>interviewing to interested.</i>
             </HeaderLayout>
-            <ApplicationList
-                id={"app-list"}
+            <CardList
+                type={"jobs"}
+                cards={cards}
+                CardComponent={JobCard}
                 isPreview={false}
                 status={status}
-                cards={cards}
             />
         </PageLayout>
     )

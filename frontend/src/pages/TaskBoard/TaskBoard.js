@@ -1,6 +1,7 @@
 
 //components
-import { TaskList } from "../../components/Lists/TaskList";
+import { TaskCard } from "../../components/Cards/TaskCard";
+import { CardList } from "../../components/CardList";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -15,7 +16,7 @@ import "./TaskBoard.css"
 function TaskBoard({status, handleStatus}) {
 
     const cards = Array.from({ length: 25 }, (_, index) => index + 1)
-    
+
     return (
         <PageLayout>
             <HeaderLayout 
@@ -25,11 +26,12 @@ function TaskBoard({status, handleStatus}) {
             >
                 Shows all the tasks you created for each job application.
             </HeaderLayout>
-            <TaskList
-                id={"task-list"}
-                isPreview={false}
+            <CardList
+                type={"tasks"}
                 cards={cards}
+                CardComponent={TaskCard}
                 status={status}
+                isPreview={false}
             />
         </PageLayout>
     )

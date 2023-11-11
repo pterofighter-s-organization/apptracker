@@ -15,7 +15,6 @@ import "./StageDropdown.css"
 function StageDropdown({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
 
     const [stage, setStage] = useState("interviewing")
-    const stageDropdownId = "stage-dropdown-" + id
 
     const handleStage = (e) => {
         e.preventDefault()
@@ -34,7 +33,7 @@ function StageDropdown({ id, showDropdown, handleCloseDropdown, handleOpenDropdo
                 onClick={(e) => (
                     showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
                 )}
-                id={stageDropdownId}
+                id={id}
             >
                 <div>{stage}</div>
                 <i

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
 
 export default function withDynamicCardCount(Component, increaseCount) {
-    function DynamicCardCount({ label, isPreview, ...props }) {
+    function DynamicCardCount({ type, isPreview, ...props }) {
         const [initialCount, setInitialCount] = useState(1)
         const [cardCount, setCardCount] = useState(1)
 
         useEffect(() => {
-            const listElement = document.getElementById("card-list-" + label)
+            const listElement = document.getElementById("card-list-" + type)
             const cardElement = (listElement.children[0]) ? listElement.children[0] : listElement
 
             const calculateCardCount = () => {
-                const rowCount = Math.floor(listElement.offsetWidth / cardElement.offsetWidth)
-                const colCount = Math.floor(window.innerHeight / cardElement.offsetHeight)
+                const colCount = Math.floor(listElement.offsetWidth / cardElement.offsetWidth)
+                const rowCount = Math.floor(window.innerHeight / cardElement.offsetHeight)
 
                 return isPreview ? (colCount * Math.floor(rowCount / 2)) : (rowCount * colCount)
             }
@@ -20,6 +20,7 @@ export default function withDynamicCardCount(Component, increaseCount) {
                 const calculatedCardCount = calculateCardCount()
                 setCardCount(calculatedCardCount)
                 setInitialCount(calculatedCardCount)
+                console.log("test")
             }
 
             handleCalculation()
@@ -28,7 +29,7 @@ export default function withDynamicCardCount(Component, increaseCount) {
             return () => {
                 window.removeEventListener("resize", handleCalculation)
             }
-        }, [isPreview, label])
+        }, [isPreview, type])
 
         const handleAddCount = (e) => {
             e.preventDefault()
@@ -38,13 +39,19 @@ export default function withDynamicCardCount(Component, increaseCount) {
         const handleResetCount = (e) => {
             e.preventDefault()
             setCardCount(initialCount)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         return <Component
+            initialCount={initialCount}
             cardCount={cardCount}
             handleAddCount={handleAddCount}
             handleResetCount={handleResetCount}
-            label={label}
+            type={type}
+            isPreview={isPreview}
             {...props}
         />
     }

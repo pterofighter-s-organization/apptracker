@@ -7,31 +7,31 @@ import { RedirectButton } from "../Buttons/RedirectButton"
 import { ErrorLayout } from "../../layouts/ErrorLayout"
 
 //hocs
-import withVisibleCardCount from "../../hoc/withVisibleCardCount"
+import withDynamicCardCount from "../../hoc/withDynamicCardCount"
 
 //css
 import "./CardList.css"
 
-function CardList({ cards, cardCount, CardComponent, status, isPreview, label, ...props }) {
+function CardList({ cards, initialCount, cardCount, CardComponent, status, isPreview, type, ...props }) {
 
-    const CARDS_WIDTH = {
+    const CARD_WIDTHS = {
         "jobs": 17.5,
-        "tasks": 35,
+        "tasks": 30,
         "notes": 17.5
     }
 
     return (
         <div className="card-list-container">
             <div
-                id={"card-list-" + label}
+                id={"card-list-" + type}
                 className="card-list"
-                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARDS_WIDTH[label]}rem, 1fr))` }}
+                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARD_WIDTHS[type]}rem, 1fr))` }}
             >
                 {
                     cards.slice(0, cardCount).map((card, index) => (
                         <CardComponent
                             id={index}
-                            isArchived={status}
+                            isArchived={status === "archived"}
                         />
                     ))
                 }
@@ -39,21 +39,25 @@ function CardList({ cards, cardCount, CardComponent, status, isPreview, label, .
             {
                 cards.length > 0 ?
                     isPreview ?
-                        <RedirectButton link={"/all-" + label + "/" + status}>
-                            show all {label}
+                        <RedirectButton link={"/all-" + type + "/" + status}>
+                            show all {type}
                         </RedirectButton>
                         :
                         <ShowButton
                             isShow={(cardCount < cards.length)}
-                            label={label}
+                            isInitial={(cardCount === initialCount)}
+                            isLess={(cards.length < initialCount)}
+                            type={type}
                             {...props}
                         />
                     :
                     <ErrorLayout>
                         <>
-                            no {label} at the moment.
+                            <div>
+                                no {status} {type} at the moment!
+                            </div>
                             <RedirectButton link={"/new-job"}>
-                                track new job
+                                track new {type}
                             </RedirectButton>
                         </>
                     </ErrorLayout>
@@ -62,4 +66,4 @@ function CardList({ cards, cardCount, CardComponent, status, isPreview, label, .
     )
 }
 
-export default withVisibleCardCount(CardList, 20)
+export default withDynamicCardCount(CardList, 20)

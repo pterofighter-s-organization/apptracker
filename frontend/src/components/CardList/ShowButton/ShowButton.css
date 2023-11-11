@@ -2,8 +2,9 @@
     text-align: center;
     border-radius: 2em;
     color: white;
-    padding: 1em;
+    padding: 1.25em 2em;
     text-transform: capitalize;
+    font-size: 0.9em;
 }
 
 .show-button-load {

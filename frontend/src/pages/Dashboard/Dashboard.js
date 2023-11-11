@@ -1,8 +1,9 @@
 
 //components
-import { ApplicationCard } from "../../components/Cards/ApplicationCard"
+import { JobCard } from "../../components/Cards/JobCard"
 import { TaskCard } from "../../components/Cards/TaskCard"
 import { NoteCard } from "../../components/Cards/NoteCard"
+import { CardList } from "../../components/CardList"
 
 //layout
 import { HeaderLayout } from "../../layouts/HeaderLayout"
@@ -17,7 +18,7 @@ import "./Dashboard.css"
 function Dashboard({ status, handleStatus }) {
 
     const isPreview = true
-    const cards = Array.from({ length: 0 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 15 }, (_, index) => index + 1)
 
     return (
         <PageLayout>
@@ -28,23 +29,26 @@ function Dashboard({ status, handleStatus }) {
             >
                 Welcome, <i>User 1</i>
             </HeaderLayout>
-            <ApplicationList
-                id={"app-list"}
+            <CardList
+                type={"jobs"}
+                CardComponent={JobCard}
                 cards={cards}
-                isPreview={isPreview}
                 status={status}
+                isPreview={isPreview}
             />
-            <TaskList
-                id={"task-list"}
+            <CardList
+                type={"tasks"}
+                CardComponent={TaskCard}
                 cards={cards}
-                isPreview={isPreview}
                 status={status}
+                isPreview={isPreview}
             />
-            <NoteList
-                id={"note-list"}
+            <CardList
+                type={"notes"}
+                CardComponent={NoteCard}
                 cards={cards}
-                isPreview={isPreview}
                 status={status}
+                isPreview={isPreview}
             />
         </PageLayout>
     )

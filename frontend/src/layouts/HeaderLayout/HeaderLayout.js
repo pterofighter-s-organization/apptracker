@@ -16,11 +16,16 @@ export default function HeaderLayout({ children, title, status, handleStatus }) 
                     {children}
                 </h6>
             </div>
-            <StatusDropdown
-                id={"status-dropdown"}
-                status={status}
-                handleStatus={handleStatus}
-            />
+            {
+                status ?
+                    <StatusDropdown
+                        id={"status-dropdown"}
+                        status={status}
+                        handleStatus={handleStatus}
+                    />
+                    :
+                    null
+            }
         </div>
     )
 }

@@ -1,6 +1,6 @@
 
 //components
-import { NoteList } from "../../components/Lists/NoteList";
+import { NoteCard } from "../../components/Cards/NoteCard";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -11,6 +11,7 @@ import withStatusControl from "../../hoc/withStatusControl";
 
 //css
 import "./NoteBoard.css"
+import { CardList } from "../../components/CardList";
 
 function NoteBoard({ status, handleStatus }) {
 
@@ -25,11 +26,12 @@ function NoteBoard({ status, handleStatus }) {
             >
                 Shows all the notes you've created for each job applications.
             </HeaderLayout>
-            <NoteList
-                id={"note-list"}
+            <CardList
+                type={"notes"}
+                cards={cards}
+                CardComponent={NoteCard}
                 isPreview={false}
                 status={status}
-                cards={cards}
             />
         </PageLayout>
     )
