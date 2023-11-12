@@ -5,7 +5,8 @@
 }
 
 .dropdownnav-bar {
-    width: 100vw;
+    max-width: 100%;
+    overflow: hidden;
     background-color: #F2EFEF;
     height: 3.5rem;
     /**/
@@ -27,7 +28,7 @@
 .dropdownnav-bar-button {
     background-color: #D9D9D9;
     border-radius: 2rem;
-    font-size: 1.25rem;
+    font-size: 1em;
     padding: 0.25rem 0.5rem;
     color: black;
 }
