@@ -1,0 +1,23 @@
+.hyperlink-button{
+    background-color: #d9d9d9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5em 1.25em;
+    border-radius: 2em;
+    text-decoration: none;
+    text-transform: capitalize;
+    width: fit-content;
+}
+
+.hyperlink-button:hover .hyperlink-button-label{
+    color: blue;
+    text-decoration: underline;
+}
+
+.hyperlink-button-label{
+    font-size: 0.9em;
+    text-decoration: none;
+    color: black;
+}

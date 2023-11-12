@@ -72,4 +72,4 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
     )
 }
 
-export default withDynamicCardCount(CardList, 20)
+export default withDynamicCardCount(CardList, "card-list")

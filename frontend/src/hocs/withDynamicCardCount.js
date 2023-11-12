@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-export default function withDynamicCardCount(Component, increaseCount) {
+export default function withDynamicCardCount(Component, elementName) {
     function DynamicCardCount({ type, isPreview, ...props }) {
         const [initialCount, setInitialCount] = useState(1)
         const [cardCount, setCardCount] = useState(1)
 
         useEffect(() => {
-            const listElement = document.getElementById("card-list-" + type)
+            const listElement = document.getElementById(elementName + "-" + type)
             const cardElement = (listElement && listElement.children[0]) ? listElement.children[0] : listElement
 
             const calculateCardCount = () => {
@@ -34,16 +34,16 @@ export default function withDynamicCardCount(Component, increaseCount) {
 
         const handleAddCount = (e) => {
             e.preventDefault()
-            setCardCount((prev) => prev + (initialCount > increaseCount ? initialCount : increaseCount))
+            setCardCount((prev) => prev + (initialCount > 20 ? initialCount : 20))
         }
 
         const handleResetCount = (e) => {
             e.preventDefault()
             setCardCount(initialCount)
-            // window.scrollTo({
-            //     top: document.documentElement.scrollHeight - (initialCount * cardElement.offsetHeight),
-            //     behavior: 'smooth'
-            // });
+            window.scrollTo({
+                top: document.body.scrollHeight - (initialCount * (15 * 16)),
+                behavior: 'smooth'
+            });
         }
 
         return <Component

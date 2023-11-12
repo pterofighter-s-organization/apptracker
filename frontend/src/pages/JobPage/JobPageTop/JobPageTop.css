@@ -1,13 +1,11 @@
-.job-page-top{
+.job-page-top {
     background-color: #f5f5f5;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 1em 1.5em;
-    border-radius: 1em;
 }
 
-.job-page-top-buttons{
+.job-page-top-buttons {
     display: flex;
     flex-direction: row;
     gap: 0.5em;

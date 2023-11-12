@@ -8,6 +8,7 @@ import { StageDropdown } from "../../../components/Dropdowns/StageDropdown"
 
 //css
 import "./JobPageTop.css"
+import "../JobPage.css"
 
 export default function JobPageTop({ isArchived, id }) {
 
@@ -24,7 +25,7 @@ export default function JobPageTop({ isArchived, id }) {
     }
 
     return (
-        <div className="job-page-top">
+        <div className="job-page-content-bg job-page-top">
             <div style={{ flexGrow: 1 }}>
                 <StageDropdown
                     id={id}
