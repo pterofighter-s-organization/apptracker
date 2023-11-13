@@ -1,21 +1,23 @@
 .show-button {
     text-align: center;
     border-radius: 2em;
-    color: white;
+    color: black;
     padding: 1.25em 2em;
     font-size: 0.9em;
+    text-transform: capitalize;
 }
 
-.show-button::first-letter{
+/* .show-button::first-letter{
     text-transform: uppercase;
-}
+} */
 
 .show-button-load {
-    background-color: #5a5151;
+    color: white;
+    background-color: #9966FF;
 }
 
 .show-button-reset {
-    background-color: #B30000;
+    background-color: #FFCE56;
 }
 
 .show-button-container {

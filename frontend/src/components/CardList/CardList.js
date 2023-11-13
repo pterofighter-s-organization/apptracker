@@ -16,7 +16,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
 
     const CARD_WIDTHS = {
         "jobs": "17.5rem",
-        "tasks": "30rem",
+        "tasks": "35rem",
         "notes": "17.5rem"
     }
 

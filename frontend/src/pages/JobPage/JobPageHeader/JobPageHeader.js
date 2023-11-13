@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //constants
@@ -7,10 +8,17 @@ import { ARCHIVED_BIN_ICON } from "../../../constants/components"
 import { StageDropdown } from "../../../components/Dropdowns/StageDropdown"
 
 //css
-import "./JobPageTop.css"
+import "./JobPageHeader.css"
 import "../JobPage.css"
 
-export default function JobPageTop({ isArchived, id }) {
+export default function JobPageHeader({ isArchived, id }) {
+
+    const [stage, setStage] = useState("interviewing")
+
+    const handleStage = (e) => {
+        e.preventDefault()
+        setStage(e.target.value)
+    }
 
     const handleRestore = (e) => {
         e.preventDefault()
@@ -29,6 +37,8 @@ export default function JobPageTop({ isArchived, id }) {
             <div style={{ flexGrow: 1 }}>
                 <StageDropdown
                     id={id}
+                    stage={stage}
+                    handleStage={handleStage}
                 />
             </div>
             <div className="job-page-top-buttons">

@@ -1,0 +1,58 @@
+.job-page-divider {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .job-page-divider {
+        flex-direction: row;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .job-page-divider-content {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .job-page-divider {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .job-page-divider-content {
+        width: 100%;
+    }
+}
+
+.job-page-divider-content {
+    padding: 1.5em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.job-page-dates {
+    justify-content: space-around;
+}
+
+.job-page-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.job-page-description{
+    background-color: white;
+    padding: 1em;
+    /* max-height: 20rem; */
+    border-radius: 1em;
+}
+
+.job-page-description-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 1.5em;
+}

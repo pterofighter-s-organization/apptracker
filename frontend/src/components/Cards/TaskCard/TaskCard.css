@@ -20,12 +20,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .task-card-job {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5rem;
     background-color: #d9d9d9;
     padding: 0.5rem 0.75rem;

@@ -40,6 +40,7 @@ function Dashboard({ status, handleStatus }) {
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
+            <hr/>
             <CardList
                 type={"tasks"}
                 CardComponent={TaskCard}
@@ -48,6 +49,7 @@ function Dashboard({ status, handleStatus }) {
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
+            <hr/>
             <CardList
                 type={"notes"}
                 CardComponent={NoteCard}

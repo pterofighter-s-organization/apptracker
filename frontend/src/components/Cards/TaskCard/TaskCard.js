@@ -28,7 +28,7 @@ export default function TaskCard({ id, isArchived }) {
 
     return (
         <Link
-            to={"/all-jobs"}
+            to={"/job/" + id}
             id={taskCardId}
             key={taskCardId}
             className="task-card"

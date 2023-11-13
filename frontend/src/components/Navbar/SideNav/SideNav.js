@@ -19,7 +19,6 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
             <Link
                 to={HOME_ROUTE.route}
                 className="sidenav-logo"
-                style={{ textDecoration: "none", marginBottom: "1rem" }}
             >
                 <img
                     className="sidenav-logo-img"
@@ -27,12 +26,14 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                     alt="Logo"
                 />
                 <div
-                    className="sidenav-button-text"
-                    style={{ fontSize: "1.25em" }}
+                    className="sidenav-button-text sidenav-logo-text"
+                    style={{ fontSize: "1.15em" }}
                 >
                     job tracker
                 </div>
             </Link>
+            <hr className="sidenav-divider"/>
+            {/* <div className="sidenav-margin"/> */}
             <button
                 type="button"
                 className="sidenav-button"
@@ -56,7 +57,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                     {NEW_APP_ROUTE.text}
                 </div>
             </Link>
-            <div style={{ margin: "0.5rem" }} />
+            <hr className="sidenav-divider"/>
             {
                 FEATURES_ROUTES.map((route) => (
                     <Link
@@ -71,7 +72,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                     </Link>
                 ))
             }
-            <div style={{ margin: "0.5rem" }} />
+            <hr className="sidenav-divider"/>
             <Link
                 to={LOGIN_ROUTE.route}
                 className="sidenav-button"

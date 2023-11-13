@@ -21,7 +21,7 @@
 }
 
 .expanded-sidenav {
-    width: 18rem;
+    width: 16rem;
     padding: 2rem 1.5rem;
 }
 
@@ -44,19 +44,19 @@
 }
 
 .sidenav-button:hover {
-    filter: brightness(0.8);
-    -webkit-filter: brightness(0.85);
+    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
 }
 
 .sidenav-button-icon {
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 .sidenav-button-text {
     font-weight: 400;
     color: black;
     text-transform: capitalize;
-    font-size: 1em;
+    font-size: 0.9em;
     /**/
     text-wrap: nowrap;
     /* making sure there's no weird transition caused by it */
@@ -75,15 +75,28 @@
 
 .sidenav-logo {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 0.75rem;
     /* gap-4 */
+    /*justify-content centers the image tag so it can allow 100%*/
     align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
 }
 
+/* .minimized-sidenav .sidenav-logo{
+    justify-content: center;
+}
+
+.expanded-sidenav .sidenav-logo{
+    justify-content: center;
+    padding: 0 0.5em;
+} */
+
 .sidenav-logo-img {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .minimized-sidenav .sidenav-button .sidenav-minimize-icon {
@@ -97,3 +110,25 @@
 .minimized-sidenav .sidenav-button .sidenav-expand-icon {
     display: initial;
 }
+
+.expanded-sidenav .sidenav-divider{
+    /* width: calc(16rem - 6.25rem); */
+    width: 100%;
+    max-width: 100%;
+}
+
+.minimized-sidenav .sidenav-divider{
+    width: 1.75rem;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* .expanded-sidenav .sidenav-margin {
+    display: none;
+}
+
+.minimized-sidenav .sidenav-margin {
+    color: #F2EFEF;
+    margin-bottom: 1rem;
+} */

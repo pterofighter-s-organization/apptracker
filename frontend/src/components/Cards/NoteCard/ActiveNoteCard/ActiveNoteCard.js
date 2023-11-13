@@ -9,10 +9,13 @@ import "../NoteCard.css"
 
 export default function ActiveNoteCard({ id }) {
 
-    const [isEdit, setIsEdit] = useState(false)
     const [value, setValue] = useState(``)
+    const [isEdit, setIsEdit] = useState(false)
+    const noteCardId = "note-card-" + id
 
-    const activeNoteCardId = "active-" + id
+    const handleArchive = (e) => {
+        e.preventDefault()
+    }
 
     const handleSave = (e) => {
         e.preventDefault()
@@ -20,19 +23,20 @@ export default function ActiveNoteCard({ id }) {
         //add a method to save it to backend
     }
 
-    const handleArchive = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault()
+        setIsEdit(true)
     }
 
     return (
         <div
             className="note-card"
-            key={activeNoteCardId}
-            id={activeNoteCardId}
+            key={noteCardId}
+            id={noteCardId}
         >
             <div className="note-card-header">
                 <Link
-                    to={"/all-jobs"}
+                    to={"/job/" + id}
                     className="note-card-title"
                 >
                     UX/UI Designer/ Google
@@ -50,10 +54,7 @@ export default function ActiveNoteCard({ id }) {
                         <button
                             type="button"
                             className="onclick-bw-button"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                setIsEdit(true)
-                            }}
+                            onClick={(e) => handleEdit(e)}
                         >
                             <i className="bi bi-pencil-fill"></i>
                         </button>
@@ -81,33 +82,28 @@ export default function ActiveNoteCard({ id }) {
                     </textarea>
                     :
                     <div className="note-card-content">
-                        {value.length > 0 ?
-                            <>
-                                <pre className="note-card-content-text">
-                                    {value}
-                                </pre>
+                        {
+                            value.length > 0 ?
+                                <>
+                                    <pre className="note-card-content-text">
+                                        {value}
+                                    </pre>
+                                    <button
+                                        type="button"
+                                        className="note-card-starter note-card-content-hover"
+                                        onClick={(e) => handleEdit(e)}
+                                    >
+                                        click to continue editing
+                                    </button>
+                                </>
+                                :
                                 <button
                                     type="button"
-                                    className="note-card-starter note-card-content-hover"
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        setIsEdit(true)
-                                    }}
+                                    className="note-card-starter"
+                                    onClick={(e) => handleEdit(e)}
                                 >
-                                    click to continue editing
+                                    click to start editing
                                 </button>
-                            </>
-                            :
-                            <button
-                                type="button"
-                                className="note-card-starter"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setIsEdit(true)
-                                }}
-                            >
-                                click to start editing
-                            </button>
                         }
                     </div>
             }

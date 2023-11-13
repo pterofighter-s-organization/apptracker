@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //components
@@ -12,6 +13,13 @@ import "./JobCard.css"
 export default function JobCard({ isArchived, id }) {
 
     const jobCardId = "job-card-" + id
+    const [stage, setStage] = useState("interviewing")
+
+    //event.preventdefault is to prevent the button from accidentally re-directing to the link.
+    const handleStage = (e) => {
+        e.preventDefault()
+        setStage(e.target.value)
+    }
 
     const handleArchive = (e) => {
         e.preventDefault()
@@ -37,6 +45,8 @@ export default function JobCard({ isArchived, id }) {
                     <StageDropdown
                         key={id}
                         id={jobCardId}
+                        stage={stage}
+                        handleStage={handleStage}
                     />
                 </div>
                 <div className="job-card-top-buttons">
@@ -69,13 +79,13 @@ export default function JobCard({ isArchived, id }) {
                 </div>
             </div>
             <div className="job-card-details">
-                <h6 className="job-card-details-text">
+                <h6 className="job-card-details-text" style={{ color: "gray" }}>
                     Google
                 </h6>
                 <h3 className="job-card-details-text" style={{ marginLeft: "-0.05em" }}>
                     UX/UI DesignerUX/UI Designer
                 </h3>
-                <h5 style={{ textTransform: "initial" }}>
+                <h5 style={{ textTransform: "initial", color: "#009E60" }}>
                     $100 /hr
                 </h5>
             </div>

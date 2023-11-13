@@ -15,7 +15,7 @@ export default function withDynamicCardCount(Component, elementName) {
                 const rowPositiveCount = rowCount > 0 ? rowCount : 1
                 const colPositiveCount = colCount > 0 ? colCount : 1
 
-                return isPreview ? (colPositiveCount * Math.ceil(rowPositiveCount / 4)) : (rowPositiveCount * colPositiveCount)
+                return isPreview ? (colPositiveCount * Math.ceil(rowPositiveCount / 6)) : (rowPositiveCount * colPositiveCount)
             }
 
             const handleCalculation = () => {
