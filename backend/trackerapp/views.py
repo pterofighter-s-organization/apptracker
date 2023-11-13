@@ -115,10 +115,13 @@ def users_detail(request, pk):
     except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
+#TODO: LEARN MORE ABOUT CSRF TOKEN AND IMPLEMENT THEM PROPERLY
 @api_view(['POST', 'DELETE'])
 def users_authentication(request):
     if request.method == 'POST':
+        print("SEAWEED")
         users_data = JSONParser().parse(request)
+        print("BEANS")
         user = authenticate(username = users_data['username'], password = users_data['password'])
         if user is not None:
             if user.is_active:
