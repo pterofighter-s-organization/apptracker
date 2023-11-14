@@ -83,7 +83,7 @@ export default function JobCard({ isArchived, id }) {
                     Google
                 </h6>
                 <h3 className="job-card-details-text" style={{ marginLeft: "-0.05em" }}>
-                    UX/UI DesignerUX/UI Designer
+                    UX/UI Designer
                 </h3>
                 <h5 style={{ textTransform: "initial", color: "#009E60" }}>
                     $100 /hr

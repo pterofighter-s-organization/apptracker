@@ -44,8 +44,8 @@ export default function JobPage({ isArchived, id }) {
                 isRedirect={isCardsRedirect}
                 isArchived={isCardsArchived}
             />
-            <div/>
             <TaskForm />
+            <div/>
             <SectionHeader
                 icon={<i className="bi bi-stickies-fill" />}
                 title={`${noteCards.length} notes taken`}

@@ -51,8 +51,9 @@ function Dashboard({ status, handleStatus }) {
                 Welcome, <i>User 1</i>
             </HeaderLayout>
             <SectionHeader
-                icon={<i className="bi bi-file-post-fill"/>}
-                title={`${jobs.length} jobs tracked`}
+                icon={<i className="bi bi-file-post-fill" />}
+                title={`${jobs.length} jobs ${status === "archived" ? "to dispose" : "tracked"}`}
+                link={"/all-jobs/" + status}
             />
             <CardList
                 type={"jobs"}
@@ -63,8 +64,9 @@ function Dashboard({ status, handleStatus }) {
                 isRedirect={isRedirect}
             />
             <SectionHeader
-                icon={<i className="bi bi-view-list"/>}
-                title={`${tasks.length} tasks to finish`}
+                icon={<i className="bi bi-view-list" />}
+                title={`${tasks.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
+                link={"/all-tasks/" + status}
             />
             <CardList
                 type={"tasks"}
@@ -75,8 +77,9 @@ function Dashboard({ status, handleStatus }) {
                 isRedirect={isRedirect}
             />
             <SectionHeader
-                icon={<i className="bi bi-stickies-fill"/>}
-                title={`${notes.length} notes taken`}
+                icon={<i className="bi bi-stickies-fill" />}
+                title={`${notes.length} notes ${status === "archived" ? "to restore" : "taken"}`}
+                link={"/all-notes/" + status}
             />
             <CardList
                 type={"notes"}

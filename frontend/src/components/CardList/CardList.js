@@ -39,9 +39,10 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
             {
                 cards.length > 0 ?
                     isRedirect ?
-                        <RedirectButton link={"/all-" + type + "/" + status}>
-                            Click here for {type}
-                        </RedirectButton>
+                        null
+                        // <RedirectButton link={"/all-" + type + "/" + status}>
+                        //     Click here for {type}
+                        // </RedirectButton>
                         :
                         <ShowButton
                             isShow={(cardCount < cards.length)}
