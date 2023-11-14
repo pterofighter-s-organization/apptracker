@@ -1,10 +1,11 @@
 .section-header{
-    border: 5px double #757575;
-    padding: 1em 1em;
+    border-top: 5px solid #757575;
+    padding: 1.25em 1em 0.5em;
     color: black;
     display: flex;
     flex-direction: row;
     margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
     text-transform: capitalize;
-    border-radius: 0.5em;
+    border-radius: 0.0em;
 }

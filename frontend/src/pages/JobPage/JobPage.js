@@ -32,10 +32,9 @@ export default function JobPage({ isArchived, id }) {
         <PageLayout>
             <JobPageHeader id={1} />
             <JobPageDetails />
-            <hr />
             <SectionHeader
                 icon={<i className="bi bi-view-list"></i>}
-                title={"all current tasks"}
+                title={`${taskCards.length} tasks for this job`}
             />
             <CardList
                 type={"tasks"}
@@ -47,10 +46,9 @@ export default function JobPage({ isArchived, id }) {
             />
             <div/>
             <TaskForm />
-            <hr />
             <SectionHeader
                 icon={<i className="bi bi-stickies-fill" />}
-                title={"all current notes"}
+                title={`${noteCards.length} notes taken`}
             />
             <CardList
                 type={"notes"}

@@ -18,6 +18,7 @@ import { filterCardsByStatus } from "../../helpers/applicationHelpers"
 //css
 import "./Dashboard.css"
 import { useState } from "react"
+import { SectionHeader } from "../../components/SectionHeader"
 
 function Dashboard({ status, handleStatus }) {
 
@@ -49,6 +50,10 @@ function Dashboard({ status, handleStatus }) {
             >
                 Welcome, <i>User 1</i>
             </HeaderLayout>
+            <SectionHeader
+                icon={<i className="bi bi-file-post-fill"/>}
+                title={`${jobs.length} jobs tracked`}
+            />
             <CardList
                 type={"jobs"}
                 CardComponent={JobCard}
@@ -57,7 +62,10 @@ function Dashboard({ status, handleStatus }) {
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
-            <hr />
+            <SectionHeader
+                icon={<i className="bi bi-view-list"/>}
+                title={`${tasks.length} tasks to finish`}
+            />
             <CardList
                 type={"tasks"}
                 CardComponent={TaskCard}
@@ -66,7 +74,10 @@ function Dashboard({ status, handleStatus }) {
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
-            <hr />
+            <SectionHeader
+                icon={<i className="bi bi-stickies-fill"/>}
+                title={`${notes.length} notes taken`}
+            />
             <CardList
                 type={"notes"}
                 CardComponent={NoteCard}

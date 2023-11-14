@@ -61,9 +61,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                                     track new {type}
                                 </RedirectButton>
                                 :
-                                <>
-                                    check job page.
-                                </>
+                                null
                             }
                         </>
                     </ErrorLayout>
