@@ -3,26 +3,26 @@ import { Link } from "react-router-dom"
 //css
 import "./HyperLinkButton.css"
 
-export default function HyperLinkButton({ id, link, label }) {
+export default function HyperLinkButton({ jobId, link, label }) {
 
     return (
         <div className="hyperlink-button">
             <b>
-                <i 
+                <i
                     className="bi bi-link-45deg"
-                    style={{color: "black"}}
+                    style={{ color: "black" }}
                 ></i>
             </b>
             {
                 link && link.length > 0 ?
-                    <a 
+                    <a
                         href={link}
                         className="hyper-link-button-label">
                         {label}
                     </a>
                     :
                     <Link
-                        to={"/job-edit/" + id}
+                        to={"/job-edit/" + jobId}
                         className="hyperlink-button-label"
                     >
                         add {label}

@@ -10,6 +10,7 @@ import { TaskCard } from "../../components/Cards/TaskCard"
 import { NoteCard } from "../../components/Cards/NoteCard"
 import { SectionHeader } from "../../components/SectionHeader"
 import { TaskForm } from "./TaskForm"
+import { CreateButton } from "../../components/Buttons/CreateButton"
 
 export default function JobPage({ isArchived, id }) {
 
@@ -22,7 +23,7 @@ export default function JobPage({ isArchived, id }) {
     const isCardsRedirect = false
     const isCardsArchived = false
 
-    const handleAddNote = (e) => {
+    const handleCreateNote = (e) => {
         e.preventDefault()
         setNotes([...notes, notes.length])
     }
@@ -59,13 +60,10 @@ export default function JobPage({ isArchived, id }) {
                 isRedirect={isCardsRedirect}
                 isArchived={isCardsArchived}
             />
-            <button
-                type="button"
-                className="submit-button"
-                onClick={handleAddNote}
-            >
-                Add note
-            </button>
+            <CreateButton
+                handleCreate={handleCreateNote}
+                label={"note"}
+            />
         </PageLayout>
     )
 }

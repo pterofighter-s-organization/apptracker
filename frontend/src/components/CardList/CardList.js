@@ -62,7 +62,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                                 </RedirectButton>
                                 :
                                 <>
-                                    check the respective job page.
+                                    check job page.
                                 </>
                             }
                         </>

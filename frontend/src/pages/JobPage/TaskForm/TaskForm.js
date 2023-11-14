@@ -3,6 +3,7 @@ import { useState } from "react"
 
 //css
 import "./TaskForm.css"
+import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 
 export default function TaskForm() {
 
@@ -112,13 +113,7 @@ export default function TaskForm() {
                     </span>
                 </div>
 
-                <button
-                    type="submit"
-                    className="submit-button"
-                    // onClick={(e) => e.preventDefault()}
-                >
-                    Submit
-                </button>
+                <SubmitButton label={""}/>
             </form>
         </div>
     )

@@ -1,0 +1,8 @@
+.create-button{
+    background-color: #6b8c70;
+    color: white;
+    border-radius: 2em;
+    padding: 1.25em 2em;
+    font-size: 0.9em;
+    text-transform: capitalize;
+}

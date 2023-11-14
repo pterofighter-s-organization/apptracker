@@ -1,0 +1,35 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+}
+
+.input-error {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+}
+
+.input-text-error{
+    color: #cc0033;
+}
+
+.input-header {
+    text-indent: 0em;
+}
+
+.input-header::first-letter {
+    text-transform: uppercase;
+}
+
+.input-footer {
+    text-indent: 0em;
+    color: gray;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    font-size: 0.8em;
+}
+
+.input-footer-text::first-letter {
+    text-transform: uppercase;
+}

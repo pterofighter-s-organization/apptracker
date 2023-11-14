@@ -1,0 +1,9 @@
+.submit-button{
+    /* background-color: #0d6efd; */
+    background-color: #6c8cbf;
+    color: white;
+    border-radius: 2em;
+    padding: 1.25em 2em;
+    font-size: 0.9em;
+    text-transform: capitalize;
+}
