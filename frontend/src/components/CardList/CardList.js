@@ -24,14 +24,14 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
         <div className="card-list-container">
             <div
                 id={"card-list-" + type}
-                className="card-list"
+                className={`card-list ${cards.length <= 0 ? "card-list-empty" : ""}`}
                 style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARD_WIDTHS[type]}, 1fr))` }}
             >
                 {
                     cards.slice(0, cardCount).map((card, index) => (
                         <CardComponent
                             id={index}
-                            isArchived={status === "archived"}
+                            isArchived={card.isArchived}
                         />
                     ))
                 }
@@ -62,7 +62,7 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                                 </RedirectButton>
                                 :
                                 <>
-                                    create one inside jobs page.
+                                    check the respective job page.
                                 </>
                             }
                         </>

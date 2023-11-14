@@ -20,7 +20,7 @@ function TaskBoard({ status, handleStatus }) {
     return (
         <PageLayout>
             <HeaderLayout
-                title={"all job tasks"}
+                title={"my job tasks"}
                 status={status}
                 handleStatus={handleStatus}
             >

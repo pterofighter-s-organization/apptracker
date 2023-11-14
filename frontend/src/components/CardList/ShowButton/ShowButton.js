@@ -5,7 +5,7 @@ import "./ShowButton.css"
 export default function ShowButton({ isShow, isInitial, isLess, handleResetCount, handleAddCount, type }) {
 
     return (
-        <div className="show-button-container">
+        <div className={`show-button-container ${isLess ? "show-button-container-empty" : ""}`}>
             {!isLess ?
                 isShow ?
                     isInitial ?

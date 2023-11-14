@@ -31,5 +31,9 @@
 }
 
 .card-list{
-    margin-bottom: 0.5rem;
+    margin-bottom: 0em;
+}
+
+.card-list-empty{
+    display: none;
 }

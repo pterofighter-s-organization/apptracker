@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 
 //css
 import { PageLayout } from "../../layouts/PageLayout"
@@ -9,37 +8,64 @@ import { JobPageDetails } from "./JobPageDetails"
 import { CardList } from "../../components/CardList"
 import { TaskCard } from "../../components/Cards/TaskCard"
 import { NoteCard } from "../../components/Cards/NoteCard"
+import { SectionHeader } from "../../components/SectionHeader"
+import { TaskForm } from "./TaskForm"
 
 export default function JobPage({ isArchived, id }) {
 
     const taskCards = Array.from({ length: 15 }, (_, index) => index + 1)
-    const noteCards = Array.from({ length: 15 }, (_, index) => index + 1)
+    const noteCards = Array.from({ length: 0 }, (_, index) => index + 1)
+
+    const [notes, setNotes] = useState(noteCards)
 
     const isCardsPreview = true
     const isCardsRedirect = false
+    const isCardsArchived = false
+
+    const handleAddNote = (e) => {
+        e.preventDefault()
+        setNotes([...notes, notes.length])
+    }
 
     return (
         <PageLayout>
             <JobPageHeader id={1} />
             <JobPageDetails />
             <hr />
-            <div className="job-page-content-bg job-page-tasks">
-                <h5 className="job-page-tasks-title">
-                    <i className="bi bi-view-list"></i>
-                    <div style={{ textIndent: "1rem" }}>
-                        All Current Tasks
-                    </div>
-                </h5>
-            </div>
+            <SectionHeader
+                icon={<i className="bi bi-view-list"></i>}
+                title={"all current tasks"}
+            />
             <CardList
                 type={"tasks"}
                 cards={taskCards}
                 CardComponent={TaskCard}
                 isPreview={isCardsPreview}
                 isRedirect={isCardsRedirect}
+                isArchived={isCardsArchived}
             />
-
-
+            <div/>
+            <TaskForm />
+            <hr />
+            <SectionHeader
+                icon={<i className="bi bi-stickies-fill" />}
+                title={"all current notes"}
+            />
+            <CardList
+                type={"notes"}
+                cards={notes}
+                CardComponent={NoteCard}
+                isPreview={isCardsPreview}
+                isRedirect={isCardsRedirect}
+                isArchived={isCardsArchived}
+            />
+            <button
+                type="button"
+                className="submit-button"
+                onClick={handleAddNote}
+            >
+                Add note
+            </button>
         </PageLayout>
     )
 }

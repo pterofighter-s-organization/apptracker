@@ -20,7 +20,7 @@ function NoteBoard({ status, handleStatus }) {
     return (
         <PageLayout>
             <HeaderLayout
-                title={"all job notes"}
+                title={"my job notes"}
                 status={status}
                 handleStatus={handleStatus}
             >

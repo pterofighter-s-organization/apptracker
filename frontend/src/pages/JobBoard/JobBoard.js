@@ -20,7 +20,7 @@ function JobBoard({ status, handleStatus }) {
     return (
         <PageLayout>
             <HeaderLayout
-                title={"all job applications"}
+                title={"my job applications"}
                 status={status}
                 handleStatus={handleStatus}
             >

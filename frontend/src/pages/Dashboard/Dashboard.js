@@ -12,16 +12,33 @@ import { PageLayout } from "../../layouts/PageLayout"
 //hocs
 import withStatusControl from "../../hocs/withStatusControl"
 
+//helpers
+import { filterCardsByStatus } from "../../helpers/applicationHelpers"
+
 //css
 import "./Dashboard.css"
+import { useState } from "react"
 
 function Dashboard({ status, handleStatus }) {
 
     const isPreview = true
     const isRedirect = true
-    const jobCards = Array.from({ length: 25 }, (_, index) => index + 1)
-    const taskCards = Array.from({ length: 30 }, (_, index) => index + 1)
-    const noteCards = Array.from({ length: 30 }, (_, index) => index + 1)
+    const jobCards = Array.from({ length: 25 }).fill({
+        value: "",
+        isArchived: true,
+    })
+    const taskCards = Array.from({ length: 20 }).fill({
+        value: "",
+        isArchived: false,
+    })
+    const noteCards = Array.from({ length: 35 }).fill({
+        value: "",
+        isArchived: false,
+    })
+
+    const [notes, setNotes] = useState(noteCards)
+    const [jobs, setJobs] = useState(jobCards)
+    const [tasks, setTasks] = useState(taskCards)
 
     return (
         <PageLayout>
@@ -35,25 +52,25 @@ function Dashboard({ status, handleStatus }) {
             <CardList
                 type={"jobs"}
                 CardComponent={JobCard}
-                cards={jobCards}
+                cards={filterCardsByStatus(jobs, status)}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
-            <hr/>
+            <hr />
             <CardList
                 type={"tasks"}
                 CardComponent={TaskCard}
-                cards={taskCards}
+                cards={filterCardsByStatus(tasks, status)}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}
             />
-            <hr/>
+            <hr />
             <CardList
                 type={"notes"}
                 CardComponent={NoteCard}
-                cards={noteCards}
+                cards={filterCardsByStatus(notes, status)}
                 status={status}
                 isPreview={isPreview}
                 isRedirect={isRedirect}

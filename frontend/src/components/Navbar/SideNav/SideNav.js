@@ -27,7 +27,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                 />
                 <div
                     className="sidenav-button-text sidenav-logo-text"
-                    style={{ fontSize: "1.15em" }}
+                    style={{ fontSize: "1.2em" }}
                 >
                     job tracker
                 </div>

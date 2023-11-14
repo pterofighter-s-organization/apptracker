@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export default function withDynamicCardCount(Component, elementName) {
-    function DynamicCardCount({ type, isPreview, ...props }) {
+    function DynamicCardCount({ type, isPreview, cards, ...props }) {
         const [initialCount, setInitialCount] = useState(1)
         const [cardCount, setCardCount] = useState(1)
 
@@ -30,7 +30,9 @@ export default function withDynamicCardCount(Component, elementName) {
             return () => {
                 window.removeEventListener("resize", handleCalculation)
             }
-        }, [isPreview, type])
+
+            //once cards.length gets changed then we check again.
+        }, [isPreview, type, cards.length])
 
         const handleAddCount = (e) => {
             e.preventDefault()
@@ -47,8 +49,9 @@ export default function withDynamicCardCount(Component, elementName) {
         }
 
         return <Component
-            initialCount={initialCount}
+            cards={cards}
             cardCount={cardCount}
+            initialCount={initialCount}
             handleAddCount={handleAddCount}
             handleResetCount={handleResetCount}
             type={type}

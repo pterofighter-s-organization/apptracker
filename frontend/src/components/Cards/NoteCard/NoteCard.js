@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 
 //components
 import { ActiveNoteCard } from "./ActiveNoteCard"
