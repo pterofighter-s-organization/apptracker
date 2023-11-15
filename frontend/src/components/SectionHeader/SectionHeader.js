@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 //css
 import "./SectionHeader.css"
 
-export default function SectionHeader({ icon, title, link }) {
+export default function SectionHeader({ IconComponent, title, link }) {
 
     return (
         <h5 className="section-header">
             <div className="section-header-left">
-                {icon}
+                {IconComponent}
                 <div className="section-header-text">
                     {title}
                 </div>

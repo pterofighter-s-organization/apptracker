@@ -1,7 +1,7 @@
 
 //css
 import "./DateTimeInput.css"
-import "./Input.css"
+import "../Input.css"
 
 export default function DateTimeInput({ name, header, footer, formDataObj, handleChange }) {
 
@@ -16,7 +16,7 @@ export default function DateTimeInput({ name, header, footer, formDataObj, handl
             <input
                 type="datetime-local"
                 name={name}
-                className={`datetime-input ${formDataObj.error.length > 0 ? "input-error" : ""}`}
+                className={`datetime-input-box input-box ${formDataObj.error.length > 0 ? "input-error" : ""}`}
                 value={formDataObj.value}
                 onChange={handleChange}
                 min=""

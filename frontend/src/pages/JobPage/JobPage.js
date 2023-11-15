@@ -6,8 +6,8 @@ import "./JobPage.css"
 import { JobPageHeader } from "./JobPageHeader"
 import { JobPageDetails } from "./JobPageDetails"
 import { CardList } from "../../components/CardList"
-import { TaskCard } from "../../components/Cards/TaskCard"
-import { NoteCard } from "../../components/Cards/NoteCard"
+import { TaskCard } from "../../components/CardList/components/Cards/TaskCard"
+import { NoteCard } from "../../components/CardList/components/Cards/NoteCard"
 import { SectionHeader } from "../../components/SectionHeader"
 import { TaskForm } from "./TaskForm"
 import { CreateButton } from "../../components/Buttons/CreateButton"
@@ -33,7 +33,7 @@ export default function JobPage({ isArchived, id }) {
             <JobPageHeader id={1} />
             <JobPageDetails />
             <SectionHeader
-                icon={<i className="bi bi-view-list"></i>}
+                IconComponent={<i className="bi bi-view-list"></i>}
                 title={`${taskCards.length} tasks for this job`}
             />
             <CardList
@@ -45,9 +45,9 @@ export default function JobPage({ isArchived, id }) {
                 isArchived={isCardsArchived}
             />
             <TaskForm />
-            <div/>
+            <div />
             <SectionHeader
-                icon={<i className="bi bi-stickies-fill" />}
+                IconComponent={<i className="bi bi-stickies-fill" />}
                 title={`${noteCards.length} notes taken`}
             />
             <CardList

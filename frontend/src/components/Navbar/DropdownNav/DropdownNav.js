@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import withDropdownControl from "../../../hocs/withDropdownControl"
 
 //routes
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../../../constants/routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../routes"
 
 //css
 import "./DropdownNav.css"

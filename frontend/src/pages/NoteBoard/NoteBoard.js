@@ -1,6 +1,5 @@
 
 //components
-import { NoteCard } from "../../components/Cards/NoteCard";
 import { CardList } from "../../components/CardList";
 
 //layouts
@@ -29,10 +28,9 @@ function NoteBoard({ status, handleStatus }) {
             <CardList
                 type={"notes"}
                 cards={cards}
-                CardComponent={NoteCard}
-                isPreview={false}
-                isRedirect={false}
                 status={status}
+                isPreview={false}
+                isShow={false}
             />
         </PageLayout>
     )

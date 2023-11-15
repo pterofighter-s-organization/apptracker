@@ -1,6 +1,5 @@
 
 //components
-import { TaskCard } from "../../components/Cards/TaskCard";
 import { CardList } from "../../components/CardList";
 
 //layouts
@@ -29,10 +28,9 @@ function TaskBoard({ status, handleStatus }) {
             <CardList
                 type={"tasks"}
                 cards={cards}
-                CardComponent={TaskCard}
                 status={status}
                 isPreview={false}
-                isRedirect={false}
+                isShow={false}
             />
         </PageLayout>
     )

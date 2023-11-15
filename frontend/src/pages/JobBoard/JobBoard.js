@@ -1,6 +1,5 @@
 
 //components
-import { JobCard } from "../../components/Cards/JobCard";
 import { CardList } from "../../components/CardList";
 
 //layouts
@@ -29,10 +28,9 @@ function JobBoard({ status, handleStatus }) {
             <CardList
                 type={"jobs"}
                 cards={cards}
-                CardComponent={JobCard}
-                isPreview={false}
-                isRedirect={false}
                 status={status}
+                isPreview={false}
+                isShow={false}
             />
         </PageLayout>
     )

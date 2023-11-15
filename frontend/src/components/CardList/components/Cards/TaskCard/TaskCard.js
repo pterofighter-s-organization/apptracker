@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
 
 //css
 import "./TaskCard.css"
@@ -25,6 +25,10 @@ export default function TaskCard({ id, isArchived }) {
         e.preventDefault() /*use preventdefault to not activate the link */
         //handle archive
     }
+
+    // Red: #ff6666
+    // Yellow: #ffff66
+    // Green: #66ff66
 
     return (
         <Link

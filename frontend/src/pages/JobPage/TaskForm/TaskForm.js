@@ -4,6 +4,8 @@ import { useState } from "react"
 //css
 import "./TaskForm.css"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
+import { TextInput } from "../../../components/Inputs/TextInput"
+import { DateTimeInput } from "../../../components/Inputs/DateTimeInput"
 
 export default function TaskForm() {
 
@@ -57,61 +59,21 @@ export default function TaskForm() {
             </div>
             <form
                 className="form-inputs task-form-section"
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    handleSubmit(e)
-                }}
+                onSubmit={handleSubmit}
             >
-                <div className="input-container">
-                    <span className={`input-header ${formData.name.error.length > 0 ? "input-text-error" : ""}`}>
-                        task name *
-                    </span>
-                    <input
-                        type="text"
-                        name={"name"}
-                        className={`textbox-input ${formData.name.error.length > 0 ? "input-error" : ""}`}
-                        placeholder={"activity name".toUpperCase()}
-                        value={formData.name.value}
-                        onChange={(e) => handleChange(e)}
-                    />
-                    <span className={`input-footer ${formData.name.error.length > 0 ? "input-text-error" : ""}`}>
-                        -
-                        <span className="input-footer-text">
-                            {
-                                formData.name.error.length > 0 ?
-                                    formData.name.error
-                                    :
-                                    "enter the activity name."
-                            }
-                        </span>
-                    </span>
-                </div>
-
-                <div className="input-container">
-                    <span className={`input-header ${formData.dateTime.error.length > 0 ? "input-text-error" : ""}`}>
-                        task date and time *
-                    </span>
-                    <input
-                        type="datetime-local"
-                        name={"dateTime"}
-                        className={`datetime-input ${formData.dateTime.error.length > 0 ? "input-error" : ""}`}
-                        value={formData.dateTime.value}
-                        onChange={handleChange}
-                        min=""
-                        max=""
-                    />
-                    <span className={`input-footer ${formData.dateTime.error.length > 0 ? "input-text-error" : ""}`}>
-                        -
-                        <span className="input-footer-text">
-                            {
-                                formData.dateTime.error.length > 0 ?
-                                    formData.dateTime.error
-                                    :
-                                    "when is this activity due."
-                            }
-                        </span>
-                    </span>
-                </div>
+                <TextInput
+                    name={"name"}
+                    formDataObj={formData.name}
+                    header={"task name"}
+                    footer={"enter activity name"}
+                    isRequired={true}
+                    handleChange={handleChange}
+                />
+                <DateTimeInput
+                    name={"dateTime"}
+                    formDataObj={formData.dateTime}
+                />
+            
 
                 <SubmitButton label={""}/>
             </form>

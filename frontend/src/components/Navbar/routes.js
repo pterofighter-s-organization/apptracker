@@ -1,4 +1,3 @@
-
 export const HOME_ROUTE = {
     text: "dashboard",
     route: "/",

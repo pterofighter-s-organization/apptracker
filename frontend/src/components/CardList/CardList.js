@@ -1,6 +1,11 @@
 
+//private-components
+import { ShowButton } from "./components/ShowButton"
+import { JobCard } from "./components/Cards/JobCard"
+import { TaskCard } from "./components/Cards/TaskCard"
+import { NoteCard } from "./components/Cards/NoteCard"
+
 //components
-import { ShowButton } from "./ShowButton"
 import { RedirectButton } from "../Buttons/RedirectButton"
 
 //layouts
@@ -12,38 +17,45 @@ import withDynamicCardCount from "../../hocs/withDynamicCardCount"
 //css
 import "./CardList.css"
 
-function CardList({ cards, initialCount, cardCount, CardComponent, status, isRedirect, type, ...props }) {
+function CardList({ cards, initialCount, cardCount, status, isShow, type, ...props }) {
 
-    const CARD_WIDTHS = {
-        "jobs": "17.5rem",
-        "tasks": "25rem",
-        "notes": "17.5rem"
-    }
+    const CARDS = {
+        jobs: {
+            width: "17.5rem",
+            Component: JobCard
+        },
+        tasks: {
+            width: "25rem",
+            Component: TaskCard
+        },
+        notes: {
+            width: "17.5rem",
+            Component: NoteCard
+        }
+    };
 
     return (
         <div className="card-list-container">
             <div
                 id={"card-list-" + type}
                 className={`card-list ${cards.length <= 0 ? "card-list-empty" : ""}`}
-                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARD_WIDTHS[type]}, 1fr))` }}
+                style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARDS[type].width}, 1fr))` }}
             >
                 {
-                    cards.slice(0, cardCount).map((card, index) => (
-                        <CardComponent
-                            id={index}
-                            isArchived={card.isArchived}
-                        />
-                    ))
+                    cards.slice(0, cardCount).map((card, index) => {
+                        const CardComponent = CARDS[type].Component
+                        return (
+                            <CardComponent
+                                id={index}
+                                isArchived={card.isArchived}
+                            />
+                        )
+                    })
                 }
             </div>
             {
                 cards.length > 0 ?
-                    isRedirect ?
-                        null
-                        // <RedirectButton link={"/all-" + type + "/" + status}>
-                        //     Click here for {type}
-                        // </RedirectButton>
-                        :
+                    isShow ?
                         <ShowButton
                             isShow={(cardCount < cards.length)}
                             isInitial={(cardCount === initialCount)}
@@ -51,6 +63,8 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                             type={type}
                             {...props}
                         />
+                        :
+                        null
                     :
                     <ErrorLayout>
                         <>
@@ -58,9 +72,10 @@ function CardList({ cards, initialCount, cardCount, CardComponent, status, isRed
                                 no {status} {type} at the moment!
                             </div>
                             {type === "jobs" ?
-                                <RedirectButton link={"/new-job"}>
-                                    track new {type}
-                                </RedirectButton>
+                                <RedirectButton
+                                    link={"/new-job"}
+                                    label={`track new ${type}`}
+                                />
                                 :
                                 null
                             }

@@ -2,10 +2,10 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { StageDropdown } from "../../Dropdowns/StageDropdown"
+import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
 
 //css
 import "./JobCard.css"

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../../../constants/components"
 
 //css
 import "../NoteCard.css"
