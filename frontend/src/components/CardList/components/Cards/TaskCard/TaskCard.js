@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 
-//constants
-import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
+//private-components
+import { ArchivedCardButtons } from "../components/ArchivedCardButtons"
+import { ActiveCardButtons } from "../components/ActiveCardButtons"
 
 //css
 import "./TaskCard.css"
@@ -36,37 +37,18 @@ export default function TaskCard({ id, isArchived }) {
             id={taskCardId}
             className="task-card-container"
         >
-            <div style={{ border: `2.5px solid ${"#ff6666"}` }} />
+            <div style={{ border: `2.5px double ${"#ff6666"}` }} />
             <div className="task-card-header">
                 <h5 className="task-card-job">
                     ux/ui designer / google
                 </h5>
-                {
-                    isArchived ?
-                        <>
-                            <button
-                                type="button"
-                                className="onclick-bw-button"
-                                onClick={(e) => handleRestore(e)}
-                            >
-                                <i className="bi bi-arrow-counterclockwise"></i>
-                            </button>
-                            <button
-                                type="button"
-                                className="onclick-bw-button"
-                                onClick={(e) => handleDelete(e)}
-                            >
-                                <i className="bi bi-trash3-fill"></i>
-                            </button>
-                        </>
-                        :
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleArchive(e)}
-                        >
-                            <i className={`${ARCHIVED_BIN_ICON}`} />
-                        </button>
+                {isArchived ?
+                    <ArchivedCardButtons
+                        handleDelete={handleDelete}
+                        handleRestore={handleRestore}
+                    />
+                    :
+                    <ActiveCardButtons />
                 }
             </div>
             <div className="task-card-title">

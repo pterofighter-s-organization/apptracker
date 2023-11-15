@@ -1,67 +1,27 @@
-import { useState } from "react"
+
+//sections
+import { JobPageHeader } from "./sections/JobPageHeader"
+import { JobPageDetails } from "./sections/JobPageDetails"
+import { JobPageTasks } from "./sections/JobPageTasks"
+import { JobPageNotes } from "./sections/JobPageNotes"
+
+//layouts
+import { PageLayout } from "../../layouts/PageLayout"
 
 //css
-import { PageLayout } from "../../layouts/PageLayout"
 import "./JobPage.css"
-import { JobPageHeader } from "./JobPageHeader"
-import { JobPageDetails } from "./JobPageDetails"
-import { CardList } from "../../components/CardList"
-import { TaskCard } from "../../components/CardList/components/Cards/TaskCard"
-import { NoteCard } from "../../components/CardList/components/Cards/NoteCard"
-import { SectionHeader } from "../../components/SectionHeader"
-import { TaskForm } from "./TaskForm"
-import { CreateButton } from "../../components/Buttons/CreateButton"
 
-export default function JobPage({ isArchived, id }) {
+export default function JobPage() {
 
-    const taskCards = Array.from({ length: 15 }, (_, index) => index + 1)
-    const noteCards = Array.from({ length: 0 }, (_, index) => index + 1)
-
-    const [notes, setNotes] = useState(noteCards)
-
-    const isCardsPreview = true
-    const isCardsRedirect = false
-    const isCardsArchived = false
-
-    const handleCreateNote = (e) => {
-        e.preventDefault()
-        setNotes([...notes, notes.length])
-    }
+    //here fetch application and where provider sits using hoc.
 
     return (
         <PageLayout>
             <JobPageHeader id={1} />
             <JobPageDetails />
-            <SectionHeader
-                IconComponent={<i className="bi bi-view-list"></i>}
-                title={`${taskCards.length} tasks for this job`}
-            />
-            <CardList
-                type={"tasks"}
-                cards={taskCards}
-                CardComponent={TaskCard}
-                isPreview={isCardsPreview}
-                isRedirect={isCardsRedirect}
-                isArchived={isCardsArchived}
-            />
-            <TaskForm />
+            <JobPageTasks />
             <div />
-            <SectionHeader
-                IconComponent={<i className="bi bi-stickies-fill" />}
-                title={`${noteCards.length} notes taken`}
-            />
-            <CardList
-                type={"notes"}
-                cards={notes}
-                CardComponent={NoteCard}
-                isPreview={isCardsPreview}
-                isRedirect={isCardsRedirect}
-                isArchived={isCardsArchived}
-            />
-            <CreateButton
-                handleCreate={handleCreateNote}
-                label={"note"}
-            />
+            <JobPageNotes />
         </PageLayout>
     )
 }

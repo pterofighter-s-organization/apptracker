@@ -3,9 +3,9 @@ import { useState } from "react"
 
 //css
 import "./TaskForm.css"
-import { SubmitButton } from "../../../components/Buttons/SubmitButton"
-import { TextInput } from "../../../components/Inputs/TextInput"
-import { DateTimeInput } from "../../../components/Inputs/DateTimeInput"
+import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
+import { TextInput } from "../../../../components/Inputs/TextInput"
+import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
 
 export default function TaskForm() {
 

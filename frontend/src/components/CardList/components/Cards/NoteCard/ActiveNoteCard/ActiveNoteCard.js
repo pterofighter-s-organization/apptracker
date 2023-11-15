@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-//constants
-import { ARCHIVED_BIN_ICON } from "../../../../../../constants/components"
+//private-components
+import { ActiveCardButtons } from "../../components/ActiveCardButtons"
 
 //css
 import "../NoteCard.css"
@@ -28,6 +28,11 @@ export default function ActiveNoteCard({ id }) {
         setIsEdit(true)
     }
 
+    const handleValue = (e) => {
+        e.preventDefault()
+        setValue(e.target.value)
+    }
+
     return (
         <div
             className="note-card"
@@ -46,7 +51,7 @@ export default function ActiveNoteCard({ id }) {
                         <button
                             type="button"
                             className="onclick-bw-button"
-                            onClick={(e) => handleSave(e)}
+                            onClick={handleSave}
                         >
                             <i className="bi bi-save-fill"></i>
                         </button>
@@ -54,18 +59,14 @@ export default function ActiveNoteCard({ id }) {
                         <button
                             type="button"
                             className="onclick-bw-button"
-                            onClick={(e) => handleEdit(e)}
+                            onClick={handleEdit}
                         >
                             <i className="bi bi-pencil-fill"></i>
                         </button>
                 }
-                <button
-                    type="button"
-                    className="onclick-bw-button"
-                    onClick={(e) => handleArchive(e)}
-                >
-                    <i className={`${ARCHIVED_BIN_ICON}`} />
-                </button>
+                <ActiveCardButtons
+                    handleArchive={handleArchive}
+                />
             </div>
             {
                 isEdit ?
@@ -74,12 +75,8 @@ export default function ActiveNoteCard({ id }) {
                         className="note-card-textarea"
                         value={value}
                         placeholder="Remember to save above after edit."
-                        onChange={(e) => {
-                            e.preventDefault()
-                            setValue(e.target.value)
-                        }}
-                    >
-                    </textarea>
+                        onChange={handleValue}
+                    />
                     :
                     <div className="note-card-content">
                         {
@@ -91,7 +88,7 @@ export default function ActiveNoteCard({ id }) {
                                     <button
                                         type="button"
                                         className="note-card-starter note-card-content-hover"
-                                        onClick={(e) => handleEdit(e)}
+                                        onClick={handleEdit}
                                     >
                                         click to continue editing
                                     </button>
@@ -100,7 +97,7 @@ export default function ActiveNoteCard({ id }) {
                                 <button
                                     type="button"
                                     className="note-card-starter"
-                                    onClick={(e) => handleEdit(e)}
+                                    onClick={handleEdit}
                                 >
                                     click to start editing
                                 </button>

@@ -1,10 +1,10 @@
 
 //components
-import { HyperLinkButton } from "../../../components/Buttons/HyperLinkButton"
+import { HyperLinkButton } from "../../../../components/Buttons/HyperLinkButton"
 
 //css
 import "./JobPageDetails.css"
-import "../JobPage.css"
+import "../../JobPage.css"
 
 export default function JobPageDetails() {
 
@@ -50,13 +50,13 @@ export default function JobPageDetails() {
                     </h5>
                 </div>
                 <div className="job-page-content-bg job-page-divider-content job-page-dates">
-                    <h6 className="test">
+                    <h6>
                         <b>Updated:</b> {testDate}
                     </h6>
-                    <h6 className="test">
+                    <h6>
                         <b>Created:</b> {testDate}
                     </h6>
-                    <h6 className="test">
+                    <h6>
                         <b>Applied:</b> {testDate}
                     </h6>
                 </div>

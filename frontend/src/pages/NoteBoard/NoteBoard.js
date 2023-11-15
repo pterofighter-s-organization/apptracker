@@ -30,7 +30,7 @@ function NoteBoard({ status, handleStatus }) {
                 cards={cards}
                 status={status}
                 isPreview={false}
-                isShow={false}
+                isShow={true}
             />
         </PageLayout>
     )

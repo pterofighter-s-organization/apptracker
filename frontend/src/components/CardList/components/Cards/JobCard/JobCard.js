@@ -1,6 +1,10 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
+//private-components
+import { ArchivedCardButtons } from "../components/ArchivedCardButtons"
+import { ActiveCardButtons } from "../components/ActiveCardButtons"
+
 //components
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
 
@@ -17,6 +21,7 @@ export default function JobCard({ isArchived, id }) {
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     const handleStage = (e) => {
+        //use this card to handle all the reducer functions
         e.preventDefault()
         setStage(e.target.value)
     }
@@ -51,30 +56,12 @@ export default function JobCard({ isArchived, id }) {
                 </div>
                 <div className="job-card-top-buttons">
                     {isArchived ?
-                        <>
-                            <button
-                                type="button"
-                                className="onclick-bw-button"
-                                onClick={(e) => handleRestore(e)}
-                            >
-                                <i className="bi bi-arrow-counterclockwise"></i>
-                            </button>
-                            <button
-                                type="button"
-                                className="onclick-bw-button"
-                                onClick={(e) => handleDelete(e)}
-                            >
-                                <i className="bi bi-trash3-fill"></i>
-                            </button>
-                        </>
+                        <ArchivedCardButtons
+                            handleDelete={handleDelete}
+                            handleRestore={handleRestore}
+                        />
                         :
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleArchive(e)}
-                        >
-                            <i className={`${ARCHIVED_BIN_ICON}`}></i>
-                        </button>
+                        <ActiveCardButtons/>
                     }
                 </div>
             </div>

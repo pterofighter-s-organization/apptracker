@@ -27,7 +27,7 @@ function Dashboard({ status, handleStatus }) {
     })
     const taskCards = Array.from({ length: 20 }).fill({
         value: "",
-        isArchived: true,
+        isArchived: false,
     })
     const noteCards = Array.from({ length: 35 }).fill({
         value: "",

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom"
 
+//private-components
+import { ArchivedCardButtons } from "../../components/ArchivedCardButtons"
+
 //css
 import "../NoteCard.css"
 
@@ -30,20 +33,10 @@ export default function ArchivedNoteCard({ id }) {
                 >
                     UX/UI Designer/ Google
                 </Link>
-                <button
-                    type="button"
-                    className="onclick-bw-button"
-                    onClick={(e) => handleRestore(e)}
-                >
-                    <i className="bi bi-arrow-counterclockwise"></i>
-                </button>
-                <button
-                    type="button"
-                    className="onclick-bw-button"
-                    onClick={(e) => handleDelete(e)}
-                >
-                    <i className="bi bi-trash3-fill"></i>
-                </button>
+                <ArchivedCardButtons
+                    handleDelete={handleDelete}
+                    handleRestore={handleRestore}
+                />
             </div>
             <div className="note-card-content">
                 {

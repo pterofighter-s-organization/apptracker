@@ -2,14 +2,14 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //constants
-import { ARCHIVED_BIN_ICON } from "../../../constants/components"
+import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
 
 //components
-import { StageDropdown } from "../../../components/Dropdowns/StageDropdown"
+import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
 
 //css
 import "./JobPageHeader.css"
-import "../JobPage.css"
+import "../../JobPage.css"
 
 export default function JobPageHeader({ isArchived, id }) {
 
