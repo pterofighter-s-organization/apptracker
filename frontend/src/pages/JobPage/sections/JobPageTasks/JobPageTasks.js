@@ -15,7 +15,7 @@ export default function JobPageTasks() {
 
     const taskCards = Array.from({length: 15}).fill({
         value: "",
-        isArchived: false
+        status: "active"
     })
 
     const [tasks, setTasks] = useState(taskCards)

@@ -1,11 +1,10 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-//constants
-import { ARCHIVED_BIN_ICON } from "../../../../constants/components"
-
 //components
 import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
+import { ActiveOptionButtons } from "../../../../components/Buttons/OptionButtons/ActiveOptionButtons"
+import { ArchivedOptionButtons } from "../../../../components/Buttons/OptionButtons/ArchivedOptionButtons"
 
 //css
 import "./JobPageHeader.css"
@@ -43,22 +42,10 @@ export default function JobPageHeader({ isArchived, id }) {
             </div>
             <div className="job-page-top-buttons">
                 {isArchived ?
-                    <>
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleRestore(e)}
-                        >
-                            <i className="bi bi-arrow-counterclockwise"></i>
-                        </button>
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleDelete(e)}
-                        >
-                            <i className="bi bi-trash3-fill"></i>
-                        </button>
-                    </>
+                    <ArchivedOptionButtons
+                        handleDelete={handleDelete}
+                        handleRestore={handleRestore}
+                    />
                     :
                     <>
                         <Link
@@ -67,13 +54,9 @@ export default function JobPageHeader({ isArchived, id }) {
                         >
                             <i className="bi bi-pencil-fill"></i>
                         </Link>
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={(e) => handleArchive(e)}
-                        >
-                            <i className={`${ARCHIVED_BIN_ICON}`}></i>
-                        </button>
+                        <ActiveOptionButtons
+                            handleArchive={handleArchive}
+                        />
                     </>
                 }
             </div>

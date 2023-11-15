@@ -2,17 +2,13 @@
     background-color: #F2EFEF;
     height: 100vh;
     transition: width 0.4s ease-in-out;
-    /**/
     position: sticky;
     /* sticky top -> making sure the navbar stays same place when scrolled down */
     top: 0;
-    /**/
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* centers the x direction*/
     gap: 0.75rem;
-    /* gap-5 */
 }
 
 .minimized-sidenav {
@@ -77,7 +73,7 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     padding: 0 1rem;
     align-items: center;
     /* justify-content: center; */
@@ -89,15 +85,6 @@
     /*justify-content centers the image tag so it can allow 100% and it can center the image*/
     justify-content: center;
 }
-
-/* .minimized-sidenav .sidenav-logo{
-    justify-content: center;
-}
-
-.expanded-sidenav .sidenav-logo{
-    justify-content: center;
-    padding: 0 0.5em;
-} */
 
 .sidenav-logo-img {
     width: 1.75rem;
@@ -128,12 +115,3 @@
     white-space: nowrap;
     overflow: hidden;
 }
-
-/* .expanded-sidenav .sidenav-margin {
-    display: none;
-}
-
-.minimized-sidenav .sidenav-margin {
-    color: #F2EFEF;
-    margin-bottom: 1rem;
-} */

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
 //private-components
-import { ArchivedCardButtons } from "../components/ArchivedCardButtons"
-import { ActiveCardButtons } from "../components/ActiveCardButtons"
+import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
+import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 
 //css
 import "./TaskCard.css"
@@ -43,12 +43,12 @@ export default function TaskCard({ id, isArchived }) {
                     ux/ui designer / google
                 </h5>
                 {isArchived ?
-                    <ArchivedCardButtons
+                    <ArchivedOptionButtons
                         handleDelete={handleDelete}
                         handleRestore={handleRestore}
                     />
                     :
-                    <ActiveCardButtons />
+                    <ActiveOptionButtons />
                 }
             </div>
             <div className="task-card-title">

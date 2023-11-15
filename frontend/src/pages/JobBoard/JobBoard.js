@@ -14,7 +14,10 @@ import "./JobBoard.css"
 
 function JobBoard({ status, handleStatus }) {
 
-    const cards = Array.from({ length: 25 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 25 }).fill({
+        value: "",
+        status: status
+    })
 
     return (
         <PageLayout>
@@ -30,7 +33,7 @@ function JobBoard({ status, handleStatus }) {
                 cards={cards}
                 status={status}
                 isPreview={false}
-                isShow={false}
+                isShow={true}
             />
         </PageLayout>
     )

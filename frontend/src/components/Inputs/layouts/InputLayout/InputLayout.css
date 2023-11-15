@@ -1,16 +1,7 @@
-.input-container {
+.input-layout {
     display: flex;
     flex-direction: column;
     gap: 0.75em;
-}
-
-.input-error {
-    background-color: #fce4e4;
-    border: 1px solid #cc0033;
-}
-
-.input-text-error{
-    color: #cc0033;
 }
 
 .input-header {
@@ -34,10 +25,22 @@
     text-transform: uppercase;
 }
 
-.input-box{
+.input-text-error,
+.input-text-error .input-footer-text {
+    color: #cc0033;
+}
+
+.input-box {
     background-color: #E5E4E2;
     border-radius: 0.5em;
     font-size: 1em;
     padding: 0.75em 1em;
     border: none;
+}
+
+.input-box-error {
+    /*put all error classes below the paired class, or just put !important so it overides it*/
+    background-color: #fce4e4 !important;
+    border: 1px solid #cc0033 !important;
+    color: #cc0033 !important;
 }

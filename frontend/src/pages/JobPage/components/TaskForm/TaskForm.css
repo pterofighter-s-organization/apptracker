@@ -1,4 +1,4 @@
-.task-form-container {
+.task-form-layout {
     background-color: #f5f5f5;
     border-radius: 1em;
     width: 100%;
@@ -33,60 +33,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
-
-.textbox-input {
-    border-radius: 0.5em;
-    font-size: 1em;
-    padding: 0.75em 1em;
-    border: none;
-    background-color: #d9d9d9;
-}
-
-.input-header {
-    text-indent: 0em;
-}
-
-.input-header::first-letter {
-    text-transform: uppercase;
-}
-
-.input-footer {
-    text-indent: 0em;
-    color: gray;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
-    font-size: 0.8em;
-}
-
-.input-footer-text::first-letter {
-    text-transform: uppercase;
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75em;
-}
-
-.input-error {
-    background-color: #fce4e4;
-    border: 1px solid #cc0033;
-}
-
-.input-text-error{
-    color: #cc0033;
-}
-
-.datetime-input{
-    border-radius: 0.5em;
-    font-size: 1em;
-    background-color: #d9d9d9;
-    padding: 0.75em 1em;
-    border: none;
-    max-width: 100%;
-    width: fit-content;
 }
 
 .form-submit-button{

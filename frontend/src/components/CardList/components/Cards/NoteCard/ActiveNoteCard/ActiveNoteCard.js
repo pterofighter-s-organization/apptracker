@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 //private-components
-import { ActiveCardButtons } from "../../components/ActiveCardButtons"
+import { ActiveOptionButtons } from "../../../../../Buttons/OptionButtons/ActiveOptionButtons"
 
 //css
 import "../NoteCard.css"
@@ -64,7 +64,7 @@ export default function ActiveNoteCard({ id }) {
                             <i className="bi bi-pencil-fill"></i>
                         </button>
                 }
-                <ActiveCardButtons
+                <ActiveOptionButtons
                     handleArchive={handleArchive}
                 />
             </div>

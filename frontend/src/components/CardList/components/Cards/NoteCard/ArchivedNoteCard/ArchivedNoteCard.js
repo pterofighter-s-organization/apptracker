@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-//private-components
-import { ArchivedCardButtons } from "../../components/ArchivedCardButtons"
+//components
+import { ArchivedOptionButtons } from "../../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 
 //css
 import "../NoteCard.css"
@@ -33,7 +33,7 @@ export default function ArchivedNoteCard({ id }) {
                 >
                     UX/UI Designer/ Google
                 </Link>
-                <ArchivedCardButtons
+                <ArchivedOptionButtons
                     handleDelete={handleDelete}
                     handleRestore={handleRestore}
                 />

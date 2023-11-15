@@ -23,15 +23,15 @@ function Dashboard({ status, handleStatus }) {
     const isShow = false
     const jobCards = Array.from({ length: 25 }).fill({
         value: "",
-        isArchived: false,
+        status: status,
     })
     const taskCards = Array.from({ length: 20 }).fill({
         value: "",
-        isArchived: false,
+        status: status,
     })
     const noteCards = Array.from({ length: 35 }).fill({
         value: "",
-        isArchived: false,
+        status: status,
     })
 
     const [notes, setNotes] = useState(noteCards)
@@ -54,7 +54,7 @@ function Dashboard({ status, handleStatus }) {
             />
             <CardList
                 type={"jobs"}
-                cards={filterCardsByStatus(jobs, status)}
+                cards={jobs}
                 status={status}
                 isPreview={isPreview}
                 isShow={isShow}
@@ -66,7 +66,7 @@ function Dashboard({ status, handleStatus }) {
             />
             <CardList
                 type={"tasks"}
-                cards={filterCardsByStatus(tasks, status)}
+                cards={tasks}
                 status={status}
                 isPreview={isPreview}
                 isShow={isShow}
@@ -78,7 +78,7 @@ function Dashboard({ status, handleStatus }) {
             />
             <CardList
                 type={"notes"}
-                cards={filterCardsByStatus(notes, status)}
+                cards={notes}
                 status={status}
                 isPreview={isPreview}
                 isShow={isShow}

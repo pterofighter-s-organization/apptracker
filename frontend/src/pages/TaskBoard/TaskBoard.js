@@ -14,7 +14,10 @@ import "./TaskBoard.css"
 
 function TaskBoard({ status, handleStatus }) {
 
-    const cards = Array.from({ length: 25 }, (_, index) => index + 1)
+    const cards = Array.from({ length: 25 }).fill({
+        value: "",
+        status: status
+    })
 
     return (
         <PageLayout>

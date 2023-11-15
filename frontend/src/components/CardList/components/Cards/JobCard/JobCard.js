@@ -1,15 +1,10 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-//private-components
-import { ArchivedCardButtons } from "../components/ArchivedCardButtons"
-import { ActiveCardButtons } from "../components/ActiveCardButtons"
-
 //components
+import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
+import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
-
-//constants
-import { ARCHIVED_BIN_ICON } from "../../../../../constants/components"
 
 //css
 import "./JobCard.css"
@@ -56,12 +51,14 @@ export default function JobCard({ isArchived, id }) {
                 </div>
                 <div className="job-card-top-buttons">
                     {isArchived ?
-                        <ArchivedCardButtons
+                        <ArchivedOptionButtons
                             handleDelete={handleDelete}
                             handleRestore={handleRestore}
                         />
                         :
-                        <ActiveCardButtons/>
+                        <ActiveOptionButtons
+                            handleArchive={handleArchive}
+                        />
                     }
                 </div>
             </div>

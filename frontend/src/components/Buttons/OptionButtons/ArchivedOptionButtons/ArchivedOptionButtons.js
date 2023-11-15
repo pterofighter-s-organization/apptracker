@@ -1,8 +1,8 @@
 
 //css
-import "./ArchivedCardButtons.css"
+import "./ArchivedOptionButtons.css"
 
-export default function ArchivedCardButtons({ handleRestore, handleDelete }) {
+export default function ArchivedOptionButtons({ handleRestore, handleDelete }) {
 
     return (
         <>

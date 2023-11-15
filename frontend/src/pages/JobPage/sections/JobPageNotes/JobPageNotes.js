@@ -11,7 +11,11 @@ import "../../JobPage.css"
 
 export default function JobPageNotes() {
 
-    const noteCards = Array.from({ length: 0 }, (_, index) => index + 1)
+    const noteCards = Array.from({ length: 0 }).fill({
+        value: "",
+        status: "active"
+    })
+
     const [notes, setNotes] = useState(noteCards)
 
     const handleCreate = (e) => {

@@ -1,11 +1,12 @@
 import { useState } from "react"
 
+//components
+import { TextInput } from "../../../../components/Inputs/TextInput"
+import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
+import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
 
 //css
 import "./TaskForm.css"
-import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
-import { TextInput } from "../../../../components/Inputs/TextInput"
-import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
 
 export default function TaskForm() {
 
@@ -38,16 +39,15 @@ export default function TaskForm() {
         //       ...formData[e.target.name],
         //       value: e.target.value
         //     }
-        //   });
+        //   }); dont delete, another way to maninpulate state thats more complex
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e)
     }
 
     return (
-        <div className="task-form-container">
+        <div className="task-form-layout">
             <div className="task-form-section form-header">
                 <h1>
                     Add a New Task!
@@ -72,9 +72,11 @@ export default function TaskForm() {
                 <DateTimeInput
                     name={"dateTime"}
                     formDataObj={formData.dateTime}
+                    header={"task date and time"}
+                    footer={"select its date and time"}
+                    isRequired={true}
+                    handleChange={handleChange}
                 />
-            
-
                 <SubmitButton label={""}/>
             </form>
         </div>
