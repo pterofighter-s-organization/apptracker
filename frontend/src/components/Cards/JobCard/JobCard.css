@@ -1,7 +1,8 @@
 .job-card {
     background-color: #F5F5F5;
     /* width: 15rem; */
-    width: 100%; /* for mobile so it stretches whole width*/
+    width: 100%;
+    /* for mobile so it stretches whole width*/
     /* min-height: 15rem; */
     border-radius: 1rem;
     padding: 1em;
@@ -13,8 +14,13 @@
     text-decoration: none;
 }
 
-.job-card:hover{
-    outline: 1px black solid; /*border that doesnt decrease the width of the card*/
+.job-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.job-card:hover .job-card-title{
+    text-decoration: underline;
+    color: #3484F0;
 }
 
 .job-card-top {
@@ -31,7 +37,7 @@
     margin: 0.5rem 0.25rem;
 }
 
-.job-card-details-text{
+.job-card-details-text {
     text-transform: capitalize;
     text-wrap: nowrap;
     white-space: nowrap;
@@ -44,7 +50,7 @@
     margin: 0.25rem;
 }
 
-.job-card-top-buttons{
+.job-card-top-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;

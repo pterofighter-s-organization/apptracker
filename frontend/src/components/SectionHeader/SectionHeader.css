@@ -26,7 +26,7 @@
 }
 
 .section-header-right{
-    color: black;
+    color: var(--redirect-button-color);
 }
 
 .section-header-right:hover{

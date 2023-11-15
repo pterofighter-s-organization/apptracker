@@ -8,7 +8,7 @@ import "./TaskCard.css"
 
 export default function TaskCard({ id, isArchived }) {
 
-    const title = "title hello, i am"
+    const title = "title hello, i am lorep ipsum looking for ipsum"
     const taskCardId = "task-card-" + id
 
     const handleDelete = (e) => {
@@ -30,26 +30,29 @@ export default function TaskCard({ id, isArchived }) {
         <Link
             to={"/job/" + id}
             id={taskCardId}
-            key={taskCardId}
-            className="task-card"
+            className="task-card-container"
         >
-            <div className="task-card-section">
+            <div style={{ border: `2.5px solid ${"#ff6666"}` }} />
+            <div className="task-card-header">
+                <h5 className="task-card-job">
+                    ux/ui designer / google
+                </h5>
                 {
                     isArchived ?
                         <>
                             <button
                                 type="button"
                                 className="onclick-bw-button"
-                                onClick={(e) => handleDelete(e)}
+                                onClick={(e) => handleRestore(e)}
                             >
-                                <i className="bi bi-trash3-fill"></i>
+                                <i className="bi bi-arrow-counterclockwise"></i>
                             </button>
                             <button
                                 type="button"
                                 className="onclick-bw-button"
-                                onClick={(e) => handleRestore(e)}
+                                onClick={(e) => handleDelete(e)}
                             >
-                                <i className="bi bi-arrow-counterclockwise"></i>
+                                <i className="bi bi-trash3-fill"></i>
                             </button>
                         </>
                         :
@@ -61,27 +64,17 @@ export default function TaskCard({ id, isArchived }) {
                             <i className={`${ARCHIVED_BIN_ICON}`} />
                         </button>
                 }
-                <div className="task-card-title">
-                    {title}
-                </div>
             </div>
-            <div className="task-card-section">
-                <div className="task-card-job">
-                    <div className="task-card-job-text">
-                        ux/ui designer ux/ui designer
-                    </div>
-                    <div className="task-card-job-text">
-                        google
-                    </div>
+            <div className="task-card-title">
+                {title}
+            </div>
+            <div className="task-card-clock">
+                <div className="task-card-datetime">
+                    <i className="bi bi-calendar-fill"></i>
+                    2/12/2022 3:08am
                 </div>
-                <div className="task-card-clock">
-                    <div className="task-card-datetime">
-                        <i className="bi bi-calendar-fill"></i>
-                        2/12/2022 3:08am
-                    </div>
-                    <div className="task-card-timer">
-                        3d
-                    </div>
+                <div className="task-card-timer" style={{ paddingRight: "0.5em" }}>
+                    3d
                 </div>
             </div>
         </Link>

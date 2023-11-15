@@ -1,83 +1,58 @@
-.task-card {
+.task-card-container{
     background-color: #f5f5f5;
     border-radius: 1rem;
-    padding: 1em;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-transform: capitalize;
     text-decoration: none;
     color: black;
-    /**/
-    display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    z-index: 0;
 }
 
-.task-card:hover {
-    outline: 1px solid black;
-}
-
-.task-card-section {
+.task-card-header{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
-    gap: 1rem;
-}
-
-.task-card-job {
-    display: flex;
-    flex-wrap: wrap;
     gap: 0.5rem;
-    background-color: #d9d9d9;
-    padding: 0.5rem 0.75rem;
-    border-radius: 1em;
-    /**/
-    overflow: hidden;
+    /* padding: 0.5rem 0; */
 }
 
-@media (min-width: 576px) {
-    .task-card-job {
-        max-width: 15rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .task-card-job {
-        width: 100%;
-    }
-}
-
-.task-card-title {
-    text-wrap: wrap;
-    margin-left: 0.75rem;
-}
-
-.task-card-title::first-letter {
-    text-transform: uppercase;
-}
-
-.task-card-job-text {
-    text-transform: capitalize;
-    max-width: 60%;
-    /*max width - the first text which is job will have more space*/
+.task-card-job{
+    width: 70%;
+    color: gray;
     text-wrap: nowrap;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
+    flex-grow: 1;
+    margin-bottom: 0;
+    font-size: 1.25rem;
 }
 
-.task-card-clock {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-left: 0.75rem;
+.task-card-container:hover .task-card-job{
+    text-decoration: underline;
+    color: #3484F0;
 }
 
-.task-card-datetime {
+.task-card-container:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.task-card-title{
+    margin-top: -0.5rem;
+    font-size: 1.25em;
+}
+
+.task-card-clock{
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.task-card-buttons{
+.task-card-datetime{
+    display: flex;
+    flex-direction: row;
     gap: 0.5rem;
+    flex-grow: 1;
 }

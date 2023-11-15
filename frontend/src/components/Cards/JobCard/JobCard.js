@@ -82,7 +82,10 @@ export default function JobCard({ isArchived, id }) {
                 <h6 className="job-card-details-text" style={{ color: "gray" }}>
                     Google
                 </h6>
-                <h3 className="job-card-details-text" style={{ marginLeft: "-0.05em" }}>
+                <h3
+                    className="job-card-details-text job-card-title"
+                    style={{ marginLeft: "-0.05em" }}
+                >
                     UX/UI Designer
                 </h3>
                 <h5 style={{ textTransform: "initial", color: "#009E60" }}>

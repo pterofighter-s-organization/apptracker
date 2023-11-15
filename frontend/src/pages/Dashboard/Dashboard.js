@@ -26,11 +26,11 @@ function Dashboard({ status, handleStatus }) {
     const isRedirect = true
     const jobCards = Array.from({ length: 25 }).fill({
         value: "",
-        isArchived: true,
+        isArchived: false,
     })
     const taskCards = Array.from({ length: 20 }).fill({
         value: "",
-        isArchived: false,
+        isArchived: true,
     })
     const noteCards = Array.from({ length: 35 }).fill({
         value: "",

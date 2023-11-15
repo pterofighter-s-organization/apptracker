@@ -77,12 +77,17 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    /* gap-4 */
-    /*justify-content centers the image tag so it can allow 100%*/
+    font-size: 1.25rem;
+    padding: 0 1rem;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     text-decoration: none;
     width: 100%;
+}
+
+.minimized-sidenav .sidenav-logo{
+    /*justify-content centers the image tag so it can allow 100% and it can center the image*/
+    justify-content: center;
 }
 
 /* .minimized-sidenav .sidenav-logo{

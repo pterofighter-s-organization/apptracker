@@ -25,10 +25,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                     src={process.env.PUBLIC_URL + '/logo/css_icon_by_freepik.png'}
                     alt="Logo"
                 />
-                <div
-                    className="sidenav-button-text sidenav-logo-text"
-                    style={{ fontSize: "1.2em" }}
-                >
+                <div className="sidenav-button-text sidenav-logo-text">
                     job tracker
                 </div>
             </Link>

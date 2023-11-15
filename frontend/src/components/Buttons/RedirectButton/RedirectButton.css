@@ -1,5 +1,5 @@
 .redirect-button {
-    background-color: #3484F0;
+    background-color: var(--redirect-button-color);
     color: white;
     padding: 1em 2em;
     text-decoration: none;
