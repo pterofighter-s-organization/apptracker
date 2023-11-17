@@ -1,10 +1,10 @@
-
+//components
+import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown"
 
 //css
-import { StatusDropdown } from "../../components/Dropdowns/StatusDropdown"
 import "./HeaderLayout.css"
 
-export default function HeaderLayout({ children, title, status, handleStatus }) {
+export default function HeaderLayout({ title, status, handleStatus, FilterComponents, children }) {
 
     return (
         <div className="header-layout">
@@ -16,16 +16,24 @@ export default function HeaderLayout({ children, title, status, handleStatus }) 
                     {children}
                 </h6>
             </div>
-            {
-                status ?
-                    <StatusDropdown
-                        id={"status-dropdown"}
-                        status={status}
-                        handleStatus={handleStatus}
-                    />
-                    :
-                    null
-            }
+            <div className="header-layout-filters">
+                {FilterComponents}
+                {
+                    status ?
+                        <FilterDropdown
+                            id={"status-dropdown"}
+                            label={"status"}
+                            value={status}
+                            options={{
+                                "archived": "#808080",
+                                "active": "#009900"
+                            }}
+                            handleOption={handleStatus}
+                        />
+                        :
+                        null
+                }
+            </div>
         </div>
     )
 }

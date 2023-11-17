@@ -1,6 +1,6 @@
 
 //hocs
-import withDropdownControl from "../../../hocs/withDropdownControl"
+import { withDropdownControl } from "../../../hocs/withDropdownControl"
 
 //constants
 import { APP_STAGE_COLORS } from "../../../constants/application"
@@ -15,7 +15,7 @@ function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdo
 
     return (
         <div
-            className={`stage-dropdown ${showDropdown ? "" : "minimized-stage-dropdown"}`}
+            className={`stage-dropdown dropdown ${showDropdown ? "" : "minimized-stage-dropdown"}`}
         >
             <button
                 type="button"
@@ -32,13 +32,13 @@ function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdo
                     style={{ fontSize: "0.75em" }}
                 ></i>
             </button>
-            <div className="stage-dropdown-options">
+            <div className="stage-dropdown-options dropdown-options">
                 {Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
                     option !== stage ? (
                         <button
                             key={option}
                             value={option}
-                            className="stage-dropdown-option"
+                            className="stage-dropdown-option dropdown-option"
                             style={{ color: color }}
                             onClick={(e) => handleStage(e)}
                         >

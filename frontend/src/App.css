@@ -43,13 +43,3 @@ pre {
     background-color: black;
     color: #D9D9D9;
 }
-
-@keyframes open-dropdown {
-    0% {
-        transform: scale(0);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}

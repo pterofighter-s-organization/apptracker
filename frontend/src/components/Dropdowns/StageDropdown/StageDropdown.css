@@ -1,6 +1,5 @@
 .stage-dropdown {
     font-size: 0.8em;
-    position: relative;
     align-items: baseline;
 }
 
@@ -10,6 +9,7 @@
     text-transform: capitalize;
     /**/
     display: inline-flex;
+    /*so this doesnt take 100% of the space with inline-flex*/
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
@@ -24,26 +24,22 @@
 }
 
 .stage-dropdown-options {
-    position: absolute;
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
     /**/
     padding: 0.5rem 0;
-    animation: open-dropdown 150ms ease;
-    transform-origin: top center;
-    /* this is how much it blurs, the thickness of the blur*/
-    backdrop-filter: blur(1.5px);
 }
 
-@media (min-width: 17.5rem){
-    .stage-dropdown-options{
-        width: 16.5rem; /*follow app card width but -1 rem*/
+@media (min-width: 17.5rem) {
+    .stage-dropdown-options {
+        width: 16.5rem;
+        /*follow app card width but -1 rem*/
     }
 }
 
-@media (max-width: 17.5rem){
-    .stage-dropdown-options{
+@media (max-width: 17.5rem) {
+    .stage-dropdown-options {
         width: inherit;
     }
 }

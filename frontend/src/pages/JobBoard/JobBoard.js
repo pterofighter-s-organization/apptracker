@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -11,8 +12,18 @@ import withStatusControl from "../../hocs/withStatusControl";
 
 //css
 import "./JobBoard.css"
+import FilterDropdown from "../../components/Dropdowns/FilterDropdown/FilterDropdown";
+import { APP_STAGE_COLORS } from "../../constants/application";
 
 function JobBoard({ status, handleStatus }) {
+
+    //the stage filter
+    const [stage, setStage] = useState(null)
+
+    const handleStage = (e, option) => {
+        e.preventDefault()
+        setStage(option)
+    }
 
     const cards = Array.from({ length: 25 }).fill({
         value: "",
@@ -25,6 +36,15 @@ function JobBoard({ status, handleStatus }) {
                 title={"my job applications"}
                 status={status}
                 handleStatus={handleStatus}
+                FilterComponents={
+                    <FilterDropdown
+                        id={"stage-filter"}
+                        label={"stage"}
+                        value={stage}
+                        options={APP_STAGE_COLORS}
+                        handleOption={handleStage}
+                    />
+                }
             >
                 Every job from <i>interviewing to interested.</i>
             </HeaderLayout>

@@ -28,7 +28,7 @@ export default function ArchivedNoteCard({ id }) {
         >
             <div className="note-card-header">
                 <Link
-                    to={"/job-edit/" + id}
+                    to={"/job/" + id}
                     className="note-card-title"
                 >
                     UX/UI Designer/ Google

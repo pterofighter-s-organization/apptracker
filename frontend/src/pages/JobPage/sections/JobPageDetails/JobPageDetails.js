@@ -78,7 +78,12 @@ export default function JobPageDetails() {
             <div className="job-page-content-bg job-page-description-container">
                 <h5>Description:</h5>
                 <pre className="job-page-description">
-                    {description}
+                    {
+                        description && description.length > 0? 
+                            description
+                            :
+                            "No description at the moment."
+                    }
                 </pre>
             </div>
         </>

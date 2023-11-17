@@ -8,16 +8,13 @@ import { NoteCard } from "./components/Cards/NoteCard"
 //components
 import { RedirectButton } from "../Buttons/RedirectButton"
 
-//layouts
-import { ErrorLayout } from "../../layouts/ErrorLayout"
-
 //hocs
 import withDynamicCardCount from "../../hocs/withDynamicCardCount"
 
 //css
 import "./CardList.css"
 
-function CardList({ cards, initialCount, cardCount, status, isShow, type, ...props }) {
+function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
 
     const CARDS = {
         jobs: {
@@ -66,21 +63,20 @@ function CardList({ cards, initialCount, cardCount, status, isShow, type, ...pro
                         :
                         null
                     :
-                    <ErrorLayout>
-                        <>
-                            <div>
-                                no {status} {type} at the moment!
-                            </div>
-                            {type === "jobs" ?
-                                <RedirectButton
-                                    link={"/new-job"}
-                                    label={`track new ${type}`}
-                                />
-                                :
-                                null
-                            }
-                        </>
-                    </ErrorLayout>
+                    <div className="card-list-error">
+                        <i className="bi bi-info-circle-fill"></i>
+                        <div>
+                            no related {type} at the moment!
+                        </div>
+                        {type === "jobs" ?
+                            <RedirectButton
+                                link={"/new-job"}
+                                label={`track new ${type}`}
+                            />
+                            :
+                            null
+                        }
+                    </div>
             }
         </div>
     )

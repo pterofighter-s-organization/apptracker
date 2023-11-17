@@ -1,8 +1,8 @@
-import { useState } from "react"
 
 //components
 import { CardList } from "../../components/CardList"
 import { SectionHeader } from "../../components/SectionHeader"
+import { RedirectButton } from "../../components/Buttons/RedirectButton"
 
 //layout
 import { HeaderLayout } from "../../layouts/HeaderLayout"
@@ -10,9 +10,6 @@ import { PageLayout } from "../../layouts/PageLayout"
 
 //hocs
 import withStatusControl from "../../hocs/withStatusControl"
-
-//helpers
-import { filterCardsByStatus } from "../../helpers/applicationHelpers"
 
 //css
 import "./Dashboard.css"
@@ -25,7 +22,7 @@ function Dashboard({ status, handleStatus }) {
         value: "",
         status: status,
     })
-    const taskCards = Array.from({ length: 20 }).fill({
+    const taskCards = Array.from({ length: 0 }).fill({
         value: "",
         status: status,
     })
@@ -33,10 +30,6 @@ function Dashboard({ status, handleStatus }) {
         value: "",
         status: status,
     })
-
-    const [notes, setNotes] = useState(noteCards)
-    const [jobs, setJobs] = useState(jobCards)
-    const [tasks, setTasks] = useState(taskCards)
 
     return (
         <PageLayout>
@@ -47,42 +40,60 @@ function Dashboard({ status, handleStatus }) {
             >
                 Welcome, <i>User 1</i>
             </HeaderLayout>
-            <SectionHeader
-                IconComponent={<i className="bi bi-file-post-fill" />}
-                title={`${jobs.length} jobs ${status === "archived" ? "to dispose" : "tracked"}`}
-                link={"/all-jobs/" + status}
-            />
-            <CardList
-                type={"jobs"}
-                cards={jobs}
-                status={status}
-                isPreview={isPreview}
-                isShow={isShow}
-            />
-            <SectionHeader
-                IconComponent={<i className="bi bi-view-list" />}
-                title={`${tasks.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
-                link={"/all-tasks/" + status}
-            />
-            <CardList
-                type={"tasks"}
-                cards={tasks}
-                status={status}
-                isPreview={isPreview}
-                isShow={isShow}
-            />
-            <SectionHeader
-                IconComponent={<i className="bi bi-stickies-fill" />}
-                title={`${notes.length} notes ${status === "archived" ? "to restore" : "taken"}`}
-                link={"/all-notes/" + status}
-            />
-            <CardList
-                type={"notes"}
-                cards={notes}
-                status={status}
-                isPreview={isPreview}
-                isShow={isShow}
-            />
+            <>
+                <SectionHeader
+                    IconComponent={<i className="bi bi-file-post-fill" />}
+                    title={`${jobCards.length} jobs ${status === "archived" ? "to dispose" : "tracked"}`}
+                    ButtonComponent={
+                        <RedirectButton
+                            link={"/all-jobs/" + status}
+                            label={`all jobs`}
+                        />
+                    }
+                />
+                <CardList
+                    type={"jobs"}
+                    cards={jobCards}
+                    isPreview={isPreview}
+                    isShow={isShow}
+                />
+            </>
+            <>
+                <SectionHeader
+                    IconComponent={<i className="bi bi-view-list" />}
+                    title={`${taskCards.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
+                    ButtonComponent={
+                        <RedirectButton
+                            link={"/all-tasks/" + status}
+                            label={`all tasks`}
+                        />
+                    }
+                />
+                <CardList
+                    type={"tasks"}
+                    cards={taskCards}
+                    isPreview={isPreview}
+                    isShow={isShow}
+                />
+            </>
+            <>
+                <SectionHeader
+                    IconComponent={<i className="bi bi-stickies-fill" />}
+                    title={`${noteCards.length} notes ${status === "archived" ? "to restore" : "taken"}`}
+                    ButtonComponent={
+                        <RedirectButton
+                            link={"/all-notes/" + status}
+                            label={`all notes`}
+                        />
+                    }
+                />
+                <CardList
+                    type={"notes"}
+                    cards={noteCards}
+                    isPreview={isPreview}
+                    isShow={isShow}
+                />
+            </>
         </PageLayout>
     )
 }

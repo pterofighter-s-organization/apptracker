@@ -1,12 +1,15 @@
+.header-layout{
+    display: flex;
+    gap: 0.5rem;
+}
+
 @media (min-width: 1200px) {
+    .header-layout{
+        flex-direction: row;
+    }
     .header-layout-title {
         flex-direction: column;
         flex-grow: 1;
-    }
-
-    .header-layout {
-        display: flex;
-        flex-direction: row;
     }
 }
 
@@ -23,7 +26,6 @@
     }
 
     .header-layout {
-        display: flex;
         flex-direction: column;
         gap: 0.5rem;
         margin: 0.5rem 0;
@@ -33,9 +35,17 @@
 .header-layout-title {
     display: flex;
     gap: 0.25rem;
+    flex-grow: 1;
+    margin-right: 0.5rem;
 }
 
 .header-layout-title-text {
     /* font-weight: 900; */
     text-transform: capitalize;
+}
+
+.header-layout-filters{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
