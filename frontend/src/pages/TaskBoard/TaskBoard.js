@@ -7,7 +7,7 @@ import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 
 //hocs
-import withStatusControl from "../../hocs/withStatusControl";
+import { withStatusControl } from "../../hocs/withStatusControl";
 
 //css
 import "./TaskBoard.css"
@@ -31,7 +31,6 @@ function TaskBoard({ status, handleStatus }) {
             <CardList
                 type={"tasks"}
                 cards={cards}
-                status={status}
                 isPreview={false}
                 isShow={true}
             />

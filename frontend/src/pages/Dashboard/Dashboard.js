@@ -9,7 +9,7 @@ import { HeaderLayout } from "../../layouts/HeaderLayout"
 import { PageLayout } from "../../layouts/PageLayout"
 
 //hocs
-import withStatusControl from "../../hocs/withStatusControl"
+import { withStatusControl } from "../../hocs/withStatusControl"
 
 //css
 import "./Dashboard.css"

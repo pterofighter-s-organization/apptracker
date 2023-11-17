@@ -2,18 +2,20 @@ import { useState } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
+import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 
+//constants
+import { APP_STAGE_COLORS } from "../../constants/constants";
+
 //hocs
-import withStatusControl from "../../hocs/withStatusControl";
+import { withStatusControl } from "../../hocs/withStatusControl";
 
 //css
 import "./JobBoard.css"
-import FilterDropdown from "../../components/Dropdowns/FilterDropdown/FilterDropdown";
-import { APP_STAGE_COLORS } from "../../constants/application";
 
 function JobBoard({ status, handleStatus }) {
 

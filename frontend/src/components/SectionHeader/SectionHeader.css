@@ -5,7 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    /* margin-bottom: 0rem; */
+    margin-bottom: 0.25rem;
 }
 
 .section-header-left{

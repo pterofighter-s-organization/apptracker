@@ -22,7 +22,12 @@ function FilterDropdown({ id, label, value, options, handleOption, showDropdown,
                 >
                     {value && value.length > 0 ? value : "all"}
                 </div>
-                <i className="filter-dropdown-face-icon bi bi-caret-down-fill" />
+                {
+                    showDropdown ?
+                        <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
+                        :
+                        <i className="dropdown-face-icon bi bi-caret-down-fill" />
+                }
             </button>
             <div className="filter-dropdown-options dropdown-options">
                 Choose:

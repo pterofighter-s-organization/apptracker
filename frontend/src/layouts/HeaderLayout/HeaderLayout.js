@@ -1,6 +1,9 @@
 //components
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown"
 
+//constants
+import { APP_STATUS_COLORS } from "../../constants/constants"
+
 //css
 import "./HeaderLayout.css"
 
@@ -24,10 +27,7 @@ export default function HeaderLayout({ title, status, handleStatus, FilterCompon
                             id={"status-dropdown"}
                             label={"status"}
                             value={status}
-                            options={{
-                                "archived": "#808080",
-                                "active": "#009900"
-                            }}
+                            options={APP_STATUS_COLORS}
                             handleOption={handleStatus}
                         />
                         :

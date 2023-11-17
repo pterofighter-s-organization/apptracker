@@ -7,7 +7,7 @@ import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 
 //hocs
-import withStatusControl from "../../hocs/withStatusControl";
+import { withStatusControl } from "../../hocs/withStatusControl";
 
 //css
 import "./NoteBoard.css"
@@ -31,7 +31,6 @@ function NoteBoard({ status, handleStatus }) {
             <CardList
                 type={"notes"}
                 cards={cards}
-                status={status}
                 isPreview={false}
                 isShow={true}
             />

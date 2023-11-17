@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 
 //private-components
 import { TaskForm } from "../../components/TaskForm"
@@ -6,19 +6,24 @@ import { TaskForm } from "../../components/TaskForm"
 //components
 import { CardList } from "../../../../components/CardList"
 import { SectionHeader } from "../../../../components/SectionHeader"
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
+
+//hocs
+import { withStatusControl } from "../../../../hocs/withStatusControl"
+
+//constants
+import { APP_STATUS_COLORS } from "../../../../constants/constants"
 
 //css
 import "./JobPageTasks.css"
 import "../../JobPage.css"
 
-export default function JobPageTasks() {
+function JobPageTasks({ status, handleStatus }) {
 
-    const taskCards = Array.from({length: 15}).fill({
+    const taskCards = Array.from({ length: 15 }).fill({
         value: "",
-        status: "active"
+        status: status
     })
-
-    const [tasks, setTasks] = useState(taskCards)
 
     //here going to fetch tasks
 
@@ -26,12 +31,20 @@ export default function JobPageTasks() {
         <>
             <SectionHeader
                 IconComponent={<i className="bi bi-view-list"></i>}
-                title={`${tasks.length} tasks for this job`}
+                title={`${taskCards.length} tasks for this job`}
+                ButtonComponent={
+                    <FilterDropdown
+                        id={"status-filter-tasks"}
+                        label={"status"}
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+                }
             />
             <CardList
                 type={"tasks"}
-                cards={tasks}
-                status={"active"}
+                cards={taskCards}
                 isPreview={true}
                 isShow={true}
             />
@@ -39,3 +52,5 @@ export default function JobPageTasks() {
         </>
     )
 }
+
+export default withStatusControl(JobPageTasks)

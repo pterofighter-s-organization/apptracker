@@ -21,9 +21,9 @@ export default function App() {
           <Route path="/all-jobs" element={<JobBoard />} />
           <Route path="/all-tasks" element={<TaskBoard />} />
           <Route path="/all-notes" element={<NoteBoard />} />
-          <Route path="/all-jobs/:givenStatus" element={<JobBoard />} />
-          <Route path="/all-tasks/:givenStatus" element={<TaskBoard />} />
-          <Route path="/all-notes/:givenStatus" element={<NoteBoard />} />
+          <Route path="/all-jobs/:status" element={<JobBoard />} />
+          <Route path="/all-tasks/:status" element={<TaskBoard />} />
+          <Route path="/all-notes/:status" element={<NoteBoard />} />
           <Route path="/job/:id" element={<JobPage />} />
         </Routes>
       </Router>

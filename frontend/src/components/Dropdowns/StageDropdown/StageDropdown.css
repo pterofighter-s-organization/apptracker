@@ -15,10 +15,6 @@
     gap: 0.5rem;
 }
 
-.stage-dropdown-face:hover {
-    opacity: 0.9;
-}
-
 .minimized-stage-dropdown .stage-dropdown-options {
     display: none;
 }

@@ -1,26 +1,30 @@
-import { useState } from "react"
 
 //components
 import { CardList } from "../../../../components/CardList"
 import { CreateButton } from "../../../../components/Buttons/CreateButton"
 import { SectionHeader } from "../../../../components/SectionHeader"
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
+
+//hocs
+import { withStatusControl } from "../../../../hocs/withStatusControl"
+
+//constants
+import { APP_STATUS_COLORS } from "../../../../constants/constants"
 
 //css
 import "./JobPageNotes.css"
 import "../../JobPage.css"
 
-export default function JobPageNotes() {
+function JobPageNotes({ status, handleStatus }) {
 
     const noteCards = Array.from({ length: 0 }).fill({
         value: "",
-        status: "active"
+        status: status
     })
-
-    const [notes, setNotes] = useState(noteCards)
 
     const handleCreate = (e) => {
         e.preventDefault()
-        setNotes([...notes, notes.length])
+        // setNotes([...notes, notes.length])
     }
 
     //here going to fetch notes
@@ -29,12 +33,20 @@ export default function JobPageNotes() {
         <>
             <SectionHeader
                 IconComponent={<i className="bi bi-stickies-fill" />}
-                title={`${notes.length} notes taken`}
+                title={`${noteCards.length} notes taken`}
+                ButtonComponent={
+                    <FilterDropdown
+                        id={"status-filter-notes"}
+                        label={"status"}
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+                }
             />
             <CardList
                 type={"notes"}
-                cards={notes}
-                status={"active"}
+                cards={noteCards}
                 isPreview={true}
                 isShow={true}
             />
@@ -45,3 +57,5 @@ export default function JobPageNotes() {
         </>
     )
 }
+
+export default withStatusControl(JobPageNotes)

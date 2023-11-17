@@ -3,7 +3,7 @@
 import { withDropdownControl } from "../../../hocs/withDropdownControl"
 
 //constants
-import { APP_STAGE_COLORS } from "../../../constants/application"
+import { APP_STAGE_COLORS } from "../../../constants/constants"
 
 //utils
 import { getContrastTextColor } from "../../../utils/components"
@@ -21,16 +21,16 @@ function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdo
                 type="button"
                 className="stage-dropdown-face"
                 style={{ backgroundColor: APP_STAGE_COLORS[stage], color: getContrastTextColor(APP_STAGE_COLORS[stage]) }}
-                onClick={(e) => (
-                    showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
-                )}
+                onClick={showDropdown ? handleCloseDropdown : handleOpenDropdown}
                 id={id}
             >
                 <div>{stage}</div>
-                <i
-                    className="bi bi-caret-down-fill"
-                    style={{ fontSize: "0.75em" }}
-                ></i>
+                {
+                    showDropdown ?
+                        <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
+                        :
+                        <i className="dropdown-face-icon bi bi-caret-down-fill" />
+                }
             </button>
             <div className="stage-dropdown-options dropdown-options">
                 {Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
@@ -40,7 +40,7 @@ function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdo
                             value={option}
                             className="stage-dropdown-option dropdown-option"
                             style={{ color: color }}
-                            onClick={(e) => handleStage(e)}
+                            onClick={handleStage}
                         >
                             {option}
                         </button>

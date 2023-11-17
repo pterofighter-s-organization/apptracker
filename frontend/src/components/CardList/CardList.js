@@ -9,7 +9,7 @@ import { NoteCard } from "./components/Cards/NoteCard"
 import { RedirectButton } from "../Buttons/RedirectButton"
 
 //hocs
-import withDynamicCardCount from "../../hocs/withDynamicCardCount"
+import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"
 
 //css
 import "./CardList.css"
