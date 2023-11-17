@@ -10,7 +10,9 @@ export default function RedirectButton({ link, label }) {
             to={link}
             className="redirect-button"
         >
-            {label}
+            <div className="redirect-button-label">
+                {label}
+            </div>
             <i className="bi bi-box-arrow-up-right"></i>
         </Link>
     )

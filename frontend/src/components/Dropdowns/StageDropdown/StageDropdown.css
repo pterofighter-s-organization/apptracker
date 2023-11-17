@@ -46,7 +46,3 @@
     border-radius: 2em;
     text-transform: capitalize;
 }
-
-.stage-dropdown-option:hover {
-    outline: 0.05em black solid;
-}

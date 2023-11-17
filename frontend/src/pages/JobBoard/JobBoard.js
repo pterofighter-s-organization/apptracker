@@ -43,6 +43,7 @@ function JobBoard({ status, handleStatus }) {
                         id={"stage-filter"}
                         label={"stage"}
                         value={stage}
+                        isOptionAll={true}
                         options={APP_STAGE_COLORS}
                         handleOption={handleStage}
                     />

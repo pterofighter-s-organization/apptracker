@@ -17,11 +17,12 @@
 }
 
 .dropdown-option {
+    color: black;
     cursor: pointer;
 }
 
 .dropdown-option:hover {
-    filter: brightness(1.25);
+    text-decoration: underline;
 }
 
 .dropdown-face-icon{

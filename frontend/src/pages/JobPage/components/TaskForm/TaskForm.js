@@ -5,6 +5,9 @@ import { TextInput } from "../../../../components/Inputs/TextInput"
 import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
 import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
 
+//layouts
+import { InfoLayout } from "../../../../layouts/InfoLayout"
+
 //css
 import "./TaskForm.css"
 
@@ -47,7 +50,7 @@ export default function TaskForm() {
     }
 
     return (
-        <div className="task-form-layout">
+        <div className="task-form">
             <div className="task-form-section form-header">
                 <h1>
                     Add a New Task!
@@ -55,7 +58,9 @@ export default function TaskForm() {
                 <h6>
                     Track nesscary activities for this application.
                 </h6>
-                <p>* are required fields.</p>
+                <InfoLayout
+                    text={"* is required"}
+                />
             </div>
             <form
                 className="form-inputs task-form-section"
@@ -77,7 +82,7 @@ export default function TaskForm() {
                     isRequired={true}
                     handleChange={handleChange}
                 />
-                <SubmitButton label={""}/>
+                <SubmitButton label={""} />
             </form>
         </div>
     )

@@ -6,7 +6,7 @@ export const HOME_ROUTE = {
 
 export const NEW_APP_ROUTE = {
     text: "new job",
-    route: "/new-app",
+    route: "/new-job",
     icon: "bi bi-plus-circle-fill"
 }
 

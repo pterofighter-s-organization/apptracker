@@ -8,6 +8,9 @@ import { NoteCard } from "./components/Cards/NoteCard"
 //components
 import { RedirectButton } from "../Buttons/RedirectButton"
 
+//layouts
+import { InfoLayout } from "../../layouts/InfoLayout"
+
 //hocs
 import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"
 
@@ -64,18 +67,18 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                         null
                     :
                     <div className="card-list-error">
-                        <i className="bi bi-info-circle-fill"></i>
-                        <div>
-                            no related {type} at the moment!
-                        </div>
-                        {type === "jobs" ?
-                            <RedirectButton
-                                link={"/new-job"}
-                                label={`track new ${type}`}
-                            />
-                            :
-                            null
-                        }
+                        <InfoLayout
+                            text={`no related ${type} at the moment!`}
+                        >
+                            {type === "jobs" ?
+                                <RedirectButton
+                                    link={"/new-job"}
+                                    label={`track new ${type}`}
+                                />
+                                :
+                                null
+                            }
+                        </InfoLayout>
                     </div>
             }
         </div>

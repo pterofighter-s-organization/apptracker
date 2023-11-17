@@ -18,7 +18,7 @@ function Dashboard({ status, handleStatus }) {
 
     const isPreview = true
     const isShow = false
-    const jobCards = Array.from({ length: 25 }).fill({
+    const jobCards = Array.from({ length: 0 }).fill({
         value: "",
         status: status,
     })
