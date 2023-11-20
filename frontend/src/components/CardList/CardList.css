@@ -46,7 +46,20 @@
     border-radius: 1em;
     /**/
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    /**/
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-list-error-header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.card-list-error-text{
+    text-align: center;
     text-transform: capitalize;
 }

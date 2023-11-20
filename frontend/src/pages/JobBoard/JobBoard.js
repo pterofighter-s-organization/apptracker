@@ -38,7 +38,7 @@ function JobBoard({ status, handleStatus }) {
                 title={"my job applications"}
                 status={status}
                 handleStatus={handleStatus}
-                FilterComponents={
+                Components={
                     <FilterDropdown
                         id={"stage-filter"}
                         label={"stage"}

@@ -1,0 +1,13 @@
+
+.info-reminder{
+    font-size: 0.9rem;
+    color: #34495E;
+}
+
+.info-reminder-text {
+    margin-left: 0.5rem;
+}
+
+.info-reminder-text::first-letter {
+    text-transform: uppercase;
+}

@@ -1,0 +1,6 @@
+.job-form-stage-dates{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 1.5rem;
+}

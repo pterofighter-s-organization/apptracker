@@ -1,6 +1,6 @@
 .stage-dropdown {
-    font-size: 0.8em;
     align-items: baseline;
+    font-size: 0.8rem;
 }
 
 .stage-dropdown-face {
@@ -41,7 +41,7 @@
 }
 
 .stage-dropdown-option {
-    background-color: #f2efef;
+    background-color: white;
     padding: 0.5em 1em;
     border-radius: 2em;
     text-transform: capitalize;

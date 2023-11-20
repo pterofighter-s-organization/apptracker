@@ -1,0 +1,32 @@
+.job-form-split{
+    display: flex;
+    width: 100%;
+}
+
+@media (min-width: 1200px){
+    .job-form-split{
+        flex-direction: row;
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .job-form-split{
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+.job-form-split-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.job-form-paid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}

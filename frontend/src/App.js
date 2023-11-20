@@ -6,10 +6,12 @@ import { JobBoard } from './pages/JobBoard';
 import { TaskBoard } from './pages/TaskBoard';
 import { NoteBoard } from './pages/NoteBoard';
 import { JobPage } from './pages/JobPage';
-import { JobForm } from './pages/JobForms';
+import { JobForm } from './pages/JobForms/components/JobForm';
 
 //css
 import './App.css'
+import { JobNewForm } from './pages/JobForms/JobNewForm';
+import { JobEditForm } from './pages/JobForms/JobEditForm';
 
 export default function App() {
 
@@ -26,8 +28,8 @@ export default function App() {
           <Route path="/all-tasks/:status" element={<TaskBoard />} />
           <Route path="/all-notes/:status" element={<NoteBoard />} />
           <Route path="/job/:id" element={<JobPage />} />
-          <Route path="/job-edit/:id" element={<JobForm />} />
-          <Route path="/new-job" element={<JobForm />} />
+          <Route path="/job-edit/:id" element={<JobEditForm />} />
+          <Route path="/new-job" element={<JobNewForm />} />
         </Routes>
       </Router>
     </div>

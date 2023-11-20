@@ -7,7 +7,7 @@ import { APP_STATUS_COLORS } from "../../constants/constants"
 //css
 import "./HeaderLayout.css"
 
-export default function HeaderLayout({ title, status, handleStatus, FilterComponents, children }) {
+export default function HeaderLayout({ title, status, handleStatus, Components, children }) {
 
     return (
         <div className="header-layout">
@@ -15,25 +15,30 @@ export default function HeaderLayout({ title, status, handleStatus, FilterCompon
                 <h2 className="header-layout-title-text">
                     {title}
                 </h2>
-                <h6>
+                <h6 className="header-layout-text">
                     {children}
                 </h6>
             </div>
-            <div className="header-layout-filters">
-                {FilterComponents}
-                {
-                    status ?
-                        <FilterDropdown
-                            id={"status-dropdown"}
-                            label={"status"}
-                            value={status}
-                            options={APP_STATUS_COLORS}
-                            handleOption={handleStatus}
-                        />
-                        :
-                        null
-                }
-            </div>
+            {
+                status || Components ?
+                    <div className="header-layout-components">
+                        {Components}
+                        {
+                            status ?
+                                <FilterDropdown
+                                    id={"status-dropdown"}
+                                    label={"status"}
+                                    value={status}
+                                    options={APP_STATUS_COLORS}
+                                    handleOption={handleStatus}
+                                />
+                                :
+                                null
+                        }
+                    </div>
+                    :
+                    null
+            }
         </div>
     )
 }

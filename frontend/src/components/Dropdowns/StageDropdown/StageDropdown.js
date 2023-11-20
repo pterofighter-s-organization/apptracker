@@ -11,7 +11,7 @@ import { getContrastTextColor } from "../../../utils/components"
 //css
 import "./StageDropdown.css"
 
-function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
+function StageDropdown({ id, name, stage, handleStage, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
 
     return (
         <div
@@ -37,6 +37,7 @@ function StageDropdown({ id, stage, handleStage, showDropdown, handleCloseDropdo
                     option !== stage ? (
                         <button
                             key={option}
+                            name={name ? name : option}
                             value={option}
                             className="stage-dropdown-option dropdown-option"
                             style={{ color: color }}

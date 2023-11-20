@@ -1,0 +1,8 @@
+.selection-input{
+    border: 0.5rem solid #E5E4E2;
+    background-color: #E5E4E2;
+    font-size: 0.9em;
+    border-radius: 0.5rem;
+    padding: 0.256rem 0.25rem;
+    width: fit-content;
+}

@@ -1,0 +1,61 @@
+.job-form {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 1200px) {
+    .job-form {
+        gap: 1.25rem;
+    }
+
+    .job-form-section{
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .job-form {
+        gap: 1rem;
+    }
+
+    .job-form-section{
+        padding: 2rem 1.5rem;
+    }
+}
+
+.job-form-section>hr {
+    margin: 0;
+}
+
+.job-form-section {
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.job-form-title {
+    text-transform: capitalize;
+}
+
+.job-form-text::first-letter {
+    text-transform: uppercase;
+}
+
+.job-form-back-button{
+    text-align: center;
+    text-decoration: none;
+    outline: 1.25px solid #333333;
+    color: #333333;
+    border-radius: 2rem;
+    padding: 1.25em 2em;
+    font-size: 0.9em;
+    text-transform: capitalize;
+    margin-top: -0.25rem;
+}
+
+.job-form-back-button:hover{
+    outline: none;
+    text-decoration: underline;
+}

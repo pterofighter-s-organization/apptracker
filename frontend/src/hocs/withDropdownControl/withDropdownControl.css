@@ -9,7 +9,7 @@
     animation: open-dropdown 150ms ease;
     transform-origin: top center;
     /* this is how much it blurs, the thickness of the blur*/
-    backdrop-filter: blur(1.5px);
+    backdrop-filter: blur(2px);
     min-width: 100%;
     width: max-content;
     z-index: 1;
