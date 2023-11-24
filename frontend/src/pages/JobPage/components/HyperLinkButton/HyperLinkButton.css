@@ -8,6 +8,7 @@
     border-radius: 2em;
     text-transform: capitalize;
     width: fit-content;
+    font-size: 0.9em;
 }
 
 .hyperlink-button:hover .hyperlink-button-label{
@@ -16,7 +17,6 @@
 }
 
 .hyperlink-button-label{
-    font-size: 0.9em;
     text-decoration: none;
     color: var(--redirect-button-color);
 }

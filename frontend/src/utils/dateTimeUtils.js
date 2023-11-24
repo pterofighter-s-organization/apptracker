@@ -1,9 +1,4 @@
 
-//helpers
-import { isValidDateTime, isValidIsoDateTime } from '../helpers/validationHelpers'
-
-//utils
-import { labelFormatter } from './formatters'
 
 const moment = require('moment')
 require('moment-timezone');
@@ -65,59 +60,30 @@ export function findTimeDifference(start, end) {
     }
 }
 
-export function convertUTCtoLocal(utcDateTime){
+export function convertUTCtoLocal(utcDateTime) {
 
-    if(isValidIsoDateTime(utcDateTime)){
-        // const resFromISO = moment.utc(utcDateTime).tz('America/Los_Angeles') old
-        const resFromISO = moment.utc(utcDateTime)
-        // console.log(utcDateTime, resFromISO, moment.utc(convertISOtoDate(findTodayUTCDate()), 'M-D-YYYY H:mm:ss').format())
-        return resFromISO.format()
-    }
-    //converting pacific time into utc
-    // const res = moment.utc(utcDateTime, 'M-D-YYYY H:mm:ss').tz('America/Los_Angeles') old and this actually minus 7 hrs if set the right tz
-    // console.log(res.toISOString(), res)
+    const res = moment.utc(utcDateTime)
+    const computerTimeZone = moment.tz.guess();
 
-    const res = moment.utc(utcDateTime, 'M-D-YYYY H:mm:ss') //this actually converts to local time
+    // Convert UTC moment to local time
+    const localMoment = res.tz(computerTimeZone);
+  
+    // Format the local moment as a local date-time string
+    const localDateTimeString = localMoment.format('YYYY-MM-DDTHH:mm:ss');
     // console.log(utcDateTime, res)
-    return res.format() //is an iso string
+    return localDateTimeString //iso
 }
 
 export function convertLocaltoUTC(localDateTime) {
 
-    if(isValidIsoDateTime(localDateTime)){
-        // const resFromISO = moment.tz(localDateTime, 'YYYY-MM-DDTHH:mm:ss', 'America/Los_Angeles').utc(); OLD
-        // console.log(resFromISO, moment.tz(localDateTime, 'YYYY-MM-DDTHH:mm:ss').utc())
+    // Get the timezone of the computer
+    const computerTimeZone = moment.tz.guess();
 
-        const resFromISO = moment.tz(localDateTime, 'YYYY-MM-DDTHH:mm:ss').utc()
-        return resFromISO.toISOString() //have to use isostring for utc
-    }
-    //converting pacific time into utc
-    // const res = moment.tz(localDateTime, 'M-D-YYYY H:mm:ss', 'America/Los_Angeles').utc(); old
-    // console.log(res.toISOString(), res)
-    
-    //moment.tz.guess() guesses the users current timezone or local timezone
-    const res = moment.tz(localDateTime, 'M-D-YYYY H:mm:ss', moment.tz.guess()).utc()
+    const res = moment.tz(localDateTime, 'YYYY-MM-DDTHH:mm:ss', computerTimeZone)
     return res.toISOString()
 }
 
-export function convertISOtoDate(isoString){
+export function convertISOtoDate(isoString) {
 
     return moment(isoString).format("M-D-YYYY H:mm:ss")
-}
-
-export function convertInputToISO(formData, label) {
-
-    const actualLabel = labelFormatter("", label)
-    const dateString = (formData["month" + actualLabel] + "-" + formData["day" + actualLabel] + "-" + formData["year" + actualLabel] + " "
-        + formData["hour" + actualLabel] + ":" + formData["min" + actualLabel] + ":" + formData["sec" + actualLabel] + "")
-
-    // console.log(Date.now(), moment(Date.now()).format("M-D-YYYY H:mm:ss"), moment(Date.now()).toISOString(), convertPSTtoUTC("6-04-2023 6:18:00"), 
-    // moment(moment(Date.now()).toISOString()).utc().format("M-D-YYYY H:mm:ss"), moment(moment(Date.now()).toISOString()).utc().toISOString())
-    // console.log(moment.utc("2023-06-04T12:00:00.000Z").toISOString(), convertUTCtoPST("2023-06-04T12:00:00.000Z"), convertUTCtoPST("6-04-2023 12:00:00"))
-    // console.log(moment(convertUTCtoPST("2023-06-04T12:00:00.000Z")).format())
-    if(!isValidDateTime(dateString)){
-        return null
-    }
-
-    return convertLocaltoUTC(dateString)
 }

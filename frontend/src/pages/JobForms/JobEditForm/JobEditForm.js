@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
+import { useParams } from "react-router-dom";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -6,76 +7,67 @@ import { JobForm } from "../components/JobForm";
 //layouts
 import { PageLayout } from "../../../layouts/PageLayout";
 
+//constants
+import { jobFormData } from "../../../constants/constants";
+
+//context-reducers
+import { JobContext } from "../../../contexts/JobContext";
+
+//helpers
+import { updateFormStateFromData, updateFormStateFromErrors, createDataFromFormState } from "../../../helpers/applicationHelpers";
+
 //css
 import "./JobEditForm.css"
 
 export default function JobEditForm() {
 
-    //in the hoc, i will put "new" as the 2nd param to make sure the hoc knows what to do.
+    const { id } = useParams()
+    const initialState = useMemo(() => (jobFormData), [])
+    //making sure this doesn't re-render and make useeffect render again
 
-    const initialState = {
-        stage: {
-            value: "interested",
-            error: ""
-        },
-        appliedDate: {
-            value: "",
-            error: ""
-        },
-        createdDate: {
-            value: "",
-            error: ""
-        },
-        job: {
-            value: "",
-            error: ""
-        },
-        company: {
-            value: "",
-            error: ""
-        },
-        paid: {
-            value: "",
-            error: ""
-        },
-        rate: {
-            value: "hour",
-            error: ""
-        },
-        description: {
-            value: "",
-            error: ""
-        },
-        relatedSite: {
-            value: "",
-            error: ""
-        },
-        resumeLink: {
-            value: "",
-            error: ""
-        },
-        coverLetterLink: {
-            value: "",
-            error: ""
-        }
-    }
-
+    const { state, getApplication, submitApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
+    // const [submissionState, setSubmissionState] = useState({
+    //     status: false,
+    //     message: "",
+    //     redirect: ""
+    // })
+
+    console.log("edit-job-form-app-id:", id)
+
+    useEffect(() => {
+        getApplication(1).then((result) => {
+            if (result.success) {
+                setFormData(updateFormStateFromData(initialState, result.data))
+            }
+        })
+    }, [getApplication, initialState]);
 
     const handleChange = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setFormData({
             ...formData,
             [e.target.name]: {
                 value: e.target.value,
-                error: ""
-            }
-        })
-    }
+                error: "",
+            },
+        });
+
+        console.log(e.target.value)
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        submitApplication(state.data.application_id, createDataFromFormState(formData))
+            .then((result) => {
+                if (!result.success) {
+                    setFormData(updateFormStateFromErrors(formData, result.errors))
+                }
+            })
+    }
 
+    if (state.loading) {
+        return <>Loading...</>;
     }
 
     return (

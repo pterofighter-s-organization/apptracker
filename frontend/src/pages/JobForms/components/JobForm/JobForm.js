@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 //components
 import { SubmitButton } from "../../../../components/Buttons/SubmitButton";
@@ -7,6 +8,7 @@ import { SubmitButton } from "../../../../components/Buttons/SubmitButton";
 import { JobFormHeader } from "./sections/JobFormHeader";
 import { JobFormInfos } from "./sections/JobFormInfos";
 import { JobFormDates } from "./sections/JobFormDates";
+
 
 //css
 import "./JobForm.css"
@@ -34,6 +36,11 @@ export default function JobForm({ isEdit, formData, handleChange, handleSubmit }
                 formData={formData}
                 handleChange={handleChange}
             />
+            {/* <div className="job-form-section">
+                <InfoReminder
+                    text={"make sure to double check before submitting."}
+                />
+            </div> */}
             <SubmitButton />
             <button
                 to=".."

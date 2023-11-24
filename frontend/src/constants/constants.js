@@ -24,3 +24,51 @@ export const SCREEN_BREAKPOINTS = {
     "xl": 1400,
 }
 
+export const jobFormData = {
+    stage: {
+        value: "interested",
+        error: ""
+    },
+    appliedDate: {
+        value: "",
+        error: ""
+    },
+    createdDate: {
+        value: "",
+        error: ""
+    },
+    job: {
+        value: "",
+        error: ""
+    },
+    company: {
+        value: "",
+        error: ""
+    },
+    paid: {
+        value: "",
+        error: ""
+    },
+    rate: {
+        value: "hour",
+        error: ""
+    },
+    description: {
+        value: "",
+        error: ""
+    },
+    relatedSite: {
+        value: "",
+        error: ""
+    },
+    resumeLink: {
+        value: "",
+        error: ""
+    },
+    coverLetterLink: {
+        value: "",
+        error: ""
+    }
+}
+
+

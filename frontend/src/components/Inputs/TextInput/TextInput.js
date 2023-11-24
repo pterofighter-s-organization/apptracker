@@ -5,7 +5,7 @@ import { InputLayout } from "../layouts/InputLayout"
 //css
 import "./TextInput.css"
 
-export default function TextInput({ width, name, formDataObj, handleChange, ...props }) {
+export default function TextInput({ maxWidth, name, formDataObj, handleChange, ...props }) {
 
     return (
         <InputLayout
@@ -16,7 +16,7 @@ export default function TextInput({ width, name, formDataObj, handleChange, ...p
                 type="text"
                 name={name}
                 className={`text-input-box input-box ${formDataObj.error.length > 0 ? "input-box-error" : ""}`}
-                style={{ width: width ? width : "" }}
+                style={{ maxWidth: maxWidth ? maxWidth : "" }}
                 placeholder={name.toUpperCase()}
                 value={formDataObj.value}
                 onChange={handleChange}

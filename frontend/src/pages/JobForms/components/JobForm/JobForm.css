@@ -48,6 +48,7 @@
     text-decoration: none;
     outline: 1.25px solid #333333;
     color: #333333;
+    background-color: transparent;
     border-radius: 2rem;
     padding: 1.25em 2em;
     font-size: 0.9em;

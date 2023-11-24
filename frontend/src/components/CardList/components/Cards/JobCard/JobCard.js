@@ -56,9 +56,17 @@ export default function JobCard({ isArchived, id }) {
                             handleRestore={handleRestore}
                         />
                         :
-                        <ActiveOptionButtons
-                            handleArchive={handleArchive}
-                        />
+                        <>
+                            <Link
+                                to={"/job-edit/" + id}
+                                className="onclick-bw-button"
+                            >
+                                <i className="bi bi-pencil-fill"></i>
+                            </Link>
+                            <ActiveOptionButtons
+                                handleArchive={handleArchive}
+                            />
+                        </>
                     }
                 </div>
             </div>

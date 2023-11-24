@@ -1,12 +1,10 @@
 
 //private-components
 import { ShowButton } from "./components/ShowButton"
+import { ErrorDisplay } from "./components/ErrorDisplay"
 import { JobCard } from "./components/Cards/JobCard"
 import { TaskCard } from "./components/Cards/TaskCard"
 import { NoteCard } from "./components/Cards/NoteCard"
-
-//components
-import { RedirectButton } from "../Buttons/RedirectButton"
 
 //hocs
 import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"
@@ -63,23 +61,9 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                         :
                         null
                     :
-
-                    <div className="card-list-error">
-                        <div className="card-list-error-header">
-                            <i className="bi bi-info-circle-fill"></i>
-                            <span className="card-list-error-text">
-                                {`no related ${type} at the moment!`}
-                            </span>
-                        </div>
-                        {type === "jobs" ?
-                            <RedirectButton
-                                link={"/new-job"}
-                                label={`track new ${type}`}
-                            />
-                            :
-                            null
-                        }
-                    </div>
+                    <ErrorDisplay
+                        type={type}
+                    />
             }
         </div>
     )

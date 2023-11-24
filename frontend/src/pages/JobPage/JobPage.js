@@ -1,3 +1,5 @@
+import { useContext, useEffect } from "react"
+import { useParams } from "react-router-dom"
 
 //sections
 import { JobPageHeader } from "./sections/JobPageHeader"
@@ -8,16 +10,29 @@ import { JobPageNotes } from "./sections/JobPageNotes"
 //layouts
 import { PageLayout } from "../../layouts/PageLayout"
 
+//context-reducer
+import { JobContext } from "../../contexts/JobContext"
+
 //css
 import "./JobPage.css"
 
 export default function JobPage() {
 
-    //here fetch application and where provider sits using hoc.
+    const { id } = useParams()
+    const { state, getApplication } = useContext(JobContext)
+    console.log("job-page-app-id:", id)
+
+    useEffect(() => {
+        getApplication(1)
+    }, [getApplication])
+
+    if (state.loading) {
+        return <>Loading...</>
+    }
 
     return (
         <PageLayout>
-            <JobPageHeader id={1} />
+            <JobPageHeader />
             <JobPageDetails />
             <JobPageTasks />
             <div />

@@ -1,3 +1,4 @@
+import { convertISOtoDate, convertUTCtoLocal } from "./dateTimeUtils"
 
 export function dateFormatter(date) {
 
@@ -25,6 +26,19 @@ export function timeFormatter(time) {
     }
 
     return { hours: hours, mins: mins, period: "am" }
+}
+
+export function dateTimeFormatter(isoString){
+    console.log("iso",isoString, convertUTCtoLocal(isoString), convertISOtoDate(convertUTCtoLocal(isoString)), convertISOtoDate(isoString))
+    const localDateTimeISO = convertUTCtoLocal(isoString)
+    const dateTimeObj = convertISOtoDate(localDateTimeISO).split(" ")
+    const date = dateTimeObj[0]
+    const time = dateTimeObj[1]
+
+    const dateFormatted = dateFormatter(date)
+    const timeFormatted = timeFormatter(time)
+
+    return `${dateFormatted} ${timeFormatted.hours}:${timeFormatted.mins}${timeFormatted.period}`
 }
 
 export function labelFormatter(prefix, label) {

@@ -1,71 +1,56 @@
+import { convertLocaltoUTC, convertUTCtoLocal } from "../utils/dateTimeUtils"
 
-//utils
-// import { APP_STATUSES } from "../utils/constants"
-import * as dateTimeUtils from "../utils/dateTimeUtils"
 
-// export function updateApplicationInfo(updateInfo, application) {
+export const updateFormStateFromErrors = (formData, errors) => {
+    const updatedFormState = { ...formData }
 
-//     const newApplication = {} // a new reference
-//     const today = dateTimeUtils.findTodayUTCDate()
+    // Map the errors properties to the corresponding form fields
+    updatedFormState.stage.error = errors.status || ''
+    updatedFormState.appliedDate.error = errors.date_applied || ''
+    updatedFormState.createdDate.error = errors.date_created || ''
+    updatedFormState.job.error = errors.position || ''
+    updatedFormState.company.error = errors.company || ''
+    updatedFormState.paid.error = errors.salary || ''
+    updatedFormState.description.error = errors.description || ''
+    updatedFormState.relatedSite.error = errors.relatedSite || ''
+    updatedFormState.resumeLink.error = errors.resume_link || ''
+    updatedFormState.coverLetterLink.error = errors.cover_letter_link || ''
 
-//     //transfering old data to new reference
-//     Object.entries(application).forEach(([label, _]) => {
-//         newApplication[label] = application[label]
-//     })
+    return updatedFormState;
+}
 
-//     //changes the only things needed to change specify on newappinfo
-//     Object.entries(updateInfo).forEach(([label, data]) => {
-//         newApplication[label] = data
-//     })
+export const createDataFromFormState = (formState) => {
 
-//     newApplication.date_edited = today
+    return {
+        application_link: formState.relatedSite.value || '',
+        archived: false,
+        company: formState.company.value || '',
+        cover_letter_link: formState.coverLetterLink.value || '',
+        date_applied: formState.appliedDate.value ? convertLocaltoUTC(formState.appliedDate.value) : "",
+        date_created: formState.createdDate.value || '',
+        description: formState.description.value || '',
+        position: formState.job.value || '',
+        resume_link: formState.resumeLink.value || '',
+        salary: (formState.paid.value || ''),
+        status: formState.stage.value || '',
+    }
+}
 
-//     return newApplication
-// }
+export const updateFormStateFromData = (formData, data) => {
+    const updatedFormState = { ...formData }
 
-// export function updateInfoForAppliedApp(dateApplied) {
+    // Map the data properties to the corresponding form fields
+    updatedFormState.stage.value = data.status || ''
+    updatedFormState.appliedDate.value = (data.date_applied) ? convertUTCtoLocal(data.date_applied) : ''
+    updatedFormState.createdDate.value = data.date_created || ''
+    updatedFormState.job.value = data.position || ''
+    updatedFormState.company.value = data.company || ''
+    updatedFormState.paid.value = data.salary || ''
+    updatedFormState.rate.value = 'hour'
+    updatedFormState.description.value = data.description || ''
+    updatedFormState.relatedSite.value = data.application_link || ''
+    updatedFormState.resumeLink.value = data.resume_link || ''
+    updatedFormState.coverLetterLink.value = data.cover_letter_link || ''
 
-//     const today = dateTimeUtils.findTodayUTCDate()
-
-//     //if date applied already declared, then dont change. If isn't declared, then make it today
-//     const updateInfo = {
-//         "status": "applied",
-//         "date_applied": (dateApplied && dateApplied.length > 0) ? dateApplied : today,
-//     }
-
-//     return updateInfo
-// }
-
-// export function categorizeApplications(applications, category) {
-
-//     //input: apps, and the category I am categorizing this in
-//     //return categorized apps {category: [n]}
-
-//     const categorizedApps = applications.reduce((groups, item) => {
-//         let group = groups[item[category]] || [];
-//         group.push(item);
-//         groups[item[category]] = group;
-//         return groups;
-//     }, {});
-//     //{} is the inital value for groups
-
-//     //temp (will change later and add a constant file)
-//     if (category === "status") {
-//         //now check if all the categories exist for that
-//         const statusCategory = APP_STATUSES
-
-//         //if those status don't exist just fill it in (temp will change later for different category)
-//         statusCategory.forEach((status) => {
-//             if (!categorizedApps.hasOwnProperty(status)) {
-//                 categorizedApps[status] = []
-//             }
-//         })
-//     }
-
-//     return categorizedApps
-// }
-
-export const filterCardsByStatus = (cards, status) => {
-    const isArchived = status === "archived"
-    return cards.filter((card) => card.isArchived === isArchived)
+    return updatedFormState;
 }

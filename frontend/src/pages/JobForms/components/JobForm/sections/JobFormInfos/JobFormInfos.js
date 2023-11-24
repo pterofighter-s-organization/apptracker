@@ -23,7 +23,7 @@ export default function JobFormInfos({ formData, handleChange }) {
             <div className="job-form-split">
                 <div className="job-form-split-section job-form-info">
                     <TextInput
-                        width={"500px"}
+                        maxWidth={"500px"}
                         name={"job"}
                         formDataObj={formData.job}
                         handleChange={handleChange}
@@ -32,7 +32,7 @@ export default function JobFormInfos({ formData, handleChange }) {
                         isRequired={true}
                     />
                     <TextInput
-                        width={"500px"}
+                        maxWidth={"500px"}
                         name={"company"}
                         formDataObj={formData.company}
                         handleChange={handleChange}
@@ -42,7 +42,6 @@ export default function JobFormInfos({ formData, handleChange }) {
                     />
                     <div className="job-form-paid">
                         <TextInput
-                            width={"250px"}
                             name={"paid"}
                             formDataObj={formData.paid}
                             handleChange={handleChange}
@@ -65,7 +64,6 @@ export default function JobFormInfos({ formData, handleChange }) {
                 </div>
                 <div className="job-form-split-section job-form-links">
                     <TextInput
-                        width={"1000px"}
                         name={"relatedSite"}
                         formDataObj={formData.relatedSite}
                         handleChange={handleChange}
@@ -74,7 +72,6 @@ export default function JobFormInfos({ formData, handleChange }) {
                         isRequired={false}
                     />
                     <TextInput
-                        width={"1000px"}
                         name={"resumeLink"}
                         formDataObj={formData.resumeLink}
                         handleChange={handleChange}
@@ -83,7 +80,6 @@ export default function JobFormInfos({ formData, handleChange }) {
                         isRequired={false}
                     />
                     <TextInput
-                        width={"1000px"}
                         name={"coverLetterLink"}
                         formDataObj={formData.coverLetterLink}
                         handleChange={handleChange}

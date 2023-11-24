@@ -48,7 +48,7 @@ export default function TaskCard({ id, isArchived }) {
                         handleRestore={handleRestore}
                     />
                     :
-                    <ActiveOptionButtons />
+                    <ActiveOptionButtons handleArchive={handleArchive}/>
                 }
             </div>
             <div className="task-card-title">
