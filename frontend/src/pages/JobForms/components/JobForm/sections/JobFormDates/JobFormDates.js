@@ -14,7 +14,7 @@ export default function JobFormDates({ formData, handleChange }) {
     return (
         <div className="job-form-section">
             <h4 className="job-form-title">
-                status and dates
+                stage and dates
             </h4>
             <hr />
             <InfoReminder

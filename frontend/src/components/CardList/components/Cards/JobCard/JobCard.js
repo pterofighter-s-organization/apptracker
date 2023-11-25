@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 //components
@@ -6,36 +6,58 @@ import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/Archive
 import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
 
+//utils
+import { dateTimeFormatter } from "../../../../../utils/formatUtils"
+
+//helpers
+import { updateDateApplied } from "../../../../../helpers/applicationHelpers"
+
+//context-providers
+import { JobsContext } from "../../../../../hooks/contexts/JobsContext"
+
 //css
 import "./JobCard.css"
 
-export default function JobCard({ isArchived, id }) {
+export default function JobCard({ card }) {
 
-    const jobCardId = "job-card-" + id
-    const [stage, setStage] = useState("interviewing")
+    const jobCardId = "job-card-" + card.application_id
+    const { updateApplication, deleteApplication } = useContext(JobsContext)
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     const handleStage = (e) => {
-        //use this card to handle all the reducer functions
         e.preventDefault()
-        setStage(e.target.value)
+        //deleting stage state so usestates from filtered out cards doesn't get accidentally displayed.
+        updateApplication(card.application_id, {
+            ...card,
+            status: e.target.value,
+            date_applied: updateDateApplied(e.target.value, card.date_applied, false)
+        })
     }
 
     const handleArchive = (e) => {
         e.preventDefault()
+        updateApplication(card.application_id, {
+            ...card,
+            archived: true
+        })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
+        deleteApplication(card.application_id)
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
+        updateApplication(card.application_id, {
+            ...card,
+            archived: false
+        })
     }
 
     return (
         <Link
-            to={"/job/" + id}
+            to={"/job/" + card.application_id}
             id={jobCardId}
             key={jobCardId}
             className="job-card"
@@ -43,14 +65,14 @@ export default function JobCard({ isArchived, id }) {
             <div className="job-card-top">
                 <div style={{ flexGrow: 1 }}>
                     <StageDropdown
-                        key={id}
+                        key={card.application_id}
                         id={jobCardId}
-                        stage={stage}
+                        stage={card.status}
                         handleStage={handleStage}
                     />
                 </div>
                 <div className="job-card-top-buttons">
-                    {isArchived ?
+                    {card.archived ?
                         <ArchivedOptionButtons
                             handleDelete={handleDelete}
                             handleRestore={handleRestore}
@@ -58,7 +80,7 @@ export default function JobCard({ isArchived, id }) {
                         :
                         <>
                             <Link
-                                to={"/job-edit/" + id}
+                                to={"/job-edit/" + card.application_id}
                                 className="onclick-bw-button"
                             >
                                 <i className="bi bi-pencil-fill"></i>
@@ -72,20 +94,20 @@ export default function JobCard({ isArchived, id }) {
             </div>
             <div className="job-card-details">
                 <h6 className="job-card-details-text" style={{ color: "gray" }}>
-                    Google
+                    {card.company}
                 </h6>
                 <h3
                     className="job-card-details-text job-card-title"
                     style={{ marginLeft: "-0.05em" }}
                 >
-                    UX/UI Designer
+                    {card.position}
                 </h3>
                 <h5 style={{ textTransform: "initial", color: "#009E60" }}>
-                    $100 /hr
+                    ${card.salary} /hr
                 </h5>
             </div>
             <div className="job-card-date">
-                Updated: 2/12/2022 10:38am
+                Updated: {dateTimeFormatter(card.date_edited)}
             </div>
         </Link>
     )

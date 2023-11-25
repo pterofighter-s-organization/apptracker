@@ -1,7 +1,7 @@
 
 
 //components
-import { Navbar } from "../../components/Navbar";
+import { Navbar } from "./components/Navbar";
 
 //css
 import "./PageLayout.css"

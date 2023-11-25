@@ -35,7 +35,7 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
                     isOptionAll && value && value.length > 0 ?
                         <li
                             className="filter-dropdown-option dropdown-option"
-                            onClick={e => handleOption(e, "")}
+                            onClick={e => handleOption(e, null)}
                         >
                             all
                         </li>

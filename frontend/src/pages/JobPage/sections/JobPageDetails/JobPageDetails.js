@@ -3,11 +3,11 @@ import { useContext } from "react"
 //private-components
 import { HyperLinkButton } from "../../components/HyperLinkButton"
 
-//context-reducer
-import { JobContext } from "../../../../contexts/JobContext"
+//context-providers
+import { JobContext } from "../../../../hooks/contexts/JobContext"
 
 //utils
-import { dateTimeFormatter } from "../../../../utils/formatters"
+import { dateTimeFormatter } from "../../../../utils/formatUtils"
 
 //css
 import "./JobPageDetails.css"
@@ -15,57 +15,57 @@ import "../../JobPage.css"
 
 export default function JobPageDetails() {
 
-    const { state } = useContext(JobContext)
+    const { job } = useContext(JobContext)
 
     return (
         <>
             <div className="job-page-divider">
                 <div className="job-page-content-bg job-page-divider-content job-page-infos">
                     <h5 style={{ color: "#808080" }}>
-                        - {state.data.company}
+                        - {job.data.company}
                     </h5>
                     <h1>
-                        {state.data.position}
+                        {job.data.position}
                     </h1>
                     <h5 style={{ color: "#009E60" }}>
-                        ${state.data.salary} /Hr
+                        ${job.data.salary} /Hr
                     </h5>
                 </div>
                 <div className="job-page-content-bg job-page-divider-content job-page-dates">
                     <h6>
-                        <b>Updated:</b> {dateTimeFormatter(state.data.date_edited)}
+                        <b>Updated:</b> {dateTimeFormatter(job.data.date_edited)}
                     </h6>
                     <h6>
-                        <b>Created:</b> {dateTimeFormatter(state.data.date_created)}
+                        <b>Created:</b> {dateTimeFormatter(job.data.date_created)}
                     </h6>
                     <h6>
                         <b>Applied: </b>
                         {
-                            state.data.status !== "interested" ?
-                                state.data.date_applied?.length > 0 ?
-                                    dateTimeFormatter(state.data.date_applied)
+                            job.data.status !== "interested" ?
+                                job.data.date_applied?.length > 0 ?
+                                    dateTimeFormatter(job.data.date_applied)
                                     :
                                     "Not given at the moment."
                                 :
-                                "Not at interested"
+                                "Unavailble in interested"
                         }
                     </h6>
                 </div>
             </div>
             <div className="job-page-content-bg job-page-links">
                 <HyperLinkButton
-                    jobId={state.data.application_id}
-                    link={state.data.application_link}
+                    jobId={job.data.application_id}
+                    link={job.data.application_link}
                     label={"related site"}
                 />
                 <HyperLinkButton
-                    jobId={state.data.application_id}
-                    link={state.data.resume_link}
+                    jobId={job.data.application_id}
+                    link={job.data.resume_link}
                     label={"resume doc"}
                 />
                 <HyperLinkButton
-                    jobId={state.data.application_id}
-                    link={state.data.cover_letter_link}
+                    jobId={job.data.application_id}
+                    link={job.data.cover_letter_link}
                     label={"cover letter"}
                 />
             </div>
@@ -73,8 +73,8 @@ export default function JobPageDetails() {
                 <h5>Description:</h5>
                 <pre className="job-page-description">
                     {
-                        state.data.description && state.data.description.length > 0 ?
-                            state.data.description
+                        job.data.description && job.data.description.length > 0 ?
+                            job.data.description
                             :
                             "No description at the moment."
                     }

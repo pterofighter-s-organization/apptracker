@@ -1,7 +1,7 @@
 import { convertLocaltoUTC, convertUTCtoLocal, findTodayUTCDate } from "../utils/dateTimeUtils"
 
 
-export const updateFormStateFromErrors = (formData, errors) => {
+export const updateJobFormErrors = (formData, errors) => {
     const updatedFormState = { ...formData }
 
     // Map the errors properties to the corresponding form fields
@@ -19,8 +19,9 @@ export const updateFormStateFromErrors = (formData, errors) => {
     return updatedFormState;
 }
 
-export const createDataFromFormState = (formState) => {
+export const createJobData = (formState) => {
 
+    //convert form data back to backend accepted data.
     return {
         application_link: formState.relatedSite.value || '',
         archived: false,
@@ -36,7 +37,7 @@ export const createDataFromFormState = (formState) => {
     }
 }
 
-export const updateFormStateFromData = (formData, data) => {
+export const updateJobFormData = (formData, data) => {
     const updatedFormState = { ...formData }
 
     // Map the data properties to the corresponding form fields
@@ -55,7 +56,7 @@ export const updateFormStateFromData = (formData, data) => {
     return updatedFormState;
 }
 
-export function updateDateApplied(stage, dateData, isConvertLocal) {
+export const updateDateApplied = (stage, dateData, isConvertLocal) => {
     // console.log(dateData)
     if (dateData?.length > 0) {
         return dateData
@@ -65,4 +66,19 @@ export function updateDateApplied(stage, dateData, isConvertLocal) {
         }
         return null
     }
+}
+
+export const filterJobsByStage = (stage, jobs) => {
+
+    console.log(stage, jobs.filter((job) => (
+        job.status === stage
+    )))
+    return (
+        stage ?
+            jobs.filter((job) => (
+                job.status === stage
+            ))
+            :
+            jobs
+    )
 }

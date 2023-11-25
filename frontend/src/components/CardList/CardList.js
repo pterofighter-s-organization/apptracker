@@ -42,7 +42,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                         return (
                             <CardComponent
                                 id={index}
-                                isArchived={card.status === "archived"}
+                                card={card}
                             />
                         )
                     })

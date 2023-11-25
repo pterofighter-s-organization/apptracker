@@ -18,7 +18,7 @@ import { APP_STATUS_COLORS } from "../../../../constants/constants"
 import "./JobPageTasks.css"
 import "../../JobPage.css"
 
-function JobPageTasks({ status, handleStatus }) {
+function JobPageTasks({ id, status, handleStatus }) {
 
     const taskCards = Array.from({ length: 15 }).fill({
         value: "",

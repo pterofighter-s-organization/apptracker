@@ -15,7 +15,7 @@ import { APP_STATUS_COLORS } from "../../../../constants/constants"
 import "./JobPageNotes.css"
 import "../../JobPage.css"
 
-function JobPageNotes({ status, handleStatus }) {
+function JobPageNotes({ id, status, handleStatus }) {
 
     const noteCards = Array.from({ length: 0 }).fill({
         value: "",

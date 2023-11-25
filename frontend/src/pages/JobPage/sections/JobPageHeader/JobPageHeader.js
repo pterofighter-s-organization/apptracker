@@ -6,8 +6,8 @@ import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
 import { ActiveOptionButtons } from "../../../../components/Buttons/OptionButtons/ActiveOptionButtons"
 import { ArchivedOptionButtons } from "../../../../components/Buttons/OptionButtons/ArchivedOptionButtons"
 
-//context-reducer
-import { JobContext } from "../../../../contexts/JobContext"
+//context-providers
+import { JobContext } from "../../../../hooks/contexts/JobContext"
 
 //helpers
 import { updateDateApplied } from "../../../../helpers/applicationHelpers"
@@ -18,35 +18,36 @@ import "../../JobPage.css"
 
 export default function JobPageHeader() {
 
-    const { state, updateApplication } = useContext(JobContext)
-    const [stage, setStage] = useState(state.data.status)
+    const { job, updateApplication, deleteApplication } = useContext(JobContext)
+    const [stage, setStage] = useState(job.data.status)
 
     const handleStage = (e) => {
         e.preventDefault()
         setStage(e.target.value)
-        updateApplication(state.data.application_id, {
-            ...state.data,
+        updateApplication(job.data.application_id, {
+            ...job.data,
             status: e.target.value,
-            date_applied: updateDateApplied(e.target.value, state.data.date_applied, false)
+            date_applied: updateDateApplied(e.target.value, job.data.date_applied, false)
         })
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
-        updateApplication(state.data.application_id, {
-            ...state.data,
+        updateApplication(job.data.application_id, {
+            ...job.data,
             archived: false
         })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
+        deleteApplication(job.data.application_id)
     }
 
     const handleArchive = (e) => {
         e.preventDefault()
-        updateApplication(state.data.application_id, {
-            ...state.data,
+        updateApplication(job.data.application_id, {
+            ...job.data,
             archived: true
         })
     }
@@ -55,13 +56,13 @@ export default function JobPageHeader() {
         <div className="job-page-content-bg job-page-top">
             <div style={{ flexGrow: 1 }}>
                 <StageDropdown
-                    id={"stage-dropdown-" + state.data.application_id}
+                    id={"stage-dropdown-" + job.data.application_id}
                     stage={stage}
                     handleStage={handleStage}
                 />
             </div>
             <div className="job-page-top-buttons">
-                {state.data.archived ?
+                {job.data.archived ?
                     <ArchivedOptionButtons
                         handleDelete={handleDelete}
                         handleRestore={handleRestore}
@@ -69,7 +70,7 @@ export default function JobPageHeader() {
                     :
                     <>
                         <Link
-                            to={"/job-edit/" + state.data.application_id}
+                            to={"/job-edit/" + job.data.application_id}
                             className="onclick-bw-button"
                         >
                             <i className="bi bi-pencil-fill"></i>

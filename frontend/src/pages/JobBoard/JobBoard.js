@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -14,6 +14,13 @@ import { APP_STAGE_COLORS } from "../../constants/constants";
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
 
+//helpers
+import { filterJobsByStage } from "../../helpers/applicationHelpers";
+import { filterDataByStatus } from "../../helpers/helpers";
+
+//context-providers
+import { JobsContext } from "../../hooks/contexts/JobsContext";
+
 //css
 import "./JobBoard.css"
 
@@ -27,10 +34,15 @@ function JobBoard({ status, handleStatus }) {
         setStage(option)
     }
 
-    const cards = Array.from({ length: 25 }).fill({
-        value: "",
-        status: status
-    })
+    const { jobs, getApplications } = useContext(JobsContext)
+
+    useEffect(() => {
+        getApplications()
+    }, [getApplications])
+
+    if (jobs.loading) {
+        return <>Loading...</>
+    }
 
     return (
         <PageLayout>
@@ -53,8 +65,11 @@ function JobBoard({ status, handleStatus }) {
             </HeaderLayout>
             <CardList
                 type={"jobs"}
-                cards={cards}
-                status={status}
+                cards={
+                    filterJobsByStage(stage,
+                        filterDataByStatus(status, jobs.data)
+                    )
+                }
                 isPreview={false}
                 isShow={true}
             />

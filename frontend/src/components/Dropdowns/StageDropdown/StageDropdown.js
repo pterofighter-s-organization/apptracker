@@ -6,7 +6,7 @@ import { withDropdownControl } from "../../../hocs/withDropdownControl"
 import { APP_STAGE_COLORS } from "../../../constants/constants"
 
 //utils
-import { getContrastTextColor } from "../../../utils/components"
+import { getContrastTextColor } from "../../../utils/componentUtils"
 
 //css
 import "./StageDropdown.css"

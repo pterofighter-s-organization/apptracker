@@ -10,8 +10,8 @@ import { JobPageNotes } from "./sections/JobPageNotes"
 //layouts
 import { PageLayout } from "../../layouts/PageLayout"
 
-//context-reducer
-import { JobContext } from "../../contexts/JobContext"
+//context-providers
+import { JobContext } from "../../hooks/contexts/JobContext"
 
 //css
 import "./JobPage.css"
@@ -19,14 +19,14 @@ import "./JobPage.css"
 export default function JobPage() {
 
     const { id } = useParams()
-    const { state, getApplication } = useContext(JobContext)
+    const { job, getApplication } = useContext(JobContext)
     // console.log("job-page-app-id:", id)
 
     useEffect(() => {
         getApplication(id)
     }, [getApplication, id])
 
-    if (state.loading) {
+    if (job.loading) {
         return <>Loading...</>
     }
 
@@ -34,9 +34,9 @@ export default function JobPage() {
         <PageLayout>
             <JobPageHeader />
             <JobPageDetails />
-            <JobPageTasks />
+            <JobPageTasks id={id} />
             <div />
-            <JobPageNotes />
+            <JobPageNotes id={id} />
         </PageLayout>
     )
 }

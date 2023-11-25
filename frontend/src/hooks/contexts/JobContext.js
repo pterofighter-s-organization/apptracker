@@ -2,61 +2,41 @@ import { createContext, useReducer, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 
 //services
-import APIs from "../services/api"
+import APIs from "../../services/api"
 
 //utils
-import { findTodayUTCDate } from "../utils/dateTimeUtils"
+import { findTodayUTCDate } from "../../utils/dateTimeUtils"
 
 //helpers
-import { handleAPIErrors } from "../helpers/formHelpers"
+import { handleAPIErrors } from "../../helpers/formHelpers"
+
+//actions
+import { JOB_CALL_SUCCESS, JOB_CALL_FAILURE, JOB_CALL_START } from "../reducers/jobReducer"
+
+//reducer
+import { jobReducer } from "../reducers/jobReducer"
 
 const initialState = {
     data: null,
     loading: true,
 }
 
-export const JOB_CALL_SUCCESS = "JOB_CALL_SUCCESS"
-export const JOB_CALL_FAILURE = "JOB_CALL_FAILURE"
-export const JOB_DELETE_SUCCESS = "JOB_DELETE_SUCCESS"
-
-const jobReducer = (state, action) => {
-    switch (action.type) {
-        case JOB_CALL_SUCCESS:
-            return {
-                ...state,
-                data: action.payload,
-                loading: false,
-            }
-        case JOB_CALL_FAILURE:
-            return {
-                ...state,
-                loading: false,
-            }
-        case JOB_DELETE_SUCCESS:
-            return {
-                ...state,
-                data: null,
-                loading: false,
-            }
-        default:
-            throw new Error("Unhandled action type.")
-    }
-}
-
 export const JobContext = createContext({
-    state: initialState,
+    job: initialState,
     dispatch: () => { },
     getApplication: async () => { },
     updateApplication: async () => { },
     editApplication: async () => { },
     createApplication: async () => { },
+    deleteApplication: async () => { },
 })
 
 export const JobProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(jobReducer, initialState)
+    const [job, dispatch] = useReducer(jobReducer, initialState)
     const navigate = useNavigate()
 
     const getApplication = useCallback(async (id) => {
+        dispatch({ type: JOB_CALL_START })
         try {
             const response = await APIs.applicationAPI.getApplication(id)
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
@@ -132,7 +112,6 @@ export const JobProvider = ({ children }) => {
             })
         } catch (error) {
             console.log(error)
-            console.log(error?.response.data || error.message)
             alert(handleAPIErrors(error))
             dispatch({ type: JOB_CALL_FAILURE })
             return ({
@@ -142,14 +121,19 @@ export const JobProvider = ({ children }) => {
         }
     }
 
+    const deleteApplication = async (id) => {
+        //code later
+    }
+
     return (
         <JobContext.Provider
             value={{
-                state,
+                job,
                 getApplication,
                 updateApplication,
                 editApplication,
-                createApplication
+                createApplication,
+                deleteApplication
             }}
         >
             {children}

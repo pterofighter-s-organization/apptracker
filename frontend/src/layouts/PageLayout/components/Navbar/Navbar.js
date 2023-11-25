@@ -5,7 +5,7 @@ import { SideNav } from "./SideNav"
 import { DropdownNav } from "./DropdownNav"
 
 //constants
-import { SCREEN_BREAKPOINTS } from "../../constants/constants"
+import { SCREEN_BREAKPOINTS } from "../../../../constants/constants"
 
 export default function Navbar() {
 

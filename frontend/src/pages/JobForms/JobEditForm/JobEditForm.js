@@ -10,14 +10,14 @@ import { PageLayout } from "../../../layouts/PageLayout";
 //constants
 import { jobFormData } from "../../../constants/constants";
 
-//context-reducers
-import { JobContext } from "../../../contexts/JobContext";
+//context-providers
+import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
-import { updateFormStateFromData, updateFormStateFromErrors, createDataFromFormState, updateDateApplied } from "../../../helpers/applicationHelpers";
+import { updateJobFormData, updateJobFormErrors, createJobData, updateDateApplied } from "../../../helpers/applicationHelpers";
 
 //utils
-import { createObjCopy } from "../../../utils/deepCopy";
+import { createObjCopy } from "../../../utils/memoryUtils";
 
 //css
 import "./JobEditForm.css"
@@ -26,9 +26,9 @@ export default function JobEditForm() {
 
     const { id } = useParams()
     const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
-    //making sure this doesn't re-render and make useeffect render again
+    //making sure this doesn't re-render and make useeffect render again. fixed*
 
-    const { state, getApplication, editApplication } = useContext(JobContext);
+    const { job, getApplication, editApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     // const [submissionState, setSubmissionState] = useState({
     //     status: false,
@@ -41,15 +41,15 @@ export default function JobEditForm() {
     useEffect(() => {
         getApplication(id).then((result) => {
             if (result.success) {
-                setFormData(updateFormStateFromData(initialState, result.data))
+                setFormData(updateJobFormData(initialState, result.data))
             }
         })
     }, [getApplication, initialState, id]);
 
     const handleChange = (e) => {
         e.preventDefault();
-        
-        if(e.target.name === "stage"){
+
+        if (e.target.name === "stage") {
             setFormData({
                 ...formData,
                 appliedDate: {
@@ -61,7 +61,7 @@ export default function JobEditForm() {
                     error: ""
                 }
             })
-        }else{
+        } else {
             setFormData({
                 ...formData,
                 [e.target.name]: {
@@ -74,16 +74,16 @@ export default function JobEditForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
-        editApplication(state.data.application_id, createDataFromFormState(formData))
+
+        editApplication(job.data.application_id, createJobData(formData))
             .then((result) => {
                 if (!result.success) {
-                    setFormData(updateFormStateFromErrors(formData, result.errors))
+                    setFormData(updateJobFormErrors(formData, result.errors))
                 }
             })
     }
 
-    if (state.loading) {
+    if (job.loading) {
         return <>Loading...</>;
     }
 

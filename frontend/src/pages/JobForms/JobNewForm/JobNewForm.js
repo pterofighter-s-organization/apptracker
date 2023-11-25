@@ -3,14 +3,14 @@ import { useState, useMemo, useContext } from "react";
 //constants
 import { jobFormData } from "../../../constants/constants";
 
-//context-reducer
-import { JobContext } from "../../../contexts/JobContext";
+//context-providers
+import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
-import { createDataFromFormState, updateDateApplied, updateFormStateFromErrors } from "../../../helpers/applicationHelpers";
+import { createJobData, updateDateApplied, updateJobFormErrors } from "../../../helpers/applicationHelpers";
 
 //utils
-import { createObjCopy } from "../../../utils/deepCopy";
+import { createObjCopy } from "../../../utils/memoryUtils";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -56,16 +56,14 @@ export default function JobNewForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createApplication(createDataFromFormState(formData))
+        createApplication(createJobData(formData))
             .then((result) => {
                 console.log(result.errors)
                 if (!result.success) {
-                    setFormData(updateFormStateFromErrors(formData, result.errors))
+                    setFormData(updateJobFormErrors(formData, result.errors))
                 }
             })
     }
-
-    console.log("hello", formData)
 
     return (
         <PageLayout>
