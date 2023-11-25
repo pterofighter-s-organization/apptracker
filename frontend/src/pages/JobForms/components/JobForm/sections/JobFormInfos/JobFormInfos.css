@@ -8,6 +8,10 @@
         grid-template-columns: 2fr 5fr 0.25fr;
         gap: 1.25rem;
     }
+
+    /* .job-form-paid{
+        grid-template-columns: 2fr 1fr;
+    } */
 }
 
 @media (max-width: 1200px) {
@@ -15,6 +19,10 @@
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+
+    /* .job-form-paid{
+        grid-template-columns: 1fr;
+    } */
 }
 
 .job-form-split-section{
@@ -27,4 +35,5 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    width: 100%;
 }

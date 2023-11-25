@@ -10,7 +10,7 @@ export default function DateTimeInput({ name, formDataObj, handleChange, ...prop
     //find todays date to put in min
     //find todays date and 3 years later to put in max
 
-    // console.log("date", formDataObj.value, formatDateString(formDataObj.value))
+    // console.log("date", formDataObj.value)
     return (
         <InputLayout
             formDataObj={formDataObj}

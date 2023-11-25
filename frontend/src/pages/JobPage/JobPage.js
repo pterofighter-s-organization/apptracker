@@ -20,11 +20,11 @@ export default function JobPage() {
 
     const { id } = useParams()
     const { state, getApplication } = useContext(JobContext)
-    console.log("job-page-app-id:", id)
+    // console.log("job-page-app-id:", id)
 
     useEffect(() => {
-        getApplication(1)
-    }, [getApplication])
+        getApplication(id)
+    }, [getApplication, id])
 
     if (state.loading) {
         return <>Loading...</>

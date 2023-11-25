@@ -9,6 +9,9 @@ import { ArchivedOptionButtons } from "../../../../components/Buttons/OptionButt
 //context-reducer
 import { JobContext } from "../../../../contexts/JobContext"
 
+//helpers
+import { updateDateApplied } from "../../../../helpers/applicationHelpers"
+
 //css
 import "./JobPageHeader.css"
 import "../../JobPage.css"
@@ -23,7 +26,8 @@ export default function JobPageHeader() {
         setStage(e.target.value)
         updateApplication(state.data.application_id, {
             ...state.data,
-            status: e.target.value
+            status: e.target.value,
+            date_applied: updateDateApplied(e.target.value, state.data.date_applied, false)
         })
     }
 
@@ -51,7 +55,7 @@ export default function JobPageHeader() {
         <div className="job-page-content-bg job-page-top">
             <div style={{ flexGrow: 1 }}>
                 <StageDropdown
-                    id={"stage-dropdown-"+state.data.application_id}
+                    id={"stage-dropdown-" + state.data.application_id}
                     stage={stage}
                     handleStage={handleStage}
                 />

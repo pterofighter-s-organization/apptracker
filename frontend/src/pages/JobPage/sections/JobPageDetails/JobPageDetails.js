@@ -6,39 +6,14 @@ import { HyperLinkButton } from "../../components/HyperLinkButton"
 //context-reducer
 import { JobContext } from "../../../../contexts/JobContext"
 
+//utils
+import { dateTimeFormatter } from "../../../../utils/formatters"
+
 //css
 import "./JobPageDetails.css"
 import "../../JobPage.css"
 
-import { dateTimeFormatter } from "../../../../utils/formatters"
-
 export default function JobPageDetails() {
-
-    const description = `job description: software engineer
-
-    responsibilities:
-    develop high-quality software solutions based on technical requirements
-    collaborate with cross-functional teams to design, build, and maintain software applications
-    participate in code reviews and provide constructive feedback to ensure code quality
-    troubleshoot and debug software issues
-    continuously improve software development processes and practices
-    stay updated with industry trends and technologies to enhance technical skills
-    document software specifications and maintain accurate project documentation
-    adhere to coding standards and best practices
-    meet project deadlines and deliver high-quality results
-    
-    requirements:
-    bachelor's degree in computer science or a related field (or equivalent work experience)
-    strong knowledge of programming languages such as Java, C++, or Python
-    experience with software development methodologies and tools
-    familiarity with version control systems (e.g., Git)
-    ability to work independently and collaboratively in a team environment
-    excellent problem-solving and analytical skills
-    strong communication and interpersonal skills
-    attention to detail and commitment to delivering high-quality work
-    willingness to learn and adapt to new technologies and frameworks
-    
-    Note: This is just a sample job description for a software engineer position. Actual job descriptions may vary based on specific requirements and company needs.`
 
     const { state } = useContext(JobContext)
 
@@ -64,7 +39,16 @@ export default function JobPageDetails() {
                         <b>Created:</b> {dateTimeFormatter(state.data.date_created)}
                     </h6>
                     <h6>
-                        <b>Applied:</b> {dateTimeFormatter(state.data.date_applied)}
+                        <b>Applied: </b>
+                        {
+                            state.data.status !== "interested" ?
+                                state.data.date_applied?.length > 0 ?
+                                    dateTimeFormatter(state.data.date_applied)
+                                    :
+                                    "Not given at the moment."
+                                :
+                                "Not at interested"
+                        }
                     </h6>
                 </div>
             </div>
@@ -89,8 +73,8 @@ export default function JobPageDetails() {
                 <h5>Description:</h5>
                 <pre className="job-page-description">
                     {
-                        description && description.length > 0 ?
-                            description
+                        state.data.description && state.data.description.length > 0 ?
+                            state.data.description
                             :
                             "No description at the moment."
                     }

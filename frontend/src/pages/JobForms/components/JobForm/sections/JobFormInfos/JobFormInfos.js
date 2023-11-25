@@ -1,6 +1,7 @@
 
 //components
 import { TextInput } from "../../../../../../components/Inputs/TextInput"
+import { NumberInput } from "../../../../../../components/Inputs/NumberInput"
 import { TextareaInput } from "../../../../../../components/Inputs/TextareaInput"
 import { SelectionInput } from "../../../../../../components/Inputs/SelectionInput"
 import { InfoReminder } from "../../../../../../components/InfoReminder"
@@ -41,7 +42,8 @@ export default function JobFormInfos({ formData, handleChange }) {
                         isRequired={true}
                     />
                     <div className="job-form-paid">
-                        <TextInput
+                        <NumberInput
+                            maxWidth={"150px"}
                             name={"paid"}
                             formDataObj={formData.paid}
                             handleChange={handleChange}

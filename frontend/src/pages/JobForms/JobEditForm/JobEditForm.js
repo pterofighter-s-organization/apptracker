@@ -14,7 +14,10 @@ import { jobFormData } from "../../../constants/constants";
 import { JobContext } from "../../../contexts/JobContext";
 
 //helpers
-import { updateFormStateFromData, updateFormStateFromErrors, createDataFromFormState } from "../../../helpers/applicationHelpers";
+import { updateFormStateFromData, updateFormStateFromErrors, createDataFromFormState, updateDateApplied } from "../../../helpers/applicationHelpers";
+
+//utils
+import { createObjCopy } from "../../../utils/deepCopy";
 
 //css
 import "./JobEditForm.css"
@@ -22,10 +25,10 @@ import "./JobEditForm.css"
 export default function JobEditForm() {
 
     const { id } = useParams()
-    const initialState = useMemo(() => (jobFormData), [])
+    const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
     //making sure this doesn't re-render and make useeffect render again
 
-    const { state, getApplication, submitApplication } = useContext(JobContext);
+    const { state, getApplication, editApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     // const [submissionState, setSubmissionState] = useState({
     //     status: false,
@@ -33,32 +36,46 @@ export default function JobEditForm() {
     //     redirect: ""
     // })
 
-    console.log("edit-job-form-app-id:", id)
+    // console.log("edit-job-form-app-id:", id)
 
     useEffect(() => {
-        getApplication(1).then((result) => {
+        getApplication(id).then((result) => {
             if (result.success) {
                 setFormData(updateFormStateFromData(initialState, result.data))
             }
         })
-    }, [getApplication, initialState]);
+    }, [getApplication, initialState, id]);
 
     const handleChange = (e) => {
         e.preventDefault();
-        setFormData({
-            ...formData,
-            [e.target.name]: {
-                value: e.target.value,
-                error: "",
-            },
-        });
-
-        console.log(e.target.value)
+        
+        if(e.target.name === "stage"){
+            setFormData({
+                ...formData,
+                appliedDate: {
+                    value: updateDateApplied(e.target.value, formData.appliedDate.value, true),
+                    error: ""
+                },
+                stage: {
+                    value: e.target.value,
+                    error: ""
+                }
+            })
+        }else{
+            setFormData({
+                ...formData,
+                [e.target.name]: {
+                    value: e.target.value,
+                    error: ""
+                }
+            })
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        submitApplication(state.data.application_id, createDataFromFormState(formData))
+        console.log(formData)
+        editApplication(state.data.application_id, createDataFromFormState(formData))
             .then((result) => {
                 if (!result.success) {
                     setFormData(updateFormStateFromErrors(formData, result.errors))

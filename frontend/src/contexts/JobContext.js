@@ -1,30 +1,26 @@
-import { createContext, useReducer, useCallback} from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useReducer, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 
 //services
-import APIs from "../services/api";
-import { findTodayUTCDate, convertUTCtoLocal } from "../utils/dateTimeUtils";
+import APIs from "../services/api"
+
+//utils
+import { findTodayUTCDate } from "../utils/dateTimeUtils"
+
+//helpers
+import { handleAPIErrors } from "../helpers/formHelpers"
 
 const initialState = {
-    data: {},
+    data: null,
     loading: true,
 }
 
 export const JOB_CALL_SUCCESS = "JOB_CALL_SUCCESS"
 export const JOB_CALL_FAILURE = "JOB_CALL_FAILURE"
 export const JOB_DELETE_SUCCESS = "JOB_DELETE_SUCCESS"
-// const JOB_DELETE_FAILURE = "JOB_DELETE_FAILURE"
-// export const JOB_CALL_START = "JOB_CALL_START"
 
 const jobReducer = (state, action) => {
-
-    // get -> update -> delete
     switch (action.type) {
-        // case JOB_CALL_START:
-        //     return {
-        //         ...state,
-        //         loading: true,
-        //     }
         case JOB_CALL_SUCCESS:
             return {
                 ...state,
@@ -42,22 +38,21 @@ const jobReducer = (state, action) => {
                 data: null,
                 loading: false,
             }
-        // case JOB_DELETE_FAILURE:{
-        //     return {
-        //         ...state,
-        //         loading: false,
-        //         errors: action.errors
-        //     }
-        // }
         default:
-            throw new Error("Action type doesn't match what's provided.")
+            throw new Error("Unhandled action type.")
     }
 }
 
-export const JobContext = createContext(null)
+export const JobContext = createContext({
+    state: initialState,
+    dispatch: () => { },
+    getApplication: async () => { },
+    updateApplication: async () => { },
+    editApplication: async () => { },
+    createApplication: async () => { },
+})
 
 export const JobProvider = ({ children }) => {
-
     const [state, dispatch] = useReducer(jobReducer, initialState)
     const navigate = useNavigate()
 
@@ -65,70 +60,98 @@ export const JobProvider = ({ children }) => {
         try {
             const response = await APIs.applicationAPI.getApplication(id)
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
-            return({
+            return {
                 success: true,
-                data: response.data
-            })
+                data: response.data,
+            }
         } catch (error) {
-            console.log(error)
+            console.error(error)
             dispatch({ type: JOB_CALL_FAILURE })
-            return({
+            return {
                 success: false,
-                errors: error.response.data
-            })
+                errors: error?.response.data || error.message,
+            }
         }
     }, [])
 
     const updateApplication = async (id, application) => {
-
-        console.log("local",convertUTCtoLocal(findTodayUTCDate()), findTodayUTCDate())
         try {
             const response = await APIs.applicationAPI.updateApplication(id, {
                 ...application,
                 application_id: id,
-                date_edited: findTodayUTCDate()
+                date_edited: findTodayUTCDate(),
             })
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
         } catch (error) {
-            console.log(error)
+            console.error(error)
+            alert(handleAPIErrors(error))
             dispatch({ type: JOB_CALL_FAILURE })
         }
     }
 
-    const submitApplication = async (id, application) => {
+    const editApplication = async (id, application) => {
         try {
             const response = await APIs.applicationAPI.updateApplication(id, {
                 ...application,
                 application_id: id,
                 user_id: 1,
-                date_edited: findTodayUTCDate()
+                date_edited: findTodayUTCDate(),
             })
-            alert("Successfully submitted! Now redirecting you to the application page.")
+            alert("Successfully edited! Now redirecting you to the application page.")
             navigate("/job/" + id)
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
             return {
                 success: true,
-                data: response.data
+                data: response.data,
             }
         } catch (error) {
-            console.log(error)
-            alert((error.code === "ERR_BAD_REQUEST") ? "Please check the invalid fields and correct them." : error.message)
-            dispatch({ type: JOB_CALL_FAILURE, payload: error.response.data })
+            console.error(error)
+            alert(handleAPIErrors(error))
+            dispatch({ type: JOB_CALL_FAILURE, payload: error.response?.data })
             return {
                 success: false,
-                errors: error.response.data
+                errors: error?.response.data || error.message,
             }
         }
     }
 
+    const createApplication = async (application) => {
+        try {
+            const response = await APIs.applicationAPI.createApplication({
+                ...application,
+                date_edited: findTodayUTCDate(),
+                date_created: findTodayUTCDate(),
+                user_id: 1
+            })
+            alert("Successfully submitted! Now redirecting to the newly created application page.")
+            navigate("/job/" + response.data.application_id)
+            dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
+            return ({
+                success: true,
+                data: response.data
+            })
+        } catch (error) {
+            console.log(error)
+            console.log(error?.response.data || error.message)
+            alert(handleAPIErrors(error))
+            dispatch({ type: JOB_CALL_FAILURE })
+            return ({
+                success: false,
+                errors: error?.response.data || error.message
+            })
+        }
+    }
+
     return (
-        <JobContext.Provider value={{
-            state,
-            dispatch,
-            getApplication,
-            updateApplication,
-            submitApplication
-        }}>
+        <JobContext.Provider
+            value={{
+                state,
+                getApplication,
+                updateApplication,
+                editApplication,
+                createApplication
+            }}
+        >
             {children}
         </JobContext.Provider>
     )

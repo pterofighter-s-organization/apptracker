@@ -1,4 +1,4 @@
-import { convertLocaltoUTC, convertUTCtoLocal } from "../utils/dateTimeUtils"
+import { convertLocaltoUTC, convertUTCtoLocal, findTodayUTCDate } from "../utils/dateTimeUtils"
 
 
 export const updateFormStateFromErrors = (formData, errors) => {
@@ -26,8 +26,8 @@ export const createDataFromFormState = (formState) => {
         archived: false,
         company: formState.company.value || '',
         cover_letter_link: formState.coverLetterLink.value || '',
-        date_applied: formState.appliedDate.value ? convertLocaltoUTC(formState.appliedDate.value) : "",
-        date_created: formState.createdDate.value || '',
+        date_applied: formState.appliedDate.value?.length > 0 ? convertLocaltoUTC(formState.appliedDate.value) : null,
+        date_created: formState.createdDate.value || null,
         description: formState.description.value || '',
         position: formState.job.value || '',
         resume_link: formState.resumeLink.value || '',
@@ -41,8 +41,8 @@ export const updateFormStateFromData = (formData, data) => {
 
     // Map the data properties to the corresponding form fields
     updatedFormState.stage.value = data.status || ''
-    updatedFormState.appliedDate.value = (data.date_applied) ? convertUTCtoLocal(data.date_applied) : ''
-    updatedFormState.createdDate.value = data.date_created || ''
+    updatedFormState.appliedDate.value = data.date_applied?.length > 0 ? convertUTCtoLocal(data.date_applied) : null
+    updatedFormState.createdDate.value = data.date_created || null
     updatedFormState.job.value = data.position || ''
     updatedFormState.company.value = data.company || ''
     updatedFormState.paid.value = data.salary || ''
@@ -53,4 +53,16 @@ export const updateFormStateFromData = (formData, data) => {
     updatedFormState.coverLetterLink.value = data.cover_letter_link || ''
 
     return updatedFormState;
+}
+
+export function updateDateApplied(stage, dateData, isConvertLocal) {
+    // console.log(dateData)
+    if (dateData?.length > 0) {
+        return dateData
+    } else {
+        if (stage === "applied") {
+            return isConvertLocal ? convertUTCtoLocal(findTodayUTCDate()) : findTodayUTCDate()
+        }
+        return null
+    }
 }

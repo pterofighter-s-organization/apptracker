@@ -29,7 +29,7 @@ export function timeFormatter(time) {
 }
 
 export function dateTimeFormatter(isoString){
-    console.log("iso",isoString, convertUTCtoLocal(isoString), convertISOtoDate(convertUTCtoLocal(isoString)), convertISOtoDate(isoString))
+    // console.log("iso",isoString, convertUTCtoLocal(isoString), convertISOtoDate(convertUTCtoLocal(isoString)), convertISOtoDate(isoString))
     const localDateTimeISO = convertUTCtoLocal(isoString)
     const dateTimeObj = convertISOtoDate(localDateTimeISO).split(" ")
     const date = dateTimeObj[0]
