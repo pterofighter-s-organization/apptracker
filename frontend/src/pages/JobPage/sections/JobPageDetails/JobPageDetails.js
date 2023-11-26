@@ -27,8 +27,8 @@ export default function JobPageDetails() {
                     <h1>
                         {job.data.position}
                     </h1>
-                    <h5 style={{ color: "#009E60" }}>
-                        ${job.data.salary} /Hr
+                    <h5 style={{ color: "#009E60", textTransform: "initial" }}>
+                        ${job.data.salary} /{job.data.salary_rate}
                     </h5>
                 </div>
                 <div className="job-page-content-bg job-page-divider-content job-page-dates">

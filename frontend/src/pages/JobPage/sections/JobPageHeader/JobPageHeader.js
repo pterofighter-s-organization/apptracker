@@ -72,6 +72,9 @@ export default function JobPageHeader() {
                         <Link
                             to={"/job-edit/" + job.data.application_id}
                             className="onclick-bw-button"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title={`Redirects to /job-edit/${job.data.application_id}`}
                         >
                             <i className="bi bi-pencil-fill"></i>
                         </Link>

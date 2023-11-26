@@ -20,7 +20,7 @@ import "./JobCard.css"
 
 export default function JobCard({ card }) {
 
-    const jobCardId = "job-card-" + card.application_id
+    const jobCardId = `job-card-${card.application_id}`
     const { updateApplication, deleteApplication } = useContext(JobsContext)
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
@@ -57,7 +57,7 @@ export default function JobCard({ card }) {
 
     return (
         <Link
-            to={"/job/" + card.application_id}
+            to={`/job/${card.application_id}`}
             id={jobCardId}
             key={jobCardId}
             className="job-card"
@@ -80,8 +80,11 @@ export default function JobCard({ card }) {
                         :
                         <>
                             <Link
-                                to={"/job-edit/" + card.application_id}
+                                to={`/job-edit/${card.application_id}`}
                                 className="onclick-bw-button"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title={`Redirects to /job-edit/${card.application_id}`}
                             >
                                 <i className="bi bi-pencil-fill"></i>
                             </Link>

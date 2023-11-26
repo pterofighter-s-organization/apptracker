@@ -1,4 +1,4 @@
-
+import { useContext, useEffect, useState } from "react"
 
 //private-components
 import { TaskForm } from "../../components/TaskForm"
@@ -12,26 +12,66 @@ import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
 import { withStatusControl } from "../../../../hocs/withStatusControl"
 
 //constants
-import { APP_STATUS_COLORS } from "../../../../constants/constants"
+import { APP_STATUS_COLORS, taskFormData } from "../../../../constants/constants"
+
+//context
+import { TasksContext } from "../../../../hooks/contexts/TasksContext"
 
 //css
 import "./JobPageTasks.css"
 import "../../JobPage.css"
+import { createObjCopy } from "../../../../utils/memoryUtils"
+import { JobContext } from "../../../../hooks/contexts/JobContext"
+import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
+import { filterDataByStatus } from "../../../../helpers/helpers"
 
-function JobPageTasks({ id, status, handleStatus }) {
 
-    const taskCards = Array.from({ length: 15 }).fill({
-        value: "",
-        status: status
-    })
+function JobPageTasks({ status, handleStatus }) {
 
-    //here going to fetch tasks
+    const { tasks, getJobTasks, createJobTask } = useContext(TasksContext)
+    const { job } = useContext(JobContext)
+    const [formData, setFormData] = useState(createObjCopy(taskFormData))
+
+    useEffect(() => {
+        getJobTasks(job.data.application_id)
+    }, [getJobTasks, job.data.application_id])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        createJobTask(job.data.application_id, {
+            ...createTaskData(formData),
+            company: job.data.company,
+            position: job.data.position
+        })
+            .then((result) => {
+                if (!result.success) {
+                    setFormData(updateTaskFormErrors(formData, result.errors))
+                }
+            })
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault()
+
+        setFormData({
+            ...formData,
+            [e.target.name]: {
+                value: e.target.value,
+                error: ''
+            }
+        })
+    }
+
+    if (tasks.loading) {
+        return <>Loading...</>
+    }
 
     return (
         <>
             <SectionHeader
                 IconComponent={<i className="bi bi-view-list"></i>}
-                title={`${taskCards.length} tasks for this job`}
+                title={`${filterDataByStatus(status, tasks.data).length} tasks for this job`}
                 ButtonComponent={
                     <FilterDropdown
                         id={"status-filter-tasks"}
@@ -44,11 +84,19 @@ function JobPageTasks({ id, status, handleStatus }) {
             />
             <CardList
                 type={"tasks"}
-                cards={taskCards}
+                cards={
+                    sortTasksByDateDue(
+                        filterDataByStatus(status, tasks.data)
+                    )
+                }
                 isPreview={true}
                 isShow={true}
             />
-            <TaskForm />
+            <TaskForm
+                formData={formData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />
         </>
     )
 }

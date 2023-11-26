@@ -56,7 +56,7 @@ export default function JobNewForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createApplication(createJobData(formData))
+        createApplication(1, createJobData(formData))
             .then((result) => {
                 console.log(result.errors)
                 if (!result.success) {

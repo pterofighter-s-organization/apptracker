@@ -54,7 +54,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                         <ShowButton
                             isShow={(cardCount < cards.length)}
                             isInitial={(cardCount === initialCount)}
-                            isLess={(cards.length < initialCount)}
+                            isLess={(cards.length <= initialCount)}
                             type={type}
                             {...props}
                         />

@@ -36,8 +36,6 @@ export default function JobEditForm() {
     //     redirect: ""
     // })
 
-    // console.log("edit-job-form-app-id:", id)
-
     useEffect(() => {
         getApplication(id).then((result) => {
             if (result.success) {

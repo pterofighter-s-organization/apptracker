@@ -1,4 +1,4 @@
-import { convertISOtoDate, convertUTCtoLocal } from "./dateTimeUtils"
+import { convertISOtoDate, convertUTCtoLocal, findTimeDifference, findTodayUTCDate } from "./dateTimeUtils"
 
 export function dateFormatter(date) {
 
@@ -28,7 +28,7 @@ export function timeFormatter(time) {
     return { hours: hours, mins: mins, period: "am" }
 }
 
-export function dateTimeFormatter(isoString){
+export function dateTimeFormatter(isoString) {
     // console.log("iso",isoString, convertUTCtoLocal(isoString), convertISOtoDate(convertUTCtoLocal(isoString)), convertISOtoDate(isoString))
     const localDateTimeISO = convertUTCtoLocal(isoString)
     const dateTimeObj = convertISOtoDate(localDateTimeISO).split(" ")
@@ -41,14 +41,46 @@ export function dateTimeFormatter(isoString){
     return `${dateFormatted} ${timeFormatted.hours}:${timeFormatted.mins}${timeFormatted.period}`
 }
 
-export function labelFormatter(prefix, label) {
+export const timerFormatter = (end, start) => {
+    const { years, months, days, hours, mins, secs } = findTimeDifference(start || findTodayUTCDate(), end)
 
-    //if not null
-    if ((prefix && label) || (prefix.length === 0 && label)) {
-        return prefix + "_" + label
+    const format = (num, label) => `${num}${label}`
+
+    switch (true) {
+        case years >= 1:
+            return {
+                value: format(years, years === 1 ? "yr" : "yrs"),
+                label: "years"
+            }
+        case months >= 1:
+            return {
+                value: format(months, months === 1 ? "mo" : "mos"),
+                label: "months"
+            }
+        case days >= 1:
+            return {
+                value: format(days, days === 1 ? "d" : "d"),
+                label: "days"
+            }
+        case hours >= 1:
+            return {
+                value: format(hours, hours === 1 ? "h" : "h"),
+                label: "hours"
+            }
+        case mins >= 1:
+            return {
+                value: format(mins, mins === 1 ? "m" : "m"),
+                label: "minutes"
+            }
+        case secs >= 0:
+            return {
+                value: "Due",
+                label: "due"
+            }
+        default:
+            return {
+                value: "Overdue",
+                label: "overdue"
+            }
     }
-    if (prefix && !label) {
-        return prefix
-    }
-    return label
 }

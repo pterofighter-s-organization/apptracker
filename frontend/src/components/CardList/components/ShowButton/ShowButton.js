@@ -2,6 +2,38 @@
 //css
 import "./ShowButton.css"
 
+//avoid repeated code. so made it a private component instead.
+const ShowMoreButton = ({ handleAddCount, type }) => {
+    return (
+        <button
+            type="button"
+            className="show-button show-button-load"
+            onClick={handleAddCount}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Show more ${type}.`}
+        >
+            show more {type}
+        </button>
+    )
+}
+
+const ShowLessButton = ({ handleResetCount }) => {
+    return (
+        <button
+            type="button"
+            className="show-button show-button-reset"
+            onClick={handleResetCount}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Reset all the loaded content."
+        >
+            show less
+        </button>
+    )
+}
+
+
 export default function ShowButton({ isShow, isInitial, isLess, handleResetCount, handleAddCount, type }) {
 
     return (
@@ -9,38 +41,24 @@ export default function ShowButton({ isShow, isInitial, isLess, handleResetCount
             {!isLess ?
                 isShow ?
                     isInitial ?
-                        <button
-                            type="button"
-                            className="show-button show-button-load"
-                            onClick={(e) => handleAddCount(e)}
-                        >
-                            show more {type}
-                        </button>
+                        <ShowMoreButton
+                            handleAddCount={handleAddCount}
+                            type={type}
+                        />
                         :
                         <>
-                            <button
-                                type="button"
-                                className="show-button show-button-load"
-                                onClick={(e) => handleAddCount(e)}
-                            >
-                                show more {type}
-                            </button>
-                            <button
-                                type="button"
-                                className="show-button show-button-reset"
-                                onClick={(e) => handleResetCount(e)}
-                            >
-                                show less
-                            </button>
+                            <ShowMoreButton
+                                handleAddCount={handleAddCount}
+                                type={type}
+                            />
+                            <ShowLessButton
+                                handleResetCount={handleResetCount}
+                            />
                         </>
                     :
-                    <button
-                        type="button"
-                        className="show-button show-button-reset"
-                        onClick={(e) => handleResetCount(e)}
-                    >
-                        show less
-                    </button>
+                    <ShowLessButton
+                        handleResetCount={handleResetCount}
+                    />
                 :
                 null
             }

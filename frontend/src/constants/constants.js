@@ -50,7 +50,7 @@ export const jobFormData = {
         error: ""
     },
     rate: {
-        value: "hour",
+        value: "hr",
         error: ""
     },
     description: {
@@ -71,4 +71,13 @@ export const jobFormData = {
     }
 }
 
-
+export const taskFormData = {
+    name: {
+        value: "",
+        error: ""
+    },
+    dateDue: {
+        value: "",
+        error: ""
+    }
+}

@@ -8,6 +8,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .serializers import ApplicationSerializer, NotesSerializer, TaskSerializer#, UserSerializer
 from .models import Application, Notes, Task#, Users
+from django.core.exceptions import ValidationError
 import bcrypt
 
 # Create your views here.
@@ -214,10 +215,17 @@ def task_list(request):
     elif request.method == 'POST':
         task_data = JSONParser().parse(request)
         task_serializer = TaskSerializer(data=task_data)
-        if task_serializer.is_valid():
-            task_serializer.save()
+        if task_serializer.is_valid(raise_exception=True):
+            task = task_serializer.save()
+            try:
+                task.full_clean()  # this is to make sure the check only performs in post
+            except ValidationError as e:
+                return JsonResponse({**task_serializer.errors, **e.message_dict}, status=status.HTTP_400_BAD_REQUEST)
+            task.save()
             return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        #     return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
+        # return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def task_detail(request, pk):

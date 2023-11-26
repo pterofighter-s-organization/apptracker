@@ -54,7 +54,7 @@ export default function JobFormInfos({ formData, handleChange }) {
                         <SelectionInput
                             name={"rate"}
                             options={
-                                ["hour", "year"]
+                                ["hr", "yr"]
                             }
                             formDataObj={formData.rate}
                             handleChange={handleChange}

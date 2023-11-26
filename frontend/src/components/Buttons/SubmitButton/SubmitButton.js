@@ -11,6 +11,9 @@ export default function SubmitButton({ label }) {
         <button
             type="submit"
             className="submit-button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Submits ${label}`}
         >
             Submit {label}
         </button>

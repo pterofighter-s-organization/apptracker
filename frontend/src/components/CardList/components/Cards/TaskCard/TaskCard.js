@@ -1,66 +1,97 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 //private-components
 import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 
+//utils
+import { dateTimeFormatter, timerFormatter } from "../../../../../utils/formatUtils"
+
+//context-providers
+import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
+
 //css
 import "./TaskCard.css"
 
-export default function TaskCard({ id, isArchived }) {
+export default function TaskCard({ card }) {
 
-    const title = "title hello, i am lorep ipsum looking for ipsum"
-    const taskCardId = "task-card-" + id
+    const taskCardId = "task-card-" + card.task_id
+    const { updateJobTask, deleteJobTask } = useContext(TasksContext)
 
     const handleDelete = (e) => {
         e.preventDefault()
         //handle delete logic
+        deleteJobTask(card.task_id)
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
         //handle restore
+        updateJobTask(card.task_id, {
+            ...card,
+            archived: false
+        })
     }
 
     const handleArchive = (e) => {
         e.preventDefault() /*use preventdefault to not activate the link */
         //handle archive
+        updateJobTask(card.task_id, {
+            ...card,
+            archived: true
+        })
     }
 
-    // Red: #ff6666
-    // Yellow: #ffff66
-    // Green: #66ff66
+    const TASK_STAGE_COLORS = {
+        // Red: #ff6666
+        // Blue: #5CACEE
+        // Green: #32CD32
+        years: "#32CD32",
+        months: "#32CD32",
+        days: "#32CD32",
+        hours: "#5CACEE",
+        minutes: "#5CACEE",
+        secs: "#ff6666",
+        overdue: "#ff6666",
+        due: "#ff6666"
+    }
+
+    const taskTimerObj = timerFormatter(card.date_due)
 
     return (
         <Link
-            to={"/job/" + id}
+            to={"/job/" + card.application_id}
             id={taskCardId}
             className="task-card-container"
         >
-            <div style={{ border: `2.5px double ${"#ff6666"}` }} />
+            <div style={{ border: `2.5px solid ${TASK_STAGE_COLORS[taskTimerObj.label]}` }} />
             <div className="task-card-header">
                 <h5 className="task-card-job">
-                    ux/ui designer / google
+                    {card.company} / {card.position}
                 </h5>
-                {isArchived ?
+                {card.archived ?
                     <ArchivedOptionButtons
                         handleDelete={handleDelete}
                         handleRestore={handleRestore}
                     />
                     :
-                    <ActiveOptionButtons handleArchive={handleArchive}/>
+                    <ActiveOptionButtons handleArchive={handleArchive} />
                 }
             </div>
             <div className="task-card-title">
-                {title}
+                {card.title}
             </div>
             <div className="task-card-clock">
                 <div className="task-card-datetime">
                     <i className="bi bi-calendar-fill"></i>
-                    2/12/2022 3:08am
+                    {dateTimeFormatter(card.date_due)}
                 </div>
-                <div className="task-card-timer" style={{ paddingRight: "0.5em" }}>
-                    3d
+                <div
+                    className="task-card-timer"
+                    style={{ paddingRight: "0.5em", color: TASK_STAGE_COLORS[taskTimerObj.label] }}
+                >
+                    {taskTimerObj.value}
                 </div>
             </div>
         </Link>

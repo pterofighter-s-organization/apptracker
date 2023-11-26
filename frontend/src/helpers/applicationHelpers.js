@@ -11,12 +11,13 @@ export const updateJobFormErrors = (formData, errors) => {
     updatedFormState.job.error = errors.position || ''
     updatedFormState.company.error = errors.company || ''
     updatedFormState.paid.error = errors.salary || ''
+    updatedFormState.rate.error = errors.salary_rate || ''
     updatedFormState.description.error = errors.description || ''
     updatedFormState.relatedSite.error = errors.relatedSite || ''
     updatedFormState.resumeLink.error = errors.resume_link || ''
     updatedFormState.coverLetterLink.error = errors.cover_letter_link || ''
 
-    return updatedFormState;
+    return updatedFormState
 }
 
 export const createJobData = (formState) => {
@@ -24,7 +25,6 @@ export const createJobData = (formState) => {
     //convert form data back to backend accepted data.
     return {
         application_link: formState.relatedSite.value || '',
-        archived: false,
         company: formState.company.value || '',
         cover_letter_link: formState.coverLetterLink.value || '',
         date_applied: formState.appliedDate.value?.length > 0 ? convertLocaltoUTC(formState.appliedDate.value) : null,
@@ -32,7 +32,8 @@ export const createJobData = (formState) => {
         description: formState.description.value || '',
         position: formState.job.value || '',
         resume_link: formState.resumeLink.value || '',
-        salary: (formState.paid.value || ''),
+        salary: formState.paid.value || '',
+        salary_rate: formState.rate.value || '',
         status: formState.stage.value || '',
     }
 }
@@ -47,13 +48,14 @@ export const updateJobFormData = (formData, data) => {
     updatedFormState.job.value = data.position || ''
     updatedFormState.company.value = data.company || ''
     updatedFormState.paid.value = data.salary || ''
-    updatedFormState.rate.value = 'hour'
+    updatedFormState.rate.value = data.salary_rate || 'hr'
     updatedFormState.description.value = data.description || ''
     updatedFormState.relatedSite.value = data.application_link || ''
     updatedFormState.resumeLink.value = data.resume_link || ''
     updatedFormState.coverLetterLink.value = data.cover_letter_link || ''
+    updatedFormState.rate.value = data.salary_rate || ''
 
-    return updatedFormState;
+    return updatedFormState
 }
 
 export const updateDateApplied = (stage, dateData, isConvertLocal) => {

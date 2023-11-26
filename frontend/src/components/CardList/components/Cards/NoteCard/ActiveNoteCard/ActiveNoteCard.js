@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 
-//private-components
+//components
 import { ActiveOptionButtons } from "../../../../../Buttons/OptionButtons/ActiveOptionButtons"
+
+//private-layout
+import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
 
 //css
 import "../NoteCard.css"
@@ -11,7 +13,7 @@ export default function ActiveNoteCard({ id }) {
 
     const [value, setValue] = useState(``)
     const [isEdit, setIsEdit] = useState(false)
-    const noteCardId = "note-card-" + id
+    const noteCardId = `note-card-${id}`
 
     const handleArchive = (e) => {
         e.preventDefault()
@@ -39,19 +41,16 @@ export default function ActiveNoteCard({ id }) {
             key={noteCardId}
             id={noteCardId}
         >
-            <div className="note-card-header">
-                <Link
-                    to={"/job/" + id}
-                    className="note-card-title"
-                >
-                    UX/UI Designer/ Google
-                </Link>
+            <NoteHeaderLayout id={id}>
                 {
                     isEdit ?
                         <button
                             type="button"
                             className="onclick-bw-button"
                             onClick={handleSave}
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Saves the edit."
                         >
                             <i className="bi bi-save-fill"></i>
                         </button>
@@ -60,6 +59,9 @@ export default function ActiveNoteCard({ id }) {
                             type="button"
                             className="onclick-bw-button"
                             onClick={handleEdit}
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Opens textbox for input."
                         >
                             <i className="bi bi-pencil-fill"></i>
                         </button>
@@ -67,7 +69,7 @@ export default function ActiveNoteCard({ id }) {
                 <ActiveOptionButtons
                     handleArchive={handleArchive}
                 />
-            </div>
+            </NoteHeaderLayout>
             {
                 isEdit ?
                     <textarea

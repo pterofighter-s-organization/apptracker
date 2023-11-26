@@ -19,7 +19,8 @@ def validate_datetime_before_now(value):
     current_datetime = timezone.now()
     # print(current_datetime, value)
     if current_datetime > value:
-        raise ValidationError("The datetime must be before the current date and time.")
+        raise ValidationError("Can't provide overdue date and time.")
+    
 
 # # Create your models here.
 # class Users(models.Model):
@@ -35,6 +36,8 @@ class Notes(models.Model):
     application_id = models.IntegerField()
     note = models.CharField(max_length=2048, blank=True, null=True)
     archived = models.BooleanField(default=False)
+    date_edited = models.DateTimeField(blank=True)
+    date_created = models.DateTimeField(blank=True)
     
 class Application(models.Model):
     application_id = models.AutoField(primary_key=True)
@@ -50,15 +53,24 @@ class Application(models.Model):
     date_edited = models.DateTimeField(blank=True)
     date_created = models.DateTimeField(blank=True)
     salary = models.CharField(max_length=255)
+    salary_rate = models.CharField(max_length=255)
     archived = models.BooleanField(default=False)
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
     application_id = models.IntegerField()
     title = models.CharField(max_length=255)
-    date_due = models.DateTimeField(validators=[validate_datetime_before_now])
+    # date_due = models.DateTimeField(validators=[validate_datetime_before_now])
+    date_due = models.DateTimeField()
     company = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
-    section = models.CharField(max_length=255, blank=True, null=True)
-    priority = models.IntegerField()
+    date_edited = models.DateTimeField(blank=True)
+    date_created = models.DateTimeField(blank=True)
+    # section = models.CharField(max_length=255, blank=True, null=True)
+    # priority = models.IntegerField()
     archived = models.BooleanField(default=False)
+
+    #this clean is to make sure the check only happens in post, code in views.py
+    def clean(self):
+        if timezone.now() > self.date_due:
+            raise ValidationError({"date_due": "Date must not be overdue."})

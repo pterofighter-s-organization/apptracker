@@ -3,13 +3,16 @@ import { Link } from "react-router-dom"
 //components
 import { ArchivedOptionButtons } from "../../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 
+//private-layouts
+import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
+
 //css
 import "../NoteCard.css"
 
 export default function ArchivedNoteCard({ id }) {
 
     const value = "t"
-    const noteCardId = "note-card-" + id
+    const noteCardId = `note-card-${id}`
 
     const handleRestore = (e) => {
         e.preventDefault()
@@ -26,10 +29,13 @@ export default function ArchivedNoteCard({ id }) {
             key={noteCardId}
             id={noteCardId}
         >
-            <div className="note-card-header">
+            <NoteHeaderLayout id={id}>
                 <Link
-                    to={"/job/" + id}
+                    to={`/job/${id}`}
                     className="note-card-title"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title={`Redirects to /job/${id}`}
                 >
                     UX/UI Designer/ Google
                 </Link>
@@ -37,7 +43,7 @@ export default function ArchivedNoteCard({ id }) {
                     handleDelete={handleDelete}
                     handleRestore={handleRestore}
                 />
-            </div>
+            </NoteHeaderLayout>
             <div className="note-card-content">
                 {
                     value.length > 0 ?

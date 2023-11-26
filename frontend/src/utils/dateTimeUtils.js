@@ -39,23 +39,23 @@ export function findTimeDifference(start, end) {
     const endTime = moment(end)
     const difference = moment.duration(endTime.diff(startTime))
 
-    const yearsLeft = difference.years();
-    const monthsLeft = difference.months();
-    const daysLeft = difference.days();
-    const hoursLeft = difference.hours();
-    const minutesLeft = difference.minutes();
-    const secondsLeft = difference.seconds();
-    const millisecondsLeft = difference.milliseconds();
+    const years = difference.years();
+    const months = difference.months();
+    const days = difference.days();
+    const hours = difference.hours();
+    const mins = difference.minutes();
+    const secs = difference.seconds();
+    const millisecs = difference.milliseconds();
 
     //all representations of the difference 1 day = 24 hours left etc.
     return {
-        yearsLeft,
-        monthsLeft,
-        daysLeft,
-        hoursLeft,
-        minutesLeft,
-        secondsLeft,
-        millisecondsLeft,
+        years,
+        months,
+        days,
+        hours,
+        mins,
+        secs,
+        millisecs,
         difference
     }
 }

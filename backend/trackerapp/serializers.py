@@ -10,11 +10,11 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Application
         fields = ('application_id','user_id','position','company','application_link', 'resume_link', 'cover_letter_link',
-                  'description','status', 'date_applied', 'date_edited', 'date_created', 'salary', 'archived')
+                  'description','status', 'date_applied', 'date_edited', 'date_created', 'salary', 'salary_rate', 'archived')
         extra_kwargs = {
             'date_applied': {
                 'error_messages': {
-                    'null': 'Please select all date elements before submitting.',
+                    'null': 'Please provide a complete date before submitting.',
                 }
             }
         }
@@ -22,16 +22,16 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notes
-        fields = ('note_id', 'application_id', 'note', 'archived')
+        fields = ('note_id', 'application_id', 'note', 'date_edited', 'date_created', 'archived')
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Task 
-        fields = ('task_id', 'application_id', 'title', 'date_due', 'company', 'position', 'priority', 'section', 'archived')
+        fields = ('task_id', 'application_id', 'title', 'date_due', 'company', 'position', 'date_edited', 'date_created', 'archived')
         extra_kwargs = {
             'date_due': {
                 'error_messages': {
-                    'null': 'Please select all date elements before submitting.',
+                    'null': 'Please provide a complete date before submitting.',
                 }
             }
         }

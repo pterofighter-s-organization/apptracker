@@ -18,11 +18,14 @@ function StageDropdown({ id, name, stage, handleStage, showDropdown, handleClose
             className={`stage-dropdown dropdown ${showDropdown ? "" : "minimized-stage-dropdown"}`}
         >
             <button
+                id={id}
                 type="button"
                 className="stage-dropdown-face"
                 style={{ backgroundColor: APP_STAGE_COLORS[stage], color: getContrastTextColor(APP_STAGE_COLORS[stage]) }}
                 onClick={showDropdown ? handleCloseDropdown : handleOpenDropdown}
-                id={id}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="A selection of stages for the application."
             >
                 <div>{stage}</div>
                 {

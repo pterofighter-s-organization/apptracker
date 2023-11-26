@@ -14,6 +14,9 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
                 type="button"
                 className="filter-dropdown-face"
                 onClick={showDropdown ? handleCloseDropdown : handleOpenDropdown}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={`Opens a selection of ${label} to filter.`}
             >
                 {label}:
                 <div

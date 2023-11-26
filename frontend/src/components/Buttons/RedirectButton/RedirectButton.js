@@ -9,6 +9,9 @@ export default function RedirectButton({ link, label }) {
         <Link
             to={link}
             className="redirect-button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Redirects you to ${link}`}
         >
             <div className="redirect-button-label">
                 {label}

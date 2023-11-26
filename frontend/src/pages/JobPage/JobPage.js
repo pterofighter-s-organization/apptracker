@@ -12,6 +12,7 @@ import { PageLayout } from "../../layouts/PageLayout"
 
 //context-providers
 import { JobContext } from "../../hooks/contexts/JobContext"
+import { TasksProvider } from "../../hooks/contexts/TasksContext"
 
 //css
 import "./JobPage.css"
@@ -34,7 +35,9 @@ export default function JobPage() {
         <PageLayout>
             <JobPageHeader />
             <JobPageDetails />
-            <JobPageTasks id={id} />
+            <TasksProvider>
+                <JobPageTasks jobId={job.data.application_id}/>
+            </TasksProvider>
             <div />
             <JobPageNotes id={id} />
         </PageLayout>

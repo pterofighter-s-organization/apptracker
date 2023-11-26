@@ -19,7 +19,7 @@ export default function DateTimeInput({ name, formDataObj, handleChange, ...prop
             <input
                 type="datetime-local"
                 name={name}
-                className={`datetime-input-box input-box ${formDataObj.error.length > 0 ? "input-error" : ""}`}
+                className={`datetime-input-box input-box ${formDataObj.error.length > 0 ? "input-box-error" : ""}`}
                 value={formDataObj.value}
                 onChange={handleChange}
                 min=""
