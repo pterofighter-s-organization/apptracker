@@ -221,8 +221,7 @@ def task_list(request):
                 task_serializer.custom_check(task_data)
             except ValidationError as e:
                 return JsonResponse({**task_serializer.errors, **e.message_dict}, status=status.HTTP_400_BAD_REQUEST)
-
-            # task_serializer.save()
+            task_serializer.save()
             return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         #     return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
