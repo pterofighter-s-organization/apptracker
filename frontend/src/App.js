@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+//components
+import { NotificationList } from './components/NotificationList';
+
 //pages
 import { Dashboard } from './pages/Dashboard';
 import { JobBoard } from './pages/JobBoard';
@@ -21,6 +24,7 @@ export default function App() {
   return (
     // mimic footer with pb-5
     <div className="App">
+      <NotificationList/>
       <Router>
         <Routes>
           <Route exact path="/" element={<Dashboard />} />

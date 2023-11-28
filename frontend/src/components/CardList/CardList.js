@@ -2,6 +2,7 @@
 //private-components
 import { ShowButton } from "./components/ShowButton"
 import { ErrorDisplay } from "./components/ErrorDisplay"
+//cards
 import { JobCard } from "./components/Cards/JobCard"
 import { TaskCard } from "./components/Cards/TaskCard"
 import { NoteCard } from "./components/Cards/NoteCard"

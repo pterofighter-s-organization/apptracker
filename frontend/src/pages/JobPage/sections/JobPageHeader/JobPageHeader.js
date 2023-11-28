@@ -1,10 +1,11 @@
 import { useState, useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 //components
 import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
 import { ActiveOptionButtons } from "../../../../components/Buttons/OptionButtons/ActiveOptionButtons"
 import { ArchivedOptionButtons } from "../../../../components/Buttons/OptionButtons/ArchivedOptionButtons"
+import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
 
 //context-providers
 import { JobContext } from "../../../../hooks/contexts/JobContext"
@@ -18,6 +19,7 @@ import "../../JobPage.css"
 
 export default function JobPageHeader() {
 
+    const navigate = useNavigate()
     const { job, updateApplication, deleteApplication } = useContext(JobContext)
     const [stage, setStage] = useState(job.data.status)
 
@@ -28,6 +30,12 @@ export default function JobPageHeader() {
             ...job.data,
             status: e.target.value,
             date_applied: updateDateApplied(e.target.value, job.data.date_applied, false)
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "job stage updated!"
+            })
         })
     }
 
@@ -36,12 +44,30 @@ export default function JobPageHeader() {
         updateApplication(job.data.application_id, {
             ...job.data,
             archived: false
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "job got restored!"
+            })
         })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
         deleteApplication(job.data.application_id)
+            .then((result) => {
+                showSubmitNotification({
+                    status: result.success,
+                    errors: result.errors,
+                    message: "job deleted successfully!"
+                })
+
+                if(result.success){
+                    //later change this to backend triggered.
+                    navigate("/")
+                }
+            })
     }
 
     const handleArchive = (e) => {
@@ -49,6 +75,12 @@ export default function JobPageHeader() {
         updateApplication(job.data.application_id, {
             ...job.data,
             archived: true
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success, 
+                errors: result.errors, 
+                message: "job got archived!"
+            })
         })
     }
 

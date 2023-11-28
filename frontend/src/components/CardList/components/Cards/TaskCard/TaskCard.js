@@ -13,6 +13,7 @@ import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
 
 //css
 import "./TaskCard.css"
+import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
 
 export default function TaskCard({ card }) {
 
@@ -23,6 +24,13 @@ export default function TaskCard({ card }) {
         e.preventDefault()
         //handle delete logic
         deleteJobTask(card.task_id)
+        .then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "task deleted successfully!"
+            })
+        })
     }
 
     const handleRestore = (e) => {
@@ -31,6 +39,12 @@ export default function TaskCard({ card }) {
         updateJobTask(card.task_id, {
             ...card,
             archived: false
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "task got restored!"
+            })
         })
     }
 
@@ -40,16 +54,22 @@ export default function TaskCard({ card }) {
         updateJobTask(card.task_id, {
             ...card,
             archived: true
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "task got archived!"
+            })
         })
     }
 
     const TASK_STAGE_COLORS = {
         // Red: #ff6666
         // Blue: #5CACEE
-        // Green: #32CD32
-        years: "#32CD32",
-        months: "#32CD32",
-        days: "#32CD32",
+        // Green: #009E60
+        years: "#009E60",
+        months: "#009E60",
+        days: "#009E60",
         hours: "#5CACEE",
         minutes: "#5CACEE",
         secs: "#ff6666",
@@ -57,7 +77,7 @@ export default function TaskCard({ card }) {
         due: "#ff6666"
     }
 
-    const taskTimerObj = timerFormatter(card.date_due)
+    const taskTimerObj = timerFormatter(card.date_due) //decides the color and value it displays
 
     return (
         <Link

@@ -5,6 +5,7 @@ export const JOBS_CALL_START = "JOBS_CALL_START" //this solves the get applicati
 export const JOBS_CALL_SUCCESS = "JOBS_CALL_SUCCESS"
 export const JOBS_CALL_FAILURE = "JOBS_CALL_FAILURE"
 export const JOB_UPDATE_SUCCESS = "JOB_UPDATE_SUCCESS"
+export const JOB_SUBMIT_FAILURE = "JOB_SUBMIT_FAILURE"
 export const JOB_DELETE_SUCCESS = "JOB_DELETE_SUCCESS"
 
 //reducer
@@ -14,18 +15,21 @@ export const jobsReducer = (jobs, action) => {
         case JOBS_CALL_START:
             return({
                 ...jobs,
-                loading: true
+                loading: true,
+                errors: null
             })
         case JOBS_CALL_SUCCESS:
             return({
                 ...jobs,
                 data: action.payload,
-                loading: false
+                loading: false,
+                errors: null
             })
         case JOBS_CALL_FAILURE:
             return({
                 ...jobs,
-                loading: false
+                loading: false,
+                errors: action.payload
             })
         case JOB_UPDATE_SUCCESS:
             return({
@@ -36,15 +40,23 @@ export const jobsReducer = (jobs, action) => {
                         :
                         job
                 ))),
-                loading: false
+                loading: false,
+                errors: null
+            })
+        case JOB_SUBMIT_FAILURE:
+            return({
+                ...jobs,
+                loading: false,
+                errors: null
             })
         case JOB_DELETE_SUCCESS:
             return({
                 ...jobs,
                 data: (jobs.data.filter((job) => (
-                    job.application_id !== action.payload.application_id
+                    job.application_id !== action.payload
                 ))),
-                loading: false
+                loading: false,
+                errors: null
             })
         default:
             throw new Error("Unhandled action type.")

@@ -1,4 +1,5 @@
 import { useState, useMemo, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 //constants
 import { jobFormData } from "../../../constants/constants";
@@ -11,6 +12,9 @@ import { createJobData, updateDateApplied, updateJobFormErrors } from "../../../
 
 //utils
 import { createObjCopy } from "../../../utils/memoryUtils";
+
+//helpers
+import { handleAPIErrors } from "../../../helpers/formHelpers";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -25,6 +29,7 @@ export default function JobNewForm() {
 
     const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
 
+    const navigate = useNavigate()
     const [formData, setFormData] = useState(initialState)
     const { createApplication } = useContext(JobContext)
 
@@ -56,11 +61,20 @@ export default function JobNewForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
         createApplication(1, createJobData(formData))
             .then((result) => {
-                console.log(result.errors)
-                if (!result.success) {
-                    setFormData(updateJobFormErrors(formData, result.errors))
+                if (result.success) {
+                    alert("Successfully submitted! Now redirecting to the newly created job page.")
+                    navigate("/job/" + result.data.application_id)
+                } else {
+                    alert(
+                        handleAPIErrors({
+                            errors: result.errors,
+                            message: "please fix the errors before submitting."
+                        })
+                    )
+                    setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
             })
     }

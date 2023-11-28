@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useMemo } from "react"
 
 //private-components
 import { TaskForm } from "../../components/TaskForm"
@@ -16,14 +16,22 @@ import { APP_STATUS_COLORS, taskFormData } from "../../../../constants/constants
 
 //context
 import { TasksContext } from "../../../../hooks/contexts/TasksContext"
+import { JobContext } from "../../../../hooks/contexts/JobContext"
+
+//components
+import { showNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+
+//helpers
+import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
+import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
+import { handleAPIErrors } from "../../../../helpers/formHelpers"
+
+//utils
+import { createObjCopy } from "../../../../utils/memoryUtils"
 
 //css
 import "./JobPageTasks.css"
 import "../../JobPage.css"
-import { createObjCopy } from "../../../../utils/memoryUtils"
-import { JobContext } from "../../../../hooks/contexts/JobContext"
-import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
-import { filterDataByStatus } from "../../../../helpers/helpers"
 
 
 function JobPageTasks({ status, handleStatus }) {
@@ -45,8 +53,17 @@ function JobPageTasks({ status, handleStatus }) {
             position: job.data.position
         })
             .then((result) => {
-                if (!result.success) {
-                    setFormData(updateTaskFormErrors(formData, result.errors))
+                if (result.success) {
+                    showNotification({
+                        status: "SUCCESS",
+                        message: "task created successfully!"
+                    })
+                } else {
+                    alert(handleAPIErrors({
+                        errors: result.errors,
+                        message: "Please fix the errors before submitting."
+                    }))
+                    setFormData(updateTaskFormErrors(formData, result.errors.response.data))
                 }
             })
     }
@@ -63,15 +80,29 @@ function JobPageTasks({ status, handleStatus }) {
         })
     }
 
+    const filteredData = useMemo(() => {
+        return filterDataByStatus(status, tasks.data)
+    }, [tasks.data, status])
+
     if (tasks.loading) {
         return <>Loading...</>
+    }
+
+    if(tasks.errors){
+        console.log(tasks.errors)
+        return(
+            <>
+                Job tasks
+                {handleAPIErrors(tasks.errors)}...
+            </>
+        )
     }
 
     return (
         <>
             <SectionHeader
                 IconComponent={<i className="bi bi-view-list"></i>}
-                title={`${filterDataByStatus(status, tasks.data).length} tasks for this job`}
+                title={`${filteredData.length} tasks for this job`}
                 ButtonComponent={
                     <FilterDropdown
                         id={"status-filter-tasks"}
@@ -85,9 +116,10 @@ function JobPageTasks({ status, handleStatus }) {
             <CardList
                 type={"tasks"}
                 cards={
-                    sortTasksByDateDue(
-                        filterDataByStatus(status, tasks.data)
-                    )
+                    status === "archived" ?
+                        sortDataByLatest(filteredData)
+                        :
+                        sortTasksByDateDue(filteredData)
                 }
                 isPreview={true}
                 isShow={true}

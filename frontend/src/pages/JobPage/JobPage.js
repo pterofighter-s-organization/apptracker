@@ -14,6 +14,9 @@ import { PageLayout } from "../../layouts/PageLayout"
 import { JobContext } from "../../hooks/contexts/JobContext"
 import { TasksProvider } from "../../hooks/contexts/TasksContext"
 
+//helpers
+import { handleAPIErrors } from "../../helpers/formHelpers"
+
 //css
 import "./JobPage.css"
 
@@ -31,12 +34,24 @@ export default function JobPage() {
         return <>Loading...</>
     }
 
+    if (job.errors) {
+        return (
+            <>
+                Job page {
+                    handleAPIErrors({
+                        errors: job.errors
+                    })
+                }...
+            </>
+        )
+    }
+
     return (
         <PageLayout>
             <JobPageHeader />
             <JobPageDetails />
             <TasksProvider>
-                <JobPageTasks jobId={job.data.application_id}/>
+                <JobPageTasks />
             </TasksProvider>
             <div />
             <JobPageNotes id={id} />

@@ -72,9 +72,9 @@ export const updateDateApplied = (stage, dateData, isConvertLocal) => {
 
 export const filterJobsByStage = (stage, jobs) => {
 
-    console.log(stage, jobs.filter((job) => (
-        job.status === stage
-    )))
+    // console.log(stage, jobs.filter((job) => (
+    //     job.status === stage
+    // )))
     return (
         stage ?
             jobs.filter((job) => (

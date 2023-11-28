@@ -17,6 +17,7 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 //helpers
 import { filterJobsByStage } from "../../helpers/applicationHelpers";
 import { filterDataByStatus } from "../../helpers/helpers";
+import { handleAPIErrors } from "../../helpers/formHelpers";
 
 //context-providers
 import { JobsContext } from "../../hooks/contexts/JobsContext";
@@ -42,6 +43,18 @@ function JobBoard({ status, handleStatus }) {
 
     if (jobs.loading) {
         return <>Loading...</>
+    }
+
+    if(jobs.errors){
+        return (
+            <>
+                Job page {
+                    handleAPIErrors({
+                        errors: jobs.errors
+                    })
+                }...
+            </>
+        )
     }
 
     return (

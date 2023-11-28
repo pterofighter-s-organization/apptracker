@@ -4,33 +4,32 @@ import { createContext, useReducer, useCallback } from "react";
 import APIs from "../../services/api";
 
 //helpers
-import { showAPIAlertErrors } from "../../helpers/formHelpers";
 import { sortDataByLatest } from "../../helpers/helpers";
 
 //utils
 import { findTodayUTCDate } from "../../utils/dateTimeUtils";
 
 //actions
-import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START } from "../reducers/jobsReducer";
+import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobsReducer";
 
 //reducers
 import { jobsReducer } from "../reducers/jobsReducer";
 
 const initialState = {
     data: [],
-    loading: true
+    loading: true,
+    errors: null
 }
 
 export const JobsContext = createContext({
     jobs: initialState,
     dispatch: () => { },
     getApplications: async () => { },
-    updateApplication: async () => { },
-    deleteApplication: async () => { }
+    updateApplication: async (application_id, application) => { },
+    deleteApplication: async (application_id) => { }
 })
 
 export const JobsProvider = ({ children }) => {
-
     const [jobs, dispatch] = useReducer(jobsReducer, initialState)
 
     const getApplications = useCallback(async () => {
@@ -39,30 +38,59 @@ export const JobsProvider = ({ children }) => {
             const response = await APIs.applicationAPI.getApplications()
             //sorting here so when user interacts with the card doesnt automatically get repositioned.
             dispatch({ type: JOBS_CALL_SUCCESS, payload: sortDataByLatest(response.data) })
-        } catch (error) {
-            console.log(error)
-            showAPIAlertErrors(error, 'jobs')
-            dispatch({ type: JOBS_CALL_FAILURE })
+            return ({
+                success: true,
+                data: response.data
+            })
+        } catch (errors) {
+            console.log(errors)
+            dispatch({ type: JOBS_CALL_FAILURE, payload: errors })
+            return ({
+                success: false,
+                errors: errors
+            })
         }
-    }, [])
+    }, [dispatch])
 
-    const updateApplication = async (id, application) => {
+    const updateApplication = async (application_id, application) => {
         try {
-            const response = await APIs.applicationAPI.updateApplication(id, {
+            const response = await APIs.applicationAPI.updateApplication(application_id, {
                 ...application,
-                application_id: id,
+                application_id: application_id,
                 date_edited: findTodayUTCDate(),
             })
             dispatch({ type: JOB_UPDATE_SUCCESS, payload: response.data })
-        } catch (error) {
-            console.log(error)
-            showAPIAlertErrors(error, 'job update')
-            dispatch({ type: JOBS_CALL_FAILURE })
+            return ({
+                success: true,
+                data: response.data
+            })
+        } catch (errors) {
+            console.log(errors)
+            dispatch({ type: JOB_SUBMIT_FAILURE })
+            return ({
+                success: false,
+                errors: errors
+            })
         }
     }
 
-    const deleteApplication = async (id) => {
-        //code later.
+    const deleteApplication = async (application_id) => {
+        try {
+            const response = await APIs.applicationAPI.deleteApplication(application_id)
+            console.log(response)
+            dispatch({ type: JOB_DELETE_SUCCESS, payload: application_id })
+            return ({
+                success: true,
+                data: response.data
+            })
+        } catch (errors) {
+            console.log(errors)
+            dispatch({ type: JOB_SUBMIT_FAILURE })
+            return({
+                success: false,
+                errors: errors
+            })
+        }
     }
 
     return (

@@ -1,0 +1,13 @@
+.notification-list {
+    position: fixed;
+    bottom: 20px;
+    /*notifications gets overflowed when using top.*/
+    right: 20px;
+    /* bottom: 2%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1;
+}

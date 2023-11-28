@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
+import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
 
 //utils
 import { dateTimeFormatter } from "../../../../../utils/formatUtils"
@@ -31,6 +32,12 @@ export default function JobCard({ card }) {
             ...card,
             status: e.target.value,
             date_applied: updateDateApplied(e.target.value, card.date_applied, false)
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "Job stage updated!"
+            })
         })
     }
 
@@ -39,12 +46,25 @@ export default function JobCard({ card }) {
         updateApplication(card.application_id, {
             ...card,
             archived: true
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "Job got archived!"
+            })
         })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
         deleteApplication(card.application_id)
+            .then((result) => {
+                showSubmitNotification({
+                    status: result.success,
+                    errors: result.errors,
+                    message: "Job deleted successfully!"
+                })
+            })
     }
 
     const handleRestore = (e) => {
@@ -52,6 +72,12 @@ export default function JobCard({ card }) {
         updateApplication(card.application_id, {
             ...card,
             archived: false
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "Job got restored!"
+            })
         })
     }
 

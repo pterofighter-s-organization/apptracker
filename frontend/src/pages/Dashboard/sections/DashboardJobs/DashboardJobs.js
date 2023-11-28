@@ -10,6 +10,7 @@ import { JobsContext } from "../../../../hooks/contexts/JobsContext"
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers"
+import { handleAPIErrors } from "../../../../helpers/formHelpers"
 
 //css
 
@@ -24,6 +25,18 @@ export default function DashboardJobs({ status, isPreview, isShow }) {
 
     if (jobs.loading) {
         return <>Loading...</>
+    }
+
+    if(jobs.errors){
+        return (
+            <>
+                Jobs {
+                    handleAPIErrors({
+                        errors: jobs.errors
+                    })
+                }...
+            </>
+        )
     }
 
     return (

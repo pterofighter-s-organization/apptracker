@@ -1,6 +1,9 @@
 
 //hocs
-import { withDropdownControl } from "../../../hocs/withDropdownControl"
+import { withToggleControl } from "../../../hocs/withToggleControl"
+
+//private-layouts
+import { DropdownLayout } from "../layouts/DropdownLayout"
 
 //constants
 import { APP_STAGE_COLORS } from "../../../constants/constants"
@@ -11,25 +14,25 @@ import { getContrastTextColor } from "../../../utils/componentUtils"
 //css
 import "./StageDropdown.css"
 
-function StageDropdown({ id, name, stage, handleStage, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
+function StageDropdown({ id, name, stage, handleStage, toggle, handleUntoggle, handleToggle }) {
 
     return (
-        <div
-            className={`stage-dropdown dropdown ${showDropdown ? "" : "minimized-stage-dropdown"}`}
+        <DropdownLayout
+            className={`stage-dropdown ${toggle ? "" : "minimized-stage-dropdown"}`}
         >
             <button
                 id={id}
                 type="button"
                 className="stage-dropdown-face"
                 style={{ backgroundColor: APP_STAGE_COLORS[stage], color: getContrastTextColor(APP_STAGE_COLORS[stage]) }}
-                onClick={showDropdown ? handleCloseDropdown : handleOpenDropdown}
+                onClick={toggle ? handleUntoggle : handleToggle}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title="A selection of stages for the application."
             >
                 <div>{stage}</div>
                 {
-                    showDropdown ?
+                    toggle ?
                         <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
                         :
                         <i className="dropdown-face-icon bi bi-caret-down-fill" />
@@ -51,8 +54,8 @@ function StageDropdown({ id, name, stage, handleStage, showDropdown, handleClose
                     ) : null
                 ))}
             </div>
-        </div>
+        </DropdownLayout>
     )
 }
 
-export default withDropdownControl(StageDropdown)
+export default withToggleControl(StageDropdown)

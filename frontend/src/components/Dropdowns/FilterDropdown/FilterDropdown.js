@@ -1,19 +1,25 @@
 
 
 //hocs
-import { withDropdownControl } from "../../../hocs/withDropdownControl"
+import { withToggleControl } from "../../../hocs/withToggleControl"
+
+//private-layouts
+import { DropdownLayout } from "../layouts/DropdownLayout"
 
 //css
 import "./FilterDropdown.css"
 
-function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
+function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, toggle, handleUntoggle, handleToggle }) {
 
     return (
-        <div className={`filter-dropdown dropdown ${showDropdown ? "" : "minimized-filter-dropdown"}`} id={id}>
+        <DropdownLayout
+            className={`filter-dropdown ${toggle ? "" : "minimized-filter-dropdown"}`} 
+        >
             <button
+                id={id}
                 type="button"
                 className="filter-dropdown-face"
-                onClick={showDropdown ? handleCloseDropdown : handleOpenDropdown}
+                onClick={toggle ? handleUntoggle : handleToggle}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title={`Opens a selection of ${label} to filter.`}
@@ -26,7 +32,7 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
                     {value && value.length > 0 ? value : "all"}
                 </div>
                 {
-                    showDropdown ?
+                    toggle ?
                         <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
                         :
                         <i className="dropdown-face-icon bi bi-caret-down-fill" />
@@ -61,8 +67,8 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
                     ))
                 }
             </div>
-        </div>
+        </DropdownLayout>
     )
 }
 
-export default withDropdownControl(FilterDropdown)
+export default withToggleControl(FilterDropdown)

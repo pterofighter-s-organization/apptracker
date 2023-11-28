@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -15,6 +15,7 @@ import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
 import { updateJobFormData, updateJobFormErrors, createJobData, updateDateApplied } from "../../../helpers/applicationHelpers";
+import { handleAPIErrors } from "../../../helpers/formHelpers";
 
 //utils
 import { createObjCopy } from "../../../utils/memoryUtils";
@@ -28,7 +29,8 @@ export default function JobEditForm() {
     const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
     //making sure this doesn't re-render and make useeffect render again. fixed*
 
-    const { job, getApplication, editApplication } = useContext(JobContext);
+    const navigate = useNavigate()
+    const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     // const [submissionState, setSubmissionState] = useState({
     //     status: false,
@@ -37,11 +39,12 @@ export default function JobEditForm() {
     // })
 
     useEffect(() => {
-        getApplication(id).then((result) => {
-            if (result.success) {
-                setFormData(updateJobFormData(initialState, result.data))
-            }
-        })
+        getApplication(id)
+            .then((result) => {
+                if (result.success) {
+                    setFormData(updateJobFormData(initialState, result.data))
+                }
+            })
     }, [getApplication, initialState, id]);
 
     const handleChange = (e) => {
@@ -73,16 +76,40 @@ export default function JobEditForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        editApplication(job.data.application_id, createJobData(formData))
+        updateApplication(job.data.application_id, {
+            ...job.data,
+            ...createJobData(formData)
+        })
             .then((result) => {
-                if (!result.success) {
-                    setFormData(updateJobFormErrors(formData, result.errors))
+                if (result.success) {
+                    alert("Successfully edited! Now redirecting you to the job page.")
+                    navigate("/job/" + result.data.application_id)
+                } else {
+                    alert(
+                        handleAPIErrors({
+                            errors: result.errors,
+                            message: "Please fix the errors before submitting."
+                        })
+                    )
+                    setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
             })
     }
 
     if (job.loading) {
         return <>Loading...</>;
+    }
+
+    if (job.errors) {
+        return (
+            <>
+                Job edit form {
+                    handleAPIErrors({
+                        errors: job.errors
+                    })
+                }...
+            </>
+        )
     }
 
     return (

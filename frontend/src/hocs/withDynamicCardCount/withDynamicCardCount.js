@@ -32,7 +32,7 @@ export default function withDynamicCardCount(Component, elementName) {
             }
 
             //once cards.length gets changed then we check again.
-        }, [isPreview, type, cards.length])
+        }, [isPreview, type])
 
         const handleAddCount = (e) => {
             e.preventDefault()
