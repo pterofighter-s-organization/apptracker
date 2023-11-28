@@ -14,7 +14,7 @@ import { tasksReducer } from "../reducers/tasksReducer";
 
 const initialState = {
     data: [],
-    loading: true,
+    loading: false,
     errors: null
 }
 

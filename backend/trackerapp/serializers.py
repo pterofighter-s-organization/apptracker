@@ -35,6 +35,11 @@ class TaskSerializer(serializers.ModelSerializer):
                 }
             }
         }
-        
+
+    def custom_check(self, validated_data):
+        #only in post
+        instance = Task(**validated_data)
+        instance.custom_check()
+
 
 

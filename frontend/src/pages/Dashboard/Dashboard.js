@@ -13,6 +13,7 @@ import { DashboardNotes } from "./sections/DashboardNotes"
 
 //context-providers
 import { JobsProvider } from "../../hooks/contexts/JobsContext"
+import { TasksProvider } from "../../hooks/contexts/TasksContext"
 
 //css
 import "./Dashboard.css"
@@ -38,11 +39,13 @@ function Dashboard({ status, handleStatus }) {
                     isShow={isShow}
                 />
             </JobsProvider>
-            <DashboardTasks
-                status={status}
-                isPreview={isPreview}
-                isShow={isShow}
-            />
+            <TasksProvider>
+                <DashboardTasks
+                    status={status}
+                    isPreview={isPreview}
+                    isShow={isShow}
+                />
+            </TasksProvider>
             <DashboardNotes
                 status={status}
                 isPreview={isPreview}

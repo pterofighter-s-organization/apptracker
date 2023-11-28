@@ -19,7 +19,7 @@ import { TasksContext } from "../../../../hooks/contexts/TasksContext"
 import { JobContext } from "../../../../hooks/contexts/JobContext"
 
 //components
-import { showNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
 
 //helpers
 import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
@@ -53,16 +53,13 @@ function JobPageTasks({ status, handleStatus }) {
             position: job.data.position
         })
             .then((result) => {
-                if (result.success) {
-                    showNotification({
-                        status: "SUCCESS",
-                        message: "task created successfully!"
-                    })
-                } else {
-                    alert(handleAPIErrors({
-                        errors: result.errors,
-                        message: "Please fix the errors before submitting."
-                    }))
+                showSubmitNotification({
+                    status: result.success,
+                    errors: result.errors,
+                    message: "task created successfully!",
+                    errorMessage: "please fix the errors before submitting the task!"      
+                })
+                if (!result.success) {
                     setFormData(updateTaskFormErrors(formData, result.errors.response.data))
                 }
             })

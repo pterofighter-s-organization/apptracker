@@ -1,0 +1,6 @@
+
+
+//actions
+export const NOTES_CALL_START = "NOTES_CALL_START"
+export const NOTES_CALL_SUCCESS = "NOTES_CALL_SUCCESS"
+export const NOTES_CALL_FAILURE = "NOTES_CALL_FAILURE"

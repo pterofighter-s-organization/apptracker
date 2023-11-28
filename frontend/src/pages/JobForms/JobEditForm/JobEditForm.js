@@ -88,7 +88,7 @@ export default function JobEditForm() {
                     alert(
                         handleAPIErrors({
                             errors: result.errors,
-                            message: "Please fix the errors before submitting."
+                            message: "Please fix the errors before submitting!"
                         })
                     )
                     setFormData(updateJobFormErrors(formData, result.errors.response.data))

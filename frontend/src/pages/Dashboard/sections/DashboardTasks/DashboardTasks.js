@@ -3,24 +3,47 @@
 import { SectionHeader } from "../../../../components/SectionHeader"
 import { CardList } from "../../../../components/CardList"
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton"
-
-//helpers
-// import { filterDataByStatus } from "../../../../helpers/helpers";
+import { useContext, useEffect, useMemo } from "react"
+import { TasksContext } from "../../../../hooks/contexts/TasksContext"
+import { handleAPIErrors } from "../../../../helpers/formHelpers"
+import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
+import { sortTasksByDateDue } from "../../../../helpers/taskHelpers"
 
 //css
 
 export default function DashboardTasks({ status, isPreview, isShow }) {
 
-    const taskCards = Array.from({ length: 0 }).fill({
-        value: "",
-        status: status,
-    })
+    const { tasks, getTasks } = useContext(TasksContext)
+
+    useEffect(() => {
+        getTasks()
+    }, [getTasks])
+
+    const filteredData = useMemo(() => {
+        return filterDataByStatus(status, tasks.data)
+    }, [tasks.data, status])
+
+    if (tasks.loading) {
+        return <>Loading...</>
+    }
+
+    if (tasks.errors) {
+        return (
+            <>
+                Tasks{
+                    handleAPIErrors({
+                        errors: tasks.errors
+                    })
+                }...
+            </>
+        )
+    }
 
     return (
         <>
             <SectionHeader
                 IconComponent={<i className="bi bi-view-list" />}
-                title={`${taskCards.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
+                title={`${filteredData.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
                 ButtonComponent={
                     <RedirectButton
                         link={"/all-tasks/" + status}
@@ -30,7 +53,12 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
             />
             <CardList
                 type={"tasks"}
-                cards={taskCards}
+                cards={
+                    status === "archived" ?
+                        sortDataByLatest(filteredData)
+                        :
+                        sortTasksByDateDue(filteredData)
+                }
                 isPreview={isPreview}
                 isShow={isShow}
             />

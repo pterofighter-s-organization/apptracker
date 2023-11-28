@@ -216,12 +216,13 @@ def task_list(request):
         task_data = JSONParser().parse(request)
         task_serializer = TaskSerializer(data=task_data)
         if task_serializer.is_valid(raise_exception=True):
-            task = task_serializer.save()
             try:
-                task.full_clean()  # this is to make sure the check only performs in post
+                #only in post, sending in the data to give it a check.
+                task_serializer.custom_check(task_data)
             except ValidationError as e:
                 return JsonResponse({**task_serializer.errors, **e.message_dict}, status=status.HTTP_400_BAD_REQUEST)
-            task.save()
+
+            # task_serializer.save()
             return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         #     return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
@@ -249,7 +250,7 @@ def task_detail(request, pk):
             item_to_delete.delete()
             return JsonResponse({'message': 'Task was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Task.DoesNotExist:
-        return JsonResponse({'message': 'The Note does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse({'message': 'The Task does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
 @api_view(['GET'])
 def task_list_application(request, app_id):

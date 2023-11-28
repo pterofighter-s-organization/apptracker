@@ -57,20 +57,27 @@ class Application(models.Model):
     archived = models.BooleanField(default=False)
 
 class Task(models.Model):
-    task_id = models.AutoField(primary_key=True)
-    application_id = models.IntegerField()
-    title = models.CharField(max_length=255)
+    task_id = models.AutoField(primary_key=True, null=False)
+    application_id = models.IntegerField(null=False)
+    title = models.CharField(max_length=255, null=False)
     # date_due = models.DateTimeField(validators=[validate_datetime_before_now])
-    date_due = models.DateTimeField()
-    company = models.CharField(max_length=255)
-    position = models.CharField(max_length=255)
-    date_edited = models.DateTimeField(blank=True)
-    date_created = models.DateTimeField(blank=True)
+    date_due = models.DateTimeField(null=False)
+    company = models.CharField(max_length=255, null=False)
+    position = models.CharField(max_length=255, null=False)
+    date_edited = models.DateTimeField(blank=True, null=False)
+    date_created = models.DateTimeField(blank=True, null=False)
     # section = models.CharField(max_length=255, blank=True, null=True)
     # priority = models.IntegerField()
-    archived = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False, null=False)
 
     #this clean is to make sure the check only happens in post, code in views.py
     def clean(self):
         if timezone.now() > self.date_due:
             raise ValidationError({"date_due": "Date must not be overdue."})
+        
+    #making a method so it can perform clean before the save, communiating from view thru serializer.
+    def custom_check(self):
+        try:
+            self.full_clean()
+        except ValidationError as e:
+            raise ValidationError(e)

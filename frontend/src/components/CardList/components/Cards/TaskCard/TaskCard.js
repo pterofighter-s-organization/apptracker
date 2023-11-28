@@ -1,6 +1,9 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 
+//components
+import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+
 //private-components
 import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
@@ -13,7 +16,6 @@ import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
 
 //css
 import "./TaskCard.css"
-import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
 
 export default function TaskCard({ card }) {
 
@@ -82,6 +84,7 @@ export default function TaskCard({ card }) {
     return (
         <Link
             to={"/job/" + card.application_id}
+            key={taskCardId}
             id={taskCardId}
             className="task-card-container"
         >

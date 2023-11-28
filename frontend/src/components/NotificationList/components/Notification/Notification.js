@@ -1,6 +1,8 @@
 
 //helpers
 import { handleAPIErrors } from "../../../../helpers/formHelpers"
+
+//utils
 import { getContrastTextColor } from "../../../../utils/componentUtils"
 
 //css
@@ -37,7 +39,6 @@ const Notification = ({ status, message }) => {
 }
 
 export const showNotification = ({ status, message }) => {
-
     const NotificationComponent = Notification({
         status: status,
         message: message
@@ -45,20 +46,22 @@ export const showNotification = ({ status, message }) => {
 
     //get notification container
     const NotificationListComponent = document.getElementById("notification-list")
-    NotificationListComponent.appendChild(NotificationComponent)
+    NotificationListComponent.insertBefore(NotificationComponent, NotificationListComponent.firstChild)
+    // NotificationListComponent.appendChild(NotificationComponent)
 
     setTimeout(() => {
         NotificationListComponent.removeChild(NotificationComponent)
     }, 3000) //dismiss after 3s
 }
 
-export const showSubmitNotification = ({ status, message, errors }) => {
+export const showSubmitNotification = ({ status, message, errors, errorMessage }) => {
 
     return (
         showNotification({
             status: status ? "SUCCESS" : "FAIL",
             message: status ? message : handleAPIErrors({
-                errors: errors
+                errors: errors,
+                message: errorMessage
             })
         })
     )
