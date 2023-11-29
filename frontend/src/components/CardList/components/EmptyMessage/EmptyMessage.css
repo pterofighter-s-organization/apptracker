@@ -1,4 +1,4 @@
-.error-display{
+.empty-message{
     width: 100%;
     background-color: #f5f5f5;
     padding: 2em;
@@ -11,14 +11,14 @@
     gap: 1rem;
 }
 
-.error-display-header{
+.empty-message-header{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
 }
 
-.error-display-text{
+.empty-message-text{
     text-align: center;
     text-transform: capitalize;
 }

@@ -47,7 +47,10 @@ function StageDropdown({ id, name, stage, handleStage, toggle, handleUntoggle, h
                             value={option}
                             className="stage-dropdown-option dropdown-option"
                             style={{ color: color }}
-                            onClick={handleStage}
+                            onClick={(e) => {
+                                handleStage(e)
+                                handleUntoggle(e)
+                            }}
                         >
                             {option}
                         </button>

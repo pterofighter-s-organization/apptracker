@@ -1,7 +1,8 @@
 
 //private-components
 import { ShowButton } from "./components/ShowButton"
-import { ErrorDisplay } from "./components/ErrorDisplay"
+import { EmptyMessage } from "./components/EmptyMessage"
+
 //cards
 import { JobCard } from "./components/Cards/JobCard"
 import { TaskCard } from "./components/Cards/TaskCard"
@@ -62,7 +63,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                         :
                         null
                     :
-                    <ErrorDisplay
+                    <EmptyMessage
                         type={type}
                     />
             }

@@ -7,38 +7,41 @@ import { APP_STATUS_COLORS } from "../../constants/constants"
 //css
 import "./HeaderLayout.css"
 
-export default function HeaderLayout({ title, status, handleStatus, Components, children }) {
+export default function HeaderLayout({ title, status, handleStatus, Components, BottomComponents, text, children }) {
 
     return (
         <div className="header-layout">
-            <div className="header-layout-title">
-                <h2 className="header-layout-title-text">
-                    {title}
-                </h2>
-                <h6 className="header-layout-text">
-                    {children}
-                </h6>
+            <div className="header-layout-top">
+                <div className="header-layout-title">
+                    <h2 className="header-layout-title-text">
+                        {title}
+                    </h2>
+                    <h6 className="header-layout-text">
+                        {text}
+                    </h6>
+                </div>
+                {
+                    status || Components ?
+                        <div className="header-layout-components">
+                            {Components}
+                            {
+                                status ?
+                                    <FilterDropdown
+                                        id={"status-dropdown"}
+                                        label={"status"}
+                                        value={status}
+                                        options={APP_STATUS_COLORS}
+                                        handleOption={handleStatus}
+                                    />
+                                    :
+                                    null
+                            }
+                        </div>
+                        :
+                        null
+                }
             </div>
-            {
-                status || Components ?
-                    <div className="header-layout-components">
-                        {Components}
-                        {
-                            status ?
-                                <FilterDropdown
-                                    id={"status-dropdown"}
-                                    label={"status"}
-                                    value={status}
-                                    options={APP_STATUS_COLORS}
-                                    handleOption={handleStatus}
-                                />
-                                :
-                                null
-                        }
-                    </div>
-                    :
-                    null
-            }
+            {children}
         </div>
     )
 }

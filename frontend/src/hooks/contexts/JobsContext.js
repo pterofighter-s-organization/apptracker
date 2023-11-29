@@ -23,7 +23,7 @@ const initialState = {
 
 export const JobsContext = createContext({
     jobs: initialState,
-    dispatch: () => { },
+    // dispatch: () => { },
     getApplications: async () => { },
     updateApplication: async (application_id, application) => { },
     deleteApplication: async (application_id) => { }

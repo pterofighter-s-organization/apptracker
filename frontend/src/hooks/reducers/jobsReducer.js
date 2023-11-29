@@ -47,7 +47,6 @@ export const jobsReducer = (jobs, action) => {
             return({
                 ...jobs,
                 loading: false,
-                errors: null
             })
         case JOB_DELETE_SUCCESS:
             return({

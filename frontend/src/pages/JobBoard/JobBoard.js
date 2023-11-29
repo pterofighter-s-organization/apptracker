@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -41,11 +41,19 @@ function JobBoard({ status, handleStatus }) {
         getApplications()
     }, [getApplications])
 
+    const filteredData = useMemo(() => {
+        return (
+            filterJobsByStage(stage,
+                filterDataByStatus(status, jobs.data)
+            )
+        )
+    }, [jobs.data, status, stage])
+
     if (jobs.loading) {
         return <>Loading...</>
     }
 
-    if(jobs.errors){
+    if (jobs.errors) {
         return (
             <>
                 Job page {
@@ -61,6 +69,11 @@ function JobBoard({ status, handleStatus }) {
         <PageLayout>
             <HeaderLayout
                 title={"my job applications"}
+                text={
+                    <>
+                        Every job from <i>interviewing to interested.</i>
+                    </>
+                }
                 status={status}
                 handleStatus={handleStatus}
                 Components={
@@ -73,16 +86,10 @@ function JobBoard({ status, handleStatus }) {
                         handleOption={handleStage}
                     />
                 }
-            >
-                Every job from <i>interviewing to interested.</i>
-            </HeaderLayout>
+            />
             <CardList
                 type={"jobs"}
-                cards={
-                    filterJobsByStage(stage,
-                        filterDataByStatus(status, jobs.data)
-                    )
-                }
+                cards={filteredData}
                 isPreview={false}
                 isShow={true}
             />

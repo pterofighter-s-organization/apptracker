@@ -102,13 +102,13 @@ export default function JobEditForm() {
 
     if (job.errors) {
         return (
-            <>
+            <div>
                 Job edit form {
                     handleAPIErrors({
                         errors: job.errors
                     })
                 }...
-            </>
+            </div>
         )
     }
 

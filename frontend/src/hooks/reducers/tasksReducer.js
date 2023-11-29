@@ -55,7 +55,6 @@ export const tasksReducer = (tasks, action) => {
             return({
                 ...tasks,
                 loading: false,
-                errors: null
             })
         case TASK_DELETE_SUCCESS:
             return({

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import withDropdownControl from "../../../../../hocs/withDropdownControl/withDropdownControl"
+import { withToggleControl } from "../../../../../hocs/withToggleControl"
 
 //routes
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../routes"
@@ -9,11 +9,11 @@ import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../rout
 //css
 import "./DropdownNav.css"
 
-function DropdownNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
+function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
 
     return (
         <nav
-            className={`dropdownnav ${showDropdown ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
+            className={`dropdownnav ${toggle ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
             id={id}
         >
             <div className="dropdownnav-bar">
@@ -38,9 +38,7 @@ function DropdownNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown
                         type="button"
                         className="dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
-                        onClick={(e) => (
-                            showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
-                        )}
+                        onClick={toggle ? handleUntoggle : handleToggle}
                     >
                         <i className="dropdownnav-button-expand-icon bi bi-list"></i>
                         <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />
@@ -79,4 +77,4 @@ function DropdownNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown
     )
 }
 
-export default withDropdownControl(DropdownNav)
+export default withToggleControl(DropdownNav)

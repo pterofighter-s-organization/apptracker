@@ -1,10 +1,18 @@
 .header-layout {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-layout-top{
     display: flex;
     gap: 0.5rem;
 }
 
 @media (min-width: 1200px) {
-    .header-layout {
+    .header-layout-top {
         flex-direction: row;
     }
 
@@ -28,7 +36,7 @@
         margin-right: 0.75rem;
     }
 
-    .header-layout {
+    .header-layout-top {
         flex-direction: column;
         gap: 0.5rem;
         margin: 0.5rem 0;
@@ -36,6 +44,9 @@
 }
 
 @media (max-width: 576px) {
+    .header-layout{
+        padding: 2rem 1.5rem;
+    }
     .header-layout-title {
         gap: 0.25rem;
     }

@@ -2,6 +2,7 @@
 
 //hocs
 import { withToggleControl } from "../../../hocs/withToggleControl"
+import { getContrastTextColor } from "../../../utils/componentUtils"
 
 //private-layouts
 import { DropdownLayout } from "../layouts/DropdownLayout"
@@ -13,7 +14,7 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
 
     return (
         <DropdownLayout
-            className={`filter-dropdown ${toggle ? "" : "minimized-filter-dropdown"}`} 
+            className={`filter-dropdown ${toggle ? "" : "minimized-filter-dropdown"}`}
         >
             <button
                 id={id}
@@ -23,11 +24,15 @@ function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, 
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title={`Opens a selection of ${label} to filter.`}
+                style={{
+                    backgroundColor: `${value?.length > 0 ? options[value] : "black"}`,
+                    color: `${getContrastTextColor(value?.length > 0 ? options[value] : "black")}`
+                }}
             >
                 {label}:
                 <div
                     className="filter-dropdown-face-value"
-                    style={{ color: `${value && value.length > 0 ? options[value] : "black"}` }}
+                    style={{ color: `${getContrastTextColor(value?.length > 0 ? options[value] : "black")}` }}
                 >
                     {value && value.length > 0 ? value : "all"}
                 </div>

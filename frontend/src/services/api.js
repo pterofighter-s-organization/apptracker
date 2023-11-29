@@ -25,17 +25,17 @@ const taskAPI = {
 
 const noteAPI = {
     getNotes: () => apiClient.get('/notes'),
-    getNote: (note_id) => apiClient.get('/notes/' + note_id),
+    getNote: (note_id) => apiClient.get(`/notes/${note_id}`),
     getApplicationNotes: (application_id) => apiClient.get('/notes_app/' + application_id),
     createNote: (note) => apiClient.post('/notes', note),
-    updateNote: (note_id, note) => apiClient.put('/notes/' + note_id, note),
+    updateNote: (note_id, note) => apiClient.put(`/notes/${note_id}`, note),
     deleteNote: (note_id) => apiClient.delete(`/notes/${note_id}`)
 }
 
 const userAPI = {
     loginUser: (user) => apiClient.post('/login', user),
-    createUser: (user) => apiClient.post('/user'),
-    updateUser: (user_id, user) => apiClient.put('/user'),
+    createUser: (user) => apiClient.post(`/user`, user),
+    updateUser: (user_id, user) => apiClient.put(`/user/${user_id}`, user),
 }
 
 const APIs = {

@@ -15,7 +15,7 @@ export default function DashboardNotes({ status, isPreview, isShow }) {
         value: "",
         status: status,
     })
-    
+
     return (
         <>
             <SectionHeader

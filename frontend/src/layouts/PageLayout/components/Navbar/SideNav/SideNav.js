@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import withDropdownControl from "../../../../../hocs/withDropdownControl/withDropdownControl"
+import { withToggleControl } from "../../../../../hocs/withToggleControl"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../routes"
@@ -9,11 +9,11 @@ import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../rout
 //css
 import "./SideNav.css"
 
-function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) {
+function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
 
     return (
         <nav
-            className={`sidenav ${showDropdown ? "expanded-sidenav" : "minimized-sidenav"}`}
+            className={`sidenav ${toggle ? "expanded-sidenav" : "minimized-sidenav"}`}
             id={id}
         >
             <Link
@@ -35,9 +35,7 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
                 type="button"
                 className="sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
-                onClick={(e) => (
-                    showDropdown ? handleCloseDropdown(e) : handleOpenDropdown(e)
-                )}
+                onClick={toggle ? handleUntoggle : handleToggle}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
@@ -83,4 +81,4 @@ function SideNav({ id, showDropdown, handleCloseDropdown, handleOpenDropdown }) 
     )
 }
 
-export default withDropdownControl(SideNav)
+export default withToggleControl(SideNav)

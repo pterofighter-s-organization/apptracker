@@ -23,11 +23,14 @@ function NoteBoard({ status, handleStatus }) {
         <PageLayout>
             <HeaderLayout
                 title={"my job notes"}
+                text={
+                    <>
+                        Shows all the notes you've created for each job applications.
+                    </>
+                }
                 status={status}
                 handleStatus={handleStatus}
-            >
-                Shows all the notes you've created for each job applications.
-            </HeaderLayout>
+            />
             <CardList
                 type={"notes"}
                 cards={cards}

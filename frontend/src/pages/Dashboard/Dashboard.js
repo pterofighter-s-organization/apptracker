@@ -29,9 +29,12 @@ function Dashboard({ status, handleStatus }) {
                 title={"my dashboard"}
                 status={status}
                 handleStatus={handleStatus}
-            >
-                Welcome, <i>User 1</i>
-            </HeaderLayout>
+                text={
+                    <>
+                        Welcome, <i>User 1</i>
+                    </>
+                }
+            />
             <JobsProvider>
                 <DashboardJobs
                     status={status}

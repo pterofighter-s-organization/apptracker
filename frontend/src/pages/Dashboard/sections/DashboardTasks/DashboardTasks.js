@@ -29,13 +29,13 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
 
     if (tasks.errors) {
         return (
-            <>
-                Tasks{
+            <div>
+                Tasks {
                     handleAPIErrors({
                         errors: tasks.errors
                     })
                 }...
-            </>
+            </div>
         )
     }
 

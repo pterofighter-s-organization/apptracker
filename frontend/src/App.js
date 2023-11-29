@@ -18,23 +18,28 @@ import './App.css'
 //context-providers
 import { JobProvider } from './hooks/contexts/JobContext';
 import { JobsProvider } from './hooks/contexts/JobsContext';
+import { TasksProvider } from './hooks/contexts/TasksContext';
 
 export default function App() {
 
   return (
     // mimic footer with pb-5
     <div className="App">
-      <NotificationList/>
+      <NotificationList />
       <Router>
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
         </Routes>
         <Routes>
-          <Route path="/all-tasks" element={<TaskBoard />} />
           <Route path="/all-notes" element={<NoteBoard />} />
-          <Route path="/all-tasks/:status" element={<TaskBoard />} />
           <Route path="/all-notes/:status" element={<NoteBoard />} />
         </Routes>
+        <TasksProvider>
+          <Routes>
+            <Route path="/all-tasks" element={<TaskBoard />} />
+            <Route path="/all-tasks/:status" element={<TaskBoard />} />
+          </Routes>
+        </TasksProvider>
         <JobsProvider>
           <Routes>
             <Route path="/all-jobs/:status" element={<JobBoard />} />

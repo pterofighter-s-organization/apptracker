@@ -63,7 +63,7 @@ export default function JobPageHeader() {
                     message: "job deleted successfully!"
                 })
 
-                if(result.success){
+                if (result.success) {
                     //later change this to backend triggered.
                     navigate("/")
                 }
@@ -77,8 +77,8 @@ export default function JobPageHeader() {
             archived: true
         }).then((result) => {
             showSubmitNotification({
-                status: result.success, 
-                errors: result.errors, 
+                status: result.success,
+                errors: result.errors,
                 message: "job got archived!"
             })
         })

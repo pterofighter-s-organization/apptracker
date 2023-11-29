@@ -53,7 +53,6 @@ export default function JobPage() {
             <TasksProvider>
                 <JobPageTasks />
             </TasksProvider>
-            <div />
             <JobPageNotes id={id} />
         </PageLayout>
     )

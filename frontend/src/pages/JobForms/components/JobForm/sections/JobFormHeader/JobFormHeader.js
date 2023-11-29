@@ -12,25 +12,32 @@ import "../../JobForm.css"
 export default function JobFormHeader({ isEdit }) {
 
     return (
-        <div className="job-form-header job-form-section">
-            {
-                isEdit ?
-                    <HeaderLayout
-                        title={"editing information"}
-                    >
-                        perform your desired edits on the application you created.
-                    </HeaderLayout>
-                    :
-                    <HeaderLayout
-                        title={"job tracking form"}
-                    >
-                        fill the form to provide information on the job you want to track.
-                    </HeaderLayout>
-            }
-            <hr />
-            <InfoReminder
-                text={"information won't save until successfully submitted."}
-            />
+        <div className="job-form-header">
+            <HeaderLayout
+                title={
+                    isEdit ?
+                        "editing information"
+                        :
+                        "job tracking form"
+                }
+                text={
+                    isEdit ?
+                        "perform your desired edits on the application you created."
+                        :
+                        "fill the form to provide information on the job you want to track."
+                }
+            >
+                <hr />
+                <InfoReminder
+                    text={"information won't save until successfully submitted."}
+                />
+            </HeaderLayout>
+            {/* <div className="job-form-header-bottom">
+                <hr />
+                <InfoReminder
+                    text={"information won't save until successfully submitted."}
+                />
+            </div> */}
         </div>
     )
 }
