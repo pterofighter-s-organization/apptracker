@@ -36,7 +36,7 @@ export const jobReducer = (job, action) => {
         case JOB_DELETE_SUCCESS:
             return {
                 ...job,
-                data: null,
+                // data: null, have to comment this out or else the data can't update in time.
                 loading: false,
                 errors: null
             }

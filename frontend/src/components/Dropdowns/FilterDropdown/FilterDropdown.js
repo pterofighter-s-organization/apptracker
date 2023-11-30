@@ -17,12 +17,12 @@ const FilterDropdownOption = ({ option, handleOption, color }) => {
         <div
             className="filter-dropdown-option"
             style={{ color: color }}
+            onClick={(e) => handleOption(e, option)}
         >
             <i className="bi bi-dot"></i>
             <span
                 key={option}
                 className="dropdown-option"
-                onClick={(e) => handleOption(e, option)}
             >
                 {option ? option : "all"}
             </span>

@@ -17,7 +17,7 @@ import { jobsReducer } from "../reducers/jobsReducer";
 
 const initialState = {
     data: [],
-    loading: true,
+    loading: false, //only false for data that is []. or else null data will crash the app.
     errors: null
 }
 
@@ -34,6 +34,7 @@ export const JobsProvider = ({ children }) => {
 
     const getApplications = useCallback(async () => {
         dispatch({ type: JOBS_CALL_START }) //this solves the get application not updating instantly
+
         try {
             const response = await APIs.applicationAPI.getApplications()
             //sorting here so when user interacts with the card doesnt automatically get repositioned.

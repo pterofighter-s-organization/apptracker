@@ -11,6 +11,9 @@ export default function EditOptionButton({ handleEdit }) {
             type="button"
             className="option-button"
             onClick={handleEdit}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Press to edit.`}
         >
             <i className="bi bi-pencil-fill"></i>
         </button>

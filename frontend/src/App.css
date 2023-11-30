@@ -28,18 +28,3 @@ pre {
     font-family: "Work Sans", sans-serif;
     background-color: #E5E4E2;
 }
-
-.onclick-bw-button {
-    background-color: #D9D9D9;
-    color: black;
-    transition: all 150ms ease-in-out;
-    padding: 0.5em 0.75em;
-    border-radius: 2em;
-    font-size: 1rem;
-}
-
-.onclick-bw-button:hover {
-    opacity: 0.75;
-    background-color: black;
-    color: #D9D9D9;
-}

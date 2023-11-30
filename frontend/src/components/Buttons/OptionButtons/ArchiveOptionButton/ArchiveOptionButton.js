@@ -12,6 +12,9 @@ export default function ArchiveOptionButton({ handleArchive }) {
             type="button"
             className="option-button"
             onClick={handleArchive}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Press to archive.`}
         >
             <i className={"bi bi-archive-fill"}></i>
         </button>

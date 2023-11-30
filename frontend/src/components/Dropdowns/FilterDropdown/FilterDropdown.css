@@ -1,13 +1,12 @@
-
 .minimized-dropdown .filter-dropdown-options {
     box-shadow: none;
 }
 
-.filter-dropdown-face{
+.filter-dropdown-face {
     font-size: 0.85rem;
 }
 
-.filter-dropdown-options{
+.filter-dropdown-options {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -18,7 +17,7 @@
     font-size: 0.85rem;
 }
 
-.filter-dropdown-option{
+.filter-dropdown-option {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

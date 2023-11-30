@@ -14,14 +14,14 @@ import { jobReducer } from "../reducers/jobReducer"
 
 const initialState = {
     data: null,
-    loading: true,
+    loading: true, //this must be true because start function can't be as fast.
     errors: null
 }
 
 export const JobContext = createContext({
     job: initialState,
     // dispatch: () => { },
-    getApplication: async (user_id) => { },
+    getApplication: async (application_id) => { },
     updateApplication: async (application_id, application) => { },
     createApplication: async (user_id, application) => { },
     deleteApplication: async (application_id) => { },
@@ -30,10 +30,11 @@ export const JobContext = createContext({
 export const JobProvider = ({ children }) => {
     const [job, dispatch] = useReducer(jobReducer, initialState)
 
-    const getApplication = useCallback(async (user_id) => {
-        dispatch({ type: JOB_CALL_START })
+    const getApplication = useCallback(async (application_id) => {
+        dispatch({ type: JOB_CALL_START }) //making sure it can erase the old data before the new one.
+        
         try {
-            const response = await APIs.applicationAPI.getApplication(user_id)
+            const response = await APIs.applicationAPI.getApplication(application_id)
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
             return {
                 success: true,
@@ -50,6 +51,7 @@ export const JobProvider = ({ children }) => {
     }, [dispatch])
 
     const updateApplication = async (application_id, application) => {
+
         try {
             const response = await APIs.applicationAPI.updateApplication(application_id, {
                 ...application,
@@ -72,6 +74,7 @@ export const JobProvider = ({ children }) => {
     }
 
     const createApplication = async (user_id, application) => {
+
         try {
             const response = await APIs.applicationAPI.createApplication({
                 ...application,
@@ -96,6 +99,7 @@ export const JobProvider = ({ children }) => {
     }
 
     const deleteApplication = async (application_id) => {
+
         try {
             const response = await APIs.applicationAPI.deleteApplication(application_id)
             dispatch({ type: JOB_DELETE_SUCCESS })

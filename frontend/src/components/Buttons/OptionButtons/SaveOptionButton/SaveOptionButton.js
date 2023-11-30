@@ -10,6 +10,9 @@ export default function SaveOptionButton({ handleSave }) {
             type="button"
             className="option-button"
             onClick={handleSave}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={`Press to save.`}
         >
             <i className="bi bi-save-fill"></i>
         </button>

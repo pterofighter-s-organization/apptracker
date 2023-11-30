@@ -10,16 +10,18 @@ import { JobPageNotes } from "./sections/JobPageNotes"
 //layouts
 import { PageLayout } from "../../layouts/PageLayout"
 
-//context-providers
+//contexts
 import { JobContext } from "../../hooks/contexts/JobContext"
+
+//providers
 import { TasksProvider } from "../../hooks/contexts/TasksContext"
+import { NotesProvider } from "../../hooks/contexts/NotesContext"
 
 //helpers
 import { handleAPIErrors } from "../../helpers/formHelpers"
 
 //css
 import "./JobPage.css"
-import { NotesProvider } from "../../hooks/contexts/NotesContext"
 
 export default function JobPage() {
 
@@ -30,6 +32,8 @@ export default function JobPage() {
     useEffect(() => {
         getApplication(id)
     }, [getApplication, id])
+
+    console.log(id)
 
     if (job.loading) {
         return <>Loading...</>
