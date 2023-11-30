@@ -3,10 +3,9 @@ import { Link } from "react-router-dom"
 
 //components
 import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
-
-//private-components
-import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
-import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
+import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
 //utils
 import { dateTimeFormatter, timerFormatter } from "../../../../../utils/formatUtils"
@@ -26,13 +25,13 @@ export default function TaskCard({ card }) {
         e.preventDefault()
         //handle delete logic
         deleteJobTask(card.task_id)
-        .then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "task deleted successfully!"
+            .then((result) => {
+                showSubmitNotification({
+                    status: result.success,
+                    errors: result.errors,
+                    message: "task deleted successfully!"
+                })
             })
-        })
     }
 
     const handleRestore = (e) => {
@@ -93,13 +92,20 @@ export default function TaskCard({ card }) {
                 <h5 className="task-card-job">
                     {card.company} / {card.position}
                 </h5>
-                {card.archived ?
-                    <ArchivedOptionButtons
-                        handleDelete={handleDelete}
-                        handleRestore={handleRestore}
-                    />
-                    :
-                    <ActiveOptionButtons handleArchive={handleArchive} />
+                {
+                    card.archived ?
+                        <>
+                            <RestoreOptionButton
+                                handleRestore={handleRestore}
+                            />
+                            <DeleteOptionButton
+                                handleDelete={handleDelete}
+                            />
+                        </>
+                        :
+                        <ArchiveOptionButton
+                            handleArchive={handleArchive}
+                        />
                 }
             </div>
             <div className="task-card-title">

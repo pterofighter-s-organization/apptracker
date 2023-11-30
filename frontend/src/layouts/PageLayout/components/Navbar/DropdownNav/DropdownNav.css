@@ -26,7 +26,7 @@
 }
 
 .dropdownnav-bar-button {
-    background-color: #D9D9D9;
+    background-color: #E5E4E2;
     border-radius: 2rem;
     font-size: 1em;
     padding: 0.25rem 0.5rem;
@@ -34,7 +34,8 @@
 }
 
 .dropdownnav-bar-button:hover {
-    opacity: 0.75;
+    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
 }
 
 .minimized-dropdownnav .dropdownnav-bar .dropdownnav-bar-button .dropdownnav-button-expand-icon {
@@ -106,8 +107,8 @@
 }
 
 .dropdownnav-content-button:hover{
-    filter: brightness(0.8);
-    -webkit-filter: brightness(0.85);
+    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
 }
 
 .dropdownnav-content-button-icon{

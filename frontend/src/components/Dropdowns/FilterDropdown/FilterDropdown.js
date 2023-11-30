@@ -1,78 +1,90 @@
 
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
-import { getContrastTextColor } from "../../../utils/componentUtils"
+import { withToggleControl } from "../../../hocs/withToggleControl";
 
-//private-layouts
-import { DropdownLayout } from "../layouts/DropdownLayout"
+//utils
+import { getContrastTextColor } from "../../../utils/componentUtils";
 
 //css
+import "../styles/Dropdown.css"
 import "./FilterDropdown.css"
 
-function FilterDropdown({ id, label, value, options, isOptionAll, handleOption, toggle, handleUntoggle, handleToggle }) {
+//private-components
+const FilterDropdownOption = ({ option, handleOption, color }) => {
 
     return (
-        <DropdownLayout
-            className={`filter-dropdown ${toggle ? "" : "minimized-filter-dropdown"}`}
+        <div
+            className="filter-dropdown-option"
+            style={{ color: color }}
         >
+            <i className="bi bi-dot"></i>
+            <span
+                key={option}
+                className="dropdown-option"
+                onClick={(e) => handleOption(e, option)}
+            >
+                {option ? option : "all"}
+            </span>
+        </div>
+    )
+}
+
+//main component
+function FilterDropdown({
+    id, label, value,
+    options, isOptionAll, handleOption,
+    toggle, handleToggle, handleUntoggle
+}) {
+
+    return (
+        <div className={`dropdown ${toggle ? "" : "minimized-dropdown"}`}>
             <button
                 id={id}
                 type="button"
-                className="filter-dropdown-face"
+                className="dropdown-face filter-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title={`Opens a selection of ${label} to filter.`}
                 style={{
-                    backgroundColor: `${value?.length > 0 ? options[value] : "black"}`,
-                    color: `${getContrastTextColor(value?.length > 0 ? options[value] : "black")}`
+                    backgroundColor: `${value ? options[value] : "black"}`,
+                    color: `${getContrastTextColor(value ? options[value] : "black")}`
                 }}
             >
-                {label}:
-                <div
-                    className="filter-dropdown-face-value"
-                    style={{ color: `${getContrastTextColor(value?.length > 0 ? options[value] : "black")}` }}
-                >
-                    {value && value.length > 0 ? value : "all"}
-                </div>
-                {
-                    toggle ?
-                        <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
-                        :
-                        <i className="dropdown-face-icon bi bi-caret-down-fill" />
-                }
+                <span className="filter-dropdown-label">
+                    {label}:
+                </span>
+                <span className="filter-dropdown-option-selected">
+                    {value ? value : "all"}
+                </span>
+                <i
+                    className={`dropdown-face-icon ${toggle ? "dropdown-face-icon-rotated" : ""} bi bi-caret-up-fill`}
+                ></i>
             </button>
-            <div className="filter-dropdown-options dropdown-options">
+            <div className="dropdown-options filter-dropdown-options">
                 Choose:
                 {
-                    isOptionAll && value && value.length > 0 ?
-                        <li
-                            className="filter-dropdown-option dropdown-option"
-                            onClick={e => handleOption(e, null)}
-                        >
-                            all
-                        </li>
+                    isOptionAll && value ?
+                        <FilterDropdownOption
+                            option={null}
+                            handleOption={handleOption}
+                            color={"black"}
+                        />
                         :
                         null
                 }
                 {
                     Object.entries(options).map(([option, color]) => (
                         option !== value ?
-                            <li
-                                key={option}
-                                className="filter-dropdown-option dropdown-option"
-                                style={{ color: color }}
-                                onClick={e => handleOption(e, option)}
-                            >
-                                {option}
-                            </li>
+                            <FilterDropdownOption
+                                option={option}
+                                handleOption={handleOption}
+                                color={color}
+                            />
                             :
                             null
                     ))
                 }
             </div>
-        </DropdownLayout>
+        </div>
     )
 }
 

@@ -1,11 +1,13 @@
 import { useState, useContext } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 //components
 import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
-import { ActiveOptionButtons } from "../../../../components/Buttons/OptionButtons/ActiveOptionButtons"
-import { ArchivedOptionButtons } from "../../../../components/Buttons/OptionButtons/ArchivedOptionButtons"
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { EditOptionButton } from "../../../../components/Buttons/OptionButtons/EditOptionButton"
+import { RestoreOptionButton } from "../../../../components/Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../components/Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../../components/Buttons/OptionButtons/ArchiveOptionButton"
 
 //context-providers
 import { JobContext } from "../../../../hooks/contexts/JobContext"
@@ -84,6 +86,11 @@ export default function JobPageHeader() {
         })
     }
 
+    const handleEdit = (e) => {
+        e.preventDefault()
+        navigate(`/job-edit/${job.data.application_id}`)
+    }
+
     return (
         <div className="job-page-content-bg job-page-top">
             <div style={{ flexGrow: 1 }}>
@@ -95,22 +102,20 @@ export default function JobPageHeader() {
             </div>
             <div className="job-page-top-buttons">
                 {job.data.archived ?
-                    <ArchivedOptionButtons
-                        handleDelete={handleDelete}
-                        handleRestore={handleRestore}
-                    />
+                    <>
+                        <RestoreOptionButton
+                            handleRestore={handleRestore}
+                        />
+                        <DeleteOptionButton
+                            handleDelete={handleDelete}
+                        />
+                    </>
                     :
                     <>
-                        <Link
-                            to={"/job-edit/" + job.data.application_id}
-                            className="onclick-bw-button"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title={`Redirects to /job-edit/${job.data.application_id}`}
-                        >
-                            <i className="bi bi-pencil-fill"></i>
-                        </Link>
-                        <ActiveOptionButtons
+                        <EditOptionButton
+                            handleEdit={handleEdit}
+                        />
+                        <ArchiveOptionButton
                             handleArchive={handleArchive}
                         />
                     </>

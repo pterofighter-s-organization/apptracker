@@ -1,48 +1,32 @@
-.stage-dropdown {
-    align-items: baseline;
+
+.stage-dropdown-face{
     font-size: 0.8rem;
 }
 
-.stage-dropdown-face {
-    padding: 0.75em 1.25em;
-    border-radius: 2rem;
-    text-transform: capitalize;
-    /**/
+.stage-dropdown-options{
     display: inline-flex;
-    /*so this doesnt take 100% of the space with inline-flex*/
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.minimized-stage-dropdown .stage-dropdown-options {
-    display: none;
-}
-
-.stage-dropdown-options {
-    display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
-    /**/
-    padding: 0.5rem 0;
+    font-size: 0.8rem;
 }
 
-@media (min-width: 17.5rem) {
-    .stage-dropdown-options {
+/*card's width*/
+@media (min-width: 17.5rem){
+    .stage-dropdown-options{
         width: 16.5rem;
-        /*follow app card width but -1 rem*/
     }
 }
 
-@media (max-width: 17.5rem) {
-    .stage-dropdown-options {
+@media (max-width: 17.5rem){
+    .stage-dropdown-options{
         width: inherit;
     }
 }
 
-.stage-dropdown-option {
+.stage-dropdown-option{
     background-color: white;
-    padding: 0.5em 1em;
-    border-radius: 2em;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-transform: capitalize;
 }

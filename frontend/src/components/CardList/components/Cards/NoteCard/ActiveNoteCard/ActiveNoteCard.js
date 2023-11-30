@@ -1,8 +1,10 @@
 import { useState, useContext, useEffect } from "react"
 
 //components
-import { ActiveOptionButtons } from "../../../../../Buttons/OptionButtons/ActiveOptionButtons"
 import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
+import { SaveOptionButton } from "../../../../../Buttons/OptionButtons/SaveOptionButton"
+import { EditOptionButton } from "../../../../../Buttons/OptionButtons/EditOptionButton"
+import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
 //private-layout
 import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
@@ -77,29 +79,15 @@ export default function ActiveNoteCard({ card }) {
             >
                 {
                     isEdit ?
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={handleSave}
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Saves the edit."
-                        >
-                            <i className="bi bi-save-fill"></i>
-                        </button>
+                        <SaveOptionButton
+                            handleSave={handleSave}
+                        />
                         :
-                        <button
-                            type="button"
-                            className="onclick-bw-button"
-                            onClick={handleEdit}
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Opens textbox for input."
-                        >
-                            <i className="bi bi-pencil-fill"></i>
-                        </button>
+                        <EditOptionButton
+                            handleEdit={handleEdit}
+                        />
                 }
-                <ActiveOptionButtons
+                <ArchiveOptionButton
                     handleArchive={handleArchive}
                 />
             </NoteHeaderLayout>

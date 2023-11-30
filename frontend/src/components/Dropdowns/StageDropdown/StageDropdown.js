@@ -1,9 +1,4 @@
 
-//hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
-
-//private-layouts
-import { DropdownLayout } from "../layouts/DropdownLayout"
 
 //constants
 import { APP_STAGE_COLORS } from "../../../constants/constants"
@@ -11,53 +6,61 @@ import { APP_STAGE_COLORS } from "../../../constants/constants"
 //utils
 import { getContrastTextColor } from "../../../utils/componentUtils"
 
+//hocs
+import { withToggleControl } from "../../../hocs/withToggleControl"
+
 //css
+import "../styles/Dropdown.css"
 import "./StageDropdown.css"
 
-function StageDropdown({ id, name, stage, handleStage, toggle, handleUntoggle, handleToggle }) {
+function StageDropdown({
+    id, stage, handleStage, name,
+    toggle, handleToggle, handleUntoggle
+}) {
+    //name is for input use
 
     return (
-        <DropdownLayout
-            className={`stage-dropdown ${toggle ? "" : "minimized-stage-dropdown"}`}
-        >
+        <div className={`dropdown ${toggle ? "" : "minimized-dropdown"}`}>
             <button
                 id={id}
                 type="button"
-                className="stage-dropdown-face"
-                style={{ backgroundColor: APP_STAGE_COLORS[stage], color: getContrastTextColor(APP_STAGE_COLORS[stage]) }}
+                className="dropdown-face stage-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="A selection of stages for the application."
+                style={{
+                    backgroundColor: `${APP_STAGE_COLORS[stage]}`,
+                    color: getContrastTextColor(APP_STAGE_COLORS[stage])
+                }}
             >
-                <div>{stage}</div>
-                {
-                    toggle ?
-                        <i className="dropdown-face-icon bi bi-caret-up-fill"></i>
-                        :
-                        <i className="dropdown-face-icon bi bi-caret-down-fill" />
-                }
+                <div className="stage-dropdown-option-selected">
+                    {stage}
+                </div>
+                <i
+                    className={`dropdown-face-icon ${toggle ? "dropdown-face-icon-rotated" : ""} bi bi-caret-up-fill`}
+                ></i>
             </button>
-            <div className="stage-dropdown-options dropdown-options">
-                {Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
-                    option !== stage ? (
-                        <button
-                            key={option}
-                            name={name ? name : option}
-                            value={option}
-                            className="stage-dropdown-option dropdown-option"
-                            style={{ color: color }}
-                            onClick={(e) => {
-                                handleStage(e)
-                                handleUntoggle(e)
-                            }}
-                        >
-                            {option}
-                        </button>
-                    ) : null
-                ))}
+            <div className="dropdown-options stage-dropdown-options">
+                {
+                    Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
+                        option !== stage ?
+                            <button
+                                type="button"
+                                name={name ? name : option}
+                                value={option}
+                                onClick={(e) => {
+                                    handleStage(e)
+                                    handleUntoggle(e)
+                                }}
+                                className="dropdown-option stage-dropdown-option"
+                                style={{ color: color }}
+                            >
+                                {option}
+                            </button>
+                            :
+                            null
+                    ))
+                }
             </div>
-        </DropdownLayout>
+        </div>
     )
 }
 

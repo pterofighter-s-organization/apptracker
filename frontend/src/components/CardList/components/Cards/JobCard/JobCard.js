@@ -1,11 +1,13 @@
 import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 //components
-import { ArchivedOptionButtons } from "../../../../Buttons/OptionButtons/ArchivedOptionButtons"
-import { ActiveOptionButtons } from "../../../../Buttons/OptionButtons/ActiveOptionButtons"
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
 import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { EditOptionButton } from "../../../../Buttons/OptionButtons/EditOptionButton"
+import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
 //utils
 import { dateTimeFormatter } from "../../../../../utils/formatUtils"
@@ -21,6 +23,7 @@ import "./JobCard.css"
 
 export default function JobCard({ card }) {
 
+    const navigate = useNavigate()
     const jobCardId = `job-card-${card.application_id}`
     const { updateApplication, deleteApplication } = useContext(JobsContext)
 
@@ -81,6 +84,11 @@ export default function JobCard({ card }) {
         })
     }
 
+    const handleEdit = (e) => {
+        e.preventDefault()
+        navigate(`/job-edit/${card.application_id}`)
+    }
+
     return (
         <Link
             to={`/job/${card.application_id}`}
@@ -98,26 +106,25 @@ export default function JobCard({ card }) {
                     />
                 </div>
                 <div className="job-card-top-buttons">
-                    {card.archived ?
-                        <ArchivedOptionButtons
-                            handleDelete={handleDelete}
-                            handleRestore={handleRestore}
-                        />
-                        :
-                        <>
-                            <Link
-                                to={`/job-edit/${card.application_id}`}
-                                className="onclick-bw-button"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title={`Redirects to /job-edit/${card.application_id}`}
-                            >
-                                <i className="bi bi-pencil-fill"></i>
-                            </Link>
-                            <ActiveOptionButtons
-                                handleArchive={handleArchive}
-                            />
-                        </>
+                    {
+                        card.archived ?
+                            <>
+                                <RestoreOptionButton
+                                    handleRestore={handleRestore}
+                                />
+                                <DeleteOptionButton
+                                    handleDelete={handleDelete}
+                                />
+                            </>
+                            :
+                            <>
+                                <EditOptionButton
+                                    handleEdit={handleEdit}
+                                />
+                                <ArchiveOptionButton
+                                    handleArchive={handleArchive}
+                                />
+                            </>
                     }
                 </div>
             </div>

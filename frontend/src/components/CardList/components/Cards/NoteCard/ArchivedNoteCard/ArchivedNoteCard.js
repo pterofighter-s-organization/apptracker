@@ -1,8 +1,9 @@
 import { useContext } from "react"
 
 //components
-import { ArchivedOptionButtons } from "../../../../../Buttons/OptionButtons/ArchivedOptionButtons"
 import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
+import { RestoreOptionButton } from "../../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../../Buttons/OptionButtons/DeleteOptionButton"
 
 //private-layouts
 import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
@@ -57,9 +58,11 @@ export default function ArchivedNoteCard({ card }) {
                 jobId={card.application_id}
                 job={card.position}
             >
-                <ArchivedOptionButtons
-                    handleDelete={handleDelete}
+                <RestoreOptionButton
                     handleRestore={handleRestore}
+                />
+                <DeleteOptionButton
+                    handleDelete={handleDelete}
                 />
             </NoteHeaderLayout>
             <div className="note-card-content">
@@ -70,7 +73,7 @@ export default function ArchivedNoteCard({ card }) {
                                 {card.note}
                             </pre>
                             <div className="note-card-starter note-card-content-hover">
-                                Please restore and edit in job page/dashboard.
+                                Please restore to edit.
                             </div>
                         </>
                         :

@@ -7,13 +7,6 @@
     margin-bottom: 0rem;
 }
 
-.section-header-buttons{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .section-header-logo-title{
     display: flex;
     flex-direction: row;
@@ -39,12 +32,4 @@
 
 .section-header-logo{
     font-size: 1rem;
-}
-
-.section-header-right{
-    color: var(--redirect-button-color);
-}
-
-.section-header-right:hover{
-    color: blue;
 }

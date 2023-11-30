@@ -1,0 +1,70 @@
+.dropdown {
+    position: relative;
+    width: fit-content;
+    align-self: stretch;
+    /*inline for displaying only within its content width*/
+    display: inline;
+}
+
+.minimized-dropdown .dropdown-options {
+    display: none;
+}
+
+.minimized-dropdown .dropdown-face {
+    box-shadow: none;
+}
+
+.dropdown-options {
+    position: absolute;
+    animation: open-dropdown 150ms ease-in-out;
+    /*where the transform starts*/
+    transform-origin: top center;
+    /*making sure the options fit the option-face width first*/
+    min-width: 100%;
+    width: fit-content;
+    text-transform: capitalize;
+    z-index: 1;
+    margin-top: 0.5rem;
+    backdrop-filter: blur(2px);
+}
+
+.dropdown-option {
+    cursor: pointer;
+}
+
+.dropdown-option:hover {
+    text-decoration: underline;
+}
+
+.dropdown-face {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 2rem;
+    text-transform: capitalize;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    padding: 0.75rem 1.25rem;
+}
+
+.dropdown-face-icon {
+    font-size: 0.75em;
+    transition: transform 0.3s ease;
+    /*making sure it looks more center*/
+    margin-top: -0.05rem;
+}
+
+.dropdown-face-icon-rotated {
+    transform: rotate(180deg);
+}
+
+@keyframes open-dropdown {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

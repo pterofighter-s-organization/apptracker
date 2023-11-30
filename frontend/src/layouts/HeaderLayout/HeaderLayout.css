@@ -71,5 +71,7 @@
 .header-layout-components {
     display: flex;
     flex-wrap: wrap;
+    /*have to be fit-content or it will stretch*/
+    height: fit-content;
     gap: 0.5rem;
 }

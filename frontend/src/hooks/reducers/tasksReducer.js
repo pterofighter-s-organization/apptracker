@@ -35,7 +35,7 @@ export const tasksReducer = (tasks, action) => {
         case TASK_CREATE_SUCCESS:
             return ({
                 ...tasks,
-                data: [...tasks.data, action.payload],
+                data: [action.payload, ...tasks.data],
                 loading: false,
                 errors: null
             })
