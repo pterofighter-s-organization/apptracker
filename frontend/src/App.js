@@ -19,6 +19,7 @@ import './App.css'
 import { JobProvider } from './hooks/contexts/JobContext';
 import { JobsProvider } from './hooks/contexts/JobsContext';
 import { TasksProvider } from './hooks/contexts/TasksContext';
+import { NotesProvider } from './hooks/contexts/NotesContext';
 
 export default function App() {
 
@@ -30,10 +31,12 @@ export default function App() {
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
         </Routes>
-        <Routes>
-          <Route path="/all-notes" element={<NoteBoard />} />
-          <Route path="/all-notes/:status" element={<NoteBoard />} />
-        </Routes>
+        <NotesProvider>
+          <Routes>
+            <Route path="/all-notes" element={<NoteBoard />} />
+            <Route path="/all-notes/:status" element={<NoteBoard />} />
+          </Routes>
+        </NotesProvider>
         <TasksProvider>
           <Routes>
             <Route path="/all-tasks" element={<TaskBoard />} />

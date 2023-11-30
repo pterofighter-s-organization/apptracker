@@ -34,6 +34,7 @@ def validate_datetime_before_now(value):
 class Notes(models.Model):
     note_id = models.AutoField(primary_key=True)
     application_id = models.IntegerField()
+    position = models.CharField(max_length=255)
     note = models.CharField(max_length=2048, blank=True, null=True)
     archived = models.BooleanField(default=False)
     date_edited = models.DateTimeField(blank=True)

@@ -4,8 +4,9 @@ import "./CreateButton.css"
 
 export default function CreateButton({ handleCreate, label }) {
 
-    return(
+    return (
         <button
+            id={label}
             type="button"
             className="create-button"
             onClick={handleCreate}

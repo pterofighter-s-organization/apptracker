@@ -22,7 +22,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notes
-        fields = ('note_id', 'application_id', 'note', 'date_edited', 'date_created', 'archived')
+        fields = ('note_id', 'application_id', 'position', 'note', 'date_edited', 'date_created', 'archived')
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta: 

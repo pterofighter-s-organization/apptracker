@@ -19,6 +19,7 @@ import { handleAPIErrors } from "../../helpers/formHelpers"
 
 //css
 import "./JobPage.css"
+import { NotesProvider } from "../../hooks/contexts/NotesContext"
 
 export default function JobPage() {
 
@@ -53,7 +54,9 @@ export default function JobPage() {
             <TasksProvider>
                 <JobPageTasks />
             </TasksProvider>
-            <JobPageNotes id={id} />
+            <NotesProvider>
+                <JobPageNotes />
+            </NotesProvider>
         </PageLayout>
     )
 }

@@ -6,6 +6,9 @@ import { findTodayUTCDate } from "../../utils/dateTimeUtils";
 //services
 import APIs from "../../services/api";
 
+//helpers
+import { sortDataByLatest } from "../../helpers/helpers";
+
 //actions
 import {
     NOTES_CALL_START, NOTES_CALL_FAILURE, NOTES_CALL_SUCCESS,
@@ -39,7 +42,7 @@ export const NotesProvider = ({ children }) => {
 
         try {
             const response = await APIs.noteAPI.getNotes()
-            dispatch({ type: NOTES_CALL_START, payload: response.data })
+            dispatch({ type: NOTES_CALL_SUCCESS, payload: sortDataByLatest(response.data) })
             return ({
                 success: true,
                 data: response.data
@@ -59,7 +62,7 @@ export const NotesProvider = ({ children }) => {
 
         try {
             const response = await APIs.noteAPI.getApplicationNotes(application_id)
-            dispatch({ type: NOTES_CALL_START, payload: response.data })
+            dispatch({ type: NOTES_CALL_SUCCESS, payload: sortDataByLatest(response.data) })
             return ({
                 success: true,
                 data: response.data

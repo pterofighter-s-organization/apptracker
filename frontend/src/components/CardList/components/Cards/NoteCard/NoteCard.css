@@ -16,28 +16,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.note-card-title {
-    text-wrap: nowrap;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1.25em;
-    flex-grow: 1;
-    /**/
-    color: var(--redirect-button-color);
-    text-decoration: none;
-    transition: color 150ms ease-in-out;
-}
-
-.note-card-title:hover {
-    color: blue;
-    text-decoration: underline;
-}
-
-.note-card-title::first-letter {
-    text-transform: uppercase;
-}
-
 .note-card-textarea {
     border: none;
     height: 100%;
@@ -45,6 +23,7 @@
     padding: 1em;
     resize: none;
     overflow: hidden;
+    overflow-y: auto;
     font-size: 0.9em;
 }
 
@@ -59,6 +38,7 @@
     font-family: "Work Sans", sans-serif;
     font-size: inherit;
     z-index: 1;
+    white-space: pre-wrap;
 }
 
 .note-card-starter {

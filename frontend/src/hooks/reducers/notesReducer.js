@@ -29,7 +29,7 @@ export const notesReducer = (notes, action) => {
             return ({
                 ...notes,
                 loading: false,
-                errors: null
+                errors: action.payload
             })
         case NOTE_UPDATE_SUCCESS:
             return ({
@@ -47,7 +47,7 @@ export const notesReducer = (notes, action) => {
             return ({
                 ...notes,
                 loading: false,
-                data: [...notes, action.payload],
+                data: [action.payload, ...notes.data],
                 errors: null
             })
         case NOTE_SUBMIT_FAILURE:

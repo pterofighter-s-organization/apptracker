@@ -3,15 +3,19 @@
 import { ActiveNoteCard } from "./ActiveNoteCard"
 import { ArchivedNoteCard } from "./ArchivedNoteCard"
 
-export default function NoteCard({ id, isArchived }) {
+export default function NoteCard({ card }) {
 
     return (
         <>
             {
-                isArchived ?
-                    <ArchivedNoteCard id={id} />
+                card.archived ?
+                    <ArchivedNoteCard
+                        card={card}
+                    />
                     :
-                    <ActiveNoteCard id={id} />
+                    <ActiveNoteCard
+                        card={card}
+                    />
             }
         </>
     )

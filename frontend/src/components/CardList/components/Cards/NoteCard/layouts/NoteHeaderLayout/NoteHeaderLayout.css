@@ -5,3 +5,33 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+.note-card-title {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    font-size: 1.25em;
+    flex-grow: 1;
+    /**/
+    color: var(--redirect-button-color);
+    text-decoration: none;
+    transition: color 150ms ease-in-out;
+}
+
+.note-card-title:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.note-card-job-title{
+    width: 85%;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+
+/* .note-card-job-title::first-letter {
+    text-transform: uppercase;
+} */

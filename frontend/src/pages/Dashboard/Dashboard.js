@@ -14,6 +14,7 @@ import { DashboardNotes } from "./sections/DashboardNotes"
 //context-providers
 import { JobsProvider } from "../../hooks/contexts/JobsContext"
 import { TasksProvider } from "../../hooks/contexts/TasksContext"
+import { NotesProvider } from "../../hooks/contexts/NotesContext"
 
 //css
 import "./Dashboard.css"
@@ -49,11 +50,13 @@ function Dashboard({ status, handleStatus }) {
                     isShow={isShow}
                 />
             </TasksProvider>
-            <DashboardNotes
-                status={status}
-                isPreview={isPreview}
-                isShow={isShow}
-            />
+            <NotesProvider>
+                <DashboardNotes
+                    status={status}
+                    isPreview={isPreview}
+                    isShow={isShow}
+                />
+            </NotesProvider>
         </PageLayout>
     )
 }

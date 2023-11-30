@@ -1,28 +1,57 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 
 //components
 import { ActiveOptionButtons } from "../../../../../Buttons/OptionButtons/ActiveOptionButtons"
+import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
 
 //private-layout
 import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
 
+//context
+import { NotesContext } from "../../../../../../hooks/contexts/NotesContext"
+
 //css
 import "../NoteCard.css"
 
-export default function ActiveNoteCard({ id }) {
+export default function ActiveNoteCard({ card }) {
 
+    const { updateJobNote } = useContext(NotesContext)
     const [value, setValue] = useState(``)
     const [isEdit, setIsEdit] = useState(false)
-    const noteCardId = `note-card-${id}`
+    const noteCardId = `note-card-${card.note_id}`
+
+    useEffect(() => {
+        setValue(card.note)
+    }, [card.note])
 
     const handleArchive = (e) => {
         e.preventDefault()
+        updateJobNote(card.note_id, {
+            ...card,
+            archived: true
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "Note got archived!"
+            })
+        })
     }
 
     const handleSave = (e) => {
         e.preventDefault()
         setIsEdit(false)
-        //add a method to save it to backend
+
+        updateJobNote(card.note_id, {
+            ...card,
+            note: value
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message:  "Note text saved!"
+            })
+        })
     }
 
     const handleEdit = (e) => {
@@ -41,7 +70,11 @@ export default function ActiveNoteCard({ id }) {
             key={noteCardId}
             id={noteCardId}
         >
-            <NoteHeaderLayout id={id}>
+            <NoteHeaderLayout 
+                id={card.note_id}
+                jobId={card.application_id}
+                job={card.position}
+            >
                 {
                     isEdit ?
                         <button
@@ -73,7 +106,7 @@ export default function ActiveNoteCard({ id }) {
             {
                 isEdit ?
                     <textarea
-                        id={"textarea-" + id}
+                        id={"textarea-" + card.note_id}
                         className="note-card-textarea"
                         value={value}
                         placeholder="Remember to save above after edit."

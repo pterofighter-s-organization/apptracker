@@ -1,3 +1,4 @@
+import { useContext, useEffect, useMemo } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -6,18 +7,46 @@ import { CardList } from "../../components/CardList";
 import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 
+//helpers
+import { filterDataByStatus } from "../../helpers/helpers";
+import { handleAPIErrors } from "../../helpers/formHelpers";
+
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
+
+//contexts
+import { NotesContext } from "../../hooks/contexts/NotesContext";
 
 //css
 import "./NoteBoard.css"
 
 function NoteBoard({ status, handleStatus }) {
 
-    const cards = Array.from({ length: 15 }).fill({
-        value: "",
-        status: status
-    })
+    const {notes, getNotes} = useContext(NotesContext)
+
+    useEffect(() => {
+        getNotes()
+    }, [getNotes])
+
+    const filteredData = useMemo(() => {
+        return filterDataByStatus(status, notes.data)
+    }, [notes.data, status])
+
+    if(notes.loading){
+        return <>Loading...</>
+    }
+
+    if(notes.errors){
+        return(
+            <div>
+                Notes {
+                    handleAPIErrors({
+                        errors: notes.errors
+                    })
+                }...
+            </div>
+        )
+    }
 
     return (
         <PageLayout>
@@ -33,7 +62,7 @@ function NoteBoard({ status, handleStatus }) {
             />
             <CardList
                 type={"notes"}
-                cards={cards}
+                cards={filteredData}
                 isPreview={false}
                 isShow={true}
             />

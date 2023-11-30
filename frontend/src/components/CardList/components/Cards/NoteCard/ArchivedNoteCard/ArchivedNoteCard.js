@@ -1,26 +1,49 @@
-import { Link } from "react-router-dom"
+import { useContext } from "react"
 
 //components
 import { ArchivedOptionButtons } from "../../../../../Buttons/OptionButtons/ArchivedOptionButtons"
+import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
 
 //private-layouts
 import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
 
+//contexts
+import { NotesContext } from "../../../../../../hooks/contexts/NotesContext"
+
 //css
 import "../NoteCard.css"
 
-export default function ArchivedNoteCard({ id }) {
+export default function ArchivedNoteCard({ card }) {
 
-    const value = "t"
-    const noteCardId = `note-card-${id}`
+    const { updateJobNote, deleteJobNote } = useContext(NotesContext)
+    const noteCardId = `note-card-${card.note_id}`
 
     const handleRestore = (e) => {
         e.preventDefault()
-        //now restore this.
+
+        updateJobNote(card.note_id, {
+            ...card,
+            archived: false
+        }).then((result) => {
+            showSubmitNotification({
+                status: result.success,
+                errors: result.errors,
+                message: "Note got restored!"
+            })
+        })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
+
+        deleteJobNote(card.note_id)
+            .then((result) => {
+                showSubmitNotification({
+                    status: result.success,
+                    errors: result.errors,
+                    message: "Note deleted successfully!"
+                })
+            })
     }
 
     return (
@@ -29,16 +52,11 @@ export default function ArchivedNoteCard({ id }) {
             key={noteCardId}
             id={noteCardId}
         >
-            <NoteHeaderLayout id={id}>
-                <Link
-                    to={`/job/${id}`}
-                    className="note-card-title"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title={`Redirects to /job/${id}`}
-                >
-                    UX/UI Designer/ Google
-                </Link>
+            <NoteHeaderLayout
+                id={card.note_id}
+                jobId={card.application_id}
+                job={card.position}
+            >
                 <ArchivedOptionButtons
                     handleDelete={handleDelete}
                     handleRestore={handleRestore}
@@ -46,10 +64,10 @@ export default function ArchivedNoteCard({ id }) {
             </NoteHeaderLayout>
             <div className="note-card-content">
                 {
-                    value.length > 0 ?
+                    card.note.length > 0 ?
                         <>
                             <pre className="note-card-content-text">
-                                {value}
+                                {card.note}
                             </pre>
                             <div className="note-card-starter note-card-content-hover">
                                 Please restore and edit in job page/dashboard.
@@ -57,7 +75,7 @@ export default function ArchivedNoteCard({ id }) {
                         </>
                         :
                         <div>
-                            No text, Please restore and edit in job page/dashboard.
+                            No text, please restore to edit.
                         </div>
                 }
             </div>
