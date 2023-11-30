@@ -35,7 +35,7 @@ function StageDropdown({
                     {stage}
                 </div>
                 <i
-                    className={`dropdown-face-icon ${toggle ? "dropdown-face-icon-rotated" : ""} bi bi-caret-up-fill`}
+                    className={`dropdown-face-icon ${toggle ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
                 ></i>
             </button>
             <div className="dropdown-options stage-dropdown-options">

@@ -49,10 +49,10 @@
 }
 
 .dropdown-face-icon {
-    font-size: 0.75em;
+    font-size: 0.8em;
     transition: transform 0.3s ease;
     /*making sure it looks more center*/
-    margin-top: -0.05rem;
+    margin-top: 0rem;
 }
 
 .dropdown-face-icon-rotated {

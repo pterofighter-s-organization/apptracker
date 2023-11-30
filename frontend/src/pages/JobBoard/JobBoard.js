@@ -71,7 +71,7 @@ function JobBoard({ status, handleStatus }) {
                 title={"my job applications"}
                 text={
                     <>
-                        Every job from <i>interviewing to interested.</i>
+                        Every job that's tracked from <i>interviewing to interested.</i>
                     </>
                 }
                 status={status}

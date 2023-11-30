@@ -16,6 +16,7 @@
 .notification-msg {
     font-size: 0.9rem;
     align-self: center;
+    text-transform: capitalize;
 }
 
 .notification-msg::first-letter {
