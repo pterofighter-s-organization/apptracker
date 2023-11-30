@@ -2,7 +2,7 @@
 
 
 export const APP_STAGE_COLORS = {
-    "applied": "#FFA500",
+    "applied": "#FFC857",
     "rejected": "#FF0000",
     "interviewing": "#4A47F2",
     "interested": "#808080",
