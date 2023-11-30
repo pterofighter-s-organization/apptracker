@@ -87,26 +87,28 @@ export default function TaskCard({ card }) {
             id={taskCardId}
             className="task-card-container"
         >
-            <div style={{ border: `2.5px solid ${TASK_STAGE_COLORS[taskTimerObj.label]}` }} />
             <div className="task-card-header">
-                <h5 className="task-card-job">
-                    {card.company} / {card.position}
-                </h5>
-                {
-                    card.archived ?
-                        <>
-                            <RestoreOptionButton
-                                handleRestore={handleRestore}
+                <div style={{ border: `2.5px solid ${TASK_STAGE_COLORS[taskTimerObj.label]}` }} />
+                <div className="task-card-header-details">
+                    <h5 className="task-card-job">
+                        {card.company} / {card.position}
+                    </h5>
+                    {
+                        card.archived ?
+                            <>
+                                <RestoreOptionButton
+                                    handleRestore={handleRestore}
+                                />
+                                <DeleteOptionButton
+                                    handleDelete={handleDelete}
+                                />
+                            </>
+                            :
+                            <ArchiveOptionButton
+                                handleArchive={handleArchive}
                             />
-                            <DeleteOptionButton
-                                handleDelete={handleDelete}
-                            />
-                        </>
-                        :
-                        <ArchiveOptionButton
-                            handleArchive={handleArchive}
-                        />
-                }
+                    }
+                </div>
             </div>
             <div className="task-card-title">
                 {card.title}
