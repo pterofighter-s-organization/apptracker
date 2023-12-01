@@ -26,37 +26,37 @@
 }
 
 .job-page-divider-content {
-    padding: 1.5em;
-    border-radius: 1em;
+    padding: 1.75rem 1.5rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.job-page-infos {
+    text-transform: capitalize;
 }
 
 .job-page-dates {
     justify-content: space-around;
 }
 
-.job-page-links{
+.job-page-links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.job-page-description{
+.job-page-description {
     background-color: white;
     padding: 1em;
     /* max-height: 20rem; */
     border-radius: 1em;
 }
 
-.job-page-description-container{
+.job-page-description-container {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    padding: 1.5em;
-}
-
-.job-page-infos{
-    text-transform: capitalize;
+    padding: 1.5rem;
 }

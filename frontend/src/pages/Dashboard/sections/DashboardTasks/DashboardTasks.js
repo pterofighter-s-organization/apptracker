@@ -8,7 +8,7 @@ import { TasksContext } from "../../../../hooks/contexts/TasksContext"
 
 import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
 import { sortTasksByDateDue } from "../../../../helpers/taskHelpers"
-import { ErrorDisplay } from "../../../../components/ErrorDisplay"
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
 
 //css
 

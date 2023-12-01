@@ -27,7 +27,7 @@ export default function JobPageDetails() {
                     <h1>
                         {job.data.position}
                     </h1>
-                    <h5 style={{ color: "#009E60", textTransform: "initial" }}>
+                    <h5 style={{ color: "#009E60", textTransform: "initial", marginBottom: 0 }}>
                         ${job.data.salary} /{job.data.salary_rate}
                     </h5>
                 </div>
@@ -38,7 +38,7 @@ export default function JobPageDetails() {
                     <h6>
                         <b>Created:</b> {dateTimeFormatter(job.data.date_created)}
                     </h6>
-                    <h6>
+                    <h6 style={{ marginBottom: 0 }}>
                         <b>Applied: </b>
                         {
                             job.data.status !== "interested" ?

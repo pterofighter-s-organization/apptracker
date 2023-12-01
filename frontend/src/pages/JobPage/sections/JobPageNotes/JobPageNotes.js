@@ -6,7 +6,7 @@ import { CreateButton } from "../../../../components/Buttons/CreateButton"
 import { SectionHeader } from "../../../../components/SectionHeader"
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
-import { ErrorDisplay } from "../../../../components/ErrorDisplay"
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers"

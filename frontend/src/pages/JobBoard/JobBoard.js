@@ -23,7 +23,7 @@ import { JobsContext } from "../../hooks/contexts/JobsContext";
 
 //css
 import "./JobBoard.css"
-import { ErrorDisplay } from "../../components/ErrorDisplay";
+import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 
 function JobBoard({ status, handleStatus }) {
 

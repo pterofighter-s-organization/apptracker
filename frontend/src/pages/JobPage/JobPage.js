@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 //components
-import { ErrorDisplay } from "../../components/ErrorDisplay"
+import { ErrorDisplay } from "../../components/Displays/ErrorDisplay"
 
 //sections
 import { JobPageHeader } from "./sections/JobPageHeader"

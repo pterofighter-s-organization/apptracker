@@ -13,7 +13,7 @@ import { filterDataByStatus } from "../../../../helpers/helpers"
 
 //css
 import "./DashboardJobs.css"
-import { ErrorDisplay } from "../../../../components/ErrorDisplay"
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
 
 export default function DashboardJobs({ status, isPreview, isShow }) {
 

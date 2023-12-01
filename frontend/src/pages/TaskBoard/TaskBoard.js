@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
-import { ErrorDisplay } from "../../components/ErrorDisplay";
+import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";

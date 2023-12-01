@@ -22,7 +22,7 @@ import { createObjCopy } from "../../../utils/memoryUtils";
 
 //css
 import "./JobEditForm.css"
-import { ErrorDisplay } from "../../../components/ErrorDisplay";
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 
 export default function JobEditForm() {
 
