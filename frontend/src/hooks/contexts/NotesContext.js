@@ -78,6 +78,7 @@ export const NotesProvider = ({ children }) => {
     }, [dispatch])
 
     const updateJobNote = async (note_id, note) => {
+        
         try {
             const response = await APIs.noteAPI.updateNote(note_id, {
                 ...note,
@@ -99,6 +100,7 @@ export const NotesProvider = ({ children }) => {
     }
 
     const createJobNote = async (application_id, note) => {
+
         try {
             const response = await APIs.noteAPI.createNote({
                 ...note,
@@ -123,6 +125,7 @@ export const NotesProvider = ({ children }) => {
     }
 
     const deleteJobNote = async (note_id) => {
+
         try {
             const response = await APIs.noteAPI.deleteNote(note_id)
             dispatch({ type: NOTE_DELETE_SUCCESS, payload: note_id })

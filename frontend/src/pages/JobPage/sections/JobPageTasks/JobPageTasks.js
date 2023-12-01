@@ -32,6 +32,7 @@ import { createObjCopy } from "../../../../utils/memoryUtils"
 //css
 import "./JobPageTasks.css"
 import "../../JobPage.css"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 
 function JobPageTasks({ status, handleStatus }) {
@@ -57,7 +58,7 @@ function JobPageTasks({ status, handleStatus }) {
                     status: result.success,
                     errors: result.errors,
                     message: "task created successfully!",
-                    errorMessage: "please fix the errors before submitting the task!"      
+                    errorMessage: "please fix the errors before submitting the task!"
                 })
                 if (!result.success) {
                     setFormData(updateTaskFormErrors(formData, result.errors.response.data))
@@ -85,13 +86,13 @@ function JobPageTasks({ status, handleStatus }) {
         return <>Loading...</>
     }
 
-    if(tasks.errors){
-        console.log(tasks.errors)
-        return(
-            <>
-                Job tasks
-                {handleAPIErrors(tasks.errors)}...
-            </>
+    if (tasks.errors) {
+        return (
+            <ErrorDisplay
+                label={"job tasks"}
+                errors={tasks.errors}
+                isSection={true}
+            />
         )
     }
 

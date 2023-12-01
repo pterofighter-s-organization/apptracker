@@ -19,10 +19,11 @@ import { NotesContext } from "../../hooks/contexts/NotesContext";
 
 //css
 import "./NoteBoard.css"
+import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 function NoteBoard({ status, handleStatus }) {
 
-    const {notes, getNotes} = useContext(NotesContext)
+    const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
         getNotes()
@@ -32,19 +33,16 @@ function NoteBoard({ status, handleStatus }) {
         return filterDataByStatus(status, notes.data)
     }, [notes.data, status])
 
-    if(notes.loading){
+    if (notes.loading) {
         return <>Loading...</>
     }
 
-    if(notes.errors){
-        return(
-            <div>
-                Notes {
-                    handleAPIErrors({
-                        errors: notes.errors
-                    })
-                }...
-            </div>
+    if (notes.errors) {
+        return (
+            <ErrorDisplay
+                label={"Notes"}
+                errors={notes.errors}
+            />
         )
     }
 

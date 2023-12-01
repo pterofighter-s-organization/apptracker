@@ -22,6 +22,7 @@ import { handleAPIErrors } from "../../helpers/formHelpers"
 
 //css
 import "./JobPage.css"
+import { ErrorDisplay } from "../../components/ErrorDisplay"
 
 export default function JobPage() {
 
@@ -33,21 +34,16 @@ export default function JobPage() {
         getApplication(id)
     }, [getApplication, id])
 
-    console.log(id)
-
     if (job.loading) {
         return <>Loading...</>
     }
 
     if (job.errors) {
         return (
-            <>
-                Job page {
-                    handleAPIErrors({
-                        errors: job.errors
-                    })
-                }...
-            </>
+            <ErrorDisplay
+                label={"Job page"}
+                errors={job.errors}
+            />
         )
     }
 

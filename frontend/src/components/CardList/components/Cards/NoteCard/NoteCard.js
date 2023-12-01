@@ -1,5 +1,5 @@
 
-//components
+//private-components
 import { ActiveNoteCard } from "./ActiveNoteCard"
 import { ArchivedNoteCard } from "./ArchivedNoteCard"
 

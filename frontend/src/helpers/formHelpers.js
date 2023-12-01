@@ -9,16 +9,14 @@ export const handleAPIErrors = ({ errors, message }) => {
         return errors.message
     }
 
-    if (errors.code === "ERR_BAD_REQUEST") {
-        if (message) {
-            return message
-        }
-        Object.entries(errors.response.data).forEach(([key, value]) => {
-            result.push(`${key}: ${value}`);
-        });
-        return result.join('\n');
+    if (errors.code === "ERR_BAD_REQUEST" && message) {
+        return message
+        // Object.entries(errors.response.data).forEach(([key, value]) => {
+        //     result.push(`${key}: ${value}`);
+        // });
+        // return result.join('\n');
     } else {
-        return errors.message
+        return `${errors.response.status} ${errors.response.statusText}`
     }
 }
 

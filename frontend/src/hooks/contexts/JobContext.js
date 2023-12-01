@@ -32,7 +32,7 @@ export const JobProvider = ({ children }) => {
 
     const getApplication = useCallback(async (application_id) => {
         dispatch({ type: JOB_CALL_START }) //making sure it can erase the old data before the new one.
-        
+
         try {
             const response = await APIs.applicationAPI.getApplication(application_id)
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
@@ -103,14 +103,14 @@ export const JobProvider = ({ children }) => {
         try {
             const response = await APIs.applicationAPI.deleteApplication(application_id)
             dispatch({ type: JOB_DELETE_SUCCESS })
-            return({
+            return ({
                 success: true,
                 data: response.data
             })
         } catch (errors) {
             console.log(errors)
             dispatch({ type: JOB_SUBMIT_FAILURE })
-            return({
+            return ({
                 success: false,
                 errors: errors
             })

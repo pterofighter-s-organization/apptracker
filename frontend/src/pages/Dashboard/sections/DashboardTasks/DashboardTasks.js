@@ -5,9 +5,10 @@ import { CardList } from "../../../../components/CardList"
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton"
 import { useContext, useEffect, useMemo } from "react"
 import { TasksContext } from "../../../../hooks/contexts/TasksContext"
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
+
 import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
 import { sortTasksByDateDue } from "../../../../helpers/taskHelpers"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 //css
 
@@ -29,13 +30,11 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
 
     if (tasks.errors) {
         return (
-            <div>
-                Tasks {
-                    handleAPIErrors({
-                        errors: tasks.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"Tasks"}
+                errors={tasks.errors}
+                isSection={true}
+            />
         )
     }
 

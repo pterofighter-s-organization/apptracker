@@ -24,6 +24,7 @@ import { NotesContext } from "../../../../hooks/contexts/NotesContext"
 //css
 import "./JobPageNotes.css"
 import "../../JobPage.css"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 
 function JobPageNotes({ status, handleStatus }) {
@@ -60,13 +61,11 @@ function JobPageNotes({ status, handleStatus }) {
 
     if (notes.errors) {
         return (
-            <div>
-                Job Notes {
-                    handleAPIErrors({
-                        errors: notes.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"job notes"}
+                errors={notes.errors}
+                isSection={true}
+            />
         )
     }
 

@@ -72,6 +72,7 @@ export const TasksProvider = ({ children }) => {
     }, [dispatch])
 
     const createJobTask = async (application_id, task) => {
+
         try {
             const response = await APIs.taskAPI.createTask({
                 ...task,
@@ -96,6 +97,7 @@ export const TasksProvider = ({ children }) => {
     }
 
     const updateJobTask = async (task_id, task) => {
+
         try {
             const response = await APIs.taskAPI.updateTask(task_id, {
                 ...task,
@@ -117,6 +119,7 @@ export const TasksProvider = ({ children }) => {
     }
 
     const deleteJobTask = async (task_id) => {
+        
         try {
             const response = await APIs.taskAPI.deleteTask(task_id)
             dispatch({ type: TASK_DELETE_SUCCESS, payload: task_id })

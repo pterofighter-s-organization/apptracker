@@ -6,11 +6,11 @@ import { CardList } from "../../../../components/CardList"
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton"
 
 //helpers
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
 import { filterDataByStatus } from "../../../../helpers/helpers"
 
 //contexts
 import { NotesContext } from "../../../../hooks/contexts/NotesContext"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 //css
 
@@ -32,13 +32,11 @@ export default function DashboardNotes({ status, isPreview, isShow }) {
 
     if (notes.errors) {
         return (
-            <div>
-                Notes {
-                    handleAPIErrors({
-                        errors: notes.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"Notes"}
+                errors={notes.errors}
+                isSection={true}
+            />
         )
     }
 

@@ -10,10 +10,10 @@ import { JobsContext } from "../../../../hooks/contexts/JobsContext"
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers"
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
 
 //css
 import "./DashboardJobs.css"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 export default function DashboardJobs({ status, isPreview, isShow }) {
 
@@ -33,13 +33,11 @@ export default function DashboardJobs({ status, isPreview, isShow }) {
 
     if (jobs.errors) {
         return (
-            <div>
-                Jobs {
-                    handleAPIErrors({
-                        errors: jobs.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"Jobs"}
+                errors={jobs.errors}
+                isSection={true}
+            />
         )
     }
 

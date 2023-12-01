@@ -22,6 +22,7 @@ import { createObjCopy } from "../../../utils/memoryUtils";
 
 //css
 import "./JobEditForm.css"
+import { ErrorDisplay } from "../../../components/ErrorDisplay";
 
 export default function JobEditForm() {
 
@@ -102,13 +103,10 @@ export default function JobEditForm() {
 
     if (job.errors) {
         return (
-            <div>
-                Job edit form {
-                    handleAPIErrors({
-                        errors: job.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"Job Edit Form"}
+                errors={job.errors}
+            />
         )
     }
 

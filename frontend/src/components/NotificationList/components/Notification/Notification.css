@@ -10,7 +10,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
     width: fit-content;
-    z-index: 1;
+    /*ensure it to be on top of everything.*/
+    z-index: 9999;
 }
 
 .notification-msg {

@@ -17,13 +17,13 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 //helpers
 import { filterJobsByStage } from "../../helpers/applicationHelpers";
 import { filterDataByStatus } from "../../helpers/helpers";
-import { handleAPIErrors } from "../../helpers/formHelpers";
 
 //context-providers
 import { JobsContext } from "../../hooks/contexts/JobsContext";
 
 //css
 import "./JobBoard.css"
+import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 function JobBoard({ status, handleStatus }) {
 
@@ -55,13 +55,10 @@ function JobBoard({ status, handleStatus }) {
 
     if (jobs.errors) {
         return (
-            <>
-                Job page {
-                    handleAPIErrors({
-                        errors: jobs.errors
-                    })
-                }...
-            </>
+            <ErrorDisplay
+                label={"all jobs"}
+                errors={jobs.errors}
+            />
         )
     }
 

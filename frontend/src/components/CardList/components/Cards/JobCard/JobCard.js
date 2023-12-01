@@ -139,7 +139,7 @@ export default function JobCard({ card }) {
                     {card.position}
                 </h3>
                 <h5 style={{ textTransform: "initial", color: "#009E60" }}>
-                    ${card.salary} /hr
+                    ${card.salary} /{card.salary_rate}
                 </h5>
             </div>
             <div className="job-card-date">

@@ -20,6 +20,7 @@ import { TasksContext } from "../../hooks/contexts/TasksContext";
 
 //css
 import "./TaskBoard.css"
+import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 function TaskBoard({ status, handleStatus }) {
 
@@ -39,13 +40,10 @@ function TaskBoard({ status, handleStatus }) {
 
     if (tasks.errors) {
         return (
-            <div>
-                Tasks {
-                    handleAPIErrors({
-                        errors: tasks.errors
-                    })
-                }...
-            </div>
+            <ErrorDisplay
+                label={"tasks"}
+                errors={tasks.errors}
+            />
         )
     }
 

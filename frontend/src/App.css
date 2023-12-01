@@ -24,6 +24,7 @@ pre {
 
 .App {
     min-height: 100vh;
+    height: auto;
     width: 100%;
     font-family: "Work Sans", sans-serif;
     background-color: #E5E4E2;
