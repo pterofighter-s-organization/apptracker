@@ -38,7 +38,13 @@ function JobBoard({ status, handleStatus }) {
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
-        getApplications()
+        getApplications().then((result) => {
+            if(result.success){
+                document.title = `Job Board - Job Tracker App`
+            }
+        })
+
+        return () => document.title = "Job Tracker App"
     }, [getApplications])
 
     const filteredData = useMemo(() => {

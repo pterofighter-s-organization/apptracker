@@ -30,7 +30,13 @@ export default function JobPage() {
     // console.log("job-page-app-id:", id)
 
     useEffect(() => {
-        getApplication(id)
+        getApplication(id).then((result) => {
+            if (result.success) {
+                document.title = `${result.data.position}, ${result.data.company} - Job Tracker App`
+            }
+        })
+
+        return () => document.title = "Job Tracker App"
     }, [getApplication, id])
 
     if (job.loading) {

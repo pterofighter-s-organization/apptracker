@@ -44,8 +44,11 @@ export default function JobEditForm() {
             .then((result) => {
                 if (result.success) {
                     setFormData(updateJobFormData(initialState, result.data))
+                    document.title = `Editing ${result.data.position}, ${result.data.company} - Job Tracker App`
                 }
             })
+
+        return () => document.title = 'Job Tracker App'
     }, [getApplication, initialState, id]);
 
     const handleChange = (e) => {

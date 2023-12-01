@@ -1,4 +1,5 @@
 import { convertLocaltoUTC, convertUTCtoLocal, findTodayUTCDate } from "../utils/dateTimeUtils"
+import { strFormatter } from "../utils/formatUtils"
 
 
 export const updateJobFormErrors = (formData, errors) => {
@@ -22,15 +23,15 @@ export const updateJobFormErrors = (formData, errors) => {
 
 export const createJobData = (formState) => {
 
-    //convert form data back to backend accepted data.
+    //convert form data back to backend data
     return {
         application_link: formState.relatedSite.value || '',
-        company: formState.company.value || '',
+        company: strFormatter(formState.company.value) || '',
         cover_letter_link: formState.coverLetterLink.value || '',
         date_applied: formState.appliedDate.value?.length > 0 ? convertLocaltoUTC(formState.appliedDate.value) : null,
         date_created: formState.createdDate.value || null,
         description: formState.description.value || '',
-        position: formState.job.value || '',
+        position: strFormatter(formState.job.value) || '',
         resume_link: formState.resumeLink.value || '',
         salary: formState.paid.value || '',
         salary_rate: formState.rate.value || '',

@@ -26,7 +26,13 @@ function TaskBoard({ status, handleStatus }) {
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
-        getTasks()
+        getTasks().then((result) => {
+            if(result.success){
+                document.title = `Task Board - Job Tracker App`
+            }
+        })
+
+        return () => document.title = "Job Tracker App"
     }, [getTasks])
 
     const filteredData = useMemo(() => {

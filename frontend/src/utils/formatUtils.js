@@ -84,3 +84,8 @@ export const timerFormatter = (end, start) => {
             }
     }
 }
+
+export const strFormatter = (str) => {
+
+    return (str.charAt(0).toUpperCase() + str.slice(1))
+}

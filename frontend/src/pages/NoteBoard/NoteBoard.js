@@ -25,7 +25,13 @@ function NoteBoard({ status, handleStatus }) {
     const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
-        getNotes()
+        getNotes().then((result) => {
+            if(result.success){
+                document.title = `Note Board - Job Tracker App`
+            }
+        })
+
+        return () => document.title = "Job Tracker App"
     }, [getNotes])
 
     const filteredData = useMemo(() => {

@@ -13,7 +13,7 @@ export default function ErrorDisplay({ label, errors, isSection }) {
             <i className="error-display-icon bi bi-exclamation-square-fill"></i>
             <div className="error-display-header">
                 <h4 className="error-display-label">
-                    {label}:
+                    {label}
                 </h4>
                 <h4 className="error-display-errors">
                     {

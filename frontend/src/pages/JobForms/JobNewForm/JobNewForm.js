@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //constants
@@ -32,6 +32,12 @@ export default function JobNewForm() {
     const navigate = useNavigate()
     const [formData, setFormData] = useState(initialState)
     const { createApplication } = useContext(JobContext)
+
+    useEffect(() => {
+        document.title = `New Job Form - Job Tracker App`
+
+        return () => document.title = "Job Tracker App"
+    }, [])
 
     const handleChange = (e) => {
         e.preventDefault()

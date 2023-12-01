@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-self: center;
+    /* align-self: center; */
     gap: 1.25rem;
     padding: 1.5em;
     /* height: 100%; */
