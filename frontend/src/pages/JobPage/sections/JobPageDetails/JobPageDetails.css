@@ -64,6 +64,7 @@
     padding: 1rem;
     /* max-height: 20rem; */
     border-radius: 1rem;
+    /*key to making description not overflowing*/
     white-space: pre-wrap;
 }
 
