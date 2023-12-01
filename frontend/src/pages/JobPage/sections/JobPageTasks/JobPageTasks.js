@@ -7,6 +7,8 @@ import { TaskForm } from "../../components/TaskForm"
 import { CardList } from "../../../../components/CardList"
 import { SectionHeader } from "../../../../components/SectionHeader"
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
+import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl"
@@ -18,13 +20,9 @@ import { APP_STATUS_COLORS, taskFormData } from "../../../../constants/constants
 import { TasksContext } from "../../../../hooks/contexts/TasksContext"
 import { JobContext } from "../../../../hooks/contexts/JobContext"
 
-//components
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
-
 //helpers
 import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
 import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
 
 //utils
 import { createObjCopy } from "../../../../utils/memoryUtils"
@@ -32,8 +30,6 @@ import { createObjCopy } from "../../../../utils/memoryUtils"
 //css
 import "./JobPageTasks.css"
 import "../../JobPage.css"
-import { ErrorDisplay } from "../../../../components/ErrorDisplay"
-
 
 function JobPageTasks({ status, handleStatus }) {
 

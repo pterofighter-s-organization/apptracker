@@ -6,10 +6,10 @@ import { CreateButton } from "../../../../components/Buttons/CreateButton"
 import { SectionHeader } from "../../../../components/SectionHeader"
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { ErrorDisplay } from "../../../../components/ErrorDisplay"
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers"
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl"
@@ -24,8 +24,6 @@ import { NotesContext } from "../../../../hooks/contexts/NotesContext"
 //css
 import "./JobPageNotes.css"
 import "../../JobPage.css"
-import { ErrorDisplay } from "../../../../components/ErrorDisplay"
-
 
 function JobPageNotes({ status, handleStatus }) {
 

@@ -1,6 +1,9 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
+//components
+import { ErrorDisplay } from "../../components/ErrorDisplay"
+
 //sections
 import { JobPageHeader } from "./sections/JobPageHeader"
 import { JobPageDetails } from "./sections/JobPageDetails"
@@ -17,12 +20,8 @@ import { JobContext } from "../../hooks/contexts/JobContext"
 import { TasksProvider } from "../../hooks/contexts/TasksContext"
 import { NotesProvider } from "../../hooks/contexts/NotesContext"
 
-//helpers
-import { handleAPIErrors } from "../../helpers/formHelpers"
-
 //css
 import "./JobPage.css"
-import { ErrorDisplay } from "../../components/ErrorDisplay"
 
 export default function JobPage() {
 

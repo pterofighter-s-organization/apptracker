@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
+import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -9,7 +10,6 @@ import { PageLayout } from "../../layouts/PageLayout";
 
 //helpers
 import { filterDataByStatus } from "../../helpers/helpers";
-import { handleAPIErrors } from "../../helpers/formHelpers";
 
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
@@ -19,7 +19,6 @@ import { NotesContext } from "../../hooks/contexts/NotesContext";
 
 //css
 import "./NoteBoard.css"
-import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 function NoteBoard({ status, handleStatus }) {
 
@@ -40,7 +39,7 @@ function NoteBoard({ status, handleStatus }) {
     if (notes.errors) {
         return (
             <ErrorDisplay
-                label={"Notes"}
+                label={"all notes"}
                 errors={notes.errors}
             />
         )

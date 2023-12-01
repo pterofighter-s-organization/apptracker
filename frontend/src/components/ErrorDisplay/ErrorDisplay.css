@@ -30,13 +30,13 @@
     text-align: center;
 }
 
-.error-display-label{
+/* .error-display-label{
     font-size: 0.75em;
 }
 
 .error-display-errors{
     font-size: 0.75em;
-}
+} */
 
 .error-display-button{
     border-radius: 2rem;
@@ -51,7 +51,7 @@
 .error-display-reload-button{
     background-color: #595959;
     color: white;
-    font-size: 0.45em;
+    font-size: 0.5em;
 }
 
 .error-display-home-link{

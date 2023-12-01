@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
+import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -12,7 +13,6 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 
 //helpers
 import { filterDataByStatus, sortDataByLatest } from "../../helpers/helpers";
-import { handleAPIErrors } from "../../helpers/formHelpers";
 import { sortTasksByDateDue } from "../../helpers/taskHelpers";
 
 //context
@@ -20,7 +20,6 @@ import { TasksContext } from "../../hooks/contexts/TasksContext";
 
 //css
 import "./TaskBoard.css"
-import { ErrorDisplay } from "../../components/ErrorDisplay";
 
 function TaskBoard({ status, handleStatus }) {
 
@@ -41,7 +40,7 @@ function TaskBoard({ status, handleStatus }) {
     if (tasks.errors) {
         return (
             <ErrorDisplay
-                label={"tasks"}
+                label={"all tasks"}
                 errors={tasks.errors}
             />
         )

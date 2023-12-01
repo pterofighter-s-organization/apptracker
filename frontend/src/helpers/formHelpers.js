@@ -3,7 +3,7 @@
 import { debounce } from "../utils/debounce"
 
 export const handleAPIErrors = ({ errors, message }) => {
-    const result = [];
+    // const result = [];
 
     if (!errors.response?.data) {
         return errors.message

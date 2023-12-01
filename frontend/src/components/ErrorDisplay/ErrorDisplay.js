@@ -12,16 +12,16 @@ export default function ErrorDisplay({ label, errors, isSection }) {
         <div className="error-display">
             <i className="error-display-icon bi bi-exclamation-square-fill"></i>
             <div className="error-display-header">
-                <div className="error-display-label">
+                <h4 className="error-display-label">
                     {label}:
-                </div>
-                <div className="error-display-errors">
+                </h4>
+                <h4 className="error-display-errors">
                     {
                         handleAPIErrors({
                             errors: errors
                         })
                     }
-                </div>
+                </h4>
             </div>
             <button
                 type="button"
@@ -30,7 +30,8 @@ export default function ErrorDisplay({ label, errors, isSection }) {
             >
                 <div className="error-display-reload-icon">
                     <i className="bi bi-arrow-counterclockwise" />
-                </div> refresh this page!
+                </div> 
+                refresh page
             </button>
             {
                 isSection ?
