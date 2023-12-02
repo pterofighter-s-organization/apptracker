@@ -1,7 +1,7 @@
 import { useContext } from "react"
 
 //private-components
-import { HyperLinkButton } from "../../components/HyperLinkButton"
+import { HyperLink } from "../../components/HyperLink"
 
 //context-providers
 import { JobContext } from "../../../../hooks/contexts/JobContext"
@@ -53,17 +53,17 @@ export default function JobPageDetails() {
                 </div>
             </div>
             <div className="job-page-content-bg job-page-links">
-                <HyperLinkButton
+                <HyperLink
                     jobId={job.data.application_id}
                     link={job.data.application_link}
                     label={"related site"}
                 />
-                <HyperLinkButton
+                <HyperLink
                     jobId={job.data.application_id}
                     link={job.data.resume_link}
                     label={"resume doc"}
                 />
-                <HyperLinkButton
+                <HyperLink
                     jobId={job.data.application_id}
                     link={job.data.cover_letter_link}
                     label={"cover letter"}

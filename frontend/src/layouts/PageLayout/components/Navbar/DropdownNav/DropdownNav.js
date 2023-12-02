@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { withToggleControl } from "../../../../../hocs/withToggleControl"
 
 //routes
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
 
 //css
 import "./DropdownNav.css"
@@ -30,13 +30,13 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                 <div className="dropdownnav-bar-end">
                     <Link
                         to={NEW_APP_ROUTE.route}
-                        className="dropdownnav-bar-button"
+                        className="button dropdownnav-bar-button"
                     >
                         <i className={`${NEW_APP_ROUTE.icon}`} />
                     </Link>
                     <button
                         type="button"
-                        className="dropdownnav-bar-button"
+                        className="button dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
                         onClick={toggle ? handleUntoggle : handleToggle}
                     >
@@ -51,7 +51,7 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                         FEATURES_ROUTES.map((route) => (
                             <Link
                                 to={route.route}
-                                className="dropdownnav-content-button"
+                                className="button dropdownnav-content-button"
                                 key={route.route}
                             >
                                 <i className={`dropdownnav-content-button-icon ${route.icon}`} />
@@ -65,7 +65,7 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                 <hr style={{ margin: "0.25rem" }} />
                 <Link
                     to={LOGIN_ROUTE.route}
-                    className="dropdownnav-content-button"
+                    className="button dropdownnav-content-button"
                 >
                     <i className={`dropdownnav-content-button-icon ${LOGIN_ROUTE.icon}`} />
                     <div className="dropdownnav-content-button-text">

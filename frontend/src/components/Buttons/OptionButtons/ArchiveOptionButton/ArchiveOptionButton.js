@@ -10,7 +10,7 @@ export default function ArchiveOptionButton({ handleArchive }) {
     return (
         <button
             type="button"
-            className="option-button"
+            className="button option-button"
             onClick={handleArchive}
             data-bs-toggle="tooltip"
             data-bs-placement="top"

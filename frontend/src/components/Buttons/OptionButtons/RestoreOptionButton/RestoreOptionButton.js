@@ -10,7 +10,7 @@ export default function RestoreOptionButton({ handleRestore }) {
     return (
         <button
             type="button"
-            className="option-button restore-option-button"
+            className="button option-button restore-option-button"
             onClick={handleRestore}
             data-bs-toggle="tooltip"
             data-bs-placement="top"

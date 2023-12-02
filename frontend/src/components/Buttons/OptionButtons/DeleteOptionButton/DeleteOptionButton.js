@@ -7,7 +7,7 @@ export default function DeleteOptionButton({ handleDelete }) {
     return (
         <button
             type="button"
-            className="option-button"
+            className="button option-button"
             onClick={handleDelete}
             data-bs-toggle="tooltip"
             data-bs-placement="top"

@@ -24,7 +24,7 @@ function StageDropdown({
             <button
                 id={id}
                 type="button"
-                className="dropdown-face stage-dropdown-face"
+                className="button dropdown-face stage-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
                 style={{
                     backgroundColor: `${APP_STAGE_COLORS[stage]}`,

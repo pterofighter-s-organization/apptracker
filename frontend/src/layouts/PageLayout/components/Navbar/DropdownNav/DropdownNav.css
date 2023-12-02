@@ -33,11 +33,6 @@
     color: black;
 }
 
-.dropdownnav-bar-button:hover {
-    filter: brightness(1.25);
-    -webkit-filter: brightness(1.25);
-}
-
 .minimized-dropdownnav .dropdownnav-bar .dropdownnav-bar-button .dropdownnav-button-expand-icon {
     display: initial;
 }

@@ -7,12 +7,15 @@ import { InfoReminder } from "../../../../components/InfoReminder"
 
 //css
 import "./TaskForm.css"
+import "../../../../styles/Forms.css"
+
+import { FormLayout } from "../../../../layouts/FormLayout"
 
 export default function TaskForm({ formData, handleChange, handleSubmit }) {
 
     return (
-        <div className="task-form">
-            <div className="task-form-section form-header">
+        <FormLayout>
+            <div className="form-header">
                 <h1>
                     Add a New Task!
                 </h1>
@@ -26,7 +29,7 @@ export default function TaskForm({ formData, handleChange, handleSubmit }) {
                 </div>
             </div>
             <form
-                className="form-inputs task-form-section"
+                className="form-fields"
                 onSubmit={handleSubmit}
             >
                 <TextInput
@@ -45,8 +48,9 @@ export default function TaskForm({ formData, handleChange, handleSubmit }) {
                     isRequired={true}
                     handleChange={handleChange}
                 />
-                <SubmitButton label={""} />
+                <div/>
+                <SubmitButton />
             </form>
-        </div>
+        </FormLayout>
     )
 }

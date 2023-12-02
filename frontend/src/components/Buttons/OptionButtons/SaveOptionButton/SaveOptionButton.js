@@ -8,7 +8,7 @@ export default function SaveOptionButton({ handleSave }) {
     return (
         <button
             type="button"
-            className="option-button"
+            className="button option-button"
             onClick={handleSave}
             data-bs-toggle="tooltip"
             data-bs-placement="top"

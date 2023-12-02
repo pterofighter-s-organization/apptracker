@@ -8,7 +8,7 @@ export default function CreateButton({ handleCreate, label }) {
         <button
             id={label}
             type="button"
-            className="create-button"
+            className="button create-button"
             onClick={handleCreate}
             // data-bs-toggle="tooltip"
             // data-bs-placement="top"

@@ -11,6 +11,8 @@ import { NoteBoard } from './pages/NoteBoard';
 import { JobPage } from './pages/JobPage';
 import { JobNewForm } from './pages/JobForms/JobNewForm';
 import { JobEditForm } from './pages/JobForms/JobEditForm';
+import { LoginForm } from './pages/AuthForms/LoginForm';
+import { SignupForm } from './pages/AuthForms/SignupForm';
 
 //css
 import './App.css'
@@ -30,6 +32,8 @@ export default function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
         </Routes>
         <NotesProvider>
           <Routes>

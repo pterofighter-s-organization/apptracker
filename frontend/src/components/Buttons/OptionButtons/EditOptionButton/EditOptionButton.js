@@ -9,7 +9,7 @@ export default function EditOptionButton({ handleEdit }) {
     return (
         <button
             type="button"
-            className="option-button"
+            className="button option-button"
             onClick={handleEdit}
             data-bs-toggle="tooltip"
             data-bs-placement="top"

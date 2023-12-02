@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { withToggleControl } from "../../../../../hocs/withToggleControl"
 
 //constants
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../routes"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
 
 //css
 import "./SideNav.css"
@@ -33,7 +33,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             {/* <div className="sidenav-margin"/> */}
             <button
                 type="button"
-                className="sidenav-button"
+                className="button sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
                 onClick={toggle ? handleUntoggle : handleToggle}
             >
@@ -45,7 +45,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             </button>
             <Link
                 to={NEW_APP_ROUTE.route}
-                className="sidenav-button"
+                className="button sidenav-button"
             >
                 <i className={`sidenav-button-icon ${NEW_APP_ROUTE.icon}`}></i>
                 <div className="sidenav-button-text">
@@ -57,7 +57,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 FEATURES_ROUTES.map((route) => (
                     <Link
                         to={route.route}
-                        className="sidenav-button"
+                        className="button sidenav-button"
                         key={route.text}
                     >
                         <i className={`sidenav-button-icon ${route.icon}`} />
@@ -70,7 +70,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             <hr className="sidenav-divider"/>
             <Link
                 to={LOGIN_ROUTE.route}
-                className="sidenav-button"
+                className="button sidenav-button"
             >
                 <i className={`sidenav-button-icon ${LOGIN_ROUTE.icon}`} />
                 <div className="sidenav-button-text">

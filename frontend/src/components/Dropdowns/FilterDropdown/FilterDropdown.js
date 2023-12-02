@@ -42,7 +42,7 @@ function FilterDropdown({
             <button
                 id={id}
                 type="button"
-                className="dropdown-face filter-dropdown-face"
+                className="button dropdown-face filter-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
                 style={{
                     backgroundColor: `${value ? options[value] : "black"}`,

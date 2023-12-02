@@ -1,6 +1,9 @@
 import { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+//components
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
+
 //private-components
 import { JobForm } from "../components/JobForm";
 
@@ -22,7 +25,6 @@ import { createObjCopy } from "../../../utils/memoryUtils";
 
 //css
 import "./JobEditForm.css"
-import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 
 export default function JobEditForm() {
 

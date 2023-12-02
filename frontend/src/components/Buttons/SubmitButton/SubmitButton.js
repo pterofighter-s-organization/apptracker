@@ -10,12 +10,12 @@ export default function SubmitButton({ label }) {
     return (
         <button
             type="submit"
-            className="submit-button"
+            className="button submit-button"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title={`Submits ${label}`}
         >
-            Submit {label}
+            {label || "submit"}
         </button>
     )
 }
