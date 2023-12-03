@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from .serializers import ApplicationSerializer, NotesSerializer, TaskSerializer#, UserSerializer
 from .models import Application, Notes, Task#, Users
 from django.core.exceptions import ValidationError
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import bcrypt
 
 # Create your views here.
@@ -19,27 +20,30 @@ def test(request):
     return render(request, 'test.html')
 
 @api_view(['GET', 'POST', 'DELETE'])
+@csrf_protect
 def application_list(request):
     #get list of applications, POST a new application, DELETE all applications
+    if not request.user.is_authenticated:
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     if request.method == 'GET':
-        applications = Application.objects.all()
-        # title = request.GET.get('title', None)
-        # if title is not None:
-        #     applications = Application.filter(title__icontains=title)
-        applications_serializer = ApplicationSerializer(applications, many=True)
-        return JsonResponse(applications_serializer.data, safe=False)
-    elif request.method == 'POST':
-        print("TESTING OVER HERE")
         if request.user.is_authenticated:
-            print("request", request.content_params)
-            application_data = JSONParser().parse(request)
-            # application_data['user_id'] = request.user.id
-            print("application data is", application_data)
-            application_serializer = ApplicationSerializer(data=application_data)
-            if application_serializer.is_valid():
-                application_serializer.save()
-                return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            applications = Application.objects.all()
+            # title = request.GET.get('title', None)
+            # if title is not None:
+            #     applications = Application.filter(title__icontains=title)
+            applications_serializer = ApplicationSerializer(applications, many=True)
+            return JsonResponse(applications_serializer.data, safe=False)
+    elif request.method == 'POST':
+        #application_data = JSONParser().parse(request.data)
+        application_data = request.data
+        #if request.user.is_authenticated:
+            # application_data = JSONParser().parse(request)
+        application_data['user_id'] = request.user.id
+        application_serializer = ApplicationSerializer(data=application_data)
+        if application_serializer.is_valid():
+            application_serializer.save()
+            return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -120,9 +124,7 @@ def users_detail(request, pk):
 @api_view(['POST', 'DELETE'])
 def users_authentication(request):
     if request.method == 'POST':
-        print("SEAWEED")
         users_data = JSONParser().parse(request)
-        print("BEANS")
         user = authenticate(username = users_data['username'], password = users_data['password'])
         if user is not None:
             if user.is_active:
