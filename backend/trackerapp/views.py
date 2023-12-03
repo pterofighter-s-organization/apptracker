@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 # from trackerapp.models import Users
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
@@ -29,11 +29,16 @@ def application_list(request):
         applications_serializer = ApplicationSerializer(applications, many=True)
         return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
-        application_data = JSONParser().parse(request)
-        application_serializer = ApplicationSerializer(data=application_data)
-        if application_serializer.is_valid():
-            application_serializer.save()
-            return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
+        print("TESTING OVER HERE")
+        if request.user.is_authenticated:
+            print("request", request.content_params)
+            application_data = JSONParser().parse(request)
+            # application_data['user_id'] = request.user.id
+            print("application data is", application_data)
+            application_serializer = ApplicationSerializer(data=application_data)
+            if application_serializer.is_valid():
+                application_serializer.save()
+                return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -78,6 +83,8 @@ def application_detail(request, pk):
 #             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
 #         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#TODO: make it error when creating user with same username
+#Creates a user
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
     if request.method == 'POST':
@@ -109,17 +116,28 @@ def users_detail(request, pk):
     except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
+#TODO: LEARN MORE ABOUT CSRF TOKEN AND IMPLEMENT THEM PROPERLY
 @api_view(['POST', 'DELETE'])
-def users_login(request):
+def users_authentication(request):
     if request.method == 'POST':
+        print("SEAWEED")
         users_data = JSONParser().parse(request)
+        print("BEANS")
         user = authenticate(username = users_data['username'], password = users_data['password'])
         if user is not None:
             if user.is_active:
                 login(request, user)
                 return JsonResponse({'message': 'Successfully logined'}, status=status.HTTP_200_OK)
         return JsonResponse({'message': 'Wrong username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+    elif request.method == 'DELETE':
+        if request.user.is_authenticated:
+            logout(request)
+            return JsonResponse({'message': 'Successfully logouted'}, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({'message': 'Cannot find user'}, status=status.HTTP_404_NOT_FOUND)
     return JsonResponse({'message': 'No clue what happened'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def users_detail(request, pk):
