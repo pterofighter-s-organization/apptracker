@@ -3,10 +3,14 @@ import { useContext, useEffect, useMemo } from "react";
 //components
 import { CardList } from "../../components/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
+import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 
 //layouts
-import { HeaderLayout } from "../../layouts/HeaderLayout";
+import { HeaderLayout } from "../../layouts/HeaderLayout1";
 import { PageLayout } from "../../layouts/PageLayout";
+import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
 
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
@@ -15,11 +19,15 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 import { filterDataByStatus, sortDataByLatest } from "../../helpers/helpers";
 import { sortTasksByDateDue } from "../../helpers/taskHelpers";
 
+//constants
+import { APP_STATUS_COLORS } from "../../constants/constants";
+
 //context
 import { TasksContext } from "../../hooks/contexts/TasksContext";
 
 //css
 import "./TaskBoard.css"
+import { CardsHeader } from "../../components/CardsHeader";
 
 function TaskBoard({ status, handleStatus }) {
 
@@ -27,7 +35,7 @@ function TaskBoard({ status, handleStatus }) {
 
     useEffect(() => {
         getTasks().then((result) => {
-            if(result.success){
+            if (result.success) {
                 document.title = `Task Board - Job Tracker App`
             }
         })
@@ -40,7 +48,9 @@ function TaskBoard({ status, handleStatus }) {
     }, [tasks.data, status])
 
     if (tasks.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (tasks.errors) {
@@ -54,27 +64,42 @@ function TaskBoard({ status, handleStatus }) {
 
     return (
         <PageLayout>
-            <HeaderLayout
-                title={"my job tasks"}
-                text={
-                    <>
-                        Shows all the tasks you created for each job application.
-                    </>
-                }
-                status={status}
-                handleStatus={handleStatus}
-            />
-            <CardList
-                type={"tasks"}
-                cards={
-                    status === "archived" ?
-                        sortDataByLatest(filteredData)
-                        :
-                        sortTasksByDateDue(filteredData)
-                }
-                isPreview={false}
-                isShow={true}
-            />
+            <HeaderLayout>
+                <h1>
+                    All Tasks
+                </h1>
+                <h6>
+                    Every task you created.
+                </h6>
+            </HeaderLayout>
+            <CardsSectionLayout>
+                <CardsHeaderLayout>
+                    <CardsHeader
+                        icon={<i className="bi bi-view-list" />}
+                        quantity={filteredData.length}
+                        type={"task"}
+                        header={status === "archived" ? "to remove" : "to finish"}
+                    />
+                    <FilterDropdown
+                        id={"tasks-status-filter"}
+                        label={"status"}
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+                </CardsHeaderLayout>
+                <CardList
+                    type={"tasks"}
+                    cards={
+                        status === "archived" ?
+                            sortDataByLatest(filteredData)
+                            :
+                            sortTasksByDateDue(filteredData)
+                    }
+                    isPreview={false}
+                    isShow={true}
+                />
+            </CardsSectionLayout>
         </PageLayout>
     )
 }

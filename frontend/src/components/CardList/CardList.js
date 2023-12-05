@@ -18,15 +18,15 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
 
     const CARDS = {
         jobs: {
-            width: "17.5rem",
+            width: "17rem",
             Component: JobCard
         },
         tasks: {
-            width: "25rem",
+            width: "17.5rem",
             Component: TaskCard
         },
         notes: {
-            width: "17.5rem",
+            width: "17rem",
             Component: NoteCard
         }
     };

@@ -1,18 +1,32 @@
+import { useContext, useEffect, useMemo } from "react";
+
+//hocs
+import { withStatusControl } from "../../../../hocs/withStatusControl";
+
+//layouts
+import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+
+//contexts
+import { TasksContext } from "../../../../hooks/contexts/TasksContext";
 
 //components
-import { SectionHeader } from "../../../../components/SectionHeader"
-import { CardList } from "../../../../components/CardList"
-import { RedirectButton } from "../../../../components/Buttons/RedirectButton"
-import { useContext, useEffect, useMemo } from "react"
-import { TasksContext } from "../../../../hooks/contexts/TasksContext"
+import { CardsHeader } from "../../../../components/CardsHeader";
+import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { CardList } from "../../../../components/CardList";
+import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
-import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
-import { sortTasksByDateDue } from "../../../../helpers/taskHelpers"
-import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
+//helpers
+import { filterDataByStatus } from "../../../../helpers/helpers";
+import { sortDataByLatest } from "../../../../helpers/helpers";
+import { sortTasksByDateDue } from "../../../../helpers/taskHelpers";
 
-//css
+//constants
+import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-export default function DashboardTasks({ status, isPreview, isShow }) {
+function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
 
@@ -25,13 +39,15 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
     }, [tasks.data, status])
 
     if (tasks.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (tasks.errors) {
         return (
             <ErrorDisplay
-                label={"Tasks"}
+                label={"tasks"}
                 errors={tasks.errors}
                 isSection={true}
             />
@@ -39,17 +55,22 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
     }
 
     return (
-        <>
-            <SectionHeader
-                IconComponent={<i className="bi bi-view-list" />}
-                title={`${filteredData.length} tasks ${status === "archived" ? "to delete" : "coming up"}`}
-                ButtonComponent={
-                    <RedirectButton
-                        link={"/all-tasks/" + status}
-                        label={`all tasks`}
-                    />
-                }
-            />
+        <CardsSectionLayout isPreview={isPreview}>
+            <CardsHeaderLayout>
+                <CardsHeader
+                    icon={<i className="bi bi-view-list" />}
+                    quantity={filteredData.length}
+                    type={"task"}
+                    header={status === "archived" ? "to remove" : "to finish"}
+                />
+                <FilterDropdown
+                    id={"tasks-status-filter"}
+                    label={"status"}
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
+            </CardsHeaderLayout>
             <CardList
                 type={"tasks"}
                 cards={
@@ -60,7 +81,14 @@ export default function DashboardTasks({ status, isPreview, isShow }) {
                 }
                 isPreview={isPreview}
                 isShow={isShow}
+                isDashboard={true}
             />
-        </>
+            <RedirectButton
+                link={`/all-tasks/${status}`}
+                label={"link to all tasks"}
+            />
+        </CardsSectionLayout>
     )
 }
+
+export default withStatusControl(DashboardTasks)

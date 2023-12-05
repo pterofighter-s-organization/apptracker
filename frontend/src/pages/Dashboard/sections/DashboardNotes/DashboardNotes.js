@@ -1,20 +1,30 @@
-import { useEffect, useContext, useMemo } from "react"
+import { useContext, useEffect, useMemo } from "react";
 
-//components
-import { SectionHeader } from "../../../../components/SectionHeader"
-import { CardList } from "../../../../components/CardList"
-import { RedirectButton } from "../../../../components/Buttons/RedirectButton"
+//hocs
+import { withStatusControl } from "../../../../hocs/withStatusControl";
 
-//helpers
-import { filterDataByStatus } from "../../../../helpers/helpers"
+//layouts
+import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
 
 //contexts
-import { NotesContext } from "../../../../hooks/contexts/NotesContext"
-import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
+import { NotesContext } from "../../../../hooks/contexts/NotesContext";
 
-//css
+//components
+import { CardsHeader } from "../../../../components/CardsHeader";
+import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { CardList } from "../../../../components/CardList";
+import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
-export default function DashboardNotes({ status, isPreview, isShow }) {
+//helpers
+import { filterDataByStatus } from "../../../../helpers/helpers";
+
+//constants
+import { APP_STATUS_COLORS } from "../../../../constants/constants";
+
+function DashboardNotes({ status, handleStatus, isPreview, isShow }) {
 
     const { notes, getNotes } = useContext(NotesContext)
 
@@ -24,16 +34,18 @@ export default function DashboardNotes({ status, isPreview, isShow }) {
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, notes.data)
-    }, [notes.data, status])
+    }, [status, notes.data])
 
     if (notes.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (notes.errors) {
         return (
             <ErrorDisplay
-                label={"Notes"}
+                label={"notes"}
                 errors={notes.errors}
                 isSection={true}
             />
@@ -41,26 +53,35 @@ export default function DashboardNotes({ status, isPreview, isShow }) {
     }
 
     return (
-        <>
-            <SectionHeader
-                IconComponent={<i className="bi bi-stickies-fill" />}
-                title={`${filteredData.length} notes ${status === "archived" ? "to restore" : "taken"}`}
-                ButtonComponent={
-                    <RedirectButton
-                        link={"/all-notes/" + status}
-                        label={`all notes`}
-                    />
-                }
-            />
+        <CardsSectionLayout isPreview={isPreview}>
+            <CardsHeaderLayout>
+                <CardsHeader
+                    icon={<i className="bi bi-stickies-fill" />}
+                    quantity={filteredData.length}
+                    type={"note"}
+                    header={status === "archived" ? "to peel off" : "to record"}
+                />
+                <FilterDropdown 
+                    id={"notes-status-filter"}
+                    label={"status"}
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
+            </CardsHeaderLayout>
             <CardList
                 type={"notes"}
                 cards={filteredData}
                 isPreview={isPreview}
                 isShow={isShow}
+                isDashboard={true}
             />
-        </>
+            <RedirectButton
+                link={`/all-notes/${status}`}
+                label={"link to all notes"}
+            />
+        </CardsSectionLayout>
     )
 }
 
-
-
+export default withStatusControl(DashboardNotes)

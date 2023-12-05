@@ -3,13 +3,18 @@ import { useContext, useEffect, useState, useMemo } from "react";
 //components
 import { CardList } from "../../components/CardList";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
+import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
+import { CardsHeader } from "../../components/CardsHeader";
 
 //layouts
-import { HeaderLayout } from "../../layouts/HeaderLayout";
+import { HeaderLayout } from "../../layouts/HeaderLayout1";
 import { PageLayout } from "../../layouts/PageLayout";
+import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";
 
 //constants
-import { APP_STAGE_COLORS } from "../../constants/constants";
+import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../constants/constants";
 
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
@@ -18,12 +23,11 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 import { filterJobsByStage } from "../../helpers/applicationHelpers";
 import { filterDataByStatus } from "../../helpers/helpers";
 
-//context-providers
+//contexts
 import { JobsContext } from "../../hooks/contexts/JobsContext";
 
 //css
 import "./JobBoard.css"
-import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 
 function JobBoard({ status, handleStatus }) {
 
@@ -39,7 +43,7 @@ function JobBoard({ status, handleStatus }) {
 
     useEffect(() => {
         getApplications().then((result) => {
-            if(result.success){
+            if (result.success) {
                 document.title = `Job Board - Job Tracker App`
             }
         })
@@ -56,7 +60,9 @@ function JobBoard({ status, handleStatus }) {
     }, [jobs.data, status, stage])
 
     if (jobs.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (jobs.errors) {
@@ -70,32 +76,47 @@ function JobBoard({ status, handleStatus }) {
 
     return (
         <PageLayout>
-            <HeaderLayout
-                title={"my job applications"}
-                text={
-                    <>
-                        Every job that's tracked from <i>interviewing to interested.</i>
-                    </>
-                }
-                status={status}
-                handleStatus={handleStatus}
-                Components={
-                    <FilterDropdown
-                        id={"stage-filter"}
-                        label={"stage"}
-                        value={stage}
-                        isOptionAll={true}
-                        options={APP_STAGE_COLORS}
-                        handleOption={handleStage}
+            <HeaderLayout>
+                <h1>
+                    All Jobs
+                </h1>
+                <h6>
+                    Every job you tracked.
+                </h6>
+            </HeaderLayout>
+            <CardsSectionLayout>
+                <CardsHeaderLayout>
+                    <CardsHeader
+                        icon={<i className="bi bi-file-post-fill" />}
+                        quantity={filteredData.length}
+                        type={"job"}
+                        header={status === "archived" ? "to delete" : "to track"}
                     />
-                }
-            />
-            <CardList
-                type={"jobs"}
-                cards={filteredData}
-                isPreview={false}
-                isShow={true}
-            />
+                    <>
+                        <FilterDropdown
+                            id={"job-stage-filter"}
+                            label={"stage"}
+                            value={stage}
+                            options={APP_STAGE_COLORS}
+                            isOptionAll={true}
+                            handleOption={handleStage}
+                        />
+                        <FilterDropdown
+                            id={"job-status-filter"}
+                            label={"status"}
+                            value={status}
+                            options={APP_STATUS_COLORS}
+                            handleOption={handleStatus}
+                        />
+                    </>
+                </CardsHeaderLayout>
+                <CardList
+                    type={"jobs"}
+                    cards={filteredData}
+                    isPreview={false}
+                    isShow={true}
+                />
+            </CardsSectionLayout>
         </PageLayout>
     )
 }

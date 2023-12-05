@@ -1,0 +1,13 @@
+
+
+.job-page-description-layout{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.job-page-description{
+    white-space: pre-wrap;
+    padding: 0 0.1rem;
+}

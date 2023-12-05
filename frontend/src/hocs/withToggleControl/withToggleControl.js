@@ -5,6 +5,7 @@ export default function withToggleControl(Component) {
     function ToggleControl({ id, ...props }) {
         const [toggle, setToggle] = useState(false)
 
+        //in password, can not give id and it will not trigger the window click effect.
         useEffect(() => {
             const handleClick = (e) => {
                 const toggleElement = document.getElementById(id)

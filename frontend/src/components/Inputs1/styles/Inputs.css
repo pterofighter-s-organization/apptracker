@@ -1,0 +1,19 @@
+
+
+.input-field{
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.input-layout-idle .input-field {
+    background-color: #f2efef;
+}
+
+.input-layout-error .input-field {
+    /*put all error classes below the paired class, or just put !important so it overides it*/
+    background-color: #fce4e4 !important;
+    outline: 1px solid #cc0033 !important;
+    color: #cc0033 !important;
+}

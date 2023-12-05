@@ -9,15 +9,15 @@ import { RestoreOptionButton } from "../../../../components/Buttons/OptionButton
 import { DeleteOptionButton } from "../../../../components/Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../components/Buttons/OptionButtons/ArchiveOptionButton"
 
-//context-providers
-import { JobContext } from "../../../../hooks/contexts/JobContext"
-
 //helpers
 import { updateDateApplied } from "../../../../helpers/applicationHelpers"
 
+//contexts
+import { JobContext } from "../../../../hooks/contexts/JobContext"
+
 //css
 import "./JobPageHeader.css"
-import "../../JobPage.css"
+import "../styles/JobPageSection.css"
 
 export default function JobPageHeader() {
 
@@ -92,35 +92,32 @@ export default function JobPageHeader() {
     }
 
     return (
-        <div className="job-page-content-bg job-page-top">
-            <div style={{ flexGrow: 1 }}>
-                <StageDropdown
-                    id={"stage-dropdown-" + job.data.application_id}
-                    stage={stage}
-                    handleStage={handleStage}
-                />
-            </div>
-            <div className="job-page-top-buttons">
-                {job.data.archived ?
-                    <>
+        <div className="job-page-section job-page-header">
+            <StageDropdown
+                id={"stage-dropdown-" + job.data.application_id}
+                stage={stage}
+                handleStage={handleStage}
+            />
+            {
+                job.data.archived ?
+                    <div className="job-page-option-buttons-layout">
                         <RestoreOptionButton
                             handleRestore={handleRestore}
                         />
                         <DeleteOptionButton
                             handleDelete={handleDelete}
                         />
-                    </>
+                    </div>
                     :
-                    <>
+                    <div className="job-page-option-buttons-layout">
                         <EditOptionButton
                             handleEdit={handleEdit}
                         />
                         <ArchiveOptionButton
                             handleArchive={handleArchive}
                         />
-                    </>
-                }
-            </div>
+                    </div>
+            }
         </div>
     )
 }

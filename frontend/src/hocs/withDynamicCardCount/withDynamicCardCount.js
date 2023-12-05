@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react"
 
 export default function withDynamicCardCount(Component, elementName) {
-    function DynamicCardCount({ type, isPreview, cards, ...props }) {
+    function DynamicCardCount({ type, isPreview, isDashboard, cards, ...props }) {
         const [initialCount, setInitialCount] = useState(1)
         const [cardCount, setCardCount] = useState(1)
 
         useEffect(() => {
             const listElement = document.getElementById(elementName + "-" + type)
             const cardElement = (listElement && listElement.children[0]) ? listElement.children[0] : listElement
+            const headerInPx = isDashboard ? (56 + 132) + (16 * 2) : 0 //actual dashboard header height + card header + gap
 
             const calculateCardCount = () => {
                 const colCount = Math.floor(listElement.offsetWidth / cardElement.offsetWidth)
-                const rowCount = Math.floor(window.innerHeight / cardElement.offsetHeight)
+                const rowCount = Math.floor((window.innerHeight - headerInPx) / cardElement.offsetHeight)
                 const rowPositiveCount = rowCount > 0 ? rowCount : 1
                 const colPositiveCount = colCount > 0 ? colCount : 1
 
-                return isPreview ? (colPositiveCount * Math.ceil(rowPositiveCount / 6)) : (rowPositiveCount * colPositiveCount)
+                return isPreview && !isDashboard ? (rowPositiveCount * Math.ceil(colPositiveCount / 6)) : (rowPositiveCount * colPositiveCount)
             }
 
             const handleCalculation = () => {
@@ -32,7 +33,7 @@ export default function withDynamicCardCount(Component, elementName) {
             }
 
             //once cards.length gets changed then we check again.
-        }, [isPreview, type])
+        }, [isPreview, type, isDashboard])
 
         const handleAddCount = (e) => {
             e.preventDefault()

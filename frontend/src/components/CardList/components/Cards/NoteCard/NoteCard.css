@@ -1,5 +1,5 @@
 .note-card {
-    background-color: #F5f5f5;
+    background-color: #fff;
     /* width: 15rem; */
     height: 15.5em;
     /* min-height: 15rem; */
@@ -25,6 +25,7 @@
     overflow: hidden;
     overflow-y: auto;
     font-size: 0.9em;
+    background-color: #f2efef;
 }
 
 .note-card-content {

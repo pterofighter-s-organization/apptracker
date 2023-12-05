@@ -11,7 +11,7 @@ import { JobForm } from "../components/JobForm";
 import { PageLayout } from "../../../layouts/PageLayout";
 
 //constants
-import { jobFormData } from "../../../constants/constants";
+import { JOB_FORM_DATA } from "../../../constants/constants";
 
 //context-providers
 import { JobContext } from "../../../hooks/contexts/JobContext";
@@ -29,7 +29,7 @@ import "./JobEditForm.css"
 export default function JobEditForm() {
 
     const { id } = useParams()
-    const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
+    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
     //making sure this doesn't re-render and make useeffect render again. fixed*
 
     const navigate = useNavigate()

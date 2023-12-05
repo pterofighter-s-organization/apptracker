@@ -24,7 +24,7 @@ export const SCREEN_BREAKPOINTS = {
     "xl": 1400,
 }
 
-export const jobFormData = {
+export const JOB_FORM_DATA = {
     stage: {
         value: "interested",
         error: ""
@@ -71,7 +71,7 @@ export const jobFormData = {
     }
 }
 
-export const taskFormData = {
+export const TASK_FORM_DATA = {
     name: {
         value: "",
         error: ""

@@ -10,7 +10,7 @@ import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOp
 //utils
 import { dateTimeFormatter, timerFormatter } from "../../../../../utils/formatUtils"
 
-//context-providers
+//contexts
 import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
 
 //css
@@ -66,13 +66,13 @@ export default function TaskCard({ card }) {
 
     const TASK_STAGE_COLORS = {
         // Red: #ff6666
-        // Blue: #5CACEE
+        // Blue: #4099ff
         // Green: #009E60
         years: "#009E60",
         months: "#009E60",
         days: "#009E60",
-        hours: "#5CACEE",
-        minutes: "#5CACEE",
+        hours: "#4099ff",
+        minutes: "#4099ff",
         secs: "#ff6666",
         overdue: "#ff6666",
         due: "#ff6666"
@@ -88,33 +88,33 @@ export default function TaskCard({ card }) {
             className="task-card-container"
         >
             <div className="task-card-header">
-                <div style={{ border: `2.5px solid ${TASK_STAGE_COLORS[taskTimerObj.label]}` }} />
-                <div className="task-card-header-details">
-                    <h5 className="task-card-job">
-                        {card.company} / {card.position}
-                    </h5>
-                    {
-                        card.archived ?
-                            <>
-                                <RestoreOptionButton
-                                    handleRestore={handleRestore}
-                                />
-                                <DeleteOptionButton
-                                    handleDelete={handleDelete}
-                                />
-                            </>
-                            :
-                            <ArchiveOptionButton
-                                handleArchive={handleArchive}
+                <h5 className="task-card-job">
+                    {card.company} / {card.position}
+                </h5>
+                {
+                    card.archived ?
+                        <>
+                            <RestoreOptionButton
+                                handleRestore={handleRestore}
                             />
-                    }
-                </div>
+                            <DeleteOptionButton
+                                handleDelete={handleDelete}
+                            />
+                        </>
+                        :
+                        <ArchiveOptionButton
+                            handleArchive={handleArchive}
+                        />
+                }
             </div>
             <div className="task-card-title">
                 {card.title}
             </div>
             <div className="task-card-clock">
-                <div className="task-card-datetime">
+                <div
+                    className="task-card-datetime"
+                    style={{ color: TASK_STAGE_COLORS[taskTimerObj.label] }}
+                >
                     <i className="bi bi-calendar-fill"></i>
                     {dateTimeFormatter(card.date_due)}
                 </div>

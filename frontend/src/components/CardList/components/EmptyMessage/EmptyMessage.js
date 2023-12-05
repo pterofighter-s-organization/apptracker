@@ -1,6 +1,7 @@
 
 //components
 import { RedirectButton } from "../../../Buttons/RedirectButton"
+import { InfoReminder } from "../../../InfoReminder"
 
 //css
 import "./EmptyMessage.css"
@@ -9,12 +10,9 @@ export default function EmptyMessage({ type }) {
 
     return (
         <div className="empty-message">
-            <div className="empty-message-header">
-                <i className="bi bi-info-circle-fill"></i>
-                <span className="empty-message-text">
-                    {`no related ${type} at the moment!`}
-                </span>
-            </div>
+            <InfoReminder
+                text={`no related ${type} at the moment!`}
+            />
             {type === "jobs" ?
                 <RedirectButton
                     link={"/new-job"}

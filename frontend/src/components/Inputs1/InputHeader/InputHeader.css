@@ -1,0 +1,9 @@
+
+.input-header{
+    font-size: 0.9rem;
+    color: black;
+}
+
+.input-layout-error .input-header{
+    color: #cc0033 !important;
+}

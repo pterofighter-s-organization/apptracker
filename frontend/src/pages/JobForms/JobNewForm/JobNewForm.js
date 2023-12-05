@@ -2,7 +2,7 @@ import { useState, useMemo, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //constants
-import { jobFormData } from "../../../constants/constants";
+import { JOB_FORM_DATA } from "../../../constants/constants";
 
 //context-providers
 import { JobContext } from "../../../hooks/contexts/JobContext";
@@ -27,7 +27,7 @@ import "./JobNewForm.css"
 
 export default function JobNewForm() {
 
-    const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
+    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
     const [formData, setFormData] = useState(initialState)

@@ -5,7 +5,7 @@ import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown"
 import { APP_STATUS_COLORS } from "../../constants/constants"
 
 //css
-import "./HeaderLayout.css"
+// import "./HeaderLayout.css"
 
 export default function HeaderLayout({ title, status, handleStatus, Components, BottomComponents, text, children }) {
 

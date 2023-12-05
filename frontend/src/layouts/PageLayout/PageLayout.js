@@ -10,7 +10,7 @@ export default function PageLayout({ children }) {
 
     return (
         <div className="page-layout">
-            <Navbar/>
+            <Navbar />
             <div className="page-content">
                 {children}
             </div>
