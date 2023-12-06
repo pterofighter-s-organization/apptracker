@@ -3,8 +3,8 @@ import { useContext, useEffect, useMemo, useState } from "react";
 //components
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
-import { CardsHeader } from "../../../../components/CardsHeader";
-import { CardList } from "../../../../components/CardList";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { CardList } from "../../../../components/Cards/CardList";
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
@@ -96,7 +96,6 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
                 cards={filteredData}
                 isPreview={isPreview}
                 isShow={isShow}
-                isDashboard={true}
             />
             <RedirectButton
                 link={`/all-jobs/${status}`}

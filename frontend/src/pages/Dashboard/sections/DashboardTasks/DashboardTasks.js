@@ -11,11 +11,11 @@ import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLa
 import { TasksContext } from "../../../../hooks/contexts/TasksContext";
 
 //components
-import { CardsHeader } from "../../../../components/CardsHeader";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
-import { CardList } from "../../../../components/CardList";
+import { CardList } from "../../../../components/Cards/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
 //helpers
@@ -81,7 +81,6 @@ function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
                 }
                 isPreview={isPreview}
                 isShow={isShow}
-                isDashboard={true}
             />
             <RedirectButton
                 link={`/all-tasks/${status}`}

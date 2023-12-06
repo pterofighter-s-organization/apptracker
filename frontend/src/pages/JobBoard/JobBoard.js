@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState, useMemo } from "react";
 
 //components
-import { CardList } from "../../components/CardList";
+import { CardList } from "../../components/Cards/CardList";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { CardsHeader } from "../../components/CardsHeader";
+import { CardsHeader } from "../../components/Cards/CardsHeader";
 
 //layouts
-import { HeaderLayout } from "../../layouts/HeaderLayout1";
+import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
 import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";

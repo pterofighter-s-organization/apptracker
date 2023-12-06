@@ -9,6 +9,9 @@ import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { PageLayout } from "../../layouts/PageLayout";
 import { CardsPageLayout } from "../../layouts/CardsLayout/CardsPageLayout";
 
+//utils
+import { strFormatter } from "../../utils/format";
+
 //contexts
 import { JobContext } from "../../hooks/contexts/JobContext";
 
@@ -34,7 +37,7 @@ export default function JobPage() {
     useEffect(() => {
         getApplication(id).then((result) => {
             if (result.success) {
-                document.title = `${result.data.position}, ${result.data.company} - Job Tracker App`
+                document.title = `${strFormatter(result.data.position)}, ${strFormatter(result.data.company)} - Job Tracker App`
             }
         })
 

@@ -1,8 +1,7 @@
 
-
-
 //css
 import "./SubmitButton.css"
+import "../styles/Buttons.css"
 
 export default function SubmitButton({ label }) {
 

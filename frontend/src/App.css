@@ -6,22 +6,16 @@
     --redirect-button-color: #3484F0;
 }
 
-button {
-    border: none;
-}
-
-.button:hover{
-    filter: brightness(1.25);
-    -webkit-filter: brightness(1.25);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 h6 {
     font-size: 1em !important;
 }
 
 pre {
     margin-bottom: 0 !important;
+}
+
+button {
+    border: none;
 }
 
 .App {

@@ -1,6 +1,6 @@
 
 //utils
-import { compareDates, convertLocaltoUTC } from '../utils/dateTimeUtils'
+import { compareDates, convertLocaltoUTC } from '../utils/dateTime'
 
 export const createTaskData = (formState) => {
 

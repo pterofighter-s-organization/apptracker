@@ -1,30 +1,20 @@
 
-//private-layouts
-import { InputLayout } from "../layouts/InputLayout"
+
 
 //css
 import "./DateTimeInput.css"
+import "../styles/Inputs.css"
 
-export default function DateTimeInput({ name, formDataObj, handleChange, ...props }) {
+export default function DateTimeInput({ name, value, handleChange }) {
 
-    //find todays date to put in min
-    //find todays date and 3 years later to put in max
-
-    // console.log("date", formDataObj.value)
     return (
-        <InputLayout
-            formDataObj={formDataObj}
-            {...props}
-        >
-            <input
-                type="datetime-local"
-                name={name}
-                className={`datetime-input-box input-box ${formDataObj.error.length > 0 ? "input-box-error" : ""}`}
-                value={formDataObj.value}
-                onChange={handleChange}
-                min=""
-                max=""
-            />
-        </InputLayout>
+        <input
+            type="datetime-local"
+            className={`datetime-field input-field`}
+            name={name}
+            placeholder={name.toUpperCase()}
+            value={value}
+            onChange={handleChange}
+        />
     )
 }

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useReducer } from "react";
 
 //utils
-import { findTodayUTCDate } from "../../utils/dateTimeUtils";
+import { findTodayUTCDate } from "../../utils/dateTime";
 
 //services
 import APIs from "../../services/api";

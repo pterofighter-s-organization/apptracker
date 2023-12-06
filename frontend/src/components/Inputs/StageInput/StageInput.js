@@ -1,27 +1,18 @@
 
-
 //components
 import { StageDropdown } from "../../Dropdowns/StageDropdown";
-
-//private-layouts
-import { InputLayout } from "../layouts/InputLayout";
 
 //css
 import "./StageInput.css"
 
-export default function StageInput({ name, formDataObj, handleChange, ...props }) {
+export default function StageInput({ name, value, handleChange }) {
 
-    return (
-        <InputLayout
-            formDataObj={formDataObj}
-            {...props}
-        >
-            <StageDropdown
-                id={name + "-input"}
-                name={name}
-                stage={formDataObj.value}
-                handleStage={handleChange}
-            />
-        </InputLayout>
+    return(
+        <StageDropdown
+            id={`${name}-stage-input`}
+            name={name}
+            stage={value}
+            handleStage={handleChange}
+        />
     )
 }

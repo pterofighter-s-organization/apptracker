@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { HyperLink } from "../../components/HyperLink"
 
 //utils
-import { dateTimeFormatter } from "../../../../utils/formatUtils"
+import { dateTimeFormatter } from "../../../../utils/format"
 
 //contexts
 import { JobContext } from "../../../../hooks/contexts/JobContext"
@@ -20,10 +20,10 @@ export default function JobPageDetails() {
     return (
         <div className="job-page-details-layout">
             <div className="job-page-section job-page-details-section job-page-infos">
-                <h5 style={{ color: "#808080" }}>
+                <h5 style={{ color: "#808080", textTransform: "capitalize" }}>
                     - {job.data.company}
                 </h5>
-                <h1>
+                <h1 style={{ textTransform: "capitalize" }}>
                     {job.data.position}
                 </h1>
                 <h5 style={{ color: "#009E60", textTransform: "initial" }}>

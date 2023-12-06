@@ -1,7 +1,4 @@
 
-//private-layouts
-import { InputLayout } from "../layouts/InputLayout";
-
 //hocs
 import { withToggleControl } from "../../../hocs/withToggleControl";
 
@@ -9,9 +6,8 @@ import { withToggleControl } from "../../../hocs/withToggleControl";
 import "./PasswordInput.css"
 
 function PasswordInput({
-    maxWidth, name, formDataObj, handleChange,
+    maxWidth, name, value, handleChange,
     toggle, handleToggle, handleUntoggle,
-    ...props
 }) {
 
     const handleShow = (e) => {
@@ -27,41 +23,36 @@ function PasswordInput({
     }
 
     return (
-        <InputLayout
-            formDataObj={formDataObj}
-            {...props}
-        >
-            <div className="password-input">
-                <input
-                    id={name}
-                    type="password"
-                    className={`password-input-box input-box ${formDataObj.error.length > 0 ? "input-box-error" : ""}`}
-                    style={{ maxWidth: maxWidth || "" }}
-                    name={name}
-                    value={formDataObj.value}
-                    onChange={handleChange}
-                    placeholder={name.toUpperCase()}
-                />
-                {
-                    toggle ?
-                        <i
-                            className="password-input-hide-toggle bi bi-eye-fill"
-                            onClick={(e) => {
-                                handleUntoggle(e)
-                                handleHide(e)
-                            }}
-                        ></i>
-                        :
-                        <i
-                            className="password-input-hide-toggle bi bi-eye-slash-fill"
-                            onClick={(e) => {
-                                handleToggle(e)
-                                handleShow(e)
-                            }}
-                        ></i>
-                }
-            </div>
-        </InputLayout>
+        <div className="password-input">
+            <input
+                id={name}
+                type="password"
+                className={`password-input-field input-field`}
+                style={{ maxWidth: maxWidth || "" }}
+                name={name}
+                value={value}
+                onChange={handleChange}
+                placeholder={name.toUpperCase()}
+            />
+            {
+                toggle ?
+                    <i
+                        className="password-input-hide-toggle bi bi-eye-fill"
+                        onClick={(e) => {
+                            handleUntoggle(e)
+                            handleHide(e)
+                        }}
+                    ></i>
+                    :
+                    <i
+                        className="password-input-hide-toggle bi bi-eye-slash-fill"
+                        onClick={(e) => {
+                            handleToggle(e)
+                            handleShow(e)
+                        }}
+                    ></i>
+            }
+        </div>
     )
 }
 

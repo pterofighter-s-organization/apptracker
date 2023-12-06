@@ -1,8 +1,8 @@
 import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/CardList";
-import { CardsHeader } from "../../../../components/CardsHeader";
+import { CardList } from "../../../../components/Cards/CardList";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
@@ -20,7 +20,7 @@ import { createTaskData, updateTaskFormErrors, sortTasksByDateDue } from "../../
 import { sortDataByLatest, filterDataByStatus } from "../../../../helpers/helpers";
 
 //utils
-import { createObjCopy } from "../../../../utils/memoryUtils";
+import { createObjCopy } from "../../../../utils/memory";
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl";
@@ -127,7 +127,6 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
                 }
                 isPreview={isPreview}
                 isShow={isShow}
-                isDashboard={true}
             />
         </CardsSectionLayout>
     )

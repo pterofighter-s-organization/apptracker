@@ -1,9 +1,9 @@
 
 //components
 import { CreateButton } from "../../../../components/Buttons/CreateButton"
-import { DateTimeInput } from "../../../../components/Inputs1/DateTimeInput"
-import { InputFooter } from "../../../../components/Inputs1/InputFooter"
-import { TextInput } from "../../../../components/Inputs1/TextInput"
+import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
+import { InputFooter } from "../../../../components/Inputs/InputFooter"
+import { TextInput } from "../../../../components/Inputs/TextInput"
 
 //layouts
 import { InputLayout } from "../../../../layouts/InputLayout"

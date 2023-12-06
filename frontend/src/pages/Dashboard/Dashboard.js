@@ -1,6 +1,6 @@
 //layouts
 import { PageLayout } from "../../layouts/PageLayout";
-import { HeaderLayout } from "../../layouts/HeaderLayout1";
+import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { CardsPageLayout } from "../../layouts/CardsLayout/CardsPageLayout";
 
 //providers

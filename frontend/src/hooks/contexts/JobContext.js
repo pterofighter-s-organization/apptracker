@@ -4,7 +4,7 @@ import { createContext, useReducer, useCallback } from "react"
 import APIs from "../../services/api"
 
 //utils
-import { findTodayUTCDate } from "../../utils/dateTimeUtils"
+import { findTodayUTCDate } from "../../utils/dateTime"
 
 //actions
 import { JOB_CALL_SUCCESS, JOB_CALL_FAILURE, JOB_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobReducer"

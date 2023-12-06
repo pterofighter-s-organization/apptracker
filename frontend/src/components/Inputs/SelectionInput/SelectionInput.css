@@ -1,15 +1,14 @@
-.selection-input {
-    border: 0.75rem solid #E5E4E2;
+.selection-input-field {
     background-color: #E5E4E2;
     border-radius: 0.5rem;
-    font-size: 0.9rem;
-    /* padding: 0.75em 1em; */
-    /* padding: 0.006rem 0.25rem; */
+    /* border: 1.45px solid #E5E4E2; */
+    padding: 0.85rem;
     width: fit-content;
 }
 
 /* @media (any-safari) {
-    .selection-input {
-        padding: 0.75em 1em;
+    .selection-input-field {
+        padding: 0.75rem 1em;
+        border: 1.45px solid #E5E4E2;
     }
 } */

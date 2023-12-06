@@ -1,9 +1,9 @@
 .submit-button{
     /* background-color: #0d6efd; */
     background-color: #7fb5ff;
-    color: #333333;
-    border-radius: 2em;
-    padding: 1.25em 2em;
-    font-size: 0.9em;
+    color: black;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
     text-transform: capitalize;
 }

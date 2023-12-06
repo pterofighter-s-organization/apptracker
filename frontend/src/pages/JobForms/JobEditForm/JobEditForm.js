@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 //components
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -13,18 +14,16 @@ import { PageLayout } from "../../../layouts/PageLayout";
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";
 
-//context-providers
+//contexts
 import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
-import { updateJobFormData, updateJobFormErrors, createJobData, updateDateApplied } from "../../../helpers/applicationHelpers";
+import { updateJobFormData, updateJobFormErrors, createJobData, handleChangeFromStage } from "../../../helpers/applicationHelpers";
 import { handleAPIErrors } from "../../../helpers/formHelpers";
 
 //utils
-import { createObjCopy } from "../../../utils/memoryUtils";
-
-//css
-import "./JobEditForm.css"
+import { createObjCopy } from "../../../utils/memory";
+import { strFormatter } from "../../../utils/format";
 
 export default function JobEditForm() {
 
@@ -35,18 +34,13 @@ export default function JobEditForm() {
     const navigate = useNavigate()
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
-    // const [submissionState, setSubmissionState] = useState({
-    //     status: false,
-    //     message: "",
-    //     redirect: ""
-    // })
 
     useEffect(() => {
         getApplication(id)
             .then((result) => {
                 if (result.success) {
                     setFormData(updateJobFormData(initialState, result.data))
-                    document.title = `Editing ${result.data.position}, ${result.data.company} - Job Tracker App`
+                    document.title = `Editing ${strFormatter(result.data.position)}, ${strFormatter(result.data.company)} - Job Tracker App`
                 }
             })
 
@@ -54,19 +48,12 @@ export default function JobEditForm() {
     }, [getApplication, initialState, id]);
 
     const handleChange = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if (e.target.name === "stage") {
             setFormData({
                 ...formData,
-                appliedDate: {
-                    value: updateDateApplied(e.target.value, formData.appliedDate.value, true),
-                    error: ""
-                },
-                stage: {
-                    value: e.target.value,
-                    error: ""
-                }
+                ...handleChangeFromStage(e.target.value, formData.appliedDate.value)
             })
         } else {
             setFormData({
@@ -77,7 +64,7 @@ export default function JobEditForm() {
                 }
             })
         }
-    };
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -103,7 +90,9 @@ export default function JobEditForm() {
     }
 
     if (job.loading) {
-        return <>Loading...</>;
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (job.errors) {

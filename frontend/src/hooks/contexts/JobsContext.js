@@ -7,7 +7,7 @@ import APIs from "../../services/api";
 import { sortDataByLatest } from "../../helpers/helpers";
 
 //utils
-import { findTodayUTCDate } from "../../utils/dateTimeUtils";
+import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
 import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobsReducer";

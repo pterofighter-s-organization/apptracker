@@ -4,6 +4,7 @@
 //css
 import "../styles/OptionButton.css"
 import "./RestoreOptionButton.css"
+import "../../styles/Buttons.css"
 
 export default function RestoreOptionButton({ handleRestore }) {
 

@@ -1,6 +1,4 @@
-import { convertLocaltoUTC, convertUTCtoLocal, findTodayUTCDate } from "../utils/dateTimeUtils"
-import { strFormatter } from "../utils/formatUtils"
-
+import { convertLocaltoUTC, convertUTCtoLocal, findTodayUTCDate } from "../utils/dateTime"
 
 export const updateJobFormErrors = (formData, errors) => {
     const updatedFormState = { ...formData }
@@ -26,12 +24,12 @@ export const createJobData = (formState) => {
     //convert form data back to backend data
     return {
         application_link: formState.relatedSite.value || '',
-        company: strFormatter(formState.company.value) || '',
+        company: formState.company.value || '',
         cover_letter_link: formState.coverLetterLink.value || '',
         date_applied: formState.appliedDate.value?.length > 0 ? convertLocaltoUTC(formState.appliedDate.value) : null,
         date_created: formState.createdDate.value || null,
         description: formState.description.value || '',
-        position: strFormatter(formState.job.value) || '',
+        position: formState.job.value || '',
         resume_link: formState.resumeLink.value || '',
         salary: formState.paid.value || '',
         salary_rate: formState.rate.value || '',
@@ -69,6 +67,22 @@ export const updateDateApplied = (stage, dateData, isConvertLocal) => {
         }
         return null
     }
+}
+
+export const handleChangeFromStage = (stage, appliedDate) => {
+    //only to detect if is applied, then help prefill the date when changing from any stage to applied when not present.
+    return (
+        {
+            appliedDate: {
+                value: updateDateApplied(stage, appliedDate, true),
+                error: ""
+            },
+            stage: {
+                value: stage,
+                error: ""
+            }
+        }
+    )
 }
 
 export const filterJobsByStage = (stage, jobs) => {

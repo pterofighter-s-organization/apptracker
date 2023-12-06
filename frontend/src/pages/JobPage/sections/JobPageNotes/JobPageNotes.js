@@ -1,8 +1,8 @@
 import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/CardList";
-import { CardsHeader } from "../../../../components/CardsHeader";
+import { CardList } from "../../../../components/Cards/CardList";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
@@ -118,7 +118,6 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
                 cards={filteredData}
                 isPreview={isPreview}
                 isShow={isShow}
-                isDashboard={true}
             />
         </CardsSectionLayout>
     )

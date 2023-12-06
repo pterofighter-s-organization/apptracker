@@ -1,13 +1,13 @@
 import { useContext, useEffect, useMemo } from "react";
 
 //components
-import { CardList } from "../../components/CardList";
+import { CardList } from "../../components/Cards/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 
 //layouts
-import { HeaderLayout } from "../../layouts/HeaderLayout1";
+import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
 import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";
 import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
@@ -27,7 +27,7 @@ import { TasksContext } from "../../hooks/contexts/TasksContext";
 
 //css
 import "./TaskBoard.css"
-import { CardsHeader } from "../../components/CardsHeader";
+import { CardsHeader } from "../../components/Cards/CardsHeader";
 
 function TaskBoard({ status, handleStatus }) {
 

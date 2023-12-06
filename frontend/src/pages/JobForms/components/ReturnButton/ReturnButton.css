@@ -1,0 +1,17 @@
+.return-button {
+    text-align: center;
+    text-decoration: none;
+    outline: 1.25px solid #333333;
+    color: #333333;
+    background-color: transparent;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    margin-top: -0.5rem;
+}
+
+.return-button:hover {
+    outline: none;
+    text-decoration: underline;
+}

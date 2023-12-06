@@ -11,6 +11,7 @@
 
 .task-form{
     display: grid;
+    align-items: baseline;
     gap: 0.75rem;
 }
 
