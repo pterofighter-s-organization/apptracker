@@ -16,7 +16,7 @@ import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLa
 import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
 
 //helpers
-import { createTaskData, updateTaskFormErrors, sortTasksByDateDue } from "../../../../helpers/taskHelpers";
+import { createTaskData, updateTaskFormErrors, sortTasksByDateDue } from "../../../../helpers/task";
 import { sortDataByLatest, filterDataByStatus } from "../../../../helpers/helpers";
 
 //utils

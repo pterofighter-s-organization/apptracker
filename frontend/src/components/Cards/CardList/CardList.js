@@ -18,7 +18,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
 
     const CARDS = {
         jobs: {
-            width: "17rem",
+            width: "16.75rem",
             Component: JobCard
         },
         tasks: {

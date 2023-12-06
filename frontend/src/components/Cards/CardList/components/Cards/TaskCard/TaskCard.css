@@ -1,22 +1,10 @@
-.task-card-container{
-    background-color: #fff;
-    border-radius: 1rem;
-    padding: 1rem;
+.task-card-layout{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     justify-content: space-between;
     text-transform: capitalize;
     text-decoration: none;
-    color: black;
-}
-
-.task-card-header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    /* padding: 0.5rem 0; */
 }
 
 .task-card-job{
@@ -27,17 +15,13 @@
     overflow: hidden;
     flex-grow: 1;
     margin-bottom: 0rem;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--redirect-button-color);
 }
 
-.task-card-container:hover .task-card-job{
+.task-card-layout:hover .task-card-job{
     text-decoration: underline;
     color: blue;
-}
-
-.task-card-container:hover{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .task-card-title{
@@ -55,7 +39,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     text-transform: initial;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .task-card-datetime{

@@ -2,16 +2,9 @@
 .note-card-header {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.note-card-title {
-    display: flex;
-    flex-direction: row;
     gap: 0.25rem;
     overflow: hidden;
-    font-size: 1.25em;
+    font-size: 1.1rem;
     flex-grow: 1;
     /**/
     color: var(--redirect-button-color);
@@ -19,12 +12,12 @@
     transition: color 150ms ease-in-out;
 }
 
-.note-card-title:hover {
+.note-card-header:hover {
     color: blue;
     text-decoration: underline;
 }
 
-.note-card-job-title{
+.note-card-job{
     max-width: 85%;
     text-wrap: nowrap;
     white-space: nowrap;
@@ -32,7 +25,3 @@
     text-overflow: ellipsis;
     text-transform: capitalize;
 }
-
-/* .note-card-job-title::first-letter {
-    text-transform: uppercase;
-} */

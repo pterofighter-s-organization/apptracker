@@ -13,18 +13,20 @@ import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/Archiv
 import { dateTimeFormatter } from "../../../../../../utils/format"
 
 //helpers
-import { updateDateApplied } from "../../../../../../helpers/applicationHelpers"
+import { updateDateApplied } from "../../../../../../helpers/application"
 
 //context-providers
 import { JobsContext } from "../../../../../../hooks/contexts/JobsContext"
 
 //css
 import "./JobCard.css"
+import "../styles/Cards.css"
+import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
+import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 export default function JobCard({ card }) {
 
     const navigate = useNavigate()
-    const jobCardId = `job-card-${card.application_id}`
     const { updateApplication, deleteApplication } = useContext(JobsContext)
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
@@ -92,20 +94,18 @@ export default function JobCard({ card }) {
     return (
         <Link
             to={`/job/${card.application_id}`}
-            id={jobCardId}
-            key={jobCardId}
-            className="job-card"
+            id={`job-card-${card.application_id}`}
+            key={`job-card-${card.application_id}`}
+            className="tracker-card job-card-layout"
         >
-            <div className="job-card-top">
-                <div style={{ flexGrow: 1 }}>
-                    <StageDropdown
-                        key={card.application_id}
-                        id={jobCardId}
-                        stage={card.status}
-                        handleStage={handleStage}
-                    />
-                </div>
-                <div className="job-card-top-buttons">
+            <CardHeaderLayout>
+                <StageDropdown
+                    key={card.application_id}
+                    id={`job-card-${card.application_id}`}
+                    stage={card.status}
+                    handleStage={handleStage}
+                />
+                <CardButtonsLayout>
                     {
                         card.archived ?
                             <>
@@ -126,8 +126,8 @@ export default function JobCard({ card }) {
                                 />
                             </>
                     }
-                </div>
-            </div>
+                </CardButtonsLayout>
+            </CardHeaderLayout>
             <div className="job-card-details">
                 <h6 className="job-card-details-text" style={{ color: "gray" }}>
                     {card.company}

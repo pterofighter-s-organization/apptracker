@@ -5,6 +5,7 @@ import { CardList } from "../../components/Cards/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
+import { CardsHeader } from "../../components/Cards/CardsHeader";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -17,17 +18,13 @@ import { withStatusControl } from "../../hocs/withStatusControl";
 
 //helpers
 import { filterDataByStatus, sortDataByLatest } from "../../helpers/helpers";
-import { sortTasksByDateDue } from "../../helpers/taskHelpers";
+import { sortTasksByDateDue } from "../../helpers/task";
 
 //constants
 import { APP_STATUS_COLORS } from "../../constants/constants";
 
 //context
 import { TasksContext } from "../../hooks/contexts/TasksContext";
-
-//css
-import "./TaskBoard.css"
-import { CardsHeader } from "../../components/Cards/CardsHeader";
 
 function TaskBoard({ status, handleStatus }) {
 

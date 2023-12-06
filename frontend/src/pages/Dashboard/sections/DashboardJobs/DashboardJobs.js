@@ -10,7 +10,7 @@ import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
-import { filterJobsByStage } from "../../../../helpers/applicationHelpers";
+import { filterJobsByStage } from "../../../../helpers/application";
 
 //layouts
 import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";

@@ -5,8 +5,12 @@ import { showSubmitNotification } from "../../../../../../NotificationList/compo
 import { RestoreOptionButton } from "../../../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../../../Buttons/OptionButtons/DeleteOptionButton"
 
+//private-components
+import { NoteHeader } from "../components/NoteHeader"
+
 //private-layouts
-import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
+import { CardHeaderLayout } from "../../layouts/CardHeaderLayout"
+import { CardButtonsLayout } from "../../layouts/CardButtonsLayout"
 
 //contexts
 import { NotesContext } from "../../../../../../../hooks/contexts/NotesContext"
@@ -17,7 +21,6 @@ import "../NoteCard.css"
 export default function ArchivedNoteCard({ card }) {
 
     const { updateJobNote, deleteJobNote } = useContext(NotesContext)
-    const noteCardId = `note-card-${card.note_id}`
 
     const handleRestore = (e) => {
         e.preventDefault()
@@ -48,23 +51,22 @@ export default function ArchivedNoteCard({ card }) {
     }
 
     return (
-        <div
-            className="note-card"
-            key={noteCardId}
-            id={noteCardId}
-        >
-            <NoteHeaderLayout
-                id={card.note_id}
-                jobId={card.application_id}
-                job={card.position}
-            >
-                <RestoreOptionButton
-                    handleRestore={handleRestore}
+        <>
+            <CardHeaderLayout>
+                <NoteHeader
+                    id={card.note_id}
+                    job={card.position}
+                    link={`/job/${card.application_id}`}
                 />
-                <DeleteOptionButton
-                    handleDelete={handleDelete}
-                />
-            </NoteHeaderLayout>
+                <CardButtonsLayout>
+                    <RestoreOptionButton
+                        handleRestore={handleRestore}
+                    />
+                    <DeleteOptionButton
+                        handleDelete={handleDelete}
+                    />
+                </CardButtonsLayout>
+            </CardHeaderLayout>
             <div className="note-card-content">
                 {
                     card.note.length > 0 ?
@@ -72,7 +74,7 @@ export default function ArchivedNoteCard({ card }) {
                             <pre className="note-card-content-text">
                                 {card.note}
                             </pre>
-                            <div className="note-card-starter note-card-content-hover">
+                            <div className="note-card-hover-layout note-card-hover-content">
                                 Please restore to edit.
                             </div>
                         </>
@@ -82,6 +84,6 @@ export default function ArchivedNoteCard({ card }) {
                         </div>
                 }
             </div>
-        </div>
+        </>
     )
 }

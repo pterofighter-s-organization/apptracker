@@ -11,7 +11,7 @@ import { InputFooter } from "../../../components/Inputs/InputFooter"
 import { InputLayout } from "../../../layouts/InputLayout"
 
 //helpers
-import { isPasswordValid } from "../../../helpers/formHelpers"
+import { isPasswordValid } from "../../../helpers/form"
 
 //privater-components
 import { AuthFormHeader } from "../components/AuthFormHeader"

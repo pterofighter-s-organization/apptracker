@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo } from "react";
 //components
 import { CardList } from "../../components/Cards/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 import { CardsHeader } from "../../components/Cards/CardsHeader";
 
@@ -24,9 +25,6 @@ import { NotesContext } from "../../hooks/contexts/NotesContext";
 //constants
 import { APP_STATUS_COLORS } from "../../constants/constants";
 
-//css
-import "./NoteBoard.css"
-
 function NoteBoard({ status, handleStatus }) {
 
     const { notes, getNotes } = useContext(NotesContext)
@@ -46,7 +44,9 @@ function NoteBoard({ status, handleStatus }) {
     }, [notes.data, status])
 
     if (notes.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (notes.errors) {

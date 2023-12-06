@@ -18,8 +18,8 @@ import { JOB_FORM_DATA } from "../../../constants/constants";
 import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
-import { updateJobFormData, updateJobFormErrors, createJobData, handleChangeFromStage } from "../../../helpers/applicationHelpers";
-import { handleAPIErrors } from "../../../helpers/formHelpers";
+import { updateJobFormData, updateJobFormErrors, createJobData, handleChangeFromStage } from "../../../helpers/application";
+import { handleAPIErrors } from "../../../helpers/form";
 
 //utils
 import { createObjCopy } from "../../../utils/memory";

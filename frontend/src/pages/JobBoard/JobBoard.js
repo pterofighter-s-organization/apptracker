@@ -20,14 +20,11 @@ import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../constants/constants";
 import { withStatusControl } from "../../hocs/withStatusControl";
 
 //helpers
-import { filterJobsByStage } from "../../helpers/applicationHelpers";
+import { filterJobsByStage } from "../../helpers/application";
 import { filterDataByStatus } from "../../helpers/helpers";
 
 //contexts
 import { JobsContext } from "../../hooks/contexts/JobsContext";
-
-//css
-import "./JobBoard.css"
 
 function JobBoard({ status, handleStatus }) {
 

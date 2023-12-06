@@ -21,7 +21,7 @@ import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
 import { sortDataByLatest } from "../../../../helpers/helpers";
-import { sortTasksByDateDue } from "../../../../helpers/taskHelpers";
+import { sortTasksByDateDue } from "../../../../helpers/task";
 
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";

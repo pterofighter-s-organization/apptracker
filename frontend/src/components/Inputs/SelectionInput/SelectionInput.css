@@ -1,7 +1,7 @@
 .selection-input-field {
-    background-color: #E5E4E2;
+    background-color: #f2efef;
     border-radius: 0.5rem;
-    /* border: 1.45px solid #E5E4E2; */
+    /* border: 1.45px solid #f2efef; */
     padding: 0.85rem;
     width: fit-content;
 }
@@ -9,6 +9,6 @@
 /* @media (any-safari) {
     .selection-input-field {
         padding: 0.75rem 1em;
-        border: 1.45px solid #E5E4E2;
+        border: 1.45px solid #f2efef;
     }
 } */

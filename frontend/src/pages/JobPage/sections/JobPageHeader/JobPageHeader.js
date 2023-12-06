@@ -10,7 +10,7 @@ import { DeleteOptionButton } from "../../../../components/Buttons/OptionButtons
 import { ArchiveOptionButton } from "../../../../components/Buttons/OptionButtons/ArchiveOptionButton"
 
 //helpers
-import { updateDateApplied } from "../../../../helpers/applicationHelpers"
+import { updateDateApplied } from "../../../../helpers/application"
 
 //contexts
 import { JobContext } from "../../../../hooks/contexts/JobContext"

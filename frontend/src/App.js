@@ -26,7 +26,6 @@ import './App.css'
 export default function App() {
 
   return (
-    // mimic footer with pb-5
     <div className="App">
       <NotificationList />
       <Router>

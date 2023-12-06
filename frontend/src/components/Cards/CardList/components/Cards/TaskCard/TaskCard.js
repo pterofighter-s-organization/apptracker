@@ -7,6 +7,10 @@ import { RestoreOptionButton } from "../../../../../Buttons/OptionButtons/Restor
 import { DeleteOptionButton } from "../../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
+//private-layouts
+import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
+import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
+
 //utils
 import { dateTimeFormatter, timerFormatter } from "../../../../../../utils/format"
 
@@ -15,6 +19,7 @@ import { TasksContext } from "../../../../../../hooks/contexts/TasksContext"
 
 //css
 import "./TaskCard.css"
+import "../styles/Cards.css"
 
 export default function TaskCard({ card }) {
 
@@ -85,28 +90,30 @@ export default function TaskCard({ card }) {
             to={"/job/" + card.application_id}
             key={taskCardId}
             id={taskCardId}
-            className="task-card-container"
+            className="tracker-card task-card-layout"
         >
-            <div className="task-card-header">
+            <CardHeaderLayout>
                 <h5 className="task-card-job">
                     {card.company} / {card.position}
                 </h5>
-                {
-                    card.archived ?
-                        <>
-                            <RestoreOptionButton
-                                handleRestore={handleRestore}
+                <CardButtonsLayout>
+                    {
+                        card.archived ?
+                            <>
+                                <RestoreOptionButton
+                                    handleRestore={handleRestore}
+                                />
+                                <DeleteOptionButton
+                                    handleDelete={handleDelete}
+                                />
+                            </>
+                            :
+                            <ArchiveOptionButton
+                                handleArchive={handleArchive}
                             />
-                            <DeleteOptionButton
-                                handleDelete={handleDelete}
-                            />
-                        </>
-                        :
-                        <ArchiveOptionButton
-                            handleArchive={handleArchive}
-                        />
-                }
-            </div>
+                    }
+                </CardButtonsLayout>
+            </CardHeaderLayout>
             <div className="task-card-title">
                 {card.title}
             </div>

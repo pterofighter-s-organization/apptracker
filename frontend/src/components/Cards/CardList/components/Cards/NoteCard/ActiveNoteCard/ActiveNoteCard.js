@@ -5,9 +5,14 @@ import { showSubmitNotification } from "../../../../../../NotificationList/compo
 import { SaveOptionButton } from "../../../../../../Buttons/OptionButtons/SaveOptionButton"
 import { EditOptionButton } from "../../../../../../Buttons/OptionButtons/EditOptionButton"
 import { ArchiveOptionButton } from "../../../../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { TextareaInput } from "../../../../../../Inputs/TextareaInput"
+
+//private-components
+import { NoteHeader } from "../components/NoteHeader"
 
 //private-layout
-import { NoteHeaderLayout } from "../layouts/NoteHeaderLayout"
+import { CardHeaderLayout } from "../../layouts/CardHeaderLayout"
+import { CardButtonsLayout } from "../../layouts/CardButtonsLayout"
 
 //context
 import { NotesContext } from "../../../../../../../hooks/contexts/NotesContext"
@@ -20,7 +25,6 @@ export default function ActiveNoteCard({ card }) {
     const { updateJobNote } = useContext(NotesContext)
     const [value, setValue] = useState(``)
     const [isEdit, setIsEdit] = useState(false)
-    const noteCardId = `note-card-${card.note_id}`
 
     useEffect(() => {
         setValue(card.note)
@@ -67,38 +71,37 @@ export default function ActiveNoteCard({ card }) {
     }
 
     return (
-        <div
-            className="note-card"
-            key={noteCardId}
-            id={noteCardId}
-        >
-            <NoteHeaderLayout
-                id={card.note_id}
-                jobId={card.application_id}
-                job={card.position}
-            >
-                {
-                    isEdit ?
-                        <SaveOptionButton
-                            handleSave={handleSave}
-                        />
-                        :
-                        <EditOptionButton
-                            handleEdit={handleEdit}
-                        />
-                }
-                <ArchiveOptionButton
-                    handleArchive={handleArchive}
+        <>
+            <CardHeaderLayout>
+                <NoteHeader
+                    id={card.note_id}
+                    job={card.position}
+                    link={`/job/${card.application_id}`}
                 />
-            </NoteHeaderLayout>
+                <CardButtonsLayout>
+                    {
+                        isEdit ?
+                            <SaveOptionButton
+                                handleSave={handleSave}
+                            />
+                            :
+                            <EditOptionButton
+                                handleEdit={handleEdit}
+                            />
+                    }
+                    <ArchiveOptionButton
+                        handleArchive={handleArchive}
+                    />
+                </CardButtonsLayout>
+            </CardHeaderLayout>
             {
                 isEdit ?
-                    <textarea
-                        id={"textarea-" + card.note_id}
-                        className="note-card-textarea"
+                    <TextareaInput
+                        height={"100%"}
+                        name={"note"}
                         value={value}
-                        placeholder="Remember to save above after edit."
-                        onChange={handleValue}
+                        placeholder={"Remember to save above after edit."}
+                        handleChange={handleValue}
                     />
                     :
                     <div className="note-card-content">
@@ -110,7 +113,7 @@ export default function ActiveNoteCard({ card }) {
                                     </pre>
                                     <button
                                         type="button"
-                                        className="note-card-starter note-card-content-hover"
+                                        className="note-card-hover-layout note-card-hover-content"
                                         onClick={handleEdit}
                                     >
                                         click to continue editing
@@ -119,7 +122,7 @@ export default function ActiveNoteCard({ card }) {
                                 :
                                 <button
                                     type="button"
-                                    className="note-card-starter"
+                                    className="note-card-hover-layout"
                                     onClick={handleEdit}
                                 >
                                     click to start editing
@@ -127,6 +130,6 @@ export default function ActiveNoteCard({ card }) {
                         }
                     </div>
             }
-        </div>
+        </>
     )
 }

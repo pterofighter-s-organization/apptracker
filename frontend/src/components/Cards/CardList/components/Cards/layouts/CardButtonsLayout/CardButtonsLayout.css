@@ -1,0 +1,6 @@
+
+.card-buttons-layout{
+    display: flex;
+    flex-direction: row;
+    gap: 0.35rem;
+}
