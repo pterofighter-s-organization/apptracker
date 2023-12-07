@@ -119,18 +119,18 @@ export default function JobFormDetails({ formData, handleChange }) {
                             errorMessage={formData.resumeLink.error}
                         />
                     </InputLayout>
-                    <InputLayout isError={formData.relatedSite.error.length > 0}>
+                    <InputLayout isError={formData.coverLetterLink.error.length > 0}>
                         <InputHeader
-                            header={"Related site"}
+                            header={"Cover letter link"}
                         />
                         <TextInput
-                            name={"relatedSite"}
-                            value={formData.relatedSite.value}
+                            name={"coverLetterLink"}
+                            value={formData.coverLetterLink.value}
                             handleChange={handleChange}
                         />
                         <InputFooter
-                            footer={"where you founded?"}
-                            errorMessage={formData.relatedSite.error}
+                            footer={"your cover letter doc link."}
+                            errorMessage={formData.coverLetterLink.error}
                         />
                     </InputLayout>
                 </div>

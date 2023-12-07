@@ -53,7 +53,7 @@ export default function JobPageDetails() {
             <div className="job-page-section job-page-details-section job-page-links">
                 <HyperLink
                     id={job.data.application_id}
-                    link={job.data.related_link}
+                    link={job.data.application_link}
                     label={"related link"}
                 />
                 <HyperLink

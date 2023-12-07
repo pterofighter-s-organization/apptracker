@@ -6,6 +6,8 @@ import "./LoadingDisplay.css"
 export default function LoadingDisplay(){
     
     return(
-        <>Loading...</>
+        <div className="loading-display">
+            
+        </div>
     )
 }

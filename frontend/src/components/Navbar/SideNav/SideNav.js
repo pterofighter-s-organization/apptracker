@@ -6,6 +6,9 @@ import { withToggleControl } from "../../../hocs/withToggleControl"
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
 
+//utils
+import { strFormatter } from "../../../utils/format"
+
 //css
 import "./SideNav.css"
 
@@ -19,6 +22,9 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             <Link
                 to={HOME_ROUTE.route}
                 className="sidenav-logo"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={`Back to home`}
             >
                 <img
                     className="sidenav-logo-img"
@@ -30,12 +36,14 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 </div>
             </Link>
             <hr className="sidenav-divider"/>
-            {/* <div className="sidenav-margin"/> */}
             <button
                 type="button"
                 className="button sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
                 onClick={toggle ? handleUntoggle : handleToggle}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={toggle ? `Minimize sidebar`: `Expand sidebar`}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
@@ -46,6 +54,9 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             <Link
                 to={NEW_APP_ROUTE.route}
                 className="button sidenav-button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={`Track a new job`}
             >
                 <i className={`sidenav-button-icon ${NEW_APP_ROUTE.icon}`}></i>
                 <div className="sidenav-button-text">
@@ -59,6 +70,9 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                         to={route.route}
                         className="button sidenav-button"
                         key={route.text}
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title={`${strFormatter(route.text)}`}
                     >
                         <i className={`sidenav-button-icon ${route.icon}`} />
                         <div className="sidenav-button-text">
@@ -71,6 +85,9 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
             <Link
                 to={LOGIN_ROUTE.route}
                 className="button sidenav-button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={`Signing in`}
             >
                 <i className={`sidenav-button-icon ${LOGIN_ROUTE.icon}`} />
                 <div className="sidenav-button-text">

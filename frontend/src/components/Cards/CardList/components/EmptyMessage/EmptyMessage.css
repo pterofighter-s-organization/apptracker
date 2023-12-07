@@ -1,9 +1,8 @@
-.empty-message{
+.empty-message-layout{
     width: 100%;
     background-color: #fff;
-    padding: 2em;
-    margin: 0.5rem 0;
-    border-radius: 1em;
+    padding: 2rem;
+    border-radius: 1rem;
     /**/
     display: flex;
     flex-wrap: wrap;

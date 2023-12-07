@@ -24,7 +24,7 @@ export default function JobFormDescription({ formData, handleChange }) {
                     handleChange={handleChange}
                 />
                 <InputFooter
-                    footer={"Place the given description."}
+                    footer={"Put the given job description here."}
                     errorMessage={formData.description.error}
                 />
             </InputLayout>

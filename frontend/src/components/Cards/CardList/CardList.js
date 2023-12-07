@@ -26,7 +26,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
             Component: TaskCard
         },
         notes: {
-            width: "17rem",
+            width: "16.75rem",
             Component: NoteCard
         }
     };

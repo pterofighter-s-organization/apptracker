@@ -1,3 +1,5 @@
+# for direct import use
+
 {
     "moduleResolution": "node",
     "compilerOptions": {
@@ -5,3 +7,7 @@
     },
     "include": ["src"]
   }
+
+# later can add
+
+- quill bar for text input fields. adding options for users to edit and type.

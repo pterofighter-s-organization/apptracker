@@ -2,7 +2,7 @@
     background-color: #f2efef;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
     gap: 0.25rem;
     padding: 0.5rem 1.25rem;
     border-radius: 2rem;

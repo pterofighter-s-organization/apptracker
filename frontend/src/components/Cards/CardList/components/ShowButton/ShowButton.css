@@ -7,6 +7,12 @@
     text-transform: capitalize;
 }
 
+.show-button:hover {
+    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* .show-button::first-letter{
     text-transform: uppercase;
 } */
@@ -26,6 +32,6 @@
     gap: 0.5rem;
 }
 
-.show-button-container-empty{
+.show-button-container-empty {
     display: none;
 }
