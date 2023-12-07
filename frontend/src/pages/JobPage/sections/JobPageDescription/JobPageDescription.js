@@ -19,7 +19,7 @@ export default function JobPageDescription() {
             <pre className="job-page-description">
                 {
                     job.data.description.length <= 0 ?
-                        "No description available"
+                        "No description available."
                         :
                         job.data.description
                 }
