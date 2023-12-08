@@ -78,6 +78,7 @@ export default function JobFormDetails({ formData, handleChange }) {
                                 isRequired={true}
                             />
                             <SelectionInput
+                                id={"rate"}
                                 name={"rate"}
                                 options={["hr", "mo", "yr"]}
                                 value={formData.rate.value}
