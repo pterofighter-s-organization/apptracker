@@ -62,7 +62,7 @@ export default function JobNewForm() {
         createApplication(1, createJobData(formData))
             .then((result) => {
                 if (result.success) {
-                    alert("Job successfully tracked! Now redirecting you to the job page.")
+                    alert("Successfully submitted! Now redirecting you to the job page.")
                     navigate(`/job/${result.data.application_id}`)
                 } else {
                     alert(
