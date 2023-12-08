@@ -41,7 +41,7 @@
 .error-display-button{
     border-radius: 2rem;
     text-transform: capitalize;
-    padding: 1em 2em;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,7 +51,7 @@
 .error-display-reload-button{
     background-color: #595959;
     color: white;
-    font-size: 0.5em;
+    font-size: 0.45em;
 }
 
 .error-display-home-link{
