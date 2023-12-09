@@ -15,7 +15,7 @@ export default function Navbar() {
 
         const handleResize = () => {
             //breakpoint for dropdown nav
-            setIsMobile(window.innerWidth < SCREEN_BREAKPOINTS["lg"]) //px
+            setIsMobile(window.innerWidth <= SCREEN_BREAKPOINTS["lg"]) //px
         }
 
         handleResize() //call the function to check the current size
