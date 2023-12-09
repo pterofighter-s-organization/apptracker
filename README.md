@@ -5,9 +5,9 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 
 **The time used in this app is based off your computer's local time.**
 
-## What's New Compared to v1.0?
+## What's New and Different Compared to v1.0?
 
-Check out this doc below:
+Check out v2.0 Notes & Patches below:
 https://docs.google.com/document/d/1gkx_9STR1gbXEw31rTgKh1j8LjoQFzjNdoMKOIzA66g/edit?usp=sharing
 
 # Technologies Used
@@ -49,7 +49,8 @@ Here are some snapshots of how the application looks:
 ![Screenshot](./images/App_v2.0_Screenshots/Editing_Job_Form_(Bottom).png)
 
 ## Archived Board
-- This is where you can restore or delete any tasks, notes, and applications.
+- With a simple filter change in status, you can restore or delete any tasks, notes, and applications that you archived.
+- This ensures users don't accidentally delete anything by accident and have a chance to restore it. (Like Recycle Bin)
 
 ![Screenshot](./images/App_v2.0_Screenshots/Archived_Board.png)
 
@@ -58,7 +59,7 @@ Here are some snapshots of how the application looks:
 
 ![Screenshot](./images/App_v2.0_Screenshots/Jobs_Sort_By_Stage.png)
 
-## Page For All Jobs, Tasks, Notes
+## Page For All Jobs, Tasks, and Notes
 
 ![Screenshot](./images/App_v2.0_Screenshots/All_Jobs.png)
 ![Screenshot](./images/App_v2.0_Screenshots/All_Tasks.png)
