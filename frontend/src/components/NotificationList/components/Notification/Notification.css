@@ -16,6 +16,14 @@
     text-transform: capitalize;
 }
 
+@media (min-width: 576px) {
+    @-moz-document url-prefix() {
+        .notification-msg {
+            text-align: center;
+        }
+    }
+}
+
 .notification-msg::first-letter {
     text-transform: uppercase;
 }

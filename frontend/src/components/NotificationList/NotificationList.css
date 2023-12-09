@@ -14,3 +14,10 @@
     left: 50%;
     transform: translate(-50%, 0%);
 }
+
+/*css specific for firefox*/
+@-moz-document url-prefix() {
+    .notification-list {
+        transform: translate(-45%, 0%);
+    }
+}
