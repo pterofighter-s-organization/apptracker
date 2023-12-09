@@ -11,9 +11,25 @@
     background-color: #f2efef;
 }
 
-.input-layout-error .input-field {
+.input-layout-error .input-field, .input-field:invalid {
     /*put all error classes below the paired class, or just put !important so it overides it*/
     background-color: #fce4e4 !important;
     outline: 1px solid #cc0033 !important;
     color: #cc0033 !important;
+    animation: invalid-shake 0.1s ease-in-out;
+}
+
+@keyframes invalid-shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(0.2rem);
+    }
+
+    75% {
+        transform: translateX(-0.2rem);
+    }
 }
