@@ -58,6 +58,12 @@ Here are some snapshots of how the application looks:
 
 ![Screenshot](./images/App_v2.0_Screenshots/Jobs_Sort_By_Stage.png)
 
+## Page For All Jobs, Tasks, Notes
+
+![Screenshot](./images/App_v2.0_Screenshots/All_Jobs.png)
+![Screenshot](./images/App_v2.0_Screenshots/All_Tasks.png)
+![Screenshot](./images/App_v2.0_Screenshots/All_Notes.png)
+
 # Resources
 
 Image: Css Basic Miscellany Flat icon  
