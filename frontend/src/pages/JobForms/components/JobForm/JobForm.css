@@ -1,5 +1,4 @@
-
-.job-form{
+.job-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -12,13 +11,13 @@
     max-width: 1400px;
 }
 
-@media (max-width: 768px){
-    .job-form{
+@media (max-width: 768px) {
+    .job-form {
         padding: 1rem;
     }
 }
 
-.job-form .info-reminder{
+.job-form .info-reminder {
     font-size: 0.9rem;
     margin-left: 0.1rem;
 }

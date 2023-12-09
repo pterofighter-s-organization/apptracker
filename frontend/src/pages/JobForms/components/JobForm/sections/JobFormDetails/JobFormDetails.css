@@ -19,7 +19,7 @@
 
 .job-form-salary {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0.5rem;
     align-items: baseline;
 }
@@ -30,8 +30,12 @@
     }
 }
 
-@media (max-width: 250px) {
+@media (max-width: 576px) {
     .job-form-salary {
         grid-template-columns: 1fr;
+    }
+
+    .job-form-salary > *{
+        width: fit-content;
     }
 }
