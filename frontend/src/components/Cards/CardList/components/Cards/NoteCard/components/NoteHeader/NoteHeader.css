@@ -1,0 +1,27 @@
+
+.note-card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    overflow: hidden;
+    font-size: 1.1rem;
+    flex-grow: 1;
+    /**/
+    color: var(--redirect-button-color);
+    text-decoration: none;
+    transition: color 150ms ease-in-out;
+}
+
+.note-card-header:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.note-card-job{
+    max-width: 85%;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}

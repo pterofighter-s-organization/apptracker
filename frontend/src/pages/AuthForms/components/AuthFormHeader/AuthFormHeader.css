@@ -1,0 +1,11 @@
+
+.auth-form-header{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.auth-form-header>*::first-letter{
+    text-transform: uppercase;
+}

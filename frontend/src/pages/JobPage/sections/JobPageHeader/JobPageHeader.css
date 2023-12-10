@@ -1,0 +1,16 @@
+
+
+.job-page-header{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+}
+
+.job-page-option-buttons-layout{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+

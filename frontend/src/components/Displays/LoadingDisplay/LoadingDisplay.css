@@ -1,0 +1,26 @@
+.loading-display-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: inherit;
+    height: 25rem;
+}
+
+.loading-icon{
+    border: 0.5rem solid #e5e4e2;
+    border-radius: 50%;
+    border-top: 0.5rem solid black;
+    width: 5rem;
+    height: 5rem;
+    animation: spinning 1s linear infinite;
+}
+
+@keyframes spinning{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

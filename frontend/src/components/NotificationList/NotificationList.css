@@ -1,0 +1,23 @@
+.notification-list {
+    position: fixed;
+    /* top: 0; */
+    /*notifications gets overflowed when using top. fixed* with not using appendchild but insertchild*/
+    /* right: 0; */
+    /* bottom: 2%; */
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1;
+    top: 2.5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+/*css specific for firefox*/
+@-moz-document url-prefix() {
+    .notification-list {
+        transform: translate(-45%, 0%);
+    }
+}

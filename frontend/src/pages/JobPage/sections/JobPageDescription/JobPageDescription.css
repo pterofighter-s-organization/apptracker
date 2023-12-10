@@ -1,0 +1,14 @@
+.job-page-description-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.job-page-description {
+    font-family: "Work Sans", sans-serif;
+    white-space: pre-wrap;
+    /*making sure link wont overflow*/
+    overflow-wrap: anywhere;
+    padding: 0 0.1rem;
+}

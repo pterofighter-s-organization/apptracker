@@ -1,0 +1,33 @@
+
+.stage-dropdown-face{
+    font-size: 0.8rem;
+}
+
+.stage-dropdown-options{
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+}
+
+/*card's width*/
+@media (min-width: 17.5rem){
+    .stage-dropdown-options{
+        width: 16.5rem;
+    }
+}
+
+@media (max-width: 17.5rem){
+    .stage-dropdown-options{
+        width: inherit;
+    }
+}
+
+.stage-dropdown-option{
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-transform: capitalize;
+    width: fit-content;
+}

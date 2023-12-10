@@ -1,0 +1,22 @@
+
+
+.redirect-button{
+    background-color: var(--redirect-button-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    /* width: 100%; */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redirect-button-label{
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    text-transform: capitalize;
+    max-width: 100%;
+}

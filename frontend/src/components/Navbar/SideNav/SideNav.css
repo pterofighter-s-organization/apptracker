@@ -1,0 +1,118 @@
+.sidenav {
+    background-color: #fff;
+    height: 100vh;
+    transition: width 0.4s ease-in-out;
+    position: sticky;
+    /* sticky top -> making sure the navbar stays same place when scrolled down */
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.minimized-sidenav {
+    width: 5rem;
+    padding: 2rem 2rem;
+}
+
+.expanded-sidenav {
+    width: 16rem;
+    padding: 2rem 1.5rem;
+}
+
+.sidenav-button {
+    text-decoration: none;
+    background-color: #f2efef;
+    padding: 0.5em 0.75em;
+    border-radius: 2em;
+    color: #090909;
+}
+
+.sidenav-button:hover{
+    filter: brightness(1.25);
+    -webkit-filter: brightness(1.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.expanded-sidenav .sidenav-button {
+    align-self: stretch;
+    padding: 0.75em 1.75em;
+    /**/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sidenav-button-icon {
+    font-size: 1em;
+}
+
+.sidenav-button-text {
+    font-weight: 400;
+    color: black;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    /**/
+    text-wrap: nowrap;
+    /* making sure there's no weird transition caused by it */
+    white-space: nowrap;
+    /* for safari */
+    overflow: hidden;
+}
+
+.minimized-sidenav .sidenav-button .sidenav-button-text {
+    display: none;
+}
+
+.minimized-sidenav .sidenav-logo .sidenav-button-text {
+    display: none;
+}
+
+.sidenav-logo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 1.15rem;
+    padding: 0 1rem;
+    align-items: center;
+    /* justify-content: center; */
+    text-decoration: none;
+    width: 100%;
+}
+
+.minimized-sidenav .sidenav-logo{
+    /*justify-content centers the image tag so it can allow 100% and it can center the image*/
+    justify-content: center;
+}
+
+.sidenav-logo-img {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.minimized-sidenav .sidenav-button .sidenav-minimize-icon {
+    display: none;
+}
+
+.expanded-sidenav .sidenav-button .sidenav-expand-icon {
+    display: none;
+}
+
+.minimized-sidenav .sidenav-button .sidenav-expand-icon {
+    display: initial;
+}
+
+.expanded-sidenav .sidenav-divider{
+    /* width: calc(16rem - 6.25rem); */
+    width: 100%;
+    max-width: 100%;
+}
+
+.minimized-sidenav .sidenav-divider{
+    width: 1.75rem;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+}

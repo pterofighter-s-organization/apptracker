@@ -1,0 +1,20 @@
+.task-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.task-form {
+    display: grid;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .task-form {
+        grid-template-columns: 4fr 1fr;
+    }
+}

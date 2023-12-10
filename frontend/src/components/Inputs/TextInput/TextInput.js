@@ -1,20 +1,19 @@
 
-export default function TextInput({ value, updateValue }) {
 
-    function changeInput(event) {
-        // console.log(event.target.value);
-        event.preventDefault()
-        const newValue = event.target.value
-        updateValue(newValue)
-    }
+//css
+import "./TextInput.css"
+import "../styles/Inputs.css"
+
+export default function TextInput({ name, value, handleChange }) {
 
     return (
         <input
-            type="text"
+            type="input"
+            className="text-input-field input-field"
+            name={name}
             value={value}
-            placeholder={"Enter text"}
-            className={`form-control p-3 bg-body`}
-            onChange={(e) => changeInput(e)}
+            placeholder={name.toUpperCase()}
+            onChange={handleChange}
         />
     )
 }

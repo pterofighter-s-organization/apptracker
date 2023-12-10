@@ -1,0 +1,11 @@
+.cards-section-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.cards-section-layout-preview {
+    background-color: #f5f5f5;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+}

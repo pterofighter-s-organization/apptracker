@@ -1,15 +1,24 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-//pages
-import { Dashboard } from './pages/Boards/Dashboard';
-import { ArchivedBoard } from './pages/Boards/ArchivedBoard';
-import { PinnedApplications } from './pages/PinnedApplications';
-import { ApplicationDetails } from './pages/ApplicationDetails'
-import { EditApplicationForm } from './pages/ApplicationForms/EditApplicationForm';
-import { NewApplicationForm } from './pages/ApplicationForms/NewApplicationForm';
+//components
+import { NotificationList } from './components/NotificationList';
 
-//layouts
-import { PageLayout } from './layouts/PageLayout';
+//pages
+import { Dashboard } from './pages/Dashboard';
+import { JobBoard } from './pages/JobBoard';
+import { TaskBoard } from './pages/TaskBoard';
+import { NoteBoard } from './pages/NoteBoard';
+import { JobPage } from './pages/JobPage';
+import { JobNewForm } from './pages/JobForms/JobNewForm';
+import { JobEditForm } from './pages/JobForms/JobEditForm';
+import { LoginForm } from './pages/AuthForms/LoginForm';
+import { SignupForm } from './pages/AuthForms/SignupForm';
+
+//providers
+import { JobProvider } from './hooks/contexts/JobContext';
+import { JobsProvider } from './hooks/contexts/JobsContext';
+import { TasksProvider } from './hooks/contexts/TasksContext';
+import { NotesProvider } from './hooks/contexts/NotesContext';
 
 //css
 import './App.css'
@@ -17,21 +26,39 @@ import './App.css'
 export default function App() {
 
   return (
-    // mimic footer with pb-5
     <div className="App">
+      <NotificationList />
       <Router>
-        <div className="d-flex flex-column flex-xl-row">
-          <PageLayout>
-            <Routes>
-              <Route exact path="/" element={<Dashboard />} />
-              <Route exact path="/archived-board" element={<ArchivedBoard />} />
-              <Route exact path="/pinned-applications" element={<PinnedApplications />} />
-              <Route exact path="/application/:id" element={<ApplicationDetails />} />
-              <Route exact path="/application/edit/:id" element={<EditApplicationForm />} />
-              <Route exact path="/application/new/:givenStatus" element={<NewApplicationForm />} />
-            </Routes>
-          </PageLayout>
-        </div>
+        <Routes>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
+        </Routes>
+        <NotesProvider>
+          <Routes>
+            <Route path="/all-notes" element={<NoteBoard />} />
+            <Route path="/all-notes/:status" element={<NoteBoard />} />
+          </Routes>
+        </NotesProvider>
+        <TasksProvider>
+          <Routes>
+            <Route path="/all-tasks" element={<TaskBoard />} />
+            <Route path="/all-tasks/:status" element={<TaskBoard />} />
+          </Routes>
+        </TasksProvider>
+        <JobsProvider>
+          <Routes>
+            <Route path="/all-jobs/:status" element={<JobBoard />} />
+            <Route path="/all-jobs" element={<JobBoard />} />
+          </Routes>
+        </JobsProvider>
+        <JobProvider>
+          <Routes>
+            <Route path="/job/:id" element={<JobPage />} />
+            <Route path="/job-edit/:id" element={<JobEditForm />} />
+            <Route path="/new-job" element={<JobNewForm />} />
+          </Routes>
+        </JobProvider>
       </Router>
     </div>
   );

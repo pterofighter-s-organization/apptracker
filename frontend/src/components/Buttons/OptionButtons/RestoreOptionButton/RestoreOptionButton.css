@@ -1,0 +1,7 @@
+.restore-option-button {
+    transition: transform 300ms ease-in-out;
+}
+
+.restore-option-button:hover {
+    transform: rotate(-360deg);
+}
