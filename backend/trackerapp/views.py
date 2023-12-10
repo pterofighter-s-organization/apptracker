@@ -12,12 +12,6 @@ from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import bcrypt
 
-# Create your views here.
-def index(request):
-    return HttpResponse("Hello, world")
-
-def test(request):
-    return render(request, 'test.html')
 
 @api_view(['GET', 'POST', 'DELETE'])
 @csrf_protect
