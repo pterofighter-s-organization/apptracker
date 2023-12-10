@@ -22,7 +22,7 @@ def application_list(request):
         return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     if request.method == 'GET':
         if request.user.is_authenticated:
-            applications = Application.objects.all()
+            applications = Application.objects.filter(user_id=request.user.id)
             # title = request.GET.get('title', None)
             # if title is not None:
             #     applications = Application.filter(title__icontains=title)
@@ -92,6 +92,7 @@ def user_registration(request):
         password = users_data['password']
         user = User.objects.create_user(username=username, password=password)
         return JsonResponse({"username":user.username,"password": user.password},status=status.HTTP_201_CREATED)
+    return JsonResponse({"message": "Your request is bad"},status=status.HTTP_400_BAD_REQUEST)
 
 
 #TODO: maybe change this in the future to take a session token 
