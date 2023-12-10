@@ -85,7 +85,7 @@ def application_detail(request, pk):
 #TODO: make it error when creating user with same username
 #Creates a user
 @api_view(['GET', 'POST', 'DELETE'])
-def user_list(request):
+def user_registration(request):
     if request.method == 'POST':
         users_data = JSONParser().parse(request)
         username = users_data['username']
@@ -98,7 +98,7 @@ def user_list(request):
 #to do stuff after adding the authenticate function
 #check if password actually changes
 @api_view(['GET', 'PUT', 'DELETE'])
-def users_detail(request, pk):
+def user_detail(request, pk):
     try:
         user = User.objects.get(id = pk)
         if request.method == 'GET':
@@ -117,7 +117,7 @@ def users_detail(request, pk):
     
 #TODO: LEARN MORE ABOUT CSRF TOKEN AND IMPLEMENT THEM PROPERLY
 @api_view(['POST', 'DELETE'])
-def users_authentication(request):
+def user_authentication(request):
     if request.method == 'POST':
         users_data = JSONParser().parse(request)
         user = authenticate(username = users_data['username'], password = users_data['password'])
