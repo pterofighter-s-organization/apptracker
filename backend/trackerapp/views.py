@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import bcrypt
 
 
+
 @api_view(['GET', 'POST', 'DELETE'])
 @csrf_protect
 def application_list(request):
