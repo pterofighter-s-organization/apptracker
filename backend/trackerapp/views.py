@@ -23,16 +23,10 @@ def application_list(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             applications = Application.objects.filter(user_id=request.user.id)
-            # title = request.GET.get('title', None)
-            # if title is not None:
-            #     applications = Application.filter(title__icontains=title)
             applications_serializer = ApplicationSerializer(applications, many=True)
             return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
-        #application_data = JSONParser().parse(request.data)
         application_data = request.data
-        #if request.user.is_authenticated:
-            # application_data = JSONParser().parse(request)
         application_data['user_id'] = request.user.id
         application_serializer = ApplicationSerializer(data=application_data)
         if application_serializer.is_valid():
@@ -65,23 +59,6 @@ def application_detail(request, pk):
     except Application.DoesNotExist:
         return JsonResponse({'message': 'The application does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-# Olde User method
-# @api_view(['GET', 'POST', 'DELETE'])
-# def user_list(request):
-#     #get list of applications, POST a new application, DELETE all users
-#     if request.method == 'GET':
-#         users = Users.objects.all()
-#         users_serializer = UsersSerializer(users, many=True)
-#         return JsonResponse(users_serializer.data, safe=False)
-#     elif request.method == 'POST':
-#         users_data = JSONParser().parse(request)
-#         users_data['password'] = bcrypt.hashpw(users_data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-#         users_serializer = UsersSerializer(data=users_data)
-#         if users_serializer.is_valid():
-#             users_serializer.save()
-#             return JsonResponse(users_serializer.data, status=status.HTTP_201_CREATED)
-#         return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 #TODO: make it error when creating user with same username
 #Creates a user
 @api_view(['GET', 'POST', 'DELETE'])
@@ -116,7 +93,6 @@ def user_detail(request, pk):
     except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
-#TODO: LEARN MORE ABOUT CSRF TOKEN AND IMPLEMENT THEM PROPERLY
 @api_view(['POST', 'DELETE'])
 def user_authentication(request):
     if request.method == 'POST':
@@ -134,44 +110,6 @@ def user_authentication(request):
         else:
             return JsonResponse({'message': 'Cannot find user'}, status=status.HTTP_404_NOT_FOUND)
     return JsonResponse({'message': 'No clue what happened'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def users_detail(request, pk):
-#     #find application by pk 
-#     try:
-#         user = Users.objects.get(pk=pk)
-#         #get an application
-#         if request.method == 'GET':
-#             users_serializer = UsersSerializer(user)
-#             return JsonResponse(users_serializer.data)
-#         #update an user 
-#         elif request.method == 'PUT':
-#             users_data = JSONParser().parse(request)
-#             users_serializer = UsersSerializer(user,data=users_data)
-#             if users_serializer.is_valid():
-#                 users_serializer.save()
-#                 return JsonResponse(users_serializer.data)
-#             return JsonResponse(users_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#         elif request.method == 'DELETE':
-#             item_to_delete = Users.objects.get(pk=pk)
-#             item_to_delete.delete()
-#             return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-#     except Users.DoesNotExist:
-#         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    
-# @api_view(['POST'])
-# def user_authenticate(request):
-#     try:
-#         user_data = JSONParser().parse(request)
-#         user = Users.objects.get(username=user_data['username'])
-#         password_matches = bcrypt.checkpw(user_data['password'].encode('utf-8'), user.password.encode('utf-8'))
-#         if password_matches:
-#             return JsonResponse({'message': 'password matches'}, status=status.HTTP_200_OK)
-#         return JsonResponse({'message': 'password does not match'}, status=status.HTTP_401_UNAUTHORIZED)
-#     except Users.DoesNotExist:
-#         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def notes_list(request):
@@ -240,8 +178,6 @@ def task_list(request):
             task_serializer.save()
             return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        #     return JsonResponse(task_serializer.data, status=status.HTTP_201_CREATED)
-        # return JsonResponse(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def task_detail(request, pk):
@@ -274,13 +210,3 @@ def task_list_application(request, app_id):
     if request.method  == 'GET':
         tasks_serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(tasks_serializer.data, safe=False)
-
-
-
-# class UsersView(viewsets.ModelViewSet):
-#     serializer_class = UsersSerializer
-#     queryset = Users.objects.all()
-
-# class ApplicationView(viewsets.ModelViewSet):
-#     serializer_class = ApplicationSerializer
-#     queryset = Application.objects.all()
