@@ -4,7 +4,7 @@
 import { withToggleControl } from "../../../hocs/withToggleControl";
 
 //utils
-import { getContrastTextColor } from "../../../utils/componentUtils";
+import { getContrastTextColor } from "../../../utils/component";
 
 //css
 import "../styles/Dropdown.css"
@@ -42,7 +42,7 @@ function FilterDropdown({
             <button
                 id={id}
                 type="button"
-                className="button dropdown-face filter-dropdown-face"
+                className="dropdown-face filter-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
                 style={{
                     backgroundColor: `${value ? options[value] : "black"}`,

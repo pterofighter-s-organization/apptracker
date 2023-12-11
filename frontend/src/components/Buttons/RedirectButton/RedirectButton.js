@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 //css
 import "./RedirectButton.css"
+import "../styles/Buttons.css"
 
 export default function RedirectButton({ link, label }) {
 
@@ -14,9 +15,8 @@ export default function RedirectButton({ link, label }) {
             title={`Redirects you to ${link}`}
         >
             <div className="redirect-button-label">
-                {label}
+                {label} <i className="bi bi-box-arrow-up-right"></i>
             </div>
-            <i className="bi bi-box-arrow-up-right"></i>
         </Link>
     )
 }

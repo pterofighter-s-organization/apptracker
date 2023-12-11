@@ -1,24 +1,26 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 
 //components
 import { TextInput } from "../../../components/Inputs/TextInput"
 import { PasswordInput } from "../../../components/Inputs/PasswordInput"
-import { InfoReminder } from "../../../components/InfoReminder"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
-
-//helpers
-import { isPasswordValid } from "../../../helpers/formHelpers"
+import { InputHeader } from "../../../components/Inputs/InputHeader"
+import { InputFooter } from "../../../components/Inputs/InputFooter"
 
 //layouts
-import { FormLayout } from "../../../layouts/FormLayout"
+import { InputLayout } from "../../../layouts/InputLayout"
+
+//helpers
+import { isPasswordValid } from "../../../helpers/form"
+
+//privater-components
+import { AuthFormHeader } from "../components/AuthFormHeader"
+import { RedirectLink } from "../components/RedirectLink"
 
 //private-layouts
+import { AuthPageLayout } from "../layouts/AuthPageLayout"
+import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
-
-//css
-import "./SignupForm.css"
-import "../../../styles/Forms.css"
 
 export default function SignupForm() {
 
@@ -96,59 +98,67 @@ export default function SignupForm() {
     }
 
     return (
-        <AuthFormLayout>
-            <FormLayout>
-                <div className="form-header">
-                    <h1>
-                        Sign Up
-                    </h1>
-                    <h6>
-                        Create a new account to start efficently tracking jobs!
-                    </h6>
-                    <div style={{ marginLeft: "0.1rem" }}>
-                        <InfoReminder
-                            text={"* is required."}
+        <AuthPageLayout>
+            <AuthFormLayout>
+                <AuthFormHeader
+                    label={"sign up"}
+                    description={"Create a new account to start efficently tracking jobs!"}
+                />
+                <AuthFieldsLayout handleSubmit={handleSubmit}>
+                    <InputLayout isError={formData.username.error.length > 0}>
+                        <InputHeader
+                            header={"Username"}
+                            isRequired={"*"}
                         />
-                    </div>
-                </div>
-                <form
-                    className="form-fields"
-                    onSubmit={handleSubmit}
-                >
-                    <TextInput
-                        formDataObj={formData.username}
-                        name={"username"}
-                        header={"new username"}
-                        footer={"type a username that's going to represent you here."}
-                        isRequired={true}
-                        handleChange={handleChange}
-                    />
-                    <PasswordInput
-                        formDataObj={formData.newPassword}
-                        name={"newPassword"}
-                        header={"new password"}
-                        footer={"must have 8 chars, 1 special char, 1 lower and uppercase."}
-                        isRequired={true}
-                        handleChange={handleChange}
-                    />
-                    <PasswordInput
-                        formDataObj={formData.confirmPassword}
-                        name={"confirmPassword"}
-                        header={"confirm password"}
-                        footer={"re-type your password here to confirm."}
-                        isRequired={true}
-                        handleChange={handleChange}
-                    />
+                        <TextInput
+                            name={"username"}
+                            value={formData.username.value}
+                            handleChange={handleChange}
+                        />
+                        <InputFooter
+                            footer={"Enter your username."}
+                            errorMessage={formData.username.error}
+                        />
+                    </InputLayout>
+                    <InputLayout isError={formData.newPassword.error.length > 0}>
+                        <InputHeader
+                            header={"New password"}
+                            isRequired={"*"}
+                        />
+                        <PasswordInput
+                            name={"newPassword"}
+                            value={formData.newPassword.value}
+                            handleChange={handleChange}
+                        />
+                        <InputFooter
+                            footer={"Must have 8 chars, 1 special char, 1 lower and uppercase."}
+                            errorMessage={formData.newPassword.error}
+                        />
+                    </InputLayout>
+                    <InputLayout isError={formData.confirmPassword.error.length > 0}>
+                        <InputHeader
+                            header={"Confirm password"}
+                            isRequired={"*"}
+                        />
+                        <PasswordInput
+                            name={"confirmPassword"}
+                            value={formData.confirmPassword.value}
+                            handleChange={handleChange}
+                        />
+                        <InputFooter
+                            footer={"Re-type your password here to confirm."}
+                            errorMessage={formData.confirmPassword.error}
+                        />
+                    </InputLayout>
                     <div />
                     <SubmitButton label={"create account"} />
-                    <Link
-                        to={"/login"}
-                        style={{ alignSelf: "center", marginTop: "0.5rem" }}
-                    >
-                        Back to Sign In!
-                    </Link>
-                </form>
-            </FormLayout>
-        </AuthFormLayout>
+                    <div />
+                    <RedirectLink
+                        link={"/login"}
+                        label={"Back to sign in!"}
+                    />
+                </AuthFieldsLayout>
+            </AuthFormLayout>
+        </AuthPageLayout>
     )
 }

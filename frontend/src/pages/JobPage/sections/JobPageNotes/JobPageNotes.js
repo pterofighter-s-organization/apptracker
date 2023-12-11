@@ -1,34 +1,44 @@
-import { useContext, useEffect, useMemo } from "react"
+import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/CardList"
-import { CreateButton } from "../../../../components/Buttons/CreateButton"
-import { SectionHeader } from "../../../../components/SectionHeader"
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
-import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
+import { CardList } from "../../../../components/Cards/CardList";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
+import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+
+//private-components
+import { NoteForm } from "../../components/NoteForm";
+
+//layouts
+import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
 
 //helpers
-import { filterDataByStatus } from "../../../../helpers/helpers"
+import { filterDataByStatus } from "../../../../helpers/helpers";
 
 //hocs
-import { withStatusControl } from "../../../../hocs/withStatusControl"
+import { withStatusControl } from "../../../../hocs/withStatusControl";
 
 //constants
-import { APP_STATUS_COLORS } from "../../../../constants/constants"
+import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
 //contexts
-import { JobContext } from "../../../../hooks/contexts/JobContext"
-import { NotesContext } from "../../../../hooks/contexts/NotesContext"
+import { NotesContext } from "../../../../hooks/contexts/NotesContext";
+import { JobContext } from "../../../../hooks/contexts/JobContext";
 
-//css
-import "./JobPageNotes.css"
-import "../../JobPage.css"
 
-function JobPageNotes({ status, handleStatus }) {
+function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
 
     const { job } = useContext(JobContext)
     const { notes, getJobNotes, createJobNote } = useContext(NotesContext)
+    const [formData, setFormData] = useState({
+        note: {
+            value: "",
+            error: ""
+        }
+    })
 
     useEffect(() => {
         getJobNotes(job.data.application_id)
@@ -40,10 +50,10 @@ function JobPageNotes({ status, handleStatus }) {
 
     const handleCreate = (e) => {
         e.preventDefault()
-        
+
         createJobNote(job.data.application_id, {
             position: job.data.position,
-            note: ""
+            note: formData.note.value
         }).then((result) => {
             showSubmitNotification({
                 status: result.success,
@@ -53,8 +63,22 @@ function JobPageNotes({ status, handleStatus }) {
         })
     }
 
+    const handleChange = (e) => {
+        e.preventDefault()
+
+        setFormData({
+            ...formData,
+            [e.target.name]: {
+                value: e.target.value,
+                error: ""
+            }
+        })
+    }
+
     if (notes.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (notes.errors) {
@@ -68,32 +92,40 @@ function JobPageNotes({ status, handleStatus }) {
     }
 
     return (
-        <>
-            <SectionHeader
-                IconComponent={<i className="bi bi-stickies-fill" />}
-                title={`${filteredData.length} notes taken`}
-                ButtonComponent={
-                    <FilterDropdown
-                        id={"status-filter-notes"}
-                        label={"status"}
-                        value={status}
-                        options={APP_STATUS_COLORS}
-                        handleOption={handleStatus}
-                    />
-                }
+        <CardsSectionLayout isPreview={isPreview}>
+            <CardsHeaderLayout>
+                <CardsHeader
+                    icon={<i className="bi bi-stickies-fill" />}
+                    quantity={filteredData.length}
+                    type={"note"}
+                    header={status === "archived" ? "to peel off" : "to record"}
+                />
+                <FilterDropdown
+                    id={"job-notes-status-filter"}
+                    label={"status"}
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
+            </CardsHeaderLayout>
+            <NoteForm
+                formData={formData}
+                handleChange={handleChange}
+                handleCreate={handleCreate}
             />
             <CardList
                 type={"notes"}
                 cards={filteredData}
-                isPreview={true}
-                isShow={true}
+                isPreview={isPreview}
+                isShow={isShow}
             />
-            <CreateButton
-                handleCreate={handleCreate}
-                label={"note"}
-            />
-        </>
+        </CardsSectionLayout>
     )
 }
 
 export default withStatusControl(JobPageNotes)
+
+
+
+
+

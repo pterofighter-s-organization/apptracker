@@ -1,76 +1,56 @@
-.job-page-divider {
+.job-page-details-layout {
     display: flex;
-}
-
-@media (min-width: 768px) {
-    .job-page-divider {
-        flex-direction: row;
-        width: 100%;
-        gap: 1.25rem;
-    }
-
-    .job-page-divider-content {
-        width: 50%;
-    }
-}
-
-@media (max-width: 768px) {
-    .job-page-divider {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .job-page-divider-content {
-        width: 100%;
-    }
-}
-
-.job-page-divider-content {
-    padding: 1.75rem;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
-.job-page-divider-content>h6 {
+.job-page-details-section>* {
     margin-bottom: 0;
 }
 
-.job-page-divider-content>h1 {
-    margin-bottom: 0;
-}
-
-.job-page-divider-content>h5 {
-    margin-bottom: 0;
+.job-page-details-section {
+    width: 27.5rem;
+    flex-grow: 1;
+    padding: 1.5rem;
 }
 
 .job-page-infos {
-    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: space-around;
 }
 
-.job-page-dates {
+.job-page-datetimes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     justify-content: space-around;
 }
 
 .job-page-links {
     display: flex;
     flex-wrap: wrap;
+    align-content: baseline;
     gap: 0.75rem;
+    padding: 1rem 1.25rem;
 }
 
-.job-page-description {
-    background-color: white;
-    padding: 1rem;
-    /* max-height: 20rem; */
-    border-radius: 1rem;
-    /*key to making description not overflowing*/
-    white-space: pre-wrap;
+/* (27.5 + (2*1) + 1.5) * 3 * 16 = 1488*/
+@media (min-width: 1500px){
+    .job-page-links{
+        flex-direction: column;
+    }
 }
 
-.job-page-description-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    padding: 1.5rem 1.75rem;
+/* @media (min-width: 768px){
+    .job-page-details-layout{
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    }
 }
+
+@media (max-width: 768px){
+    .job-page-details-layout{
+        grid-template-columns: 1fr;
+    }
+} */

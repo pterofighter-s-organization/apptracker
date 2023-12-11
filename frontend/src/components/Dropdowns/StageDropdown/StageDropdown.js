@@ -4,7 +4,7 @@
 import { APP_STAGE_COLORS } from "../../../constants/constants"
 
 //utils
-import { getContrastTextColor } from "../../../utils/componentUtils"
+import { getContrastTextColor } from "../../../utils/component"
 
 //hocs
 import { withToggleControl } from "../../../hocs/withToggleControl"
@@ -24,7 +24,7 @@ function StageDropdown({
             <button
                 id={id}
                 type="button"
-                className="button dropdown-face stage-dropdown-face"
+                className="dropdown-face stage-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
                 style={{
                     backgroundColor: `${APP_STAGE_COLORS[stage]}`,

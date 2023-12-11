@@ -1,0 +1,66 @@
+.note-card {
+    background-color: #fff;
+    /* width: 15rem; */
+    height: 15rem;
+    /* min-height: 15rem; */
+    border-radius: 1rem;
+    padding: 1rem;
+    /**/
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: black;
+}
+
+.note-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.note-card-content {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.note-card-content .note-card-content-text {
+    position: absolute;
+    font-family: "Work Sans", sans-serif;
+    font-size: inherit;
+    z-index: 1;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.note-card-hover-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify for centering y axis, align-items for x axis, and text-align for text itself */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 1em;
+    background-color: #f2efef;
+}
+
+.note-card-hover-content {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.note-card-content:hover .note-card-hover-content {
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    backdrop-filter: blur(0.5px);
+}
+
+.note-card-hover-layout:hover{
+    background-color: #e5e4e2;
+}
+
+.note-card-content:hover .note-card-content-text {
+    display: none;
+}

@@ -1,26 +1,17 @@
 
-
-//layouts
-import { InputLayout } from "../layouts/InputLayout";
-
 //css
 import "./TextareaInput.css"
 
-export default function TextareaInput({ height, name, formDataObj, handleChange, ...props }) {
+export default function TextareaInput({ height, name, value, placeholder, handleChange }) {
 
     return (
-        <InputLayout
-            formDataObj={formDataObj}
-            {...props}
-        >
-            <textarea
-                name={name}
-                value={formDataObj.value}
-                onChange={handleChange}
-                className="textarea-input input-box"
-                style={{ height: (height ? height : "") }}
-                placeholder={name.toUpperCase()}
-            />
-        </InputLayout>
+        <textarea
+            name={name}
+            value={value}
+            placeholder={placeholder || name.toUpperCase()}
+            onChange={handleChange}
+            className="textarea-input-field input-field"
+            style={{ height: height || "" }}
+        />
     )
 }

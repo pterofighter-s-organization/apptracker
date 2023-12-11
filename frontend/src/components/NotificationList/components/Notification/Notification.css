@@ -1,23 +1,27 @@
 .notification {
     border: 2.5px none gray;
     border-radius: 0.5rem;
-    padding: 0.75rem 5vw;
-    /* padding-right: 2rem; */
+    padding: 1rem 5vw;
+    font-size: 0.9rem;
     animation: fadeOut 3s ease-in-out;
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     gap: 0.75rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 1rem;
-    width: fit-content;
+    width: max-content;
+    max-width: 95vw;
     /*ensure it to be on top of everything.*/
     z-index: 9999;
+    text-transform: capitalize;
 }
 
-.notification-msg {
-    font-size: 0.9rem;
-    align-self: center;
-    text-transform: capitalize;
+@media (min-width: 576px) {
+    @-moz-document url-prefix() {
+        .notification-msg {
+            text-align: center;
+        }
+    }
 }
 
 .notification-msg::first-letter {

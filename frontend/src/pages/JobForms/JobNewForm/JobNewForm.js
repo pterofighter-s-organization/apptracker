@@ -2,19 +2,19 @@ import { useState, useMemo, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //constants
-import { jobFormData } from "../../../constants/constants";
+import { JOB_FORM_DATA } from "../../../constants/constants";
 
-//context-providers
+//contexts
 import { JobContext } from "../../../hooks/contexts/JobContext";
 
 //helpers
-import { createJobData, updateDateApplied, updateJobFormErrors } from "../../../helpers/applicationHelpers";
+import { createJobData, handleChangeFromStage, updateJobFormErrors } from "../../../helpers/application";
 
 //utils
-import { createObjCopy } from "../../../utils/memoryUtils";
+import { createObjCopy } from "../../../utils/memory";
 
 //helpers
-import { handleAPIErrors } from "../../../helpers/formHelpers";
+import { handleAPIErrors } from "../../../helpers/form";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -22,19 +22,17 @@ import { JobForm } from "../components/JobForm";
 //layouts
 import { PageLayout } from "../../../layouts/PageLayout";
 
-//css
-import "./JobNewForm.css"
-
 export default function JobNewForm() {
 
-    const initialState = useMemo(() => (createObjCopy(jobFormData)), [])
+    //avoid sharing the same reference, make sure they are different references when switching between edit and new.
+    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
-    const [formData, setFormData] = useState(initialState)
     const { createApplication } = useContext(JobContext)
+    const [formData, setFormData] = useState(initialState)
 
     useEffect(() => {
-        document.title = `New Job Form - Job Tracker App`
+        document.title = "New Job Form - Job Tracker App"
 
         return () => document.title = "Job Tracker App"
     }, [])
@@ -42,19 +40,12 @@ export default function JobNewForm() {
     const handleChange = (e) => {
         e.preventDefault()
 
-        if(e.target.name === "stage"){
+        if (e.target.name === "stage") {
             setFormData({
                 ...formData,
-                appliedDate: {
-                    value: updateDateApplied(e.target.value, formData.appliedDate.value, true),
-                    error: ""
-                },
-                stage: {
-                    value: e.target.value,
-                    error: ""
-                }
+                ...handleChangeFromStage(e.target.value, formData.appliedDate.value)
             })
-        }else{
+        } else {
             setFormData({
                 ...formData,
                 [e.target.name]: {
@@ -71,8 +62,8 @@ export default function JobNewForm() {
         createApplication(1, createJobData(formData))
             .then((result) => {
                 if (result.success) {
-                    alert("Successfully submitted! Now redirecting to the newly created job page.")
-                    navigate("/job/" + result.data.application_id)
+                    alert("Successfully submitted! Now redirecting you to the job page.")
+                    navigate(`/job/${result.data.application_id}`)
                 } else {
                     alert(
                         handleAPIErrors({
@@ -88,7 +79,6 @@ export default function JobNewForm() {
     return (
         <PageLayout>
             <JobForm
-                isEdit={false}
                 formData={formData}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}

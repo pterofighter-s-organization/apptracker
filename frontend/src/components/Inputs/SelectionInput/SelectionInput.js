@@ -1,41 +1,37 @@
-import { InputLayout } from "../layouts/InputLayout";
-
-
 
 
 //css
 import "./SelectionInput.css"
 
-export default function SelectionInput({ name, options, formDataObj, handleChange, ...props }) {
+export default function SelectionInput({ name, options, value, handleChange }) {
 
     return (
-        <InputLayout
-            formDataObj={formDataObj}
-            {...props}
-        >
+        <div className="selection-input-field input-field">
             <select
                 name={name}
-                className="selection-input"
                 onChange={handleChange}
             >
                 {
                     options.map((option) => (
-                        option !== formDataObj.value ?
+                        option !== value ?
                             <option
                                 value={option}
                             >
                                 {option}
                             </option>
                             :
-                            <option 
+                            <option
                                 selected
-                                value={option}    
+                                value={option}
                             >
                                 {option}
                             </option>
                     ))
                 }
             </select>
-        </InputLayout>
+            <i
+                className={`selection-arrow-icon bi bi-caret-down-fill`}
+            ></i>
+        </div>
     )
 }

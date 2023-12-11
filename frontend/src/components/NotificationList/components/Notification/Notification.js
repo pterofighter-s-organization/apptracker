@@ -1,9 +1,9 @@
 
 //helpers
-import { handleAPIErrors } from "../../../../helpers/formHelpers"
+import { handleAPIErrors } from "../../../../helpers/form"
 
 //utils
-import { getContrastTextColor } from "../../../../utils/componentUtils"
+import { getContrastTextColor } from "../../../../utils/component"
 
 //css
 import "./Notification.css"

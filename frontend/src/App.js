@@ -14,19 +14,18 @@ import { JobEditForm } from './pages/JobForms/JobEditForm';
 import { LoginForm } from './pages/AuthForms/LoginForm';
 import { SignupForm } from './pages/AuthForms/SignupForm';
 
-//css
-import './App.css'
-
-//context-providers
+//providers
 import { JobProvider } from './hooks/contexts/JobContext';
 import { JobsProvider } from './hooks/contexts/JobsContext';
 import { TasksProvider } from './hooks/contexts/TasksContext';
 import { NotesProvider } from './hooks/contexts/NotesContext';
 
+//css
+import './App.css'
+
 export default function App() {
 
   return (
-    // mimic footer with pb-5
     <div className="App">
       <NotificationList />
       <Router>

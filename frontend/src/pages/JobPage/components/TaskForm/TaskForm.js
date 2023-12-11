@@ -1,56 +1,48 @@
 
 //components
-import { TextInput } from "../../../../components/Inputs/TextInput"
+import { CreateButton } from "../../../../components/Buttons/CreateButton"
 import { DateTimeInput } from "../../../../components/Inputs/DateTimeInput"
-import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
-import { InfoReminder } from "../../../../components/InfoReminder"
+import { InputFooter } from "../../../../components/Inputs/InputFooter"
+import { TextInput } from "../../../../components/Inputs/TextInput"
+
+//layouts
+import { InputLayout } from "../../../../layouts/InputLayout"
 
 //css
 import "./TaskForm.css"
-import "../../../../styles/Forms.css"
 
-import { FormLayout } from "../../../../layouts/FormLayout"
-
-export default function TaskForm({ formData, handleChange, handleSubmit }) {
+export default function TaskForm({ formData, handleChange, handleCreate }) {
 
     return (
-        <FormLayout>
-            <div className="form-header">
-                <h1>
-                    Add a New Task!
-                </h1>
-                <h6>
-                    Track nesscary activities for this application.
-                </h6>
-                <div style={{ marginLeft: "0.1rem" }}>
-                    <InfoReminder
-                        text={"* is required"}
+        <div className="task-form-container">
+            <form className="task-form">
+                <InputLayout isError={formData.name.error.length > 0} >
+                    <TextInput
+                        name={"name"}
+                        value={formData.name.value}
+                        handleChange={handleChange}
                     />
-                </div>
-            </div>
-            <form
-                className="form-fields"
-                onSubmit={handleSubmit}
-            >
-                <TextInput
-                    name={"name"}
-                    formDataObj={formData.name}
-                    header={"task name"}
-                    footer={"enter activity name"}
-                    isRequired={true}
-                    handleChange={handleChange}
-                />
-                <DateTimeInput
-                    name={"dateDue"}
-                    formDataObj={formData.dateDue}
-                    header={"task date and time"}
-                    footer={"select its date and time"}
-                    isRequired={true}
-                    handleChange={handleChange}
-                />
-                <div/>
-                <SubmitButton />
+                    <InputFooter
+                        footer={"task name"}
+                        errorMessage={formData.name.error}
+                    />
+                </InputLayout>
+                <InputLayout isError={formData.dateDue.error.length > 0}>
+                    <DateTimeInput
+                        name={"dateDue"}
+                        value={formData.dateDue.value}
+                        handleChange={handleChange}
+                    />
+                    <InputFooter
+                        footer={"due date"}
+                        errorMessage={formData.dateDue.error}
+                    />
+                </InputLayout>
             </form>
-        </FormLayout>
+            <CreateButton
+                handleCreate={handleCreate}
+                label={"task"}
+            />
+        </div>
     )
 }

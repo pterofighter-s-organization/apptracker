@@ -1,15 +1,32 @@
-.selection-input {
-    border: 0.75rem solid #E5E4E2;
-    background-color: #E5E4E2;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    /* padding: 0.75em 1em; */
-    /* padding: 0.006rem 0.25rem; */
+.selection-input-field {
+    background-color: #f2efef;
+    /* border: 1.45px solid #f2efef; */
     width: fit-content;
+    padding: 0;
+}
+
+/*this is to correct unify the styles of select for all browsers*/
+.selection-input-field > select{
+    position: relative;
+    background-color: transparent;
+    appearance: none;
+    padding: 0.75rem;
+    padding-right: 1.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    z-index: 1;
+}
+
+.selection-arrow-icon{
+    position: absolute;
+    margin: 1rem;
+    margin-left: -1.25rem;
+    font-size: 0.6rem;
 }
 
 /* @media (any-safari) {
-    .selection-input {
-        padding: 0.75em 1em;
+    .selection-input-field {
+        padding: 0.75rem 1em;
+        border: 1.45px solid #f2efef;
     }
 } */

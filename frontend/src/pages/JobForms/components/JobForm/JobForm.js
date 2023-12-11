@@ -1,25 +1,25 @@
-
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 //components
-import { SubmitButton } from "../../../../components/Buttons/SubmitButton";
+import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
+import { ReturnButton } from "../ReturnButton"
 
 //sections
-import { JobFormHeader } from "./sections/JobFormHeader";
-import { JobFormInfos } from "./sections/JobFormInfos";
-import { JobFormDates } from "./sections/JobFormDates";
-
+import { JobFormHeader } from "./sections/JobFormHeader"
+import { JobFormStage } from "./sections/JobFormStage"
+import { JobFormDetails } from "./sections/JobFormDetails"
+import { JobFormDescription } from "./sections/JobFormDescription"
 
 //css
 import "./JobForm.css"
 
 export default function JobForm({ isEdit, formData, handleChange, handleSubmit }) {
 
-    const nav = useNavigate()
+    const navigate = useNavigate()
 
-    const handleReturnPage = (e) => {
+    const handleReturn = (e) => {
         e.preventDefault()
-        nav(-1)
+        navigate(-1)
     }
 
     return (
@@ -28,27 +28,23 @@ export default function JobForm({ isEdit, formData, handleChange, handleSubmit }
             onSubmit={handleSubmit}
         >
             <JobFormHeader isEdit={isEdit} />
-            <JobFormDates
+            <JobFormStage
                 formData={formData}
                 handleChange={handleChange}
             />
-            <JobFormInfos
+            <JobFormDetails
                 formData={formData}
                 handleChange={handleChange}
             />
-            {/* <div className="job-form-section">
-                <InfoReminder
-                    text={"make sure to double check before submitting."}
-                />
-            </div> */}
+            <JobFormDescription
+                formData={formData}
+                handleChange={handleChange}
+            />
             <SubmitButton />
-            <button
-                to=".."
-                className="job-form-back-button"
-                onClick={handleReturnPage}
-            >
-                Return to Previous Page
-            </button>
+            <ReturnButton
+                handleReturn={handleReturn}
+                label={"Previous page"}
+            />
         </form>
     )
 }

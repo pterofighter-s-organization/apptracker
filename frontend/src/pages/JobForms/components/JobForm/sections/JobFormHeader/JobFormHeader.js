@@ -2,42 +2,34 @@
 //components
 import { InfoReminder } from "../../../../../../components/InfoReminder"
 
-//layouts
-import { HeaderLayout } from "../../../../../../layouts/HeaderLayout"
-
 //css
 import "./JobFormHeader.css"
-import "../../JobForm.css"
+import "../styles/JobFormSections.css"
 
 export default function JobFormHeader({ isEdit }) {
 
     return (
         <div className="job-form-header">
-            <HeaderLayout
-                title={
+            <h1>
+                {
                     isEdit ?
-                        "editing information"
+                        "Editing Job"
                         :
-                        "job tracking form"
+                        "New Job Form"
                 }
-                text={
+            </h1>
+            <h6>
+                - {
                     isEdit ?
-                        "perform your desired edits on the application you created."
+                        "Edit the information to better track this."
                         :
-                        "fill the form to provide information on the job you want to track."
+                        "Fill this form to start tracking your desired job!"
                 }
-            >
-                <hr />
-                <InfoReminder
-                    text={"information won't save until successfully submitted."}
-                />
-            </HeaderLayout>
-            {/* <div className="job-form-header-bottom">
-                <hr />
-                <InfoReminder
-                    text={"information won't save until successfully submitted."}
-                />
-            </div> */}
+            </h6>
+            <hr />
+            <InfoReminder
+                text={"Changes won't save until successfully submitted."}
+            />
         </div>
     )
 }

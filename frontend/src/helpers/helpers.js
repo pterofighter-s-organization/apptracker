@@ -1,4 +1,4 @@
-import { compareDates } from "../utils/dateTimeUtils"
+import { compareDates } from "../utils/dateTime"
 
 export const sortDataByLatest = (data) => {
     return (

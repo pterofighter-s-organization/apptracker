@@ -3,8 +3,9 @@ import { Link } from "react-router-dom"
 //css
 import "./HyperLink.css"
 
-export default function HyperLink({ jobId, link, label }) {
+export default function HyperLink({ id, link, label }) {
 
+    console.log(link)
     return (
         <div className="hyper-link">
             <b>
@@ -22,7 +23,7 @@ export default function HyperLink({ jobId, link, label }) {
                     </a>
                     :
                     <Link
-                        to={"/job-edit/" + jobId}
+                        to={"/job-edit/" + id}
                         className="hyper-link-label"
                     >
                         add {label}

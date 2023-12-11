@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 //helpers
-import { handleAPIErrors } from "../../../helpers/formHelpers";
+import { handleAPIErrors } from "../../../helpers/form";
 
 //css
 import "./ErrorDisplay.css"

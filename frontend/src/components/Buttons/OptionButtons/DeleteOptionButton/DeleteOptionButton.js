@@ -1,6 +1,7 @@
 
 //css
 import "../styles/OptionButton.css"
+import "../../styles/Buttons.css"
 
 export default function DeleteOptionButton({ handleDelete }) {
 

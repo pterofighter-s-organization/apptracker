@@ -1,47 +1,52 @@
-import { useContext, useEffect, useState, useMemo } from "react"
-
-//private-components
-import { TaskForm } from "../../components/TaskForm"
+import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/CardList"
-import { SectionHeader } from "../../../../components/SectionHeader"
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
-import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay"
+import { CardList } from "../../../../components/Cards/CardList";
+import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
+import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
+import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
 
-//hocs
-import { withStatusControl } from "../../../../hocs/withStatusControl"
+//private-components
+import { TaskForm } from "../../components/TaskForm";
 
-//constants
-import { APP_STATUS_COLORS, taskFormData } from "../../../../constants/constants"
-
-//context
-import { TasksContext } from "../../../../hooks/contexts/TasksContext"
-import { JobContext } from "../../../../hooks/contexts/JobContext"
+//layouts
+import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
 
 //helpers
-import { createTaskData, sortTasksByDateDue, updateTaskFormErrors } from "../../../../helpers/taskHelpers"
-import { filterDataByStatus, sortDataByLatest } from "../../../../helpers/helpers"
+import { createTaskData, updateTaskFormErrors, sortTasksByDateDue } from "../../../../helpers/task";
+import { sortDataByLatest, filterDataByStatus } from "../../../../helpers/helpers";
 
 //utils
-import { createObjCopy } from "../../../../utils/memoryUtils"
+import { createObjCopy } from "../../../../utils/memory";
 
-//css
-import "./JobPageTasks.css"
-import "../../JobPage.css"
+//hocs
+import { withStatusControl } from "../../../../hocs/withStatusControl";
 
-function JobPageTasks({ status, handleStatus }) {
+//constants
+import { APP_STATUS_COLORS, TASK_FORM_DATA } from "../../../../constants/constants";
+
+//contexts
+import { TasksContext } from "../../../../hooks/contexts/TasksContext";
+import { JobContext } from "../../../../hooks/contexts/JobContext";
+
+function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getJobTasks, createJobTask } = useContext(TasksContext)
     const { job } = useContext(JobContext)
-    const [formData, setFormData] = useState(createObjCopy(taskFormData))
+    const [formData, setFormData] = useState(createObjCopy(TASK_FORM_DATA))
 
     useEffect(() => {
         getJobTasks(job.data.application_id)
     }, [getJobTasks, job.data.application_id])
 
-    const handleSubmit = (e) => {
+    const filteredData = useMemo(() => {
+        return filterDataByStatus(status, tasks.data)
+    }, [status, tasks.data])
+
+    const handleCreate = (e) => {
         e.preventDefault()
 
         createJobTask(job.data.application_id, {
@@ -74,18 +79,16 @@ function JobPageTasks({ status, handleStatus }) {
         })
     }
 
-    const filteredData = useMemo(() => {
-        return filterDataByStatus(status, tasks.data)
-    }, [tasks.data, status])
-
     if (tasks.loading) {
-        return <>Loading...</>
+        return (
+            <LoadingDisplay />
+        )
     }
 
     if (tasks.errors) {
         return (
             <ErrorDisplay
-                label={"job tasks"}
+                label={"Job tasks"}
                 errors={tasks.errors}
                 isSection={true}
             />
@@ -93,19 +96,26 @@ function JobPageTasks({ status, handleStatus }) {
     }
 
     return (
-        <>
-            <SectionHeader
-                IconComponent={<i className="bi bi-view-list"></i>}
-                title={`${filteredData.length} tasks for this job`}
-                ButtonComponent={
-                    <FilterDropdown
-                        id={"status-filter-tasks"}
-                        label={"status"}
-                        value={status}
-                        options={APP_STATUS_COLORS}
-                        handleOption={handleStatus}
-                    />
-                }
+        <CardsSectionLayout isPreview={isPreview}>
+            <CardsHeaderLayout>
+                <CardsHeader
+                    icon={<i className="bi bi-view-list" />}
+                    quantity={filteredData.length}
+                    type={"task"}
+                    header={status === "archived" ? "to remove" : "to finish"}
+                />
+                <FilterDropdown
+                    id={"tasks-status-filter"}
+                    label={"status"}
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
+            </CardsHeaderLayout>
+            <TaskForm
+                formData={formData}
+                handleChange={handleChange}
+                handleCreate={handleCreate}
             />
             <CardList
                 type={"tasks"}
@@ -115,15 +125,10 @@ function JobPageTasks({ status, handleStatus }) {
                         :
                         sortTasksByDateDue(filteredData)
                 }
-                isPreview={true}
-                isShow={true}
+                isPreview={isPreview}
+                isShow={isShow}
             />
-            <TaskForm
-                formData={formData}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-            />
-        </>
+        </CardsSectionLayout>
     )
 }
 

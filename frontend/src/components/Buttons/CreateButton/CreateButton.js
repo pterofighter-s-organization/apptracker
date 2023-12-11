@@ -1,6 +1,7 @@
 
 //css
 import "./CreateButton.css"
+import "../styles/Buttons.css"
 
 export default function CreateButton({ handleCreate, label }) {
 
