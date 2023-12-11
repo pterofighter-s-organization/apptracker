@@ -90,7 +90,7 @@ export default function JobCard({ card }) {
         e.preventDefault()
         navigate(`/job-edit/${card.application_id}`)
     }
-
+    console.log(card)
     return (
         <Link
             to={`/job/${card.application_id}`}
