@@ -27,7 +27,7 @@ function StageDropdown({
                 className="dropdown-face stage-dropdown-face"
                 onClick={toggle ? handleUntoggle : handleToggle}
                 style={{
-                    backgroundColor: `${APP_STAGE_COLORS[stage]}`,
+                    backgroundColor: `${APP_STAGE_COLORS[stage || "interested"]}`,
                     color: getContrastTextColor(APP_STAGE_COLORS[stage])
                 }}
             >

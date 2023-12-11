@@ -45,7 +45,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 data-bs-placement="top"
                 title={toggle ? `Minimize sidebar`: `Expand sidebar`}
             >
-                <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
+                <i className="sidenav-button-icon sidenav-expand-icon bi bi-list"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
                 <div className="sidenav-button-text">
                     close menu

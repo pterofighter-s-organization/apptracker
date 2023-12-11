@@ -2,20 +2,20 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
-import { RestoreOptionButton } from "../../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../../Buttons/OptionButtons/DeleteOptionButton"
-import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 //utils
-import { dateTimeFormatter, timerFormatter } from "../../../../../../utils/format"
+import { dateTimeFormatter, timerFormatter } from "../../../../../utils/format"
 
 //contexts
-import { TasksContext } from "../../../../../../hooks/contexts/TasksContext"
+import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
 
 //css
 import "./TaskCard.css"

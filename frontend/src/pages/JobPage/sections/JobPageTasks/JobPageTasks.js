@@ -1,8 +1,8 @@
 import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/Cards/CardList";
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { CardList } from "../../../../components/CardList";
+import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
@@ -12,8 +12,7 @@ import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
 import { TaskForm } from "../../components/TaskForm";
 
 //layouts
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //helpers
 import { createTaskData, updateTaskFormErrors, sortTasksByDateDue } from "../../../../helpers/task";
@@ -97,21 +96,18 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-view-list" />}
-                    quantity={filteredData.length}
-                    type={"task"}
-                    header={status === "archived" ? "to remove" : "to finish"}
-                />
-                <FilterDropdown
-                    id={"tasks-status-filter"}
-                    label={"status"}
-                    value={status}
-                    options={APP_STATUS_COLORS}
-                    handleOption={handleStatus}
-                />
-            </CardsHeaderLayout>
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"task"}
+            />
+            <FilterDropdown
+                id={"tasks-status-filter"}
+                label={"status"}
+                value={status}
+                options={APP_STATUS_COLORS}
+                handleOption={handleStatus}
+            />
             <TaskForm
                 formData={formData}
                 handleChange={handleChange}

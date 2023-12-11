@@ -6,19 +6,16 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 **The time used in this app is based off your computer's local time.**
 
 ## What's New and Different Compared to v1.0?
-
 Check out v2.0 Notes & Patches below:
 https://docs.google.com/document/d/1gkx_9STR1gbXEw31rTgKh1j8LjoQFzjNdoMKOIzA66g/edit?usp=sharing
 
 # Technologies Used
-
 - Backend: Django, Djongo, MongoDB, Django REST Framework
 - Frontend: React.js, HTML, CSS (Bootstrap), Axios
 
-# Designs
-
-This application was designed using figma. From initial sketches to prototypes.
-https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
+## Documentations
+- Development Docs:
+https://docs.google.com/document/d/1A4i4dL2hSM_ZcLYZXczjuIID0aVfLw3OKZj_1x2ra-o/edit?usp=sharing
 
 # Contributors
 - Kelvin Chan (Github: chan34kelvin)

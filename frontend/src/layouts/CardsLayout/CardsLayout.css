@@ -1,12 +1,11 @@
 
-
-.cards-page-layout {
+.cards-layout {
     display: grid;
     gap: 1rem;
 }
 
 @media (min-width: 1200px) {
-    .cards-page-layout {
+    .cards-layout {
         /*(17rem + 2rem)*2*/
         grid-template-columns: repeat(auto-fit, minmax(38rem, 1fr));
         /* padding: 0 0.25rem; */
@@ -14,7 +13,7 @@
 }
 
 @media (max-width: 1200px) {
-    .cards-page-layout {
+    .cards-layout {
         grid-template-columns: 1fr;
     }
 }

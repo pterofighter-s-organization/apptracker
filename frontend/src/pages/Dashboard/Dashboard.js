@@ -1,7 +1,7 @@
 //layouts
 import { PageLayout } from "../../layouts/PageLayout";
 import { HeaderLayout } from "../../layouts/HeaderLayout";
-import { CardsPageLayout } from "../../layouts/CardsLayout/CardsPageLayout";
+import { CardsLayout } from "../../layouts/CardsLayout";
 
 //providers
 import { JobsProvider } from "../../hooks/contexts/JobsContext";
@@ -28,7 +28,7 @@ export default function Dashboard() {
                     Welcome, <i>User 1</i>
                 </h6>
             </HeaderLayout>
-                <CardsPageLayout>
+                <CardsLayout>
                     <JobsProvider>
                         <DashboardJobs
                             isPreview={isPreview}
@@ -47,7 +47,7 @@ export default function Dashboard() {
                             isShow={isShow}
                         />
                     </NotesProvider>
-                </CardsPageLayout>
+                </CardsLayout>
         </PageLayout>
     )
 } 

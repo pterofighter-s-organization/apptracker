@@ -1,8 +1,8 @@
 import { useContext, useMemo, useEffect, useState } from "react";
 
 //components
-import { CardList } from "../../../../components/Cards/CardList";
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { CardList } from "../../../../components/CardList";
+import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
@@ -12,8 +12,7 @@ import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown"
 import { NoteForm } from "../../components/NoteForm";
 
 //layouts
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
@@ -93,21 +92,18 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-stickies-fill" />}
-                    quantity={filteredData.length}
-                    type={"note"}
-                    header={status === "archived" ? "to peel off" : "to record"}
-                />
-                <FilterDropdown
-                    id={"job-notes-status-filter"}
-                    label={"status"}
-                    value={status}
-                    options={APP_STATUS_COLORS}
-                    handleOption={handleStatus}
-                />
-            </CardsHeaderLayout>
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"note"}
+            />
+            <FilterDropdown
+                id={"job-notes-status-filter"}
+                label={"status"}
+                value={status}
+                options={APP_STATUS_COLORS}
+                handleOption={handleStatus}
+            />
             <NoteForm
                 formData={formData}
                 handleChange={handleChange}

@@ -1,7 +1,7 @@
 
 //components
-import { RedirectButton } from "../../../../Buttons/RedirectButton"
-import { InfoReminder } from "../../../../InfoReminder"
+import { RedirectButton } from "../../../Buttons/RedirectButton"
+import { InfoReminder } from "../../../InfoReminder"
 
 //css
 import "./EmptyMessage.css"

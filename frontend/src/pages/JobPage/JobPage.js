@@ -7,7 +7,7 @@ import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 
 //layouts
 import { PageLayout } from "../../layouts/PageLayout";
-import { CardsPageLayout } from "../../layouts/CardsLayout/CardsPageLayout";
+import { CardsLayout } from "../../layouts/CardsLayout";
 
 //utils
 import { strFormatter } from "../../utils/format";
@@ -64,7 +64,7 @@ export default function JobPage() {
             <JobPageHeader />
             <JobPageDetails />
             <JobPageDescription />
-            <CardsPageLayout>
+            <CardsLayout>
                 <TasksProvider>
                     <JobPageTasks
                         isPreview={isPreview}
@@ -77,7 +77,7 @@ export default function JobPage() {
                         isShow={isShow}
                     />
                 </NotesProvider>
-            </CardsPageLayout>
+            </CardsLayout>
         </PageLayout>
     )
 }
