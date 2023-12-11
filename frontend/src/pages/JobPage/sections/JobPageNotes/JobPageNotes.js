@@ -27,7 +27,6 @@ import { APP_STATUS_COLORS } from "../../../../constants/constants";
 import { NotesContext } from "../../../../hooks/contexts/NotesContext";
 import { JobContext } from "../../../../hooks/contexts/JobContext";
 
-
 function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
 
     const { job } = useContext(JobContext)
