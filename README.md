@@ -9,6 +9,10 @@ Job tracker app is a tool that helps manage all job applications in one place. I
 Check out v2.0 Notes & Patches below:
 https://docs.google.com/document/d/1gkx_9STR1gbXEw31rTgKh1j8LjoQFzjNdoMKOIzA66g/edit?usp=sharing
 
+# Contributors
+- Kelvin Chan (Github: chan34kelvin)
+- Damon Chen (Github: pterofighter)
+
 # Technologies Used
 - Backend: Django, Djongo, MongoDB, Django REST Framework
 - Frontend: React.js, HTML, CSS (Bootstrap), Axios
@@ -16,10 +20,6 @@ https://docs.google.com/document/d/1gkx_9STR1gbXEw31rTgKh1j8LjoQFzjNdoMKOIzA66g/
 # Development Documentation
 - Development Docs:
 https://docs.google.com/document/d/1A4i4dL2hSM_ZcLYZXczjuIID0aVfLw3OKZj_1x2ra-o/edit?usp=sharing
-
-# Contributors
-- Kelvin Chan (Github: chan34kelvin)
-- Damon Chen (Github: pterofighter)
 
 # Installation
 Follow this link for instructions on how to install and use this application:
