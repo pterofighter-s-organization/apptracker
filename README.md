@@ -13,7 +13,7 @@ https://docs.google.com/document/d/1gkx_9STR1gbXEw31rTgKh1j8LjoQFzjNdoMKOIzA66g/
 - Backend: Django, Djongo, MongoDB, Django REST Framework
 - Frontend: React.js, HTML, CSS (Bootstrap), Axios
 
-## Documentations
+# Development Documentation
 - Development Docs:
 https://docs.google.com/document/d/1A4i4dL2hSM_ZcLYZXczjuIID0aVfLw3OKZj_1x2ra-o/edit?usp=sharing
 
@@ -22,7 +22,7 @@ https://docs.google.com/document/d/1A4i4dL2hSM_ZcLYZXczjuIID0aVfLw3OKZj_1x2ra-o/
 - Damon Chen (Github: pterofighter)
 
 # Installation
-Follow this link for instructions on how to install and use this application.
+Follow this link for instructions on how to install and use this application:
 https://docs.google.com/document/d/1iIqQoPxdEsYk8TVBMIBDvzLAHp3-g6rDB-FnzstRuf8/edit?usp=sharing
 
 # Project Snapshots
