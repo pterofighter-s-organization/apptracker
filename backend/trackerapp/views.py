@@ -19,6 +19,7 @@ import bcrypt
 def application_list(request):
     #get list of applications, POST a new application, DELETE all applications
     if not request.user.is_authenticated:
+        #put some redirect code here
         return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     if request.method == 'GET':
         if request.user.is_authenticated:
