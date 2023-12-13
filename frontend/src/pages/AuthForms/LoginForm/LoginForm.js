@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 //components
 import { TextInput } from "../../../components/Inputs/TextInput"
@@ -19,6 +19,9 @@ import { AuthPageLayout } from "../layouts/AuthPageLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
 import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 
+//context
+import { AuthContext } from "../../../hooks/contexts/AuthContext"
+
 export default function LoginForm() {
 
     const [formData, setFormData] = useState({
@@ -32,9 +35,16 @@ export default function LoginForm() {
         }
     })
 
+    const { auth, getUser } = useContext(AuthContext)
+
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        getUser({
+            username: formData.username.value,
+            password: formData.password.value
+        }).then((result) => {
+            console.log("res", result.data)
+        })
     }
 
     const handleChange = (e) => {
@@ -56,7 +66,7 @@ export default function LoginForm() {
                     label={"Log in"}
                     description={"Sign in to access the app's features!"}
                 />
-                <AuthFieldsLayout onSubmit={handleSubmit}>
+                <AuthFieldsLayout handleSubmit={handleSubmit}>
                     <InputLayout isError={formData.username.error.length > 0}>
                         <InputHeader
                             header={"Username"}

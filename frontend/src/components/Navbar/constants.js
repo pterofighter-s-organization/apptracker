@@ -19,7 +19,7 @@ export const FEATURES_ROUTES = [
     {
         text: "all tasks",
         route: "/all-tasks",
-        icon: "bi bi-view-list"
+        icon: "bi bi-card-checklist"
     },
     {
         text: "all notes",

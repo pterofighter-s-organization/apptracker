@@ -1,9 +1,9 @@
 import { useContext } from "react"
 
 //components
-import { showSubmitNotification } from "../../../../../../NotificationList/components/Notification/Notification"
-import { RestoreOptionButton } from "../../../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../../../Buttons/OptionButtons/DeleteOptionButton"
+import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
+import { RestoreOptionButton } from "../../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../../Buttons/OptionButtons/DeleteOptionButton"
 
 //private-components
 import { NoteHeader } from "../components/NoteHeader"
@@ -13,7 +13,7 @@ import { CardHeaderLayout } from "../../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../../layouts/CardButtonsLayout"
 
 //contexts
-import { NotesContext } from "../../../../../../../hooks/contexts/NotesContext"
+import { NotesContext } from "../../../../../../hooks/contexts/NotesContext"
 
 //css
 import "../NoteCard.css"

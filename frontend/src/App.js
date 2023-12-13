@@ -22,6 +22,7 @@ import { NotesProvider } from './hooks/contexts/NotesContext';
 
 //css
 import './App.css'
+import { AuthProvider } from './hooks/contexts/AuthContext';
 
 export default function App() {
 
@@ -31,9 +32,13 @@ export default function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
         </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignupForm />} />
+          </Routes>
+        </AuthProvider>
         <NotesProvider>
           <Routes>
             <Route path="/all-notes" element={<NoteBoard />} />

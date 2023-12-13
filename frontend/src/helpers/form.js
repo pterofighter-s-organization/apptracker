@@ -16,7 +16,7 @@ export const handleAPIErrors = ({ errors, message }) => {
         // });
         // return result.join('\n');
     } else {
-        return `${errors.response.status} ${errors.response.statusText}`
+        return `${errors.response.data.message}`
     }
 }
 

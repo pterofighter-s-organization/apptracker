@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from "react"
 
 //components
-import { showSubmitNotification } from "../../../../../../NotificationList/components/Notification/Notification"
-import { SaveOptionButton } from "../../../../../../Buttons/OptionButtons/SaveOptionButton"
-import { EditOptionButton } from "../../../../../../Buttons/OptionButtons/EditOptionButton"
-import { ArchiveOptionButton } from "../../../../../../Buttons/OptionButtons/ArchiveOptionButton"
-import { TextareaInput } from "../../../../../../Inputs/TextareaInput"
+import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
+import { SaveOptionButton } from "../../../../../Buttons/OptionButtons/SaveOptionButton"
+import { EditOptionButton } from "../../../../../Buttons/OptionButtons/EditOptionButton"
+import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { TextareaInput } from "../../../../../Inputs/TextareaInput"
 
 //private-components
 import { NoteHeader } from "../components/NoteHeader"
@@ -15,7 +15,7 @@ import { CardHeaderLayout } from "../../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../../layouts/CardButtonsLayout"
 
 //context
-import { NotesContext } from "../../../../../../../hooks/contexts/NotesContext"
+import { NotesContext } from "../../../../../../hooks/contexts/NotesContext"
 
 //css
 import "../NoteCard.css"

@@ -2,21 +2,21 @@ import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 //components
-import { StageDropdown } from "../../../../../Dropdowns/StageDropdown"
-import { showSubmitNotification } from "../../../../../NotificationList/components/Notification/Notification"
-import { EditOptionButton } from "../../../../../Buttons/OptionButtons/EditOptionButton"
-import { RestoreOptionButton } from "../../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../../Buttons/OptionButtons/DeleteOptionButton"
-import { ArchiveOptionButton } from "../../../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
+import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { EditOptionButton } from "../../../../Buttons/OptionButtons/EditOptionButton"
+import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 
 //utils
-import { dateTimeFormatter } from "../../../../../../utils/format"
+import { dateTimeFormatter } from "../../../../../utils/format"
 
 //helpers
-import { updateDateApplied } from "../../../../../../helpers/application"
+import { updateDateApplied } from "../../../../../helpers/application"
 
 //context-providers
-import { JobsContext } from "../../../../../../hooks/contexts/JobsContext"
+import { JobsContext } from "../../../../../hooks/contexts/JobsContext"
 
 //css
 import "./JobCard.css"

@@ -4,18 +4,17 @@ import { useContext, useEffect, useMemo } from "react";
 import { withStatusControl } from "../../../../hocs/withStatusControl";
 
 //layouts
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //contexts
 import { NotesContext } from "../../../../hooks/contexts/NotesContext";
 
 //components
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
+import { CardListHeader } from "../../../../components/CardListHeader";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
-import { CardList } from "../../../../components/Cards/CardList";
+import { CardList } from "../../../../components/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
 //helpers
@@ -54,21 +53,18 @@ function DashboardNotes({ status, handleStatus, isPreview, isShow }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-stickies-fill" />}
-                    quantity={filteredData.length}
-                    type={"note"}
-                    header={status === "archived" ? "to peel off" : "to record"}
-                />
-                <FilterDropdown 
-                    id={"notes-status-filter"}
-                    label={"status"}
-                    value={status}
-                    options={APP_STATUS_COLORS}
-                    handleOption={handleStatus}
-                />
-            </CardsHeaderLayout>
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"note"}
+            />
+            <FilterDropdown
+                id={"notes-status-filter"}
+                label={"status"}
+                value={status}
+                options={APP_STATUS_COLORS}
+                handleOption={handleStatus}
+            />
             <CardList
                 type={"notes"}
                 cards={filteredData}

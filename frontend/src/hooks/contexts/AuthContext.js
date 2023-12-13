@@ -12,7 +12,7 @@ import { authReducer } from "../reducers/authReducer";
 
 const initialState = {
     data: null,
-    loading: true,
+    loading: false,
     errors: null
 }
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             dispatch({ type: AUTH_CALL_SUCCESS, payload: response.data })
             return ({
                 success: true,
-                data: response.data
+                data: response
             })
         } catch (errors) {
             console.log(errors)

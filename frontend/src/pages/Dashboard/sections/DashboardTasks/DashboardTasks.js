@@ -4,18 +4,17 @@ import { useContext, useEffect, useMemo } from "react";
 import { withStatusControl } from "../../../../hocs/withStatusControl";
 
 //layouts
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //contexts
 import { TasksContext } from "../../../../hooks/contexts/TasksContext";
 
 //components
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
-import { CardList } from "../../../../components/Cards/CardList";
+import { CardListHeader } from "../../../../components/CardListHeader";
+import { CardList } from "../../../../components/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
 //helpers
@@ -56,21 +55,18 @@ function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-view-list" />}
-                    quantity={filteredData.length}
-                    type={"task"}
-                    header={status === "archived" ? "to remove" : "to finish"}
-                />
-                <FilterDropdown
-                    id={"tasks-status-filter"}
-                    label={"status"}
-                    value={status}
-                    options={APP_STATUS_COLORS}
-                    handleOption={handleStatus}
-                />
-            </CardsHeaderLayout>
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"task"}
+            />
+            <FilterDropdown
+                id={"tasks-status-filter"}
+                label={"status"}
+                value={status}
+                options={APP_STATUS_COLORS}
+                handleOption={handleStatus}
+            />
             <CardList
                 type={"tasks"}
                 cards={

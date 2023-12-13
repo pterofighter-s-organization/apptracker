@@ -9,7 +9,7 @@ import { TaskCard } from "./components/Cards/TaskCard"
 import { NoteCard } from "./components/Cards/NoteCard"
 
 //hocs
-import { withDynamicCardCount } from "../../../hocs/withDynamicCardCount"
+import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"
 
 //css
 import "./CardList.css"
@@ -29,7 +29,7 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
             width: "16.75rem",
             Component: NoteCard
         }
-    };
+    }
 
     return (
         <div className="card-list-container">
