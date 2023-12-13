@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { withToggleControl } from "../../../hocs/withToggleControl"
 
 //constants
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
 
 //utils
 import { strFormatter } from "../../../utils/format"
@@ -12,7 +12,7 @@ import { strFormatter } from "../../../utils/format"
 //css
 import "./SideNav.css"
 
-function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
+function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
 
     return (
         <nav
@@ -35,7 +35,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                     job tracker
                 </div>
             </Link>
-            <hr className="sidenav-divider"/>
+            <hr className="sidenav-divider" />
             <button
                 type="button"
                 className="button sidenav-button"
@@ -43,7 +43,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 onClick={toggle ? handleUntoggle : handleToggle}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
-                title={toggle ? `Minimize sidebar`: `Expand sidebar`}
+                title={toggle ? `Minimize sidebar` : `Expand sidebar`}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
@@ -63,7 +63,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                     {NEW_APP_ROUTE.text}
                 </div>
             </Link>
-            <hr className="sidenav-divider"/>
+            <hr className="sidenav-divider" />
             {
                 FEATURES_ROUTES.map((route) => (
                     <Link
@@ -81,8 +81,20 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                     </Link>
                 ))
             }
-            <hr className="sidenav-divider"/>
-            <Link
+            <hr className="sidenav-divider" />
+            <button
+                onClick={handleLogout}
+                className="button sidenav-button"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={`Sign out`}
+            >
+                <i className={`sidenav-button-icon ${LOGOUT_ROUTE.icon}`} />
+                <div className="sidenav-button-text">
+                    {LOGOUT_ROUTE.text}
+                </div>
+            </button>
+            {/* <Link
                 to={LOGIN_ROUTE.route}
                 className="button sidenav-button"
                 data-bs-toggle="tooltip"
@@ -93,7 +105,7 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 <div className="sidenav-button-text">
                     {LOGIN_ROUTE.text}
                 </div>
-            </Link>
+            </Link> */}
         </nav>
     )
 }

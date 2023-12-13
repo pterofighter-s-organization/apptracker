@@ -2,6 +2,7 @@
 //actions
 export const AUTH_CALL_START = "AUTH_CALL_START"
 export const AUTH_CALL_SUCCESS = "AUTH_CALL_SUCCESS"
+export const AUTH_CREATE_SUCCESS = "AUTH_CREATE_SUCCESS"
 export const AUTH_CALL_FAILURE = "AUTH_CALL_FAILURE"
 export const AUTH_SUBMIT_FAILURE = "AUTH_SUBMIT_FAILURE"
 export const AUTH_DELETE_SUCCESS = "AUTH_DELETE_SUCCESS"
@@ -11,7 +12,7 @@ export const authReducer = (auth, action) => {
 
     switch (action.type) {
         case AUTH_CALL_START:
-            return({
+            return ({
                 ...auth,
                 loading: true,
                 errors: null
@@ -28,18 +29,23 @@ export const authReducer = (auth, action) => {
                 errors: null
             })
         case AUTH_CALL_FAILURE:
-            return({
+            return ({
                 ...auth,
                 loading: false,
                 errors: action.payload
             })
+        case AUTH_CREATE_SUCCESS:
+            return ({
+                ...auth,
+                loading: false
+            })
         case AUTH_SUBMIT_FAILURE:
-            return({
+            return ({
                 ...auth,
                 loading: false,
             })
         case AUTH_DELETE_SUCCESS:
-            return({
+            return ({
                 ...auth,
                 data: {
                     username: null,

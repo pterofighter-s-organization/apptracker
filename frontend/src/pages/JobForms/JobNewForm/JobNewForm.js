@@ -59,7 +59,7 @@ export default function JobNewForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        createApplication(1, createJobData(formData))
+        createApplication(createJobData(formData))
             .then((result) => {
                 if (result.success) {
                     alert("Successfully submitted! Now redirecting you to the job page.")

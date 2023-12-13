@@ -23,7 +23,7 @@ export const JobContext = createContext({
     // dispatch: () => { },
     getApplication: async (application_id) => { },
     updateApplication: async (application_id, application) => { },
-    createApplication: async (user_id, application) => { },
+    createApplication: async (application) => { },
     deleteApplication: async (application_id) => { },
 })
 
@@ -73,7 +73,7 @@ export const JobProvider = ({ children }) => {
         }
     }
 
-    const createApplication = async (user_id, application) => {
+    const createApplication = async (application) => {
 
         try {
             const response = await APIs.applicationAPI.createApplication({
@@ -81,7 +81,6 @@ export const JobProvider = ({ children }) => {
                 archived: false,
                 date_edited: findTodayUTCDate(),
                 date_created: findTodayUTCDate(),
-                user_id: user_id
             })
             dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
             return ({

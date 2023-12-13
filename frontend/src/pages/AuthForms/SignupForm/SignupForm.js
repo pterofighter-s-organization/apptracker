@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 //components
 import { TextInput } from "../../../components/Inputs/TextInput"
@@ -6,12 +6,13 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
+import { showNotification, showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
 
 //helpers
-import { isPasswordValid } from "../../../helpers/form"
+import { customSignupValidations } from "../../../helpers/auth"
 
 //privater-components
 import { AuthFormHeader } from "../components/AuthFormHeader"
@@ -21,6 +22,9 @@ import { RedirectLink } from "../components/RedirectLink"
 import { AuthPageLayout } from "../layouts/AuthPageLayout"
 import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
+
+//contexts
+import { AuthContext } from "../../../hooks/contexts/AuthContext"
 
 export default function SignupForm() {
 
@@ -38,42 +42,7 @@ export default function SignupForm() {
             error: ""
         }
     })
-
-    //helpers
-    const isPasswordConfirmed = () => {
-        return formData.newPassword.value === formData.confirmPassword.value && formData.confirmPassword.value.length > 0
-    }
-
-    const handleValidation = () => {
-        let errflag = false
-
-        if (!isPasswordConfirmed()) {
-            setFormData({
-                ...formData,
-                confirmPassword: {
-                    ...formData.confirmPassword,
-                    error: "This doesn't match the password you created!"
-                }
-            })
-
-            errflag = true
-        } if (!isPasswordValid(formData.newPassword.value)) {
-            setFormData({
-                ...formData,
-                newPassword: {
-                    ...formData.newPassword,
-                    error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"
-                }
-            })
-
-            errflag = true
-        } if (errflag) {
-            //this didn't pass
-            return false
-        }
-        //this passed the validations
-        return true
-    }
+    const { loginUser, registerUser } = useContext(AuthContext)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -89,12 +58,49 @@ export default function SignupForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (!handleValidation()) {
-            alert("Please fix the errors to continue!")
+        const customValidation = customSignupValidations(formData)
+        if (customValidation.isError) {
+            setFormData(customValidation.updatedFormState)
+            showNotification({
+                status: "FAIL",
+                message: "Fix the errors to continue."
+            })
             return
         }
-        alert(`Successfully created account!`)
-        //api call
+
+        registerUser({
+            username: formData.username.value,
+            password: formData.newPassword.value
+        }).then((result) => {
+            if (!result.success && result.errors?.code === 'ERR_BAD_RESPONSE') {
+                showNotification({
+                    status: "FAIL",
+                    message: "Username taken already, choose a new one!"
+                })
+                setFormData({
+                    ...formData,
+                    username: {
+                        ...formData.username,
+                        error: "Username taken, choose a new one!"
+                    }
+                })
+                return
+            } else if (result.success) {
+                loginUser(result.data).then((result) => {
+                    showSubmitNotification({
+                        status: result.success,
+                        message: "User created! Now redirecting to dashboard!",
+                        errors: result.errors,
+                    })
+                })
+            } else {
+                showSubmitNotification({
+                    status: result.success,
+                    message: "User created! Now redirecting to dashboard!",
+                    errors: result.errors,
+                })
+            }
+        })
     }
 
     return (

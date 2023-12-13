@@ -6,9 +6,13 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
+import { showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
+
+//helpers
+import { updateLoginErrors } from "../../../helpers/auth"
 
 //private-components
 import { RedirectLink } from "../components/RedirectLink"
@@ -35,15 +39,25 @@ export default function LoginForm() {
         }
     })
 
-    const { auth, getUser } = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        getUser({
+        loginUser({
             username: formData.username.value,
             password: formData.password.value
         }).then((result) => {
-            console.log("res", result.data)
+            //if err code is 403, we must logout first
+            if (!result.success) {
+                setFormData(updateLoginErrors(formData, result.errors))
+            }
+
+            showSubmitNotification({
+                status: result.success,
+                message: "Login successful, Now redirecting to Dashboard!",
+                errors: result.errors,
+                errorMessage: "Can't login without logging out the current user."
+            })
         })
     }
 

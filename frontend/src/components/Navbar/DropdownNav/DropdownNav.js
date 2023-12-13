@@ -4,12 +4,12 @@ import { Link } from "react-router-dom"
 import { withToggleControl } from "../../../hocs/withToggleControl"
 
 //routes
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
 
 //css
 import "./DropdownNav.css"
 
-function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
+function DropdownNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
 
     return (
         <nav
@@ -63,7 +63,19 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                     }
                 </div>
                 <hr style={{ margin: "0.25rem" }} />
-                <Link
+                <button
+                    onClick={handleLogout}
+                    className="button dropdownnav-content-button"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title={`Sign out`}
+                >
+                    <i className={`dropdownnav-content-button-icon ${LOGOUT_ROUTE.icon}`} />
+                    <div className="dropdownnav-content-button-text">
+                        {LOGOUT_ROUTE.text}
+                    </div>
+                </button>
+                {/* <Link
                     to={LOGIN_ROUTE.route}
                     className="button dropdownnav-content-button"
                 >
@@ -71,7 +83,7 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                     <div className="dropdownnav-content-button-text">
                         {LOGIN_ROUTE.text}
                     </div>
-                </Link>
+                </Link> */}
             </div>
         </nav>
     )

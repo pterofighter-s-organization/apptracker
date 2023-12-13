@@ -39,8 +39,11 @@ def application_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def application_detail(request, pk):
     #find application by pk 
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     try:
-        application = Application.objects.get(pk=pk)
+        application = Application.objects.get(pk=pk, user_id=request.user.id)
         #get an application
         if request.method == 'GET':
             application_serializer = ApplicationSerializer(application)

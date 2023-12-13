@@ -38,3 +38,9 @@ export const LOGIN_ROUTE = {
     route: "/login",
     icon: "bi bi-door-open-fill"
 }
+
+export const LOGOUT_ROUTE = {
+    text: "sign out",
+    route: "/logout",
+    icon: "bi bi-door-open-fill"
+}

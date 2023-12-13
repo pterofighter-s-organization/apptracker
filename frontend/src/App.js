@@ -23,6 +23,7 @@ import { NotesProvider } from './hooks/contexts/NotesContext';
 //css
 import './App.css'
 import { AuthProvider } from './hooks/contexts/AuthContext';
+import ProtectedRoutes from './routes/ProtectedRoutes';
 
 export default function App() {
 
@@ -30,40 +31,50 @@ export default function App() {
     <div className="App">
       <NotificationList />
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Dashboard />} />
-        </Routes>
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
           </Routes>
+          <Routes>
+            <Route element={<ProtectedRoutes />}>
+              <Route exact path="/" element={<Dashboard />} />
+            </Route>
+          </Routes>
+          <NotesProvider>
+            <Routes>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/all-notes" element={<NoteBoard />} />
+                <Route path="/all-notes/:status" element={<NoteBoard />} />
+              </Route>
+            </Routes>
+          </NotesProvider>
+          <TasksProvider>
+            <Routes>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/all-tasks" element={<TaskBoard />} />
+                <Route path="/all-tasks/:status" element={<TaskBoard />} />
+              </Route>
+            </Routes>
+          </TasksProvider>
+          <JobsProvider>
+            <Routes>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/all-jobs/:status" element={<JobBoard />} />
+                <Route path="/all-jobs" element={<JobBoard />} />
+              </Route>
+            </Routes>
+          </JobsProvider>
+          <JobProvider>
+            <Routes>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/job/:id" element={<JobPage />} />
+                <Route path="/job-edit/:id" element={<JobEditForm />} />
+                <Route path="/new-job" element={<JobNewForm />} />
+              </Route>
+            </Routes>
+          </JobProvider>
         </AuthProvider>
-        <NotesProvider>
-          <Routes>
-            <Route path="/all-notes" element={<NoteBoard />} />
-            <Route path="/all-notes/:status" element={<NoteBoard />} />
-          </Routes>
-        </NotesProvider>
-        <TasksProvider>
-          <Routes>
-            <Route path="/all-tasks" element={<TaskBoard />} />
-            <Route path="/all-tasks/:status" element={<TaskBoard />} />
-          </Routes>
-        </TasksProvider>
-        <JobsProvider>
-          <Routes>
-            <Route path="/all-jobs/:status" element={<JobBoard />} />
-            <Route path="/all-jobs" element={<JobBoard />} />
-          </Routes>
-        </JobsProvider>
-        <JobProvider>
-          <Routes>
-            <Route path="/job/:id" element={<JobPage />} />
-            <Route path="/job-edit/:id" element={<JobEditForm />} />
-            <Route path="/new-job" element={<JobNewForm />} />
-          </Routes>
-        </JobProvider>
       </Router>
     </div>
   );
