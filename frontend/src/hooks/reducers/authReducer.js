@@ -20,7 +20,11 @@ export const authReducer = (auth, action) => {
             return ({
                 ...auth,
                 loading: false,
-                data: action.payload,
+                data: {
+                    username: action.payload.username,
+                    isAuth: action.payload.isAuth,
+                    expireDate: action.payload.expireDate
+                },
                 errors: null
             })
         case AUTH_CALL_FAILURE:
@@ -37,7 +41,11 @@ export const authReducer = (auth, action) => {
         case AUTH_DELETE_SUCCESS:
             return({
                 ...auth,
-                data: null,
+                data: {
+                    username: null,
+                    isAuth: false,
+                    expireDate: null
+                },
                 loading: false
             })
         default:

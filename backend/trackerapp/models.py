@@ -5,7 +5,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
+    BaseUserManager, AbstractUser
 )
 
 # from datetime import datetime
@@ -21,13 +21,12 @@ def validate_datetime_before_now(value):
     if current_datetime > value:
         raise ValidationError("Can't provide overdue date and time.")
     
-
 # # Create your models here.
-# class Users(models.Model):
+# class Users(AbstractUser):
 #     user_id = models.AutoField(primary_key=True)
-#     username = models.CharField(max_length=255)
-#     email = models.EmailField()
-#     password = models.CharField(max_length=255)
+#     # username = models.CharField(max_length=255)
+#     # email = models.EmailField()
+#     # password = models.CharField(max_length=255)
 #     def __str__(self):
 #         return self.username
     

@@ -4,7 +4,7 @@ from .models import Application, Notes, Task#, Users
 # class UsersSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Users
-#         fields = ('user_id', 'username', 'email', 'password')
+#         fields = "__all__"
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta: 

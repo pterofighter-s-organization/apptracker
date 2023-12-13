@@ -4,6 +4,7 @@ const API_BASE_URL = "http://localhost:8000/api"
 
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
+    withCredentials: true
 })
 
 const applicationAPI = {
@@ -36,6 +37,7 @@ const userAPI = {
     loginUser: (user) => apiClient.post('/login', user),
     createUser: (user) => apiClient.post(`/user`, user),
     updateUser: (user_id, user) => apiClient.put(`/user/${user_id}`, user),
+    logoutUser: () => apiClient.delete('/logout'),
 }
 
 const APIs = {

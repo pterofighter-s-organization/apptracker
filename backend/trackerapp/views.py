@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework import viewsets, status
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from .serializers import ApplicationSerializer, NotesSerializer, TaskSerializer#, UserSerializer
+from .serializers import ApplicationSerializer, NotesSerializer, TaskSerializer#, UsersSerializer
 from .models import Application, Notes, Task#, Users
 from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -68,6 +68,10 @@ def user_registration(request):
         users_data = JSONParser().parse(request)
         username = users_data['username']
         password = users_data['password']
+        # user_serializer = UsersSerializer(data=users_data)
+        # if user_serializer.is_valid():
+        #     user_serializer.save()
+        #     return JsonResponse(user_serializer.data, status=status.HTTP_201_CREATED)
         user = User.objects.create_user(username=username, password=password)
         return JsonResponse({"username":user.username,"password": user.password},status=status.HTTP_201_CREATED)
     return JsonResponse({"message": "Your request is bad"},status=status.HTTP_400_BAD_REQUEST)
