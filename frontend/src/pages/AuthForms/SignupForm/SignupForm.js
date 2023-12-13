@@ -63,7 +63,7 @@ export default function SignupForm() {
             setFormData(customValidation.updatedFormState)
             showNotification({
                 status: "FAIL",
-                message: "Fix the errors to continue."
+                message: "Fix the errors to continue!"
             })
             return
         }
@@ -75,13 +75,13 @@ export default function SignupForm() {
             if (!result.success && result.errors?.code === 'ERR_BAD_RESPONSE') {
                 showNotification({
                     status: "FAIL",
-                    message: "Username taken already, choose a new one!"
+                    message: "Username can't be use, create a new one!"
                 })
                 setFormData({
                     ...formData,
                     username: {
                         ...formData.username,
-                        error: "Username taken, choose a new one!"
+                        error: "Username can't be use, create a new one!"
                     }
                 })
                 return
@@ -96,7 +96,6 @@ export default function SignupForm() {
             } else {
                 showSubmitNotification({
                     status: result.success,
-                    message: "User created! Now redirecting to dashboard!",
                     errors: result.errors,
                 })
             }

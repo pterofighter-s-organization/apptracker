@@ -47,6 +47,7 @@ export default function LoginForm() {
             username: formData.username.value,
             password: formData.password.value
         }).then((result) => {
+            //TODO: fix logging in takes a while to load with a loading screen
             //if err code is 403, we must logout first
             if (!result.success) {
                 setFormData(updateLoginErrors(formData, result.errors))

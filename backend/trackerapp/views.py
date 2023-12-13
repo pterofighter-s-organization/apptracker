@@ -33,7 +33,7 @@ def application_list(request):
         if application_serializer.is_valid():
             application_serializer.save()
             return JsonResponse(application_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
