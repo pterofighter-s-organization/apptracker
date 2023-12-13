@@ -127,7 +127,8 @@ def notes_list(request):
         notes_serializer = NotesSerializer(notes, many=True)
         return JsonResponse(notes_serializer.data, safe=False)
     elif request.method == 'POST':
-        notes_data = JSONParser().parse(request)
+        # notes_data = JSONParser().parse(request)
+        notes_data = request.data
         notes_serializer = NotesSerializer(data=notes_data)
         if notes_serializer.is_valid():
             notes_serializer.save()
@@ -175,7 +176,9 @@ def task_list(request):
         task_serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(task_serializer.data, safe=False)
     elif request.method == 'POST':
-        task_data = JSONParser().parse(request)
+        # task_data = JSONParser().parse(request)
+        # this fix the problem of it throwing an error on last line. I saw it from app post, and seems like post is the only error happening.
+        task_data = request.data
         task_serializer = TaskSerializer(data=task_data)
         if task_serializer.is_valid(raise_exception=True):
             try:
