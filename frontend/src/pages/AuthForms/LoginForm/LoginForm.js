@@ -7,6 +7,7 @@ import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
 import { showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
@@ -39,7 +40,7 @@ export default function LoginForm() {
         }
     })
 
-    const { loginUser } = useContext(AuthContext)
+    const { auth, loginUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -55,7 +56,7 @@ export default function LoginForm() {
 
             showSubmitNotification({
                 status: result.success,
-                message: "Login successful, Now redirecting to Dashboard!",
+                message: `Welcome ${result.data.username}! Redirected you to Dashboard!`,
                 errors: result.errors,
                 errorMessage: "Can't login without logging out the current user."
             })
@@ -72,6 +73,10 @@ export default function LoginForm() {
                 error: ""
             }
         })
+    }
+
+    if (auth.loading) {
+        return <LoadingDisplay />
     }
 
     return (

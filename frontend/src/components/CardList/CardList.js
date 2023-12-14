@@ -39,10 +39,11 @@ function CardList({ cards, initialCount, cardCount, isShow, type, ...props }) {
                 style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${CARDS[type].width}, 1fr))` }}
             >
                 {
-                    cards.slice(0, cardCount).map((card) => {
+                    cards.slice(0, cardCount).map((card, index) => {
                         const CardComponent = CARDS[type].Component
                         return (
                             <CardComponent
+                                key={index}
                                 card={card}
                             />
                         )

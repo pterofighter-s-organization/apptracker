@@ -14,7 +14,10 @@ import { InputLayout } from "../../../layouts/InputLayout"
 //helpers
 import { customSignupValidations } from "../../../helpers/auth"
 
-//privater-components
+//components
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
+
+//private-components
 import { AuthFormHeader } from "../components/AuthFormHeader"
 import { RedirectLink } from "../components/RedirectLink"
 
@@ -42,7 +45,7 @@ export default function SignupForm() {
             error: ""
         }
     })
-    const { loginUser, registerUser } = useContext(AuthContext)
+    const { auth, loginUser, registerUser } = useContext(AuthContext)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -100,6 +103,10 @@ export default function SignupForm() {
                 })
             }
         })
+    }
+
+    if (auth.loading) {
+        return <LoadingDisplay />
     }
 
     return (

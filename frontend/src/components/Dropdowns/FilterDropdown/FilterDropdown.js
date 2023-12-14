@@ -75,6 +75,7 @@ function FilterDropdown({
                     Object.entries(options).map(([option, color]) => (
                         option !== value ?
                             <FilterDropdownOption
+                                key={option}
                                 option={option}
                                 handleOption={handleOption}
                                 color={color}

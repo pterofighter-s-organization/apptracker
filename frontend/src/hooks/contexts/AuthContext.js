@@ -1,48 +1,63 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 //services
 import APIs from "../../services/api";
 
 //actions
-import { AUTH_CALL_START, AUTH_CALL_FAILURE, AUTH_CALL_SUCCESS, AUTH_CREATE_SUCCESS, AUTH_SUBMIT_FAILURE, AUTH_DELETE_SUCCESS } from "../reducers/authReducer";
+import {
+    AUTH_CALL_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS,
+    AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_SUBMIT_FAILURE, AUTH_LOGOUT_SUCCESS
+} from "../reducers/authReducer";
 
 //reducer
 import { authReducer } from "../reducers/authReducer";
-const moment = require('moment')
 
 const initialState = {
     data: {
-        username: localStorage.getItem('username') ? localStorage.getItem('username') : null,
-        isAuth: localStorage.getItem('isAuth') ? localStorage.getItem('isAuth') : false,
-        expireDate: localStorage.getItem('expireDate') ? localStorage.getItem('expireDate') : null
+        username: null,
+        isAuth: null
     },
     loading: false,
-    errors: null
 }
 
 export const AuthContext = createContext({
     auth: initialState,
     loginUser: (user) => { },
     registerUser: (user) => { },
-    logoutUser: () => { }
+    logoutUser: () => { },
+    getUser: () => { }
 })
 
 export const AuthProvider = ({ children }) => {
     const [auth, dispatch] = useReducer(authReducer, initialState)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (auth.data.expireDate) {
-            setTimeout(() => {
-                logoutUser().then((result) => {
-                    if (result.success) {
-                        alert("You've been logged out!")
-                    }
-                })
-            }, moment(auth.data.expireDate) - moment.now())
+    const getUser = useCallback(async () => {
+
+        try {
+            const response = await APIs.userAPI.getUser()
+            dispatch({ type: AUTH_GET_SUCCESS, payload: response.data.username })
+            return ({
+                success: true,
+                data: {
+                    username: response.data.username,
+                    isAuth: true
+                }
+            })
+        } catch (errors) {
+            console.log(errors)
+            dispatch({ type: AUTH_GET_FAILURE })
+            return ({
+                success: false,
+                errors: errors,
+                data: {
+                    username: null,
+                    isAuth: false
+                }
+            })
         }
-    }, [auth.data])
+    }, [dispatch])
 
     const loginUser = async (user) => {
         dispatch({ type: AUTH_CALL_START })
@@ -50,38 +65,36 @@ export const AuthProvider = ({ children }) => {
         try {
             //don't delete await or else it couldnt wait for the promise to throw error
             await APIs.userAPI.loginUser(user)
-            const data = {
-                username: user.username,
-                //2 weeks for session to expire from now
-                expireDate: moment().add({ weeks: 2, days: 0, hours: 0, minutes: 0, seconds: 0 }).toISOString(),
-                isAuth: true
-            }
-            localStorage.setItem('username', data.username)
-            localStorage.setItem('isAuth', data.isAuth)
-            localStorage.setItem('expireDate', data.expireDate)
-
-            dispatch({ type: AUTH_CALL_SUCCESS, payload: data })
+            dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user.username })
             //reroute to dashboard, here because login is for sure re-routing to dashboard
             navigate("/")
             return ({
                 success: true,
-                data: data
+                data: {
+                    username: user.username,
+                    isAuth: true
+                }
             })
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_CALL_FAILURE, payload: errors })
+            dispatch({ type: AUTH_LOGIN_FAILURE })
             return ({
                 success: false,
-                errors: errors
+                errors: errors,
+                data: {
+                    username: null,
+                    isAuth: false
+                }
             })
         }
     }
 
     const registerUser = async (user) => {
+        dispatch({ type: AUTH_CALL_START })
 
         try {
             await APIs.userAPI.registerUser(user)
-            dispatch({ type: AUTH_CREATE_SUCCESS })
+            dispatch({ type: AUTH_REGISTER_SUCCESS })
             return ({
                 success: true,
                 data: user
@@ -97,29 +110,35 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logoutUser = async () => {
-
-        const clearLocalStorage = () => {
-            dispatch({ type: AUTH_DELETE_SUCCESS })
-            localStorage.removeItem('isAuth')
-            localStorage.removeItem('username')
-            localStorage.removeItem('expireDate')
+        dispatch({ type: AUTH_CALL_START })
+        
+        const loggedOut = () => {
+            dispatch({
+                type: AUTH_LOGOUT_SUCCESS,
+                payload: {
+                    isAuth: false
+                }
+            })
+            alert("You've been logged out!")
+            return ({
+                username: null,
+                isAuth: false
+            })
         }
 
-        //this will log out even w/o session existing
         try {
             await APIs.userAPI.logoutUser()
-            clearLocalStorage()
             return ({
                 success: true,
-                data: {}
+                data: loggedOut()
             })
         } catch (errors) {
             console.log(errors)
-            if (errors.response?.code === '404') {
-                clearLocalStorage()
+            //this will log out even w/o session existing
+            if (errors.response?.status === 404) {
                 return ({
                     success: true,
-                    data: {}
+                    data: loggedOut()
                 })
             }
             dispatch({ type: AUTH_SUBMIT_FAILURE })
@@ -136,7 +155,8 @@ export const AuthProvider = ({ children }) => {
                 auth,
                 loginUser,
                 registerUser,
-                logoutUser
+                logoutUser,
+                getUser
             }}
         >
             {children}

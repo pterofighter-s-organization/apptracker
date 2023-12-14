@@ -30,7 +30,7 @@ urlpatterns = [
     re_path(r'^api/application$', views.application_list),
     re_path(r'^api/application/(?P<pk>[0-9]+)$', views.application_detail),
     re_path(r'^api/register$', views.user_registration),
-    re_path(r'^api/user/(?P<pk>[0-9]+)$', views.user_detail),
+    re_path(r'^api/user$', views.user_detail),
     re_path(r'^api/login$', views.user_authentication),
     re_path(r'^api/logout$', views.user_authentication),
     re_path(r'^api/notes$', views.notes_list),

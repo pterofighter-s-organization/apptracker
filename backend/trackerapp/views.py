@@ -84,11 +84,14 @@ def user_registration(request):
 #to do stuff after adding the authenticate function
 #check if password actually changes
 @api_view(['GET', 'PUT', 'DELETE'])
-def user_detail(request, pk):
+def user_detail(request):
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     try:
-        user = User.objects.get(id = pk)
+        user = User.objects.get(id = request.user.id)
         if request.method == 'GET':
-            return JsonResponse({"username":user.username,"email": user.email,"password": user.password},status=status.HTTP_201_CREATED)
+            return JsonResponse({"username":user.username},status=status.HTTP_201_CREATED)
         if request.method == 'PUT':
             users_data = JSONParser().parse(request)
             if 'email' in users_data:

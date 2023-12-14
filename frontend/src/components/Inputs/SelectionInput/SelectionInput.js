@@ -21,8 +21,7 @@ export default function SelectionInput({ name, options, value, handleChange }) {
                             </option>
                             :
                             <option
-                                selected
-                                value={option}
+                                defaultValue={option}
                             >
                                 {option}
                             </option>

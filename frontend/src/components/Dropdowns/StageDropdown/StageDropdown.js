@@ -43,6 +43,7 @@ function StageDropdown({
                     Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
                         option !== stage ?
                             <button
+                                key={option}
                                 type="button"
                                 name={name ? name : option}
                                 value={option}

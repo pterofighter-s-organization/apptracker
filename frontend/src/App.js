@@ -27,6 +27,10 @@ import ProtectedRoutes from './routes/ProtectedRoutes';
 
 export default function App() {
 
+  /*
+    to fix the "no routes matched sth error" we must
+    have routes nest under /, but can fix later.
+  */
   return (
     <div className="App">
       <NotificationList />

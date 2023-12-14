@@ -1,11 +1,13 @@
 
 //actions
 export const AUTH_CALL_START = "AUTH_CALL_START"
-export const AUTH_CALL_SUCCESS = "AUTH_CALL_SUCCESS"
-export const AUTH_CREATE_SUCCESS = "AUTH_CREATE_SUCCESS"
-export const AUTH_CALL_FAILURE = "AUTH_CALL_FAILURE"
+export const AUTH_REGISTER_SUCCESS = "AUTH_REGISTER_SUCCESS"
+export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS"
+export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE"
+export const AUTH_GET_SUCCESS = "AUTH_GET_SUCCESS"
+export const AUTH_GET_FAILURE = "AUTH_GET_FAILURE"
 export const AUTH_SUBMIT_FAILURE = "AUTH_SUBMIT_FAILURE"
-export const AUTH_DELETE_SUCCESS = "AUTH_DELETE_SUCCESS"
+export const AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS"
 
 //reducer
 export const authReducer = (auth, action) => {
@@ -15,26 +17,44 @@ export const authReducer = (auth, action) => {
             return ({
                 ...auth,
                 loading: true,
-                errors: null
             })
-        case AUTH_CALL_SUCCESS:
+        case AUTH_GET_SUCCESS:
             return ({
                 ...auth,
                 loading: false,
                 data: {
-                    username: action.payload.username,
-                    isAuth: action.payload.isAuth,
-                    expireDate: action.payload.expireDate
+                    username: action.payload,
+                    isAuth: true
                 },
-                errors: null
             })
-        case AUTH_CALL_FAILURE:
+        case AUTH_GET_FAILURE:
             return ({
                 ...auth,
                 loading: false,
-                errors: action.payload
+                data: {
+                    username: null,
+                    isAuth: false
+                },
             })
-        case AUTH_CREATE_SUCCESS:
+        case AUTH_LOGIN_SUCCESS:
+            return({
+                ...auth,
+                loading: false,
+                data: {
+                    username: action.payload,
+                    isAuth: true
+                }
+            })
+        case AUTH_LOGIN_FAILURE:
+            return({
+                ...auth,
+                loading: false,
+                data: {
+                    username: null,
+                    isAuth: false
+                }
+            })
+        case AUTH_REGISTER_SUCCESS:
             return ({
                 ...auth,
                 loading: false
@@ -44,13 +64,12 @@ export const authReducer = (auth, action) => {
                 ...auth,
                 loading: false,
             })
-        case AUTH_DELETE_SUCCESS:
+        case AUTH_LOGOUT_SUCCESS:
             return ({
                 ...auth,
                 data: {
                     username: null,
                     isAuth: false,
-                    expireDate: null
                 },
                 loading: false
             })

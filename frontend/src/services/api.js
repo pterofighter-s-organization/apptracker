@@ -51,7 +51,8 @@ const userAPI = {
     loginUser: (user) => apiClient.post('/login', user),
     registerUser: (user) => apiClient.post(`/register`, user),
     updateUser: (user_id, user) => apiProtectedClient().put(`/user/${user_id}`, user),
-    logoutUser: () => apiProtectedClient().delete('/logout')
+    logoutUser: () => apiProtectedClient().delete('/logout'),
+    getUser: () => apiProtectedClient().get('/user')
 }
 
 const APIs = {
