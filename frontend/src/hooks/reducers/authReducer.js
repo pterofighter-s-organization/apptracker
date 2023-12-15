@@ -26,6 +26,7 @@ export const authReducer = (auth, action) => {
                     username: action.payload,
                     isAuth: true
                 },
+                errors: null,
             })
         case AUTH_GET_FAILURE:
             return ({
@@ -35,6 +36,7 @@ export const authReducer = (auth, action) => {
                     username: null,
                     isAuth: false
                 },
+                errors: action.payload,
             })
         case AUTH_LOGIN_SUCCESS:
             return({
@@ -43,7 +45,8 @@ export const authReducer = (auth, action) => {
                 data: {
                     username: action.payload,
                     isAuth: true
-                }
+                },
+                errors: null,
             })
         case AUTH_LOGIN_FAILURE:
             return({
@@ -57,7 +60,8 @@ export const authReducer = (auth, action) => {
         case AUTH_REGISTER_SUCCESS:
             return ({
                 ...auth,
-                loading: false
+                loading: false,
+                errors: null,
             })
         case AUTH_SUBMIT_FAILURE:
             return ({
@@ -71,7 +75,8 @@ export const authReducer = (auth, action) => {
                     username: null,
                     isAuth: false,
                 },
-                loading: false
+                loading: false,
+                errors: null,
             })
         default:
             throw new Error("Unhandled action type.")

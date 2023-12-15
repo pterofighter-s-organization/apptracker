@@ -3,12 +3,14 @@ import { Outlet, Navigate } from "react-router-dom";
 
 //components
 import { LoadingDisplay } from "../components/Displays/LoadingDisplay";
+import { ErrorDisplay } from "../components/Displays/ErrorDisplay";
 
 //contexts
 import { AuthContext } from "../hooks/contexts/AuthContext";
 
-export default function ProtectedRoutes() {
+export default function IsAuthRoutes({ isAuth }) {
 
+    //if it is an authenticated route, then redirect it to login when there's an error, if not redirect to dashboard
     const { auth, getUser } = useContext(AuthContext)
 
     useEffect(() => {
@@ -20,10 +22,19 @@ export default function ProtectedRoutes() {
         return <LoadingDisplay />
     }
 
+    if (auth.errors?.code === 'ERR_NETWORK') {
+        return (
+            <ErrorDisplay
+                label={isAuth ? "Authorized Pages" : "Not Authorized Pages"}
+                errors={auth.errors}
+            />
+        )
+    }
+
     return (
-        auth.data.isAuth ?
+        auth.data.isAuth === isAuth ?
             <Outlet />
             :
-            <Navigate to="/login" />
+            <Navigate to={isAuth ? "/login" : "/"} />
     )
 }

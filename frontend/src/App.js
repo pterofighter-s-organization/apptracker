@@ -14,16 +14,18 @@ import { JobEditForm } from './pages/JobForms/JobEditForm';
 import { LoginForm } from './pages/AuthForms/LoginForm';
 import { SignupForm } from './pages/AuthForms/SignupForm';
 
+//routes
+import IsAuthRoutes from './routes/IsAuthRoutes';
+
 //providers
 import { JobProvider } from './hooks/contexts/JobContext';
 import { JobsProvider } from './hooks/contexts/JobsContext';
 import { TasksProvider } from './hooks/contexts/TasksContext';
 import { NotesProvider } from './hooks/contexts/NotesContext';
+import { AuthProvider } from './hooks/contexts/AuthContext';
 
 //css
 import './App.css'
-import { AuthProvider } from './hooks/contexts/AuthContext';
-import ProtectedRoutes from './routes/ProtectedRoutes';
 
 export default function App() {
 
@@ -37,17 +39,19 @@ export default function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/signup" element={<SignupForm />} />
+            <Route element={<IsAuthRoutes isAuth={false} />}>
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/signup" element={<SignupForm />} />
+            </Route>
           </Routes>
           <Routes>
-            <Route element={<ProtectedRoutes />}>
+            <Route element={<IsAuthRoutes isAuth={true} />}>
               <Route exact path="/" element={<Dashboard />} />
             </Route>
           </Routes>
           <NotesProvider>
             <Routes>
-              <Route element={<ProtectedRoutes />}>
+              <Route element={<IsAuthRoutes isAuth={true} />}>
                 <Route path="/all-notes" element={<NoteBoard />} />
                 <Route path="/all-notes/:status" element={<NoteBoard />} />
               </Route>
@@ -55,7 +59,7 @@ export default function App() {
           </NotesProvider>
           <TasksProvider>
             <Routes>
-              <Route element={<ProtectedRoutes />}>
+              <Route element={<IsAuthRoutes isAuth={true} />}>
                 <Route path="/all-tasks" element={<TaskBoard />} />
                 <Route path="/all-tasks/:status" element={<TaskBoard />} />
               </Route>
@@ -63,7 +67,7 @@ export default function App() {
           </TasksProvider>
           <JobsProvider>
             <Routes>
-              <Route element={<ProtectedRoutes />}>
+              <Route element={<IsAuthRoutes isAuth={true} />}>
                 <Route path="/all-jobs/:status" element={<JobBoard />} />
                 <Route path="/all-jobs" element={<JobBoard />} />
               </Route>
@@ -71,7 +75,7 @@ export default function App() {
           </JobsProvider>
           <JobProvider>
             <Routes>
-              <Route element={<ProtectedRoutes />}>
+              <Route element={<IsAuthRoutes isAuth={true} />}>
                 <Route path="/job/:id" element={<JobPage />} />
                 <Route path="/job-edit/:id" element={<JobEditForm />} />
                 <Route path="/new-job" element={<JobNewForm />} />

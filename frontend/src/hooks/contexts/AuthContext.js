@@ -19,6 +19,7 @@ const initialState = {
         isAuth: null
     },
     loading: false,
+    errors: null
 }
 
 export const AuthContext = createContext({
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
             })
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_GET_FAILURE })
+            dispatch({ type: AUTH_GET_FAILURE, payload: errors })
             return ({
                 success: false,
                 errors: errors,
@@ -111,7 +112,7 @@ export const AuthProvider = ({ children }) => {
 
     const logoutUser = async () => {
         dispatch({ type: AUTH_CALL_START })
-        
+
         const loggedOut = () => {
             dispatch({
                 type: AUTH_LOGOUT_SUCCESS,
