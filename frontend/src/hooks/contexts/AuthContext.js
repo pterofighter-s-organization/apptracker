@@ -6,7 +6,7 @@ import APIs from "../../services/api";
 
 //actions
 import {
-    AUTH_CALL_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS,
+    AUTH_CALL_START, AUTH_SUBMIT_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS,
     AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_SUBMIT_FAILURE, AUTH_LOGOUT_SUCCESS
 } from "../reducers/authReducer";
 
@@ -19,6 +19,7 @@ const initialState = {
         isAuth: null
     },
     loading: false,
+    submitLoading: false,
     errors: null
 }
 
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }) => {
     }, [dispatch])
 
     const loginUser = async (user) => {
-        dispatch({ type: AUTH_CALL_START })
+        dispatch({ type: AUTH_SUBMIT_START })
 
         try {
             //don't delete await or else it couldnt wait for the promise to throw error
@@ -91,7 +92,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const registerUser = async (user) => {
-        dispatch({ type: AUTH_CALL_START })
+        dispatch({ type: AUTH_SUBMIT_START })
 
         try {
             await APIs.userAPI.registerUser(user)

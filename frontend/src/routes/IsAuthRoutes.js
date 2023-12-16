@@ -22,10 +22,11 @@ export default function IsAuthRoutes({ isAuth }) {
         return <LoadingDisplay />
     }
 
+    //if is network error, show the error display instead since backend doesn't work
     if (auth.errors?.code === 'ERR_NETWORK') {
         return (
             <ErrorDisplay
-                label={isAuth ? "Authorized Pages" : "Not Authorized Pages"}
+                label={isAuth ? "Authorized Pages" : "Non Authorized Pages"}
                 errors={auth.errors}
             />
         )

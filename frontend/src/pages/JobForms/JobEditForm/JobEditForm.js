@@ -28,12 +28,13 @@ import { strFormatter } from "../../../utils/format";
 export default function JobEditForm() {
 
     const { id } = useParams()
-    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
     //making sure this doesn't re-render and make useeffect render again. fixed*
+    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         getApplication(id)
@@ -50,6 +51,7 @@ export default function JobEditForm() {
     const handleChange = (e) => {
         e.preventDefault()
 
+        setErrorMessage("")
         if (e.target.name === "stage") {
             setFormData({
                 ...formData,
@@ -78,12 +80,12 @@ export default function JobEditForm() {
                     alert("Successfully edited! Now redirecting you to the job page.")
                     navigate("/job/" + result.data.application_id)
                 } else {
-                    alert(
-                        handleAPIErrors({
-                            errors: result.errors,
-                            message: "Please fix the errors before submitting!"
-                        })
-                    )
+                    const apiError = handleAPIErrors({
+                        errors: result.errors,
+                        message: "Please fix the errors before submitting!"
+                    })
+                    alert(apiError)
+                    setErrorMessage(apiError)
                     setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
             })
@@ -109,6 +111,7 @@ export default function JobEditForm() {
             <JobForm
                 isEdit={true}
                 formData={formData}
+                errorMessage={errorMessage}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
             />

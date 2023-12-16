@@ -44,7 +44,8 @@ export default function JobPage() {
         return () => document.title = "Job Tracker App"
     }, [getApplication, id])
 
-    if (job.loading) {
+    //preventing accidental errors that rarely happens
+    if (job.loading || !job.data) {
         return (
             <LoadingDisplay />
         )

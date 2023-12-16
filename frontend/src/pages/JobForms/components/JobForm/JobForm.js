@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 //components
 import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
 import { ReturnButton } from "../ReturnButton"
+import { InfoReminder } from "../../../../components/InfoReminder"
 
 //sections
 import { JobFormHeader } from "./sections/JobFormHeader"
@@ -13,7 +14,7 @@ import { JobFormDescription } from "./sections/JobFormDescription"
 //css
 import "./JobForm.css"
 
-export default function JobForm({ isEdit, formData, handleChange, handleSubmit }) {
+export default function JobForm({ isEdit, formData, errorMessage, handleChange, handleSubmit }) {
 
     const navigate = useNavigate()
 
@@ -40,6 +41,15 @@ export default function JobForm({ isEdit, formData, handleChange, handleSubmit }
                 formData={formData}
                 handleChange={handleChange}
             />
+            {
+                errorMessage.length > 0 ?
+                    <InfoReminder
+                        isError={true}
+                        text={errorMessage}
+                    />
+                    :
+                    null
+            }
             <SubmitButton />
             <ReturnButton
                 handleReturn={handleReturn}

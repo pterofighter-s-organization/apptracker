@@ -9,7 +9,7 @@ const apiClient = axios.create({
 })
 
 const apiProtectedClient = () => {
-    //this is to ensure the csrftoken always stay updated
+    //this is a method to ensure the csrftoken always get updated because it needs to be recall on every use
     return (
         axios.create({
             headers: {

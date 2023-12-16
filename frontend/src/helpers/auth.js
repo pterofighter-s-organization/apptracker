@@ -23,10 +23,10 @@ export const updateLoginErrors = (formData, errors) => {
 }
 
 export const updateSignupErrors = (formData, errors) => {
-
+    //for later use
 }
 
-const isPasswordValid = (password) => {
+const isNewPasswordValid = (password) => {
     // Check the length of the password.
     if (password.length < 8) {
         return false;
@@ -51,7 +51,7 @@ const isPasswordValid = (password) => {
     return true;
 }
 
-const isPasswordConfirmed = (formData) => {
+const isNewPasswordConfirmed = (formData) => {
     return formData.newPassword.value === formData.confirmPassword.value && formData.confirmPassword.value.length > 0
 }
 
@@ -59,14 +59,14 @@ export const customSignupValidations = (formData) => {
     let errflag = false
     const updatedFormState = {...formData}
 
-    if (!isPasswordConfirmed(formData)) {
+    if (!isNewPasswordConfirmed(formData)) {
         updatedFormState["confirmPassword"] = {
             ...formData.confirmPassword,
             error: "This doesn't match the password you created!"
         }
 
         errflag = true
-    } if (!isPasswordValid(formData.newPassword.value)) {
+    } if (!isNewPasswordValid(formData.newPassword.value)) {
         updatedFormState["newPassword"] = {
             ...formData.newPassword,
             error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"

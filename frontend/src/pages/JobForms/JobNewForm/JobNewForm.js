@@ -30,6 +30,7 @@ export default function JobNewForm() {
     const navigate = useNavigate()
     const { createApplication } = useContext(JobContext)
     const [formData, setFormData] = useState(initialState)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         document.title = "New Job Form - Job Tracker App"
@@ -40,6 +41,7 @@ export default function JobNewForm() {
     const handleChange = (e) => {
         e.preventDefault()
 
+        setErrorMessage("")
         if (e.target.name === "stage") {
             setFormData({
                 ...formData,
@@ -65,12 +67,12 @@ export default function JobNewForm() {
                     alert("Successfully submitted! Now redirecting you to the job page.")
                     navigate(`/job/${result.data.application_id}`)
                 } else {
-                    alert(
-                        handleAPIErrors({
-                            errors: result.errors,
-                            message: "Please fix the errors before submitting!"
-                        })
-                    )
+                    const apiError = handleAPIErrors({
+                        errors: result.errors,
+                        message: "Please fix the errors before submitting!"
+                    })
+                    alert(apiError)
+                    setErrorMessage(apiError)
                     setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
             })
@@ -80,6 +82,7 @@ export default function JobNewForm() {
         <PageLayout>
             <JobForm
                 formData={formData}
+                errorMessage={errorMessage}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
             />

@@ -1,6 +1,7 @@
 
 //actions
 export const AUTH_CALL_START = "AUTH_CALL_START"
+export const AUTH_SUBMIT_START = "AUTH_SUBMIT_START"
 export const AUTH_REGISTER_SUCCESS = "AUTH_REGISTER_SUCCESS"
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS"
 export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE"
@@ -17,6 +18,11 @@ export const authReducer = (auth, action) => {
             return ({
                 ...auth,
                 loading: true,
+            })
+        case AUTH_SUBMIT_START:
+            return ({
+                ...auth,
+                submitLoading: true
             })
         case AUTH_GET_SUCCESS:
             return ({
@@ -39,9 +45,9 @@ export const authReducer = (auth, action) => {
                 errors: action.payload,
             })
         case AUTH_LOGIN_SUCCESS:
-            return({
+            return ({
                 ...auth,
-                loading: false,
+                submitLoading: false,
                 data: {
                     username: action.payload,
                     isAuth: true
@@ -49,9 +55,9 @@ export const authReducer = (auth, action) => {
                 errors: null,
             })
         case AUTH_LOGIN_FAILURE:
-            return({
+            return ({
                 ...auth,
-                loading: false,
+                submitLoading: false,
                 data: {
                     username: null,
                     isAuth: false
@@ -60,13 +66,13 @@ export const authReducer = (auth, action) => {
         case AUTH_REGISTER_SUCCESS:
             return ({
                 ...auth,
-                loading: false,
+                submitLoading: false,
                 errors: null,
             })
         case AUTH_SUBMIT_FAILURE:
             return ({
                 ...auth,
-                loading: false,
+                submitLoading: false,
             })
         case AUTH_LOGOUT_SUCCESS:
             return ({

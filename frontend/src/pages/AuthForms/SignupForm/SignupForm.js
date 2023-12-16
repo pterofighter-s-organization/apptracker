@@ -105,7 +105,7 @@ export default function SignupForm() {
         })
     }
 
-    if (auth.loading) {
+    if (auth.submitLoading) {
         return <LoadingDisplay />
     }
 
