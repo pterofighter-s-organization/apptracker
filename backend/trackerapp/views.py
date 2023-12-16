@@ -28,7 +28,7 @@ def application_list(request):
             return JsonResponse(applications_serializer.data, safe=False)
     elif request.method == 'POST':
         application_data = request.data
-        application_data['user_id'] = request.user.id
+        application_data['user'] = request.user.id
         application_serializer = ApplicationSerializer(data=application_data)
         if application_serializer.is_valid():
             application_serializer.save()
@@ -101,6 +101,9 @@ def user_detail(request):
             user_json = {"username": user.username, "email": user.email, "password": user.password}
             user.save()
             return JsonResponse(user_json)
+        if request.method == "DELETE":
+            user.delete()
+            return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except:
         return JsonResponse({'message': 'The User does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -125,13 +128,25 @@ def user_authentication(request):
 @api_view(['GET', 'POST', 'DELETE'])
 def notes_list(request):
     #get list of applications, POST a new application, DELETE all applications
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     if request.method == 'GET':
-        notes = Notes.objects.all()
+        notes = Notes.objects.filter(user_id=request.user.id)
         notes_serializer = NotesSerializer(notes, many=True)
         return JsonResponse(notes_serializer.data, safe=False)
     elif request.method == 'POST':
         # notes_data = JSONParser().parse(request)
         notes_data = request.data
+        application_id = notes_data['application_id']
+        try:
+            # Check if the Application with the given ID exists
+            Application.objects.get(pk=application_id, user_id=request.user.id)
+        except Application.DoesNotExist:
+            return JsonResponse({'message': 'The specified Application does not exist or does not belong to the user.'},
+                                status=status.HTTP_404_NOT_FOUND)
+        notes_data['application'] = application_id
+        notes_data['user_id'] = request.user.id
         notes_serializer = NotesSerializer(data=notes_data)
         if notes_serializer.is_valid():
             notes_serializer.save()
@@ -142,8 +157,11 @@ def notes_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def notes_detail(request, pk):
     #find application by pk 
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     try:
-        note = Notes.objects.get(pk=pk)
+        note = Notes.objects.get(pk=pk, user_id=request.user.id)
         #get an application
         if request.method == 'GET':
             notes_serializer = NotesSerializer(note)
@@ -165,7 +183,10 @@ def notes_detail(request, pk):
     
 @api_view(['GET'])
 def notes_list_application(request, app_id):
-    notes = Notes.objects.filter(application_id=app_id)
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
+    notes = Notes.objects.filter(application_id=app_id, user_id=request.user.id)
 
     if request.method  == 'GET':
         notes_serializer = NotesSerializer(notes, many=True)
@@ -173,20 +194,26 @@ def notes_list_application(request, app_id):
 
 @api_view(['GET', 'POST', 'DELETE'])
 def task_list(request):
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     #get list of applications, POST a new application, DELETE all applications
     if request.method == 'GET':
-        tasks = Task.objects.all()
+        tasks = Task.objects.filter(user_id=request.user.id)
         task_serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(task_serializer.data, safe=False)
     elif request.method == 'POST':
         # task_data = JSONParser().parse(request)
         # this fix the problem of it throwing an error on last line. I saw it from app post, and seems like post is the only error happening.
         task_data = request.data
+        task_data['application'] = task_data['application_id']
+        task_data['user_id'] = request.user.id
         task_serializer = TaskSerializer(data=task_data)
         if task_serializer.is_valid(raise_exception=True):
             try:
                 #only in post, sending in the data to give it a check.
-                task_serializer.custom_check(task_data)
+                task_serializer.post_application_check(task_data)
+                task_serializer.post_date_due_check(task_data)
             except ValidationError as e:
                 return JsonResponse({**task_serializer.errors, **e.message_dict}, status=status.HTTP_400_BAD_REQUEST)
             task_serializer.save()
@@ -195,9 +222,12 @@ def task_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def task_detail(request, pk):
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
     #find application by pk 
     try:
-        task = Task.objects.get(pk=pk)
+        task = Task.objects.get(pk=pk, user_id=request.user.id)
         #get an application
         if request.method == 'GET':
             task_serializer = TaskSerializer(task)
@@ -219,7 +249,10 @@ def task_detail(request, pk):
     
 @api_view(['GET'])
 def task_list_application(request, app_id):
-    tasks = Task.objects.filter(application_id=app_id)
+    if not request.user.is_authenticated:
+        #put some redirect code here
+        return JsonResponse({'message': 'You Are Not Allowed'},status=status.HTTP_401_UNAUTHORIZED)
+    tasks = Task.objects.filter(application_id=app_id, user_id=request.user.id)
 
     if request.method  == 'GET':
         tasks_serializer = TaskSerializer(tasks, many=True)

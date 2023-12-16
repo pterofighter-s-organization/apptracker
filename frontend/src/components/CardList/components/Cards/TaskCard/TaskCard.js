@@ -87,7 +87,7 @@ export default function TaskCard({ card }) {
 
     return (
         <Link
-            to={"/job/" + card.application_id}
+            to={"/job/" + card.application}
             key={taskCardId}
             id={taskCardId}
             className="tracker-card task-card-layout"

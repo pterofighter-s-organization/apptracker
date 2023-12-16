@@ -102,6 +102,7 @@ export const TasksProvider = ({ children }) => {
             const response = await APIs.taskAPI.updateTask(task_id, {
                 ...task,
                 date_edited: findTodayUTCDate(),
+                last_archived: task.archived
             })
             dispatch({ type: TASK_UPDATE_SUCCESS, payload: response.data })
             return ({

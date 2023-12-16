@@ -7,7 +7,7 @@ import APIs from "../../services/api"
 import { findTodayUTCDate } from "../../utils/dateTime"
 
 //actions
-import { JOB_CALL_SUCCESS, JOB_CALL_FAILURE, JOB_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobReducer"
+import { JOB_CALL_SUCCESS, JOB_CALL_FAILURE, JOB_CALL_START, JOB_SUBMIT_FAILURE, JOB_SUBMIT_START, JOB_SUBMIT_SUCCESS, JOB_DELETE_SUCCESS } from "../reducers/jobReducer"
 
 //reducer
 import { jobReducer } from "../reducers/jobReducer"
@@ -15,6 +15,7 @@ import { jobReducer } from "../reducers/jobReducer"
 const initialState = {
     data: null,
     loading: true, //this must be true because start function can't be as fast.
+    submitLoading: false,
     errors: null
 }
 
@@ -51,6 +52,7 @@ export const JobProvider = ({ children }) => {
     }, [dispatch])
 
     const updateApplication = async (application_id, application) => {
+        dispatch({ type: JOB_SUBMIT_START })
 
         try {
             const response = await APIs.applicationAPI.updateApplication(application_id, {
@@ -58,7 +60,7 @@ export const JobProvider = ({ children }) => {
                 application_id: application_id,
                 date_edited: findTodayUTCDate(),
             })
-            dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
+            dispatch({ type: JOB_SUBMIT_SUCCESS, payload: response.data })
             return ({
                 success: true,
                 data: response.data
@@ -74,6 +76,7 @@ export const JobProvider = ({ children }) => {
     }
 
     const createApplication = async (application) => {
+        dispatch({ type: JOB_SUBMIT_START })
 
         try {
             const response = await APIs.applicationAPI.createApplication({
@@ -82,7 +85,7 @@ export const JobProvider = ({ children }) => {
                 date_edited: findTodayUTCDate(),
                 date_created: findTodayUTCDate(),
             })
-            dispatch({ type: JOB_CALL_SUCCESS, payload: response.data })
+            dispatch({ type: JOB_SUBMIT_SUCCESS, payload: response.data })
             return ({
                 success: true,
                 data: response.data
@@ -98,6 +101,7 @@ export const JobProvider = ({ children }) => {
     }
 
     const deleteApplication = async (application_id) => {
+        dispatch({ type: JOB_CALL_START })
 
         try {
             const response = await APIs.applicationAPI.deleteApplication(application_id)

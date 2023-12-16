@@ -26,7 +26,7 @@ export default function IsAuthRoutes({ isAuth }) {
     if (auth.errors?.code === 'ERR_NETWORK') {
         return (
             <ErrorDisplay
-                label={isAuth ? "Authorized Pages" : "Non Authorized Pages"}
+                label={"Application Status"}
                 errors={auth.errors}
             />
         )

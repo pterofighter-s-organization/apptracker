@@ -35,7 +35,7 @@ export default function Dashboard() {
                     Dashboard
                 </h1>
                 <h6>
-                    Welcome, <i>{strFormatter(auth.data.username)}</i>
+                    Welcome, <i>{auth.data.username ? strFormatter(auth.data.username) : "User"}</i>
                 </h6>
             </HeaderLayout>
             <CardsLayout>

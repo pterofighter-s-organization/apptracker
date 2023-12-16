@@ -76,7 +76,7 @@ export default function ActiveNoteCard({ card }) {
                 <NoteHeader
                     id={card.note_id}
                     job={card.position}
-                    link={`/job/${card.application_id}`}
+                    link={`/job/${card.application}`}
                 />
                 <CardButtonsLayout>
                     {

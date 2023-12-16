@@ -82,7 +82,7 @@ export default function JobEditForm() {
                 } else {
                     const apiError = handleAPIErrors({
                         errors: result.errors,
-                        message: "Please fix the errors before submitting!"
+                        message: "Please fix the errors above before submitting!"
                     })
                     alert(apiError)
                     setErrorMessage(apiError)
@@ -91,7 +91,7 @@ export default function JobEditForm() {
             })
     }
 
-    if (job.loading) {
+    if (job.submitLoading) {
         return (
             <LoadingDisplay />
         )

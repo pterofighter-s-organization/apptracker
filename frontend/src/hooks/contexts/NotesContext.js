@@ -82,7 +82,8 @@ export const NotesProvider = ({ children }) => {
         try {
             const response = await APIs.noteAPI.updateNote(note_id, {
                 ...note,
-                date_edited: findTodayUTCDate()
+                date_edited: findTodayUTCDate(),
+                last_archived: note.archived
             })
             dispatch({ type: NOTE_UPDATE_SUCCESS, payload: response.data })
             return ({
@@ -109,6 +110,7 @@ export const NotesProvider = ({ children }) => {
                 date_created: findTodayUTCDate(),
                 archived: false
             })
+            console.log(response.data)
             dispatch({ type: NOTE_CREATE_SUCCESS, payload: response.data })
             return ({
                 success: true,

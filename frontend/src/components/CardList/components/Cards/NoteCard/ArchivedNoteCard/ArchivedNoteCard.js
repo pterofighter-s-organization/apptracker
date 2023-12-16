@@ -56,7 +56,7 @@ export default function ArchivedNoteCard({ card }) {
                 <NoteHeader
                     id={card.note_id}
                     job={card.position}
-                    link={`/job/${card.application_id}`}
+                    link={`/job/${card.application}`}
                 />
                 <CardButtonsLayout>
                     <RestoreOptionButton

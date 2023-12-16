@@ -1,6 +1,9 @@
 import { useState, useMemo, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//components
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
+
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";
 
@@ -28,7 +31,7 @@ export default function JobNewForm() {
     const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
-    const { createApplication } = useContext(JobContext)
+    const { job, createApplication } = useContext(JobContext)
     const [formData, setFormData] = useState(initialState)
     const [errorMessage, setErrorMessage] = useState("")
 
@@ -69,13 +72,17 @@ export default function JobNewForm() {
                 } else {
                     const apiError = handleAPIErrors({
                         errors: result.errors,
-                        message: "Please fix the errors before submitting!"
+                        message: "Please fix the errors above before submitting!"
                     })
                     alert(apiError)
                     setErrorMessage(apiError)
                     setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
             })
+    }
+
+    if(job.submitLoading){
+        return <LoadingDisplay/>
     }
 
     return (

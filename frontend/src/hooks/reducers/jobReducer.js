@@ -1,9 +1,11 @@
 
 //actions
 export const JOB_CALL_START = "JOB_CALL_START"
+export const JOB_SUBMIT_START = "JOB_SUBMIT_START"
 export const JOB_CALL_SUCCESS = "JOB_CALL_SUCCESS"
 export const JOB_CALL_FAILURE = "JOB_CALL_FAILURE"
 export const JOB_DELETE_SUCCESS = "JOB_DELETE_SUCCESS"
+export const JOB_SUBMIT_SUCCESS = "JOB_SUBMIT_SUCCESS"
 export const JOB_SUBMIT_FAILURE = "JOB_SUBMIT_FAILURE"
 
 //reducer
@@ -13,6 +15,12 @@ export const jobReducer = (job, action) => {
             return {
                 ...job,
                 loading: true,
+                errors: null
+            }
+        case JOB_SUBMIT_START:
+            return {
+                ...job,
+                submitLoading: true,
                 errors: null
             }
         case JOB_CALL_SUCCESS:
@@ -28,9 +36,17 @@ export const jobReducer = (job, action) => {
                 loading: false,
                 errors: action.payload
             }
+        case JOB_SUBMIT_SUCCESS:
+            return {
+                ...job,
+                data: action.payload,
+                submitLoading: false,
+                errors: null
+            }
         case JOB_SUBMIT_FAILURE:
             return {
                 ...job,
+                submitLoading: false,
                 loading: false,
             }
         case JOB_DELETE_SUCCESS:
