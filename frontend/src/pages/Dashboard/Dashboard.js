@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 //layouts
 import { PageLayout } from "../../layouts/PageLayout";
@@ -27,6 +27,8 @@ export default function Dashboard() {
     const isShow = false
 
     const { auth } = useContext(AuthContext)
+    //this is to ensure the elements are updated
+    const [loading, setLoading] = useState(false)
 
     return (
         <PageLayout>
@@ -41,18 +43,24 @@ export default function Dashboard() {
             <CardsLayout>
                 <JobsProvider>
                     <DashboardJobs
+                        loading={loading}
+                        setLoading={setLoading}
                         isPreview={isPreview}
                         isShow={isShow}
                     />
                 </JobsProvider>
                 <TasksProvider>
                     <DashboardTasks
+                        loading={loading}
+                        setLoading={setLoading}
                         isPreview={isPreview}
                         isShow={isShow}
                     />
                 </TasksProvider>
                 <NotesProvider>
                     <DashboardNotes
+                        loading={loading}
+                        setLoading={setLoading}
                         isPreview={isPreview}
                         isShow={isShow}
                     />

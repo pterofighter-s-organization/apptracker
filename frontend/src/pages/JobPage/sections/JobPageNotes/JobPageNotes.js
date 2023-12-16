@@ -43,15 +43,26 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
     }, [getJobNotes, job.data.application_id])
 
     const filteredData = useMemo(() => {
-        return filterDataByStatus(status, notes.data)
-    }, [status, notes.data])
+        return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)
+    }, [status, notes.data, job.data.archived])
+
+    const filteredStatusOptions = useMemo(() => {
+        const filteredOptions = { ...APP_STATUS_COLORS }
+        console.log(job.data.archived, filteredOptions)
+        if (job.data.archived) {
+            delete filteredOptions.active
+            return filteredOptions
+        } else {
+            return filteredOptions
+        }
+    }, [job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
 
         createJobNote(job.data.application_id, {
             position: job.data.position,
-            note: formData.note.value
+            note: formData.note.value,
         }).then((result) => {
             showSubmitNotification({
                 status: result.success,
@@ -73,7 +84,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (notes.loading) {
+    if (notes.loading || notes.submitLoading) {
         return (
             <LoadingDisplay />
         )
@@ -89,25 +100,32 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         )
     }
 
+    console.log(filteredStatusOptions)
+
     return (
         <CardsSectionLayout isPreview={isPreview}>
             <CardListHeader
-                isArchived={status === "archived"}
+                isArchived={job.data.archived ? true : status === "archived"}
                 quantity={filteredData.length}
                 type={"note"}
             />
             <FilterDropdown
                 id={"job-notes-status-filter"}
                 label={"status"}
-                value={status}
-                options={APP_STATUS_COLORS}
+                value={job.data.archived ? "archived" : status}
+                options={filteredStatusOptions}
                 handleOption={handleStatus}
             />
-            <NoteForm
-                formData={formData}
-                handleChange={handleChange}
-                handleCreate={handleCreate}
-            />
+            {
+                !job.data.archived ?
+                    <NoteForm
+                        formData={formData}
+                        handleChange={handleChange}
+                        handleCreate={handleCreate}
+                    />
+                    :
+                    null
+            }
             <CardList
                 type={"notes"}
                 cards={filteredData}

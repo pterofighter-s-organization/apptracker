@@ -37,6 +37,7 @@ function FilterDropdown({
     toggle, handleToggle, handleUntoggle
 }) {
 
+    console.log("test", options)
     return (
         <div className={`dropdown ${toggle ? "" : "minimized-dropdown"}`}>
             <button
@@ -55,36 +56,46 @@ function FilterDropdown({
                 <span className="filter-dropdown-option-selected">
                     {value ? value : "all"}
                 </span>
-                <i
-                    className={`dropdown-face-icon ${toggle ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
-                ></i>
-            </button>
-            <div className="dropdown-options filter-dropdown-options">
-                Choose:
                 {
-                    isOptionAll && value ?
-                        <FilterDropdownOption
-                            option={null}
-                            handleOption={handleOption}
-                            color={"black"}
-                        />
+                    options && Object.keys(options).length> 1 ?
+                        <i
+                            className={`dropdown-face-icon ${toggle ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
+                        ></i>
                         :
-                        null
+                        <div style={{marginLeft: "-0.25rem"}}></div>
                 }
-                {
-                    Object.entries(options).map(([option, color]) => (
-                        option !== value ?
-                            <FilterDropdownOption
-                                key={option}
-                                option={option}
-                                handleOption={handleOption}
-                                color={color}
-                            />
-                            :
-                            null
-                    ))
-                }
-            </div>
+            </button>
+            {
+                options && Object.keys(options).length> 1 ?
+                    <div className="dropdown-options filter-dropdown-options">
+                        Choose:
+                        {
+                            isOptionAll && value ?
+                                <FilterDropdownOption
+                                    option={null}
+                                    handleOption={handleOption}
+                                    color={"black"}
+                                />
+                                :
+                                null
+                        }
+                        {
+                            Object.entries(options).map(([option, color]) => (
+                                option !== value ?
+                                    <FilterDropdownOption
+                                        key={option}
+                                        option={option}
+                                        handleOption={handleOption}
+                                        color={color}
+                                    />
+                                    :
+                                    null
+                            ))
+                        }
+                    </div>
+                    :
+                    null
+            }
         </div>
     )
 }

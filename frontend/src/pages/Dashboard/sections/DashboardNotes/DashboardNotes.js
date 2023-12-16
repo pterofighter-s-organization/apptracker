@@ -23,19 +23,19 @@ import { filterDataByStatus } from "../../../../helpers/helpers";
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-function DashboardNotes({ status, handleStatus, isPreview, isShow }) {
+function DashboardNotes({ loading, status, handleStatus, isPreview, isShow }) {
 
     const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
         getNotes()
-    }, [getNotes])
+    }, [getNotes, loading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, notes.data)
     }, [status, notes.data])
 
-    if (notes.loading) {
+    if (notes.loading || notes.submitLoading || loading) {
         return (
             <LoadingDisplay />
         )

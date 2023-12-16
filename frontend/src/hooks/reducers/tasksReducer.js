@@ -2,6 +2,7 @@
 
 //actions
 export const TASKS_CALL_START = "TASKS_CALL_START"
+export const TASK_SUBMIT_START = "TASK_SUBMIT_START"
 export const TASKS_CALL_SUCCESS = "TASKS_CALL_SUCCESS"
 export const TASKS_CALL_FAILURE = "TASKS_CALL_FAILURE"
 export const TASK_CREATE_SUCCESS = "TASK_CREATE_SUCCESS"
@@ -17,6 +18,12 @@ export const tasksReducer = (tasks, action) => {
             return ({
                 ...tasks,
                 loading: true,
+                errors: null
+            })
+        case TASK_SUBMIT_START:
+            return({
+                ...tasks,
+                submitLoading: true,
                 errors: null
             })
         case TASKS_CALL_SUCCESS:
@@ -36,7 +43,7 @@ export const tasksReducer = (tasks, action) => {
             return ({
                 ...tasks,
                 data: [action.payload, ...tasks.data],
-                loading: false,
+                submitLoading: false,
                 errors: null
             })
         case TASK_UPDATE_SUCCESS:
@@ -48,13 +55,13 @@ export const tasksReducer = (tasks, action) => {
                         :
                         task
                 ))),
-                loading: false,
+                submitLoading: false,
                 errors: null
             })
         case TASK_SUBMIT_FAILURE:
             return({
                 ...tasks,
-                loading: false,
+                submitLoading: false,
             })
         case TASK_DELETE_SUCCESS:
             return({
@@ -62,7 +69,7 @@ export const tasksReducer = (tasks, action) => {
                 data: (tasks.data.filter((task) => (
                     task.task_id !== action.payload
                 ))),
-                loading: false,
+                submitLoading: false,
                 errors: null
             })
         default:

@@ -12,7 +12,7 @@ import { sortDataByLatest } from "../../helpers/helpers";
 //actions
 import {
     NOTES_CALL_START, NOTES_CALL_FAILURE, NOTES_CALL_SUCCESS,
-    NOTE_CREATE_SUCCESS, NOTE_DELETE_SUCCESS, NOTE_SUBMIT_FAILURE, NOTE_UPDATE_SUCCESS
+    NOTE_CREATE_SUCCESS, NOTE_DELETE_SUCCESS, NOTE_SUBMIT_FAILURE, NOTE_UPDATE_SUCCESS, NOTE_SUBMIT_START
 } from "../reducers/notesReducer";
 
 //reducer
@@ -21,6 +21,7 @@ import { notesReducer } from "../reducers/notesReducer";
 const initialState = {
     data: [],
     loading: false,
+    submitLoading: false,
     errors: null
 }
 
@@ -78,7 +79,8 @@ export const NotesProvider = ({ children }) => {
     }, [dispatch])
 
     const updateJobNote = async (note_id, note) => {
-        
+        dispatch({ type: NOTE_SUBMIT_START })
+
         try {
             const response = await APIs.noteAPI.updateNote(note_id, {
                 ...note,
@@ -101,6 +103,7 @@ export const NotesProvider = ({ children }) => {
     }
 
     const createJobNote = async (application_id, note) => {
+        dispatch({ type: NOTE_SUBMIT_START })
 
         try {
             const response = await APIs.noteAPI.createNote({
@@ -108,7 +111,6 @@ export const NotesProvider = ({ children }) => {
                 application_id: application_id,
                 date_edited: findTodayUTCDate(),
                 date_created: findTodayUTCDate(),
-                archived: false
             })
             console.log(response.data)
             dispatch({ type: NOTE_CREATE_SUCCESS, payload: response.data })
@@ -127,6 +129,7 @@ export const NotesProvider = ({ children }) => {
     }
 
     const deleteJobNote = async (note_id) => {
+        dispatch({ type: NOTE_SUBMIT_START })
 
         try {
             const response = await APIs.noteAPI.deleteNote(note_id)

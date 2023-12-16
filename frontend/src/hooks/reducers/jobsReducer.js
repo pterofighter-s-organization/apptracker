@@ -2,6 +2,7 @@
 
 //actions
 export const JOBS_CALL_START = "JOBS_CALL_START" //this solves the get application not updating instantly
+export const JOB_SUBMIT_START = "JOB_SUBMIT_START"
 export const JOBS_CALL_SUCCESS = "JOBS_CALL_SUCCESS"
 export const JOBS_CALL_FAILURE = "JOBS_CALL_FAILURE"
 export const JOB_UPDATE_SUCCESS = "JOB_UPDATE_SUCCESS"
@@ -16,6 +17,12 @@ export const jobsReducer = (jobs, action) => {
             return({
                 ...jobs,
                 loading: true,
+                errors: null
+            })
+        case JOB_SUBMIT_START:
+            return({
+                ...jobs,
+                submitLoading: true,
                 errors: null
             })
         case JOBS_CALL_SUCCESS:
@@ -40,13 +47,14 @@ export const jobsReducer = (jobs, action) => {
                         :
                         job
                 ))),
-                loading: false,
+                submitLoading: false,
                 errors: null
             })
         case JOB_SUBMIT_FAILURE:
             return({
                 ...jobs,
                 loading: false,
+                submitLoading: false,
             })
         case JOB_DELETE_SUCCESS:
             return({
@@ -54,7 +62,7 @@ export const jobsReducer = (jobs, action) => {
                 data: (jobs.data.filter((job) => (
                     job.application_id !== action.payload
                 ))),
-                loading: false,
+                submitLoading: false,
                 errors: null
             })
         default:

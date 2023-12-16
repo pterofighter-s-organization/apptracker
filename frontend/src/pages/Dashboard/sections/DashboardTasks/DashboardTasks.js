@@ -25,19 +25,19 @@ import { sortTasksByDateDue } from "../../../../helpers/task";
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
+function DashboardTasks({ loading, status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
         getTasks()
-    }, [getTasks])
+    }, [getTasks, loading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading) {
+    if (tasks.loading || tasks.submitLoading || loading) {
         return (
             <LoadingDisplay />
         )

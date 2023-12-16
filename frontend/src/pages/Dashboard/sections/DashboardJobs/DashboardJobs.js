@@ -25,7 +25,7 @@ import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../../../constants/const
 import { JobsContext } from "../../../../hooks/contexts/JobsContext";
 
 
-function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
+function DashboardJobs({ loading, setLoading, status, handleStatus, isShow, isPreview }) {
 
     const [stage, setStage] = useState(null)
     const { jobs, getApplications } = useContext(JobsContext)
@@ -33,6 +33,10 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
     useEffect(() => {
         getApplications()
     }, [getApplications])
+
+    useEffect(() => {
+        setLoading(jobs.submitLoading)
+    }, [jobs.submitLoading, setLoading])
 
     const handleStage = (e, option) => {
         e.preventDefault()
@@ -47,7 +51,7 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
         )
     }, [status, stage, jobs.data])
 
-    if (jobs.loading) {
+    if (jobs.loading || jobs.submitLoading || loading) {
         return (
             <LoadingDisplay />
         )

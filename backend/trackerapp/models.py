@@ -26,7 +26,7 @@ class Notes(models.Model):
     position = models.CharField(max_length=255)
     note = models.CharField(max_length=2048, blank=True, null=True)
     archived = models.BooleanField(default=False)
-    last_archived = models.BooleanField(default=False, null=False)
+    last_archived = models.BooleanField(default=False)
     date_edited = models.DateTimeField(blank=True)
     date_created = models.DateTimeField(blank=True)
 
@@ -44,8 +44,8 @@ class Task(models.Model):
     date_created = models.DateTimeField(blank=True, null=False)
     # section = models.CharField(max_length=255, blank=True, null=True)
     # priority = models.IntegerField()
-    archived = models.BooleanField(default=False, null=False)
-    last_archived = models.BooleanField(default=False, null=False)
+    archived = models.BooleanField(default=False)
+    last_archived = models.BooleanField(default=False)
 
     #this clean is to make sure the check only happens in post, code in views.py
     def clean(self):

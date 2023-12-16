@@ -7,7 +7,7 @@ import APIs from "../../services/api";
 import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
-import { TASKS_CALL_START, TASKS_CALL_FAILURE, TASKS_CALL_SUCCESS, TASK_CREATE_SUCCESS, TASK_UPDATE_SUCCESS, TASK_DELETE_SUCCESS, TASK_SUBMIT_FAILURE } from "../reducers/tasksReducer";
+import { TASKS_CALL_START, TASKS_CALL_FAILURE, TASKS_CALL_SUCCESS, TASK_CREATE_SUCCESS, TASK_UPDATE_SUCCESS, TASK_DELETE_SUCCESS, TASK_SUBMIT_FAILURE, TASK_SUBMIT_START } from "../reducers/tasksReducer";
 
 //reducer
 import { tasksReducer } from "../reducers/tasksReducer";
@@ -15,6 +15,7 @@ import { tasksReducer } from "../reducers/tasksReducer";
 const initialState = {
     data: [],
     loading: false,
+    submitLoading: false,
     errors: null
 }
 
@@ -72,6 +73,7 @@ export const TasksProvider = ({ children }) => {
     }, [dispatch])
 
     const createJobTask = async (application_id, task) => {
+        dispatch({ type: TASK_SUBMIT_START })
 
         try {
             const response = await APIs.taskAPI.createTask({
@@ -79,7 +81,6 @@ export const TasksProvider = ({ children }) => {
                 application_id: application_id,
                 date_edited: findTodayUTCDate(),
                 date_created: findTodayUTCDate(),
-                archived: false
             })
             dispatch({ type: TASK_CREATE_SUCCESS, payload: response.data })
             return ({
@@ -97,6 +98,7 @@ export const TasksProvider = ({ children }) => {
     }
 
     const updateJobTask = async (task_id, task) => {
+        dispatch({ type: TASK_SUBMIT_START })
 
         try {
             const response = await APIs.taskAPI.updateTask(task_id, {
@@ -120,7 +122,8 @@ export const TasksProvider = ({ children }) => {
     }
 
     const deleteJobTask = async (task_id) => {
-        
+        dispatch({ type: TASK_SUBMIT_START })
+
         try {
             const response = await APIs.taskAPI.deleteTask(task_id)
             dispatch({ type: TASK_DELETE_SUCCESS, payload: task_id })

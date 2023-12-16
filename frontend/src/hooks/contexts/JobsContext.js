@@ -10,7 +10,7 @@ import { sortDataByLatest } from "../../helpers/helpers";
 import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
-import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobsReducer";
+import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS, JOB_SUBMIT_START } from "../reducers/jobsReducer";
 
 //reducers
 import { jobsReducer } from "../reducers/jobsReducer";
@@ -18,6 +18,7 @@ import { jobsReducer } from "../reducers/jobsReducer";
 const initialState = {
     data: [],
     loading: false, //only false for data that is []. or else null data will crash the app.
+    submitLoading: false,
     errors: null
 }
 
@@ -54,6 +55,8 @@ export const JobsProvider = ({ children }) => {
     }, [dispatch])
 
     const updateApplication = async (application_id, application) => {
+        dispatch({ type: JOB_SUBMIT_START })
+
         try {
             const response = await APIs.applicationAPI.updateApplication(application_id, {
                 ...application,
@@ -76,6 +79,8 @@ export const JobsProvider = ({ children }) => {
     }
 
     const deleteApplication = async (application_id) => {
+        dispatch({ type: JOB_SUBMIT_START })
+        
         try {
             const response = await APIs.applicationAPI.deleteApplication(application_id)
             console.log(response)
@@ -87,7 +92,7 @@ export const JobsProvider = ({ children }) => {
         } catch (errors) {
             console.log(errors)
             dispatch({ type: JOB_SUBMIT_FAILURE })
-            return({
+            return ({
                 success: false,
                 errors: errors
             })

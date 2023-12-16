@@ -42,8 +42,18 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     }, [getJobTasks, job.data.application_id])
 
     const filteredData = useMemo(() => {
-        return filterDataByStatus(status, tasks.data)
-    }, [status, tasks.data])
+        return filterDataByStatus(job.data.archived ? "archived" : status, tasks.data)
+    }, [status, tasks.data, job.data.archived])
+
+    const filteredStatusOptions = useMemo(() => {
+        const filteredOptions = { ...APP_STATUS_COLORS }
+        if (job.data.archived) {
+            delete filteredOptions.active
+            return filteredOptions
+        } else {
+            return filteredOptions
+        }
+    }, [job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
@@ -51,7 +61,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
         createJobTask(job.data.application_id, {
             ...createTaskData(formData),
             company: job.data.company,
-            position: job.data.position
+            position: job.data.position,
         })
             .then((result) => {
                 showSubmitNotification({
@@ -78,7 +88,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (tasks.loading) {
+    if (tasks.loading || tasks.submitLoading) {
         return (
             <LoadingDisplay />
         )
@@ -97,22 +107,27 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     return (
         <CardsSectionLayout isPreview={isPreview}>
             <CardListHeader
-                isArchived={status === "archived"}
+                isArchived={job.data.archived ? true : status === "archived"}
                 quantity={filteredData.length}
                 type={"task"}
             />
             <FilterDropdown
                 id={"tasks-status-filter"}
                 label={"status"}
-                value={status}
-                options={APP_STATUS_COLORS}
+                value={job.data.archived ? "archived" : status}
+                options={filteredStatusOptions}
                 handleOption={handleStatus}
             />
-            <TaskForm
-                formData={formData}
-                handleChange={handleChange}
-                handleCreate={handleCreate}
-            />
+            {
+                !job.data.archived ?
+                    <TaskForm
+                        formData={formData}
+                        handleChange={handleChange}
+                        handleCreate={handleCreate}
+                    />
+                    :
+                    null
+            }
             <CardList
                 type={"tasks"}
                 cards={
