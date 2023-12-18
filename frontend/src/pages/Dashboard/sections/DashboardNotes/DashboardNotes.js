@@ -13,9 +13,9 @@ import { NotesContext } from "../../../../hooks/contexts/NotesContext";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
 import { CardList } from "../../../../components/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
@@ -58,9 +58,7 @@ function DashboardNotes({ loading, status, handleStatus, isPreview, isShow }) {
                 quantity={filteredData.length}
                 type={"note"}
             />
-            <FilterDropdown
-                id={"notes-status-filter"}
-                label={"status"}
+            <ToggleButton
                 value={status}
                 options={APP_STATUS_COLORS}
                 handleOption={handleStatus}

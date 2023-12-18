@@ -23,6 +23,7 @@ import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../../../constants/const
 
 //contexts
 import { JobsContext } from "../../../../hooks/contexts/JobsContext";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 
 function DashboardJobs({ loading, setLoading, status, handleStatus, isShow, isPreview }) {
@@ -83,9 +84,7 @@ function DashboardJobs({ loading, setLoading, status, handleStatus, isShow, isPr
                     isOptionAll={true}
                     handleOption={handleStage}
                 />
-                <FilterDropdown
-                    id={"job-status-filter"}
-                    label={"status"}
+                <ToggleButton
                     value={status}
                     options={APP_STATUS_COLORS}
                     handleOption={handleStatus}

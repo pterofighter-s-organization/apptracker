@@ -6,7 +6,8 @@ import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
+import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 
 //private-components
 import { TaskForm } from "../../components/TaskForm";
@@ -44,16 +45,6 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, tasks.data)
     }, [status, tasks.data, job.data.archived])
-
-    const filteredStatusOptions = useMemo(() => {
-        const filteredOptions = { ...APP_STATUS_COLORS }
-        if (job.data.archived) {
-            delete filteredOptions.active
-            return filteredOptions
-        } else {
-            return filteredOptions
-        }
-    }, [job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
@@ -111,13 +102,20 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
                 quantity={filteredData.length}
                 type={"task"}
             />
-            <FilterDropdown
-                id={"tasks-status-filter"}
-                label={"status"}
-                value={job.data.archived ? "archived" : status}
-                options={filteredStatusOptions}
-                handleOption={handleStatus}
-            />
+            {
+                job.data.archived ?
+                    <DisabledToggleButton
+                        isLeft={false}
+                        value={"archived"}
+                        color={APP_STATUS_COLORS["archived"]}
+                    />
+                    :
+                    <ToggleButton
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+            }
             {
                 !job.data.archived ?
                     <TaskForm

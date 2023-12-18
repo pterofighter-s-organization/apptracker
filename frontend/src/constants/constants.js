@@ -12,8 +12,8 @@ export const APP_STAGE_COLORS = {
 };
 
 export const APP_STATUS_COLORS = {
+    "active": "#009900",
     "archived": "#808080",
-    "active": "#009900"
 }
 
 export const SCREEN_BREAKPOINTS = {

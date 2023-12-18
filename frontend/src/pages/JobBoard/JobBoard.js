@@ -24,6 +24,7 @@ import { filterDataByStatus } from "../../helpers/helpers";
 
 //contexts
 import { JobsContext } from "../../hooks/contexts/JobsContext";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 
 function JobBoard({ status, handleStatus }) {
 
@@ -88,16 +89,14 @@ function JobBoard({ status, handleStatus }) {
                 />
                 <>
                     <FilterDropdown
-                        id={"job-stage-filter"}
+                        id={"job-board-stage-filter"}
                         label={"stage"}
                         value={stage}
                         options={APP_STAGE_COLORS}
                         isOptionAll={true}
                         handleOption={handleStage}
                     />
-                    <FilterDropdown
-                        id={"job-status-filter"}
-                        label={"status"}
+                    <ToggleButton
                         value={status}
                         options={APP_STATUS_COLORS}
                         handleOption={handleStatus}

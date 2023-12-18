@@ -4,7 +4,7 @@ import { useContext, useEffect, useMemo } from "react";
 import { CardList } from "../../components/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 import { CardListHeader } from "../../components/CardListHeader";
 
 //layouts
@@ -69,9 +69,7 @@ function NoteBoard({ status, handleStatus }) {
                     quantity={filteredData.length}
                     type={"note"}
                 />
-                <FilterDropdown
-                    id={"notes-status-filter"}
-                    label={"status"}
+                <ToggleButton
                     value={status}
                     options={APP_STATUS_COLORS}
                     handleOption={handleStatus}

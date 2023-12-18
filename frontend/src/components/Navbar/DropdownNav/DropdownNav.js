@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //routes
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
@@ -9,11 +9,11 @@ import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../con
 //css
 import "./DropdownNav.css"
 
-function DropdownNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
+function DropdownNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
 
     return (
         <nav
-            className={`dropdownnav ${toggle ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
+            className={`dropdownnav ${isExpand ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
             id={id}
         >
             <div className="dropdownnav-bar">
@@ -38,7 +38,7 @@ function DropdownNav({ id, handleLogout, toggle, handleUntoggle, handleToggle })
                         type="button"
                         className="button dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
-                        onClick={toggle ? handleUntoggle : handleToggle}
+                        onClick={isExpand ? handleMinimize : handleExpand}
                     >
                         <i className="dropdownnav-button-expand-icon bi bi-list"></i>
                         <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />
@@ -66,7 +66,7 @@ function DropdownNav({ id, handleLogout, toggle, handleUntoggle, handleToggle })
                 <button
                     onClick={handleLogout}
                     className="button dropdownnav-content-button"
-                    data-bs-toggle="tooltip"
+                    data-bs-isExpand="tooltip"
                     data-bs-placement="top"
                     title={`Sign out`}
                 >
@@ -89,4 +89,4 @@ function DropdownNav({ id, handleLogout, toggle, handleUntoggle, handleToggle })
     )
 }
 
-export default withToggleControl(DropdownNav)
+export default withExpandControl(DropdownNav)

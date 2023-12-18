@@ -1,13 +1,13 @@
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl";
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //css
 import "./PasswordInput.css"
 
 function PasswordInput({
     maxWidth, name, value, handleChange,
-    toggle, handleToggle, handleUntoggle,
+    isExpand, handleExpand, handleMinimize,
 }) {
 
     const handleShow = (e) => {
@@ -35,19 +35,19 @@ function PasswordInput({
                 placeholder={name.toUpperCase()}
             />
             {
-                toggle ?
+                isExpand ?
                     <i
-                        className="password-input-hide-toggle bi bi-eye-fill"
+                        className="password-input-hide-isExpand bi bi-eye-fill"
                         onClick={(e) => {
-                            handleUntoggle(e)
+                            handleMinimize(e)
                             handleHide(e)
                         }}
                     ></i>
                     :
                     <i
-                        className="password-input-hide-toggle bi bi-eye-slash-fill"
+                        className="password-input-hide-isExpand bi bi-eye-slash-fill"
                         onClick={(e) => {
-                            handleToggle(e)
+                            handleExpand(e)
                             handleShow(e)
                         }}
                     ></i>
@@ -56,4 +56,4 @@ function PasswordInput({
     )
 }
 
-export default withToggleControl(PasswordInput)
+export default withExpandControl(PasswordInput)

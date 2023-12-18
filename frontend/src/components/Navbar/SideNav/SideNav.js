@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //constants
 import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
@@ -12,17 +12,17 @@ import { strFormatter } from "../../../utils/format"
 //css
 import "./SideNav.css"
 
-function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
+function SideNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
 
     return (
         <nav
-            className={`sidenav ${toggle ? "expanded-sidenav" : "minimized-sidenav"}`}
+            className={`sidenav ${isExpand ? "expanded-sidenav" : "minimized-sidenav"}`}
             id={id}
         >
             <Link
                 to={HOME_ROUTE.route}
                 className="sidenav-logo"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Back to home`}
             >
@@ -40,10 +40,10 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
                 type="button"
                 className="button sidenav-button"
                 // style={{ borderStyle: "none" }} declared in app.css
-                onClick={toggle ? handleUntoggle : handleToggle}
-                data-bs-toggle="tooltip"
+                onClick={isExpand ? handleMinimize : handleExpand}
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
-                title={toggle ? `Minimize sidebar` : `Expand sidebar`}
+                title={isExpand ? `Minimize sidebar` : `Expand sidebar`}
             >
                 <i className="sidenav-button-icon sidenav-expand-icon bi bi-list"></i>
                 <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
@@ -54,7 +54,7 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
             <Link
                 to={NEW_APP_ROUTE.route}
                 className="button sidenav-button"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Track a new job`}
             >
@@ -70,7 +70,7 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
                         to={route.route}
                         className="button sidenav-button"
                         key={route.text}
-                        data-bs-toggle="tooltip"
+                        data-bs-isExpand="tooltip"
                         data-bs-placement="top"
                         title={`${strFormatter(route.text)}`}
                     >
@@ -85,7 +85,7 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
             <button
                 onClick={handleLogout}
                 className="button sidenav-button"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Sign out`}
             >
@@ -97,7 +97,7 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
             {/* <Link
                 to={LOGIN_ROUTE.route}
                 className="button sidenav-button"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Signing in`}
             >
@@ -110,4 +110,4 @@ function SideNav({ id, handleLogout, toggle, handleUntoggle, handleToggle }) {
     )
 }
 
-export default withToggleControl(SideNav)
+export default withExpandControl(SideNav)

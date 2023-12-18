@@ -6,7 +6,8 @@ import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
+import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 
 //private-components
 import { NoteForm } from "../../components/NoteForm";
@@ -45,17 +46,6 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)
     }, [status, notes.data, job.data.archived])
-
-    const filteredStatusOptions = useMemo(() => {
-        const filteredOptions = { ...APP_STATUS_COLORS }
-        console.log(job.data.archived, filteredOptions)
-        if (job.data.archived) {
-            delete filteredOptions.active
-            return filteredOptions
-        } else {
-            return filteredOptions
-        }
-    }, [job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
@@ -100,8 +90,6 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         )
     }
 
-    console.log(filteredStatusOptions)
-
     return (
         <CardsSectionLayout isPreview={isPreview}>
             <CardListHeader
@@ -109,13 +97,21 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
                 quantity={filteredData.length}
                 type={"note"}
             />
-            <FilterDropdown
-                id={"job-notes-status-filter"}
-                label={"status"}
-                value={job.data.archived ? "archived" : status}
-                options={filteredStatusOptions}
-                handleOption={handleStatus}
-            />
+            {
+                job.data.archived ?
+                    <DisabledToggleButton
+                        isLeft={false}
+                        value={"archived"}
+                        color={APP_STATUS_COLORS["archived"]}
+                    />
+                    :
+                    <ToggleButton
+                        id={"job-notes-status-toggle"}
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+            }
             {
                 !job.data.archived ?
                     <NoteForm

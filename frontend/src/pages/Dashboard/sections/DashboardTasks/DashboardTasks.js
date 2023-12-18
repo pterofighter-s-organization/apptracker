@@ -12,10 +12,10 @@ import { TasksContext } from "../../../../hooks/contexts/TasksContext";
 //components
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { CardList } from "../../../../components/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
@@ -60,9 +60,7 @@ function DashboardTasks({ loading, status, handleStatus, isPreview, isShow }) {
                 quantity={filteredData.length}
                 type={"task"}
             />
-            <FilterDropdown
-                id={"tasks-status-filter"}
-                label={"status"}
+            <ToggleButton
                 value={status}
                 options={APP_STATUS_COLORS}
                 handleOption={handleStatus}
