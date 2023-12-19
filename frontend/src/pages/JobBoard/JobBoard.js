@@ -56,7 +56,7 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.loading) {
+    if (jobs.loading || jobs.submitLoading) {
         return (
             <LoadingDisplay />
         )

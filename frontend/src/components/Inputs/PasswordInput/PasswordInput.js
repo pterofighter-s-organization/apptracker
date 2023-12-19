@@ -37,7 +37,7 @@ function PasswordInput({
             {
                 isExpand ?
                     <i
-                        className="password-input-hide-isExpand bi bi-eye-fill"
+                        className="password-input-hide-toggle bi bi-eye-fill"
                         onClick={(e) => {
                             handleMinimize(e)
                             handleHide(e)
@@ -45,7 +45,7 @@ function PasswordInput({
                     ></i>
                     :
                     <i
-                        className="password-input-hide-isExpand bi bi-eye-slash-fill"
+                        className="password-input-hide-toggle bi bi-eye-slash-fill"
                         onClick={(e) => {
                             handleExpand(e)
                             handleShow(e)

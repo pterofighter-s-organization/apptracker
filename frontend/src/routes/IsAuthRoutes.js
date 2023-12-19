@@ -14,6 +14,7 @@ export default function IsAuthRoutes({ isAuth }) {
     const { auth, getUser } = useContext(AuthContext)
 
     useEffect(() => {
+        //refresh token can be added later, if we check for user and can't find, we will ask again with the refresh token.
         getUser()
     }, [getUser])
 

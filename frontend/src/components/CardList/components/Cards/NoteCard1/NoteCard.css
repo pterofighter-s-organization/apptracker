@@ -1,0 +1,73 @@
+.note-card-layout {
+    background-color: #fff;
+    height: 15rem;
+    /* min-height: 15rem; */
+    border-radius: 1rem;
+    padding: 1rem;
+    /**/
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.note-card-layout:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.note-card-link-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    color: var(--redirect-button-color);
+    text-decoration: none;
+    max-width: min-content;
+    overflow: hidden;
+}
+
+.note-card-link-layout:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.note-card-link-layout>* {
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    overflow: hidden;
+}
+
+.note-card-number {
+    min-width: fit-content;
+}
+
+.note-card-content-layout{
+    position: relative;
+    height: 100%;
+}
+
+.note-card-content-layout>*{
+    position: absolute;
+    width: 100%;
+}
+
+.note-card-content-layout> .loading-display-layout{
+    height: inherit;
+    backdrop-filter: blur(1.5px);
+}
+
+.note-card-content-layout > .textarea-input-field{
+    /* background-color: #FFFFE5; */
+    background-color: inherit;
+    border-radius: 0;
+    padding: 0;
+    outline: none;
+}
+
+.note-text{
+    font-family: "Work Sans", sans-serif;
+    white-space: pre-wrap;
+    /*making sure links won't overflow*/
+    /*wrap the item when its overflowing*/
+    overflow-wrap: anywhere;
+}

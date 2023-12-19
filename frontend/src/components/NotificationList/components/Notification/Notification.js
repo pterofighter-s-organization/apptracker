@@ -17,6 +17,10 @@ const NOTIFICATION_STATUS = {
         color: "#5CACEE",
         icon: "bi bi-bell-fill"
     },
+    WARNING: {
+        color: "#FF9933",
+        icon: "bi bi-dash-circle-fill"
+    },
     SUCCESS: {
         color: "#009E60",
         icon: "bi-check-circle-fill"

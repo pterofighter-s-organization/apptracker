@@ -24,6 +24,7 @@ import { handleAPIErrors } from "../../../helpers/form";
 //utils
 import { createObjCopy } from "../../../utils/memory";
 import { strFormatter } from "../../../utils/format";
+import { showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification";
 
 export default function JobEditForm() {
 
@@ -77,17 +78,21 @@ export default function JobEditForm() {
         })
             .then((result) => {
                 if (result.success) {
-                    alert("Successfully edited! Now redirecting you to the job page.")
                     navigate("/job/" + result.data.application_id)
                 } else {
                     const apiError = handleAPIErrors({
                         errors: result.errors,
                         message: "Please fix the errors above before submitting!"
                     })
-                    alert(apiError)
                     setErrorMessage(apiError)
                     setFormData(updateJobFormErrors(formData, result.errors.response.data))
                 }
+                showSubmitNotification({
+                    status: result.success,
+                    message: "Successfully edited! Redirected you back to the job page.",
+                    errors: result.errors,
+                    errorMessage: "Please fix the errors above before submitting!"
+                })
             })
     }
 
