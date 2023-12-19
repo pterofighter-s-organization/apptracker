@@ -1,4 +1,4 @@
-.note-card {
+.note-card-layout {
     background-color: #fff;
     height: 15rem;
     /* min-height: 15rem; */
@@ -7,59 +7,44 @@
     /**/
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    color: black;
+    gap: 0.25rem;
 }
 
-.note-card:hover {
+.note-card-layout:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.note-card-content {
+.note-card-number {
+    min-width: fit-content;
+}
+
+.note-card-content-layout{
     position: relative;
     height: 100%;
-    overflow: hidden;
 }
 
-.note-card-content .note-card-content-text {
+.note-card-content-layout>*{
     position: absolute;
-    font-family: "Work Sans", sans-serif;
-    font-size: inherit;
-    z-index: 1;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-}
-
-.note-card-hover-layout {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* justify for centering y axis, align-items for x axis, and text-align for text itself */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-    border-radius: 1em;
-    background-color: #f2efef;
 }
 
-.note-card-hover-content {
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
+.note-card-content-layout> .loading-display-layout{
+    height: inherit;
+    backdrop-filter: blur(1.5px);
 }
 
-.note-card-content:hover .note-card-hover-content {
-    position: absolute;
-    z-index: 2;
-    opacity: 1;
-    backdrop-filter: blur(0.5px);
+.note-card-content-layout > .textarea-input-field{
+    /* background-color: #FFFFE5; */
+    background-color: inherit;
+    border-radius: 0;
+    padding: 0;
+    outline: none;
 }
 
-.note-card-hover-layout:hover{
-    background-color: #e5e4e2;
-}
-
-.note-card-content:hover .note-card-content-text {
-    display: none;
+.note-text{
+    font-family: "Work Sans", sans-serif;
+    white-space: pre-wrap;
+    /*making sure links won't overflow*/
+    /*wrap the item when its overflowing*/
+    overflow-wrap: anywhere;
 }

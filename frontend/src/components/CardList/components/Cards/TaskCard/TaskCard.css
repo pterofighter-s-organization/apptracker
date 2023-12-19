@@ -7,21 +7,13 @@
     text-decoration: none;
 }
 
-.task-card-job{
-    width: 70%;
-    text-wrap: nowrap;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    flex-grow: 1;
-    margin-bottom: 0rem;
-    font-size: 1.1rem;
-    color: var(--redirect-button-color);
+.task-card-layout:hover> * > .tracker-card-link-header-layout{
+    color: blue;
+    text-decoration: underline;
 }
 
-.task-card-layout:hover .task-card-job{
-    text-decoration: underline;
-    color: blue;
+.task-card-company{
+    min-width: fit-content;
 }
 
 .task-card-title{
@@ -40,7 +32,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     text-transform: initial;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .task-card-datetime{

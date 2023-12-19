@@ -74,7 +74,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (notes.loading || notes.submitLoading) {
+    if (notes.loading) {
         return (
             <LoadingDisplay />
         )

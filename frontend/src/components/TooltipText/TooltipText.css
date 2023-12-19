@@ -9,7 +9,7 @@
 /*when the parent of this gets hover, it will show this*/
 *:hover>.tooltip-layout {
     position: absolute;
-    top: -25%;
+    top: -20%;
     display: flex;
     flex-direction: column;
     z-index: 1;

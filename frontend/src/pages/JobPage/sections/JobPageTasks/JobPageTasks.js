@@ -79,7 +79,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (tasks.loading || tasks.submitLoading) {
+    if (tasks.loading) {
         return (
             <LoadingDisplay />
         )

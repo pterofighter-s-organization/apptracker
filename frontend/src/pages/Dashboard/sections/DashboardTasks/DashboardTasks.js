@@ -37,7 +37,7 @@ function DashboardTasks({ loading, status, handleStatus, isPreview, isShow }) {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading || tasks.submitLoading || loading) {
+    if (tasks.loading || loading) {
         return (
             <LoadingDisplay />
         )

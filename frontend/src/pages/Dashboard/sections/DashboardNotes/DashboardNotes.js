@@ -35,7 +35,7 @@ function DashboardNotes({ loading, status, handleStatus, isPreview, isShow }) {
         return filterDataByStatus(status, notes.data)
     }, [status, notes.data])
 
-    if (notes.loading || notes.submitLoading || loading) {
+    if (notes.loading || loading) {
         return (
             <LoadingDisplay />
         )

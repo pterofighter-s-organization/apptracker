@@ -93,9 +93,15 @@ export default function TaskCard({ card }) {
             className="tracker-card task-card-layout"
         >
             <CardHeaderLayout>
-                <h5 className="task-card-job">
-                    {card.company} / {card.position}
-                </h5>
+                <div className="tracker-card-link-header-layout">
+                    <div className="task-card-company">
+                        {card.company}
+                    </div>
+                    /
+                    <div className="task-card-job">
+                        {card.position}
+                    </div>
+                </div>
                 <CardButtonsLayout>
                     {
                         card.archived ?

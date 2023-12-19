@@ -6,7 +6,7 @@ import { EmptyMessage } from "./components/EmptyMessage"
 //cards
 import { JobCard } from "./components/Cards/JobCard"
 import { TaskCard } from "./components/Cards/TaskCard"
-import { NoteCard } from "./components/Cards/NoteCard1"
+import { NoteCard } from "./components/Cards/NoteCard"
 
 //hocs
 import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"
