@@ -39,11 +39,13 @@ export default function LoginForm() {
             error: ""
         }
     })
+    const [isSubmit, setIsSubmit] = useState(false)
 
-    const { auth, loginUser } = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setIsSubmit(true)
         loginUser({
             username: formData.username.value,
             password: formData.password.value
@@ -59,6 +61,7 @@ export default function LoginForm() {
                 errors: result.errors,
                 errorMessage: "Can't login without logging out the current user."
             })
+            setIsSubmit(false)
         })
     }
 
@@ -75,7 +78,7 @@ export default function LoginForm() {
     }
 
     //TODO: fix logging in takes a while to load with a loading screen
-    if (auth.submitLoading) {
+    if (isSubmit) {
         return <LoadingDisplay />
     }
 

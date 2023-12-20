@@ -57,7 +57,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             showSubmitNotification({
                 status: result.success,
                 errors: result.errors,
-                message: "Note created successfully!"
+                message: "Note created! You can edit anytime by clicking on it."
             })
         })
     }

@@ -25,9 +25,9 @@ const initialState = {
 
 export const AuthContext = createContext({
     auth: initialState,
-    loginUser: (user) => { },
-    registerUser: (user) => { },
-    logoutUser: () => { },
+    loginUser: async (user) => { },
+    registerUser: async (user) => { },
+    logoutUser: async () => { },
     getUser: () => { }
 })
 
@@ -91,23 +91,34 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const registerUser = async (user) => {
-        dispatch({ type: AUTH_SUBMIT_START })
+    const loginUser1 = async (user) => {
+        try {
+            //don't delete await or else it couldnt wait for the promise to throw error
+            await APIs.userAPI.loginUser(user)
+            dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user.username })
+            //reroute to dashboard, here because login is for sure re-routing to dashboard
 
+            navigate("/")
+            return {
+                username: user.username,
+                isAuth: true
+            }
+        } catch (errors) {
+            console.log(errors)
+            dispatch({ type: AUTH_LOGIN_FAILURE })
+            throw errors
+        }
+    }
+
+    const registerUser = async (user) => {
         try {
             await APIs.userAPI.registerUser(user)
             dispatch({ type: AUTH_REGISTER_SUCCESS })
-            return ({
-                success: true,
-                data: user
-            })
+            return user
         } catch (errors) {
             console.log(errors)
             dispatch({ type: AUTH_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            throw errors
         }
     }
 
@@ -158,7 +169,8 @@ export const AuthProvider = ({ children }) => {
                 loginUser,
                 registerUser,
                 logoutUser,
-                getUser
+                getUser,
+                loginUser1
             }}
         >
             {children}

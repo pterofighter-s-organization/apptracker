@@ -55,28 +55,36 @@ const isNewPasswordConfirmed = (formData) => {
     return formData.newPassword.value === formData.confirmPassword.value && formData.confirmPassword.value.length > 0
 }
 
-export const customSignupValidations = (formData) => {
-    let errflag = false
-    const updatedFormState = {...formData}
+export const customSignupValidations = async (formData) => {
+    return new Promise(async (resolve, reject) => {
+        let errflag = false
+        const updatedFormState = { ...formData }
 
-    if (!isNewPasswordConfirmed(formData)) {
-        updatedFormState["confirmPassword"] = {
-            ...formData.confirmPassword,
-            error: "This doesn't match the password you created!"
+        if (!isNewPasswordConfirmed(formData)) {
+            updatedFormState["confirmPassword"] = {
+                ...formData.confirmPassword,
+                error: "This doesn't match the password you created!"
+            }
+
+            errflag = true
+        } if (!isNewPasswordValid(formData.newPassword.value)) {
+            updatedFormState["newPassword"] = {
+                ...formData.newPassword,
+                error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"
+            }
+
+            errflag = true
         }
 
-        errflag = true
-    } if (!isNewPasswordValid(formData.newPassword.value)) {
-        updatedFormState["newPassword"] = {
-            ...formData.newPassword,
-            error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"
+        if (errflag) {
+            reject({
+                // Adjust the structure here to match the expected structure in the catch block
+                code: 'ERR_CUSTOM_VALIDATION',
+                data: updatedFormState,
+                message: 'Please fix the errors below!',
+            });
+        } else {
+            resolve(updatedFormState)
         }
-
-        errflag = true
-    }
-
-    return ({
-        isError: errflag,
-        updatedFormState: updatedFormState
     })
 }

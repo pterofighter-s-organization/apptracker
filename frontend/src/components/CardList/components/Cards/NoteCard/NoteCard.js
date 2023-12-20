@@ -141,22 +141,32 @@ export default function NoteCard({ card }) {
             <div className="note-card-content-layout">
                 {
                     card.archived ?
-                        <pre className="note-text">
-                            {
-                                value.length > 0 ?
-                                    value
-                                    :
-                                    "This note has no text."
-                            }
-                        </pre>
+                        <>
+                            <TooltipText
+                                text={"Please restore this note to edit."}
+                            />
+                            <pre className="note-text">
+                                {
+                                    value.length > 0 ?
+                                        value
+                                        :
+                                        "This note has no text."
+                                }
+                            </pre>
+                        </>
                         :
-                        <TextareaInput
-                            height={"100%"}
-                            name={"note"}
-                            value={value}
-                            placeholder={"Edit directly here, saves 3s after your last edit."}
-                            handleChange={handleChange}
-                        />
+                        <>
+                            <TooltipText
+                                text={"Click to edit, it will save 1s after you finish editing."}
+                            />
+                            <TextareaInput
+                                height={"100%"}
+                                name={"note"}
+                                value={value}
+                                placeholder={"Edit directly here, saves 3s after your last edit."}
+                                handleChange={handleChange}
+                            />
+                        </>
                 }
                 {
                     isLoading ?
@@ -165,16 +175,6 @@ export default function NoteCard({ card }) {
                         null
                 }
             </div>
-            <TooltipText
-                id={"note-tooltip-active"}
-                text={
-                    card.archived ?
-                        "Please restore this note to edit."
-                        :
-                        "Click to edit, it will save 1s after you finish editing."
-                }
-            />
-
         </div>
     )
 }

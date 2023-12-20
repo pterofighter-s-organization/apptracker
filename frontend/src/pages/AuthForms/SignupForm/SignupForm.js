@@ -6,7 +6,7 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
-import { showNotification, showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { showNotification } from "../../../components/NotificationList/components/Notification/Notification"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
@@ -45,7 +45,9 @@ export default function SignupForm() {
             error: ""
         }
     })
-    const { auth, loginUser, registerUser } = useContext(AuthContext)
+    const [isSubmit, setIsSubmit] = useState(false)
+
+    const { loginUser1, registerUser } = useContext(AuthContext)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -59,23 +61,27 @@ export default function SignupForm() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const customValidation = customSignupValidations(formData)
-        if (customValidation.isError) {
-            setFormData(customValidation.updatedFormState)
-            showNotification({
-                status: "FAIL",
-                message: "Fix the errors to continue!"
-            })
-            return
-        }
+        setIsSubmit(true)
 
-        registerUser({
-            username: formData.username.value,
-            password: formData.newPassword.value
-        }).then((result) => {
-            if (!result.success && result.errors?.code === 'ERR_BAD_RESPONSE') {
+        try {
+            const validatedFormData = await customSignupValidations(formData)
+            const validatedNewUser = await registerUser({
+                username: validatedFormData.username.value,
+                password: validatedFormData.newPassword.value
+            })
+            await loginUser1(validatedNewUser)
+
+            showNotification({
+                status: "SUCCESS",
+                message: "User created! Now redirecting to your dashboard."
+            })
+        } catch (errors) {
+            console.log(errors)
+            if (errors?.code === 'ERR_CUSTOM_VALIDATION') {
+                setFormData(errors.data)
+            } if (errors?.code === 'ERR_BAD_RESPONSE') {
                 showNotification({
                     status: "FAIL",
                     message: "Username can't be use, create a new one!"
@@ -87,26 +93,21 @@ export default function SignupForm() {
                         error: "Username can't be use, create a new one!"
                     }
                 })
-                return
-            } else if (result.success) {
-                loginUser(result.data).then((result) => {
-                    showSubmitNotification({
-                        status: result.success,
-                        message: "User created! Now redirecting to dashboard!",
-                        errors: result.errors,
-                    })
-                })
             } else {
-                showSubmitNotification({
-                    status: result.success,
-                    errors: result.errors,
+                showNotification({
+                    status: "FAIL",
+                    errors: errors
                 })
             }
-        })
+        } finally {
+            setIsSubmit(false)
+        }
     }
 
-    if (auth.submitLoading) {
-        return <LoadingDisplay />
+    if (isSubmit) {
+        return (
+            <LoadingDisplay />
+        )
     }
 
     return (

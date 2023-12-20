@@ -62,11 +62,7 @@
     overflow: hidden;
 }
 
-.minimized-sidenav .sidenav-button .sidenav-button-text {
-    display: none;
-}
-
-.minimized-sidenav .sidenav-logo .sidenav-button-text {
+.minimized-sidenav * .sidenav-button-text {
     display: none;
 }
 
@@ -90,18 +86,6 @@
 .sidenav-logo-img {
     width: 1.75rem;
     height: 1.75rem;
-}
-
-.minimized-sidenav .sidenav-button .sidenav-minimize-icon {
-    display: none;
-}
-
-.expanded-sidenav .sidenav-button .sidenav-expand-icon {
-    display: none;
-}
-
-.minimized-sidenav .sidenav-button .sidenav-expand-icon {
-    display: initial;
 }
 
 .expanded-sidenav .sidenav-divider{

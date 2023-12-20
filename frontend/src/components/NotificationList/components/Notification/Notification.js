@@ -42,10 +42,18 @@ const Notification = ({ status, message }) => {
     return notification
 }
 
-export const showNotification = ({ status, message }) => {
+export const showNotification = ({ status, message, errors }) => {
+
     const NotificationComponent = Notification({
         status: status,
-        message: message
+        message: (
+            errors ?
+                handleAPIErrors({
+                    errors: errors
+                })
+                :
+                message
+        )
     })
 
     //get notification container
