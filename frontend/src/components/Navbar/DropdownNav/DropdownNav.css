@@ -39,18 +39,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.minimized-dropdownnav .dropdownnav-bar .dropdownnav-bar-button .dropdownnav-button-expand-icon {
-    display: initial;
-}
-
-.expanded-dropdownnav .dropdownnav-bar .dropdownnav-bar-button .dropdownnav-button-expand-icon {
-    display: none;
-}
-
-.minimized-dropdownnav .dropdownnav-bar .dropdownnav-bar-button .dropdownnav-button-minimize-icon {
-    display: none;
-}
-
 .dropdownnav-logo {
     text-decoration: none;
     font-weight: bolder;

@@ -1,14 +1,14 @@
 
 //actions
 export const AUTH_CALL_START = "AUTH_CALL_START"
-export const AUTH_SUBMIT_START = "AUTH_SUBMIT_START"
 export const AUTH_REGISTER_SUCCESS = "AUTH_REGISTER_SUCCESS"
+export const AUTH_REGISTER_FAILURE = "AUTH_REGISTER_FAILURE"
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS"
 export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE"
 export const AUTH_GET_SUCCESS = "AUTH_GET_SUCCESS"
 export const AUTH_GET_FAILURE = "AUTH_GET_FAILURE"
-export const AUTH_SUBMIT_FAILURE = "AUTH_SUBMIT_FAILURE"
 export const AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS"
+export const AUTH_LOGOUT_FAILURE = "AUTH_LOGOUT_FAILURE"
 
 //reducer
 export const authReducer = (auth, action) => {
@@ -18,11 +18,6 @@ export const authReducer = (auth, action) => {
             return ({
                 ...auth,
                 loading: true,
-            })
-        case AUTH_SUBMIT_START:
-            return ({
-                ...auth,
-                submitLoading: true
             })
         case AUTH_GET_SUCCESS:
             return ({
@@ -38,16 +33,12 @@ export const authReducer = (auth, action) => {
             return ({
                 ...auth,
                 loading: false,
-                data: {
-                    username: null,
-                    isAuth: false
-                },
                 errors: action.payload,
             })
         case AUTH_LOGIN_SUCCESS:
             return ({
                 ...auth,
-                submitLoading: false,
+                loading: false,
                 data: {
                     username: action.payload,
                     isAuth: true
@@ -57,22 +48,24 @@ export const authReducer = (auth, action) => {
         case AUTH_LOGIN_FAILURE:
             return ({
                 ...auth,
-                submitLoading: false,
+                loading: false,
                 data: {
                     username: null,
                     isAuth: false
-                }
+                },
+                errors: action.payload
             })
         case AUTH_REGISTER_SUCCESS:
             return ({
                 ...auth,
-                submitLoading: false,
                 errors: null,
+                loading: false,
             })
-        case AUTH_SUBMIT_FAILURE:
+        case AUTH_REGISTER_FAILURE:
             return ({
                 ...auth,
-                submitLoading: false,
+                loading: false,
+                errors: action.payload
             })
         case AUTH_LOGOUT_SUCCESS:
             return ({
@@ -83,6 +76,12 @@ export const authReducer = (auth, action) => {
                 },
                 loading: false,
                 errors: null,
+            })
+        case AUTH_LOGOUT_FAILURE:
+            return({
+                ...auth,
+                loading: false,
+                errors: action.payload
             })
         default:
             throw new Error("Unhandled action type.")

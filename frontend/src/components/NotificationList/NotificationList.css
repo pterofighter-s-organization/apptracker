@@ -7,18 +7,14 @@
     align-items: center;
     gap: 0.5rem;
     top: 2.5%;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
 }
 
-.notification-list:hover{
-    z-index: 0;
-}
-
-
 /*css specific for firefox*/
-/* @-moz-document url-prefix() {
+@-moz-document url-prefix() {
     .notification-list {
         transform: translate(-45%, 0%);
     }
-} */
+}

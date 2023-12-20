@@ -6,9 +6,12 @@ import APIs from "../../services/api";
 
 //actions
 import {
-    AUTH_CALL_START, AUTH_SUBMIT_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS,
-    AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_SUBMIT_FAILURE, AUTH_LOGOUT_SUCCESS
+    AUTH_CALL_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS, AUTH_REGISTER_FAILURE,
+    AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT_FAILURE, AUTH_LOGOUT_SUCCESS
 } from "../reducers/authReducer";
+
+//helpers
+import { isCodeBadRequest } from "../../helpers/auth";
 
 //reducer
 import { authReducer } from "../reducers/authReducer";
@@ -16,10 +19,9 @@ import { authReducer } from "../reducers/authReducer";
 const initialState = {
     data: {
         username: null,
-        isAuth: null
+        isAuth: false
     },
     loading: false,
-    submitLoading: false,
     errors: null
 }
 
@@ -28,7 +30,7 @@ export const AuthContext = createContext({
     loginUser: async (user) => { },
     registerUser: async (user) => { },
     logoutUser: async () => { },
-    getUser: () => { }
+    getUser: async () => { }
 })
 
 export const AuthProvider = ({ children }) => {
@@ -36,68 +38,24 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
 
     const getUser = useCallback(async () => {
-
         try {
             const response = await APIs.userAPI.getUser()
             dispatch({ type: AUTH_GET_SUCCESS, payload: response.data.username })
-            return ({
-                success: true,
-                data: {
-                    username: response.data.username,
-                    isAuth: true
-                }
-            })
+            return response.data.username
         } catch (errors) {
             console.log(errors)
             dispatch({ type: AUTH_GET_FAILURE, payload: errors })
-            return ({
-                success: false,
-                errors: errors,
-                data: {
-                    username: null,
-                    isAuth: false
-                }
-            })
+            throw errors
         }
     }, [dispatch])
 
     const loginUser = async (user) => {
-        dispatch({ type: AUTH_SUBMIT_START })
-
         try {
             //don't delete await or else it couldnt wait for the promise to throw error
             await APIs.userAPI.loginUser(user)
             dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user.username })
-            //reroute to dashboard, here because login is for sure re-routing to dashboard
-            navigate("/")
-            return ({
-                success: true,
-                data: {
-                    username: user.username,
-                    isAuth: true
-                }
-            })
-        } catch (errors) {
-            console.log(errors)
-            dispatch({ type: AUTH_LOGIN_FAILURE })
-            return ({
-                success: false,
-                errors: errors,
-                data: {
-                    username: null,
-                    isAuth: false
-                }
-            })
-        }
-    }
 
-    const loginUser1 = async (user) => {
-        try {
-            //don't delete await or else it couldnt wait for the promise to throw error
-            await APIs.userAPI.loginUser(user)
-            dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user.username })
             //reroute to dashboard, here because login is for sure re-routing to dashboard
-
             navigate("/")
             return {
                 username: user.username,
@@ -105,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_LOGIN_FAILURE })
+            dispatch({ type: AUTH_LOGIN_FAILURE, payload: errors })
             throw errors
         }
     }
@@ -117,50 +75,40 @@ export const AuthProvider = ({ children }) => {
             return user
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_SUBMIT_FAILURE })
+            dispatch({ type: AUTH_REGISTER_FAILURE, payload: errors })
             throw errors
         }
     }
 
-    const logoutUser = async () => {
+    const logoutUser = useCallback(async () => {
         dispatch({ type: AUTH_CALL_START })
 
-        const loggedOut = () => {
-            dispatch({
-                type: AUTH_LOGOUT_SUCCESS,
-                payload: {
-                    isAuth: false
-                }
-            })
+        const handleLogoutData = () => {
+            dispatch({ type: AUTH_LOGOUT_SUCCESS })
             alert("You've been logged out!")
-            return ({
-                username: null,
-                isAuth: false
-            })
         }
 
         try {
             await APIs.userAPI.logoutUser()
-            return ({
-                success: true,
-                data: loggedOut()
-            })
+            handleLogoutData()
+            return {
+                username: null,
+                isAuth: false
+            }
         } catch (errors) {
             console.log(errors)
             //this will log out even w/o session existing
-            if (errors.response?.status === 404) {
-                return ({
-                    success: true,
-                    data: loggedOut()
-                })
+            if (auth.data.isAuth && isCodeBadRequest(errors)) {
+                handleLogoutData()
+                return {
+                    username: null,
+                    isAuth: false
+                }
             }
-            dispatch({ type: AUTH_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            dispatch({ type: AUTH_LOGOUT_FAILURE, payload: errors })
+            throw errors
         }
-    }
+    }, [dispatch, auth.data.isAuth])
 
     return (
         <AuthContext.Provider
@@ -170,7 +118,6 @@ export const AuthProvider = ({ children }) => {
                 registerUser,
                 logoutUser,
                 getUser,
-                loginUser1
             }}
         >
             {children}

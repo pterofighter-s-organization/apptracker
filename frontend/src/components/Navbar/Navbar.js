@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 
 //components
-import { showSubmitNotification } from "../NotificationList/components/Notification/Notification"
+import { showNotification } from "../NotificationList/components/Notification/Notification"
 
 //navs
 import { SideNav } from "./SideNav"
@@ -37,26 +37,31 @@ export default function Navbar() {
     const handleLogout = (e) => {
         e.preventDefault()
 
-        logoutUser().then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "Logout Successful!",
+        logoutUser()
+            .then(() => {
+                showNotification({
+                    status: "SUCCESS",
+                    message: "Logout Successful!"
+                })
+            }).catch((errors) => {
+                showNotification({
+                    status: "FAIL",
+                    errors: errors
+                })
             })
-        })
     }
 
     return (
         <>
             {
                 isMobile ?
-                    <DropdownNav 
-                        id={"dropdownnav"} 
+                    <DropdownNav
+                        id={"dropdownnav"}
                         handleLogout={handleLogout}
                     />
                     :
-                    <SideNav 
-                        id={"sidenav"} 
+                    <SideNav
+                        id={"sidenav"}
                         handleLogout={handleLogout}
                     />
             }

@@ -6,14 +6,15 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
-import { showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { showNotification } from "../../../components/NotificationList/components/Notification/Notification"
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
 
 //helpers
-import { updateLoginErrors } from "../../../helpers/auth"
+import { isCodeNetworkError, updateLoginErrors } from "../../../helpers/auth"
 
 //private-components
 import { RedirectLink } from "../components/RedirectLink"
@@ -39,29 +40,30 @@ export default function LoginForm() {
             error: ""
         }
     })
-    const [isSubmit, setIsSubmit] = useState(false)
+    const [isValidating, setIsValidating] = useState(false)
 
-    const { loginUser } = useContext(AuthContext)
+    const { auth, loginUser } = useContext(AuthContext)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setIsSubmit(true)
+        setIsValidating(true)
+
         loginUser({
             username: formData.username.value,
             password: formData.password.value
         }).then((result) => {
-            //if err code is 403, we must logout first
-            if (!result.success) {
-                setFormData(updateLoginErrors(formData, result.errors))
-            }
-
-            showSubmitNotification({
-                status: result.success,
-                message: `Welcome ${result.data.username}! Redirected you to Dashboard!`,
-                errors: result.errors,
-                errorMessage: "Can't login without logging out the current user."
+            showNotification({
+                status: "SUCCESS",
+                message: `Welcome ${result.username}! Redirected you to dashboard.`
             })
-            setIsSubmit(false)
+        }).catch((errors) => {
+            setFormData(updateLoginErrors(formData, errors))
+            showNotification({
+                status: "FAIL",
+                errors: errors
+            })
+        }).finally(() => {
+            setIsValidating(false)
         })
     }
 
@@ -78,8 +80,16 @@ export default function LoginForm() {
     }
 
     //TODO: fix logging in takes a while to load with a loading screen
-    if (isSubmit) {
+    if (isValidating) {
         return <LoadingDisplay />
+    }
+
+    if (isCodeNetworkError(auth.errors)) {
+        return (
+            <ErrorDisplay
+                errors={auth.errors}
+            />
+        )
     }
 
     return (

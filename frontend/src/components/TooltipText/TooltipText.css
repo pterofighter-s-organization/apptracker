@@ -17,14 +17,14 @@
     top: 0;
     min-width: 100%;
     align-self: baseline;
-    animation: vanish 3s;
+    animation: tooltip-vanish 3s;
     /*making sure the animation is only one time*/
     animation-fill-mode: forwards;
     /*making sure opacity stays at 1 until the 3s gone by. Only 1 step which is the first step the whole 3s*/
     animation-timing-function: steps(1, end);
 }
 
-@keyframes vanish {
+@keyframes tooltip-vanish {
     0% {
         opacity: 1;
     }

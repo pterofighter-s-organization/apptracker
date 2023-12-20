@@ -55,28 +55,56 @@ const isNewPasswordConfirmed = (formData) => {
     return formData.newPassword.value === formData.confirmPassword.value && formData.confirmPassword.value.length > 0
 }
 
+const handleFieldsEmpty = (formData, isError) => {
+    const updatedFormState = {}
+
+    const entries = Object.entries(formData)
+    for (const [key, values] of entries) {
+        if (values.value.length <= 0) {
+            updatedFormState[key] = {
+                ...values,
+                error: "This field can't be empty."
+            }
+
+            isError = true
+        } else {
+            updatedFormState[key] = { ...values }
+        }
+    }
+
+    return {
+        data: updatedFormState,
+        isError: isError
+    }
+}
+
+//mimic backend validations with a promise
 export const customSignupValidations = async (formData) => {
     return new Promise(async (resolve, reject) => {
-        let errflag = false
-        const updatedFormState = { ...formData }
+        let isError = false
+        let updatedFormState = { ...formData }
 
         if (!isNewPasswordConfirmed(formData)) {
             updatedFormState["confirmPassword"] = {
-                ...formData.confirmPassword,
+                ...updatedFormState.confirmPassword,
                 error: "This doesn't match the password you created!"
             }
 
-            errflag = true
+            isError = true
         } if (!isNewPasswordValid(formData.newPassword.value)) {
             updatedFormState["newPassword"] = {
-                ...formData.newPassword,
+                ...updatedFormState.newPassword,
                 error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"
             }
 
-            errflag = true
+            isError = true
         }
 
-        if (errflag) {
+        const handledResult = handleFieldsEmpty(updatedFormState, isError)
+        updatedFormState = handledResult.data
+        isError = handledResult.isError
+
+        if (isError) {
             reject({
                 // Adjust the structure here to match the expected structure in the catch block
                 code: 'ERR_CUSTOM_VALIDATION',
@@ -87,4 +115,12 @@ export const customSignupValidations = async (formData) => {
             resolve(updatedFormState)
         }
     })
+}
+
+export const isCodeNetworkError = (errors) => {
+    return errors?.code === 'ERR_NETWORK'
+}
+
+export const isCodeBadRequest = (errors) => {
+    return errors?.code === 'ERR_BAD_REQUEST'
 }

@@ -40,8 +40,12 @@ function DropdownNav({ id, handleLogout, isExpand, handleMinimize, handleExpand 
                         // style={{ borderStyle: "none" }} already declared in app.css
                         onClick={isExpand ? handleMinimize : handleExpand}
                     >
-                        <i className="dropdownnav-button-expand-icon bi bi-list"></i>
-                        <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />
+                        {
+                            isExpand ?
+                                <i className="bi bi-x-circle-fill" />
+                                :
+                                <i className="bi bi-list"></i>
+                        }
                     </button>
                 </div>
             </div>

@@ -12,10 +12,11 @@ import { showNotification } from "../../../components/NotificationList/component
 import { InputLayout } from "../../../layouts/InputLayout"
 
 //helpers
-import { customSignupValidations } from "../../../helpers/auth"
+import { customSignupValidations, isCodeNetworkError } from "../../../helpers/auth"
 
 //components
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
 
 //private-components
 import { AuthFormHeader } from "../components/AuthFormHeader"
@@ -45,9 +46,9 @@ export default function SignupForm() {
             error: ""
         }
     })
-    const [isSubmit, setIsSubmit] = useState(false)
+    const [isValidating, setIsValidating] = useState(false)
 
-    const { loginUser1, registerUser } = useContext(AuthContext)
+    const { auth, loginUser, registerUser } = useContext(AuthContext)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -63,7 +64,7 @@ export default function SignupForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setIsSubmit(true)
+        setIsValidating(true)
 
         try {
             const validatedFormData = await customSignupValidations(formData)
@@ -71,7 +72,7 @@ export default function SignupForm() {
                 username: validatedFormData.username.value,
                 password: validatedFormData.newPassword.value
             })
-            await loginUser1(validatedNewUser)
+            await loginUser(validatedNewUser)
 
             showNotification({
                 status: "SUCCESS",
@@ -100,13 +101,21 @@ export default function SignupForm() {
                 })
             }
         } finally {
-            setIsSubmit(false)
+            setIsValidating(false)
         }
     }
 
-    if (isSubmit) {
+    if (isValidating) {
         return (
             <LoadingDisplay />
+        )
+    }
+
+    if(isCodeNetworkError(auth.errors)){
+        return (
+            <ErrorDisplay
+                errors={auth.errors}
+            />
         )
     }
 
