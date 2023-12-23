@@ -5,8 +5,9 @@ import { CardList } from "../../../../components/CardList";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { showFailNotification, showSuccessNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
+import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 
 //private-components
 import { TaskForm } from "../../components/TaskForm";
@@ -36,33 +37,46 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     const { tasks, getJobTasks, createJobTask } = useContext(TasksContext)
     const { job } = useContext(JobContext)
     const [formData, setFormData] = useState(createObjCopy(TASK_FORM_DATA))
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        setIsLoading(true)
         getJobTasks(job.data.application_id)
-    }, [getJobTasks, job.data.application_id])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getJobTasks, job.data.application_id, setIsLoading])
 
     const filteredData = useMemo(() => {
-        return filterDataByStatus(status, tasks.data)
-    }, [status, tasks.data])
+        return filterDataByStatus(job.data.archived ? "archived" : status, tasks.data)
+    }, [status, tasks.data, job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
+        setIsSubmitting(true)
 
         createJobTask(job.data.application_id, {
             ...createTaskData(formData),
             company: job.data.company,
-            position: job.data.position
+            position: job.data.position,
         })
-            .then((result) => {
-                showSubmitNotification({
-                    status: result.success,
-                    errors: result.errors,
-                    message: "task created successfully!",
-                    errorMessage: "please fix the errors before submitting the task!"
+            .then(() => {
+                showSuccessNotification({
+                    message: "Task created successfully!"
                 })
-                if (!result.success) {
-                    setFormData(updateTaskFormErrors(formData, result.errors.response.data))
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    message: "Please fix the errors before submitting this task!",
+                    errors: errors
+                })
+                if (errors.response?.data) {
+                    setFormData(updateTaskFormErrors(formData, errors.response.data))
                 }
+            })
+            .finally(() => {
+                setIsSubmitting(false)
             })
     }
 
@@ -78,7 +92,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (tasks.loading) {
+    if (isLoading) {
         return (
             <LoadingDisplay />
         )
@@ -97,22 +111,39 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     return (
         <CardsSectionLayout isPreview={isPreview}>
             <CardListHeader
-                isArchived={status === "archived"}
+                isArchived={job.data.archived ? true : status === "archived"}
                 quantity={filteredData.length}
                 type={"task"}
             />
-            <FilterDropdown
-                id={"tasks-status-filter"}
-                label={"status"}
-                value={status}
-                options={APP_STATUS_COLORS}
-                handleOption={handleStatus}
-            />
-            <TaskForm
-                formData={formData}
-                handleChange={handleChange}
-                handleCreate={handleCreate}
-            />
+            {
+                job.data.archived ?
+                    <DisabledToggleButton
+                        isLeft={false}
+                        value={"archived"}
+                        color={APP_STATUS_COLORS["archived"]}
+                    />
+                    :
+                    <ToggleButton
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+            }
+            {
+                !job.data.archived ?
+                    isSubmitting ?
+                        <LoadingDisplay
+                            height={"10.75rem"}
+                        />
+                        :
+                        <TaskForm
+                            formData={formData}
+                            handleChange={handleChange}
+                            handleCreate={handleCreate}
+                        />
+                    :
+                    null
+            }
             <CardList
                 type={"tasks"}
                 cards={

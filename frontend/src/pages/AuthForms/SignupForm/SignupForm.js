@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 //components
 import { TextInput } from "../../../components/Inputs/TextInput"
@@ -6,14 +6,19 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
 
 //helpers
-import { isPasswordValid } from "../../../helpers/form"
+import { customSignupValidations, isCodeNetworkError } from "../../../helpers/auth"
 
-//privater-components
+//components
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
+
+//private-components
 import { AuthFormHeader } from "../components/AuthFormHeader"
 import { RedirectLink } from "../components/RedirectLink"
 
@@ -21,6 +26,9 @@ import { RedirectLink } from "../components/RedirectLink"
 import { AuthPageLayout } from "../layouts/AuthPageLayout"
 import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
+
+//contexts
+import { AuthContext } from "../../../hooks/contexts/AuthContext"
 
 export default function SignupForm() {
 
@@ -38,42 +46,10 @@ export default function SignupForm() {
             error: ""
         }
     })
+    //this is for validating everything at once since the backend call for registering isnt fully finish.
+    const [isValidating, setIsValidating] = useState(false)
 
-    //helpers
-    const isPasswordConfirmed = () => {
-        return formData.newPassword.value === formData.confirmPassword.value && formData.confirmPassword.value.length > 0
-    }
-
-    const handleValidation = () => {
-        let errflag = false
-
-        if (!isPasswordConfirmed()) {
-            setFormData({
-                ...formData,
-                confirmPassword: {
-                    ...formData.confirmPassword,
-                    error: "This doesn't match the password you created!"
-                }
-            })
-
-            errflag = true
-        } if (!isPasswordValid(formData.newPassword.value)) {
-            setFormData({
-                ...formData,
-                newPassword: {
-                    ...formData.newPassword,
-                    error: "Got to be 8 chars, 1 special, 1 lower and 1 upper case!"
-                }
-            })
-
-            errflag = true
-        } if (errflag) {
-            //this didn't pass
-            return false
-        }
-        //this passed the validations
-        return true
-    }
+    const { auth, loginUser, registerUser } = useContext(AuthContext)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -87,14 +63,59 @@ export default function SignupForm() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!handleValidation()) {
-            alert("Please fix the errors to continue!")
-            return
+        setIsValidating(true)
+
+        try {
+            const validatedFormData = await customSignupValidations(formData)
+            const validatedNewUser = await registerUser({
+                username: validatedFormData.username.value,
+                password: validatedFormData.newPassword.value
+            })
+            await loginUser(validatedNewUser)
+
+            showSuccessNotification({
+                message: "User created! Now redirecting to your dashboard."
+            })
+        } catch (errors) {
+            console.log(errors)
+            if (errors?.code === 'ERR_CUSTOM_VALIDATION') {
+                setFormData(errors.data)
+            } if (errors?.code === 'ERR_BAD_RESPONSE') {
+                showFailNotification({
+                    message: "Username can't be use, create a new one!"
+                })
+
+                setFormData({
+                    ...formData,
+                    username: {
+                        ...formData.username,
+                        error: "Username can't be use, create a new one!"
+                    }
+                })
+            } else {
+                showFailNotification({
+                    errors: errors
+                })
+            }
+        } finally {
+            setIsValidating(false)
         }
-        alert(`Successfully created account!`)
-        //api call
+    }
+
+    if (isValidating) {
+        return (
+            <LoadingDisplay />
+        )
+    }
+
+    if(isCodeNetworkError(auth.errors)){
+        return (
+            <ErrorDisplay
+                errors={auth.errors}
+            />
+        )
     }
 
     return (

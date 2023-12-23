@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 //components
 import { TextInput } from "../../../components/Inputs/TextInput"
@@ -6,9 +6,15 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
+import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
+
+//helpers
+import { isCodeNetworkError, updateLoginErrors } from "../../../helpers/auth"
 
 //private-components
 import { RedirectLink } from "../components/RedirectLink"
@@ -18,6 +24,9 @@ import { AuthFormHeader } from "../components/AuthFormHeader"
 import { AuthPageLayout } from "../layouts/AuthPageLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
 import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
+
+//context
+import { AuthContext } from "../../../hooks/contexts/AuthContext"
 
 export default function LoginForm() {
 
@@ -32,9 +41,28 @@ export default function LoginForm() {
         }
     })
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const { auth, loginUser } = useContext(AuthContext)
+    const [isValidating, setIsValidating] = useState(false)
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setIsValidating(true)
+
+        loginUser({
+            username: formData.username.value,
+            password: formData.password.value
+        }).then((result) => {
+            showSuccessNotification({
+                message: `Welcome ${result.username}! Redirected you to dashboard.`
+            })
+        }).catch((errors) => {
+            setFormData(updateLoginErrors(formData, errors))
+            showFailNotification({
+                errors: errors
+            })
+        }).finally(() => {
+            setIsValidating(false)
+        })
     }
 
     const handleChange = (e) => {
@@ -49,6 +77,19 @@ export default function LoginForm() {
         })
     }
 
+    //TODO: add a loading screen
+    if (isValidating) {
+        return <LoadingDisplay />
+    }
+
+    if (isCodeNetworkError(auth.errors)) {
+        return (
+            <ErrorDisplay
+                errors={auth.errors}
+            />
+        )
+    }
+
     return (
         <AuthPageLayout>
             <AuthFormLayout>
@@ -56,7 +97,7 @@ export default function LoginForm() {
                     label={"Log in"}
                     description={"Sign in to access the app's features!"}
                 />
-                <AuthFieldsLayout onSubmit={handleSubmit}>
+                <AuthFieldsLayout handleSubmit={handleSubmit}>
                     <InputLayout isError={formData.username.error.length > 0}>
                         <InputHeader
                             header={"Username"}

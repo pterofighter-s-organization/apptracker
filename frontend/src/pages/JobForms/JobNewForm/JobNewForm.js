@@ -1,6 +1,10 @@
 import { useState, useMemo, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//components
+import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
+import { showFailNotification, showSuccessNotification } from "../../../components/NotificationList/components/Notification/Notification";
+
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";
 
@@ -28,8 +32,9 @@ export default function JobNewForm() {
     const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
-    const { createApplication } = useContext(JobContext)
+    const { job, createApplication } = useContext(JobContext)
     const [formData, setFormData] = useState(initialState)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         document.title = "New Job Form - Job Tracker App"
@@ -39,6 +44,7 @@ export default function JobNewForm() {
 
     const handleChange = (e) => {
         e.preventDefault()
+        setErrorMessage("")
 
         if (e.target.name === "stage") {
             setFormData({
@@ -59,27 +65,39 @@ export default function JobNewForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        createApplication(1, createJobData(formData))
+        createApplication(createJobData(formData))
             .then((result) => {
-                if (result.success) {
-                    alert("Successfully submitted! Now redirecting you to the job page.")
-                    navigate(`/job/${result.data.application_id}`)
-                } else {
-                    alert(
-                        handleAPIErrors({
-                            errors: result.errors,
-                            message: "Please fix the errors before submitting!"
-                        })
-                    )
-                    setFormData(updateJobFormErrors(formData, result.errors.response.data))
+                showSuccessNotification({
+                    message: "Successfully submitted! Now redirecting you to the job page."
+                })
+
+                navigate(`/job/${result.application_id}`)
+            }).catch((errors) => {
+                const apiErrorMessage = handleAPIErrors({
+                    errors: errors,
+                    message: "Please fix the errors below before submitting!"
+                })
+
+                if (errors.response?.data) {
+                    setFormData(updateJobFormErrors(formData, errors.response.data))
                 }
+
+                setErrorMessage(apiErrorMessage)
+                showFailNotification({
+                    message: apiErrorMessage
+                })
             })
+    }
+
+    if (job.isRefresh) {
+        return <LoadingDisplay />
     }
 
     return (
         <PageLayout>
             <JobForm
                 formData={formData}
+                errorMessage={errorMessage}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
             />

@@ -9,11 +9,11 @@ import "./ErrorDisplay.css"
 export default function ErrorDisplay({ label, errors, isSection }) {
 
     return (
-        <div className="error-display">
+        <div className="error-display-layout">
             <i className="error-display-icon bi bi-exclamation-square-fill"></i>
             <div className="error-display-header">
                 <h4 className="error-display-label">
-                    {label}
+                    {label ? label : "Application Status"}:
                 </h4>
                 <h4 className="error-display-errors">
                     {

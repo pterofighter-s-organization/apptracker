@@ -5,7 +5,6 @@ import "./HyperLink.css"
 
 export default function HyperLink({ id, link, label }) {
 
-    console.log(link)
     return (
         <div className="hyper-link">
             <b>

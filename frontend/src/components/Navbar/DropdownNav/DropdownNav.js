@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //routes
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
 
 //css
 import "./DropdownNav.css"
 
-function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
+function DropdownNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
 
     return (
         <nav
-            className={`dropdownnav ${toggle ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
+            className={`dropdownnav ${isExpand ? "expanded-dropdownnav" : "minimized-dropdownnav"}`}
             id={id}
         >
             <div className="dropdownnav-bar">
@@ -38,10 +38,14 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                         type="button"
                         className="button dropdownnav-bar-button"
                         // style={{ borderStyle: "none" }} already declared in app.css
-                        onClick={toggle ? handleUntoggle : handleToggle}
+                        onClick={isExpand ? handleMinimize : handleExpand}
                     >
-                        <i className="dropdownnav-button-expand-icon bi bi-list"></i>
-                        <i className="dropdownnav-button-minimize-icon bi bi-x-circle-fill" />
+                        {
+                            isExpand ?
+                                <i className="bi bi-x-circle-fill" />
+                                :
+                                <i className="bi bi-list"></i>
+                        }
                     </button>
                 </div>
             </div>
@@ -63,7 +67,19 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                     }
                 </div>
                 <hr style={{ margin: "0.25rem" }} />
-                <Link
+                <button
+                    onClick={handleLogout}
+                    className="button dropdownnav-content-button"
+                    data-bs-isExpand="tooltip"
+                    data-bs-placement="top"
+                    title={`Sign out`}
+                >
+                    <i className={`dropdownnav-content-button-icon ${LOGOUT_ROUTE.icon}`} />
+                    <div className="dropdownnav-content-button-text">
+                        {LOGOUT_ROUTE.text}
+                    </div>
+                </button>
+                {/* <Link
                     to={LOGIN_ROUTE.route}
                     className="button dropdownnav-content-button"
                 >
@@ -71,10 +87,10 @@ function DropdownNav({ id, toggle, handleUntoggle, handleToggle }) {
                     <div className="dropdownnav-content-button-text">
                         {LOGIN_ROUTE.text}
                     </div>
-                </Link>
+                </Link> */}
             </div>
         </nav>
     )
 }
 
-export default withToggleControl(DropdownNav)
+export default withExpandControl(DropdownNav)

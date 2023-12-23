@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+
+//components
+import { showSuccessNotification, showFailNotification } from "../NotificationList/components/Notification/Notification"
 
 //navs
 import { SideNav } from "./SideNav"
@@ -7,9 +10,13 @@ import { DropdownNav } from "./DropdownNav"
 //constants
 import { SCREEN_BREAKPOINTS } from "../../constants/constants"
 
+//contexts
+import { AuthContext } from "../../hooks/contexts/AuthContext"
+
 export default function Navbar() {
 
     const [isMobile, setIsMobile] = useState(false)
+    const { logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
 
@@ -27,10 +34,35 @@ export default function Navbar() {
         }
     }, [])
 
+    const handleLogout = (e) => {
+        e.preventDefault()
+
+        logoutUser()
+            .then(() => {
+                showSuccessNotification({
+                    message: "Logout Successful!"
+                })
+            }).catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+    }
 
     return (
         <>
-            {isMobile ? <DropdownNav id={"dropdownnav"}/> : <SideNav id={"sidenav"}/>}
+            {
+                isMobile ?
+                    <DropdownNav
+                        id={"dropdownnav"}
+                        handleLogout={handleLogout}
+                    />
+                    :
+                    <SideNav
+                        id={"sidenav"}
+                        handleLogout={handleLogout}
+                    />
+            }
         </>
     )
 }

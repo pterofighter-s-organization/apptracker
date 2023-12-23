@@ -6,7 +6,9 @@ import "./CardsSectionLayout.css"
 
 export default function CardsSectionLayout({ children, isPreview }) {
 
+    //how a cards section should be layout
     const [header, filters, list, listComponent] = children
+
     return (
         <div
             className={`cards-section-layout ${isPreview ? "cards-section-layout-preview" : ""}`}

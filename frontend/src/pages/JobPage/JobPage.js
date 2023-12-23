@@ -35,16 +35,16 @@ export default function JobPage() {
     const { job, getApplication } = useContext(JobContext)
 
     useEffect(() => {
-        getApplication(id).then((result) => {
-            if (result.success) {
-                document.title = `${strFormatter(result.data.position)}, ${strFormatter(result.data.company)} - Job Tracker App`
-            }
-        })
+        getApplication(id)
+            .then((result) => {
+                document.title = `${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getApplication, id])
 
-    if (job.loading) {
+    //preventing accidental errors that rarely happens
+    if (job.isFetching || job.isRefresh) {
         return (
             <LoadingDisplay />
         )

@@ -4,7 +4,7 @@ import { useContext, useEffect, useMemo } from "react";
 import { CardList } from "../../components/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 import { CardListHeader } from "../../components/CardListHeader";
 
 //layouts
@@ -29,11 +29,10 @@ function NoteBoard({ status, handleStatus }) {
     const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
-        getNotes().then((result) => {
-            if (result.success) {
+        getNotes()
+            .then(() => {
                 document.title = `Note Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getNotes])
@@ -42,7 +41,7 @@ function NoteBoard({ status, handleStatus }) {
         return filterDataByStatus(status, notes.data)
     }, [notes.data, status])
 
-    if (notes.loading) {
+    if (notes.isFetching) {
         return (
             <LoadingDisplay />
         )
@@ -69,9 +68,7 @@ function NoteBoard({ status, handleStatus }) {
                     quantity={filteredData.length}
                     type={"note"}
                 />
-                <FilterDropdown
-                    id={"notes-status-filter"}
-                    label={"status"}
+                <ToggleButton
                     value={status}
                     options={APP_STATUS_COLORS}
                     handleOption={handleStatus}

@@ -1,61 +1,63 @@
 
 
 //actions
-export const JOBS_CALL_START = "JOBS_CALL_START" //this solves the get application not updating instantly
-export const JOBS_CALL_SUCCESS = "JOBS_CALL_SUCCESS"
-export const JOBS_CALL_FAILURE = "JOBS_CALL_FAILURE"
-export const JOB_UPDATE_SUCCESS = "JOB_UPDATE_SUCCESS"
-export const JOB_SUBMIT_FAILURE = "JOB_SUBMIT_FAILURE"
-export const JOB_DELETE_SUCCESS = "JOB_DELETE_SUCCESS"
+export const JOBS_GET_START = "JOBS_GET_START"
+export const JOBS_GET_SUCCESS = "JOBS_GET_SUCCESS"
+export const JOBS_GET_FAILURE = "JOBS_GET_FAILURE"
+export const JOBS_UPDATE_SUCCESS = "JOBS_UPDATE_SUCCESS"
+export const JOBS_DELETE_SUCCESS = "JOBS_DELETE_SUCCESS"
+export const JOBS_REFRESH_START = "JOBS_REFRESH_START"
+export const JOBS_REFRESH_END = "JOBS_REFRESH_END"
 
 //reducer
 export const jobsReducer = (jobs, action) => {
 
-    switch(action.type){
-        case JOBS_CALL_START:
+    switch (action.type) {
+        case JOBS_GET_START:
             return({
                 ...jobs,
-                loading: true,
-                errors: null
+                errors: null,
+                isFetching: true,
             })
-        case JOBS_CALL_SUCCESS:
-            return({
+        case JOBS_GET_SUCCESS:
+            return ({
                 ...jobs,
                 data: action.payload,
-                loading: false,
-                errors: null
+                errors: null,
+                isFetching: false,
             })
-        case JOBS_CALL_FAILURE:
-            return({
+        case JOBS_GET_FAILURE:
+            return ({
                 ...jobs,
-                loading: false,
-                errors: action.payload
+                errors: action.payload,
+                isFetching: false,
             })
-        case JOB_UPDATE_SUCCESS:
-            return({
+        case JOBS_UPDATE_SUCCESS:
+            return ({
                 ...jobs,
-                data: (jobs.data.map((job) => (
+                data: jobs.data.map((job) => (
                     job.application_id === action.payload.application_id ?
                         action.payload
                         :
                         job
-                ))),
-                loading: false,
-                errors: null
+                )),
             })
-        case JOB_SUBMIT_FAILURE:
-            return({
+        case JOBS_DELETE_SUCCESS:
+            return ({
                 ...jobs,
-                loading: false,
-            })
-        case JOB_DELETE_SUCCESS:
-            return({
-                ...jobs,
-                data: (jobs.data.filter((job) => (
+                data: jobs.data.filter((job) => (
                     job.application_id !== action.payload
-                ))),
-                loading: false,
-                errors: null
+                )),
+            })
+        case JOBS_REFRESH_START:
+            return({
+                ...jobs,
+                isRefresh: true,
+            })
+        case JOBS_REFRESH_END:
+            return ({
+                ...jobs,
+                isRefresh: false,
             })
         default:
             throw new Error("Unhandled action type.")

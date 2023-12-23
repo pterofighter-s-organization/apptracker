@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 //components
 import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../../components/NotificationList/components/Notification/Notification"
 import { EditOptionButton } from "../../../../components/Buttons/OptionButtons/EditOptionButton"
 import { RestoreOptionButton } from "../../../../components/Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../components/Buttons/OptionButtons/DeleteOptionButton"
@@ -28,62 +28,83 @@ export default function JobPageHeader() {
     const handleStage = (e) => {
         e.preventDefault()
         setStage(e.target.value)
+
         updateApplication(job.data.application_id, {
             ...job.data,
             status: e.target.value,
             date_applied: updateDateApplied(e.target.value, job.data.date_applied, false)
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "job stage updated!"
+        }).then(() => {
+            showSuccessNotification({
+                message: "Job stage updated!"
+            })
+        }).catch((errors) => {
+            showFailNotification({
+                errors: errors
             })
         })
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            archived: false
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "job got restored!"
+
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                archived: false
+            },
+            true
+        )
+            .then(() => {
+                showSuccessNotification({
+                    message: "Job got restored!"
+                })
             })
-        })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        deleteApplication(job.data.application_id)
-            .then((result) => {
-                showSubmitNotification({
-                    status: result.success,
-                    errors: result.errors,
-                    message: "job deleted successfully!"
-                })
 
-                if (result.success) {
-                    //later change this to backend triggered.
-                    navigate("/")
-                }
+        deleteApplication(job.data.application_id)
+            .then(() => {
+                showSuccessNotification({
+                    message: "Job deleted successfully!"
+                })
+                navigate("/")
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
             })
     }
 
     const handleArchive = (e) => {
         e.preventDefault()
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            archived: true
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "job got archived!"
+
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                archived: true
+            },
+            true
+        )
+            .then(() => {
+                showSuccessNotification({
+                    message: "Job got archived!"
+                })
             })
-        })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
     }
 
     const handleEdit = (e) => {

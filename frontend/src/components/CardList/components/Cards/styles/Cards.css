@@ -10,3 +10,30 @@
 .tracker-card:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+.tracker-card-link-header-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    color: var(--redirect-button-color);
+    text-decoration: none;
+    max-width: min-content;
+    overflow: hidden;
+}
+
+.tracker-card-link-header-layout:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.tracker-card-link-header-layout>* {
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    overflow: hidden;
+}
+
+.tracker-card-company {
+    min-width: fit-content;
+}

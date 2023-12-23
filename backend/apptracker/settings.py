@@ -58,6 +58,9 @@ MIDDLEWARE = [
 #      'https://localhost:3000'
 # ]
 
+#added this in to make whitelist frontend to take cors
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+
 # ALLOWED_HOSTS=['*']
 
 # CORS_ORIGIN_ALLOW_ALL = True
@@ -110,7 +113,6 @@ DATABASES = {
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

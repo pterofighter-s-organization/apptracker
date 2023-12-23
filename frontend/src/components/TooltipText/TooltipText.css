@@ -1,0 +1,64 @@
+:root {
+    --tooltip-bg-color: #595959;
+}
+
+.tooltip-layout {
+    display: none;
+}
+
+/*when the parent of this gets hover, it will show this*/
+*:hover>.tooltip-layout {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    /*top tooltip*/
+    transform: translate(-50%, -100%);
+    left: 50%;
+    top: 0;
+    min-width: 100%;
+    opacity: 1;
+    align-self: baseline;
+    animation: tooltip-vanish 3s ease-in-out;
+    /*making sure the animation is only one time*/
+    animation-fill-mode: forwards;
+    /*making sure opacity stays at 1 until the 3s gone by. Only 1 step which is the first step the whole 3s*/
+    /* animation-timing-function: steps(1, end); */
+}
+
+/*90% making sure the ease in out timing function don't start fading out earlier than expected.*/
+@keyframes tooltip-vanish {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/*avoid tooltip blocking the buttons above. once it exits the parent, it will dissapear*/
+.tooltip-layout:hover {
+    display: none;
+}
+
+.tooltip-text {
+    background-color: var(--tooltip-bg-color);
+    color: white;
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.75em;
+    border-radius: 0.5rem;
+    text-transform: capitalize;
+}
+
+.tooltip-text-bottom-arrow {
+    border-width: 0.5rem;
+    border-color: var(--tooltip-bg-color) transparent transparent transparent;
+    border-style: solid;
+    width: fit-content;
+    align-self: center;
+}

@@ -6,7 +6,7 @@ import "./NumericInput.css"
 export default function NumericInput({ name, value, handleChange }) {
 
     useEffect(() => {
-
+        //this is to prevent the numeric input from having the scroll wheel cause is causing mistakes from accidental scrolling.
         const handleScrolling = (e) => {
             if (document.activeElement.type === "number" && document.activeElement.classList.contains("numeric-input-field")) {
                 document.activeElement.blur();
@@ -23,7 +23,7 @@ export default function NumericInput({ name, value, handleChange }) {
             type="number"
             name={name}
             className={`numeric-input-field input-field`}
-            placeholder={name.toUpperCase()}
+            placeholder={"###"}
             value={value}
             onChange={handleChange}
         />

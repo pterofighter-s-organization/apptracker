@@ -23,9 +23,10 @@ import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../../../constants/const
 
 //contexts
 import { JobsContext } from "../../../../hooks/contexts/JobsContext";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 
-function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
+function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }) {
 
     const [stage, setStage] = useState(null)
     const { jobs, getApplications } = useContext(JobsContext)
@@ -33,6 +34,10 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
     useEffect(() => {
         getApplications()
     }, [getApplications])
+
+    useEffect(() => {
+        setIsRefresh(jobs.isRefresh)
+    }, [jobs.isRefresh, setIsRefresh])
 
     const handleStage = (e, option) => {
         e.preventDefault()
@@ -47,7 +52,7 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
         )
     }, [status, stage, jobs.data])
 
-    if (jobs.loading) {
+    if (jobs.isFetching) {
         return (
             <LoadingDisplay />
         )
@@ -79,9 +84,7 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
                     isOptionAll={true}
                     handleOption={handleStage}
                 />
-                <FilterDropdown
-                    id={"job-status-filter"}
-                    label={"status"}
+                <ToggleButton
                     value={status}
                     options={APP_STATUS_COLORS}
                     handleOption={handleStatus}

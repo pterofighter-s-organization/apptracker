@@ -4,6 +4,7 @@
     --fs-button-xl: calc(1rem * 1.15);
     --fs-button-xs: calc(1rem);
     --redirect-button-color: #3484F0;
+    --error-color: #cc0033;
 }
 
 h6 {

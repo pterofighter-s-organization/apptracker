@@ -2,7 +2,7 @@
 //css
 import "./TextareaInput.css"
 
-export default function TextareaInput({ height, name, value, placeholder, handleChange }) {
+export default function TextareaInput({ height, name, value, placeholder, handleChange, ...props }) {
 
     return (
         <textarea
@@ -12,6 +12,7 @@ export default function TextareaInput({ height, name, value, placeholder, handle
             onChange={handleChange}
             className="textarea-input-field input-field"
             style={{ height: height || "" }}
+            {...props}
         />
     )
 }

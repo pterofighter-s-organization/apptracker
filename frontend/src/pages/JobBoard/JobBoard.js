@@ -6,6 +6,7 @@ import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { CardListHeader } from "../../components/CardListHeader";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -38,11 +39,10 @@ function JobBoard({ status, handleStatus }) {
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
-        getApplications().then((result) => {
-            if (result.success) {
+        getApplications()
+            .then(() => {
                 document.title = `Job Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getApplications])
@@ -55,10 +55,8 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.loading) {
-        return (
-            <LoadingDisplay />
-        )
+    if (jobs.isFetching) {
+        return <LoadingDisplay />
     }
 
     if (jobs.errors) {
@@ -88,16 +86,14 @@ function JobBoard({ status, handleStatus }) {
                 />
                 <>
                     <FilterDropdown
-                        id={"job-stage-filter"}
+                        id={"job-board-stage-filter"}
                         label={"stage"}
                         value={stage}
                         options={APP_STAGE_COLORS}
                         isOptionAll={true}
                         handleOption={handleStage}
                     />
-                    <FilterDropdown
-                        id={"job-status-filter"}
-                        label={"status"}
+                    <ToggleButton
                         value={status}
                         options={APP_STATUS_COLORS}
                         handleOption={handleStatus}

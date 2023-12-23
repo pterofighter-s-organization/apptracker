@@ -23,7 +23,7 @@ export default function TaskForm({ formData, handleChange, handleCreate }) {
                         handleChange={handleChange}
                     />
                     <InputFooter
-                        footer={"task name"}
+                        footer={"task name *"}
                         errorMessage={formData.name.error}
                     />
                 </InputLayout>
@@ -34,7 +34,7 @@ export default function TaskForm({ formData, handleChange, handleCreate }) {
                         handleChange={handleChange}
                     />
                     <InputFooter
-                        footer={"due date"}
+                        footer={"due date *"}
                         errorMessage={formData.dateDue.error}
                     />
                 </InputLayout>

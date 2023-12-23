@@ -1,49 +1,25 @@
-.task-card-layout{
+.task-card-layout {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     justify-content: space-between;
+    gap: 0.5rem;
     text-transform: capitalize;
     text-decoration: none;
 }
 
-.task-card-job{
-    width: 70%;
-    text-wrap: nowrap;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    flex-grow: 1;
-    margin-bottom: 0rem;
-    font-size: 1.1rem;
-    color: var(--redirect-button-color);
+.task-card-layout>.editable-display-input>.display-text {
+    padding-bottom: 0.5rem;
 }
 
-.task-card-layout:hover .task-card-job{
-    text-decoration: underline;
-    color: blue;
-}
-
-.task-card-title{
-    font-size: 1rem;
-    margin-top: -0.5rem;
-    text-transform: initial;
-    overflow: hidden;
-}
-
-.task-card-title::first-letter{
-    text-transform: uppercase;
-}
-
-.task-card-clock{
+.task-card-clock {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     text-transform: initial;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
-.task-card-datetime{
+.task-card-datetime {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

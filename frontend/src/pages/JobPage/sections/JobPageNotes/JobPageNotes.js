@@ -5,8 +5,9 @@ import { CardList } from "../../../../components/CardList";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
+import { showFailNotification, showSuccessNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
+import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 
 //private-components
 import { NoteForm } from "../../components/NoteForm";
@@ -27,7 +28,6 @@ import { APP_STATUS_COLORS } from "../../../../constants/constants";
 import { NotesContext } from "../../../../hooks/contexts/NotesContext";
 import { JobContext } from "../../../../hooks/contexts/JobContext";
 
-
 function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
 
     const { job } = useContext(JobContext)
@@ -38,27 +38,39 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             error: ""
         }
     })
+    const [isLoading, setIsLoading] = useState(true)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         getJobNotes(job.data.application_id)
-    }, [getJobNotes, job.data.application_id])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getJobNotes, job.data.application_id, setIsLoading])
 
     const filteredData = useMemo(() => {
-        return filterDataByStatus(status, notes.data)
-    }, [status, notes.data])
+        return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)
+    }, [status, notes.data, job.data.archived])
 
     const handleCreate = (e) => {
         e.preventDefault()
+        setIsSubmitting(true)
 
         createJobNote(job.data.application_id, {
+            company: job.data.company,
             position: job.data.position,
-            note: formData.note.value
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "Note created successfully!"
+            note: formData.note.value,
+        }).then(() => {
+            showSuccessNotification({
+                message: "Note created! You can edit anytime by clicking on it."
             })
+        }).catch((errors) => {
+            showFailNotification({
+                errors: errors
+            })
+        }).finally(() => {
+            setIsSubmitting(false)
         })
     }
 
@@ -74,7 +86,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (notes.loading) {
+    if (isLoading) {
         return (
             <LoadingDisplay />
         )
@@ -93,22 +105,40 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
     return (
         <CardsSectionLayout isPreview={isPreview}>
             <CardListHeader
-                isArchived={status === "archived"}
+                isArchived={job.data.archived ? true : status === "archived"}
                 quantity={filteredData.length}
                 type={"note"}
             />
-            <FilterDropdown
-                id={"job-notes-status-filter"}
-                label={"status"}
-                value={status}
-                options={APP_STATUS_COLORS}
-                handleOption={handleStatus}
-            />
-            <NoteForm
-                formData={formData}
-                handleChange={handleChange}
-                handleCreate={handleCreate}
-            />
+            {
+                job.data.archived ?
+                    <DisabledToggleButton
+                        isLeft={false}
+                        value={"archived"}
+                        color={APP_STATUS_COLORS["archived"]}
+                    />
+                    :
+                    <ToggleButton
+                        id={"job-notes-status-toggle"}
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+            }
+            {
+                !job.data.archived ?
+                    isSubmitting ?
+                        <LoadingDisplay
+                            height={"10.75rem"}
+                        />
+                        :
+                        <NoteForm
+                            formData={formData}
+                            handleChange={handleChange}
+                            handleCreate={handleCreate}
+                        />
+                    :
+                    null
+            }
             <CardList
                 type={"notes"}
                 cards={filteredData}

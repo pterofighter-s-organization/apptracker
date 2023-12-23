@@ -4,7 +4,7 @@ import { useContext, useEffect, useMemo } from "react";
 import { CardList } from "../../components/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 import { CardListHeader } from "../../components/CardListHeader";
 
 //layouts
@@ -30,11 +30,10 @@ function TaskBoard({ status, handleStatus }) {
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
-        getTasks().then((result) => {
-            if (result.success) {
+        getTasks()
+            .then(() => {
                 document.title = `Task Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getTasks])
@@ -43,7 +42,7 @@ function TaskBoard({ status, handleStatus }) {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading) {
+    if (tasks.isFetching) {
         return (
             <LoadingDisplay />
         )
@@ -74,9 +73,7 @@ function TaskBoard({ status, handleStatus }) {
                     quantity={filteredData.length}
                     type={"task"}
                 />
-                <FilterDropdown
-                    id={"tasks-status-filter"}
-                    label={"status"}
+                <ToggleButton
                     value={status}
                     options={APP_STATUS_COLORS}
                     handleOption={handleStatus}
