@@ -29,11 +29,10 @@ function NoteBoard({ status, handleStatus }) {
     const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
-        getNotes().then((result) => {
-            if (result.success) {
+        getNotes()
+            .then(() => {
                 document.title = `Note Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getNotes])
@@ -42,7 +41,7 @@ function NoteBoard({ status, handleStatus }) {
         return filterDataByStatus(status, notes.data)
     }, [notes.data, status])
 
-    if (notes.loading) {
+    if (notes.isFetching) {
         return (
             <LoadingDisplay />
         )

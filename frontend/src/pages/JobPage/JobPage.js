@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //components
@@ -33,22 +33,18 @@ export default function JobPage() {
     const isShow = true
 
     const { job, getApplication } = useContext(JobContext)
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        setIsLoading(true)
         getApplication(id)
             .then((result) => {
                 document.title = `${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
-            }).finally(() => {
-                setIsLoading(false)
             })
 
         return () => document.title = "Job Tracker App"
     }, [getApplication, id])
 
     //preventing accidental errors that rarely happens
-    if (isLoading || (!job.data && !job.errors)) {
+    if (job.isFetching || job.isRefresh) {
         return (
             <LoadingDisplay />
         )
@@ -65,7 +61,7 @@ export default function JobPage() {
 
     return (
         <PageLayout>
-            <JobPageHeader setIsLoading={setIsLoading}/>
+            <JobPageHeader />
             <JobPageDetails />
             <JobPageDescription />
             <CardsLayout>

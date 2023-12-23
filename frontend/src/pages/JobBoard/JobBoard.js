@@ -55,7 +55,7 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.loading) {
+    if (jobs.isFetching) {
         return <LoadingDisplay />
     }
 

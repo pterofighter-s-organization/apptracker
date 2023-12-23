@@ -8,7 +8,8 @@ import { findTodayUTCDate } from "../../utils/dateTime"
 
 //actions
 import {
-    JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS, JOB_DELETE_SUCCESS
+    JOB_GET_START, JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS,
+    JOB_DELETE_SUCCESS, JOB_REFRESH_START, JOB_REFRESH_END
 } from "../reducers/jobReducer"
 
 //reducer
@@ -16,6 +17,8 @@ import { jobReducer } from "../reducers/jobReducer"
 
 const initialState = {
     data: null,
+    isFetching: true,
+    isRefresh: false,
     errors: null
 }
 
@@ -31,6 +34,8 @@ export const JobProvider = ({ children }) => {
     const [job, dispatch] = useReducer(jobReducer, initialState)
 
     const getApplication = useCallback(async (application_id) => {
+        dispatch({ type: JOB_GET_START })
+
         try {
             const response = await APIs.applicationAPI.getApplication(application_id)
             dispatch({ type: JOB_GET_SUCCESS, payload: response.data })
@@ -42,7 +47,11 @@ export const JobProvider = ({ children }) => {
         }
     }, [dispatch])
 
-    const updateApplication = async (application_id, application) => {
+    const updateApplication = async (application_id, application, isRefresh) => {
+        if (isRefresh) {
+            dispatch({ type: JOB_REFRESH_START })
+        }
+
         try {
             const response = await APIs.applicationAPI.updateApplication(application_id, {
                 ...application,
@@ -54,10 +63,16 @@ export const JobProvider = ({ children }) => {
         } catch (errors) {
             console.log(errors)
             throw errors
+        } finally {
+            if (isRefresh) {
+                dispatch({ type: JOB_REFRESH_END })
+            }
         }
     }
 
     const createApplication = async (application) => {
+        dispatch({ type: JOB_REFRESH_START })
+
         try {
             const response = await APIs.applicationAPI.createApplication({
                 ...application,
@@ -70,10 +85,14 @@ export const JobProvider = ({ children }) => {
         } catch (errors) {
             console.log(errors)
             throw errors
+        } finally {
+            dispatch({ type: JOB_REFRESH_END })
         }
     }
 
     const deleteApplication = async (application_id) => {
+        dispatch({ type: JOB_REFRESH_START })
+
         try {
             await APIs.applicationAPI.deleteApplication(application_id)
             dispatch({ type: JOB_DELETE_SUCCESS })
@@ -81,6 +100,8 @@ export const JobProvider = ({ children }) => {
         } catch (errors) {
             console.log(errors)
             throw errors
+        } finally {
+            dispatch({ type: JOB_REFRESH_END })
         }
     }
 

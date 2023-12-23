@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 //components
@@ -30,9 +30,7 @@ import "../styles/Cards.css"
 export default function JobCard({ card }) {
 
     const navigate = useNavigate()
-    const { updateApplication, deleteApplication } = useContext(JobsContext)
-    //give a loading screen for any action that can cause a chain reaction from updating.
-    const [isUpdating, setIsUpdating] = useState(false)
+    const { jobs, updateApplication, deleteApplication } = useContext(JobsContext)
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     const handleStage = (e) => {
@@ -58,7 +56,6 @@ export default function JobCard({ card }) {
 
     const handleArchive = (e) => {
         e.preventDefault()
-        setIsUpdating(true)
 
         updateApplication(
             card.application_id,
@@ -77,14 +74,10 @@ export default function JobCard({ card }) {
                     errors: errors
                 })
             })
-            .finally(() => {
-                setIsUpdating(false)
-            })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        setIsUpdating(true)
 
         deleteApplication(card.application_id)
             .then(() => {
@@ -97,14 +90,10 @@ export default function JobCard({ card }) {
                     errors: errors
                 })
             })
-            .finally(() => {
-                setIsUpdating(false)
-            })
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
-        setIsUpdating(true)
 
         updateApplication(
             card.application_id,
@@ -123,9 +112,6 @@ export default function JobCard({ card }) {
                     errors: errors
                 })
             })
-            .finally(() => {
-                setIsUpdating(false)
-            })
     }
 
     const handleEdit = (e) => {
@@ -134,7 +120,7 @@ export default function JobCard({ card }) {
         navigate(`/job-edit/${card.application_id}`)
     }
 
-    if (isUpdating) {
+    if (jobs.isRefresh) {
         return (
             <LoadingDisplay
                 height={"15rem"}

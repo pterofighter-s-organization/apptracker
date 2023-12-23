@@ -36,15 +36,12 @@ export default function JobEditForm() {
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     const [errorMessage, setErrorMessage] = useState("")
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         getApplication(id)
             .then((result) => {
                 setFormData(updateJobFormData(initialState, result))
                 document.title = `Editing ${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
-            }).finally(() => {
-                setIsLoading(false)
             })
 
         return () => document.title = 'Job Tracker App'
@@ -72,19 +69,23 @@ export default function JobEditForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setIsLoading(true)
 
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            ...createJobData(formData)
-        })
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                ...createJobData(formData)
+            },
+            true
+        )
             .then((result) => {
                 navigate("/job/" + result.application_id)
 
                 showSuccessNotification({
                     message: "Successfully edited! Redirected you back to the job page."
                 })
-            }).catch((errors) => {
+            })
+            .catch((errors) => {
                 const apiErrorMessage = handleAPIErrors({
                     errors: errors,
                     message: "Please fix the errors below before submitting!"
@@ -98,12 +99,10 @@ export default function JobEditForm() {
                 showFailNotification({
                     message: apiErrorMessage
                 })
-            }).finally(() => {
-                setIsLoading(false)
             })
     }
 
-    if (isLoading) {
+    if (job.isFetching || job.isRefresh) {
         return (
             <LoadingDisplay />
         )

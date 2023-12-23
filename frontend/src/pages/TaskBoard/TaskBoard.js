@@ -30,11 +30,10 @@ function TaskBoard({ status, handleStatus }) {
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
-        getTasks().then((result) => {
-            if (result.success) {
+        getTasks()
+            .then(() => {
                 document.title = `Task Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getTasks])
@@ -43,7 +42,7 @@ function TaskBoard({ status, handleStatus }) {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading) {
+    if (tasks.isFetching) {
         return (
             <LoadingDisplay />
         )

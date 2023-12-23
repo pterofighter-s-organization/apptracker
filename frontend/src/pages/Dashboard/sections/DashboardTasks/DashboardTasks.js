@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl";
@@ -28,21 +28,16 @@ import { APP_STATUS_COLORS } from "../../../../constants/constants";
 function DashboardTasks({ isRefresh, status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        setIsLoading(true)
         getTasks()
-            .finally(() => {
-                setIsLoading(false)
-            })
-    }, [getTasks, isRefresh, setIsLoading])
+    }, [getTasks, isRefresh])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (isLoading || isRefresh) {
+    if (tasks.isFetching || isRefresh) {
         return (
             <LoadingDisplay />
         )

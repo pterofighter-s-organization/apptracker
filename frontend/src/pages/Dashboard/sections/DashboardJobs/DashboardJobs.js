@@ -29,16 +29,11 @@ import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/Toggl
 function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }) {
 
     const [stage, setStage] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
-        setIsLoading(true)
         getApplications()
-            .finally(() => {
-                setIsLoading(false)
-            })
-    }, [getApplications, setIsLoading])
+    }, [getApplications])
 
     useEffect(() => {
         setIsRefresh(jobs.isRefresh)
@@ -57,7 +52,7 @@ function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }
         )
     }, [status, stage, jobs.data])
 
-    if (isLoading) {
+    if (jobs.isFetching) {
         return (
             <LoadingDisplay />
         )

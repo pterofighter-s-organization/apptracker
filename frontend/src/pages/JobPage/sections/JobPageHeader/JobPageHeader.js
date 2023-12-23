@@ -19,7 +19,7 @@ import { JobContext } from "../../../../hooks/contexts/JobContext"
 import "./JobPageHeader.css"
 import "../styles/JobPageSection.css"
 
-export default function JobPageHeader({ setIsLoading }) {
+export default function JobPageHeader() {
 
     const navigate = useNavigate()
     const { job, updateApplication, deleteApplication } = useContext(JobContext)
@@ -46,12 +46,15 @@ export default function JobPageHeader({ setIsLoading }) {
 
     const handleRestore = (e) => {
         e.preventDefault()
-        setIsLoading(true)
 
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            archived: false
-        })
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                archived: false
+            },
+            true
+        )
             .then(() => {
                 showSuccessNotification({
                     message: "Job got restored!"
@@ -62,14 +65,10 @@ export default function JobPageHeader({ setIsLoading }) {
                     errors: errors
                 })
             })
-            .finally(() => {
-                setIsLoading(false)
-            })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        setIsLoading(true)
 
         deleteApplication(job.data.application_id)
             .then(() => {
@@ -77,23 +76,25 @@ export default function JobPageHeader({ setIsLoading }) {
                     message: "Job deleted successfully!"
                 })
                 navigate("/")
-            }).catch((errors) => {
+            })
+            .catch((errors) => {
                 showFailNotification({
                     errors: errors
                 })
-            }).finally(() => {
-                setIsLoading(false)
             })
     }
 
     const handleArchive = (e) => {
         e.preventDefault()
-        setIsLoading(true)
 
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            archived: true
-        })
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                archived: true
+            },
+            true
+        )
             .then(() => {
                 showSuccessNotification({
                     message: "Job got archived!"
@@ -103,9 +104,6 @@ export default function JobPageHeader({ setIsLoading }) {
                 showFailNotification({
                     errors: errors
                 })
-            })
-            .finally(() => {
-                setIsLoading(false)
             })
     }
 

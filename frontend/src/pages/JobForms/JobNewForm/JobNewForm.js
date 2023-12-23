@@ -32,10 +32,9 @@ export default function JobNewForm() {
     const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
-    const { createApplication } = useContext(JobContext)
+    const { job, createApplication } = useContext(JobContext)
     const [formData, setFormData] = useState(initialState)
     const [errorMessage, setErrorMessage] = useState("")
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
         document.title = "New Job Form - Job Tracker App"
@@ -65,7 +64,6 @@ export default function JobNewForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setIsSubmitting(true)
 
         createApplication(createJobData(formData))
             .then((result) => {
@@ -88,12 +86,10 @@ export default function JobNewForm() {
                 showFailNotification({
                     message: apiErrorMessage
                 })
-            }).finally(() => {
-                setIsSubmitting(false)
             })
     }
 
-    if (isSubmitting) {
+    if (job.isRefresh) {
         return <LoadingDisplay />
     }
 
