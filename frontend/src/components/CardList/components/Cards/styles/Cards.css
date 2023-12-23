@@ -33,3 +33,7 @@
     text-transform: capitalize;
     overflow: hidden;
 }
+
+.tracker-card-company {
+    min-width: fit-content;
+}

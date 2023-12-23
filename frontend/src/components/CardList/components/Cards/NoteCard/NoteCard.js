@@ -142,11 +142,12 @@ export default function NoteCard({ card }) {
                     to={`/job/${card.application}`}
                     className="tracker-card-link-header-layout"
                 >
-                    <div className="note-card-job-title">
-                        {card.position}
+                    <div className="tracker-card-company">
+                        {card.company}
                     </div>
-                    <div className="note-card-number">
-                        #{card.note_id}
+                    /
+                    <div className="tracker-card-job">
+                        {card.position}
                     </div>
                 </Link>
                 <CardButtonsLayout>

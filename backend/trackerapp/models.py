@@ -23,6 +23,7 @@ class Notes(models.Model):
     application = models.ForeignKey(
         "Application", on_delete=models.CASCADE, related_name="notes")
     user_id = models.IntegerField()
+    company = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     note = models.CharField(max_length=2048, blank=True, null=True)
     archived = models.BooleanField(default=False)
@@ -73,7 +74,7 @@ class Application(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        self.notes.all().update(position=self.position)
+        self.notes.all().update(position=self.position, company=self.company)
         self.tasks.all().update(position=self.position, company=self.company)
         # Update archived field of all related notes when the application is saved
         if(self.archived == True):

@@ -13,7 +13,3 @@
 .note-card-layout:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
-.note-card-number {
-    min-width: fit-content;
-}

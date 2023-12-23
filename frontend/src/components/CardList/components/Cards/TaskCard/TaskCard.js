@@ -173,11 +173,11 @@ export default function TaskCard({ card }) {
                     to={"/job/" + card.application}
                     className="tracker-card-link-header-layout"
                 >
-                    <div className="task-card-company">
+                    <div className="tracker-card-company">
                         {card.company}
                     </div>
                     /
-                    <div className="task-card-job">
+                    <div className="tracker-card-job">
                         {card.position}
                     </div>
                 </Link>

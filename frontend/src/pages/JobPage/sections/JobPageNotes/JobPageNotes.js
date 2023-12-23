@@ -58,6 +58,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         setIsSubmitting(true)
 
         createJobNote(job.data.application_id, {
+            company: job.data.company,
             position: job.data.position,
             note: formData.note.value,
         }).then(() => {

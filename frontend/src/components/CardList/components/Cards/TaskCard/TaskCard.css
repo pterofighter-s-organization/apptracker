@@ -7,21 +7,8 @@
     text-decoration: none;
 }
 
-.task-card-layout:hover>*>.tracker-card-link-header-layout {
-    color: blue;
-    text-decoration: underline;
-}
-
-.task-card-company {
-    min-width: fit-content;
-}
-
 .task-card-layout>.editable-display-input>.display-text {
     padding-bottom: 0.5rem;
-}
-
-.task-card-title::first-letter {
-    text-transform: uppercase;
 }
 
 .task-card-clock {
