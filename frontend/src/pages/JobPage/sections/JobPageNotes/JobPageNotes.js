@@ -47,7 +47,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             .finally(() => {
                 setIsLoading(false)
             })
-    }, [getJobNotes, job.data.application_id, job.data.archived, setIsLoading])
+    }, [getJobNotes, job.data.application_id, setIsLoading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)

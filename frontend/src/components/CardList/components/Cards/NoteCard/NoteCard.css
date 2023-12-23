@@ -17,33 +17,3 @@
 .note-card-number {
     min-width: fit-content;
 }
-
-.note-card-content-layout{
-    position: relative;
-    height: 100%;
-}
-
-.note-card-content-layout>*{
-    position: absolute;
-    width: 100%;
-}
-
-.note-card-content-layout> .loading-display-layout{
-    height: inherit !important;
-}
-
-.note-card-content-layout > .textarea-input-field{
-    /* background-color: #FFFFE5; */
-    background-color: inherit;
-    border-radius: 0;
-    padding: 0;
-    outline: none;
-}
-
-.note-text{
-    font-family: "Work Sans", sans-serif;
-    white-space: pre-wrap;
-    /*making sure links won't overflow*/
-    /*wrap the item when its overflowing*/
-    overflow-wrap: anywhere;
-}

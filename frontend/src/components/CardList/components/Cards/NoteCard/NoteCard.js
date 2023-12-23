@@ -3,12 +3,11 @@ import { Link } from "react-router-dom"
 
 //components
 import { showSuccessNotification, showFailNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
-import { TextareaInput } from "../../../../Inputs/TextareaInput"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
-import { TooltipText } from "../../../../TooltipText"
+import { EditableDisplayInput } from "../../../../Inputs/EditableDisplayInput"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
@@ -47,6 +46,7 @@ export default function NoteCard({ card }) {
         noteSaveTimerRef.current = setTimeout(() => {
             setIsEditing(true)
             updatingWarningNotification()
+            const prevValue = value //once error, this will replace the changes
 
             updateJobNote(card.note_id, {
                 ...card,
@@ -59,6 +59,7 @@ export default function NoteCard({ card }) {
                 showFailNotification({
                     errors: errors
                 })
+                setValue(prevValue)
             }).finally(() => {
                 setIsEditing(false)
             })
@@ -127,7 +128,7 @@ export default function NoteCard({ card }) {
             })
     }
 
-    if(isUpdating){
+    if (isUpdating) {
         return (
             <LoadingDisplay
                 height={"15rem"}
@@ -167,43 +168,13 @@ export default function NoteCard({ card }) {
                     }
                 </CardButtonsLayout>
             </CardHeaderLayout>
-            <div className="note-card-content-layout">
-                {
-                    card.archived ?
-                        <>
-                            <TooltipText
-                                text={"Please restore this note to edit."}
-                            />
-                            <pre className="note-text">
-                                {
-                                    value.length > 0 ?
-                                        value
-                                        :
-                                        "This note has no text."
-                                }
-                            </pre>
-                        </>
-                        :
-                        <>
-                            <TooltipText
-                                text={"Click to edit, it will save 1s after you finish editing."}
-                            />
-                            <TextareaInput
-                                height={"100%"}
-                                name={"note"}
-                                value={value}
-                                placeholder={"Edit directly here, saves 3s after your last edit."}
-                                handleChange={handleChange}
-                            />
-                        </>
-                }
-                {
-                    isEditing ?
-                        <LoadingDisplay />
-                        :
-                        null
-                }
-            </div>
+            <EditableDisplayInput
+                isArchived={card.archived}
+                isEditing={isEditing}
+                value={value}
+                height={"100%"}
+                handleChange={handleChange}
+            />
         </div>
     )
 }

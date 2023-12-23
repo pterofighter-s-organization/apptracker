@@ -1,12 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showFailNotification, showSuccessNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showFailNotification, showSuccessNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
 import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
+import { EditableDisplayInput } from "../../../../Inputs/EditableDisplayInput"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
@@ -27,6 +28,51 @@ export default function TaskCard({ card }) {
     const taskCardId = "task-card-" + card.task_id
     const { updateJobTask, deleteJobTask } = useContext(TasksContext)
     const [isUpdating, setIsUpdating] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [value, setValue] = useState(``)
+
+    const titleSaveTimerRef = useRef(null)
+
+    useEffect(() => {
+        setValue(card.title)
+    }, [card.title])
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        setValue(e.target.value)
+
+        if (titleSaveTimerRef.current) {
+            clearTimeout(titleSaveTimerRef.current)
+        }
+
+        titleSaveTimerRef.current = setTimeout(() => {
+            setIsEditing(true)
+            updatingWarningNotification()
+            const prevValue = value //this is to ensure the user gets the latest last val back when they got an error
+
+            updateJobTask(card.task_id, {
+                ...card,
+                title: e.target.value
+            })
+                .then(() => {
+                    showSuccessNotification({
+                        message: "Task successfully edited!"
+                    })
+                })
+                .catch((errors) => {
+                    showFailNotification({
+                        errors: errors,
+                        message: "Task title didn't save! Can't be empty!"
+                    })
+                    setValue(prevValue)
+                })
+                .finally(() => {
+                    setIsEditing(false)
+                })
+
+            clearTimeout(titleSaveTimerRef.current)
+        }, 1000)
+    }
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -89,7 +135,7 @@ export default function TaskCard({ card }) {
             })
             .catch((errors) => {
                 showFailNotification({
-                    errors: errors
+                    errors: errors,
                 })
             })
             .finally(() => {
@@ -114,18 +160,20 @@ export default function TaskCard({ card }) {
     const taskTimerObj = timerFormatter(card.date_due) //decides the color and value it displays
 
     if (isUpdating) {
-        return <LoadingDisplay height={"10.75rem"} />
+        return <LoadingDisplay height={"10rem"} />
     }
 
     return (
-        <Link
-            to={"/job/" + card.application}
+        <div
             key={taskCardId}
             id={taskCardId}
             className="tracker-card task-card-layout"
         >
             <CardHeaderLayout>
-                <div className="tracker-card-link-header-layout">
+                <Link
+                    to={"/job/" + card.application}
+                    className="tracker-card-link-header-layout"
+                >
                     <div className="task-card-company">
                         {card.company}
                     </div>
@@ -133,7 +181,7 @@ export default function TaskCard({ card }) {
                     <div className="task-card-job">
                         {card.position}
                     </div>
-                </div>
+                </Link>
                 <CardButtonsLayout>
                     {
                         card.archived ?
@@ -152,9 +200,13 @@ export default function TaskCard({ card }) {
                     }
                 </CardButtonsLayout>
             </CardHeaderLayout>
-            <div className="task-card-title">
-                {card.title}
-            </div>
+            <EditableDisplayInput
+                isArchived={card.archived}
+                isEditing={isEditing}
+                value={value}
+                handleChange={handleChange}
+                height={"100%"}
+            />
             <div className="task-card-clock">
                 <div
                     className="task-card-datetime"
@@ -170,6 +222,6 @@ export default function TaskCard({ card }) {
                     {taskTimerObj.value}
                 </div>
             </div>
-        </Link>
+        </div>
     )
 }

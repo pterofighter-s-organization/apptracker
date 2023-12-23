@@ -46,7 +46,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
             .finally(() => {
                 setIsLoading(false)
             })
-    }, [getJobTasks, job.data.application_id, job.data.archived, setIsLoading])
+    }, [getJobTasks, job.data.application_id, setIsLoading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, tasks.data)

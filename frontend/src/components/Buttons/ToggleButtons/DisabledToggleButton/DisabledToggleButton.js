@@ -1,4 +1,7 @@
 
+//components
+import { TooltipText } from "../../../TooltipText"
+
 //utils
 import { getContrastTextColor } from "../../../../utils/component"
 
@@ -17,11 +20,11 @@ export default function DisabledToggleButton({ isLeft, value, color }) {
                 backgroundColor: color,
                 color: getContrastTextColor(color)
             }}
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title={"This toggle is disabled."}
             disabled
         >
+            <TooltipText
+                text={"This toggle is disabled."}
+            />
             <div className={`${isLeft ? "toggle-button-label" : "toggle-button-bg"}`}>
                 {value}
             </div>

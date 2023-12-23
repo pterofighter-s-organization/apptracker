@@ -47,20 +47,25 @@ export default function JobPageHeader({ setIsLoading }) {
 
     const handleRestore = (e) => {
         e.preventDefault()
-        updatingWarningNotification()
+        setIsLoading(true)
 
         updateApplication(job.data.application_id, {
             ...job.data,
             archived: false
-        }).then(() => {
-            showSuccessNotification({
-                message: "Job got restored!"
-            })
-        }).catch((errors) => {
-            showFailNotification({
-                errors: errors
-            })
         })
+            .then(() => {
+                showSuccessNotification({
+                    message: "Job got restored!"
+                })
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const handleDelete = (e) => {
@@ -84,20 +89,25 @@ export default function JobPageHeader({ setIsLoading }) {
 
     const handleArchive = (e) => {
         e.preventDefault()
-        updatingWarningNotification()
+        setIsLoading(true)
 
         updateApplication(job.data.application_id, {
             ...job.data,
             archived: true
-        }).then(() => {
-            showSuccessNotification({
-                message: "Job got archived!"
-            })
-        }).catch((errors) => {
-            showFailNotification({
-                errors: errors
-            })
         })
+            .then(() => {
+                showSuccessNotification({
+                    message: "Job got archived!"
+                })
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const handleEdit = (e) => {

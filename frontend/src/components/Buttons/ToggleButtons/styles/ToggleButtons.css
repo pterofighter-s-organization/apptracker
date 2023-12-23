@@ -13,12 +13,10 @@
     align-items: center;
     position: relative;
     border-radius: 2.5rem;
-    /*preventing unexpected overflowing behavior of the toggle button*/
-    overflow: hidden;
 }
 
 .toggle-button-disabled {
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 .toggle-button-circle {
@@ -56,4 +54,6 @@
 .toggle-button-bg {
     opacity: 0;
     max-width: var(--toggle-button-width);
+    /*preventing unexpected overflowing behavior of the toggle button*/
+    overflow: hidden;
 }
