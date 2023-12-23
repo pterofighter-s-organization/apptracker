@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //components
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -24,7 +25,6 @@ import { handleAPIErrors } from "../../../helpers/form";
 //utils
 import { createObjCopy } from "../../../utils/memory";
 import { strFormatter } from "../../../utils/format";
-import { showSubmitNotification } from "../../../components/NotificationList/components/Notification/Notification";
 
 export default function JobEditForm() {
 
@@ -36,14 +36,15 @@ export default function JobEditForm() {
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     const [errorMessage, setErrorMessage] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         getApplication(id)
             .then((result) => {
-                if (result.success) {
-                    setFormData(updateJobFormData(initialState, result.data))
-                    document.title = `Editing ${strFormatter(result.data.position)}, ${strFormatter(result.data.company)} - Job Tracker App`
-                }
+                setFormData(updateJobFormData(initialState, result))
+                document.title = `Editing ${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
+            }).finally(() => {
+                setIsLoading(false)
             })
 
         return () => document.title = 'Job Tracker App'
@@ -51,8 +52,8 @@ export default function JobEditForm() {
 
     const handleChange = (e) => {
         e.preventDefault()
-
         setErrorMessage("")
+
         if (e.target.name === "stage") {
             setFormData({
                 ...formData,
@@ -71,32 +72,38 @@ export default function JobEditForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setIsLoading(true)
 
         updateApplication(job.data.application_id, {
             ...job.data,
             ...createJobData(formData)
         })
             .then((result) => {
-                if (result.success) {
-                    navigate("/job/" + result.data.application_id)
-                } else {
-                    const apiError = handleAPIErrors({
-                        errors: result.errors,
-                        message: "Please fix the errors above before submitting!"
-                    })
-                    setErrorMessage(apiError)
-                    setFormData(updateJobFormErrors(formData, result.errors.response.data))
-                }
-                showSubmitNotification({
-                    status: result.success,
-                    message: "Successfully edited! Redirected you back to the job page.",
-                    errors: result.errors,
-                    errorMessage: "Please fix the errors above before submitting!"
+                navigate("/job/" + result.application_id)
+
+                showSuccessNotification({
+                    message: "Successfully edited! Redirected you back to the job page."
                 })
+            }).catch((errors) => {
+                const apiErrorMessage = handleAPIErrors({
+                    errors: errors,
+                    message: "Please fix the errors below before submitting!"
+                })
+                //checking if there's a response or data, then we update the errors
+                if (errors.response?.data) {
+                    setFormData(updateJobFormErrors(formData, errors.response.data))
+                }
+
+                setErrorMessage(apiErrorMessage)
+                showFailNotification({
+                    message: apiErrorMessage
+                })
+            }).finally(() => {
+                setIsLoading(false)
             })
     }
 
-    if (job.submitLoading) {
+    if (isLoading) {
         return (
             <LoadingDisplay />
         )

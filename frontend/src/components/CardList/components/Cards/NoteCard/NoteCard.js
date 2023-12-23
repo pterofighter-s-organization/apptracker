@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showNotification, showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { TextareaInput } from "../../../../Inputs/TextareaInput"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
@@ -25,7 +25,8 @@ export default function NoteCard({ card }) {
 
     const { updateJobNote, deleteJobNote } = useContext(NotesContext)
     const [value, setValue] = useState(``)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [isUpdating, setIsUpdating] = useState(false)
     //use ref doesn't cause re-render for values that persist (basically values that doesnt need to re-render for updating purposes)
     const noteSaveTimerRef = useRef(null)
 
@@ -44,66 +45,94 @@ export default function NoteCard({ card }) {
         }
 
         noteSaveTimerRef.current = setTimeout(() => {
-            setIsLoading(true)
-            showNotification({
-                status: "WARNING",
-                message: "Wait... Saving text at the moment."
-            })
+            setIsEditing(true)
+            updatingWarningNotification()
+
             updateJobNote(card.note_id, {
                 ...card,
                 note: e.target.value
-            }).then((result) => {
-                showSubmitNotification({
-                    status: result.success,
-                    message: "Note text saved!",
-                    errors: result.errors,
+            }).then(() => {
+                showSuccessNotification({
+                    message: "Note saved successfully!"
                 })
-                setIsLoading(false)
+            }).catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            }).finally(() => {
+                setIsEditing(false)
             })
+
             clearTimeout(noteSaveTimerRef.current)
         }, 1000) //1.5s
     }
 
     const handleArchive = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
+
         updateJobNote(card.note_id, {
             ...card,
             archived: true
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
+        }).then(() => {
+            showSuccessNotification({
                 message: "Note got archived!"
             })
+        }).catch((errors) => {
+            showFailNotification({
+                errors: errors
+            })
+        }).finally(() => {
+            setIsUpdating(false)
         })
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
 
         updateJobNote(card.note_id, {
             ...card,
             archived: false
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
+        }).then(() => {
+            showSuccessNotification({
                 message: "Note got restored!"
             })
+        }).catch((errors) => {
+            showFailNotification({
+                errors: errors
+            })
+        }).finally(() => {
+            setIsUpdating(false)
         })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
 
         deleteJobNote(card.note_id)
-            .then((result) => {
-                showSubmitNotification({
-                    status: result.success,
-                    errors: result.errors,
+            .then(() => {
+                showSuccessNotification({
                     message: "Note deleted successfully!"
                 })
             })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsUpdating(false)
+            })
+    }
+
+    if(isUpdating){
+        return (
+            <LoadingDisplay
+                height={"15rem"}
+            />
+        )
     }
 
     return (
@@ -169,7 +198,7 @@ export default function NoteCard({ card }) {
                         </>
                 }
                 {
-                    isLoading ?
+                    isEditing ?
                         <LoadingDisplay />
                         :
                         null

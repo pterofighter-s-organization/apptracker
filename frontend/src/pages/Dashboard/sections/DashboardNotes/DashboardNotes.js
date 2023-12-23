@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl";
@@ -23,22 +23,25 @@ import { filterDataByStatus } from "../../../../helpers/helpers";
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-function DashboardNotes({ loading, status, handleStatus, isPreview, isShow }) {
+function DashboardNotes({ isRefresh, status, handleStatus, isPreview, isShow }) {
 
+    const [isLoading, setIsLoading] = useState(true)
     const { notes, getNotes } = useContext(NotesContext)
 
     useEffect(() => {
+        setIsLoading(true)
         getNotes()
-    }, [getNotes, loading])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getNotes, isRefresh, setIsLoading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, notes.data)
     }, [status, notes.data])
 
-    if (notes.loading || loading) {
-        return (
-            <LoadingDisplay />
-        )
+    if (isLoading || isRefresh) {
+        return <LoadingDisplay />
     }
 
     if (notes.errors) {

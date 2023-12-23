@@ -1,11 +1,12 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showSubmitNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showFailNotification, showSuccessNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
@@ -25,48 +26,75 @@ export default function TaskCard({ card }) {
 
     const taskCardId = "task-card-" + card.task_id
     const { updateJobTask, deleteJobTask } = useContext(TasksContext)
+    const [isUpdating, setIsUpdating] = useState(false)
 
     const handleDelete = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
+
         //handle delete logic
         deleteJobTask(card.task_id)
             .then((result) => {
-                showSubmitNotification({
-                    status: result.success,
-                    errors: result.errors,
-                    message: "task deleted successfully!"
+                showSuccessNotification({
+                    message: "Task deleted successfully!"
                 })
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsUpdating(false)
             })
     }
 
     const handleRestore = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
+
         //handle restore
         updateJobTask(card.task_id, {
             ...card,
             archived: false
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "task got restored!"
-            })
         })
+            .then(() => {
+                showSuccessNotification({
+                    message: "Task got restored!"
+                })
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsUpdating(false)
+            })
     }
 
     const handleArchive = (e) => {
         e.preventDefault() /*use preventdefault to not activate the link */
+        setIsUpdating(true)
+
         //handle archive
         updateJobTask(card.task_id, {
             ...card,
             archived: true
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
-                message: "task got archived!"
-            })
         })
+            .then(() => {
+                showSuccessNotification({
+                    message: "Task got archived!"
+                })
+            })
+            .catch((errors) => {
+                showFailNotification({
+                    errors: errors
+                })
+            })
+            .finally(() => {
+                setIsUpdating(false)
+            })
     }
 
     const TASK_STAGE_COLORS = {
@@ -84,6 +112,10 @@ export default function TaskCard({ card }) {
     }
 
     const taskTimerObj = timerFormatter(card.date_due) //decides the color and value it displays
+
+    if (isUpdating) {
+        return <LoadingDisplay height={"10.75rem"} />
+    }
 
     return (
         <Link

@@ -13,8 +13,8 @@ import { AuthContext } from "../hooks/contexts/AuthContext";
 
 export default function IsAuthRoutes({ isAuth }) {
 
-    //if it is an authenticated route, then redirect it to login when there's an error, if not redirect to dashboard
-    const [isValidating, setIsValidating] = useState(false)
+    //this must be validating true because the start of this function is validation
+    const [isValidating, setIsValidating] = useState(true)
     const { auth, getUser, logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
@@ -22,7 +22,6 @@ export default function IsAuthRoutes({ isAuth }) {
         let isMounted = true;
 
         const validateSession = async () => {
-            setIsValidating(true)
             try {
                 await getUser()
             } catch (errors) {
@@ -48,8 +47,8 @@ export default function IsAuthRoutes({ isAuth }) {
         }
     }, [getUser, logoutUser])
 
-    //if is null, wait until the response is back from get user
-    if (auth.loading || isValidating) {
+    //loading is for logging out so users can't perform any more actions when it pressed log out.
+    if (auth.isLoggingOff || isValidating) {
         return <LoadingDisplay />
     }
 

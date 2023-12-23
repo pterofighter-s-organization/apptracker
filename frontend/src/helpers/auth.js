@@ -106,7 +106,7 @@ export const customSignupValidations = async (formData) => {
 
         if (isError) {
             reject({
-                // Adjust the structure here to match the expected structure in the catch block
+                // Adjust the structure here to match the expected structure in an api error
                 code: 'ERR_CUSTOM_VALIDATION',
                 data: updatedFormState,
                 message: 'Please fix the errors below!',

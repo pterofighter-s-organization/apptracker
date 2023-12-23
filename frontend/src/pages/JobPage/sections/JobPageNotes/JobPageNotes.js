@@ -5,7 +5,7 @@ import { CardList } from "../../../../components/CardList";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
-import { showSubmitNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { showFailNotification, showSuccessNotification } from "../../../../components/NotificationList/components/Notification/Notification";
 import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 
@@ -38,10 +38,16 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             error: ""
         }
     })
+    const [isLoading, setIsLoading] = useState(true)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         getJobNotes(job.data.application_id)
-    }, [getJobNotes, job.data.application_id])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getJobNotes, job.data.application_id, job.data.archived, setIsLoading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)
@@ -49,16 +55,21 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
 
     const handleCreate = (e) => {
         e.preventDefault()
+        setIsSubmitting(true)
 
         createJobNote(job.data.application_id, {
             position: job.data.position,
             note: formData.note.value,
-        }).then((result) => {
-            showSubmitNotification({
-                status: result.success,
-                errors: result.errors,
+        }).then(() => {
+            showSuccessNotification({
                 message: "Note created! You can edit anytime by clicking on it."
             })
+        }).catch((errors) => {
+            showFailNotification({
+                errors: errors
+            })
+        }).finally(() => {
+            setIsSubmitting(false)
         })
     }
 
@@ -74,7 +85,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (notes.loading) {
+    if (isLoading) {
         return (
             <LoadingDisplay />
         )
@@ -114,11 +125,16 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             }
             {
                 !job.data.archived ?
-                    <NoteForm
-                        formData={formData}
-                        handleChange={handleChange}
-                        handleCreate={handleCreate}
-                    />
+                    isSubmitting ?
+                        <LoadingDisplay
+                            height={"10.75rem"}
+                        />
+                        :
+                        <NoteForm
+                            formData={formData}
+                            handleChange={handleChange}
+                            handleCreate={handleCreate}
+                        />
                     :
                     null
             }

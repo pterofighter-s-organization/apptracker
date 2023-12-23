@@ -6,7 +6,7 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
-import { showNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification"
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
 
@@ -40,9 +40,9 @@ export default function LoginForm() {
             error: ""
         }
     })
-    const [isValidating, setIsValidating] = useState(false)
 
     const { auth, loginUser } = useContext(AuthContext)
+    const [isValidating, setIsValidating] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -52,14 +52,12 @@ export default function LoginForm() {
             username: formData.username.value,
             password: formData.password.value
         }).then((result) => {
-            showNotification({
-                status: "SUCCESS",
+            showSuccessNotification({
                 message: `Welcome ${result.username}! Redirected you to dashboard.`
             })
         }).catch((errors) => {
             setFormData(updateLoginErrors(formData, errors))
-            showNotification({
-                status: "FAIL",
+            showFailNotification({
                 errors: errors
             })
         }).finally(() => {
@@ -79,7 +77,7 @@ export default function LoginForm() {
         })
     }
 
-    //TODO: fix logging in takes a while to load with a loading screen
+    //TODO: add a loading screen
     if (isValidating) {
         return <LoadingDisplay />
     }

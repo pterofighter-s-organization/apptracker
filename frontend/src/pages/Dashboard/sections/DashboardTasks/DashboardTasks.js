@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl";
@@ -25,19 +25,24 @@ import { sortTasksByDateDue } from "../../../../helpers/task";
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-function DashboardTasks({ loading, status, handleStatus, isPreview, isShow }) {
+function DashboardTasks({ isRefresh, status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        setIsLoading(true)
         getTasks()
-    }, [getTasks, loading])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getTasks, isRefresh, setIsLoading])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading || loading) {
+    if (isLoading || isRefresh) {
         return (
             <LoadingDisplay />
         )

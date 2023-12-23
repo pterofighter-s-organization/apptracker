@@ -1,26 +1,27 @@
-.loading-display-layout{
+.loading-display-layout {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: inherit;
-    height: 25rem;
+    backdrop-filter: blur(2px);
 }
 
-.loading-icon{
-    border: 0.5rem solid #e5e4e2;
+.loading-icon {
+    border: 0.5em solid #e5e4e2;
     border-radius: 50%;
-    border-top: 0.5rem solid black;
-    width: 5rem;
-    height: 5rem;
+    border-top: 0.5em solid black;
+    width: 5em;
+    height: 5em;
     animation: spinning 1s linear infinite;
 }
 
-@keyframes spinning{
-    0%{
+@keyframes spinning {
+    0% {
         transform: rotate(0deg);
     }
-    100%{
+
+    100% {
         transform: rotate(360deg);
     }
 }

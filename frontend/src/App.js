@@ -40,8 +40,8 @@ export default function App() {
         <AuthProvider>
           <Routes>
             <Route element={<IsAuthRoutes isAuth={false} />}>
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/signup" element={<SignupForm />} />
+              <Route exact path="/login" element={<LoginForm />} />
+              <Route exact path="/signup" element={<SignupForm />} />
             </Route>
           </Routes>
           <Routes>

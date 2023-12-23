@@ -6,7 +6,7 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
-import { showNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification"
 
 //layouts
 import { InputLayout } from "../../../layouts/InputLayout"
@@ -46,6 +46,7 @@ export default function SignupForm() {
             error: ""
         }
     })
+    //this is for validating everything at once since the backend call for registering isnt fully finish.
     const [isValidating, setIsValidating] = useState(false)
 
     const { auth, loginUser, registerUser } = useContext(AuthContext)
@@ -74,8 +75,7 @@ export default function SignupForm() {
             })
             await loginUser(validatedNewUser)
 
-            showNotification({
-                status: "SUCCESS",
+            showSuccessNotification({
                 message: "User created! Now redirecting to your dashboard."
             })
         } catch (errors) {
@@ -83,10 +83,10 @@ export default function SignupForm() {
             if (errors?.code === 'ERR_CUSTOM_VALIDATION') {
                 setFormData(errors.data)
             } if (errors?.code === 'ERR_BAD_RESPONSE') {
-                showNotification({
-                    status: "FAIL",
+                showFailNotification({
                     message: "Username can't be use, create a new one!"
                 })
+
                 setFormData({
                     ...formData,
                     username: {
@@ -95,8 +95,7 @@ export default function SignupForm() {
                     }
                 })
             } else {
-                showNotification({
-                    status: "FAIL",
+                showFailNotification({
                     errors: errors
                 })
             }

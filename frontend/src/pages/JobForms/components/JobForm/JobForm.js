@@ -29,6 +29,17 @@ export default function JobForm({ isEdit, formData, errorMessage, handleChange, 
             onSubmit={handleSubmit}
         >
             <JobFormHeader isEdit={isEdit} />
+            {
+                errorMessage.length > 0 ?
+                    <div className="job-form-error-section">
+                        <InfoReminder
+                            isError={true}
+                            text={errorMessage}
+                        />
+                    </div>
+                    :
+                    null
+            }
             <JobFormStage
                 formData={formData}
                 handleChange={handleChange}
@@ -41,15 +52,6 @@ export default function JobForm({ isEdit, formData, errorMessage, handleChange, 
                 formData={formData}
                 handleChange={handleChange}
             />
-            {
-                errorMessage.length > 0 ?
-                    <InfoReminder
-                        isError={true}
-                        text={errorMessage}
-                    />
-                    :
-                    null
-            }
             <SubmitButton />
             <ReturnButton
                 handleReturn={handleReturn}

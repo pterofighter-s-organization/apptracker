@@ -26,18 +26,23 @@ import { JobsContext } from "../../../../hooks/contexts/JobsContext";
 import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 
-function DashboardJobs({ loading, setLoading, status, handleStatus, isShow, isPreview }) {
+function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }) {
 
     const [stage, setStage] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
+        setIsLoading(true)
         getApplications()
-    }, [getApplications])
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [getApplications, setIsLoading])
 
     useEffect(() => {
-        setLoading(jobs.submitLoading)
-    }, [jobs.submitLoading, setLoading])
+        setIsRefresh(jobs.isUpdatingArchive)
+    }, [jobs.isUpdatingArchive, setIsRefresh])
 
     const handleStage = (e, option) => {
         e.preventDefault()
@@ -52,7 +57,7 @@ function DashboardJobs({ loading, setLoading, status, handleStatus, isShow, isPr
         )
     }, [status, stage, jobs.data])
 
-    if (jobs.loading || jobs.submitLoading || loading) {
+    if (isLoading) {
         return (
             <LoadingDisplay />
         )

@@ -7,15 +7,16 @@ import APIs from "../../services/api";
 import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
-import { TASKS_CALL_START, TASKS_CALL_FAILURE, TASKS_CALL_SUCCESS, TASK_CREATE_SUCCESS, TASK_UPDATE_SUCCESS, TASK_DELETE_SUCCESS, TASK_SUBMIT_FAILURE, TASK_SUBMIT_START } from "../reducers/tasksReducer";
+import { 
+    TASKS_GET_SUCCESS, TASKS_GET_FAILURE, TASKS_CREATE_SUCCESS,
+    TASKS_UPDATE_SUCCESS, TASKS_DELETE_SUCCESS
+} from "../reducers/tasksReducer";
 
 //reducer
 import { tasksReducer } from "../reducers/tasksReducer";
 
 const initialState = {
     data: [],
-    loading: false,
-    submitLoading: false,
     errors: null
 }
 
@@ -33,48 +34,30 @@ export const TasksProvider = ({ children }) => {
     const [tasks, dispatch] = useReducer(tasksReducer, initialState)
 
     const getTasks = useCallback(async () => {
-        dispatch({ type: TASKS_CALL_START })
-
         try {
             const response = await APIs.taskAPI.getTasks()
-            dispatch({ type: TASKS_CALL_SUCCESS, payload: response.data })
-            return ({
-                success: true,
-                data: response.data
-            })
+            dispatch({ type: TASKS_GET_SUCCESS, payload: response.data })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: TASKS_CALL_FAILURE, payload: errors })
-            return ({
-                success: false,
-                errors: errors
-            })
+            dispatch({ type: TASKS_GET_FAILURE, payload: errors })
+            throw errors
         }
     }, [dispatch])
 
     const getJobTasks = useCallback(async (application_id) => {
-        dispatch({ type: TASKS_CALL_START })
-
         try {
             const response = await APIs.taskAPI.getApplicationTasks(application_id)
-            dispatch({ type: TASKS_CALL_SUCCESS, payload: response.data })
-            return ({
-                success: true,
-                data: response.data
-            })
+            dispatch({ type: TASKS_GET_SUCCESS, payload: response.data })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: TASKS_CALL_FAILURE, payload: errors })
-            return ({
-                success: false,
-                errors: errors
-            })
+            dispatch({ type: TASKS_GET_FAILURE, payload: errors })
+            throw errors
         }
     }, [dispatch])
 
     const createJobTask = async (application_id, task) => {
-        dispatch({ type: TASK_SUBMIT_START })
-
         try {
             const response = await APIs.taskAPI.createTask({
                 ...task,
@@ -82,62 +65,37 @@ export const TasksProvider = ({ children }) => {
                 date_edited: findTodayUTCDate(),
                 date_created: findTodayUTCDate(),
             })
-            dispatch({ type: TASK_CREATE_SUCCESS, payload: response.data })
-            return ({
-                success: true,
-                data: response.data
-            })
+            dispatch({ type: TASKS_CREATE_SUCCESS, payload: response.data })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: TASK_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            throw errors
         }
     }
 
     const updateJobTask = async (task_id, task) => {
-        dispatch({ type: TASK_SUBMIT_START })
-
         try {
             const response = await APIs.taskAPI.updateTask(task_id, {
                 ...task,
                 date_edited: findTodayUTCDate(),
                 last_archived: task.archived
             })
-            dispatch({ type: TASK_UPDATE_SUCCESS, payload: response.data })
-            return ({
-                success: true,
-                data: response.data
-            })
+            dispatch({ type: TASKS_UPDATE_SUCCESS, payload: response.data })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: TASK_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            throw errors
         }
     }
 
     const deleteJobTask = async (task_id) => {
-        dispatch({ type: TASK_SUBMIT_START })
-
         try {
-            const response = await APIs.taskAPI.deleteTask(task_id)
-            dispatch({ type: TASK_DELETE_SUCCESS, payload: task_id })
-            return ({
-                success: true,
-                data: response.data
-            })
+            await APIs.taskAPI.deleteTask(task_id)
+            dispatch({ type: TASKS_DELETE_SUCCESS, payload: task_id })
+            return task_id
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: TASK_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            throw errors
         }
     }
 

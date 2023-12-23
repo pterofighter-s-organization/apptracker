@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 
 //components
-import { showNotification } from "../NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../NotificationList/components/Notification/Notification"
 
 //navs
 import { SideNav } from "./SideNav"
@@ -39,13 +39,11 @@ export default function Navbar() {
 
         logoutUser()
             .then(() => {
-                showNotification({
-                    status: "SUCCESS",
+                showSuccessNotification({
                     message: "Logout Successful!"
                 })
             }).catch((errors) => {
-                showNotification({
-                    status: "FAIL",
+                showFailNotification({
                     errors: errors
                 })
             })

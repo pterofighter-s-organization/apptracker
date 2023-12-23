@@ -6,6 +6,7 @@ import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 import { CardListHeader } from "../../components/CardListHeader";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
@@ -24,7 +25,6 @@ import { filterDataByStatus } from "../../helpers/helpers";
 
 //contexts
 import { JobsContext } from "../../hooks/contexts/JobsContext";
-import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 
 function JobBoard({ status, handleStatus }) {
 
@@ -39,11 +39,10 @@ function JobBoard({ status, handleStatus }) {
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
-        getApplications().then((result) => {
-            if (result.success) {
+        getApplications()
+            .then(() => {
                 document.title = `Job Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getApplications])
@@ -56,10 +55,8 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.loading || jobs.submitLoading) {
-        return (
-            <LoadingDisplay />
-        )
+    if (jobs.loading) {
+        return <LoadingDisplay />
     }
 
     if (jobs.errors) {

@@ -6,8 +6,8 @@ import APIs from "../../services/api";
 
 //actions
 import {
-    AUTH_CALL_START, AUTH_GET_SUCCESS, AUTH_GET_FAILURE, AUTH_REGISTER_SUCCESS, AUTH_REGISTER_FAILURE,
-    AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT_FAILURE, AUTH_LOGOUT_SUCCESS
+    AUTH_VALIDATE_SUCCESS, AUTH_VALIDATE_FAILURE, AUTH_REGISTER_SUCCESS, AUTH_REGISTER_FAILURE,
+    AUTH_LOGOUT_START, AUTH_LOGOUT_FAILURE, AUTH_LOGOUT_SUCCESS
 } from "../reducers/authReducer";
 
 //helpers
@@ -21,7 +21,7 @@ const initialState = {
         username: null,
         isAuth: false
     },
-    loading: false,
+    isLoggingOff: false,
     errors: null
 }
 
@@ -40,11 +40,11 @@ export const AuthProvider = ({ children }) => {
     const getUser = useCallback(async () => {
         try {
             const response = await APIs.userAPI.getUser()
-            dispatch({ type: AUTH_GET_SUCCESS, payload: response.data.username })
+            dispatch({ type: AUTH_VALIDATE_SUCCESS, payload: response.data.username })
             return response.data.username
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_GET_FAILURE, payload: errors })
+            dispatch({ type: AUTH_VALIDATE_FAILURE, payload: errors })
             throw errors
         }
     }, [dispatch])
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
         try {
             //don't delete await or else it couldnt wait for the promise to throw error
             await APIs.userAPI.loginUser(user)
-            dispatch({ type: AUTH_LOGIN_SUCCESS, payload: user.username })
+            dispatch({ type: AUTH_VALIDATE_SUCCESS, payload: user.username })
 
             //reroute to dashboard, here because login is for sure re-routing to dashboard
             navigate("/")
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: AUTH_LOGIN_FAILURE, payload: errors })
+            dispatch({ type: AUTH_VALIDATE_FAILURE, payload: errors })
             throw errors
         }
     }
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logoutUser = useCallback(async () => {
-        dispatch({ type: AUTH_CALL_START })
+        dispatch({ type: AUTH_LOGOUT_START })
 
         const handleLogoutData = () => {
             dispatch({ type: AUTH_LOGOUT_SUCCESS })

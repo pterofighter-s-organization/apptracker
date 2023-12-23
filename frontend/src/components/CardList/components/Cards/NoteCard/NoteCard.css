@@ -29,8 +29,7 @@
 }
 
 .note-card-content-layout> .loading-display-layout{
-    height: inherit;
-    backdrop-filter: blur(1.5px);
+    height: inherit !important;
 }
 
 .note-card-content-layout > .textarea-input-field{

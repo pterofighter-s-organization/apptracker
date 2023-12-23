@@ -17,15 +17,19 @@
     top: 0;
     min-width: 100%;
     align-self: baseline;
-    animation: tooltip-vanish 3s;
+    animation: tooltip-vanish 3s ease-in-out;
     /*making sure the animation is only one time*/
     animation-fill-mode: forwards;
     /*making sure opacity stays at 1 until the 3s gone by. Only 1 step which is the first step the whole 3s*/
-    animation-timing-function: steps(1, end);
+    /* animation-timing-function: steps(1, end); */
 }
 
+/*90% making sure the ease in out timing function don't start fading out earlier than expected.*/
 @keyframes tooltip-vanish {
     0% {
+        opacity: 1;
+    }
+    90%{
         opacity: 1;
     }
     100% {

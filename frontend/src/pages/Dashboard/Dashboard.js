@@ -27,8 +27,8 @@ export default function Dashboard() {
     const isShow = false
 
     const { auth } = useContext(AuthContext)
-    //this is to ensure the elements are updated
-    const [loading, setLoading] = useState(false)
+    //loading is to ensure the notes and tasks elements are updated when application status changed.
+    const [isRefresh, setIsRefresh] = useState(false)
 
     return (
         <PageLayout>
@@ -43,24 +43,21 @@ export default function Dashboard() {
             <CardsLayout>
                 <JobsProvider>
                     <DashboardJobs
-                        loading={loading}
-                        setLoading={setLoading}
+                        setIsRefresh={setIsRefresh}
                         isPreview={isPreview}
                         isShow={isShow}
                     />
                 </JobsProvider>
                 <TasksProvider>
                     <DashboardTasks
-                        loading={loading}
-                        setLoading={setLoading}
+                        isRefresh={isRefresh}
                         isPreview={isPreview}
                         isShow={isShow}
                     />
                 </TasksProvider>
                 <NotesProvider>
                     <DashboardNotes
-                        loading={loading}
-                        setLoading={setLoading}
+                        isRefresh={isRefresh}
                         isPreview={isPreview}
                         isShow={isShow}
                     />

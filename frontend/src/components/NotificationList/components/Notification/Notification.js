@@ -42,18 +42,11 @@ const Notification = ({ status, message }) => {
     return notification
 }
 
-export const showNotification = ({ status, message, errors }) => {
+const showNotification = ({ status, message }) => {
 
     const NotificationComponent = Notification({
         status: status,
-        message: (
-            errors ?
-                handleAPIErrors({
-                    errors: errors
-                })
-                :
-                message
-        )
+        message: message
     })
 
     //get notification container
@@ -66,15 +59,48 @@ export const showNotification = ({ status, message, errors }) => {
     }, 3000) //dismiss after 3s
 }
 
-export const showSubmitNotification = ({ status, message, errors, errorMessage }) => {
+export const showWarningNotification = ({ message }) => {
 
-    return (
-        showNotification({
-            status: status ? "SUCCESS" : "FAIL",
-            message: status ? message : handleAPIErrors({
-                errors: errors,
-                message: errorMessage
-            })
-        })
-    )
+    return showNotification({
+        status: "WARNING",
+        message: message
+    })
+}
+
+export const showFailNotification = ({ message, errors }) => {
+
+    return showNotification({
+        status: "FAIL",
+        message: (
+            errors ?
+                handleAPIErrors({
+                    errors: errors,
+                    message: message
+                })
+                :
+                message
+        )
+    })
+}
+
+export const showNormalNotification = ({ message }) => {
+
+    return showNotification({
+        status: "NORMAL",
+        message: message
+    })
+}
+
+export const showSuccessNotification = ({ message }) => {
+
+    return showNotification({
+        status: "SUCCESS",
+        message: message
+    })
+}
+
+export const updatingWarningNotification = () => {
+    showWarningNotification({
+        message: "Wait... Submitting changes."
+    })
 }
