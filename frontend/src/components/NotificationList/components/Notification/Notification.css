@@ -1,0 +1,49 @@
+.notification {
+    border: 2.5px none gray;
+    border-radius: 0.5rem;
+    padding: 1rem 5vw;
+    font-size: 0.9rem;
+    animation: fadeOut 3s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: max-content;
+    max-width: 95vw;
+    /*ensure it to be on top of everything.*/
+    z-index: 9999;
+    text-transform: capitalize;
+}
+
+.notification-msg{
+    width: inherit;
+}
+
+@media (min-width: 576px) {
+    @-moz-document url-prefix() {
+        .notification-msg {
+            text-align: center;
+        }
+    }
+}
+
+.notification-msg::first-letter {
+    text-transform: uppercase;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}

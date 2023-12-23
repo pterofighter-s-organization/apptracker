@@ -1,0 +1,25 @@
+.minimized-dropdown .filter-dropdown-options {
+    box-shadow: none;
+}
+
+.filter-dropdown-face {
+    font-size: 0.85rem;
+}
+
+.filter-dropdown-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 0.85rem;
+    color: black;
+}
+
+.filter-dropdown-option {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}

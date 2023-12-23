@@ -1,31 +1,28 @@
 /* share between css files inside its tree - this is the root file */
 :root {
+    /* commented out because its too big for smaller screen sizes, no need atm. */
     --fs-button-xl: calc(1rem * 1.15);
     --fs-button-xs: calc(1rem);
+    --redirect-button-color: #3484F0;
+    --error-color: #cc0033;
+}
+
+h6 {
+    font-size: 1em !important;
+}
+
+pre {
+    margin-bottom: 0 !important;
+}
+
+button {
+    border: none;
 }
 
 .App {
-    min-height: 100%;
+    min-height: 100vh;
+    height: auto;
     width: 100%;
-}
-
-@media (min-width: 680px) {
-    .form-button-label{
-        font-size: var(--fs-button-xl);
-    }
-    .add-form-button{
-        height: 300px;
-        width: min(315px);
-    }
-}
-
-/* 680px 768px */
-@media (max-width: 680px) {
-    .form-button-label{
-        font-size: var(--fs-button-xs);
-    }
-    .add-form-button{
-        height: auto;
-        width: 100%;
-    }
+    font-family: "Work Sans", sans-serif;
+    background-color: #f2efef;
 }

@@ -1,0 +1,13 @@
+
+.input-footer{
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: gray;
+    margin-left: 0.15rem;
+}
+
+.input-layout-error .input-footer{
+    color: #cc0033 !important;
+}

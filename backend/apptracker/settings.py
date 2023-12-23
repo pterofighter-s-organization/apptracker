@@ -52,9 +52,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
+# AUTH_USER_MODEL = "trackerapp.Users"
+
 # CORS_ORIGIN_WHITELIST = [
 #      'https://localhost:3000'
 # ]
+
+#added this in to make whitelist frontend to take cors
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
 # ALLOWED_HOSTS=['*']
 
@@ -109,7 +114,6 @@ DATABASES = {
 #     }
 # }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -126,6 +130,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
 

@@ -1,0 +1,18 @@
+.job-form-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.job-form-header>* {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px){
+    .job-form-header{
+        padding: 1.5rem 1rem;
+    }
+}

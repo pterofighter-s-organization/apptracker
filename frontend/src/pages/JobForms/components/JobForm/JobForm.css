@@ -1,0 +1,36 @@
+.job-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: center;
+    /**/
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 1400px;
+}
+
+@media (max-width: 768px) {
+    .job-form {
+        padding: 1rem;
+    }
+}
+
+.job-form .info-reminder {
+    font-size: 0.9rem;
+    margin-left: 0.1rem;
+}
+
+.job-form-error-section{
+    outline: 0.5px solid var(--error-color);
+    border-radius: 1rem;
+    padding: 1.25em 2em;
+}
+
+@media (max-width: 768px){
+    .job-form-error-section{
+        padding: 0 0.5rem;
+        outline: 0;
+    }
+}

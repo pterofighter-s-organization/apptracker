@@ -1,0 +1,59 @@
+:root {
+    --toggle-button-width: 1.5rem;
+    --toggle-button-margin: 1.5rem;
+}
+
+.toggle-button-layout {
+    height: 100%;
+    /*padding to prevent the button squished when parent height is 0*/
+    padding: 0.75rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    border-radius: 2.5rem;
+}
+
+.toggle-button-disabled {
+    opacity: 0.75;
+}
+
+.toggle-button-circle {
+    position: absolute;
+    height: calc(100% - var(--toggle-button-margin));
+    min-height: var(--toggle-button-width);
+    width: var(--toggle-button-width);
+    border-radius: 2.5rem;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.toggle-button-circle-left {
+    left: calc(var(--toggle-button-margin)/2);
+}
+
+.toggle-button-circle-right {
+    right: calc(var(--toggle-button-margin)/2);
+}
+
+.toggle-button-circle-right-transition {
+    right: calc(100% - (var(--toggle-button-width) + (var(--toggle-button-margin)/2)));
+}
+
+.toggle-button-layout:hover>.toggle-button-circle {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-button-label {
+    padding: 0 calc(var(--toggle-button-margin)/2);
+    text-transform: capitalize;
+    font-size: 0.9rem;
+}
+
+.toggle-button-bg {
+    opacity: 0;
+    max-width: var(--toggle-button-width);
+    /*preventing unexpected overflowing behavior of the toggle button*/
+    overflow: hidden;
+}

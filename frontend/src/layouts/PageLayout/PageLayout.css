@@ -1,0 +1,37 @@
+
+@media (min-width: 1200px) {
+    .page-layout{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .page-content{
+        width: 100%;
+        overflow: hidden; /* this fix the right side content from overflowing outside the expected x*/
+        padding: 2rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 1200px){
+    .page-layout{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-content{
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+}
+
+@media(max-width: 768px){
+    .page-content{
+        gap: 1rem;
+    }
+}
+
+.page-content{
+    display: flex;
+    flex-direction: column;
+}

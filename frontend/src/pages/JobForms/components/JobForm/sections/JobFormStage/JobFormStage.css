@@ -1,0 +1,25 @@
+
+.job-form-stage-dates{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.job-form-stage-dates-fields{
+    display: flex;
+}
+
+@media (min-width: 576px){
+    .job-form-stage-dates-fields{
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: last baseline;
+    }
+}
+
+@media (max-width: 576px){
+    .job-form-stage-dates-fields{
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

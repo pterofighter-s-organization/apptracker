@@ -4,6 +4,10 @@ then 'python -m manage runserver' to run the server
 
 This is localhost:8000
 
+# Migration commands
+python -m manage makemigrations trackerapp
+python -m manage migrate
+
 # API endpoints
 
 ## Applications

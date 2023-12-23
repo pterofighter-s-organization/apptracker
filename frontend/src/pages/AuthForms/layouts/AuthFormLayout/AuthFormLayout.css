@@ -1,0 +1,49 @@
+
+
+.auth-form-layout{
+    background-color: #fff;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.auth-form-layout-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+}
+
+.auth-form-layout-fields{
+    padding-top: 1.25vw;
+    padding-bottom: 1.25vw;
+}
+
+@media (min-width: 768px){
+    .auth-form-layout{
+        padding: 2rem 4vw;
+    }
+
+    .auth-form-layout-header{
+        width: 45%;
+    }
+
+    .auth-form-layout-fields{
+        width: 55%;
+    }
+}
+
+@media (max-width: 768px){
+    .auth-form-layout{
+        padding: 2rem 1rem;
+    }
+
+    .auth-form-layout-header{
+        width: 100%;
+    }
+
+    .auth-form-layout-fields{
+        width: 100%;
+    }
+}
