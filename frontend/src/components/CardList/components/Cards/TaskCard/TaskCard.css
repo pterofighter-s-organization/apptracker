@@ -1,4 +1,4 @@
-.task-card-layout{
+.task-card-layout {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -7,27 +7,24 @@
     text-decoration: none;
 }
 
-.task-card-layout:hover> * > .tracker-card-link-header-layout{
+.task-card-layout:hover>*>.tracker-card-link-header-layout {
     color: blue;
     text-decoration: underline;
 }
 
-.task-card-company{
+.task-card-company {
     min-width: fit-content;
 }
 
-/* .task-card-layout > .editable-display-input > .textarea-input-field{
-    font-size: 1rem;
-    margin-top: -1rem;
-    text-transform: initial;
-    overflow: hidden;
-} */
+.task-card-layout>.editable-display-input>.display-text {
+    padding-bottom: 0.5rem;
+}
 
-.task-card-title::first-letter{
+.task-card-title::first-letter {
     text-transform: uppercase;
 }
 
-.task-card-clock{
+.task-card-clock {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -35,7 +32,7 @@
     font-size: 0.9rem;
 }
 
-.task-card-datetime{
+.task-card-datetime {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

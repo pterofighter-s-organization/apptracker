@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 //components
 import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
-import { showSuccessNotification, showFailNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { EditOptionButton } from "../../../../Buttons/OptionButtons/EditOptionButton"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
@@ -37,7 +37,6 @@ export default function JobCard({ card }) {
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     const handleStage = (e) => {
         e.preventDefault()
-        updatingWarningNotification()
 
         //deleting stage state so usestates from filtered out cards doesn't get accidentally displayed.
         updateApplication(card.application_id, {

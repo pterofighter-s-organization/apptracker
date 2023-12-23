@@ -98,9 +98,3 @@ export const showSuccessNotification = ({ message }) => {
         message: message
     })
 }
-
-export const updatingWarningNotification = () => {
-    showWarningNotification({
-        message: "Wait... Submitting changes."
-    })
-}

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showFailNotification, showSuccessNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showFailNotification, showSuccessNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
@@ -47,7 +47,6 @@ export default function TaskCard({ card }) {
 
         titleSaveTimerRef.current = setTimeout(() => {
             setIsEditing(true)
-            updatingWarningNotification()
             const prevValue = value //this is to ensure the user gets the latest last val back when they got an error
 
             updateJobTask(card.task_id, {

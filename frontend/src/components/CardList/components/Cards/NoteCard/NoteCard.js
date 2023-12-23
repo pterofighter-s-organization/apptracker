@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showSuccessNotification, showFailNotification, updatingWarningNotification } from "../../../../NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../../NotificationList/components/Notification/Notification"
 import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
@@ -45,7 +45,6 @@ export default function NoteCard({ card }) {
 
         noteSaveTimerRef.current = setTimeout(() => {
             setIsEditing(true)
-            updatingWarningNotification()
             const prevValue = value //once error, this will replace the changes
 
             updateJobNote(card.note_id, {

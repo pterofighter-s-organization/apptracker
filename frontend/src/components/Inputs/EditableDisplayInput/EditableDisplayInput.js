@@ -24,26 +24,26 @@ export default function EditableDisplayInput({ isArchived, isEditing, height, va
                 isArchived ?
                     <>
                         <TooltipText
-                            text={"Please restore this note to edit."}
+                            text={"Please restore to edit."}
                         />
                         <pre className="display-text">
                             {
                                 value.length > 0 ?
                                     value
                                     :
-                                    "Please restore this note to edit."
+                                    "Please restore to edit."
                             }
                         </pre>
                     </>
                     :
                     <>
                         <TooltipText
-                            text={"Click to edit, it will save 1s after you finish editing."}
+                            text={"Click to edit."}
                         />
                         <TextareaInput
                             height={height}
                             value={value}
-                            placeholder={"Click to edit, it will save 1s after you finish editing."}
+                            placeholder={"Click to edit."}
                             {...props}
                         />
                     </>
