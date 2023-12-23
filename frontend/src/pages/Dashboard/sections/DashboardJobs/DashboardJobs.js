@@ -41,8 +41,8 @@ function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }
     }, [getApplications, setIsLoading])
 
     useEffect(() => {
-        setIsRefresh(jobs.isUpdatingArchive)
-    }, [jobs.isUpdatingArchive, setIsRefresh])
+        setIsRefresh(jobs.isRefresh)
+    }, [jobs.isRefresh, setIsRefresh])
 
     const handleStage = (e, option) => {
         e.preventDefault()

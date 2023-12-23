@@ -11,8 +11,8 @@ import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
 import {
-    JOBS_GET_SUCCESS, JOBS_GET_FAILURE, JOBS_UPDATE_SUCCESS, JOBS_DELETE_SUCCESS,
-    JOBS_UPDATE_ARCHIVE_START, JOBS_UPDATE_ARCHIVE_END
+    JOBS_GET_SUCCESS, JOBS_GET_FAILURE, JOBS_UPDATE_SUCCESS,
+    JOBS_DELETE_SUCCESS, JOBS_REFRESH_START, JOBS_REFRESH_END
 } from "../reducers/jobsReducer";
 
 //reducers
@@ -20,7 +20,7 @@ import { jobsReducer } from "../reducers/jobsReducer";
 
 const initialState = {
     data: [],
-    isUpdatingArchive: false,
+    isRefresh: false,
     errors: null
 }
 
@@ -28,7 +28,7 @@ export const JobsContext = createContext({
     jobs: initialState,
     // dispatch: () => { },
     getApplications: async () => { },
-    updateApplication: async (application_id, application, isUpdatingArchive) => { },
+    updateApplication: async (application_id, application, isRefresh) => { },
     deleteApplication: async (application_id) => { }
 })
 
@@ -48,9 +48,9 @@ export const JobsProvider = ({ children }) => {
         }
     }, [dispatch])
 
-    const updateApplication = async (application_id, application, isUpdatingArchive) => {
-        if (isUpdatingArchive) {
-            dispatch({ type: JOBS_UPDATE_ARCHIVE_START })
+    const updateApplication = async (application_id, application, isRefresh) => {
+        if (isRefresh) {
+            dispatch({ type: JOBS_REFRESH_START })
         }
 
         try {
@@ -66,13 +66,14 @@ export const JobsProvider = ({ children }) => {
             console.log(errors)
             throw errors
         } finally {
-            if (isUpdatingArchive) {
-                dispatch({ type: JOBS_UPDATE_ARCHIVE_END })
+            if (isRefresh) {
+                dispatch({ type: JOBS_REFRESH_END })
             }
         }
     }
 
     const deleteApplication = async (application_id) => {
+        dispatch({ type: JOBS_REFRESH_START })
         try {
             await APIs.applicationAPI.deleteApplication(application_id)
             dispatch({ type: JOBS_DELETE_SUCCESS, payload: application_id })
@@ -80,6 +81,8 @@ export const JobsProvider = ({ children }) => {
         } catch (errors) {
             console.log(errors)
             throw errors
+        } finally {
+            dispatch({ type: JOBS_REFRESH_END })
         }
     }
 

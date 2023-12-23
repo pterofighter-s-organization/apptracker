@@ -5,8 +5,8 @@ export const JOBS_GET_SUCCESS = "JOBS_GET_SUCCESS"
 export const JOBS_GET_FAILURE = "JOBS_GET_FAILURE"
 export const JOBS_UPDATE_SUCCESS = "JOBS_UPDATE_SUCCESS"
 export const JOBS_DELETE_SUCCESS = "JOBS_DELETE_SUCCESS"
-export const JOBS_UPDATE_ARCHIVE_START = "JOBS_UPDATE_ARCHIVE_START"
-export const JOBS_UPDATE_ARCHIVE_END = "JOBS_UPDATE_ARCHIVE_END"
+export const JOBS_REFRESH_START = "JOBS_REFRESH_START"
+export const JOBS_REFRESH_END = "JOBS_REFRESH_END"
 
 //reducer
 export const jobsReducer = (jobs, action) => {
@@ -40,15 +40,15 @@ export const jobsReducer = (jobs, action) => {
                     job.application_id !== action.payload
                 )),
             })
-        case JOBS_UPDATE_ARCHIVE_START:
+        case JOBS_REFRESH_START:
             return({
                 ...jobs,
-                isUpdatingArchive: true,
+                isRefresh: true,
             })
-        case JOBS_UPDATE_ARCHIVE_END:
+        case JOBS_REFRESH_END:
             return ({
                 ...jobs,
-                isUpdatingArchive: false
+                isRefresh: false,
             })
         default:
             throw new Error("Unhandled action type.")

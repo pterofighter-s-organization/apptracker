@@ -48,7 +48,7 @@ export default function JobPage() {
     }, [getApplication, id])
 
     //preventing accidental errors that rarely happens
-    if (isLoading) {
+    if (isLoading || (!job.data && !job.errors)) {
         return (
             <LoadingDisplay />
         )
