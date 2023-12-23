@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -27,21 +27,26 @@ import { APP_STATUS_COLORS } from "../../constants/constants";
 function NoteBoard({ status, handleStatus }) {
 
     const { notes, getNotes } = useContext(NotesContext)
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
+        setIsFetching(true)
         getNotes()
             .then(() => {
                 document.title = `Note Board - Job Tracker App`
             })
+            .finally(() => {
+                setIsFetching(false)
+            })
 
         return () => document.title = "Job Tracker App"
-    }, [getNotes])
+    }, [getNotes, setIsFetching])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, notes.data)
     }, [notes.data, status])
 
-    if (notes.isFetching) {
+    if (isFetching) {
         return (
             <LoadingDisplay />
         )

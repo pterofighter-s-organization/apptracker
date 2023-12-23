@@ -8,8 +8,7 @@ import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
 import {
-    TASKS_GET_START, TASKS_GET_SUCCESS, TASKS_GET_FAILURE,
-    TASKS_CREATE_SUCCESS, TASKS_UPDATE_SUCCESS, TASKS_DELETE_SUCCESS
+    TASKS_GET_SUCCESS, TASKS_GET_FAILURE, TASKS_CREATE_SUCCESS, TASKS_UPDATE_SUCCESS, TASKS_DELETE_SUCCESS
 } from "../reducers/tasksReducer";
 
 //reducer
@@ -17,7 +16,6 @@ import { tasksReducer } from "../reducers/tasksReducer";
 
 const initialState = {
     data: [],
-    isFetching: true,
     errors: null
 }
 
@@ -35,8 +33,6 @@ export const TasksProvider = ({ children }) => {
     const [tasks, dispatch] = useReducer(tasksReducer, initialState)
 
     const getTasks = useCallback(async () => {
-        dispatch({ type: TASKS_GET_START })
-
         try {
             const response = await APIs.taskAPI.getTasks()
             dispatch({ type: TASKS_GET_SUCCESS, payload: response.data })
@@ -49,8 +45,6 @@ export const TasksProvider = ({ children }) => {
     }, [dispatch])
 
     const getJobTasks = useCallback(async (application_id) => {
-        dispatch({ type: TASKS_GET_START })
-
         try {
             const response = await APIs.taskAPI.getApplicationTasks(application_id)
             dispatch({ type: TASKS_GET_SUCCESS, payload: response.data })

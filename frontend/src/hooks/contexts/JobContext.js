@@ -8,7 +8,7 @@ import { findTodayUTCDate } from "../../utils/dateTime"
 
 //actions
 import {
-    JOB_GET_START, JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS,
+    JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS,
     JOB_DELETE_SUCCESS, JOB_REFRESH_START, JOB_REFRESH_END
 } from "../reducers/jobReducer"
 
@@ -17,7 +17,6 @@ import { jobReducer } from "../reducers/jobReducer"
 
 const initialState = {
     data: null,
-    isFetching: true,
     isRefresh: false,
     errors: null
 }
@@ -34,8 +33,6 @@ export const JobProvider = ({ children }) => {
     const [job, dispatch] = useReducer(jobReducer, initialState)
 
     const getApplication = useCallback(async (application_id) => {
-        dispatch({ type: JOB_GET_START })
-
         try {
             const response = await APIs.applicationAPI.getApplication(application_id)
             dispatch({ type: JOB_GET_SUCCESS, payload: response.data })

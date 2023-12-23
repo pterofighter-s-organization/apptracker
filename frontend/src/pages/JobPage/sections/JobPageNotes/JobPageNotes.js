@@ -38,16 +38,16 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
             error: ""
         }
     })
-    const [isLoading, setIsLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
-        setIsLoading(true)
+        setIsFetching(true)
         getJobNotes(job.data.application_id)
             .finally(() => {
-                setIsLoading(false)
+                setIsFetching(false)
             })
-    }, [getJobNotes, job.data.application_id, setIsLoading])
+    }, [getJobNotes, job.data.application_id, setIsFetching])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, notes.data)
@@ -86,7 +86,7 @@ function JobPageNotes({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (isLoading) {
+    if (isFetching) {
         return (
             <LoadingDisplay />
         )

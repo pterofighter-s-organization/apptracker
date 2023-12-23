@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 //components
 import { CardList } from "../../components/CardList";
@@ -28,21 +28,26 @@ import { TasksContext } from "../../hooks/contexts/TasksContext";
 function TaskBoard({ status, handleStatus }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
+        setIsFetching(true)
         getTasks()
             .then(() => {
                 document.title = `Task Board - Job Tracker App`
             })
+            .finally(() => {
+                setIsFetching(false)
+            })
 
         return () => document.title = "Job Tracker App"
-    }, [getTasks])
+    }, [getTasks, setIsFetching])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.isFetching) {
+    if (isFetching) {
         return (
             <LoadingDisplay />
         )

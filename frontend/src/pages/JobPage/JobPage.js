@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 //components
@@ -33,18 +33,23 @@ export default function JobPage() {
     const isShow = true
 
     const { job, getApplication } = useContext(JobContext)
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
+        setIsFetching(true)
         getApplication(id)
             .then((result) => {
                 document.title = `${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
             })
+            .finally(() => {
+                setIsFetching(false)
+            })
 
         return () => document.title = "Job Tracker App"
-    }, [getApplication, id])
+    }, [getApplication, id, setIsFetching])
 
     //preventing accidental errors that rarely happens
-    if (job.isFetching || job.isRefresh) {
+    if (isFetching || job.isRefresh) {
         return (
             <LoadingDisplay />
         )

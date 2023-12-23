@@ -38,15 +38,15 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
     const { job } = useContext(JobContext)
     const [formData, setFormData] = useState(createObjCopy(TASK_FORM_DATA))
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
-        setIsLoading(true)
+        setIsFetching(true)
         getJobTasks(job.data.application_id)
             .finally(() => {
-                setIsLoading(false)
+                setIsFetching(false)
             })
-    }, [getJobTasks, job.data.application_id, setIsLoading])
+    }, [getJobTasks, job.data.application_id, setIsFetching])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(job.data.archived ? "archived" : status, tasks.data)
@@ -92,7 +92,7 @@ function JobPageTasks({ status, handleStatus, isPreview, isShow }) {
         })
     }
 
-    if (isLoading) {
+    if (isFetching) {
         return (
             <LoadingDisplay />
         )
