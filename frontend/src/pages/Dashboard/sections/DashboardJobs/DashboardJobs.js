@@ -3,8 +3,8 @@ import { useContext, useEffect, useMemo, useState } from "react";
 //components
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
-import { CardList } from "../../../../components/Cards/CardList";
+import { CardListHeader } from "../../../../components/CardListHeader";
+import { CardList } from "../../../../components/CardList";
 import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
 
@@ -13,8 +13,7 @@ import { filterDataByStatus } from "../../../../helpers/helpers";
 import { filterJobsByStage } from "../../../../helpers/application";
 
 //layouts
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //hocs
 import { withStatusControl } from "../../../../hocs/withStatusControl";
@@ -24,9 +23,10 @@ import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../../../constants/const
 
 //contexts
 import { JobsContext } from "../../../../hooks/contexts/JobsContext";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 
-function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
+function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }) {
 
     const [stage, setStage] = useState(null)
     const { jobs, getApplications } = useContext(JobsContext)
@@ -34,6 +34,10 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
     useEffect(() => {
         getApplications()
     }, [getApplications])
+
+    useEffect(() => {
+        setIsRefresh(jobs.isRefresh)
+    }, [jobs.isRefresh, setIsRefresh])
 
     const handleStage = (e, option) => {
         e.preventDefault()
@@ -48,7 +52,7 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
         )
     }, [status, stage, jobs.data])
 
-    if (jobs.loading) {
+    if (jobs.isFetching) {
         return (
             <LoadingDisplay />
         )
@@ -66,31 +70,26 @@ function DashboardJobs({ status, handleStatus, isShow, isPreview }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-file-post-fill" />}
-                    quantity={filteredData.length}
-                    type={"job"}
-                    header={status === "archived" ? "to delete" : "to track"}
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"job"}
+            />
+            <>
+                <FilterDropdown
+                    id={"job-stage-filter"}
+                    label={"stage"}
+                    value={stage}
+                    options={APP_STAGE_COLORS}
+                    isOptionAll={true}
+                    handleOption={handleStage}
                 />
-                <>
-                    <FilterDropdown
-                        id={"job-stage-filter"}
-                        label={"stage"}
-                        value={stage}
-                        options={APP_STAGE_COLORS}
-                        isOptionAll={true}
-                        handleOption={handleStage}
-                    />
-                    <FilterDropdown
-                        id={"job-status-filter"}
-                        label={"status"}
-                        value={status}
-                        options={APP_STATUS_COLORS}
-                        handleOption={handleStatus}
-                    />
-                </>
-            </CardsHeaderLayout>
+                <ToggleButton
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
+            </>
             <CardList
                 type={"jobs"}
                 cards={filteredData}

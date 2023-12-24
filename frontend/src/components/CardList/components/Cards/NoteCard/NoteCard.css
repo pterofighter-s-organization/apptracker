@@ -1,0 +1,15 @@
+.note-card-layout {
+    background-color: #fff;
+    height: 15rem;
+    /* min-height: 15rem; */
+    border-radius: 1rem;
+    padding: 1rem;
+    /**/
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.note-card-layout:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -4,19 +4,18 @@ import { useContext, useEffect, useMemo } from "react";
 import { withStatusControl } from "../../../../hocs/withStatusControl";
 
 //layouts
-import { CardsSectionLayout } from "../../../../layouts/CardsLayout/CardsSectionLayout";
-import { CardsHeaderLayout } from "../../../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../../../layouts/CardsSectionLayout";
 
 //contexts
 import { TasksContext } from "../../../../hooks/contexts/TasksContext";
 
 //components
-import { CardsHeader } from "../../../../components/Cards/CardsHeader";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
-import { FilterDropdown } from "../../../../components/Dropdowns/FilterDropdown";
-import { CardList } from "../../../../components/Cards/CardList";
+import { CardListHeader } from "../../../../components/CardListHeader";
+import { CardList } from "../../../../components/CardList";
 import { RedirectButton } from "../../../../components/Buttons/RedirectButton";
+import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 
 //helpers
 import { filterDataByStatus } from "../../../../helpers/helpers";
@@ -26,19 +25,19 @@ import { sortTasksByDateDue } from "../../../../helpers/task";
 //constants
 import { APP_STATUS_COLORS } from "../../../../constants/constants";
 
-function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
+function DashboardTasks({ isRefresh, status, handleStatus, isPreview, isShow }) {
 
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
         getTasks()
-    }, [getTasks])
+    }, [getTasks, isRefresh])
 
     const filteredData = useMemo(() => {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading) {
+    if (tasks.isFetching || isRefresh) {
         return (
             <LoadingDisplay />
         )
@@ -56,21 +55,16 @@ function DashboardTasks({ status, handleStatus, isPreview, isShow }) {
 
     return (
         <CardsSectionLayout isPreview={isPreview}>
-            <CardsHeaderLayout>
-                <CardsHeader
-                    icon={<i className="bi bi-view-list" />}
-                    quantity={filteredData.length}
-                    type={"task"}
-                    header={status === "archived" ? "to remove" : "to finish"}
-                />
-                <FilterDropdown
-                    id={"tasks-status-filter"}
-                    label={"status"}
-                    value={status}
-                    options={APP_STATUS_COLORS}
-                    handleOption={handleStatus}
-                />
-            </CardsHeaderLayout>
+            <CardListHeader
+                isArchived={status === "archived"}
+                quantity={filteredData.length}
+                type={"task"}
+            />
+            <ToggleButton
+                value={status}
+                options={APP_STATUS_COLORS}
+                handleOption={handleStatus}
+            />
             <CardList
                 type={"tasks"}
                 cards={

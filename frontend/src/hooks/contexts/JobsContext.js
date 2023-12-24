@@ -10,14 +10,18 @@ import { sortDataByLatest } from "../../helpers/helpers";
 import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
-import { JOBS_CALL_SUCCESS, JOBS_CALL_FAILURE, JOB_UPDATE_SUCCESS, JOBS_CALL_START, JOB_SUBMIT_FAILURE, JOB_DELETE_SUCCESS } from "../reducers/jobsReducer";
+import {
+    JOBS_GET_START, JOBS_GET_SUCCESS, JOBS_GET_FAILURE, JOBS_UPDATE_SUCCESS,
+    JOBS_DELETE_SUCCESS, JOBS_REFRESH_START, JOBS_REFRESH_END
+} from "../reducers/jobsReducer";
 
 //reducers
 import { jobsReducer } from "../reducers/jobsReducer";
 
 const initialState = {
     data: [],
-    loading: false, //only false for data that is []. or else null data will crash the app.
+    isRefresh: false,
+    isFetching: true,
     errors: null
 }
 
@@ -25,7 +29,7 @@ export const JobsContext = createContext({
     jobs: initialState,
     // dispatch: () => { },
     getApplications: async () => { },
-    updateApplication: async (application_id, application) => { },
+    updateApplication: async (application_id, application, isRefresh) => { },
     deleteApplication: async (application_id) => { }
 })
 
@@ -33,64 +37,55 @@ export const JobsProvider = ({ children }) => {
     const [jobs, dispatch] = useReducer(jobsReducer, initialState)
 
     const getApplications = useCallback(async () => {
-        dispatch({ type: JOBS_CALL_START }) //this solves the get application not updating instantly
-
+        dispatch({ type: JOBS_GET_START })
+        
         try {
             const response = await APIs.applicationAPI.getApplications()
             //sorting here so when user interacts with the card doesnt automatically get repositioned.
-            dispatch({ type: JOBS_CALL_SUCCESS, payload: sortDataByLatest(response.data) })
-            return ({
-                success: true,
-                data: response.data
-            })
+            dispatch({ type: JOBS_GET_SUCCESS, payload: sortDataByLatest(response.data) })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: JOBS_CALL_FAILURE, payload: errors })
-            return ({
-                success: false,
-                errors: errors
-            })
+            dispatch({ type: JOBS_GET_FAILURE, payload: errors })
+            throw errors
         }
     }, [dispatch])
 
-    const updateApplication = async (application_id, application) => {
+    const updateApplication = async (application_id, application, isRefresh) => {
+        if (isRefresh) {
+            dispatch({ type: JOBS_REFRESH_START })
+        }
+
         try {
             const response = await APIs.applicationAPI.updateApplication(application_id, {
                 ...application,
                 application_id: application_id,
                 date_edited: findTodayUTCDate(),
             })
-            dispatch({ type: JOB_UPDATE_SUCCESS, payload: response.data })
-            return ({
-                success: true,
-                data: response.data
-            })
+
+            dispatch({ type: JOBS_UPDATE_SUCCESS, payload: response.data })
+            return response.data
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: JOB_SUBMIT_FAILURE })
-            return ({
-                success: false,
-                errors: errors
-            })
+            throw errors
+        } finally {
+            if (isRefresh) {
+                dispatch({ type: JOBS_REFRESH_END })
+            }
         }
     }
 
     const deleteApplication = async (application_id) => {
+        dispatch({ type: JOBS_REFRESH_START })
         try {
-            const response = await APIs.applicationAPI.deleteApplication(application_id)
-            console.log(response)
-            dispatch({ type: JOB_DELETE_SUCCESS, payload: application_id })
-            return ({
-                success: true,
-                data: response.data
-            })
+            await APIs.applicationAPI.deleteApplication(application_id)
+            dispatch({ type: JOBS_DELETE_SUCCESS, payload: application_id })
+            return application_id
         } catch (errors) {
             console.log(errors)
-            dispatch({ type: JOB_SUBMIT_FAILURE })
-            return({
-                success: false,
-                errors: errors
-            })
+            throw errors
+        } finally {
+            dispatch({ type: JOBS_REFRESH_END })
         }
     }
 
@@ -100,7 +95,7 @@ export const JobsProvider = ({ children }) => {
                 jobs,
                 getApplications,
                 updateApplication,
-                deleteApplication
+                deleteApplication,
             }}
         >
             {children}

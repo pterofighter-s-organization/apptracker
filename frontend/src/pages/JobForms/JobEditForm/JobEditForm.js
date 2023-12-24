@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //components
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -28,20 +29,19 @@ import { strFormatter } from "../../../utils/format";
 export default function JobEditForm() {
 
     const { id } = useParams()
-    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
     //making sure this doesn't re-render and make useeffect render again. fixed*
+    const initialState = useMemo(() => (createObjCopy(JOB_FORM_DATA)), [])
 
     const navigate = useNavigate()
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         getApplication(id)
             .then((result) => {
-                if (result.success) {
-                    setFormData(updateJobFormData(initialState, result.data))
-                    document.title = `Editing ${strFormatter(result.data.position)}, ${strFormatter(result.data.company)} - Job Tracker App`
-                }
+                setFormData(updateJobFormData(initialState, result))
+                document.title = `Editing ${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
             })
 
         return () => document.title = 'Job Tracker App'
@@ -49,6 +49,7 @@ export default function JobEditForm() {
 
     const handleChange = (e) => {
         e.preventDefault()
+        setErrorMessage("")
 
         if (e.target.name === "stage") {
             setFormData({
@@ -69,27 +70,39 @@ export default function JobEditForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        updateApplication(job.data.application_id, {
-            ...job.data,
-            ...createJobData(formData)
-        })
+        updateApplication(
+            job.data.application_id,
+            {
+                ...job.data,
+                ...createJobData(formData)
+            },
+            true
+        )
             .then((result) => {
-                if (result.success) {
-                    alert("Successfully edited! Now redirecting you to the job page.")
-                    navigate("/job/" + result.data.application_id)
-                } else {
-                    alert(
-                        handleAPIErrors({
-                            errors: result.errors,
-                            message: "Please fix the errors before submitting!"
-                        })
-                    )
-                    setFormData(updateJobFormErrors(formData, result.errors.response.data))
+                navigate("/job/" + result.application_id)
+
+                showSuccessNotification({
+                    message: "Successfully edited! Redirected you back to the job page."
+                })
+            })
+            .catch((errors) => {
+                const apiErrorMessage = handleAPIErrors({
+                    errors: errors,
+                    message: "Please fix the errors below before submitting!"
+                })
+                //checking if there's a response or data, then we update the errors
+                if (errors.response?.data) {
+                    setFormData(updateJobFormErrors(formData, errors.response.data))
                 }
+
+                setErrorMessage(apiErrorMessage)
+                showFailNotification({
+                    message: apiErrorMessage
+                })
             })
     }
 
-    if (job.loading) {
+    if (job.isFetching || job.isRefresh) {
         return (
             <LoadingDisplay />
         )
@@ -109,6 +122,7 @@ export default function JobEditForm() {
             <JobForm
                 isEdit={true}
                 formData={formData}
+                errorMessage={errorMessage}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
             />

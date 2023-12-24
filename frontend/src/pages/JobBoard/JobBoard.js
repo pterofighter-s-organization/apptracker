@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState, useMemo } from "react";
 
 //components
-import { CardList } from "../../components/Cards/CardList";
+import { CardList } from "../../components/CardList";
 import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { CardsHeader } from "../../components/Cards/CardsHeader";
+import { CardListHeader } from "../../components/CardListHeader";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
-import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
-import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";
+import { CardsSectionLayout } from "../../layouts/CardsSectionLayout";
 
 //constants
 import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../constants/constants";
@@ -39,11 +39,10 @@ function JobBoard({ status, handleStatus }) {
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
-        getApplications().then((result) => {
-            if (result.success) {
+        getApplications()
+            .then(() => {
                 document.title = `Job Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getApplications])
@@ -56,10 +55,8 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.loading) {
-        return (
-            <LoadingDisplay />
-        )
+    if (jobs.isFetching) {
+        return <LoadingDisplay />
     }
 
     if (jobs.errors) {
@@ -82,31 +79,26 @@ function JobBoard({ status, handleStatus }) {
                 </h6>
             </HeaderLayout>
             <CardsSectionLayout>
-                <CardsHeaderLayout>
-                    <CardsHeader
-                        icon={<i className="bi bi-file-post-fill" />}
-                        quantity={filteredData.length}
-                        type={"job"}
-                        header={status === "archived" ? "to delete" : "to track"}
+                <CardListHeader
+                    isArchived={status === "archived"}
+                    quantity={filteredData.length}
+                    type={"job"}
+                />
+                <>
+                    <FilterDropdown
+                        id={"job-board-stage-filter"}
+                        label={"stage"}
+                        value={stage}
+                        options={APP_STAGE_COLORS}
+                        isOptionAll={true}
+                        handleOption={handleStage}
                     />
-                    <>
-                        <FilterDropdown
-                            id={"job-stage-filter"}
-                            label={"stage"}
-                            value={stage}
-                            options={APP_STAGE_COLORS}
-                            isOptionAll={true}
-                            handleOption={handleStage}
-                        />
-                        <FilterDropdown
-                            id={"job-status-filter"}
-                            label={"status"}
-                            value={status}
-                            options={APP_STATUS_COLORS}
-                            handleOption={handleStatus}
-                        />
-                    </>
-                </CardsHeaderLayout>
+                    <ToggleButton
+                        value={status}
+                        options={APP_STATUS_COLORS}
+                        handleOption={handleStatus}
+                    />
+                </>
                 <CardList
                     type={"jobs"}
                     cards={filteredData}

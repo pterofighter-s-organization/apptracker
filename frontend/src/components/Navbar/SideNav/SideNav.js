@@ -1,28 +1,26 @@
 import { Link } from "react-router-dom"
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //constants
-import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGIN_ROUTE, HOME_ROUTE } from "../constants"
-
-//utils
-import { strFormatter } from "../../../utils/format"
+import { NEW_APP_ROUTE, FEATURES_ROUTES, LOGOUT_ROUTE, HOME_ROUTE } from "../constants"
 
 //css
 import "./SideNav.css"
+import { TooltipText } from "../../TooltipText"
 
-function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
+function SideNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
 
     return (
         <nav
-            className={`sidenav ${toggle ? "expanded-sidenav" : "minimized-sidenav"}`}
+            className={`sidenav ${isExpand ? "expanded-sidenav" : "minimized-sidenav"}`}
             id={id}
         >
             <Link
                 to={HOME_ROUTE.route}
                 className="sidenav-logo"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Back to home`}
             >
@@ -35,57 +33,89 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                     job tracker
                 </div>
             </Link>
-            <hr className="sidenav-divider"/>
+            <hr className="sidenav-divider" />
             <button
                 type="button"
                 className="button sidenav-button"
-                // style={{ borderStyle: "none" }} declared in app.css
-                onClick={toggle ? handleUntoggle : handleToggle}
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title={toggle ? `Minimize sidebar`: `Expand sidebar`}
+                onClick={isExpand ? handleMinimize : handleExpand}
             >
-                <i className="sidenav-button-icon sidenav-expand-icon bi bi-list-ul"></i>
-                <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
-                <div className="sidenav-button-text">
-                    close menu
-                </div>
+                {
+                    isExpand ?
+                        <>
+                            <i className="sidenav-button-icon sidenav-minimize-icon bi bi-x-circle-fill" />
+                            <div className="sidenav-button-text">
+                                close menu
+                            </div>
+                        </>
+                        :
+                        <>
+                            {/* make sure icon is on top of tooltip so it doesnt overtake the order */}
+                            <i className="sidenav-button-icon sidenav-expand-icon bi bi-list"></i>
+                            <TooltipText
+                                text={"Expand sidebar"}
+                            />
+                        </>
+                }
             </button>
             <Link
                 to={NEW_APP_ROUTE.route}
                 className="button sidenav-button"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title={`Track a new job`}
             >
                 <i className={`sidenav-button-icon ${NEW_APP_ROUTE.icon}`}></i>
-                <div className="sidenav-button-text">
-                    {NEW_APP_ROUTE.text}
-                </div>
+                {
+                    isExpand ?
+                        <div className="sidenav-button-text">
+                            {NEW_APP_ROUTE.text}
+                        </div>
+                        :
+                        <TooltipText
+                            text={"New trackings"}
+                        />
+                }
             </Link>
-            <hr className="sidenav-divider"/>
+            <hr className="sidenav-divider" />
             {
                 FEATURES_ROUTES.map((route) => (
                     <Link
                         to={route.route}
                         className="button sidenav-button"
                         key={route.text}
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title={`${strFormatter(route.text)}`}
                     >
                         <i className={`sidenav-button-icon ${route.icon}`} />
-                        <div className="sidenav-button-text">
-                            {route.text}
-                        </div>
+                        {
+                            isExpand ?
+                                <div className="sidenav-button-text">
+                                    {route.text}
+                                </div>
+                                :
+                                <TooltipText
+                                    text={route.text}
+                                />
+                        }
                     </Link>
                 ))
             }
-            <hr className="sidenav-divider"/>
-            <Link
+            <hr className="sidenav-divider" />
+            <button
+                onClick={handleLogout}
+                className="button sidenav-button"
+            >
+                <i className={`sidenav-button-icon ${LOGOUT_ROUTE.icon}`} />
+                {
+                    isExpand ?
+                        <div className="sidenav-button-text">
+                            {LOGOUT_ROUTE.text}
+                        </div>
+                        :
+                        <TooltipText
+                            text={"Logout"}
+                        />
+                }
+            </button>
+            {/* <Link
                 to={LOGIN_ROUTE.route}
                 className="button sidenav-button"
-                data-bs-toggle="tooltip"
+                data-bs-isExpand="tooltip"
                 data-bs-placement="top"
                 title={`Signing in`}
             >
@@ -93,9 +123,9 @@ function SideNav({ id, toggle, handleUntoggle, handleToggle }) {
                 <div className="sidenav-button-text">
                     {LOGIN_ROUTE.text}
                 </div>
-            </Link>
+            </Link> */}
         </nav>
     )
 }
 
-export default withToggleControl(SideNav)
+export default withExpandControl(SideNav)

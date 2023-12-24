@@ -19,7 +19,7 @@ export const FEATURES_ROUTES = [
     {
         text: "all tasks",
         route: "/all-tasks",
-        icon: "bi bi-view-list"
+        icon: "bi bi-card-checklist"
     },
     {
         text: "all notes",
@@ -36,5 +36,11 @@ export const FEATURES_ROUTES = [
 export const LOGIN_ROUTE = {
     text: "sign in",
     route: "/login",
+    icon: "bi bi-door-open-fill"
+}
+
+export const LOGOUT_ROUTE = {
+    text: "sign out",
+    route: "/logout",
     icon: "bi bi-door-open-fill"
 }

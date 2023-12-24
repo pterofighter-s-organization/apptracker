@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 //components
 import { SubmitButton } from "../../../../components/Buttons/SubmitButton"
 import { ReturnButton } from "../ReturnButton"
+import { InfoReminder } from "../../../../components/InfoReminder"
 
 //sections
 import { JobFormHeader } from "./sections/JobFormHeader"
@@ -13,7 +14,7 @@ import { JobFormDescription } from "./sections/JobFormDescription"
 //css
 import "./JobForm.css"
 
-export default function JobForm({ isEdit, formData, handleChange, handleSubmit }) {
+export default function JobForm({ isEdit, formData, errorMessage, handleChange, handleSubmit }) {
 
     const navigate = useNavigate()
 
@@ -28,6 +29,17 @@ export default function JobForm({ isEdit, formData, handleChange, handleSubmit }
             onSubmit={handleSubmit}
         >
             <JobFormHeader isEdit={isEdit} />
+            {
+                errorMessage.length > 0 ?
+                    <div className="job-form-error-section">
+                        <InfoReminder
+                            isError={true}
+                            text={errorMessage}
+                        />
+                    </div>
+                    :
+                    null
+            }
             <JobFormStage
                 formData={formData}
                 handleChange={handleChange}

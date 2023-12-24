@@ -7,7 +7,7 @@ import { APP_STAGE_COLORS } from "../../../constants/constants"
 import { getContrastTextColor } from "../../../utils/component"
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl"
+import { withExpandControl } from "../../../hocs/withExpandControl"
 
 //css
 import "../styles/Dropdown.css"
@@ -15,19 +15,19 @@ import "./StageDropdown.css"
 
 function StageDropdown({
     id, stage, handleStage, name,
-    toggle, handleToggle, handleUntoggle
+    isExpand, handleExpand, handleMinimize
 }) {
     //name is for input use
 
     return (
-        <div className={`dropdown ${toggle ? "" : "minimized-dropdown"}`}>
+        <div className={`dropdown ${isExpand ? "" : "minimized-dropdown"}`}>
             <button
                 id={id}
                 type="button"
                 className="dropdown-face stage-dropdown-face"
-                onClick={toggle ? handleUntoggle : handleToggle}
+                onClick={isExpand ? handleMinimize : handleExpand}
                 style={{
-                    backgroundColor: `${APP_STAGE_COLORS[stage]}`,
+                    backgroundColor: `${APP_STAGE_COLORS[stage || "interested"]}`,
                     color: getContrastTextColor(APP_STAGE_COLORS[stage])
                 }}
             >
@@ -35,7 +35,7 @@ function StageDropdown({
                     {stage}
                 </div>
                 <i
-                    className={`dropdown-face-icon ${toggle ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
+                    className={`dropdown-face-icon ${isExpand ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
                 ></i>
             </button>
             <div className="dropdown-options stage-dropdown-options">
@@ -43,12 +43,13 @@ function StageDropdown({
                     Object.entries(APP_STAGE_COLORS).map(([option, color]) => (
                         option !== stage ?
                             <button
+                                key={option}
                                 type="button"
                                 name={name ? name : option}
                                 value={option}
                                 onClick={(e) => {
                                     handleStage(e)
-                                    handleUntoggle(e)
+                                    handleMinimize(e)
                                 }}
                                 className="dropdown-option stage-dropdown-option"
                                 style={{ color: color }}
@@ -64,4 +65,4 @@ function StageDropdown({
     )
 }
 
-export default withToggleControl(StageDropdown)
+export default withExpandControl(StageDropdown)

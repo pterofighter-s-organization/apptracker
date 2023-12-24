@@ -1,17 +1,16 @@
 import { useContext, useEffect, useMemo } from "react";
 
 //components
-import { CardList } from "../../components/Cards/CardList";
+import { CardList } from "../../components/CardList";
 import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
-import { FilterDropdown } from "../../components/Dropdowns/FilterDropdown";
-import { CardsHeader } from "../../components/Cards/CardsHeader";
+import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButton";
+import { CardListHeader } from "../../components/CardListHeader";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { PageLayout } from "../../layouts/PageLayout";
-import { CardsHeaderLayout } from "../../layouts/CardsLayout/CardsHeaderLayout";
-import { CardsSectionLayout } from "../../layouts/CardsLayout/CardsSectionLayout";
+import { CardsSectionLayout } from "../../layouts/CardsSectionLayout";
 
 //hocs
 import { withStatusControl } from "../../hocs/withStatusControl";
@@ -31,11 +30,10 @@ function TaskBoard({ status, handleStatus }) {
     const { tasks, getTasks } = useContext(TasksContext)
 
     useEffect(() => {
-        getTasks().then((result) => {
-            if (result.success) {
+        getTasks()
+            .then(() => {
                 document.title = `Task Board - Job Tracker App`
-            }
-        })
+            })
 
         return () => document.title = "Job Tracker App"
     }, [getTasks])
@@ -44,7 +42,7 @@ function TaskBoard({ status, handleStatus }) {
         return filterDataByStatus(status, tasks.data)
     }, [tasks.data, status])
 
-    if (tasks.loading) {
+    if (tasks.isFetching) {
         return (
             <LoadingDisplay />
         )
@@ -70,21 +68,16 @@ function TaskBoard({ status, handleStatus }) {
                 </h6>
             </HeaderLayout>
             <CardsSectionLayout>
-                <CardsHeaderLayout>
-                    <CardsHeader
-                        icon={<i className="bi bi-view-list" />}
-                        quantity={filteredData.length}
-                        type={"task"}
-                        header={status === "archived" ? "to remove" : "to finish"}
-                    />
-                    <FilterDropdown
-                        id={"tasks-status-filter"}
-                        label={"status"}
-                        value={status}
-                        options={APP_STATUS_COLORS}
-                        handleOption={handleStatus}
-                    />
-                </CardsHeaderLayout>
+                <CardListHeader
+                    isArchived={status === "archived"}
+                    quantity={filteredData.length}
+                    type={"task"}
+                />
+                <ToggleButton
+                    value={status}
+                    options={APP_STATUS_COLORS}
+                    handleOption={handleStatus}
+                />
                 <CardList
                     type={"tasks"}
                     cards={

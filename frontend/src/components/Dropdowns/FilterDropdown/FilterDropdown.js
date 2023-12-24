@@ -1,7 +1,7 @@
 
 
 //hocs
-import { withToggleControl } from "../../../hocs/withToggleControl";
+import { withExpandControl } from "../../../hocs/withExpandControl";
 
 //utils
 import { getContrastTextColor } from "../../../utils/component";
@@ -34,16 +34,16 @@ const FilterDropdownOption = ({ option, handleOption, color }) => {
 function FilterDropdown({
     id, label, value,
     options, isOptionAll, handleOption,
-    toggle, handleToggle, handleUntoggle
+    isExpand, handleExpand, handleMinimize
 }) {
 
     return (
-        <div className={`dropdown ${toggle ? "" : "minimized-dropdown"}`}>
+        <div className={`dropdown ${isExpand ? "" : "minimized-dropdown"}`}>
             <button
                 id={id}
                 type="button"
                 className="dropdown-face filter-dropdown-face"
-                onClick={toggle ? handleUntoggle : handleToggle}
+                onClick={isExpand ? handleMinimize : handleExpand}
                 style={{
                     backgroundColor: `${value ? options[value] : "black"}`,
                     color: `${getContrastTextColor(value ? options[value] : "black")}`
@@ -56,7 +56,7 @@ function FilterDropdown({
                     {value ? value : "all"}
                 </span>
                 <i
-                    className={`dropdown-face-icon ${toggle ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
+                    className={`dropdown-face-icon ${isExpand ? "" : "dropdown-face-icon-rotated"} bi bi-caret-up-fill`}
                 ></i>
             </button>
             <div className="dropdown-options filter-dropdown-options">
@@ -75,6 +75,7 @@ function FilterDropdown({
                     Object.entries(options).map(([option, color]) => (
                         option !== value ?
                             <FilterDropdownOption
+                                key={option}
                                 option={option}
                                 handleOption={handleOption}
                                 color={color}
@@ -88,4 +89,4 @@ function FilterDropdown({
     )
 }
 
-export default withToggleControl(FilterDropdown)
+export default withExpandControl(FilterDropdown)
