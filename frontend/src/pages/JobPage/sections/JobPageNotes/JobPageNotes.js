@@ -5,7 +5,7 @@ import { CardList } from "../../../../components/CardList";
 import { CardListHeader } from "../../../../components/CardListHeader";
 import { ErrorDisplay } from "../../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../../components/Displays/LoadingDisplay";
-import { showFailNotification, showSuccessNotification } from "../../../../components/NotificationList/components/Notification/Notification";
+import { showFailNotification, showSuccessNotification } from "../../../../components/NotificationList/Notification/Notification";
 import { ToggleButton } from "../../../../components/Buttons/ToggleButtons/ToggleButton";
 import { DisabledToggleButton } from "../../../../components/Buttons/ToggleButtons/DisabledToggleButton";
 

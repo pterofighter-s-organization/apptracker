@@ -48,8 +48,7 @@ export default function JobPage() {
         return () => document.title = "Job Tracker App"
     }, [getApplication, id, setIsFetching])
 
-    //preventing accidental errors that rarely happens
-    if (isFetching || job.isRefresh) {
+    if (isFetching || job.isRefresh || job.isUpdate) {
         return (
             <LoadingDisplay />
         )

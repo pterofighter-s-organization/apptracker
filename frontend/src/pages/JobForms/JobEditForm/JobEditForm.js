@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //components
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
-import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification";
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/Notification/Notification";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -81,7 +81,6 @@ export default function JobEditForm() {
                 ...job.data,
                 ...createJobData(formData)
             },
-            true
         )
             .then((result) => {
                 navigate("/job/" + result.application_id)
@@ -107,7 +106,7 @@ export default function JobEditForm() {
             })
     }
 
-    if (isFetching || job.isRefresh) {
+    if (isFetching || job.isUpdate) {
         return (
             <LoadingDisplay />
         )

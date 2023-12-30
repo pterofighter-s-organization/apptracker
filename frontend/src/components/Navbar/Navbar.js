@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 
 //components
-import { showSuccessNotification, showFailNotification } from "../NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../NotificationList/Notification/Notification"
 
 //navs
 import { SideNav } from "./SideNav"

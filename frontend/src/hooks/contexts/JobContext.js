@@ -8,8 +8,8 @@ import { findTodayUTCDate } from "../../utils/dateTime"
 
 //actions
 import {
-    JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS,
-    JOB_DELETE_SUCCESS, JOB_REFRESH_START, JOB_REFRESH_END
+    JOB_GET_SUCCESS, JOB_GET_FAILURE, JOB_SUBMIT_SUCCESS, JOB_DELETE_SUCCESS, JOB_REFRESH_START, 
+    JOB_REFRESH_END, JOB_UPDATE_START, JOB_UPDATE_END
 } from "../reducers/jobReducer"
 
 //reducer
@@ -18,6 +18,7 @@ import { jobReducer } from "../reducers/jobReducer"
 const initialState = {
     data: null,
     isRefresh: false,
+    isUpdate: false,
     errors: null
 }
 
@@ -47,6 +48,8 @@ export const JobProvider = ({ children }) => {
     const updateApplication = async (application_id, application, isRefresh) => {
         if (isRefresh) {
             dispatch({ type: JOB_REFRESH_START })
+        } else {
+            dispatch({ type: JOB_UPDATE_START })
         }
 
         try {
@@ -63,12 +66,14 @@ export const JobProvider = ({ children }) => {
         } finally {
             if (isRefresh) {
                 dispatch({ type: JOB_REFRESH_END })
+            } else {
+                dispatch({ type: JOB_UPDATE_END })
             }
         }
     }
 
     const createApplication = async (application) => {
-        dispatch({ type: JOB_REFRESH_START })
+        dispatch({ type: JOB_UPDATE_START })
 
         try {
             const response = await APIs.applicationAPI.createApplication({
@@ -83,7 +88,7 @@ export const JobProvider = ({ children }) => {
             console.log(errors)
             throw errors
         } finally {
-            dispatch({ type: JOB_REFRESH_END })
+            dispatch({ type: JOB_UPDATE_END })
         }
     }
 
