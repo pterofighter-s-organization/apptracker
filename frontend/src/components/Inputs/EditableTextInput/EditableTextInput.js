@@ -5,9 +5,9 @@ import { LoadingDisplay } from "../../Displays/LoadingDisplay"
 import { TextareaInput } from "../TextareaInput"
 
 //css
-import "./EditableDisplayInput.css"
+import "./EditableTextInput.css"
 
-export default function EditableDisplayInput({ isArchived, isEditing, height, value, ...props }) {
+export default function EditableTextInput({ isArchived, isEditing, height, value, ...props }) {
 
     if(isEditing){
         return <LoadingDisplay height={height}/>
@@ -15,7 +15,7 @@ export default function EditableDisplayInput({ isArchived, isEditing, height, va
 
     return (
         <div
-            className="editable-display-input"
+            className="editable-text-input"
             style={{
                 height: height || ""
             }}

@@ -2,19 +2,19 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showSuccessNotification, showFailNotification } from "../../../../NotificationList/components/Notification/Notification"
-import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
-import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
-import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
-import { EditableDisplayInput } from "../../../../Inputs/EditableDisplayInput"
+import { showSuccessNotification, showFailNotification } from "../../../NotificationList/Notification/Notification"
+import { RestoreOptionButton } from "../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { LoadingDisplay } from "../../../Displays/LoadingDisplay"
+import { EditableTextInput } from "../../../Inputs/EditableTextInput"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 //contexts
-import { NotesContext } from "../../../../../hooks/contexts/NotesContext"
+import { NotesContext } from "../../../../hooks/contexts/NotesContext"
 
 //css
 import "../styles/Cards.css"
@@ -168,7 +168,7 @@ export default function NoteCard({ card }) {
                     }
                 </CardButtonsLayout>
             </CardHeaderLayout>
-            <EditableDisplayInput
+            <EditableTextInput
                 isArchived={card.archived}
                 isEditing={isEditing}
                 value={value}

@@ -6,7 +6,7 @@ import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { SubmitButton } from "../../../components/Buttons/SubmitButton"
 import { InputHeader } from "../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../components/Inputs/InputFooter"
-import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/Notification/Notification"
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay"
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay"
 

@@ -1,11 +1,12 @@
 
 //utils
 import { compareDates, convertLocaltoUTC } from '../utils/dateTime'
+import { strFormatter } from '../utils/format'
 
 export const createTaskData = (formState) => {
 
     return ({
-        title: formState.name.value || '',
+        title: strFormatter(formState.name.value) || '',
         date_due: formState.dateDue.value?.length > 0 ? convertLocaltoUTC(formState.dateDue.value) : null
     })
 }

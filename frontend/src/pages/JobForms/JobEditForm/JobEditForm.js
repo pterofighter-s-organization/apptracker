@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //components
 import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
-import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/components/Notification/Notification";
+import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/Notification/Notification";
 
 //private-components
 import { JobForm } from "../components/JobForm";
@@ -36,16 +36,21 @@ export default function JobEditForm() {
     const { job, getApplication, updateApplication } = useContext(JobContext);
     const [formData, setFormData] = useState(initialState)
     const [errorMessage, setErrorMessage] = useState("")
+    const [isFetching, setIsFetching] = useState(true)
 
     useEffect(() => {
+        setIsFetching(true)
         getApplication(id)
             .then((result) => {
                 setFormData(updateJobFormData(initialState, result))
                 document.title = `Editing ${strFormatter(result.position)}, ${strFormatter(result.company)} - Job Tracker App`
             })
+            .finally(() => {
+                setIsFetching(false)
+            })
 
         return () => document.title = 'Job Tracker App'
-    }, [getApplication, initialState, id]);
+    }, [getApplication, initialState, id, setIsFetching]);
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -76,7 +81,6 @@ export default function JobEditForm() {
                 ...job.data,
                 ...createJobData(formData)
             },
-            true
         )
             .then((result) => {
                 navigate("/job/" + result.application_id)
@@ -102,7 +106,7 @@ export default function JobEditForm() {
             })
     }
 
-    if (job.isFetching || job.isRefresh) {
+    if (isFetching || job.isUpdate) {
         return (
             <LoadingDisplay />
         )

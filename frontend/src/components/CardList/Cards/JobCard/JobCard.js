@@ -1,27 +1,27 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 //components
-import { StageDropdown } from "../../../../Dropdowns/StageDropdown"
-import { showSuccessNotification, showFailNotification } from "../../../../NotificationList/components/Notification/Notification"
-import { EditOptionButton } from "../../../../Buttons/OptionButtons/EditOptionButton"
-import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
-import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
-import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
+import { StageDropdown } from "../../../Dropdowns/StageDropdown"
+import { showSuccessNotification, showFailNotification } from "../../../NotificationList/Notification/Notification"
+import { EditOptionButton } from "../../../Buttons/OptionButtons/EditOptionButton"
+import { RestoreOptionButton } from "../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { LoadingDisplay } from "../../../Displays/LoadingDisplay"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 //utils
-import { dateTimeFormatter } from "../../../../../utils/format"
+import { dateTimeFormatter } from "../../../../utils/format"
 
 //helpers
-import { updateDateApplied } from "../../../../../helpers/application"
+import { updateDateApplied } from "../../../../helpers/application"
 
 //context-providers
-import { JobsContext } from "../../../../../hooks/contexts/JobsContext"
+import { JobsContext } from "../../../../hooks/contexts/JobsContext"
 
 //css
 import "./JobCard.css"
@@ -31,10 +31,13 @@ export default function JobCard({ card }) {
 
     const navigate = useNavigate()
     const { jobs, updateApplication, deleteApplication } = useContext(JobsContext)
+    //this is to prevent any more edits on items that doens't require a full refresh
+    const [isUpdating, setIsUpdating] = useState(false)
 
     //event.preventdefault is to prevent the button from accidentally re-directing to the link.
     const handleStage = (e) => {
         e.preventDefault()
+        setIsUpdating(true)
 
         //deleting stage state so usestates from filtered out cards doesn't get accidentally displayed.
         updateApplication(card.application_id, {
@@ -51,6 +54,9 @@ export default function JobCard({ card }) {
                 showFailNotification({
                     errors: errors
                 })
+            })
+            .finally(() => {
+                setIsUpdating(false)
             })
     }
 
@@ -116,11 +122,10 @@ export default function JobCard({ card }) {
 
     const handleEdit = (e) => {
         e.preventDefault()
-
         navigate(`/job-edit/${card.application_id}`)
     }
 
-    if (jobs.isRefresh) {
+    if (jobs.isRefresh || isUpdating) {
         return (
             <LoadingDisplay
                 height={"15rem"}

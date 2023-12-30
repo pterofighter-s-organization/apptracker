@@ -11,8 +11,7 @@ import { sortDataByLatest } from "../../helpers/helpers";
 
 //actions
 import {
-    NOTES_GET_START, NOTES_GET_SUCCESS, NOTES_GET_FAILURE,
-    NOTES_CREATE_SUCCESS, NOTES_UPDATE_SUCCESS, NOTES_DELETE_SUCCESS
+    NOTES_GET_SUCCESS, NOTES_GET_FAILURE, NOTES_CREATE_SUCCESS, NOTES_UPDATE_SUCCESS, NOTES_DELETE_SUCCESS
 } from "../reducers/notesReducer";
 
 //reducer
@@ -20,7 +19,6 @@ import { notesReducer } from "../reducers/notesReducer";
 
 const initialState = {
     data: [],
-    isFetching: true,
     errors: null
 }
 
@@ -38,8 +36,6 @@ export const NotesProvider = ({ children }) => {
     const [notes, dispatch] = useReducer(notesReducer, initialState)
 
     const getNotes = useCallback(async () => {
-        dispatch({ type: NOTES_GET_START })
-
         try {
             const response = await APIs.noteAPI.getNotes()
             dispatch({ type: NOTES_GET_SUCCESS, payload: sortDataByLatest(response.data) })
@@ -52,8 +48,6 @@ export const NotesProvider = ({ children }) => {
     }, [dispatch])
 
     const getJobNotes = useCallback(async (application_id) => {
-        dispatch({ type: NOTES_GET_START })
-
         try {
             const response = await APIs.noteAPI.getApplicationNotes(application_id)
             dispatch({ type: NOTES_GET_SUCCESS, payload: sortDataByLatest(response.data) })
