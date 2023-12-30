@@ -2,22 +2,23 @@ import { useContext, useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 //components
-import { showFailNotification, showSuccessNotification } from "../../../../NotificationList/components/Notification/Notification"
-import { RestoreOptionButton } from "../../../../Buttons/OptionButtons/RestoreOptionButton"
-import { DeleteOptionButton } from "../../../../Buttons/OptionButtons/DeleteOptionButton"
-import { ArchiveOptionButton } from "../../../../Buttons/OptionButtons/ArchiveOptionButton"
-import { LoadingDisplay } from "../../../../Displays/LoadingDisplay"
-import { EditableDisplayInput } from "../../../../Inputs/EditableDisplayInput"
+import { showFailNotification, showSuccessNotification } from "../../../NotificationList/Notification/Notification"
+import { RestoreOptionButton } from "../../../Buttons/OptionButtons/RestoreOptionButton"
+import { DeleteOptionButton } from "../../../Buttons/OptionButtons/DeleteOptionButton"
+import { ArchiveOptionButton } from "../../../Buttons/OptionButtons/ArchiveOptionButton"
+import { LoadingDisplay } from "../../../Displays/LoadingDisplay"
+import { EditableTextInput } from "../../../Inputs/EditableTextInput"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
 import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 //utils
-import { dateTimeFormatter, timerFormatter } from "../../../../../utils/format"
+import { dateTimeFormatter, timerFormatter } from "../../../../utils/format"
+import { strFormatter } from "../../../../utils/format"
 
 //contexts
-import { TasksContext } from "../../../../../hooks/contexts/TasksContext"
+import { TasksContext } from "../../../../hooks/contexts/TasksContext"
 
 //css
 import "./TaskCard.css"
@@ -30,12 +31,14 @@ export default function TaskCard({ card }) {
     const [isUpdating, setIsUpdating] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [value, setValue] = useState(``)
+    const [prevValue, setPrevValue] = useState(``) //this is to ensure the user gets the latest last val back when they got an error
 
     const titleSaveTimerRef = useRef(null)
 
     useEffect(() => {
         setValue(card.title)
-    }, [card.title])
+        setPrevValue(card.title)
+    }, [card.title, setValue, setPrevValue])
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -47,16 +50,16 @@ export default function TaskCard({ card }) {
 
         titleSaveTimerRef.current = setTimeout(() => {
             setIsEditing(true)
-            const prevValue = value //this is to ensure the user gets the latest last val back when they got an error
 
             updateJobTask(card.task_id, {
                 ...card,
-                title: e.target.value
+                title: strFormatter(e.target.value)
             })
                 .then(() => {
                     showSuccessNotification({
                         message: "Task successfully edited!"
                     })
+                    setPrevValue(e.target.value)
                 })
                 .catch((errors) => {
                     showFailNotification({
@@ -199,7 +202,7 @@ export default function TaskCard({ card }) {
                     }
                 </CardButtonsLayout>
             </CardHeaderLayout>
-            <EditableDisplayInput
+            <EditableTextInput
                 isArchived={card.archived}
                 isEditing={isEditing}
                 value={value}

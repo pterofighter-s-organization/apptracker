@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 //components
 import { StageDropdown } from "../../../../components/Dropdowns/StageDropdown"
-import { showSuccessNotification, showFailNotification } from "../../../../components/NotificationList/components/Notification/Notification"
+import { showSuccessNotification, showFailNotification } from "../../../../components/NotificationList/Notification/Notification"
 import { EditOptionButton } from "../../../../components/Buttons/OptionButtons/EditOptionButton"
 import { RestoreOptionButton } from "../../../../components/Buttons/OptionButtons/RestoreOptionButton"
 import { DeleteOptionButton } from "../../../../components/Buttons/OptionButtons/DeleteOptionButton"

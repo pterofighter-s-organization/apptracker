@@ -11,11 +11,12 @@ If there's an error, check below.
 ```npm ls``` to check which tools was installed.
 
 ```
+├── @babel/traverse@7.23.2
 ├── @testing-library/jest-dom@5.16.5
 ├── @testing-library/react@13.4.0
 ├── @testing-library/user-event@13.5.0
 ├── axios@1.4.0
-├── bootstrap-icons@1.10.5
+├── bootstrap-icons@1.11.1
 ├── bootstrap@5.3.0-alpha3
 ├── moment-timezone@0.5.43
 ├── moment@2.29.4

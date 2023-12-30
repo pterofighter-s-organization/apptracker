@@ -1,13 +1,13 @@
 
-.editable-display-input{
+.editable-text-input{
     position: relative;
 }
 
-.editable-display-input>*{
+.editable-text-input>*{
     width: 100%;
 }
 
-.editable-display-input > .textarea-input-field{
+.editable-text-input > .textarea-input-field{
     /* background-color: #FFFFE5; */
     background-color: inherit;
     border-radius: 0;

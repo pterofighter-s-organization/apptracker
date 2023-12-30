@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 //components
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
-import { showFailNotification, showSuccessNotification } from "../../../components/NotificationList/components/Notification/Notification";
+import { showFailNotification, showSuccessNotification } from "../../../components/NotificationList/Notification/Notification";
 
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";
@@ -89,7 +89,7 @@ export default function JobNewForm() {
             })
     }
 
-    if (job.isRefresh) {
+    if (job.isUpdate) {
         return <LoadingDisplay />
     }
 
