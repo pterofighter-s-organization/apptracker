@@ -32,7 +32,7 @@ https://docs.google.com/document/d/1iIqQoPxdEsYk8TVBMIBDvzLAHp3-g6rDB-FnzstRuf8/
 - API Testing: Postman
 
 # UI Mockups
-- Here's the link of our Figma used for UI Mockups
+- Here's the link of our Figma used for UI Mockups:
 https://www.figma.com/file/jXAmFzBf4VQl7PFGGbISVQ/Job-Tracker-Application?type=design&node-id=0%3A1&t=feJ8UCNlgcwfnnh4-1
 
 # Full Documentation
@@ -42,7 +42,7 @@ https://docs.google.com/document/d/1A4i4dL2hSM_ZcLYZXczjuIID0aVfLw3OKZj_1x2ra-o/
 # Project Snapshots
 Here are some snapshots of how the application looks both in Mobile & Desktop:
 
-For Mobile, here is the google docs for the images because it doesn't size well in README.md
+For Mobile, here is the google docs for the images because it doesn't size well in README.md:
 https://docs.google.com/document/d/1MbBf0aCvdmN4MMxAH8jOgyetsbU9JJh9UqLtNSCC-8c/edit?usp=sharing
 
 For Desktop, the snapshots are right below.
