@@ -3,8 +3,8 @@
 
 Job tracker app is a tool that helps manage all job applications in one place. It simplifies the process of keeping track of the companies and positions you've applied to, as well as the status of each application. You can also use the app to manage tasks and take notes for each job application, making it easier to follow up with employers and future interviews. 
 
-**This is an app made responsive for both Mobile & Destop, there are some project snapshots below showing how it looks.**
-**The time used in this app is based off your computer's local time.**
+- **This is an app made responsive for both Mobile & Destop, there are some project snapshots below showing how it looks.**
+- **The time used in this app is based off your computer's local time.**
 
 ## What's New and Different Compared to v1.0?
 Check out v2.0 Notes & Patches below:
