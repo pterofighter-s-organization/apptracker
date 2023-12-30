@@ -87,7 +87,7 @@ For Desktop, the snapshots are right below.
 - You can also sort apps by any stage and status of your choice.
 - Ex: (Interested) Stage
 
-![Screenshot](./images/App_v2.1_Screenshots/Desktop/Job_Board_(Sorted_with_Stage).png)
+![Screenshot](./images/App_v2.1_Screenshots/Desktop/Job_Board_(Sorted_with_Stages).png)
 
 ## Page For All Jobs, Tasks, and Notes
 - You can check out all the notes, jobs, and tasks in one place and sort them by your desire.
