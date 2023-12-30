@@ -1,0 +1,24 @@
+
+.editable-text-input{
+    position: relative;
+}
+
+.editable-text-input>*{
+    width: 100%;
+}
+
+.editable-text-input > .textarea-input-field{
+    /* background-color: #FFFFE5; */
+    background-color: inherit;
+    border-radius: 0;
+    padding: 0;
+    outline: none;
+}
+
+.display-text{
+    font-family: "Work Sans", sans-serif;
+    white-space: pre-wrap;
+    /*making sure links won't overflow*/
+    /*wrap the item when its overflowing*/
+    overflow-wrap: anywhere;
+}

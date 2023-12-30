@@ -1,12 +1,12 @@
 
 //private-components
-import { ShowButton } from "./components/ShowButton"
-import { EmptyMessage } from "./components/EmptyMessage"
+import { ShowButton } from "./ShowButton"
+import { EmptyMessage } from "./EmptyMessage"
 
 //cards
-import { JobCard } from "./components/Cards/JobCard"
-import { TaskCard } from "./components/Cards/TaskCard"
-import { NoteCard } from "./components/Cards/NoteCard"
+import { JobCard } from "./Cards/JobCard"
+import { TaskCard } from "./Cards/TaskCard"
+import { NoteCard } from "./Cards/NoteCard"
 
 //hocs
 import { withDynamicCardCount } from "../../hocs/withDynamicCardCount"

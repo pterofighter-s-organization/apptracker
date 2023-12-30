@@ -1,0 +1,32 @@
+.task-card-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+/*without > is calling the descendant. with > is direct children*/
+/* .task-card-layout  .editable-text-input  .textarea-input-field{
+    text-transform: capitalize;
+} */
+
+.task-card-layout>.editable-text-input>.display-text {
+    padding-bottom: 0.5rem;
+}
+
+.task-card-clock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    text-transform: initial;
+    font-size: 0.9rem;
+}
+
+.task-card-datetime {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-grow: 1;
+    text-transform: capitalize;
+}

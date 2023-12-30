@@ -11,7 +11,7 @@ import { findTodayUTCDate } from "../../utils/dateTime";
 
 //actions
 import {
-    JOBS_GET_START, JOBS_GET_SUCCESS, JOBS_GET_FAILURE, JOBS_UPDATE_SUCCESS,
+    JOBS_GET_SUCCESS, JOBS_GET_FAILURE, JOBS_UPDATE_SUCCESS,
     JOBS_DELETE_SUCCESS, JOBS_REFRESH_START, JOBS_REFRESH_END
 } from "../reducers/jobsReducer";
 
@@ -21,7 +21,6 @@ import { jobsReducer } from "../reducers/jobsReducer";
 const initialState = {
     data: [],
     isRefresh: false,
-    isFetching: true,
     errors: null
 }
 
@@ -37,8 +36,6 @@ export const JobsProvider = ({ children }) => {
     const [jobs, dispatch] = useReducer(jobsReducer, initialState)
 
     const getApplications = useCallback(async () => {
-        dispatch({ type: JOBS_GET_START })
-        
         try {
             const response = await APIs.applicationAPI.getApplications()
             //sorting here so when user interacts with the card doesnt automatically get repositioned.

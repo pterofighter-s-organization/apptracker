@@ -30,6 +30,7 @@ function JobBoard({ status, handleStatus }) {
 
     //the stage filter
     const [stage, setStage] = useState(null)
+    const [isFetching, setIsFetching] = useState(true)
 
     const handleStage = (e, option) => {
         e.preventDefault()
@@ -39,13 +40,17 @@ function JobBoard({ status, handleStatus }) {
     const { jobs, getApplications } = useContext(JobsContext)
 
     useEffect(() => {
+        setIsFetching(true)
         getApplications()
             .then(() => {
                 document.title = `Job Board - Job Tracker App`
             })
+            .finally(() => {
+                setIsFetching(false)
+            })
 
         return () => document.title = "Job Tracker App"
-    }, [getApplications])
+    }, [getApplications, setIsFetching])
 
     const filteredData = useMemo(() => {
         return (
@@ -55,7 +60,7 @@ function JobBoard({ status, handleStatus }) {
         )
     }, [jobs.data, status, stage])
 
-    if (jobs.isFetching) {
+    if (isFetching) {
         return <LoadingDisplay />
     }
 
