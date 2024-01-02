@@ -15,7 +15,7 @@ export default function EmptyMessage({ type }) {
             />
             {type === "jobs" ?
                 <RedirectButton
-                    link={"/new-job"}
+                    link={"/auth/job"}
                     label={`track new ${type}`}
                 />
                 :
