@@ -14,6 +14,7 @@ export default function TextInput({ name, value, handleChange }) {
             value={value}
             placeholder={name.toUpperCase()}
             onChange={handleChange}
+            autoComplete="true"
         />
     )
 }
