@@ -33,6 +33,7 @@ function PasswordInput({
                 value={value}
                 onChange={handleChange}
                 placeholder={name.toUpperCase()}
+                autoComplete="true"
             />
             {
                 isExpand ?
