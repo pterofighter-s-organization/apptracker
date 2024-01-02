@@ -15,12 +15,14 @@ export default function SelectionInput({ name, options, value, handleChange }) {
                     options.map((option) => (
                         option !== value ?
                             <option
+                                key={option}
                                 value={option}
                             >
                                 {option}
                             </option>
                             :
                             <option
+                                key={option}
                                 defaultValue={option}
                             >
                                 {option}

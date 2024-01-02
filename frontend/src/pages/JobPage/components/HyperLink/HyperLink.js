@@ -22,7 +22,7 @@ export default function HyperLink({ id, link, label }) {
                     </a>
                     :
                     <Link
-                        to={"/job-edit/" + id}
+                        to={`/auth/job/edit/${id}`}
                         className="hyper-link-label"
                     >
                         add {label}

@@ -70,7 +70,7 @@ function DropdownNav({ id, handleLogout, isExpand, handleMinimize, handleExpand 
                 <button
                     onClick={handleLogout}
                     className="button dropdownnav-content-button"
-                    data-bs-isExpand="tooltip"
+                    data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title={`Sign out`}
                 >

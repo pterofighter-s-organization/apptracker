@@ -82,7 +82,7 @@ function DashboardTasks({ isRefresh, status, handleStatus, isPreview, isShow }) 
                 isShow={isShow}
             />
             <RedirectButton
-                link={`/all-tasks/${status}`}
+                link={`/auth/tasks/${status}`}
                 label={"link to all tasks"}
             />
         </CardsSectionLayout>
