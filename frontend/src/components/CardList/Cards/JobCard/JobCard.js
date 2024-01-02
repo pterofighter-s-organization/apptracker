@@ -122,7 +122,7 @@ export default function JobCard({ card }) {
 
     const handleEdit = (e) => {
         e.preventDefault()
-        navigate(`/job-edit/${card.application_id}`)
+        navigate(`/auth/job/edit/${card.application_id}`)
     }
 
     if (jobs.isRefresh || isUpdating) {
@@ -135,7 +135,7 @@ export default function JobCard({ card }) {
 
     return (
         <Link
-            to={`/job/${card.application_id}`}
+            to={`/auth/job/${card.application_id}`}
             id={`job-card-${card.application_id}`}
             key={`job-card-${card.application_id}`}
             className="tracker-card job-card-layout"

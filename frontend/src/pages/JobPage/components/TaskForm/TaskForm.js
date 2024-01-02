@@ -15,7 +15,10 @@ export default function TaskForm({ formData, handleChange, handleCreate }) {
 
     return (
         <div className="task-form-container">
-            <form className="task-form">
+            <form 
+                id="task-form"
+                className="task-form"
+            >
                 <InputLayout isError={formData.name.error.length > 0} >
                     <TextInput
                         name={"name"}
