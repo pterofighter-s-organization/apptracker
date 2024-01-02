@@ -23,6 +23,14 @@
     font-size: 0.9rem;
 }
 
+.test{
+    font-family: "Work Sans", sans-serif;
+    white-space: pre-wrap;
+    /*making sure links won't overflow*/
+    /*wrap the item when its overflowing*/
+    overflow-wrap: anywhere;
+}
+
 .task-card-datetime {
     display: flex;
     flex-direction: row;
