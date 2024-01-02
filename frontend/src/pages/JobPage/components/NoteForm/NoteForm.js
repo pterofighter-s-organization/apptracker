@@ -14,7 +14,10 @@ export default function NoteForm({ formData, handleChange, handleCreate }) {
 
     return (
         <div className="note-form-container">
-            <form className="note-form">
+            <form 
+                id="note-form"
+                className="note-form"
+            >
                 <InputLayout isError={formData.note.error.length > 0}>
                     <TextInput
                         name={"note"}

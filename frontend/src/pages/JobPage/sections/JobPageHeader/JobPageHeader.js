@@ -109,7 +109,7 @@ export default function JobPageHeader() {
 
     const handleEdit = (e) => {
         e.preventDefault()
-        navigate(`/job-edit/${job.data.application_id}`)
+        navigate(`/auth/job/edit/${job.data.application_id}`)
     }
 
     return (

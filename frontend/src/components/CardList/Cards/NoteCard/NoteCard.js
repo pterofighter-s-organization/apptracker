@@ -139,7 +139,7 @@ export default function NoteCard({ card }) {
         <div className="note-card-layout">
             <CardHeaderLayout>
                 <Link
-                    to={`/job/${card.application}`}
+                    to={`/auth/job/${card.application}`}
                     className="tracker-card-link-header-layout"
                 >
                     <div className="tracker-card-company">

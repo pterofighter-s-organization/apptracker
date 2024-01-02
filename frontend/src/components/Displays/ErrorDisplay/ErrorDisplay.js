@@ -6,7 +6,7 @@ import { handleAPIErrors } from "../../../helpers/form";
 //css
 import "./ErrorDisplay.css"
 
-export default function ErrorDisplay({ label, errors, isSection }) {
+export default function ErrorDisplay({ label, errors, message, isSection }) {
 
     return (
         <div className="error-display-layout">
@@ -17,9 +17,12 @@ export default function ErrorDisplay({ label, errors, isSection }) {
                 </h4>
                 <h4 className="error-display-errors">
                     {
-                        handleAPIErrors({
-                            errors: errors
-                        })
+                        errors ?
+                            handleAPIErrors({
+                                errors: errors
+                            })
+                            :
+                            message
                     }
                 </h4>
             </div>
@@ -30,7 +33,7 @@ export default function ErrorDisplay({ label, errors, isSection }) {
             >
                 <div className="error-display-reload-icon">
                     <i className="bi bi-arrow-counterclockwise" />
-                </div> 
+                </div>
                 refresh page
             </button>
             {

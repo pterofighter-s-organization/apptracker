@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom'
 
 //components
 import { NotificationList } from './components/NotificationList';
+import { ErrorDisplay } from './components/Displays/ErrorDisplay';
 
 //pages
 import { Dashboard } from './pages/Dashboard';
@@ -30,58 +31,76 @@ import './App.css'
 export default function App() {
 
   /*
-    to fix the "no routes matched sth error" we must
-    have routes nest under /, but can fix later.
+    fixed "no routes matched" with nesting routes under their specific provider with children being outlet.
+    outlet is the paths under that provider route where outlet would render those pathings.
   */
   return (
     <div className="App">
       <NotificationList />
-      <Router>
+      <Router basename={`${process.env.PUBLIC_URL}`}>
         <AuthProvider>
           <Routes>
-            <Route element={<IsAuthRoutes isAuth={false} />}>
-              <Route exact path="/login" element={<LoginForm />} />
-              <Route exact path="/signup" element={<SignupForm />} />
+            <Route path="" element={<IsAuthRoutes isAuth={false} />}>
+              <Route index element={<LoginForm />} />
+              <Route path="login" element={<LoginForm />} />
+              <Route path="signup" element={<SignupForm />} />
             </Route>
-          </Routes>
-          <Routes>
-            <Route element={<IsAuthRoutes isAuth={true} />}>
-              <Route exact path="/" element={<Dashboard />} />
+            <Route path="auth" element={<IsAuthRoutes isAuth={true} />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+
+              <Route
+                path="job"
+                element={
+                  <JobProvider>
+                    <Outlet />
+                  </JobProvider>
+                }
+              >
+                <Route index element={<JobNewForm />} />
+                <Route path=":id" element={<JobPage />} />
+                <Route path="edit/:id" element={<JobEditForm />} />
+              </Route>
+
+              <Route
+                path="jobs"
+                element={
+                  <JobsProvider>
+                    <Outlet />
+                  </JobsProvider>
+                }
+              >
+                <Route index element={<JobBoard />} />
+                <Route path=":status" element={<JobBoard />} />
+              </Route>
+
+              <Route
+                path="notes"
+                element={
+                  <NotesProvider>
+                    <Outlet />
+                  </NotesProvider>
+                }
+              >
+                <Route index element={<NoteBoard />} />
+                <Route path=":status" element={<NoteBoard />} />
+              </Route>
+
+              <Route
+                path="tasks"
+                element={
+                  <TasksProvider>
+                    <Outlet />
+                  </TasksProvider>
+                }
+              >
+                <Route index element={<TaskBoard />} />
+                <Route path=":status" element={<TaskBoard />} />
+              </Route>
             </Route>
+
+            <Route path="*" element={<ErrorDisplay message={"Page not found"} />} />
           </Routes>
-          <NotesProvider>
-            <Routes>
-              <Route element={<IsAuthRoutes isAuth={true} />}>
-                <Route path="/all-notes" element={<NoteBoard />} />
-                <Route path="/all-notes/:status" element={<NoteBoard />} />
-              </Route>
-            </Routes>
-          </NotesProvider>
-          <TasksProvider>
-            <Routes>
-              <Route element={<IsAuthRoutes isAuth={true} />}>
-                <Route path="/all-tasks" element={<TaskBoard />} />
-                <Route path="/all-tasks/:status" element={<TaskBoard />} />
-              </Route>
-            </Routes>
-          </TasksProvider>
-          <JobsProvider>
-            <Routes>
-              <Route element={<IsAuthRoutes isAuth={true} />}>
-                <Route path="/all-jobs/:status" element={<JobBoard />} />
-                <Route path="/all-jobs" element={<JobBoard />} />
-              </Route>
-            </Routes>
-          </JobsProvider>
-          <JobProvider>
-            <Routes>
-              <Route element={<IsAuthRoutes isAuth={true} />}>
-                <Route path="/job/:id" element={<JobPage />} />
-                <Route path="/job-edit/:id" element={<JobEditForm />} />
-                <Route path="/new-job" element={<JobNewForm />} />
-              </Route>
-            </Routes>
-          </JobProvider>
         </AuthProvider>
       </Router>
     </div>

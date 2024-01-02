@@ -1,5 +1,7 @@
 
 
+//pure function where component gives a color and give back the color contrast to it.
+//always giving same output for the same input. And doesn't change anything outside of it.
 export const getContrastTextColor = (hexColor) => {
     const r = parseInt(hexColor.substr(1, 2), 16);
     const g = parseInt(hexColor.substr(3, 2), 16);

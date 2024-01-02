@@ -25,6 +25,7 @@ export default function JobForm({ isEdit, formData, errorMessage, handleChange, 
 
     return (
         <form
+            id={"job-form"}
             className="job-form"
             onSubmit={handleSubmit}
         >
