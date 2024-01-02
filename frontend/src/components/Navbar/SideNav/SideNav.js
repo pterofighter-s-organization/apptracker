@@ -20,7 +20,7 @@ function SideNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
             <Link
                 to={HOME_ROUTE.route}
                 className="sidenav-logo"
-                data-bs-isExpand="tooltip"
+                data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title={`Back to home`}
             >
@@ -115,7 +115,7 @@ function SideNav({ id, handleLogout, isExpand, handleMinimize, handleExpand }) {
             {/* <Link
                 to={LOGIN_ROUTE.route}
                 className="button sidenav-button"
-                data-bs-isExpand="tooltip"
+                data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title={`Signing in`}
             >

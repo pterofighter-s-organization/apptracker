@@ -83,7 +83,7 @@ export default function JobEditForm() {
             },
         )
             .then((result) => {
-                navigate("/job/" + result.application_id)
+                navigate(`/auth/job/${result.application_id}`)
 
                 showSuccessNotification({
                     message: "Successfully edited! Redirected you back to the job page."

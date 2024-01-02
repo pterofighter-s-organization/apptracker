@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
             dispatch({ type: AUTH_VALIDATE_SUCCESS, payload: user.username })
 
             //reroute to dashboard, here because login is for sure re-routing to dashboard
-            navigate("/")
+            navigate("/auth/dashboard")
             return {
                 username: user.username,
                 isAuth: true

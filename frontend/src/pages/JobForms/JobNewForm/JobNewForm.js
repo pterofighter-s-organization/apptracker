@@ -71,7 +71,7 @@ export default function JobNewForm() {
                     message: "Successfully submitted! Now redirecting you to the job page."
                 })
 
-                navigate(`/job/${result.application_id}`)
+                navigate(`/auth/job/${result.application_id}`)
             }).catch((errors) => {
                 const apiErrorMessage = handleAPIErrors({
                     errors: errors,

@@ -65,6 +65,6 @@ export default function IsAuthRoutes({ isAuth }) {
         auth.data.isAuth === isAuth ?
             <Outlet />
             :
-            <Navigate to={isAuth ? "/login" : "/"} />
+            <Navigate to={isAuth ? "/login" : "/auth/dashboard"} />
     )
 }
