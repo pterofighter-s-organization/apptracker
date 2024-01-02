@@ -32,7 +32,7 @@ export default function App() {
 
   /*
     fixed "no routes matched" with nesting routes under their specific provider with children being outlet.
-    outlet is the paths under that provider route where outlet would render those pathings.
+    outlet will direct the user onto the paths under that provider route where it would render the desired path.
   */
   return (
     <div className="App">
