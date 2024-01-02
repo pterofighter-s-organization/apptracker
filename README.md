@@ -18,18 +18,24 @@ https://docs.google.com/document/d/1iIqQoPxdEsYk8TVBMIBDvzLAHp3-g6rDB-FnzstRuf8/
 - Kelvin Chan (Github: chan34kelvin)
 - Damon Chen (Github: pterofighter)
 
-# Frameworks Use
-- Backend: Django, Djongo, MongoDB, Django REST Framework
-- Frontend: React.js, Bootstrap Icons, Axios
+# Frameworks
+- Backend: Django, Django REST Framework, Djongo - Allowing Django to use MongoDB as the database backend.
+- Frontend: React.js
 
-# Programming Languages Use
+# Programming Languages
 - Backend: Python
-- Frontend: Javascript, HTML5, CSS3
+- Frontend: JavaScript, HTML5, CSS3
 
-# Tools Use
-- Version Control: Github
+# Tools
+- Version Control: GitHub
 - Design & Mockups: Figma
 - API Testing: Postman
+
+# Libraries
+- Frontend: Bootstrap Icons, Axios
+
+# Database
+- Backend: MongoDB
 
 # UI Mockups
 - Here's the link of our Figma used for UI Mockups:
