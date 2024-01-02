@@ -73,7 +73,7 @@ function DashboardNotes({ isRefresh, status, handleStatus, isPreview, isShow }) 
                 isShow={isShow}
             />
             <RedirectButton
-                link={`/all-notes/${status}`}
+                link={`/auth/notes/${status}`}
                 label={"link to all notes"}
             />
         </CardsSectionLayout>

@@ -102,7 +102,7 @@ function DashboardJobs({ setIsRefresh, status, handleStatus, isShow, isPreview }
                 isShow={isShow}
             />
             <RedirectButton
-                link={`/all-jobs/${status}`}
+                link={`/auth/jobs/${status}`}
                 label={"link to all jobs"}
             />
         </CardsSectionLayout>
