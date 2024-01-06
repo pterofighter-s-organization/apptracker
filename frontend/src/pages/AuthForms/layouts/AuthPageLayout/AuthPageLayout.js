@@ -3,13 +3,11 @@
 //css
 import "./AuthPageLayout.css"
 
-export default function AuthPageayout({ children }) {
+export default function AuthPageLayout({ children }) {
 
     return (
         <div className="auth-page-layout">
-            <div className="auth-page-restriction">
-                {children}
-            </div>
+            {children}
         </div>
     )
 }

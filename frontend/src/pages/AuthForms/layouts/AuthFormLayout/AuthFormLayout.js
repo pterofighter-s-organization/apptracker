@@ -1,11 +1,9 @@
 
 
-
-
 //css
 import "./AuthFormLayout.css"
 
-export default function AuthFormLayout({ children }) {
+export default function AuthFormLayout({ children, handleSubmit }) {
 
     //form components
     const [header, fields] = children
@@ -15,9 +13,13 @@ export default function AuthFormLayout({ children }) {
             <div className="auth-form-layout-section auth-form-layout-header">
                 {header}
             </div>
-            <div className="auth-form-layout-section auth-form-layout-fields">
+            <form
+                id="auth-form"
+                className="auth-form-layout-section auth-form-layout-fields"
+                onSubmit={handleSubmit}
+            >
                 {fields}
-            </div>
+            </form>
         </div>
     )
 }

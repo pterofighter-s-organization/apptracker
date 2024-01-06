@@ -40,7 +40,8 @@ export default function App() {
       <Router basename={`${process.env.PUBLIC_URL}`}>
         <AuthProvider>
           <Routes>
-            <Route path="" element={<IsAuthRoutes isAuth={false} />}>
+            <Route path="" element={<IsAuthRoutes isAuth={false} />}
+            >
               <Route index element={<LoginForm />} />
               <Route path="login" element={<LoginForm />} />
               <Route path="signup" element={<SignupForm />} />

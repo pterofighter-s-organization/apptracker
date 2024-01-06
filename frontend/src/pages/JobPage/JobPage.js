@@ -6,8 +6,8 @@ import { ErrorDisplay } from "../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../components/Displays/LoadingDisplay";
 
 //layouts
-import { PageLayout } from "../../layouts/PageLayout";
 import { CardsLayout } from "../../layouts/CardsLayout";
+import { PageLayout } from "../../layouts/PageLayout";
 
 //utils
 import { strFormatter } from "../../utils/format";
