@@ -9,8 +9,8 @@ import { CardListHeader } from "../../components/CardListHeader";
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
-import { PageLayout } from "../../layouts/PageLayout";
 import { CardsSectionLayout } from "../../layouts/CardsSectionLayout";
+import { PageLayout } from "../../layouts/PageLayout";
 
 //helpers
 import { filterDataByStatus } from "../../helpers/helpers";

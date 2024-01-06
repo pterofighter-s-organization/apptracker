@@ -6,11 +6,11 @@ import { ErrorDisplay } from "../../../components/Displays/ErrorDisplay";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
 import { showSuccessNotification, showFailNotification } from "../../../components/NotificationList/Notification/Notification";
 
-//private-components
-import { JobForm } from "../components/JobForm";
-
 //layouts
 import { PageLayout } from "../../../layouts/PageLayout";
+
+//private-components
+import { JobForm } from "../components/JobForm";
 
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";

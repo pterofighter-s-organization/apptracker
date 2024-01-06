@@ -1,10 +1,10 @@
 
-
 .auth-form-layout{
     background-color: #fff;
     border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
+    max-width: 1000px;
     width: 100%;
 }
 
@@ -18,6 +18,9 @@
 .auth-form-layout-fields{
     padding-top: 1.25vw;
     padding-bottom: 1.25vw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 @media (min-width: 768px){

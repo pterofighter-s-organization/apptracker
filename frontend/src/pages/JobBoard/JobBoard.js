@@ -10,8 +10,8 @@ import { ToggleButton } from "../../components/Buttons/ToggleButtons/ToggleButto
 
 //layouts
 import { HeaderLayout } from "../../layouts/HeaderLayout";
-import { PageLayout } from "../../layouts/PageLayout";
 import { CardsSectionLayout } from "../../layouts/CardsSectionLayout";
+import { PageLayout } from "../../layouts/PageLayout";
 
 //constants
 import { APP_STAGE_COLORS, APP_STATUS_COLORS } from "../../constants/constants";
