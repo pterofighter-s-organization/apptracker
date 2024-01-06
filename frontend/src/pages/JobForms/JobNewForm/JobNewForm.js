@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { LoadingDisplay } from "../../../components/Displays/LoadingDisplay";
 import { showFailNotification, showSuccessNotification } from "../../../components/NotificationList/Notification/Notification";
 
+//layouts
+import { PageLayout } from "../../../layouts/PageLayout";
+
 //constants
 import { JOB_FORM_DATA } from "../../../constants/constants";
 
@@ -22,9 +25,6 @@ import { handleAPIErrors } from "../../../helpers/form";
 
 //private-components
 import { JobForm } from "../components/JobForm";
-
-//layouts
-import { PageLayout } from "../../../layouts/PageLayout";
 
 export default function JobNewForm() {
 

@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 
 //layouts
-import { PageLayout } from "../../layouts/PageLayout";
 import { HeaderLayout } from "../../layouts/HeaderLayout";
 import { CardsLayout } from "../../layouts/CardsLayout";
+import { PageLayout } from "../../layouts/PageLayout";
 
 //providers
 import { JobsProvider } from "../../hooks/contexts/JobsContext";
