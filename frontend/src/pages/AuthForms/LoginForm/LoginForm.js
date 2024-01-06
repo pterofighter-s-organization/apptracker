@@ -23,7 +23,6 @@ import { AuthFormHeader } from "../components/AuthFormHeader"
 //private-layouts
 import { AuthPageLayout } from "../layouts/AuthPageLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
-import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 
 //context
 import { AuthContext } from "../../../hooks/contexts/AuthContext"
@@ -92,12 +91,12 @@ export default function LoginForm() {
 
     return (
         <AuthPageLayout>
-            <AuthFormLayout>
+            <AuthFormLayout handleSubmit={handleSubmit}>
                 <AuthFormHeader
                     label={"Log in"}
                     description={"Sign in to access the app's features!"}
                 />
-                <AuthFieldsLayout handleSubmit={handleSubmit}>
+                <>
                     <InputLayout isError={formData.username.error.length > 0}>
                         <InputHeader
                             header={"Username"}
@@ -137,7 +136,7 @@ export default function LoginForm() {
                         link={"/signup"}
                         label={"make a new account!"}
                     />
-                </AuthFieldsLayout>
+                </>
             </AuthFormLayout>
         </AuthPageLayout>
     )

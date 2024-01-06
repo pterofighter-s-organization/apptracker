@@ -24,7 +24,6 @@ import { RedirectLink } from "../components/RedirectLink"
 
 //private-layouts
 import { AuthPageLayout } from "../layouts/AuthPageLayout"
-import { AuthFieldsLayout } from "../layouts/AuthFieldsLayout"
 import { AuthFormLayout } from "../layouts/AuthFormLayout"
 
 //contexts
@@ -110,7 +109,7 @@ export default function SignupForm() {
         )
     }
 
-    if(isCodeNetworkError(auth.errors)){
+    if (isCodeNetworkError(auth.errors)) {
         return (
             <ErrorDisplay
                 errors={auth.errors}
@@ -120,12 +119,12 @@ export default function SignupForm() {
 
     return (
         <AuthPageLayout>
-            <AuthFormLayout>
+            <AuthFormLayout handleSubmit={handleSubmit}>
                 <AuthFormHeader
                     label={"sign up"}
                     description={"Create a new account to start efficently tracking jobs!"}
                 />
-                <AuthFieldsLayout handleSubmit={handleSubmit}>
+                <>
                     <InputLayout isError={formData.username.error.length > 0}>
                         <InputHeader
                             header={"Username"}
@@ -178,7 +177,7 @@ export default function SignupForm() {
                         link={"/login"}
                         label={"Back to sign in!"}
                     />
-                </AuthFieldsLayout>
+                </>
             </AuthFormLayout>
         </AuthPageLayout>
     )

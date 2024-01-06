@@ -26,3 +26,5 @@ button {
     font-family: "Work Sans", sans-serif;
     background-color: #f2efef;
 }
+
+/*the > only targets the immediate descendant of the parent.*/

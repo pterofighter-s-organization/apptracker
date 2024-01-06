@@ -59,7 +59,7 @@ MIDDLEWARE = [
 # ]
 
 #added this in to make whitelist frontend to take cors
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:3001']
 
 # ALLOWED_HOSTS=['*']
 
