@@ -9,3 +9,8 @@ export const getContrastTextColor = (hexColor) => {
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
     return brightness > 128 ? "#000000" : "#FFFFFF";
 }
+
+export const isFirstCharacterDigit = (str) => {
+    // Check if the first character is a digit
+    return /^\d/.test(str);
+}
