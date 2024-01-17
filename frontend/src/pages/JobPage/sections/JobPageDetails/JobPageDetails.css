@@ -17,15 +17,15 @@
 .job-page-infos {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    justify-content: space-around;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .job-page-datetimes {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    justify-content: space-around;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .job-page-links {
@@ -40,6 +40,14 @@
 @media (min-width: 1500px){
     .job-page-links{
         flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 992px){
+    .job-page-datetimes{
+        gap: 1.5rem;
     }
 }
 
