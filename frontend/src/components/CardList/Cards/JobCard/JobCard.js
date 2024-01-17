@@ -9,6 +9,7 @@ import { RestoreOptionButton } from "../../../Buttons/OptionButtons/RestoreOptio
 import { DeleteOptionButton } from "../../../Buttons/OptionButtons/DeleteOptionButton"
 import { ArchiveOptionButton } from "../../../Buttons/OptionButtons/ArchiveOptionButton"
 import { LoadingDisplay } from "../../../Displays/LoadingDisplay"
+import { TooltipText } from "../../../TooltipText"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
@@ -16,6 +17,7 @@ import { CardButtonsLayout } from "../layouts/CardButtonsLayout"
 
 //utils
 import { dateTimeFormatter } from "../../../../utils/format"
+import { isFirstCharacterDigit } from "../../../../utils/component"
 
 //helpers
 import { updateDateApplied } from "../../../../helpers/application"
@@ -180,9 +182,16 @@ export default function JobCard({ card }) {
                 >
                     {card.position}
                 </h3>
-                <h5 style={{ textTransform: "initial", color: "#009E60" }}>
-                    ${card.salary} /{card.salary_rate}
-                </h5>
+                <TooltipText text={card.position}/>
+                <h6 style={{ textTransform: "initial", color: "#009E60" }}>
+                    {
+                        isFirstCharacterDigit(card.salary) ?
+                        "$"
+                        :
+                        null
+                    }
+                    {card.salary} /{card.salary_rate}
+                </h6>
             </div>
             <div className="job-card-date">
                 Updated: {dateTimeFormatter(card.date_edited)}

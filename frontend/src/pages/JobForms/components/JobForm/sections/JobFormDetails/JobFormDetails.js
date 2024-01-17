@@ -2,7 +2,6 @@
 //components
 import { TextInput } from "../../../../../../components/Inputs/TextInput"
 import { SelectionInput } from "../../../../../../components/Inputs/SelectionInput"
-import { NumericInput } from "../../../../../../components/Inputs/NumericInput"
 import { InfoReminder } from "../../../../../../components/InfoReminder"
 import { InputHeader } from "../../../../../../components/Inputs/InputHeader"
 import { InputFooter } from "../../../../../../components/Inputs/InputFooter"
@@ -62,7 +61,7 @@ export default function JobFormDetails({ formData, handleChange }) {
                                 header={"Paid"}
                                 isRequired={true}
                             />
-                            <NumericInput
+                            <TextInput
                                 name={"paid"}
                                 value={formData.paid.value}
                                 handleChange={handleChange}

@@ -5,6 +5,7 @@ import { HyperLink } from "../../components/HyperLink"
 
 //utils
 import { dateTimeFormatter } from "../../../../utils/format"
+import { isFirstCharacterDigit } from "../../../../utils/component"
 
 //contexts
 import { JobContext } from "../../../../hooks/contexts/JobContext"
@@ -23,11 +24,17 @@ export default function JobPageDetails() {
                 <h5 style={{ color: "#808080", textTransform: "capitalize" }}>
                     - {job.data.company}
                 </h5>
-                <h1 style={{ textTransform: "capitalize" }}>
+                <h2 style={{ textTransform: "capitalize" }}>
                     {job.data.position}
-                </h1>
+                </h2>
                 <h5 style={{ color: "#009E60", textTransform: "initial" }}>
-                    ${job.data.salary} /{job.data.salary_rate}
+                    {
+                        isFirstCharacterDigit(job.data.salary) ?
+                            "$"
+                            :
+                            null
+                    }
+                    {job.data.salary} /{job.data.salary_rate}
                 </h5>
             </div>
             <div className="job-page-section job-page-details-section job-page-datetimes">

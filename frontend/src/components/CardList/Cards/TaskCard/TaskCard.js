@@ -8,6 +8,7 @@ import { DeleteOptionButton } from "../../../Buttons/OptionButtons/DeleteOptionB
 import { ArchiveOptionButton } from "../../../Buttons/OptionButtons/ArchiveOptionButton"
 import { LoadingDisplay } from "../../../Displays/LoadingDisplay"
 import { EditableTextInput } from "../../../Inputs/EditableTextInput"
+import { TooltipText } from "../../../TooltipText"
 
 //private-layouts
 import { CardHeaderLayout } from "../layouts/CardHeaderLayout"
@@ -184,6 +185,7 @@ export default function TaskCard({ card }) {
                         {card.position}
                     </div>
                 </Link>
+                <TooltipText text={`${card.company}/${card.position}`} />
                 <CardButtonsLayout>
                     {
                         card.archived ?
